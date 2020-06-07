@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Apne Saathi</string>
+
+    <string name="total_calls_vs_connected">Total calls made VS Connected</string>
+    <string name="total_sr_citizens_supported">Total no. of Senior Citizens Supported</string>
+    <string name="calls_connected_yesterday">Calls connected yesterday</string>
+    <string name="average_connected_called_per_day">Average connected call per day</string>
+    <string name="calls_connected_today">Calls connected today</string>
+    <string name="sr_citizens_supported_today">Sr. citizens supported today</string>
+    <string name="Sr_citizen_calls_pending">Number of Sr. citizen calls pending</string>
+    <string name="sr_citizens_grievances_vs_resolved">Sr. citizens grievances reported VS resolved</string>
+    <string name="on_call_sr_citizen_feedback_form">Senior citizen feedback over a call</string>
+    <string name="wrong_detail_warning">Details provided by you will be verified by District Level Staff Member and wrong details can lead legal action against you</string>
+</resources>
