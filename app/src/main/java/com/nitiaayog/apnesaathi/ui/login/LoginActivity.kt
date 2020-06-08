@@ -14,7 +14,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        dataManager.setPhoneNumber("123456")
         BtnLogin.setOnClickListener {
 
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
