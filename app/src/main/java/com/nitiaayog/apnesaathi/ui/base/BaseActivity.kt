@@ -17,7 +17,7 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
     protected val viewModel: VM by lazy { provideViewModel() }
 
-    protected val disposables: CompositeDisposable = CompositeDisposable()
+    protected val disposables: CompositeDisposable by lazy { CompositeDisposable() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
