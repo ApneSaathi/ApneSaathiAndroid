@@ -78,5 +78,14 @@
         <item>Call Disconnected</item>
         <item>Call Connected</item>
     </string-array>
+    <string name="permission_detail">Permission Detail</string>
+    <string name="permission_text">App has feature that with just a single click on Senior citizen details you can initiate a regular call on daily basis.For that we will require CALL permission.</string>
+    <string name="accept">Accept</string>
+    <string name="not_now">Not now</string>
+
+    <string name="todays_call">Today\'s calls</string>
+    <string name="call_connected">Calls connected</string>
+    <string name="call_permission_denied">Calling Permission Denied</string>
+    <string name="not_handle_action">Can not handle the action</string>
 
 </resources>
