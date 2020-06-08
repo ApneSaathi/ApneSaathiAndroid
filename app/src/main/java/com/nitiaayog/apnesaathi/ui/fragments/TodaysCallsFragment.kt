@@ -57,7 +57,7 @@ class TodaysCallsFragment : BaseFragment<TodaysCallsViewModel>(),
         if (requestCode == CONST_PERMISSION_FROM_SETTINGS) {
             if (checkPermission(PERMISSION_CALL_PHONE)) prepareToCallPerson()
             else Snackbar.make(rvList, R.string.call_permission_denied, Snackbar.LENGTH_LONG).show()
-        } else Snackbar.make(rvList, R.string.call_permission_denied, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     override fun provideViewModel(): TodaysCallsViewModel =
