@@ -91,5 +91,32 @@
     <string name="call_connected">Calls connected</string>
     <string name="call_permission_denied">Calling Permission Denied</string>
     <string name="not_handle_action">Can not handle the action</string>
+    <string name="personal_details">PERSONAL DETAILS</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="state">State</string>
+    <string name="district">District</string>
+    <string name="block">Block</string>
+    <string name="health_care_information">HEALTH CARE INFORMATION</string>
+    <string name="emotional_state">Emotional State</string>
+    <string name="happy">Happy</string>
+    <string name="neutral">Neutral</string>
+    <string name="sad">Sad</string>
+    <string name="covid_symptoms">Covid Symptoms</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="other_medical_problems">Other Medical Problems</string>
+    <string name="complaints">COMPLAINTS</string>
+    <string name="calls_information">CALLS INFORMATION</string>
+    <string name="call_type">Call Type</string>
+    <string name="update"><u>Update</u></string>
+    <string name="call_received_by">Call Received By</string>
+    <string name="appbar_title">SENIOR CITIZEN DATA</string>
+    <string name="register_a_new_citizen">Register a new citizen</string>
+    <string name="emergency_call">Emergency Call</string>
+    <string name="report_a_problem">Report a problem</string>
+    <string name="feedback">Feedback</string>
+    <string name="drawerOpen">Drawer Open</string>
+    <string name="drawerClose">Drawer Close</string>
 
 </resources>
