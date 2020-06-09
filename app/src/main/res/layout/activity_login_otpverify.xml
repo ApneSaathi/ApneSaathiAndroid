@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Enter Verification Code"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/text_16">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_3"
+        android:gravity="center"
+        android:text="We have send a 4 digit verification code on"
+   >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txt3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_3"
+        android:gravity="center"
+        android:text="+91 9673346489">
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/LinearDigitLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_below="@id/txt3"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/EditFirstChar"
+            android:layout_width="@dimen/view_size_40"
+            android:layout_height="@dimen/dimen_35"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:layout_width="@dimen/view_size_40"
+            android:layout_height="@dimen/dimen_35"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:layout_width="@dimen/view_size_40"
+            android:layout_height="@dimen/dimen_35"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:layout_width="@dimen/view_size_40"
+            android:layout_height="@dimen/dimen_35"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Btnverify"
+        android:layout_width="150dp"
+        android:layout_height="@dimen/view_size_45"
+        android:layout_below="@+id/LinearDigitLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dimen_10"
+        android:background="@drawable/button_background"
+        android:gravity="center"
+        android:text="verify"
+        android:textColor="@color/color_white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Btnverify"
+        android:layout_centerHorizontal="true"
+        android:text="Did't recive any code ? Re-send"
+        android:textColor="@color/colorPrimaryDark" />
+
+</RelativeLayout>

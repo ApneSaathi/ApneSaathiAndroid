@@ -10,12 +10,12 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
+import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenssupporttoday.SeniorCitizensSupportedToday
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import java.util.concurrent.TimeUnit
-
 
 class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
 
@@ -78,7 +78,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
                 getTargetIntent(SeniorCitizenFeedbackFormActivity::class.java),
                 options.toBundle()
             )*/
-            navigateToNextScreen(SeniorCitizenFeedbackFormActivity::class.java)
+            navigateToNextScreen(SeniorCitizensSupportedToday::class.java)
         }.autoDispose(disposables)
 
         tvTotalSrCitizensSupported.throttleClick().subscribe {
