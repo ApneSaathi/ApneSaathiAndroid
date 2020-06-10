@@ -29,9 +29,6 @@ ext {
     gmsGradleVersion = '4.3.0'
     gmsSupportPackage = 'com.google.gms:google-services'
 
-    realmGradleVersion = "6.0.0"
-    realmSupportPackage = "io.realm:realm-gradle-plugin"
-
     constraintLayoutVersion = '1.1.3'
     constraintLayoutPackage = 'androidx.constraintlayout:constraintlayout'
 
@@ -76,7 +73,6 @@ ext {
     androidGradleSupport = buildDependency(androidSupportPackage, androidGradleVersion)
     kotlinGradleSupport = buildDependency(kotlinSupportPackage, kotlinPluginVersion)
     gmsServiceSupport = buildDependency(gmsSupportPackage, gmsGradleVersion)
-    realmSupport = buildDependency(realmSupportPackage, realmGradleVersion)
     kotlinSupport = buildDependency(kotlinPackage, kotlinPluginVersion)
     constraintLayout = buildDependency(constraintLayoutPackage, constraintLayoutVersion)
     okHttpInterceptor = buildDependency(okhttpPackage, okhttpVersion)
