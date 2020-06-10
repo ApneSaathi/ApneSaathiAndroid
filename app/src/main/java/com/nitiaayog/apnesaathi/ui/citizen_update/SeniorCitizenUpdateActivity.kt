@@ -12,6 +12,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.senior_citizen_update_form.*
 
 class SeniorCitizenUpdateActivity : BaseActivity<SeniorCitizenUpdateViewModel>() {
+
     override fun provideViewModel(): SeniorCitizenUpdateViewModel =
         getViewModel { SeniorCitizenUpdateViewModel.getInstance(dataManager) }
 
@@ -26,10 +27,10 @@ class SeniorCitizenUpdateActivity : BaseActivity<SeniorCitizenUpdateViewModel>()
     private fun initClicks() {
         img_complaints.setOnClickListener { addMoreComplaints() }
         img_other_problems.setOnClickListener { addMoreOtherProblems() }
-        cb_yes.setOnCheckedChangeListener { buttonView, b ->
+        cb_yes.setOnCheckedChangeListener { buttonView, _ ->
             cb_no.isChecked = !buttonView.isChecked
         }
-        cb_no.setOnCheckedChangeListener { buttonView, b ->
+        cb_no.setOnCheckedChangeListener { buttonView, _ ->
             cb_yes.isChecked = !buttonView.isChecked
         }
     }
