@@ -15,7 +15,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         super.onCreate(savedInstanceState)
 
         dataManager.setPhoneNumber("123456")
-        BtnLogin.setOnClickListener {
+        btnLogin.setOnClickListener {
 
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
                 EditMobileNumber.setError("Enter Mobile Number")

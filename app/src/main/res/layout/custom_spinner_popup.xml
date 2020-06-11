@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/next_screen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginBottom="32dp"
+    android:layout_marginStart="@dimen/dimen_20"
+    android:layout_marginTop="@dimen/view_size_32"
+    android:layout_marginEnd="@dimen/dimen_20"
+    android:layout_marginBottom="@dimen/view_size_32"
     android:background="@drawable/dailog_background_shape"
-    android:elevation="2dp"
-    app:cardCornerRadius="30dp">
+    android:elevation="@dimen/dimen_2"
+    app:cardCornerRadius="@dimen/dimen_30">
 
     <LinearLayout
 
@@ -23,7 +22,7 @@
         <RelativeLayout
             android:id="@+id/english_block"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="@dimen/view_size_60">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,12 +35,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#e5e8e7" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
-            android:id="@+id/spanish_block"
+            android:id="@+id/hindi_block"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="@dimen/view_size_60">
 
             <TextView
                 android:layout_width="wrap_content"

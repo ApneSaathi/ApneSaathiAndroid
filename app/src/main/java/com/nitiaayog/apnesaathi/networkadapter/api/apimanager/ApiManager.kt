@@ -22,7 +22,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
             }
     }
 
-    override fun loginUser(phoneNumber:String): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: String): Single<LoginRepo> =
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
     override fun getAssessmentQuestions(): Single<AssessmentRepo> =

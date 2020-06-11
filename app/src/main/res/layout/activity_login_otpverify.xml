@@ -11,7 +11,7 @@
         android:layout_marginTop="@dimen/dimen_30"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="Enter Verification Code"
+        android:text="@string/verificationcode"
         android:textColor="@color/color_black"
         android:textSize="@dimen/text_16">
 
@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimen_3"
         android:gravity="center"
-        android:text="We have send a 4 digit verification code on"
+        android:text="@string/wehavesendverificaiton_code"
    >
 
     </TextView>
@@ -38,14 +38,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimen_3"
         android:gravity="center"
-        android:text="+91 9673346489">
+        android:text="@string/senderNumber">
 
     </TextView>
 
     <LinearLayout
         android:id="@+id/LinearDigitLayout"
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/dimen_70"
         android:layout_below="@id/txt3"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -91,7 +91,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/Btnverify"
+        android:id="@+id/btnVerify"
         android:layout_width="150dp"
         android:layout_height="@dimen/view_size_45"
         android:layout_below="@+id/LinearDigitLayout"
@@ -100,15 +100,15 @@
         android:layout_margin="@dimen/dimen_10"
         android:background="@drawable/button_background"
         android:gravity="center"
-        android:text="verify"
+        android:text="@string/verify"
         android:textColor="@color/color_white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Btnverify"
+        android:layout_below="@+id/btnVerify"
         android:layout_centerHorizontal="true"
-        android:text="Did't recive any code ? Re-send"
+        android:text="@string/donthave_receive_resend"
         android:textColor="@color/colorPrimaryDark" />
 
 </RelativeLayout>

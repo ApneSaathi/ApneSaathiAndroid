@@ -9,7 +9,6 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
-import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenssupporttoday.SeniorCitizensSupportedToday
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

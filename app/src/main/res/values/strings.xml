@@ -15,6 +15,8 @@
     <string name="select_language">Select Language</string>
     <string name="english_text">English</string>
     <string name="hindi_text">Hindi</string>
+    <string name="txtSubmit">Submit</string>
+
 
     <string name="volunteer_name">Name of Volunteer *</string>
     <string name="volunteer_phone_number">Phone Number of Volunteer *</string>
@@ -24,7 +26,6 @@
     <string name="district_of_person">Select district of the person *</string>
     <string name="block_name">Block Name *</string>
     <string name="is_call_connected">Did your call connect successfully? *</string>
-    <string name="submit">Submit</string>
     <string name="validate_volunteer_name">Provide volunteer name</string>
     <string name="validate_volunteer_phone_number">Provide volunteer phone number</string>
     <string name="validate_person_name">Provide person name whom you called</string>
@@ -91,5 +92,16 @@
     <string name="call_connected">Calls connected</string>
     <string name="call_permission_denied">Calling Permission Denied</string>
     <string name="not_handle_action">Can not handle the action</string>
+
+    <string name="txtenterMobilenumbe">Enter Mobile Number</string>
+    <string name="txtValidmobilenumber">Enter valid mobile number</string>
+    <string name="txtlogin">Login</string>
+    <string name="txtmobileNumber">Mobile Number</string>
+    <string name="verificationcode">Enter Verification Code</string>
+    <string name="wehavesendverificaiton_code">We have send a 4 digit verification code on</string>
+    <string name="senderNumber">+91 9673346489</string>
+    <string name="verify">verify</string>
+    <string name="donthave_receive_resend">Did\'t recive any code ? Re-send</string>
+    <string name="enterOtp">Enter Otp</string>
 
 </resources>

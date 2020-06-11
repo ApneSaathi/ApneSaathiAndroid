@@ -49,4 +49,12 @@ open class PreferenceManager private constructor(application: Application) : Pre
 
     override fun setPhoneNumber(phoneNumber: String) =
         preferences.putString(PreferenceConstants.PhoneNumber, phoneNumber)
+
+    override fun getSelectedLaungage(): String {
+        return preferences.getString(PreferenceConstants.SELECTED_LANGUAGE)!!
+    }
+
+    override fun setSelectedLaungage(selectedlanguage: String) {
+        preferences.putString(PreferenceConstants.SELECTED_LANGUAGE, selectedlanguage)
+    }
 }

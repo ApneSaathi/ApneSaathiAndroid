@@ -1,8 +1,10 @@
 package com.nitiaayog.apnesaathi
 
 import android.app.Application
+import android.content.Context
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.utility.LanguageUtils
 
 class ApneSaathiApplication : Application() {
 
@@ -16,5 +18,8 @@ class ApneSaathiApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
     }
+
+
 }
