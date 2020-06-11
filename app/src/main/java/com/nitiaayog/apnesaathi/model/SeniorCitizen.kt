@@ -1,31 +1,36 @@
 package com.nitiaayog.apnesaathi.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
+@Entity
 class SeniorCitizen(
+
     @SerializedName(ApiConstants.UserId)
-    private val sNo: Int,
+    @PrimaryKey(autoGenerate = true) private val sNo: Int,
     @SerializedName(ApiConstants.UserId)
-    private val mDisplayName: String = "",
+    @ColumnInfo(name = "display_name") private val mDisplayName: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mPhoneNumber: Long,
+    @ColumnInfo(name = "phone_number") private val mPhoneNumber: Long,
     @SerializedName(ApiConstants.UserId)
-    private val mEmail: String = "",
+    @ColumnInfo(name = "email") private val mEmail: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mFlag: Boolean = false,
+    @ColumnInfo(name = "flag") private val mFlag: Boolean = false,
     @SerializedName(ApiConstants.UserId)
-    private val mFlagComment: String = "",
+    @ColumnInfo(name = "flag_comment") private val mFlagComment: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mGender: String = "",
+    @ColumnInfo(name = "gender") private val mGender: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mState: String = "",
+    @ColumnInfo(name = "state") private val mState: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mDistrict: String = "",
+    @ColumnInfo(name = "district") private val mDistrict: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mBlock: String = "",
+    @ColumnInfo(name = "block") private val mBlock: String = "",
     @SerializedName(ApiConstants.UserId)
-    private val mVillage: String = "",
+    @ColumnInfo(name = "village") private val mVillage: String = "",
     @SerializedName(ApiConstants.UserId)
     private val mCreatedBy: String = "",
     @SerializedName(ApiConstants.UserId)

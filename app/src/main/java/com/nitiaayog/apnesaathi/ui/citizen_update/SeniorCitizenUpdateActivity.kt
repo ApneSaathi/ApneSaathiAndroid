@@ -28,10 +28,10 @@ class SeniorCitizenUpdateActivity : BaseActivity<SeniorCitizenUpdateViewModel>()
         img_complaints.setOnClickListener { addMoreComplaints() }
         img_other_problems.setOnClickListener { addMoreOtherProblems() }
         cb_yes.setOnCheckedChangeListener { buttonView, b ->
-            cb_no.isChecked = !buttonView.isChecked
+            if(b)cb_no.isChecked = !buttonView.isChecked
         }
         cb_no.setOnCheckedChangeListener { buttonView, b ->
-            cb_yes.isChecked = !buttonView.isChecked
+            if(b)cb_yes.isChecked = !buttonView.isChecked
         }
     }
 
