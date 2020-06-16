@@ -38,8 +38,12 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextActivity() {
-val fragment = SeniorCitizenDetailsFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.dummy_container,fragment).commit()
-//        finish()
+        val dataManager = ApneSaathiApplication.getApiClient()
+        val targetIntent = getTargetIntent(
+            if (dataManager.isLogin()) DashBoardActivity::class.java
+            else LanguageSelectionActivity::class.java
+        )
+        startActivity(targetIntent)
+        finish()
     }
 }
