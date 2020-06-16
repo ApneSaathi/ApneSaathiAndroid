@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/language_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- <androidx.constraintlayout.widget.Guideline
+         android:id="@+id/guideline"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         app:layout_constraintGuide_percent="0.04" /> -->
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_75"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/rhodes_logo"
-        android:layout_width="@dimen/dimen_181"
-        android:layout_height="@dimen/dimen_130"
-        android:layout_marginTop="@dimen/dimen_10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo"
-        app:srcCompat="@drawable/applogo" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        app:srcCompat="@drawable/image_2" />
 
     <TextView
         android:id="@+id/select_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_size_40"
+        android:layout_below="@+id/rhodes_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:text="@string/select_language"
         android:textAlignment="center"
         android:textSize="@dimen/text_16"
@@ -39,70 +36,107 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rhodes_logo" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/country_selection_view"
-        android:layout_width="@dimen/dimen_300"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_30"
-        android:elevation="@dimen/view_size_40"
-        android:padding="@dimen/dimen_20"
-        app:cardCornerRadius="@dimen/dimen_20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_language">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_55"
-            android:padding="@dimen/dimen_10">
-
-            <TextView
-
-                android:id="@+id/confirmed_language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_20"
-                android:text="@string/english_text"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimen_20"
-                android:src="@drawable/ic_chevron_down_regular_copy" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/view_size_50"
-        android:layout_marginBottom="@dimen/dimen_10"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_language"
+        android:padding="10dp">
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15">
+
+            <RadioButton
+                android:id="@+id/radiobtnEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_60"
+                android:text="@string/english_text"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                android:background="@color/color_black" />
+
+            <RadioButton
+                android:id="@+id/radiobtnHindi"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/view_size_60"
+                android:text="@string/hindi_text"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                android:background="@color/color_black" />
+
+            <RadioButton
+                android:id="@+id/radiobtnMarathi"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/view_size_60"
+                android:text="@string/marathi_text"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                android:background="@color/color_black" />
+
+            <RadioButton
+                android:id="@+id/radiobtnGujrati"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/view_size_60"
+                android:text="@string/gujrati_text"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginLeft="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_15"
+                android:background="@color/color_black" />
+ </RadioGroup>
+    </RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/dimen_15"
+        android:layout_marginRight="@dimen/dimen_15"
         android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:cardCornerRadius="@dimen/dimen_3"
+        android:orientation="horizontal">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimen_15"
-            android:layout_marginRight="@dimen/dimen_15"
+
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnSubmit"
+            <TextView
+android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_50"
-                android:text="@string/txtSubmit" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/btn_bg"
+                android:gravity="center"
+                android:text="@string/letsgetstarted"
+                android:textColor="@color/color_white" />
         </LinearLayout>
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/next_screen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dimen_20"
-    android:layout_marginTop="@dimen/view_size_32"
-    android:layout_marginEnd="@dimen/dimen_20"
-    android:layout_marginBottom="@dimen/view_size_32"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="32dp"
     android:background="@drawable/dailog_background_shape"
-    android:elevation="@dimen/dimen_2"
-    app:cardCornerRadius="@dimen/dimen_30">
+    android:elevation="2dp"
+    app:cardCornerRadius="30dp">
 
     <LinearLayout
 
@@ -22,7 +23,7 @@
         <RelativeLayout
             android:id="@+id/english_block"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/view_size_60">
+            android:layout_height="60dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -35,12 +36,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="#e5e8e7" />
 
         <RelativeLayout
             android:id="@+id/hindi_block"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/view_size_60">
+            android:layout_height="60dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,8 +50,40 @@
                 android:text="@string/hindi_text" />
 
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e5e8e7" />
 
+        <RelativeLayout
+            android:id="@+id/gujrati_block"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/gujrati_text" />
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e5e8e7" />
+
+        <RelativeLayout
+            android:id="@+id/marathi_block"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/marathi_text" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

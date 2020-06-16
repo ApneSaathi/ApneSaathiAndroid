@@ -24,7 +24,6 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutResource())
-
     }
 
     override fun onDestroy() {

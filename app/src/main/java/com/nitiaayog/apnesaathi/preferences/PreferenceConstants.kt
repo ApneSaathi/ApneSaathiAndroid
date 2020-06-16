@@ -7,5 +7,4 @@ object PreferenceConstants {
     const val ProfileImage: String = "profile_image"
     const val PhoneNumber: String = "phone_number"
     const val SELECTED_LANGUAGE: String = "selected_lang"
-
 }

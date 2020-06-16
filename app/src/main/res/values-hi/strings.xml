@@ -15,8 +15,10 @@
     <string name="select_language">भाषा का चयन करें</string>
     <string name="english_text">अंग्रेज़ी</string>
     <string name="hindi_text">हिन्दी</string>
-    <string name="txtSubmit">प्रस्तुत</string>
-
+    <string name="submit">प्रस्तुत</string>
+    <string name="marathi_text">मराठी</string>
+    <string name="gujrati_text">गुजराती</string>
+    <string name="aasammi_text">आसामी</string>
 
     <string name="volunteer_name">स्वयंसेवक का नाम </string>
     <string name="volunteer_phone_number">स्वयंसेवक का फोन नंबर *</string>
@@ -35,53 +37,53 @@
     <string name="validate_block_name">ब्लॉक नाम प्रदान करें</string>
     <string name="validate_call_connection">कॉल की स्थिति प्रदान करें</string>
     <string-array name="states_array">
-        <item>Assam</item>
-        <item>Bihar</item>
-        <item>Madhya Pradesh</item>
-        <item>Uttar Pradesh</item>
-        <item>Rajasthan</item>
-        <item>Maharashtra</item>
-        <item>Gujarat</item>
-        <item>Jharkhand</item>
+        <item>असम</item>
+        <item>बिहार</item>
+        <item>मध्य प्रदेश</item>
+        <item>उत्तर प्रदेश</item>
+        <item>राजस्थान </item>
+        <item>महाराष्ट्र</item>
+        <item>गुजरात</item>
+        <item>झारखंड</item>
     </string-array>
     <string-array name="districts_array">
         <item>बारपेटा</item>
         <item>Baska</item>
-        <item>Darrang</item>
-        <item>Goalpara</item>
-        <item>Dhubri</item>
-        <item>Halakandi</item>
-        <item>Araria</item>
-        <item>Sitamarhi</item>
-        <item>Begusarai</item>
-        <item>Katihar</item>
-        <item>Sheikhpura</item>
-        <item>Damoh</item>
-        <item>Barwani</item>
-        <item>Khandwa</item>
-        <item>Singrauli</item>
-        <item>Vidisha</item>
+        <item>दरांग</item>
+        <item>गोलपाड़ा</item>
+        <item>धुबरी</item>
+        <item>हैलाकांडी</item>
+        <item>अररिया</item>
+        <item>सीतामढ़ी</item>
+        <item>बेगूसराय</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+        <item>दमोह</item>
+        <item>बड़वानी</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
         <item>Behraich</item>
-        <item>Balrampur</item>
-        <item>Shrawasti</item>
-        <item>Chitrakoot</item>
-        <item>Sonbhadra</item>
-        <item>Baran</item>
-        <item>Jaiselmer</item>
-        <item>Nandurbar</item>
-        <item>Amravati</item>
-        <item>Gadchiroli</item>
-        <item>Narmada</item>
+        <item>बलरामपुर</item>
+        <item>श्रावस्ती</item>
+        <item>चित्रकूट</item>
+        <item>सोनभद्र</item>
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+        <item>नंदुरबार</item>
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नर्मदा</item>
         <item>Pakur</item>
         <item>Sahibganj</item>
         <item>SurendraNagar</item>
     </string-array>
     <string-array name="call_status">
-        <item>No Response</item>
-        <item>Phone not picked</item>
-        <item>Phone not reachable</item>
-        <item>Call Disconnected</item>
-        <item>Call Connected</item>
+        <item>कोई जवाब नहीं</item>
+        <item>फोन नहीं उठाया</item>
+        <item>फोन नहीं पहुंच पा रहा है</item>
+        <item>डिस्कनेक्ट किया गया कॉल</item>
+        <item>कनेक्टेड कॉल करें</item>
     </string-array>
     <string name="permission_detail">अनुमति विस्तार</string>
     <string name="permission_text">ऐप में यह सुविधा है कि वरिष्ठ नागरिक विवरण पर केवल एक क्लिक से आप दैनिक आधार पर एक नियमित कॉल शुरू कर सकते हैं। इसके लिए हमें कॉल अनुमति की आवश्यकता होगी.</string>
@@ -104,4 +106,37 @@
     <string name="donthave_receive_resend">क्या किसी भी कोड को पुनः प्राप्त नहीं किया? पुन: भेजें</string>
     <string name="enterOtp">Otp दर्ज करें</string>
 
+    <string name="personal_details">PERSONAL DETAILS</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="state">State</string>
+    <string name="district">District</string>
+    <string name="block">Block</string>
+    <string name="health_care_information">HEALTH CARE INFORMATION</string>
+    <string name="emotional_state">Emotional State</string>
+    <string name="happy">Happy</string>
+    <string name="neutral">Neutral</string>
+    <string name="sad">Sad</string>
+    <string name="covid_symptoms">Covid Symptoms</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="other_medical_problems">Other Medical Problems</string>
+    <string name="complaints">COMPLAINTS</string>
+    <string name="calls_information">CALLS INFORMATION</string>
+    <string name="call_type">Call Type</string>
+    <string name="update"><u>Update</u></string>
+    <string name="call_received_by">Call Received By</string>
+    <string name="appbar_title">SENIOR CITIZEN DATA</string>
+    <string name="register_a_new_citizen">Register a new citizen</string>
+    <string name="emergency_call">Emergency Call</string>
+    <string name="report_a_problem">Report a problem</string>
+    <string name="feedback">Feedback</string>
+    <string name="drawerOpen">Drawer Open</string>
+    <string name="drawerClose">Drawer Close</string>
+    <string name="letsgetstarted">आएँ शुरू करें</string>
+    <string name="logindescription">अपना मोबाइल नंबर दर्ज करें, हम आपको बाद में सत्यापित करने के लिए OTP भेजेंगे</string>
+    <string name="confirm">पुष्टि करें</string>
+    <string name="proceed">बढ़ना</string>
+    <string name="resendcode">0:30 में कोड पुनः भेजें</string>
+    <string name="resendOTP">ओटीपी पुनः भेजें</string>
 </resources>

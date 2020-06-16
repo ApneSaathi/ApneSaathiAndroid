@@ -1,6 +1,5 @@
 package com.nitiaayog.apnesaathi.ui.splash
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
@@ -45,6 +44,4 @@ class SplashActivity : AppCompatActivity() {
         startActivity(targetIntent)
         finish()
     }
-
-
 }

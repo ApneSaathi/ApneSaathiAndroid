@@ -52,7 +52,6 @@ class AppDataManager private constructor(
         setPhoneNumber(loginUser.phoneNumber)
     }
 
-
     override fun getUserId(): String = preferences.getUserId()
 
     override fun setUserId(userId: String) = preferences.setUserId(userId)
@@ -68,12 +67,11 @@ class AppDataManager private constructor(
     override fun getPhoneNumber(): String = preferences.getPhoneNumber()
 
     override fun setPhoneNumber(phoneNumber: String) = preferences.setPhoneNumber(phoneNumber)
-    override fun getSelectedLaungage(): String {
-        return preferences.getSelectedLaungage()
+    override fun getSelectedLanguage(): String {
+        return preferences.getSelectedLanguage()
     }
 
-    override fun setSelectedLaungage(selectedlanguage: String) {
-        preferences.setSelectedLaungage(selectedlanguage)
+    override fun setSelectedLanguage(language: String) {
+        preferences.setSelectedLanguage(language)
     }
-
 }

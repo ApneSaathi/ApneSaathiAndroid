@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_login_otpverify.*
 class OtpActivity : BaseActivity<OtpActivityModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dataManager.setPhoneNumber("123456")
+//        dataManager.setPhoneNumber("123456")
 
         btnVerify.throttleClick().subscribe() {
             if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
@@ -32,4 +32,5 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
     }
 
     override fun provideLayoutResource(): Int = R.layout.activity_login_otpverify
+
 }

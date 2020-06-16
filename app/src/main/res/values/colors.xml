@@ -7,5 +7,9 @@
     <color name="color_black">#000000</color>
     <color name="color_white">#FFFFFF</color>
 
-    <color name="color_highlited">#F5BC27</color>>
+    <color name="color_highlited">#F5BC27</color>
+    <color name="color_orange">#F7650B</color>
+    <color name="text_color_grey">#5E524B</color>
+    <color name="btn_bg">#fe4612</color>
+    <color name="textcolor">#662c2d32</color>
 </resources>

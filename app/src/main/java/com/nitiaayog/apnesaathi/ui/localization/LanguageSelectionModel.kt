@@ -15,5 +15,4 @@ class LanguageSelectionModel private constructor(dataManager: DataManager) : Bas
                 instance ?: LanguageSelectionModel(dataManager).also { instance = it }
             }
     }
-
 }

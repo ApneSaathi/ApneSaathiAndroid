@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/dimen_30"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="@string/verificationcode"
-        android:textColor="@color/color_black"
-        android:textSize="@dimen/text_16">
+        android:src="@drawable/otp_image">
 
-    </TextView>
+    </ImageView>
+
 
     <TextView
+
         android:id="@+id/txt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_3"
+        android:layout_marginTop="@dimen/dimen_20"
         android:gravity="center"
-        android:text="@string/wehavesendverificaiton_code"
-   >
+        android:text="@string/wehavesendverificaiton_code">
 
     </TextView>
 
@@ -38,18 +36,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimen_3"
         android:gravity="center"
-        android:text="@string/senderNumber">
+        android:text="+91 9673346489">
 
     </TextView>
 
     <LinearLayout
         android:id="@+id/LinearDigitLayout"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_70"
+        android:layout_height="70dp"
         android:layout_below="@id/txt3"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/dimen_5"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_20"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -90,25 +89,42 @@
             android:maxLength="1" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnVerify"
-        android:layout_width="150dp"
-        android:layout_height="@dimen/view_size_45"
-        android:layout_below="@+id/LinearDigitLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dimen_10"
-        android:background="@drawable/button_background"
-        android:gravity="center"
-        android:text="@string/verify"
-        android:textColor="@color/color_white" />
 
     <TextView
+        android:id="@+id/btnVerify"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_size_45"
+        android:layout_below="@+id/linearloginfield"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:layout_marginRight="@dimen/dimen_10"
+        android:background="@color/btn_bg"
+        android:gravity="center"
+        android:text="@string/proceed"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_16" />
+
+    <TextView
+        android:id="@+id/txttimer"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnVerify"
         android:layout_centerHorizontal="true"
-        android:text="@string/donthave_receive_resend"
-        android:textColor="@color/colorPrimaryDark" />
+        android:text="@string/resendcode"
+        android:textSize="@dimen/text_16"
+        android:textColor="@color/color_black" />
 
-</RelativeLayout>
+    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txttimer"
+        android:layout_centerHorizontal="true"
+        android:text="@string/resendOTP"
+        android:textSize="@dimen/text_16"
+        android:textColor="@color/text_color_grey" />
+</LinearLayout>

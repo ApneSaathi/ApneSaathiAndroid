@@ -2,75 +2,56 @@ package com.nitiaayog.apnesaathi.ui.localization
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import kotlinx.android.synthetic.main.activity_launguage_selection.*
-import kotlinx.android.synthetic.main.custom_spinner_popup.*
-
 
 class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
     lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = applicationContext
-        if (dataManager.getSelectedLaungage().isEmpty()) {
-            confirmed_language.text = resources.getString(R.string.english_text)
+        if (dataManager.getSelectedLanguage().isEmpty()) {
+            radiobtnEnglish.isChecked = true
         } else {
-//            confirmed_language.text = dataManager.getSelectedLaungage()
-            if (dataManager.getSelectedLaungage().equals("English")) {
-                confirmed_language.text = resources.getString(R.string.english_text)
+            if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_ENGLISH)) {
+                radiobtnEnglish.isChecked = true
             } else {
-                confirmed_language.text = resources.getString(R.string.hindi_text)
+                if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_MARATHI)) {
+                    radiobtnMarathi.isChecked = true
+                } else {
+                    if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_GUJRATI)) {
+                        radiobtnGujrati.isChecked = true
+                    } else {
+                        radiobtnHindi.isChecked = true
+                    }
+                }
             }
-
         }
 
-        country_selection_view.throttleClick().subscribe() {
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_spinner_popup, null)
-            val mBuilder = AlertDialog.Builder(this, R.style.CustomDialog)
-                .setView(mDialogView)
-            val mAlertDialog = mBuilder.show()
-
-            if (confirmed_language.text.toString() == resources.getString(R.string.english_text)) {
-                mAlertDialog.english_block.setBackgroundColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.color_highlited
-                    )
-                )
-
-            } else if (confirmed_language.text.toString() == resources.getString(R.string.hindi_text)) {
-                mAlertDialog.hindi_block.setBackgroundColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.color_highlited
-                    )
-                )
+        radiogroup.setOnCheckedChangeListener { radioGroup, i ->
+            when (radiogroup.checkedRadioButtonId) {
+                R.id.radiobtnEnglish -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_ENGLISH)
+                }
+                R.id.radiobtnMarathi -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_MARATHI)
+                }
+                R.id.radiobtnHindi -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_HINDI)
+                }
+                R.id.radiobtnGujrati -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_GUJRATI)
+                }
+                else -> dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_ENGLISH)
             }
-            mAlertDialog.english_block.throttleClick().subscribe() {
-                mAlertDialog.dismiss()
-                dataManager.setSelectedLaungage("English")
-                recreate()
-                confirmed_language.text = resources.getString(R.string.english_text)
-
-            }.autoDispose(disposables)
-
-            mAlertDialog.hindi_block.throttleClick().subscribe() {
-                mAlertDialog.dismiss()
-                dataManager.setSelectedLaungage("Hindi")
-                recreate()
-                confirmed_language.text = resources.getString(R.string.hindi_text)
-
-            }.autoDispose(disposables)
-        }.autoDispose(disposables)
-
+            recreate()
+        }
 
         btnSubmit.throttleClick().subscribe() {
             val targetIntent = getTargetIntent(LoginActivity::class.java)
@@ -83,6 +64,5 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         LanguageSelectionModel.getInstance(dataManager)
 
     override fun provideLayoutResource(): Int = R.layout.activity_launguage_selection
-
 
 }
