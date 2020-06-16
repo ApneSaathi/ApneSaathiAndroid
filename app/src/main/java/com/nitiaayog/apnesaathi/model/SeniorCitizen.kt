@@ -3,42 +3,30 @@ package com.nitiaayog.apnesaathi.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 @Entity
 class SeniorCitizen(
+    @PrimaryKey(autoGenerate = true) val sNo: Int,
+    @ColumnInfo(name = "display_name") val mDisplayName: String = "",
+    @ColumnInfo(name = "phone_number") val mPhoneNumber: Long,
+    @ColumnInfo(name = "email_") val mEmail: String = "",
+    @ColumnInfo(name = "flag_") val mFlag: Boolean = false,
+    @ColumnInfo(name = "flag_comment") val mFlagComment: String = "",
+    @ColumnInfo(name = "gender_") val mGender: String = "",
+    @ColumnInfo(name = "state_") val mState: String = "",
+    @ColumnInfo(name = "district_") val mDistrict: String = "",
+    @ColumnInfo(name = "block_") val mBlock: String = "",
+    @ColumnInfo(name = "village_") val mVillage: String = "",
+    @ColumnInfo(name = "status_") val mStatus: String = "",
+    @ColumnInfo(name = "covid_symptoms") val mCovidSymptoms:String="",
+    @ColumnInfo(name = "non_covid_symptoms") val mNonCovidSymptoms:String=""
+//    private val mCreatedBy: String = "",
+//    private val mAssignTo: String = "",
+//    private val mContentDescription: String = "",
 
-    @SerializedName(ApiConstants.UserId)
-    @PrimaryKey(autoGenerate = true) private val sNo: Int,
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "display_name") private val mDisplayName: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "phone_number") private val mPhoneNumber: Long,
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "email") private val mEmail: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "flag") private val mFlag: Boolean = false,
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "flag_comment") private val mFlagComment: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "gender") private val mGender: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "state") private val mState: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "district") private val mDistrict: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "block") private val mBlock: String = "",
-    @SerializedName(ApiConstants.UserId)
-    @ColumnInfo(name = "village") private val mVillage: String = "",
-    @SerializedName(ApiConstants.UserId)
-    private val mCreatedBy: String = "",
-    @SerializedName(ApiConstants.UserId)
-    private val mAssignTo: String = "",
-    @SerializedName(ApiConstants.UserId)
-    private val mContentDescription: String = "",
-    @SerializedName(ApiConstants.UserId)
-    private val mStatus: String = ""
 //    private val mDateOfOnBoarding:String="",
 //    private val mProcess:String="",
 //    private val mUpdatedDate:String="",
@@ -65,20 +53,4 @@ class SeniorCitizen(
 //    private val mComplaintsOfBasicUtilities:String="",
 //    private val mComplaintsOfUnhygenicConditions:String="",
 //    private val mComplaintsOfLackOfInformation:String=""
-) {
-    val userId: Int = sNo
-    val displayName: String = mDisplayName
-    val phoneNumber: Long = mPhoneNumber
-    val email: String = mEmail
-    val flag: Boolean = mFlag
-    val flagComment: String = mFlagComment
-    val gender: String = mGender
-    val state: String = mState
-    val district: String = mDistrict
-    val block: String = mBlock
-    val village: String = mVillage
-    val createdBy: String = mCreatedBy
-    val assignTo: String = mAssignTo
-    val contentDescription: String = mContentDescription
-    val status: String = mStatus
-}
+)
