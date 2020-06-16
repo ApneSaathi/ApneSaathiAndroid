@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
+import com.nitiaayog.apnesaathi.ui.citizen_update.SeniorCitizenUpdateActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import io.reactivex.Observable
@@ -38,7 +39,7 @@ class SplashActivity : AppCompatActivity() {
     private fun navigateToNextActivity() {
         val dataManager = ApneSaathiApplication.getApiClient()
         val targetIntent = getTargetIntent(
-            if (dataManager.isLogin()) DashBoardActivity::class.java
+            if (dataManager.isLogin()) SeniorCitizenUpdateActivity::class.java
             else LanguageSelectionActivity::class.java
         )
         startActivity(targetIntent)
