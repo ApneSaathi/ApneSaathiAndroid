@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.fragments
+package com.nitiaayog.apnesaathi.ui.fragments.userDetails
 
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
@@ -37,8 +37,13 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
 
         @Synchronized
         fun getInstance(dataManager: DataManager): SeniorCitizenDetailsViewModel =
-            instance ?: synchronized(this) {
-                instance ?: SeniorCitizenDetailsViewModel(dataManager).also { instance = it }
+            instance
+                ?: synchronized(this) {
+                instance
+                    ?: SeniorCitizenDetailsViewModel(
+                        dataManager
+                    )
+                        .also { instance = it }
             }
     }
 }

@@ -161,5 +161,6 @@
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
     <string name="app_bar_title">User Details</string>
+    <string name="txtSubmit">Submit</string>
 
 </resources>

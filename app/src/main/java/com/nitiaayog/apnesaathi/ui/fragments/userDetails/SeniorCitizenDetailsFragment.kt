@@ -1,11 +1,11 @@
-package com.nitiaayog.apnesaathi.ui.fragments
+package com.nitiaayog.apnesaathi.ui.fragments.userDetails
 
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
-import com.nitiaayog.apnesaathi.base.extensions.rx.getViewModel
+import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.senior_citizen_details_fragment.*
@@ -13,10 +13,14 @@ import kotlinx.android.synthetic.main.senior_citizen_details_fragment.*
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     SeniorCitizenDateAdapter.OnItemClickListener {
-    override fun provideViewModel(): SeniorCitizenDetailsViewModel =
-        getViewModel { SeniorCitizenDetailsViewModel.getInstance(dataManager) }
 
     private lateinit var adapter: SeniorCitizenDateAdapter
+    override fun provideViewModel(): SeniorCitizenDetailsViewModel =
+        getViewModel {
+            SeniorCitizenDetailsViewModel.getInstance(
+                dataManager
+            )
+        }
 
     override fun provideLayoutResource(): Int = R.layout.senior_citizen_details_fragment
 
@@ -93,4 +97,13 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
 
     }
+
+    override fun onCallPermissionGranted() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCallPermissionDenied() {
+        TODO("Not yet implemented")
+    }
+
 }
