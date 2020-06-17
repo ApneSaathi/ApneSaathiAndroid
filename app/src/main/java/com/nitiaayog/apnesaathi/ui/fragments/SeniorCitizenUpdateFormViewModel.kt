@@ -10,22 +10,22 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     fun prepareData(): MutableList<DateItem> {
         dataList.add(
             DateItem(
-                "01", "Jan"
+                "01", "Jan","Attended"
             )
         )
         dataList.add(
             DateItem(
-                "02", "Jan"
+                "02", "Jan","Attended"
             )
         )
         dataList.add(
             DateItem(
-                "08", "Jan"
+                "08", "Jan","Attended"
             )
         )
         dataList.add(
             DateItem(
-                "09", "Feb"
+                "09", "Feb","Unattended"
             )
         )
         return  dataList
