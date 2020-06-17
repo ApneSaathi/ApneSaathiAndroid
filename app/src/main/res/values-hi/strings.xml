@@ -1,0 +1,142 @@
+<resources>
+    <string name="app_name">Apne Saathi</string>
+
+    <string name="total_calls_vs_connected">कुल कॉल किए गए VS कनेक्टेड</string>
+    <string name="total_sr_citizens_supported">कुल नं। वरिष्ठ नागरिकों का समर्थन किया</string>
+    <string name="calls_connected_yesterday">कल जुड़े कॉल</string>
+    <string name="average_connected_called_per_day">प्रति दिन औसत कनेक्टेड कॉल</string>
+    <string name="calls_connected_today">आज जुड़े कॉल</string>
+    <string name="sr_citizens_supported_today">सीनियर सिटीजन ने आज समर्थन किया</string>
+    <string name="Sr_citizen_calls_pending">वरिष्ठ नागरिकों की संख्या लंबित है</string>
+    <string name="sr_citizens_grievances_vs_resolved">सीनियर सिटीजन शिकायतों की रिपोर्ट वीएस ने हल की</string>
+    <string name="on_call_sr_citizen_feedback_form">एक कॉल पर वरिष्ठ नागरिक प्रतिक्रिया</string>
+    <string name="wrong_detail_warning">आपके द्वारा प्रदान किए गए विवरण को जिला स्तरीय स्टाफ सदस्य द्वारा सत्यापित किया जाएगा और गलत विवरण आपके खिलाफ कानूनी कार्रवाई का नेतृत्व कर सकता है</string>
+
+    <string name="select_language">भाषा का चयन करें</string>
+    <string name="english_text">अंग्रेज़ी</string>
+    <string name="hindi_text">हिन्दी</string>
+    <string name="submit">प्रस्तुत</string>
+    <string name="marathi_text">मराठी</string>
+    <string name="gujrati_text">गुजराती</string>
+    <string name="aasammi_text">आसामी</string>
+
+    <string name="volunteer_name">स्वयंसेवक का नाम </string>
+    <string name="volunteer_phone_number">स्वयंसेवक का फोन नंबर *</string>
+    <string name="person_name_whom_you_were_calling">उस व्यक्ति का नाम, जिसे आप बुला रहे थे? *</string>
+    <string name="person_phone_no_whom_you_were_calling">उस व्यक्ति का फ़ोन नंबर जिसे आप कॉल कर रहे थे? *</string>
+    <string name="state_of_person">जिस व्यक्ति से आपने संपर्क किया है, उसकी स्थिति*</string>
+    <string name="district_of_person">व्यक्ति का जिला चुनें *</string>
+    <string name="block_name">ब्लॉक का नाम *</string>
+    <string name="is_call_connected">क्या आपका कॉल सफलतापूर्वक कनेक्ट हुआ? *</string>
+    <string name="validate_volunteer_name">स्वयंसेवक नाम प्रदान करें</string>
+    <string name="validate_volunteer_phone_number">स्वयंसेवक फोन नंबर प्रदान करें</string>
+    <string name="validate_person_name">जिस व्यक्ति को आपने बुलाया है उसे नाम दें</string>
+    <string name="validate_person_phone">उस व्यक्ति को फोन करें जिसे आपने फोन किया है</string>
+    <string name="validate_person_state">व्यक्ति की राज्य प्रदान करें</string>
+    <string name="validate_person_district">्यक्ति का जिला चुनें </string>
+    <string name="validate_block_name">ब्लॉक नाम प्रदान करें</string>
+    <string name="validate_call_connection">कॉल की स्थिति प्रदान करें</string>
+    <string-array name="states_array">
+        <item>असम</item>
+        <item>बिहार</item>
+        <item>मध्य प्रदेश</item>
+        <item>उत्तर प्रदेश</item>
+        <item>राजस्थान </item>
+        <item>महाराष्ट्र</item>
+        <item>गुजरात</item>
+        <item>झारखंड</item>
+    </string-array>
+    <string-array name="districts_array">
+        <item>बारपेटा</item>
+        <item>Baska</item>
+        <item>दरांग</item>
+        <item>गोलपाड़ा</item>
+        <item>धुबरी</item>
+        <item>हैलाकांडी</item>
+        <item>अररिया</item>
+        <item>सीतामढ़ी</item>
+        <item>बेगूसराय</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+        <item>दमोह</item>
+        <item>बड़वानी</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
+        <item>Behraich</item>
+        <item>बलरामपुर</item>
+        <item>श्रावस्ती</item>
+        <item>चित्रकूट</item>
+        <item>सोनभद्र</item>
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+        <item>नंदुरबार</item>
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नर्मदा</item>
+        <item>Pakur</item>
+        <item>Sahibganj</item>
+        <item>SurendraNagar</item>
+    </string-array>
+    <string-array name="call_status">
+        <item>कोई जवाब नहीं</item>
+        <item>फोन नहीं उठाया</item>
+        <item>फोन नहीं पहुंच पा रहा है</item>
+        <item>डिस्कनेक्ट किया गया कॉल</item>
+        <item>कनेक्टेड कॉल करें</item>
+    </string-array>
+    <string name="permission_detail">अनुमति विस्तार</string>
+    <string name="permission_text">ऐप में यह सुविधा है कि वरिष्ठ नागरिक विवरण पर केवल एक क्लिक से आप दैनिक आधार पर एक नियमित कॉल शुरू कर सकते हैं। इसके लिए हमें कॉल अनुमति की आवश्यकता होगी.</string>
+    <string name="accept">स्वीकार करना</string>
+    <string name="not_now">अभी नहीं</string>
+
+    <string name="todays_call">आज के कॉल</string>
+    <string name="call_connected">जुड़े कॉल</string>
+    <string name="call_permission_denied">कॉलिंग अनुमति अनुमति</string>
+    <string name="not_handle_action">कार्रवाई को संभाल नहीं सकते</string>
+
+    <string name="txtenterMobilenumbe">मोबाइल नंबर दर्ज करें</string>
+    <string name="txtValidmobilenumber">वैध मोबाइल नंबर दर्ज करें</string>
+    <string name="txtlogin">लॉग इन करें</string>
+    <string name="txtmobileNumber">मोबाइल नंबर</string>
+    <string name="verificationcode">सत्यापन कोड दर्ज करें</string>
+    <string name="wehavesendverificaiton_code">हमने 4 अंकों का सत्यापन कोड भेजा है</string>
+    <string name="senderNumber">+91 9673346489</string>
+    <string name="verify">सत्यापित करें</string>
+    <string name="donthave_receive_resend">क्या किसी भी कोड को पुनः प्राप्त नहीं किया? पुन: भेजें</string>
+    <string name="enterOtp">Otp दर्ज करें</string>
+
+    <string name="personal_details">PERSONAL DETAILS</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="state">State</string>
+    <string name="district">District</string>
+    <string name="block">Block</string>
+    <string name="health_care_information">HEALTH CARE INFORMATION</string>
+    <string name="emotional_state">Emotional State</string>
+    <string name="happy">Happy</string>
+    <string name="neutral">Neutral</string>
+    <string name="sad">Sad</string>
+    <string name="covid_symptoms">Covid Symptoms</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="other_medical_problems">Other Medical Problems</string>
+    <string name="complaints">COMPLAINTS</string>
+    <string name="calls_information">CALLS INFORMATION</string>
+    <string name="call_type">Call Type</string>
+    <string name="update"><u>Update</u></string>
+    <string name="call_received_by">Call Received By</string>
+    <string name="appbar_title">SENIOR CITIZEN DATA</string>
+    <string name="register_a_new_citizen">Register a new citizen</string>
+    <string name="emergency_call">Emergency Call</string>
+    <string name="report_a_problem">Report a problem</string>
+    <string name="feedback">Feedback</string>
+    <string name="drawerOpen">Drawer Open</string>
+    <string name="drawerClose">Drawer Close</string>
+    <string name="letsgetstarted">आएँ शुरू करें</string>
+    <string name="logindescription">अपना मोबाइल नंबर दर्ज करें, हम आपको बाद में सत्यापित करने के लिए OTP भेजेंगे</string>
+    <string name="confirm">पुष्टि करें</string>
+    <string name="proceed">बढ़ना</string>
+    <string name="resendcode">0:30 में कोड पुनः भेजें</string>
+    <string name="resendOTP">ओटीपी पुनः भेजें</string>
+</resources>

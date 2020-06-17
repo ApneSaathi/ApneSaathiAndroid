@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.base
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.LayoutRes
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.base.extensions.setLightStatusBar
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
@@ -42,4 +44,9 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
     @LayoutRes
     abstract fun provideLayoutResource(): Int
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        LanguageUtils.changeLanguage(dataManager,applicationContext,resources)
+    }
 }

@@ -118,11 +118,7 @@
     <string name="happy">Happy</string>
     <string name="neutral">Neutral</string>
     <string name="sad">Sad</string>
-
     <string name="covid_symptoms">Covid Symptoms</string>
-
-    <string name="covid_symptoms">Covid Symptoms:</string>
-
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="other_medical_problems">Other Medical Problems</string>
@@ -138,24 +134,10 @@
     <string name="feedback">Feedback</string>
     <string name="drawerOpen">Drawer Open</string>
     <string name="drawerClose">Drawer Close</string>
-
     <string name="letsgetstarted">Let\'s get started</string>
     <string name="logindescription">Enter your mobile number, we will send you OTP to verify later</string>
     <string name="confirm">Confirm</string>
     <string name="proceed">Proceed</string>
     <string name="resendcode">Resend code in 0:30</string>
     <string name="resendOTP">Resend OTP</string>
-
-    <string name="attended">Attended</string>
-    <string name="not_attended">Not Attended</string>
-    <string name="call_status">Call Status:</string>
-    <string name="cough">Cough</string>
-    <string name="fever">Fever</string>
-    <string name="shortness_of_breath">Shortness of breath</string>
-    <string name="type_here">Type here…</string>
-    <string name="grivence">Grivence</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="address"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
-
 </resources>

@@ -10,6 +10,10 @@
     <color name="color_highlited">#F5BC27</color>
     <color name="color_orange">#F7650B</color>
     <color name="text_color_grey">#5E524B</color>
+
+    <color name="btn_bg">#fe4612</color>
+    <color name="textcolor">#662c2d32</color>
+
     <color name="bg_color_grey">#fbfcff</color>
     <color name="color_orange_bg">#fe4612</color>
     <color name="color_grey_bg">#e2e2e2</color>
@@ -18,6 +22,5 @@
     <color name="color_dark_grey">#8f9bb3</color>
     <color name="color_dark_grey_txt">#8e8e8e</color>
     <color name="color_dark_blue">#253746</color>
-
 
 </resources>

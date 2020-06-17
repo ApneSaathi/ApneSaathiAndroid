@@ -39,7 +39,7 @@
             android:background="#e5e8e7" />
 
         <RelativeLayout
-            android:id="@+id/spanish_block"
+            android:id="@+id/hindi_block"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
@@ -50,8 +50,40 @@
                 android:text="@string/hindi_text" />
 
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e5e8e7" />
 
+        <RelativeLayout
+            android:id="@+id/gujrati_block"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/gujrati_text" />
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e5e8e7" />
+
+        <RelativeLayout
+            android:id="@+id/marathi_block"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/marathi_text" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
