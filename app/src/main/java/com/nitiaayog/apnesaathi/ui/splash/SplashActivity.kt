@@ -6,12 +6,10 @@ import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
-//import com.nitiaayog.apnesaathi.ui.fragments.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 
 class SplashActivity : AppCompatActivity() {

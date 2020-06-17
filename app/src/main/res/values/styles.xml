@@ -74,8 +74,6 @@
         <item name="hintTextAppearance">@style/Base.InputLayout.TextAppearance</item>
     </style>
 
-    <!--<style name="form_default_text" parent="TextAppearance.MaterialComponents.Caption">-->
-
     <style name="form_default_text" parent= "TextAppearance.MaterialComponents.Caption">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_16</item>
