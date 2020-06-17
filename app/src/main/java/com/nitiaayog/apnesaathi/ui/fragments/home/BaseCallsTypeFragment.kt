@@ -5,14 +5,14 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.adapter.PendingCallsAdapter
+import com.nitiaayog.apnesaathi.adapter.CallsAdapter
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
 class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
-    PendingCallsAdapter.OnItemClickListener {
+    CallsAdapter.OnItemClickListener {
 
     companion object {
         const val TYPE_OF_DATA = "type_of_data"
@@ -51,10 +51,10 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
     private fun initViews() {
         val adapter =
             when (typeOfData) {
-                getString(R.string.pending_calls) -> PendingCallsAdapter(viewModel.getPendingCalls())
-                getString(R.string.follow_up) -> PendingCallsAdapter(viewModel.getFollowupCalls())
-                getString(R.string.attended_calls) -> PendingCallsAdapter(viewModel.getAttendedCalls())
-                else -> PendingCallsAdapter(viewModel.getPendingCalls())
+                getString(R.string.pending_calls) -> CallsAdapter(viewModel.getPendingCalls())
+                getString(R.string.follow_up) -> CallsAdapter(viewModel.getFollowupCalls())
+                getString(R.string.attended_calls) -> CallsAdapter(viewModel.getAttendedCalls())
+                else -> CallsAdapter(viewModel.getPendingCalls())
             }
         adapter.setOnItemClickListener(this)
 

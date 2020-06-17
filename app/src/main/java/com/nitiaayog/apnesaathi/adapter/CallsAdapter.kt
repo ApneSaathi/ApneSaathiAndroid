@@ -11,8 +11,8 @@ import com.nitiaayog.apnesaathi.base.CircleImageView
 import com.nitiaayog.apnesaathi.model.User
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 
-class PendingCallsAdapter(private val dataList: MutableList<User>) :
-    RecyclerView.Adapter<PendingCallsAdapter.TodaysCallsViewHolder>() {
+class CallsAdapter(private val dataList: MutableList<User>) :
+    RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
     private lateinit var itemClickListener: OnItemClickListener
 

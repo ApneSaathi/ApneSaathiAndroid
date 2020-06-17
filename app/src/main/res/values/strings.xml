@@ -162,5 +162,6 @@
     <string name="edit">Edit</string>
     <string name="app_bar_title">User Details</string>
     <string name="txtSubmit">Submit</string>
-
+    <string name="call_status_1">Call Status</string>
+    <string name="all_calls">All Calls</string>
 </resources>
