@@ -239,7 +239,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_15"
                 android:layout_marginBottom="@dimen/dimen_10"
-                android:text="@string/submit"
+                android:text="@string/txtSubmit"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
