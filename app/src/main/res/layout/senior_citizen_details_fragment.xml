@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/color_white"
-            app:title="User Details"
+            app:title="@string/app_bar_title"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:titleTextColor="@color/color_black" />
 
@@ -44,9 +44,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/view_size_40"
-                        android:layout_height="@dimen/view_size_40"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_male_user" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -73,8 +73,8 @@
 
                     <ImageView
                         android:id="@+id/img_call_button"
-                        android:layout_width="@dimen/view_size_40"
-                        android:layout_height="@dimen/view_size_40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_phone_icon" />
                 </LinearLayout>
 
@@ -98,12 +98,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcl_call_dates"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingTop="@dimen/dimen_5"
                 android:paddingBottom="@dimen/dimen_5"
-                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container" />
+
             <View
+                android:id="@+id/view_bg"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/color_light_grey_bg"
@@ -112,244 +114,482 @@
 
             </View>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_editable_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/dimen_20"
-                android:paddingTop="@dimen/dimen_13"
-                android:paddingRight="@dimen/dimen_20"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rcl_call_dates">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/call_status"
-                    android:textColor="@color/color_black"
-                    android:textStyle="bold"/>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_attended"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_orange_selector"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:minWidth="105dp"
-                        android:minHeight="@dimen/view_size_36"
-                        android:text="@string/attended"
-                        android:textColor="@drawable/radio_text"/>
-
-                    <RadioButton
-                        android:id="@+id/rb_unattended"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_orange_selector"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:minWidth="105dp"
-                        android:minHeight="@dimen/view_size_36"
-                        android:text="@string/not_attended"
-                        android:textColor="@drawable/radio_text"/>
-                </RadioGroup>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_20"
-                    android:text="@string/covid_symptoms"
-                    android:textColor="@color/color_black"
-                    android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/view_bg">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_20"
-                    android:orientation="horizontal">
-                    <LinearLayout
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingTop="@dimen/dimen_13"
+                    android:paddingRight="@dimen/dimen_20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <View
-                                android:layout_width="@dimen/view_size_62"
-                                android:background="@drawable/bg_rectangle_border_form"
-                                android:layout_height="@dimen/view_size_62">
-                            </View>
-                            <ImageView
-                                android:layout_gravity="center"
-                                android:layout_width="@dimen/view_size_42"
-                                android:src="@drawable/ic_cough_icon_unselected"
-                                android:layout_height="@dimen/view_size_42">
-                            </ImageView>
-                        </FrameLayout>
-                        <TextView
-                            android:text="@string/cough"
-                            android:textColor="@color/color_black"
-                            android:textSize="@dimen/text_10"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:text="@string/call_status"
+                        android:textColor="@color/color_black"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_marginRight="@dimen/dimen_15"
-                        android:layout_marginLeft="@dimen/dimen_15"
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_attended"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_orange_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:minWidth="105dp"
+                            android:minHeight="@dimen/view_size_36"
+                            android:text="@string/attended"
+                            android:textColor="@drawable/radio_text" />
+
+                        <RadioButton
+                            android:id="@+id/rb_unattended"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_orange_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:minWidth="105dp"
+                            android:minHeight="@dimen/view_size_36"
+                            android:text="@string/not_attended"
+                            android:textColor="@drawable/radio_text" />
+                    </RadioGroup>
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <View
-                                android:layout_width="@dimen/view_size_62"
-                                android:background="@drawable/bg_rectangle_border_form"
-                                android:layout_height="@dimen/view_size_62">
-                            </View>
-                            <ImageView
-                                android:layout_gravity="center"
-                                android:layout_width="@dimen/view_size_42"
-                                android:src="@drawable/ic_fever_icon_selected"
-                                android:layout_height="@dimen/view_size_42">
-                            </ImageView>
-
-                        </FrameLayout>
-                        <TextView
-                            android:text="@string/fever"
-                            android:textColor="@color/color_black"
-                            android:textSize="@dimen/text_10"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                        </TextView>
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_20"
+                        android:text="@string/covid_symptoms"
+                        android:textColor="@color/color_black"
+                        android:textStyle="bold" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
-                        <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_20"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <View
-                                android:layout_width="@dimen/view_size_62"
-                                android:background="@drawable/bg_rectangle_border_form"
-                                android:layout_height="@dimen/view_size_62">
-                            </View>
-                            <ImageView
-                                android:layout_gravity="center"
-                                android:layout_width="@dimen/view_size_42"
-                                android:src="@drawable/ic_shortness_icon_unselected"
-                                android:layout_height="@dimen/view_size_42">
-                            </ImageView>
-                        </FrameLayout>
-                        <TextView
-                            android:text="@string/shortness_of_breath"
-                            android:textColor="@color/color_black"
-                            android:textSize="@dimen/text_10"
-                            android:gravity="center"
-                            android:lines="2"
-                            android:minLines="2"
-                            android:singleLine="false"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/view_border_cough"
+                                    android:layout_width="@dimen/view_size_62"
+                                    android:layout_height="@dimen/view_size_62"
+                                    android:background="@drawable/bg_border_selector"/>
+
+                                <ImageView
+                                    android:id="@+id/img_cough"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/bg_cough_selector"/>
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/txt_cough"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/cough"
+                                android:textColor="@drawable/text_orange_selector"
+                                android:textSize="@dimen/text_10" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_15"
+                            android:layout_marginRight="@dimen/dimen_15"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/view_border_fever"
+                                    android:layout_width="@dimen/view_size_62"
+                                    android:layout_height="@dimen/view_size_62"
+                                    android:background="@drawable/bg_border_selector"/>
+
+                                <ImageView
+                                    android:id="@+id/img_fever"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/bg_fever_selector"/>
+
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/txt_fever"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/fever"
+                                android:textColor="@drawable/text_orange_selector"
+                                android:textSize="@dimen/text_10"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/view_border_shortness"
+                                    android:layout_width="@dimen/view_size_62"
+                                    android:layout_height="@dimen/view_size_62"
+                                    android:background="@drawable/bg_border_selector"/>
+
+                                <ImageView
+                                    android:id="@+id/img_shortness"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/bg_shortness_selector"/>
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/txt_shortness"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:lines="2"
+                                android:minLines="2"
+                                android:singleLine="false"
+                                android:text="@string/shortness_of_breath"
+                                android:textColor="@drawable/text_orange_selector"
+                                android:textSize="@dimen/text_10" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_20"
+                        android:text="@string/other_medical_problems"
+                        android:textColor="@color/color_black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:background="@drawable/bg_rectangle_border_form"
+                        android:hint="@string/type_here"
+                        android:minHeight="@dimen/view_size_32"
+                        android:paddingLeft="@dimen/dimen_5"
+                        android:textColor="@color/color_black"
+                        android:textColorHint="@color/color_grey_txt"
+                        android:textSize="@dimen/text_12" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_20"
+                        android:text="@string/grivence"
+                        android:textColor="@color/color_black"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_orange_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:minWidth="@dimen/view_size_60"
+                            android:minHeight="@dimen/view_size_36"
+                            android:text="@string/yes"
+                            android:textColor="@drawable/radio_text" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_orange_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:minWidth="@dimen/view_size_60"
+                            android:minHeight="@dimen/view_size_36"
+                            android:text="@string/no"
+                            android:textColor="@drawable/radio_text" />
+                    </RadioGroup>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_20"
-                    android:text="@string/other_medical_problems"
-                    android:textColor="@color/color_black"
-                    android:textStyle="bold"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5"
-                    android:background="@drawable/bg_rectangle_border_form"
-                    android:hint="@string/type_here"
-                    android:textSize="@dimen/text_12"
-                    android:textColor="@color/color_black"
-                    android:paddingLeft="@dimen/dimen_5"
-                    android:minHeight="@dimen/view_size_32"
-                    android:textColorHint="@color/color_grey_txt" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_20"
-                    android:text="@string/grivence"
-                    android:textColor="@color/color_black"
-                    android:textStyle="bold"/>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_orange_selector"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:minWidth="@dimen/view_size_60"
-                        android:minHeight="@dimen/view_size_36"
-                        android:text="@string/yes"
-                        android:textColor="@drawable/radio_text"/>
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_orange_selector"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:minWidth="@dimen/view_size_60"
-                        android:minHeight="@dimen/view_size_36"
-                        android:text="@string/no"
-                        android:textColor="@drawable/radio_text"/>
-                </RadioGroup>
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
+                android:id="@+id/ll_save_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/view_size_40"
                 android:orientation="horizontal"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_edit"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_16"
+                    android:text="@string/edit"
+                    android:background="@color/color_dark_grey"
+                    android:textColor="@color/color_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
                 <TextView
+                    android:id="@+id/txt_save"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/color_orange_bg"
                     android:gravity="center"
                     android:text="@string/save"
-                    android:textColor="@color/color_white"/>
+                    android:textColor="@color/color_white" />
 
                 <TextView
+                    android:id="@+id/txt_cancel"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/color_light_grey_bg"
                     android:gravity="center"
                     android:text="@string/cancel"
-                    android:textColor="@color/color_dark_grey_txt"/>
+                    android:textColor="@color/color_dark_grey_txt" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_uneditable_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_bg">
+
+                <LinearLayout
+                    android:id="@+id/ll_status_and_problems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingTop="@dimen/dimen_13"
+                    android:paddingRight="@dimen/dimen_20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:baselineAligned="false">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="@string/call_status"
+                            android:textColor="@color/color_grey_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="@string/attended"
+                            android:layout_marginTop="@dimen/dimen_2"
+                            android:textColor="@color/color_orange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:paddingLeft="@dimen/dimen_10"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="@string/other_medical_problems"
+                            android:textColor="@color/color_grey_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="NA"
+                            android:textColor="@color/color_orange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingTop="@dimen/dimen_13"
+                    android:paddingRight="@dimen/dimen_20"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_status_and_problems"
+                    android:baselineAligned="false">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/color_grey_txt"
+                            android:text="@string/covid_symptoms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_covid_symptoms"
+                            android:layout_width="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_5"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/img_cough_uneditable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_cough_selected"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+                            <TextView
+                                android:layout_marginTop="@dimen/dimen_5"
+                                android:textSize="@dimen/text_10"
+                                app:layout_constraintStart_toStartOf="@id/img_cough_uneditable"
+                                android:textColor="@color/color_orange"
+                                app:layout_constraintTop_toBottomOf="@id/img_cough_uneditable"
+                                android:layout_width="wrap_content"
+                                android:text="@string/cough"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:id="@+id/img_fever_uneditable"
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_10"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_fever_icon_selected"
+                                app:layout_constraintTop_toTopOf="@id/img_cough_uneditable"
+                                app:layout_constraintStart_toEndOf="@id/img_cough_uneditable"
+                                />
+                            <TextView
+                                android:layout_marginTop="@dimen/dimen_5"
+                                android:textSize="@dimen/text_10"
+                                app:layout_constraintStart_toStartOf="@id/img_fever_uneditable"
+                                android:textColor="@color/color_orange"
+                                app:layout_constraintTop_toBottomOf="@id/img_fever_uneditable"
+                                android:layout_width="wrap_content"
+                                android:text="@string/fever"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:id="@+id/img_shortness_uneditable"
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_10"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_shortness_icon_selected"
+                                app:layout_constraintTop_toTopOf="@id/img_fever_uneditable"
+                                app:layout_constraintStart_toEndOf="@id/img_fever_uneditable"
+                                />
+                            <TextView
+                                android:layout_marginTop="@dimen/dimen_5"
+                                app:layout_constraintStart_toStartOf="@id/img_shortness_uneditable"
+                                android:textColor="@color/color_orange"
+                                android:lines="2"
+                                android:textSize="@dimen/text_10"
+                                android:maxWidth="@dimen/view_size_60"
+                                android:minLines="2"
+                                android:singleLine="false"
+                                app:layout_constraintTop_toBottomOf="@id/img_shortness_uneditable"
+                                android:layout_width="wrap_content"
+                                android:text="@string/shortness_of_breath"
+                                android:layout_height="wrap_content"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:paddingLeft="@dimen/dimen_10"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="@string/grivence"
+                            android:textColor="@color/color_grey_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_marginTop="@dimen/dimen_2"
+                            android:text="@string/no"
+                            android:textColor="@color/color_orange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/ll_status_container"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:paddingLeft="@dimen/dimen_20"
+                android:visibility="gone"
+                android:paddingTop="@dimen/dimen_13"
+                android:paddingRight="@dimen/dimen_20"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rcl_call_dates"
+                android:baselineAligned="false">
+                <TextView
+                    android:text="@string/call_status"
+                    android:textColor="@color/color_grey_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:text="@string/not_attended"
+                    android:textColor="@color/color_orange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

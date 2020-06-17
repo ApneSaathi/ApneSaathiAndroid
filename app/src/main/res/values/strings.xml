@@ -112,8 +112,6 @@
     <string name="happy">Happy</string>
     <string name="neutral">Neutral</string>
     <string name="sad">Sad</string>
-    <string name="covid_symptoms">Covid Symptoms</string>
-    <string name="covid_symptoms">Covid Symptoms</string>
     <string name="covid_symptoms">Covid Symptoms:</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -160,4 +158,9 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="address"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
+    <string name="unattended">Unattended</string>
+    <string name="edit">Edit</string>
+    <string name="app_bar_title">User Details</string>
+    <string name="txtSubmit">Submit</string>
+
 </resources>

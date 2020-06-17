@@ -1,13 +1,8 @@
 package com.nitiaayog.apnesaathi.model
 
-import com.google.gson.annotations.SerializedName
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 @Entity
 class SeniorCitizen(
@@ -54,20 +49,4 @@ class SeniorCitizen(
 //    private val mComplaintsOfBasicUtilities:String="",
 //    private val mComplaintsOfUnhygenicConditions:String="",
 //    private val mComplaintsOfLackOfInformation:String=""
-) {
-    val userId: Int = sNo
-    val displayName: String = mDisplayName
-    val phoneNumber: Long = mPhoneNumber
-    val email: String = mEmail
-    val flag: Boolean = mFlag
-    val flagComment: String = mFlagComment
-    val gender: String = mGender
-    val state: String = mState
-    val district: String = mDistrict
-    val block: String = mBlock
-    val village: String = mVillage
-    val createdBy: String = mCreatedBy
-    val assignTo: String = mAssignTo
-    val contentDescription: String = mContentDescription
-    val status: String = mStatus
-}
+)
