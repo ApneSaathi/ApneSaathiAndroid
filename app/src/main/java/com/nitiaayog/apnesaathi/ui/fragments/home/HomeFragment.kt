@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.adapter.PendingCallsAdapter
+import com.nitiaayog.apnesaathi.adapter.CallsAdapter
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
@@ -16,7 +16,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
-class HomeFragment : BaseFragment<HomeViewModel>(), PendingCallsAdapter.OnItemClickListener {
+class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickListener {
 
 
     private var position: Int = -1
@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), PendingCallsAdapter.OnItemCl
     }
 
     private fun initRecyclerView() {
-        val adapter = PendingCallsAdapter(viewModel.getFewPendingCalls())
+        val adapter = CallsAdapter(viewModel.getFewPendingCalls())
         adapter.setOnItemClickListener(this)
 
         val rvPendingList = (rvPendingList as RecyclerView)

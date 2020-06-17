@@ -158,4 +158,6 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="address"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
+    <string name="call_status_1">Call Status</string>
+    <string name="all_calls">All Calls</string>
 </resources>
