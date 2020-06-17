@@ -11,14 +11,26 @@ data class User(
     @SerializedName(ApiConstants.UserName)
     private val mUserName: String? = "",
 
-    @SerializedName(ApiConstants.ImageUrl)
-    private val mProfileImage: String? = "",
+    @SerializedName(ApiConstants.Block)
+    private val mBlock: String? = "",
+
+    @SerializedName(ApiConstants.District)
+    private val mDistrict: String? = "",
+
+    @SerializedName(ApiConstants.State)
+    private val mState: String? = "",
+
+    @SerializedName(ApiConstants.Gender)
+    private val mGender: String? = "",
 
     @SerializedName(ApiConstants.PhoneNumber)
     private val mPhoneNumber: String? = ""
 ) {
     val userId: String = mUserId ?: ""
     val userName: String = mUserName ?: ""
-    val userProfileImage: String = mProfileImage ?: ""
+    val state: String = mState ?: ""
+    val district: String = mDistrict ?: ""
+    val block: String = mBlock ?: ""
+    val gender: String = mGender ?: ""
     val phoneNumber: String = mPhoneNumber ?: ""
 }

@@ -10,7 +10,7 @@ class DashBoardViewModel(private val dataManager: DataManager) : BaseViewModel()
         private var instance: DashBoardViewModel? = null
 
         @Synchronized
-        fun getInstance(dataManager: DataManager): DashBoardViewModel =
+        fun getInstance(dataManager: DataManager):DashBoardViewModel =
             instance ?: synchronized(this) {
                 instance ?: DashBoardViewModel(dataManager).also { instance = it }
             }

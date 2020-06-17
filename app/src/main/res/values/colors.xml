@@ -2,14 +2,30 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#FE4612</color>
 
     <color name="color_black">#000000</color>
     <color name="color_white">#FFFFFF</color>
+    <color name="card_background">#FDFEFE</color>
+    <color name="gray_background">#80253746</color>
+    <color name="item_divider">#EFF3FF</color>
 
     <color name="color_highlited">#F5BC27</color>
     <color name="color_orange">#F7650B</color>
     <color name="text_color_grey">#5E524B</color>
+
+    <color name="title_text_color">#253746</color>
+
+    <color name="text_color">#101426</color>
+    <color name="text_color_1">#8F9BB3</color>
+    <color name="text_color_2">#979797</color>
+    <color name="text_color_3">#FF9811</color>
+    <color name="text_color_4">#66B619</color>
+
+    <!--<color name="colorPrimaryDark">#3700B3</color>-->
+    <color name="btn_bg">#fe4612</color>
+    <color name="textcolor">#662c2d32</color>
+
     <color name="bg_color_grey">#fbfcff</color>
     <color name="color_orange_bg">#fe4612</color>
     <color name="color_grey_bg">#e2e2e2</color>
@@ -18,6 +34,5 @@
     <color name="color_dark_grey">#8f9bb3</color>
     <color name="color_dark_grey_txt">#8e8e8e</color>
     <color name="color_dark_blue">#253746</color>
-
 
 </resources>

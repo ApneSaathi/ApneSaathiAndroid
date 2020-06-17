@@ -2,62 +2,62 @@ package com.nitiaayog.apnesaathi.ui.localization
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
+import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import kotlinx.android.synthetic.main.activity_launguage_selection.*
-import kotlinx.android.synthetic.main.custom_spinner_popup.*
 
 class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
     lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = applicationContext
-        country_selection_view.setOnClickListener {
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_spinner_popup, null)
-            val mBuilder = AlertDialog.Builder(this, R.style.CustomDialog)
-                .setView(mDialogView)
-            val mAlertDialog = mBuilder.show()
-            if (confirmed_language.text.toString() == "English") {
-                mAlertDialog.english_block.setBackgroundColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.color_highlited
-                    )
-                )
-
-            } else if (confirmed_language.text.toString() == "Hindi") {
-                mAlertDialog.spanish_block.setBackgroundColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.color_highlited
-                    )
-                )
-
-            }
-            mAlertDialog.english_block.setOnClickListener {
-                confirmed_language.text = "English"
-                mAlertDialog.dismiss()
-
-
-            }
-
-            mAlertDialog.spanish_block.setOnClickListener {
-                confirmed_language.text = "Hindi"
-                mAlertDialog.dismiss()
-
-
+        if (dataManager.getSelectedLanguage().isEmpty()) {
+            radiobtnEnglish.isChecked = true
+        } else {
+            if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_ENGLISH)) {
+                radiobtnEnglish.isChecked = true
+            } else {
+                if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_MARATHI)) {
+                    radiobtnMarathi.isChecked = true
+                } else {
+                    if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_GUJRATI)) {
+                        radiobtnGujrati.isChecked = true
+                    } else {
+                        radiobtnHindi.isChecked = true
+                    }
+                }
             }
         }
-        BtnSubmit.setOnClickListener {
+
+        radiogroup.setOnCheckedChangeListener { radioGroup, i ->
+            when (radiogroup.checkedRadioButtonId) {
+                R.id.radiobtnEnglish -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_ENGLISH)
+                }
+                R.id.radiobtnMarathi -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_MARATHI)
+                }
+                R.id.radiobtnHindi -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_HINDI)
+                }
+                R.id.radiobtnGujrati -> {
+                    dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_GUJRATI)
+                }
+                else -> dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_ENGLISH)
+            }
+            recreate()
+        }
+
+        btnSubmit.throttleClick().subscribe() {
             val targetIntent = getTargetIntent(LoginActivity::class.java)
             startActivity(targetIntent)
             finish()
-        }
+        }.autoDispose(disposables)
     }
 
     override fun provideViewModel(): LanguageSelectionModel =

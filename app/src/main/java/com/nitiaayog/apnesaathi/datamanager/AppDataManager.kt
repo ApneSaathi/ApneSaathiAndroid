@@ -48,7 +48,7 @@ class AppDataManager private constructor(
     override fun updateUserPreference(loginUser: User) {
         setUserId(loginUser.userId)
         setUserName(loginUser.userName)
-        setProfileImage(loginUser.userProfileImage)
+        //setProfileImage(loginUser.userProfileImage)
         setPhoneNumber(loginUser.phoneNumber)
     }
 
@@ -67,4 +67,11 @@ class AppDataManager private constructor(
     override fun getPhoneNumber(): String = preferences.getPhoneNumber()
 
     override fun setPhoneNumber(phoneNumber: String) = preferences.setPhoneNumber(phoneNumber)
+    override fun getSelectedLanguage(): String {
+        return preferences.getSelectedLanguage()
+    }
+
+    override fun setSelectedLanguage(language: String) {
+        preferences.setSelectedLanguage(language)
+    }
 }

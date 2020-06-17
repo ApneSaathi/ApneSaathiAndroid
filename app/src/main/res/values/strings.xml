@@ -11,11 +11,12 @@
     <string name="sr_citizens_grievances_vs_resolved">Sr. citizens grievances reported VS resolved</string>
     <string name="on_call_sr_citizen_feedback_form">Senior citizen feedback over a call</string>
     <string name="wrong_detail_warning">Details provided by you will be verified by District Level Staff Member and wrong details can lead legal action against you</string>
-
     <string name="select_language">Select Language</string>
     <string name="english_text">English</string>
     <string name="hindi_text">Hindi</string>
-
+    <string name="marathi_text">Marathi</string>
+    <string name="gujrati_text">Gujrati</string>
+    <string name="aasammi_text">Assamese</string>
     <string name="volunteer_name">Name of Volunteer *</string>
     <string name="volunteer_phone_number">Phone Number of Volunteer *</string>
     <string name="person_name_whom_you_were_calling">Name of the person whom you were calling? *</string>
@@ -86,7 +87,16 @@
     <string name="permission_text">App has feature that with just a single click on Senior citizen details you can initiate a regular call on daily basis.For that we will require CALL permission.</string>
     <string name="accept">Accept</string>
     <string name="not_now">Not now</string>
-
+    <string name="txtenterMobilenumbe">Enter mobile number</string>
+    <string name="txtValidmobilenumber">Enter valid mobile number</string>
+    <string name="txtlogin">Login</string>
+    <string name="txtmobileNumber">Mobile Number</string>
+    <string name="verificationcode">Enter Verification Code</string>
+    <string name="wehavesendverificaiton_code">We have send a 4 digit verification code on</string>
+    <string name="senderNumber">+91 9673346489</string>
+    <string name="verify">verify</string>
+    <string name="donthave_receive_resend">Did\t recive any code ? Re-send</string>
+    <string name="enterOtp">Enter OTP</string>
     <string name="todays_call">Today\'s calls</string>
     <string name="call_connected">Calls connected</string>
     <string name="call_permission_denied">Calling Permission Denied</string>
@@ -118,6 +128,25 @@
     <string name="feedback">Feedback</string>
     <string name="drawerOpen">Drawer Open</string>
     <string name="drawerClose">Drawer Close</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_calls">Calls</string>
+    <string name="menu_notification">Notification</string>
+    <string name="menu_profile">Profile</string>
+    <string name="pending_calls_count">Pending Calls(%s)</string>
+    <string name="grievances_count">Grievances(%s)</string>
+    <string name="follow_up_count">Follow Up(%s)</string>
+    <string name="attended_calls_count">Attended Calls(%s)</string>
+    <string name="pending_calls">Pending Calls</string>
+    <string name="grievances">Grievances</string>
+    <string name="follow_up">Follow Up</string>
+    <string name="attended_calls">Attended Calls</string>
+    <string name="see_all">See All</string>
+    <string name="letsgetstarted">Let\'s get started</string>
+    <string name="logindescription">Enter your mobile number, we will send you OTP to verify later</string>
+    <string name="confirm">Confirm</string>
+    <string name="proceed">Proceed</string>
+    <string name="resendcode">Resend code in 0:30</string>
+    <string name="resendOTP">Resend OTP</string>
     <string name="attended">Attended</string>
     <string name="not_attended">Not Attended</string>
     <string name="call_status">Call Status:</string>

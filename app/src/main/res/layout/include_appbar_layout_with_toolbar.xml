@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
+    android:background="@android:color/background_light"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
     <include layout="@layout/include_toolbar" />
