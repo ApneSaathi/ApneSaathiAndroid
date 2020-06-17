@@ -48,7 +48,7 @@ class AppDataManager private constructor(
     override fun updateUserPreference(loginUser: User) {
         setUserId(loginUser.userId)
         setUserName(loginUser.userName)
-        setProfileImage(loginUser.userProfileImage)
+        //setProfileImage(loginUser.userProfileImage)
         setPhoneNumber(loginUser.phoneNumber)
     }
 

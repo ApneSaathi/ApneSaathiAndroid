@@ -6,8 +6,11 @@ object ApiConstants {
 
     const val UserId: String = "user_id"
     const val UserName: String = "user_name"
+    const val Block: String = "block"
+    const val State: String = "state"
+    const val District: String = "district"
     const val PhoneNumber: String = "phone_number"
-    const val ImageUrl: String = "image_url"
+    const val Gender: String = "gender"
     const val UserInfo: String = "user_info"
 
     const val AssessmentQuestions: String = "assessment_questions"

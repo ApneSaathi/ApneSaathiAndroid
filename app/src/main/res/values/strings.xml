@@ -119,4 +119,18 @@
     <string name="drawerOpen">Drawer Open</string>
     <string name="drawerClose">Drawer Close</string>
 
+    <string name="menu_home">Home</string>
+    <string name="menu_calls">Calls</string>
+    <string name="menu_notification">Notification</string>
+    <string name="menu_profile">Profile</string>
+    <string name="pending_calls_count">Pending Calls(%s)</string>
+    <string name="grievances_count">Grievances(%s)</string>
+    <string name="follow_up_count">Follow Up(%s)</string>
+    <string name="attended_calls_count">Attended Calls(%s)</string>
+    <string name="pending_calls">Pending Calls</string>
+    <string name="grievances">Grievances</string>
+    <string name="follow_up">Follow Up</string>
+    <string name="attended_calls">Attended Calls</string>
+    <string name="see_all">See All</string>
+
 </resources>

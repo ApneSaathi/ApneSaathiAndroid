@@ -4,34 +4,49 @@ import com.google.gson.annotations.SerializedName
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 class SeniorCitizen(
+
     @SerializedName(ApiConstants.UserId)
     private val sNo: Int,
+
     @SerializedName(ApiConstants.UserId)
     private val mDisplayName: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mPhoneNumber: Long,
+
     @SerializedName(ApiConstants.UserId)
     private val mEmail: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mFlag: Boolean = false,
+
     @SerializedName(ApiConstants.UserId)
     private val mFlagComment: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mGender: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mState: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mDistrict: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mBlock: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mVillage: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mCreatedBy: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mAssignTo: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mContentDescription: String = "",
+
     @SerializedName(ApiConstants.UserId)
     private val mStatus: String = ""
 //    private val mDateOfOnBoarding:String="",

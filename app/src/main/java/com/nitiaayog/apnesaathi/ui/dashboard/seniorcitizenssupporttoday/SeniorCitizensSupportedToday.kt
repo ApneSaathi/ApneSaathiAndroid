@@ -1,30 +1,21 @@
 package com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenssupporttoday
 
 import android.os.Bundle
-import android.widget.Button
-import androidx.core.content.ContextCompat
-import androidx.viewpager.widget.ViewPager
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
-import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
-import com.nitiaayog.apnesaathi.ui.fragments.TodaysCallsFragment
-import kotlinx.android.synthetic.main.activity_senior_citizens_supported_today.*
 
-class SeniorCitizensSupportedToday : BaseActivity<SrCitizensSupportedTodayViewModel>(),
-    ViewPager.OnPageChangeListener {
+class SeniorCitizensSupportedToday : BaseActivity<SrCitizensSupportedTodayViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        toolBar.setNavigationIcon(R.drawable.ic_back_white)
+        /*toolBar.setNavigationIcon(R.drawable.ic_back_black)
         setSupportActionBar(toolBar)
         toolBar.setNavigationOnClickListener { finish() }
 
         prepareViewPager()
-        initViews()
+        initViews()*/
     }
 
     override fun provideViewModel(): SrCitizensSupportedTodayViewModel =
@@ -32,7 +23,7 @@ class SeniorCitizensSupportedToday : BaseActivity<SrCitizensSupportedTodayViewMo
 
     override fun provideLayoutResource(): Int = R.layout.activity_senior_citizens_supported_today
 
-    override fun onPageScrollStateChanged(state: Int) {
+    /*override fun onPageScrollStateChanged(state: Int) {
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -71,5 +62,5 @@ class SeniorCitizensSupportedToday : BaseActivity<SrCitizensSupportedTodayViewMo
         btnRemoveSelection.setBackgroundColor(
             ContextCompat.getColor(this, android.R.color.darker_gray)
         )
-    }
+    }*/
 }
