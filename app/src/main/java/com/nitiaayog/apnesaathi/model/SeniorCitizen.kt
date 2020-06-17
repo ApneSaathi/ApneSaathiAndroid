@@ -1,13 +1,8 @@
 package com.nitiaayog.apnesaathi.model
 
-import com.google.gson.annotations.SerializedName
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 @Entity
 class SeniorCitizen(
@@ -23,11 +18,12 @@ class SeniorCitizen(
     @ColumnInfo(name = "block_") val mBlock: String = "",
     @ColumnInfo(name = "village_") val mVillage: String = "",
     @ColumnInfo(name = "status_") val mStatus: String = "",
-    @ColumnInfo(name = "covid_symptoms") val mCovidSymptoms:String="",
-    @ColumnInfo(name = "non_covid_symptoms") val mNonCovidSymptoms:String=""
+    @ColumnInfo(name = "covid_symptoms") val mCovidSymptoms: String = "",
+    @ColumnInfo(name = "non_covid_symptoms") val mNonCovidSymptoms: String = ""
 //    private val mCreatedBy: String = "",
 //    private val mAssignTo: String = "",
 //    private val mContentDescription: String = "",
+
 //    private val mDateOfOnBoarding:String="",
 //    private val mProcess:String="",
 //    private val mUpdatedDate:String="",
@@ -54,20 +50,4 @@ class SeniorCitizen(
 //    private val mComplaintsOfBasicUtilities:String="",
 //    private val mComplaintsOfUnhygenicConditions:String="",
 //    private val mComplaintsOfLackOfInformation:String=""
-) {
-    val userId: Int = sNo
-    val displayName: String = mDisplayName
-    val phoneNumber: Long = mPhoneNumber
-    val email: String = mEmail
-    val flag: Boolean = mFlag
-    val flagComment: String = mFlagComment
-    val gender: String = mGender
-    val state: String = mState
-    val district: String = mDistrict
-    val block: String = mBlock
-    val village: String = mVillage
-    val createdBy: String = mCreatedBy
-    val assignTo: String = mAssignTo
-    val contentDescription: String = mContentDescription
-    val status: String = mStatus
-}
+)
