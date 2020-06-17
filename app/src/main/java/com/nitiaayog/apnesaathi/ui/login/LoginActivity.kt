@@ -23,7 +23,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 EditMobileNumber.setError(null)
                 if (EditMobileNumber.text.toString().trim().length < 10) {
                     EditMobileNumber.setError(resources.getString(R.string.txtValidmobilenumber))
-
                 } else {
                     val targetIntent = getTargetIntent( OtpActivity::class.java  )
                     startActivity(targetIntent)
