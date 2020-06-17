@@ -1,18 +1,18 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: applicationPlugin
+apply plugin: kotlinPlugin
+apply plugin: kotlinAndroidPlugin
+apply plugin: kotlinKaptPlugin
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion targetVersion
+    buildToolsVersion buildVersion
 
     defaultConfig {
-        applicationId "com.nitiaayog.apnesaathi"
-        minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        applicationId appId
+        minSdkVersion minVersion
+        targetSdkVersion targetVersion
+        versionCode versionCode
+        versionName versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,49 +33,50 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // Kotlin Support
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation kotlinSupport
 
-    // Android UI
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "androidx.cardview:cardview:1.0.0"
+    // Android UI Support
+    implementation constraintLayout
+    implementation androidSupport.appCompat
+    implementation androidSupport.ktx
+    implementation androidSupport.recyclerView
+    implementation androidSupport.materialDesign
+    implementation androidSupport.cardView
 
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // RxJava + RxAndroid
-    implementation "io.reactivex.rxjava2:rxjava:2.2.13"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-
-    // Room Database RxRoom
-    implementation "androidx.room:room-runtime:2.2.5"
-    kapt "androidx.room:room-compiler:2.2.5"
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.2.5"
-
-    // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:2.2.5"
-
-    // Glide - Image Loader
-    implementation "com.github.bumptech.glide:glide:4.10.0"
-
-    // HTTP Login Interceptor
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
-
-    // Retrofit Api Calling Architecture
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-
-    // JSON to Response Class converter
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
-
-    // RxAnimation - Handle Animations Asynchronous
-    implementation 'com.mikhaellopez:rxanimation:1.0.0'
+    implementation rxJava2
+    implementation rxAndroid2
 
     // RxBinding for UI
-    implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+    implementation rxViewBinding
+
+    // Room Database RxRoom
+    implementation roomDB.runtime
+    kapt roomDB.compiler
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation roomDB.ktx
+
+    // optional - RxJava support for Room
+    implementation roomDB.rxjava
+
+    // Glide - Image Loader
+    implementation glide
+
+    // HTTP Login Interceptor
+    implementation okHttpInterceptor
+
+    // Retrofit Api Calling Architecture
+    implementation retrofit.networkCall
+
+    // JSON to Response Class converter
+    implementation retrofit.gsonConverter
+    implementation retrofit.rxJava
+
+    // RxAnimation - Handle Animations Asynchronous
+    //implementation 'com.mikhaellopez:rxanimation:1.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

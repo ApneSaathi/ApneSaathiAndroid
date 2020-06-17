@@ -1,8 +1,8 @@
 package com.nitiaayog.apnesaathi.ui.fragments
 
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.model.DateItem
 
 class SeniorCitizenDetailsViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {

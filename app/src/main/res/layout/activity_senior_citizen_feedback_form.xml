@@ -28,7 +28,7 @@
                 android:layout_marginEnd="@dimen/dimen_7"
                 android:background="@drawable/bg_circle_white_28"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_back_white" />
+                android:src="@drawable/ic_back_black" />
 
             <TextView
                 android:layout_width="match_parent"
