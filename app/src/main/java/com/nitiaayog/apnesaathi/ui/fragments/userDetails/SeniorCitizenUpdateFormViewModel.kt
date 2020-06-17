@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.fragments
+package com.nitiaayog.apnesaathi.ui.fragments.userDetails
 
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
@@ -10,22 +10,22 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     fun prepareData(): MutableList<DateItem> {
         dataList.add(
             DateItem(
-                "01", "Jan"
+                "01", "Jan","Attended"
             )
         )
         dataList.add(
             DateItem(
-                "02", "Jan"
+                "02", "Jan","Attended"
             )
         )
         dataList.add(
             DateItem(
-                "08", "Jan"
+                "08", "Jan","Attended"
             )
         )
         dataList.add(
             DateItem(
-                "09", "Feb"
+                "09", "Feb","Unattended"
             )
         )
         return  dataList
@@ -37,8 +37,13 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
 
         @Synchronized
         fun getInstance(dataManager: DataManager): SeniorCitizenDetailsViewModel =
-            instance ?: synchronized(this) {
-                instance ?: SeniorCitizenDetailsViewModel(dataManager).also { instance = it }
+            instance
+                ?: synchronized(this) {
+                instance
+                    ?: SeniorCitizenDetailsViewModel(
+                        dataManager
+                    )
+                        .also { instance = it }
             }
     }
 }

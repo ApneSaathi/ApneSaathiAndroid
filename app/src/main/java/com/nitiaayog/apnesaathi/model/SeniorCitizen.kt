@@ -18,12 +18,11 @@ class SeniorCitizen(
     @ColumnInfo(name = "block_") val mBlock: String = "",
     @ColumnInfo(name = "village_") val mVillage: String = "",
     @ColumnInfo(name = "status_") val mStatus: String = "",
-    @ColumnInfo(name = "covid_symptoms") val mCovidSymptoms: String = "",
-    @ColumnInfo(name = "non_covid_symptoms") val mNonCovidSymptoms: String = ""
+    @ColumnInfo(name = "covid_symptoms") val mCovidSymptoms:String="",
+    @ColumnInfo(name = "non_covid_symptoms") val mNonCovidSymptoms:String=""
 //    private val mCreatedBy: String = "",
 //    private val mAssignTo: String = "",
 //    private val mContentDescription: String = "",
-
 //    private val mDateOfOnBoarding:String="",
 //    private val mProcess:String="",
 //    private val mUpdatedDate:String="",
