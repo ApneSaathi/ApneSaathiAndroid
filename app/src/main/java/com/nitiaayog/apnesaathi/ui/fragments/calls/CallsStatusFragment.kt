@@ -54,6 +54,10 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
         prepareToCallPerson()
     }
 
+    override fun onMoreInfoClick(position: Int, user: User) {
+        TODO("Not yet implemented")
+    }
+
     private fun initRecyclerView() {
         val pendingAdapter = CallsAdapter(viewModel.getFewPendingCalls())
         pendingAdapter.setOnItemClickListener(this)

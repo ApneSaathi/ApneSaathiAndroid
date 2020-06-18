@@ -17,6 +17,7 @@ class CallsAdapter(private val dataList: MutableList<User>) :
 
     interface OnItemClickListener {
         fun onItemClick(position: Int, user: User)
+        fun onMoreInfoClick(position: Int, user: User)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodaysCallsViewHolder {
@@ -59,6 +60,8 @@ class CallsAdapter(private val dataList: MutableList<User>) :
                         itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
                 }
                 R.id.ivMoreInfo -> {
+                    if (::itemClickListener.isInitialized)
+                        itemClickListener.onMoreInfoClick(adapterPosition, dataList[adapterPosition])
                 }
             }
         }

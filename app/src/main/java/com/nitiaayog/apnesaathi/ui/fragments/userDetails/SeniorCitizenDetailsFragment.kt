@@ -8,7 +8,7 @@ import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.senior_citizen_details_fragment.*
+import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
@@ -22,7 +22,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             )
         }
 
-    override fun provideLayoutResource(): Int = R.layout.senior_citizen_details_fragment
+    override fun provideLayoutResource(): Int = R.layout.fragment_senior_citizen_details
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
