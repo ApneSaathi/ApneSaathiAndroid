@@ -20,7 +20,9 @@
     <color name="text_color_1">#8F9BB3</color>
     <color name="text_color_2">#979797</color>
     <color name="text_color_3">#FF9811</color>
+
     <color name="text_color_4">#66B619</color>
+    <color name="text_color_5">#66B01F</color>
 
     <!--<color name="colorPrimaryDark">#3700B3</color>-->
     <color name="btn_bg">#fe4612</color>

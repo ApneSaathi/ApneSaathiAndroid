@@ -164,4 +164,6 @@
     <string name="txtSubmit">Submit</string>
     <string name="call_status_1">Call Status</string>
     <string name="all_calls">All Calls</string>
+    <string name="resolved">Resolved</string>
+    <string name="pending">Pending</string>
 </resources>

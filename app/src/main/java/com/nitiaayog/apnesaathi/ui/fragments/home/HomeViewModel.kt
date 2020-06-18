@@ -1,6 +1,8 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
+import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.model.Grievances
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
@@ -22,10 +24,13 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val attendedCallsList: MutableList<User> = mutableListOf()
     private val allCallsList: MutableList<User> = mutableListOf()
 
+    private val grievancesList: MutableList<Grievances> = mutableListOf()
+
     init {
         preparePendingData()
         prepareFollowupData()
         prepareAttendedData()
+        prepareGrievancesData()
     }
 
     private fun preparePendingData() {
@@ -130,10 +135,48 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         allCallsList.addAll(attendedCallsList)
     }
 
+    private fun prepareGrievancesData() {
+        grievancesList.add(
+            Grievances(
+                "1", "Having food related issues", GrievancesAdapter.GRIEVANCE_PENDING
+            )
+        )
+        grievancesList.add(
+            Grievances(
+                "2", "Not receiving pension", GrievancesAdapter.GRIEVANCE_RESOLVED
+            )
+        )
+        grievancesList.add(
+            Grievances(
+                "3", "Having COVID-19 symptoms", GrievancesAdapter.GRIEVANCE_PENDING
+            )
+        )
+        grievancesList.add(
+            Grievances(
+                "4", "Medical checkup not possible", GrievancesAdapter.GRIEVANCE_RESOLVED
+            )
+        )
+        grievancesList.add(
+            Grievances(
+                "5", "Physically unfit", GrievancesAdapter.GRIEVANCE_PENDING
+            )
+        )
+        grievancesList.add(
+            Grievances(
+                "6", "Diabetic and Pressure related issues", GrievancesAdapter.GRIEVANCE_RESOLVED
+            )
+        )
+    }
+
     fun getFewPendingCalls(): MutableList<User> =
         if (pendingCallsList.size > 3) pendingCallsList.subList(0, 3) else pendingCallsList
 
     fun getPendingCalls(): MutableList<User> = pendingCallsList
+
+    fun getFewGrievancesList() =
+        if (grievancesList.size > 3) grievancesList.subList(0, 3) else grievancesList
+
+    fun getGrievancesList() = grievancesList
 
     fun getFewFollowupCalls(): MutableList<User> =
         if (followupCallsList.size > 3) followupCallsList.subList(0, 3) else followupCallsList

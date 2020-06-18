@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
@@ -17,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
 class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickListener {
-
 
     private var position: Int = -1
     private var lastSelectedItem: User? = null
@@ -55,8 +55,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     }
 
     private fun initRecyclerView() {
-        val adapter = CallsAdapter(viewModel.getFewPendingCalls())
-        adapter.setOnItemClickListener(this)
+        val pendingAdapter = CallsAdapter(viewModel.getFewPendingCalls())
+        pendingAdapter.setOnItemClickListener(this)
 
         val rvPendingList = (rvPendingList as RecyclerView)
         rvPendingList.addItemDecoration(
@@ -64,11 +64,21 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
                 setDrawable(ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!)
             }
         )
-        rvPendingList.adapter = adapter
+        rvPendingList.adapter = pendingAdapter
+
+        val grievancesAdapter = GrievancesAdapter(viewModel.getFewGrievancesList())
+
+        val rvGrievancesList = (rvGrievancesList as RecyclerView)
+        rvGrievancesList.addItemDecoration(
+            DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
+                setDrawable(ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!)
+            }
+        )
+        rvGrievancesList.adapter = grievancesAdapter
     }
 
     private fun initViews() {
-        val dataListSize: Int = viewModel.getPendingCalls().size
+        var dataListSize: Int = viewModel.getPendingCalls().size
         tvPendingCalls.text = getString(R.string.pending_calls_count, dataListSize.toString())
         btnSeeAll.visibility = if (dataListSize > 3) {
             btnSeeAll.setOnClickListener {
@@ -81,6 +91,15 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
                 addFragment(
                     R.id.fragmentHomeContainer, fragment, getString(R.string.pending_calls)
                 )
+            }
+            View.VISIBLE
+        } else View.GONE
+
+        dataListSize = viewModel.getGrievancesList().size
+        tvGrievances.text = getString(R.string.grievances_count, dataListSize.toString())
+        btnSeeAllGrievances.visibility = if (dataListSize > 3) {
+            btnSeeAllGrievances.setOnClickListener {
+                
             }
             View.VISIBLE
         } else View.GONE
