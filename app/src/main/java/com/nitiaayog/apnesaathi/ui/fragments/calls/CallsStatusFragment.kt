@@ -12,6 +12,7 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.BaseCallsTypeFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_calls_status.*
@@ -41,7 +42,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
     override fun provideLayoutResource(): Int = R.layout.fragment_calls_status
 
     override fun onCallPermissionGranted() {
-        lastSelectedItem?.let { placeCall(it) }
+        lastSelectedItem?.let { placeCall(it, R.id.fragmentCallContainer) }
     }
 
     override fun onCallPermissionDenied() {
@@ -55,7 +56,10 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
     }
 
     override fun onMoreInfoClick(position: Int, user: User) {
-        TODO("Not yet implemented")
+        val fragment = SeniorCitizenDetailsFragment()
+        addFragment(
+            R.id.fragmentCallContainer, fragment,getString(R.string.details_fragment)
+        )
     }
 
     private fun initRecyclerView() {
@@ -125,6 +129,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
     private fun showAllData(type: String) {
         val data = Bundle()
         data.putString(BaseCallsTypeFragment.TYPE_OF_DATA, type)
+        data.putInt(BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentCallContainer)
         val fragment = BaseCallsTypeFragment()
         fragment.arguments = data
         addFragment(R.id.fragmentCallContainer, fragment, "Show All Data")

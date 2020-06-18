@@ -5,9 +5,11 @@ import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.include_recyclerview.*
 
@@ -33,6 +35,7 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
     override fun provideLayoutResource(): Int = R.layout.fragment_all_calls
 
     override fun onCallPermissionGranted() {
+        lastSelectedItem?.let { placeCall(it, R.id.fragmentCallContainer) }
     }
 
     override fun onCallPermissionDenied() {
@@ -45,6 +48,9 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
     }
 
     override fun onMoreInfoClick(position: Int, user: User) {
-
+        val fragment = SeniorCitizenDetailsFragment()
+        addFragment(
+            R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+        )
     }
 }

@@ -1,422 +1,427 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/view_size_62"
-    android:background="@color/color_white">
+    android:background="@color/color_white"
+    android:paddingBottom="@dimen/view_size_62">
 
-     <ScrollView
-         android:layout_width="match_parent"
-         android:fillViewport="true"
-         android:scrollbars="none"
-         android:layout_height="match_parent">
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="vertical"
-             android:paddingBottom="@dimen/view_size_60"
-             android:paddingLeft="@dimen/dimen_20"
-             android:paddingTop="@dimen/dimen_13"
-             android:paddingRight="@dimen/dimen_20">
+    <include layout="@layout/include_appbar_layout_with_toolbar" />
 
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/call_status"
-                 android:textColor="@color/color_black"
-                 android:textStyle="bold" />
-
-             <RadioGroup
-                 android:id="@+id/rg_call_status"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="@dimen/dimen_5"
-                 android:orientation="horizontal">
-
-                 <RadioButton
-                     android:id="@+id/rb_attended"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:background="@drawable/bg_orange_selector"
-                     android:button="@null"
-                     android:gravity="center"
-                     android:minWidth="105dp"
-                     android:minHeight="@dimen/view_size_36"
-                     android:text="@string/attended"
-                     android:textColor="@drawable/radio_text" />
-
-                 <RadioButton
-                     android:id="@+id/rb_unattended"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:background="@drawable/bg_orange_selector"
-                     android:button="@null"
-                     android:gravity="center"
-                     android:minWidth="105dp"
-                     android:minHeight="@dimen/view_size_36"
-                     android:text="@string/not_attended"
-                     android:textColor="@drawable/radio_text" />
-             </RadioGroup>
-             <com.google.android.material.textfield.TextInputLayout
-                 android:id="@+id/ti_call_category"
-                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="@dimen/dimen_15"
-                 android:focusable="false"
-                 android:visibility="visible"
-                 android:focusableInTouchMode="false"
-                 app:endIconMode="dropdown_menu">
-
-                 <AutoCompleteTextView
-                     android:id="@+id/act_call_category"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:hint="@string/select_a_call_status"
-                     android:inputType="none" />
-
-             </com.google.android.material.textfield.TextInputLayout>
-             <LinearLayout
-                 android:id="@+id/ll_attended_container"
-                 android:layout_width="match_parent"
-                 android:visibility="gone"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical">
-
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_20"
-                     android:text="@string/covid_symptoms"
-                     android:textColor="@color/color_black"
-                     android:textStyle="bold" />
-
-                 <LinearLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_20"
-                     android:orientation="horizontal">
-
-                     <LinearLayout
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:orientation="vertical">
-
-                         <FrameLayout
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content">
-
-                             <View
-                                 android:id="@+id/view_border_cough"
-                                 android:layout_width="@dimen/view_size_62"
-                                 android:layout_height="@dimen/view_size_62"
-                                 android:background="@drawable/bg_border_selector" />
-
-                             <ImageView
-                                 android:id="@+id/img_cough"
-                                 android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:layout_gravity="center"
-                                 android:src="@drawable/bg_cough_selector" />
-                         </FrameLayout>
-
-                         <TextView
-                             android:id="@+id/txt_cough"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:gravity="center"
-                             android:text="@string/cough"
-                             android:textColor="@drawable/text_orange_selector"
-                             android:textSize="@dimen/text_10" />
-                     </LinearLayout>
-
-                     <LinearLayout
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="@dimen/dimen_15"
-                         android:layout_marginRight="@dimen/dimen_15"
-                         android:orientation="vertical">
-
-                         <FrameLayout
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content">
-
-                             <View
-                                 android:id="@+id/view_border_fever"
-                                 android:layout_width="@dimen/view_size_62"
-                                 android:layout_height="@dimen/view_size_62"
-                                 android:background="@drawable/bg_border_selector" />
-
-                             <ImageView
-                                 android:id="@+id/img_fever"
-                                 android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:layout_gravity="center"
-                                 android:src="@drawable/bg_fever_selector" />
-
-                         </FrameLayout>
-
-                         <TextView
-                             android:id="@+id/txt_fever"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:gravity="center"
-                             android:text="@string/fever"
-                             android:textColor="@drawable/text_orange_selector"
-                             android:textSize="@dimen/text_10" />
-                     </LinearLayout>
-
-                     <LinearLayout
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:orientation="vertical">
-
-                         <FrameLayout
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content">
-
-                             <View
-                                 android:id="@+id/view_border_shortness"
-                                 android:layout_width="@dimen/view_size_62"
-                                 android:layout_height="@dimen/view_size_62"
-                                 android:background="@drawable/bg_border_selector" />
-
-                             <ImageView
-                                 android:id="@+id/img_shortness"
-                                 android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:layout_gravity="center"
-                                 android:src="@drawable/bg_shortness_selector" />
-                         </FrameLayout>
-
-                         <TextView
-                             android:id="@+id/txt_shortness"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:gravity="center"
-                             android:lines="2"
-                             android:minLines="2"
-                             android:singleLine="false"
-                             android:text="@string/shortness_of_breath"
-                             android:textColor="@drawable/text_orange_selector"
-                             android:textSize="@dimen/text_10" />
-                     </LinearLayout>
-
-                 </LinearLayout>
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_20"
-                     android:text="@string/quarantine_hospitalization_status"
-                     android:textColor="@color/color_black"
-                     android:textStyle="bold" />
-
-                 <com.google.android.material.textfield.TextInputLayout
-                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_15"
-                     android:focusable="false"
-                     android:focusableInTouchMode="false"
-                     app:endIconMode="dropdown_menu">
-
-                     <AutoCompleteTextView
-                         android:id="@+id/act_hospitalization_status"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:hint="@string/select_status"
-                         android:inputType="none" />
-
-                 </com.google.android.material.textfield.TextInputLayout>
-
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_20"
-                     android:text="@string/other_medical_problems"
-                     android:textColor="@color/color_black"
-                     android:textStyle="bold" />
-
-                 <com.google.android.material.textfield.TextInputLayout
-                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_15"
-                     android:focusable="false"
-                     android:focusableInTouchMode="false"
-                     app:endIconMode="dropdown_menu">
-
-                     <AutoCompleteTextView
-                         android:id="@+id/act_other_medical_problems"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:hint="@string/other_medical_problems"
-                         android:inputType="none" />
-
-                 </com.google.android.material.textfield.TextInputLayout>
-
-
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_20"
-                     android:text="@string/grivence"
-                     android:textColor="@color/color_black"
-                     android:textStyle="bold" />
-
-                 <RadioGroup
-                     android:id="@+id/rg_grivence"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_5"
-                     android:orientation="horizontal">
-
-                     <RadioButton
-                         android:id="@+id/rb_yes"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:background="@drawable/bg_orange_selector"
-                         android:button="@null"
-                         android:gravity="center"
-                         android:minWidth="@dimen/view_size_60"
-                         android:minHeight="@dimen/view_size_36"
-                         android:text="@string/yes"
-                         android:textColor="@drawable/radio_text" />
-
-                     <RadioButton
-                         android:id="@+id/rb_no"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:background="@drawable/bg_orange_selector"
-                         android:button="@null"
-                         android:gravity="center"
-                         android:minWidth="@dimen/view_size_60"
-                         android:minHeight="@dimen/view_size_36"
-                         android:text="@string/no"
-                         android:textColor="@drawable/radio_text" />
-                 </RadioGroup>
-
-                 <LinearLayout
-                     android:visibility="gone"
-                     android:id="@+id/ll_grivence_container"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-
-                     <com.google.android.material.textfield.TextInputLayout
-                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/dimen_15"
-                         android:focusable="false"
-                         android:focusableInTouchMode="false"
-                         app:endIconMode="dropdown_menu">
-
-                         <AutoCompleteTextView
-                             android:id="@+id/act_grivence_category"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:hint="@string/select_a_category"
-                             android:inputType="none" />
-
-                     </com.google.android.material.textfield.TextInputLayout>
-
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/dimen_10"
-                         android:text="@string/description"
-                         android:textColor="@color/color_black" />
-
-                     <EditText
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/dimen_5"
-                         android:background="@drawable/bg_rectangle_border_form"
-                         android:hint="@string/type_here"
-                         android:minHeight="@dimen/view_size_40"
-                         android:paddingLeft="@dimen/dimen_5"
-                         android:textColor="@color/color_black"
-                         android:textColorHint="@color/color_grey_txt"
-                         android:textSize="@dimen/text_12" />
-
-                     <com.google.android.material.textfield.TextInputLayout
-                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/dimen_15"
-                         android:focusable="false"
-                         android:focusableInTouchMode="false"
-                         app:endIconMode="dropdown_menu">
-
-                         <AutoCompleteTextView
-                             android:id="@+id/act_priority"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:hint="@string/priority"
-                             android:inputType="none" />
-
-                     </com.google.android.material.textfield.TextInputLayout>
-
-                 </LinearLayout>
-
-                 <TextView
-                     android:id="@+id/txt_other_imp_info"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_10"
-                     android:text="@string/other_important_information" />
-
-                 <EditText
-                     android:id="@+id/edt_other_imp_info"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="@dimen/dimen_5"
-                     android:background="@drawable/bg_rectangle_border_form"
-                     android:hint="@string/type_here"
-                     android:minHeight="@dimen/view_size_40"
-                     android:paddingLeft="@dimen/dimen_5"
-                     android:textColor="@color/color_black"
-                     android:textColorHint="@color/color_grey_txt"
-                     android:textSize="@dimen/text_12" />
-
-
-             </LinearLayout>
-
-         </LinearLayout>
-     </ScrollView>
-
-
-    <LinearLayout
-        android:id="@+id/ll_save_container"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/view_size_60"
-        android:gravity="end"
-        android:minHeight="@dimen/view_size_40"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <TextView
-            android:id="@+id/txt_save"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_orange_bg"
-            android:gravity="center"
-            android:text="@string/save"
-            android:textColor="@color/color_white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_20"
+            android:paddingTop="@dimen/dimen_13"
+            android:paddingRight="@dimen/dimen_20"
+            android:paddingBottom="@dimen/view_size_60">
 
-        <TextView
-            android:id="@+id/txt_cancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_light_grey_bg"
-            android:gravity="center"
-            android:text="@string/cancel"
-            android:textColor="@color/color_dark_grey_txt" />
-    </LinearLayout>
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_status"
+                android:textColor="@color/color_black"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rg_call_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_attended"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_orange_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:minWidth="105dp"
+                    android:minHeight="@dimen/view_size_36"
+                    android:text="@string/attended"
+                    android:textColor="@drawable/radio_text" />
+
+                <RadioButton
+                    android:id="@+id/rb_unattended"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_orange_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:minWidth="105dp"
+                    android:minHeight="@dimen/view_size_36"
+                    android:text="@string/not_attended"
+                    android:textColor="@drawable/radio_text" />
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_call_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="visible"
+                app:endIconMode="dropdown_menu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_call_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/select_a_call_status"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_attended_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:text="@string/covid_symptoms"
+                    android:textColor="@color/color_black"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:id="@+id/view_border_cough"
+                                android:layout_width="@dimen/view_size_62"
+                                android:layout_height="@dimen/view_size_62"
+                                android:background="@drawable/bg_border_selector" />
+
+                            <ImageView
+                                android:id="@+id/img_cough"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/bg_cough_selector" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/txt_cough"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/cough"
+                            android:textColor="@drawable/text_orange_selector"
+                            android:textSize="@dimen/text_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginRight="@dimen/dimen_15"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:id="@+id/view_border_fever"
+                                android:layout_width="@dimen/view_size_62"
+                                android:layout_height="@dimen/view_size_62"
+                                android:background="@drawable/bg_border_selector" />
+
+                            <ImageView
+                                android:id="@+id/img_fever"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/bg_fever_selector" />
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/txt_fever"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/fever"
+                            android:textColor="@drawable/text_orange_selector"
+                            android:textSize="@dimen/text_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:id="@+id/view_border_shortness"
+                                android:layout_width="@dimen/view_size_62"
+                                android:layout_height="@dimen/view_size_62"
+                                android:background="@drawable/bg_border_selector" />
+
+                            <ImageView
+                                android:id="@+id/img_shortness"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/bg_shortness_selector" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/txt_shortness"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:lines="2"
+                            android:minLines="2"
+                            android:singleLine="false"
+                            android:text="@string/shortness_of_breath"
+                            android:textColor="@drawable/text_orange_selector"
+                            android:textSize="@dimen/text_10" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:text="@string/quarantine_hospitalization_status"
+                    android:textColor="@color/color_black"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    app:endIconMode="dropdown_menu">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/act_hospitalization_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/select_status"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:text="@string/other_medical_problems"
+                    android:textColor="@color/color_black"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    app:endIconMode="dropdown_menu">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/act_other_medical_problems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/other_medical_problems"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:text="@string/grivence"
+                    android:textColor="@color/color_black"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rg_grivence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_orange_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:minWidth="@dimen/view_size_60"
+                        android:minHeight="@dimen/view_size_36"
+                        android:text="@string/yes"
+                        android:textColor="@drawable/radio_text" />
+
+                    <RadioButton
+                        android:id="@+id/rb_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_orange_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:minWidth="@dimen/view_size_60"
+                        android:minHeight="@dimen/view_size_36"
+                        android:text="@string/no"
+                        android:textColor="@drawable/radio_text" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/ll_grivence_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/act_grivence_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/select_a_category"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:text="@string/description"
+                        android:textColor="@color/color_black" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:background="@drawable/bg_rectangle_border_form"
+                        android:hint="@string/type_here"
+                        android:minHeight="@dimen/view_size_40"
+                        android:paddingLeft="@dimen/dimen_5"
+                        android:textColor="@color/color_black"
+                        android:textColorHint="@color/color_grey_txt"
+                        android:textSize="@dimen/text_12" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/act_priority"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/priority"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_other_imp_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@string/other_important_information" />
+
+                <EditText
+                    android:id="@+id/edt_other_imp_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:hint="@string/type_here"
+                    android:minHeight="@dimen/view_size_40"
+                    android:paddingLeft="@dimen/dimen_5"
+                    android:textColor="@color/color_black"
+                    android:textColorHint="@color/color_grey_txt"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_save_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:gravity="end"
+                android:minHeight="@dimen/view_size_40"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txt_save"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_orange_bg"
+                    android:gravity="center"
+                    android:text="@string/save"
+                    android:textColor="@color/color_white" />
+
+                <TextView
+                    android:id="@+id/txt_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_light_grey_bg"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textColor="@color/color_dark_grey_txt" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

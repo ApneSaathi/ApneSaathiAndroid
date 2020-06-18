@@ -6,8 +6,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -15,10 +17,12 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
     CallsAdapter.OnItemClickListener {
 
     companion object {
-        const val TYPE_OF_DATA = "type_of_data"
+        const val TYPE_OF_DATA: String = "type_of_data"
+        const val CONTAINER_ID: String = "container_id"
     }
 
     private lateinit var typeOfData: String
+    private var containerId: Int = -1
 
     private var position: Int = -1
     private var lastSelectedItem: User? = null
@@ -27,6 +31,7 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.run {
+            containerId = this.getInt(CONTAINER_ID, -1)
             toolBar.title = this.getString(TYPE_OF_DATA).also {
                 typeOfData = it!!
             }
@@ -45,7 +50,9 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
     }
 
     override fun onMoreInfoClick(position: Int, user: User) {
-        TODO("Not yet implemented")
+        addFragment(
+            containerId, SeniorCitizenDetailsFragment(), getString(R.string.edit_fragment)
+        )
     }
 
     override fun provideViewModel(): HomeViewModel = HomeViewModel.getInstance(dataManager)
@@ -72,7 +79,7 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
     }
 
     override fun onCallPermissionGranted() {
-        lastSelectedItem?.let { placeCall(it) }
+        if (containerId != -1) lastSelectedItem?.let { placeCall(it, containerId) }
     }
 
     override fun onCallPermissionDenied() {

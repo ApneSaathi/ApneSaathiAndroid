@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     override fun provideLayoutResource(): Int = R.layout.fragment_home
 
     override fun onCallPermissionGranted() {
-        lastSelectedItem?.let { placeCall(it) }
+        lastSelectedItem?.let { placeCall(it, R.id.fragmentHomeContainer) }
     }
 
     override fun onCallPermissionDenied() =
@@ -58,7 +58,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     override fun onMoreInfoClick(position: Int, user: User) {
         val fragment = SeniorCitizenDetailsFragment()
         addFragment(
-            R.id.fragmentHomeContainer, fragment,getString(R.string.details_fragment)
+            R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
         )
     }
 
@@ -93,6 +93,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
                 val data = Bundle()
                 data.putString(
                     BaseCallsTypeFragment.TYPE_OF_DATA, getString(R.string.pending_calls)
+                )
+                data.putInt(
+                    BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentHomeContainer
                 )
                 val fragment = BaseCallsTypeFragment()
                 fragment.arguments = data

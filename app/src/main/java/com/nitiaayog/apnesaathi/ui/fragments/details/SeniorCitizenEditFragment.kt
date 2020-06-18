@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_details_edit_page.*
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
     override fun provideViewModel(): SeniorCitizenEditViewModel =
@@ -15,11 +16,14 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
                 dataManager
             )
         }
+
     private lateinit var itemClickListener: OnItemClickListener
+
     interface OnItemClickListener {
         fun onSaveButton(status: String)
         fun onCancelButton()
     }
+
     var selectedGrievance: String = ""
     var selectedPriority: String = ""
     var selectedCallStatus: String = ""
@@ -27,6 +31,11 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
     var selectedOtherMedicalProblems: String = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolBar.title = getString(R.string.app_bar_title)
+        toolBar.setNavigationIcon(R.drawable.ic_back)
+        toolBar.setNavigationOnClickListener { activity?.onBackPressed() }
+
         initViews()
         initClicks()
     }
@@ -46,7 +55,13 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
 
         val otherMedicalProblemList = resources.getStringArray(R.array.other_medical_problems)
         val otherMedicalProblemsListAdapter =
-            activity?.let { ArrayAdapter(it, R.layout.item_layout_dropdown_menu, otherMedicalProblemList) }
+            activity?.let {
+                ArrayAdapter(
+                    it,
+                    R.layout.item_layout_dropdown_menu,
+                    otherMedicalProblemList
+                )
+            }
         act_other_medical_problems.setAdapter(otherMedicalProblemsListAdapter)
         act_other_medical_problems.setOnItemClickListener { _, _, position, _ ->
             selectedOtherMedicalProblems = otherMedicalProblemList[position]
@@ -54,7 +69,13 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
 
         val quarantineStatusList = resources.getStringArray(R.array.quarantine_status_array)
         val quarantineStatusListAdapter =
-            activity?.let { ArrayAdapter(it, R.layout.item_layout_dropdown_menu, quarantineStatusList) }
+            activity?.let {
+                ArrayAdapter(
+                    it,
+                    R.layout.item_layout_dropdown_menu,
+                    quarantineStatusList
+                )
+            }
         act_hospitalization_status.setAdapter(quarantineStatusListAdapter)
         act_hospitalization_status.setOnItemClickListener { _, _, position, _ ->
             selectedQuarantineStatus = quarantineStatusList[position]
@@ -79,16 +100,16 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
 
     private fun initClicks() {
         txt_cancel.setOnClickListener {
-            itemClickListener.onCancelButton()
+            if (::itemClickListener.isInitialized) itemClickListener.onCancelButton()
             activity?.supportFragmentManager?.popBackStackImmediate()
         }
 
         txt_save.setOnClickListener {
-            var status ="Unattended"
-            if (rb_attended.isChecked){
+            var status = "Unattended"
+            if (rb_attended.isChecked) {
                 status = "Attended"
             }
-            itemClickListener.onSaveButton(status)
+            if (::itemClickListener.isInitialized) itemClickListener.onSaveButton(status)
             activity?.supportFragmentManager?.popBackStackImmediate()
         }
         rg_call_status.setOnCheckedChangeListener { _, optionId ->
@@ -96,11 +117,11 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
                 when (optionId) {
                     R.id.rb_attended -> {
                         ll_attended_container.visibility = View.VISIBLE
-                        ti_call_category.visibility =View.GONE
+                        ti_call_category.visibility = View.GONE
                     }
                     R.id.rb_unattended -> {
                         ll_attended_container.visibility = View.GONE
-                        ti_call_category.visibility =View.VISIBLE
+                        ti_call_category.visibility = View.VISIBLE
                     }
                 }
             }
@@ -136,20 +157,17 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
             txt_shortness.isSelected = status
             view_border_shortness.isSelected = status
         }
-
     }
 
     override fun provideLayoutResource(): Int = R.layout.fragment_details_edit_page
 
     override fun onCallPermissionGranted() {
-        TODO("Not yet implemented")
     }
 
     override fun onCallPermissionDenied() {
-        TODO("Not yet implemented")
     }
 
     fun setItemClickListener(listener: OnItemClickListener) {
-        itemClickListener=listener
+        itemClickListener = listener
     }
 }
