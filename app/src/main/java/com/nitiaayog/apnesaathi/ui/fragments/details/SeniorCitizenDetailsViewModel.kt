@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.fragments.userDetails
+package com.nitiaayog.apnesaathi.ui.fragments.details
 
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
@@ -29,6 +29,10 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
                 "09", "Feb","Unattended"
             )
         )
+        return  dataList
+    }
+
+    fun getDataList():MutableList<DateItem>{
         return  dataList
     }
 

@@ -44,6 +44,44 @@
         <item>Gujarat</item>
         <item>Jharkhand</item>
     </string-array>
+    <string-array name="other_medical_problems">
+        <item>No problem</item>
+        <item>Diabetes</item>
+        <item>Arthritis</item>
+        <item>Kidney and bladder problems</item>
+        <item>Glaucoma</item>
+        <item>Parkinson\'s disease</item>
+        <item>Cataracts</item>
+    </string-array>
+    <string-array name="call_status_array">
+        <item>No response</item>
+        <item>Phone not picked</item>
+        <item>Phone not reachable</item>
+        <item>Call disconnected</item>
+        <item>Call connected</item>
+    </string-array>
+    <string-array name="quarantine_status_array">
+        <item>Yes, home quarantine</item>
+        <item>Yes, government quarantine</item>
+        <item>Yes, hospitalized</item>
+        <item>Not quarantine or hospitalized</item>
+    </string-array>
+    <string-array name="priority_array">
+        <item>High</item>
+        <item>Low</item>
+    </string-array>
+    <string-array name="grievance_array">
+        <item>Lack of food</item>
+        <item>Lack of medicine</item>
+        <item>Lack of access to banking services</item>
+        <item>Lack of utilities supply(water,electricity)</item>
+        <item>Lack of hygiene and sanitation</item>
+        <item>Lack of safety</item>
+        <item>Lack of access to emergency services (ambulance, helpline nos, etc.)</item>
+        <item>Phone &amp; internet services</item>
+        <item>Other problems reported</item>
+        <item>Other</item>
+    </string-array>
     <string-array name="districts_array">
         <item>Barpeta</item>
         <item>Baska</item>
@@ -171,4 +209,17 @@
     <string name="all_calls">All Calls</string>
     <string name="resolved">Resolved</string>
     <string name="pending">Pending</string>
+    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="select_a_category">Select a category</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+    <string name="other_important_information">Other important information</string>
+    <string name="edit_fragment">Edit fragment</string>
+    <string name="select_a_call_status">Select a call status</string>
+    <string name="quarantine_hospitalization_status">Quarantine/ Hospitalization Status</string>
+    <string name="select_status">Select a status</string>
+    <string name="category">Category</string>
+    <string name="medical_details">Medical Details</string>
+    <string name="grievance_information">Grievance Information</string>
+    <string name="other_problems">Other problems</string>
 </resources>
