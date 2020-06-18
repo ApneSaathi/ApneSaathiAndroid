@@ -174,4 +174,47 @@
     <string name="menu_notification">સૂચના</string>
     <string name="menu_profile">પ્રોફાઇલ</string>
 
+    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="select_a_category">શ્રેણી ની પસંદગી કરો</string>
+    <string name="description">વર્ણન</string>
+    <string name="priority">પ્રાથમિકતા</string>
+    <string name="other_important_information">અન્ય મહત્વપૂર્ણ માહિતી</string>
+    <string name="edit_fragment">Edit fragment</string>
+    <string name="select_a_call_status">ક callલ સ્થિતિ પસંદ કરો</string>
+    <string name="quarantine_hospitalization_status">સંસર્ગનિષેધ / હોસ્પિટલમાં દાખલ થવાની સ્થિતિ</string>
+    <string name="select_status">સ્થિતિ પસંદ કરો</string>
+    <string name="category">કેટેગરી</string>
+    <string name="medical_details">તબીબી વિગતો</string>
+    <string name="grievance_information">ફરિયાદની માહિતી</string>
+    <string name="other_problems">અન્ય સમસ્યાઓ</string>
+
+    <string name="no_problems">કોઈ સમસ્યા નથી</string>
+    <string name="diabetes">ડાયાબિટીસ</string>
+    <string name="arthritis">સંધિવા</string>
+    <string name="kidney_and_bladder_pbm">કિડની અને મૂત્રાશયની સમસ્યાઓ</string>
+    <string name="glaucoma">ગ્લુકોમા</string>
+    <string name="parkinson">ધ્રુજારી ની બીમારી</string>
+    <string name="cataracts">મોતિયા</string>
+    <string name="no_response">કોઈ જવાબ નથી</string>
+    <string name="phone_not_picked">ફોન લેવામાં આવ્યો નથી</string>
+    <string name="phone_not_reachable">ફોન પહોંચી શકાય તેમ નથી</string>
+    <string name="call_disconnected">ક Callલ ડિસ્કનેક્ટ થયો</string>
+    <string name="home_quarantine">હા, ઘરેલુ સંસર્ગનિષેધ</string>
+    <string name="government_quarantine">હા, સરકારી સંસર્ગનિષેધ</string>
+    <string name="hospitalized">હા, હોસ્પિટલમાં દાખલ</string>
+    <string name="not_quarantined">સંસર્ગનિષેધ અથવા હોસ્પિટલમાં દાખલ નથી</string>
+    <string name="lack_of_food">ખોરાકનો અભાવ</string>
+    <string name="lack_of_medicine">દવાનો અભાવ</string>
+    <string name="lack_of_banking_service">બેંકિંગ સેવાઓનો વપરાશ અભાવ</string>
+    <string name="lack_of_utilities">ઉપયોગિતાઓના સપ્લાયનો અભાવ (પાણી, વીજળી)</string>
+    <string name="lack_of_hygine">સ્વચ્છતા અને સ્વચ્છતાનો અભાવ</string>
+    <string name="lack_of_safety">સલામતીનો અભાવ</string>
+    <string name="lack_of_access_emergency">કટોકટી સેવાઓ (એમ્બ્યુલન્સ, હેલ્પલાઇન નંબર, વગેરે) ની accessક્સેસનો અભાવ.</string>
+    <string name="phone_and_service">ફોન અને ઇન્ટરનેટ સેવાઓ</string>
+    <string name="other_problems_reported">અન્ય સમસ્યાઓ અહેવાલ</string>
+    <string name="other">અન્ય</string>
+    <string name="high">ઉચ્ચ</string>
+    <string name="low">નીચા</string>
+
+
 </resources>

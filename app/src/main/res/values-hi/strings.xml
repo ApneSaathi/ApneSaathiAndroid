@@ -120,7 +120,7 @@
     <string name="covid_symptoms">Covid Symptoms</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="other_medical_problems">Other Medical Problems</string>
+    <string name="other_medical_problems">अन्य चिकित्सा समस्याएं</string>
     <string name="complaints">COMPLAINTS</string>
     <string name="calls_information">CALLS INFORMATION</string>
     <string name="call_type">Call Type</string>
@@ -174,5 +174,47 @@
     <string name="menu_notification">अधिसूचना</string>
     <string name="menu_profile">प्रोफ़ाइल</string>
     <string name="grievances_count">शिकायत(%s)</string>
+
+    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="select_a_category">एक वर्ग का चयन करें</string>
+    <string name="description">विवरण</string>
+    <string name="priority">प्राथमिकता</string>
+    <string name="other_important_information">अन्य महत्वपूर्ण जानकारी</string>
+    <string name="edit_fragment">Edit fragment</string>
+    <string name="select_a_call_status">एक कॉल स्थिति चुनें</string>
+    <string name="quarantine_hospitalization_status">संगरोध / अस्पताल में भर्ती की स्थिति</string>
+    <string name="select_status">एक स्थिति चुनें</string>
+    <string name="category">वर्ग</string>
+    <string name="medical_details">चिकित्सा विवरण</string>
+    <string name="grievance_information">शिकायत सूचना</string>
+    <string name="other_problems">दूसरी समस्याएं</string>
+
+    <string name="no_problems">कोई समस्या नहीं</string>
+    <string name="diabetes">मधुमेह</string>
+    <string name="arthritis">गठिया</string>
+    <string name="kidney_and_bladder_pbm">गुर्दे और मूत्राशय की समस्याएं</string>
+    <string name="glaucoma">आंख का रोग</string>
+    <string name="parkinson">पार्किंसंस रोग</string>
+    <string name="cataracts">मोतियाबिंद</string>
+    <string name="no_response">कोई जवाब नहीं</string>
+    <string name="phone_not_picked">फोन नहीं उठाया</string>
+    <string name="phone_not_reachable">फोन नहीं पहुंच पा रहा है</string>
+    <string name="call_disconnected">कॉल काट दिया गया</string>
+    <string name="home_quarantine">हां, घर का संगरोध</string>
+    <string name="government_quarantine">हाँ, सरकारी संगरोध</string>
+    <string name="hospitalized">हाँ, अस्पताल में भर्ती</string>
+    <string name="not_quarantined">संगरोध या अस्पताल में भर्ती नहीं</string>
+    <string name="lack_of_food">भोजन की कमी</string>
+    <string name="lack_of_medicine">दवा का अभाव</string>
+    <string name="lack_of_banking_service">बैंकिंग सेवाओं तक पहुंच का अभाव</string>
+    <string name="lack_of_utilities">उपयोगिताओं की आपूर्ति की कमी (पानी, बिजली)</string>
+    <string name="lack_of_hygine">स्वच्छता और स्वच्छता का अभाव</string>
+    <string name="lack_of_safety">सुरक्षा का अभाव</string>
+    <string name="lack_of_access_emergency">आपातकालीन सेवाओं तक पहुँच का अभाव (एम्बुलेंस, हेल्पलाइन नग इत्यादि)</string>
+    <string name="phone_and_service">फोन और इंटरनेट सेवाएं</string>
+    <string name="other_problems_reported">अन्य समस्याओं की सूचना दी</string>
+    <string name="other">अन्य</string>
+    <string name="high">उच्च</string>
+    <string name="low">कम</string>
 
 </resources>
