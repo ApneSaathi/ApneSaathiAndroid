@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:paddingTop="@dimen/dimen_5"
+    android:paddingBottom="@dimen/dimen_5">
+
+    <com.nitiaayog.apnesaathi.base.CircleImageView
+        android:id="@+id/civGender"
+        android:layout_width="@dimen/view_size_66"
+        android:layout_height="@dimen/view_size_66"
+        android:layout_marginStart="@dimen/dimen_5"
+        android:padding="@dimen/dimen_5"
+        android:src="@drawable/ic_profile"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvComplaint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/civGender"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnComplaintStatus"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@color/color_orange"
+        android:textSize="@dimen/text_12"
+        app:layout_constraintStart_toEndOf="@id/civGender"
+        app:layout_constraintTop_toBottomOf="@id/tvComplaint" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

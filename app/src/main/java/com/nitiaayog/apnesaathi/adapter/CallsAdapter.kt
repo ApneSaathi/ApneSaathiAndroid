@@ -3,7 +3,6 @@ package com.nitiaayog.apnesaathi.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
@@ -40,17 +39,11 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         val civGender: CircleImageView = itemView.civGender
         val tvName: TextView = itemView.tvName
         val tvAddress: TextView = itemView.tvAddress
-        val ivCall: ImageView = itemView.ivCall
-        val ivMoreInfo: ImageView = itemView.ivMoreInfo
 
         init {
             itemView.constraintLayout.setOnClickListener(this)
             itemView.ivCall.setOnClickListener(this)
             itemView.ivMoreInfo.setOnClickListener(this)
-            /*itemView.constraintLayout.setOnClickListener {
-                if (::itemClickListener.isInitialized)
-                    itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
-            }*/
         }
 
         fun bindData(user: User) {
