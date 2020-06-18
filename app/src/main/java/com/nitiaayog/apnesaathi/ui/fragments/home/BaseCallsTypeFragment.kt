@@ -44,6 +44,10 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>(),
         prepareToCallPerson()
     }
 
+    override fun onMoreInfoClick(position: Int, user: User) {
+        TODO("Not yet implemented")
+    }
+
     override fun provideViewModel(): HomeViewModel = HomeViewModel.getInstance(dataManager)
 
     override fun provideLayoutResource(): Int = R.layout.fragment_base_calls_type

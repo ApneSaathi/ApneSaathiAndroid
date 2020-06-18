@@ -8,6 +8,7 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     BaseViewModel() {
     private val dataList: MutableList<DateItem> = mutableListOf()
     fun prepareData(): MutableList<DateItem> {
+        dataList.clear()
         dataList.add(
             DateItem(
                 "01", "Jan","Attended"

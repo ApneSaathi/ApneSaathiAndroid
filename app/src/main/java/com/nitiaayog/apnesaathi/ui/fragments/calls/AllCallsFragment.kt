@@ -43,4 +43,8 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
         lastSelectedItem = user
         prepareToCallPerson()
     }
+
+    override fun onMoreInfoClick(position: Int, user: User) {
+
+    }
 }
