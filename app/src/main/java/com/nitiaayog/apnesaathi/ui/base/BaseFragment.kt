@@ -17,10 +17,11 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.User
-import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenEditFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -113,7 +114,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             }.create().show()
     }
 
-    protected fun placeCall(selectedUser: User) {
+    protected fun placeCall(selectedUser: User, containerId: Int) {
         Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:${selectedUser.phoneNumber}")
             if (this.resolveActivity(activity!!.packageManager) != null)
@@ -123,7 +124,10 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
 
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                startActivity(Intent(activity, SeniorCitizenFeedbackFormActivity::class.java))
+                addFragment(
+                    containerId, SeniorCitizenEditFragment(), getString(R.string.edit_fragment)
+                )
+                //startActivity(Intent(activity, SeniorCitizenFeedbackFormActivity::class.java))
             }.autoDispose(disposables)
     }
 
