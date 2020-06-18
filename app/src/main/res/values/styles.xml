@@ -39,7 +39,7 @@
     </style>
 
     <style name="Theme.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/color_orange</item>
+        <item name="colorPrimary">@android:color/background_light</item>
     </style>
 
     <style name="CustomDialog" parent="android:Theme.Dialog">

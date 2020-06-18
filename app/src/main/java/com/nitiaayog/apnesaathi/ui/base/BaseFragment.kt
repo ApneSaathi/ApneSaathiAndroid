@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.ui.base
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -97,7 +98,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     private fun showPermissionTextPopup(
         @StringRes message: Int, navigateToSetting: Boolean, permission: String
     ) {
-        AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
+        val dialog = AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
             .setTitle(R.string.permission_detail).apply {
                 this.setCancelable(false)
                 this.setMessage(message)
@@ -111,7 +112,12 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
                     } else requestPermission(permission)
                 }
                 this.setNegativeButton(R.string.not_now) { dialog, _ -> dialog.dismiss() }
-            }.create().show()
+            }.create()
+        dialog.show()
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
     protected fun placeCall(selectedUser: User, containerId: Int) {

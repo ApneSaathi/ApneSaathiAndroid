@@ -50,7 +50,7 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         fun bindData(user: User) {
             tvName.text = user.userName
             tvAddress.text = user.block.plus(", ").plus(user.district).plus(", ").plus(user.state)
-            civGender.setImageResource(R.drawable.ic_profile)
+            civGender.setImageResource(R.drawable.ic_male_user)
         }
 
         override fun onClick(view: View) {
