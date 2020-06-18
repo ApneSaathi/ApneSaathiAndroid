@@ -3,9 +3,6 @@ package com.nitiaayog.apnesaathi.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 @Entity
 class SeniorCitizen(
@@ -26,7 +23,6 @@ class SeniorCitizen(
 //    private val mCreatedBy: String = "",
 //    private val mAssignTo: String = "",
 //    private val mContentDescription: String = "",
-
 //    private val mDateOfOnBoarding:String="",
 //    private val mProcess:String="",
 //    private val mUpdatedDate:String="",

@@ -1,53 +1,34 @@
 package com.nitiaayog.apnesaathi.ui.dashboard
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.adapter.ViewPagerAdapter
-import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
+import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
-import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
-import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenssupporttoday.SeniorCitizensSupportedToday
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import com.nitiaayog.apnesaathi.ui.fragments.calls.CallsFragment
+import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
+import com.nitiaayog.apnesaathi.ui.fragments.notifications.NotificationsFragment
+import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import java.util.concurrent.TimeUnit
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
 
-    companion object {
-        private const val FLIP_IMAGE_DELAY: Long = 3500
-    }
-
-    private var intervalDisposable: Disposable? = null
+    private val homeFragment = HomeFragment()
+    private val callsFragment = CallsFragment()
+    private val notificationFragment = NotificationsFragment()
+    private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTransparentStatusBar()
-
         initViewPager()
-        initClicks()
+        initBottomNavigationView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        intervalDisposable = Observable.interval(FLIP_IMAGE_DELAY, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                viewPager.currentItem =
-                    if (viewPager.currentItem == (viewPager.adapter!!.count - 1)) 0
-                    else viewPager.currentItem + 1
-            }
-    }
-
-    override fun onPause() {
-        intervalDisposable?.run {
-            if (!this.isDisposed) this.dispose()
-        }
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     override fun provideViewModel(): DashBoardViewModel =
@@ -56,60 +37,51 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
     override fun provideLayoutResource(): Int = R.layout.activity_dashboard
 
     private fun initViewPager() {
-        val pageMargin =
-            (resources.getDimension(R.dimen.dimen_30) / resources.displayMetrics.density).toInt()
-        val padding =
-            (resources.getDimension(R.dimen.view_size_62) / resources.displayMetrics.density).toInt()
+        val adapter = FragmentViewPagerAdapter(this)
+        adapter.addFragment(homeFragment, getString(R.string.menu_home))
+        adapter.addFragment(callsFragment, getString(R.string.menu_calls))
+        adapter.addFragment(notificationFragment, getString(R.string.menu_notification))
+        adapter.addFragment(profileFragment, getString(R.string.menu_profile))
 
-        viewPager.apply {
-            this.clipToPadding = false
-            this.setPadding(padding, 0, padding, 0)
-            this.pageMargin = pageMargin
-            this.offscreenPageLimit = 2
-            this.adapter = ViewPagerAdapter()
+        viewPager.isUserInputEnabled = false
+        viewPager.adapter = adapter
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                bottomNavigationView.selectedItemId = when (position) {
+                    0 -> R.id.menuHome
+                    1 -> R.id.menuCalls
+                    2 -> R.id.menuNotification
+                    3 -> R.id.menuProfile
+                    else -> R.id.menuHome
+                }
+                updateToolbarTittle()
+            }
+        })
+    }
+
+    private fun initBottomNavigationView() {
+        bottomNavigationView.itemIconTintList = null
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menuHome -> viewPager.currentItem = 0
+                R.id.menuCalls -> viewPager.currentItem = 1
+                R.id.menuNotification -> viewPager.currentItem = 2
+                R.id.menuProfile -> viewPager.currentItem = 3
+            }
+            updateToolbarTittle()
+            true
         }
     }
 
-    private fun initClicks() {
-        tvTotalCallsVsConnected.throttleClick().subscribe {
-            /*val options = ActivityOptions.makeSceneTransitionAnimation(this)
-            startActivity(
-                getTargetIntent(SeniorCitizenFeedbackFormActivity::class.java),
-                options.toBundle()
-            )*/
-            navigateToNextScreen(SeniorCitizensSupportedToday::class.java)
-        }.autoDispose(disposables)
-
-        tvTotalSrCitizensSupported.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-
-        tvCallsConnectedYesterday.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-
-        tvAverageConnectedCallsPerDay.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-
-        tvCallsConnectedToday.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-
-        tvSrCitizensSupportedToday.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-
-        tvCallsPending.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-
-        tvComplainsAndResolve.throttleClick().subscribe {
-
-        }.autoDispose(disposables)
-    }
-
-    private fun <T : AppCompatActivity> navigateToNextScreen(targetActivity: Class<T>) {
-        startActivity(getTargetIntent(targetActivity))
+    private fun updateToolbarTittle() {
+        when (viewPager.currentItem) {
+            0 -> toolBar.setTitle(R.string.menu_home)
+            1 -> toolBar.setTitle(R.string.menu_calls)
+            2 -> toolBar.setTitle(R.string.menu_notification)
+            3 -> toolBar.setTitle(R.string.menu_profile)
+        }
+        if (supportFragmentManager.backStackEntryCount > 0)
+            supportFragmentManager.fragments.forEach { _ -> supportFragmentManager.popBackStack() }
     }
 }

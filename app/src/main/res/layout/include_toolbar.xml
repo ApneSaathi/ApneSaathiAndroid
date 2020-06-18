@@ -4,8 +4,7 @@
     android:id="@+id/toolBar"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
-    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/background_light"
     android:theme="@style/ThemeOverlay.MaterialComponents.Light"
-    app:contentInsetEnd="0dp"
-    app:contentInsetStart="0dp"
     app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark" />

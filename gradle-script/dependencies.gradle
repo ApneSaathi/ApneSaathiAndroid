@@ -1,0 +1,110 @@
+ext {
+
+    /* TODO : AppDetails ------------------------------------------------------------------------ */
+
+    appId = "com.nitiaayog.apnesaathi"
+    minVersion = 19
+    buildVersion = "29.0.3"
+    targetVersion = 29
+    versionCode = 1
+    versionName = "1.0"
+
+    /* TODO : Plugins --------------------------------------------------------------------------- */
+
+    applicationPlugin = 'com.android.application'
+    kotlinPlugin = 'kotlin-android'
+    kotlinAndroidPlugin = 'kotlin-android-extensions'
+    kotlinKaptPlugin = 'kotlin-kapt'
+    gmsServicePlugin = 'com.google.gms.google-services'
+
+    /* TODO : Libraries Gradle ------------------------------------------------------------------ */
+
+    androidGradleVersion = '4.0.0'
+    androidSupportPackage = 'com.android.tools.build:gradle'
+
+    kotlinPluginVersion = '1.3.72'
+    kotlinSupportPackage = "org.jetbrains.kotlin:kotlin-gradle-plugin"
+    kotlinPackage = 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    gmsGradleVersion = '4.3.0'
+    gmsSupportPackage = 'com.google.gms:google-services'
+
+    constraintLayoutVersion = '1.1.3'
+    constraintLayoutPackage = 'androidx.constraintlayout:constraintlayout'
+
+    supportVersion = '1.1.0'
+    appCompatPackage = 'androidx.appcompat:appcompat'
+    ktxPackage = 'androidx.core:core-ktx'
+    recyclerViewPackage = 'androidx.recyclerview:recyclerview'
+    materialPackage = 'com.google.android.material:material'
+
+    cardViewVersion = '1.0.0'
+    cardViewPackage = 'androidx.cardview:cardview'
+
+    retrofitVersion = '2.5.0'
+    retrofitNetworkCallPackage = 'com.squareup.retrofit2:retrofit'
+    retrofitGsonConverterPackage = 'com.squareup.retrofit2:converter-gson'
+    retrofitRxjavaAdapterPackage = 'com.squareup.retrofit2:adapter-rxjava2'
+
+    okhttpVersion = '3.12.0'
+    okhttpPackage = 'com.squareup.okhttp3:logging-interceptor'
+
+    glideVersion = '4.10.0'
+    glidePackage = 'com.github.bumptech.glide:glide'
+
+    imagePickerVersion = '1.3.0'
+    imagePickerPackage = 'com.github.nguyenhoanglam:ImagePicker'
+
+    rxBindingVersion = '3.1.0'
+    rxBindingPackage = 'com.jakewharton.rxbinding3:rxbinding'
+
+    rxJava2Version = '2.2.2'
+    rxJava2Package = 'io.reactivex.rxjava2:rxjava'
+
+    rxAndroid2Version = '2.1.1'
+    rxAndroid2Package = 'io.reactivex.rxjava2:rxandroid'
+
+    roomVersion = '2.2.5'
+    roomRuntimePackage = 'androidx.room:room-runtime'
+    roomCompilerPackage = 'androidx.room:room-compiler'
+    roomKtxPackage = 'androidx.room:room-ktx'
+    roomRxjava2Package = 'androidx.room:room-rxjava2'
+
+    androidGradleSupport = buildDependency(androidSupportPackage, androidGradleVersion)
+    kotlinGradleSupport = buildDependency(kotlinSupportPackage, kotlinPluginVersion)
+    gmsServiceSupport = buildDependency(gmsSupportPackage, gmsGradleVersion)
+    kotlinSupport = buildDependency(kotlinPackage, kotlinPluginVersion)
+    constraintLayout = buildDependency(constraintLayoutPackage, constraintLayoutVersion)
+    okHttpInterceptor = buildDependency(okhttpPackage, okhttpVersion)
+    glide = buildDependency(glidePackage, glideVersion)
+    imagePicker = buildDependency(imagePickerPackage, imagePickerVersion)
+    rxViewBinding = buildDependency(rxBindingPackage, rxBindingVersion)
+    rxJava2 = buildDependency(rxJava2Package, rxJava2Version)
+    rxAndroid2 = buildDependency(rxAndroid2Package, rxAndroid2Version)
+
+    androidSupport = [
+            appCompat     : buildDependency(appCompatPackage, supportVersion),
+            ktx           : buildDependency(ktxPackage, supportVersion),
+            recyclerView  : buildDependency(recyclerViewPackage, supportVersion),
+            materialDesign: buildDependency(materialPackage, supportVersion),
+            cardView      : buildDependency(cardViewPackage, cardViewVersion)
+    ]
+
+    retrofit = [
+            networkCall  : buildDependency(retrofitNetworkCallPackage, retrofitVersion),
+            gsonConverter: buildDependency(retrofitGsonConverterPackage, retrofitVersion),
+            rxJava       : buildDependency(retrofitRxjavaAdapterPackage, retrofitVersion)
+    ]
+
+    roomDB = [
+            runtime : buildDependency(roomRuntimePackage, roomVersion),
+            compiler: buildDependency(roomCompilerPackage, roomVersion),
+            ktx     : buildDependency(roomKtxPackage, roomVersion),
+            rxjava  : buildDependency(roomRxjava2Package, roomVersion)
+    ]
+}
+
+// TODO : Create Dependency --------------------------------------------------------------------
+static String buildDependency(String packageName, String version) {
+    return "${packageName}:${version}"
+}
