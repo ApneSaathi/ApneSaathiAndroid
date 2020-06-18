@@ -22,6 +22,10 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     private var position: Int = -1
     private var lastSelectedItem: User? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
