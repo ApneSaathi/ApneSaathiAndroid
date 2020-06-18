@@ -14,6 +14,7 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.userDetails.SeniorCitizenDetailsFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -52,6 +53,13 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
         this.position = position
         lastSelectedItem = user
         prepareToCallPerson()
+    }
+
+    override fun onMoreInfoClick(position: Int, user: User) {
+        val fragment = SeniorCitizenDetailsFragment()
+        addFragment(
+            R.id.fragmentHomeContainer, fragment, getString(R.string.pending_calls)
+        )
     }
 
     private fun initRecyclerView() {
@@ -99,7 +107,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
         tvGrievances.text = getString(R.string.grievances_count, dataListSize.toString())
         btnSeeAllGrievances.visibility = if (dataListSize > 3) {
             btnSeeAllGrievances.setOnClickListener {
-                
+
             }
             View.VISIBLE
         } else View.GONE
