@@ -167,12 +167,13 @@
 
     <string name="menu_calls">कॉल</string>
     <string name="menu_home">मुख्यपृष्ठ</string>
-    <string name="pending_calls_count">तक्रारी(%s)</string>
+    <string name="pending_calls_count">प्रलंबित कॉल(%s)</string>
     <string name="follow_up_count">पाठपुरावा(%s)</string>
     <string name="follow_up">पाठपुरावा</string>
     <string name="attended_calls_count">उपस्थित कॉल(%s)</string>
     <string name="attended_calls">उपस्थित कॉल</string>
     <string name="menu_notification">सूचना</string>
     <string name="menu_profile">प्रोफाइल</string>
+    <string name="grievances_count">तक्रारी(%s)</string>
 
 </resources>
