@@ -159,4 +159,20 @@
     <string name="all_calls">सभी कालेँ</string>
     <string name="resolved">हल</string>
     <string name="pending">विचाराधीन</string>
+
+    <string name="pending_calls">लंबित कॉल</string>
+    <string name="grievances">शिकायत</string>
+    <string name="see_all">सभी देखें</string>
+
+    <string name="menu_calls">कॉल</string>
+    <string name="menu_home">मुख्यपृष्ठ</string>
+    <string name="pending_calls_count">लंबित कॉल(%s)</string>
+    <string name="follow_up_count">वापस कॉल करें(%s)</string>
+    <string name="follow_up">वापस कॉल करें</string>
+    <string name="attended_calls_count">उपस्थित कॉल(%s)</string>
+    <string name="attended_calls">उपस्थित कॉल</string>
+    <string name="menu_notification">अधिसूचना</string>
+    <string name="menu_profile">प्रोफ़ाइल</string>
+    <string name="grievances_count">शिकायत(%s)</string>
+
 </resources>

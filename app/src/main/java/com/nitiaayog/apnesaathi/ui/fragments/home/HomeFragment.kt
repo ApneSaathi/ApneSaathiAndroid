@@ -107,7 +107,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
         tvGrievances.text = getString(R.string.grievances_count, dataListSize.toString())
         btnSeeAllGrievances.visibility = if (dataListSize > 3) {
             btnSeeAllGrievances.setOnClickListener {
-                
+
             }
             View.VISIBLE
         } else View.GONE

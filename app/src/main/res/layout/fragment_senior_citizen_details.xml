@@ -11,7 +11,7 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
             <androidx.appcompat.widget.Toolbar
@@ -23,503 +23,518 @@
                 app:titleTextAppearance="@style/Toolbar.TitleText"
                 app:titleTextColor="@color/color_black" />
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_white">
+        </com.google.android.material.appbar.AppBarLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_white"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingBottom="200dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_personal_details_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/color_white"
-                    android:paddingBottom="200dp">
+                    android:background="@drawable/bg_item_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingTop="@dimen/dimen_20"
+                    android:paddingRight="@dimen/dimen_20"
+                    android:paddingBottom="@dimen/dimen_15"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
-                        android:id="@+id/ll_personal_details_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_item_background"
-                        android:gravity="center"
-                        android:orientation="vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_male_user" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_20"
+                            android:layout_marginRight="@dimen/dimen_20"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Scott Osborne (60Y)"
+                                android:textColor="@color/color_black" />
+
+                            <TextView
+                                android:id="@+id/txt_user_phone_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="96084309390"
+                                android:textColor="@color/color_dark_grey" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/img_call_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_phone_icon" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12"
+                        android:text="@string/address"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_light_grey_bg"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container">
+
+                </View>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcl_call_dates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dimen_5"
+                    android:paddingBottom="@dimen/dimen_5"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container" />
+
+                <View
+                    android:id="@+id/view_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_light_grey_bg"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcl_call_dates">
+
+                </View>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_uneditable_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_bg">
+
+                    <LinearLayout
+                        android:id="@+id/ll_status_and_problems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
                         android:paddingLeft="@dimen/dimen_20"
-                        android:paddingTop="@dimen/dimen_20"
+                        android:paddingTop="@dimen/dimen_13"
                         android:paddingRight="@dimen/dimen_20"
-                        android:paddingBottom="@dimen/dimen_15"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            <ImageView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_male_user" />
+                                android:text="@string/call_status"
+                                android:textColor="@color/color_grey_txt" />
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/dimen_20"
-                                android:layout_marginRight="@dimen/dimen_20"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txt_user_name"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Scott Osborne (60Y)"
-                                    android:textColor="@color/color_black" />
-
-                                <TextView
-                                    android:id="@+id/txt_user_phone_number"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="96084309390"
-                                    android:textColor="@color/color_dark_grey" />
-                            </LinearLayout>
-
-                            <ImageView
-                                android:id="@+id/img_call_button"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_phone_icon" />
+                                android:layout_marginTop="@dimen/dimen_2"
+                                android:text="@string/attended"
+                                android:textColor="@color/color_orange" />
+
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:id="@+id/ll_call_category"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_12"
-                            android:text="@string/address"
-                            android:textColor="@color/color_black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/category"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/txt_call_response"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No Response"
+                                android:textColor="@color/color_orange" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/color_light_grey_bg"
-                        app:layout_constraintEnd_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container">
-
-                    </View>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcl_call_dates"
+                    <TextView
+                        android:id="@+id/txt_medical_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/dimen_5"
-                        android:paddingBottom="@dimen/dimen_5"
-                        app:layout_constraintEnd_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container" />
-
-                    <View
-                        android:id="@+id/view_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dimen_10"
                         android:background="@color/color_light_grey_bg"
-                        app:layout_constraintEnd_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/rcl_call_dates">
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/dimen_30"
+                        android:paddingLeft="@dimen/dimen_20"
+                        android:text="@string/medical_details"
+                        android:textColor="@color/color_black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_status_and_problems">
 
-                    </View>
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_uneditable_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/view_bg">
-
-                        <LinearLayout
-                            android:id="@+id/ll_status_and_problems"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:paddingTop="@dimen/dimen_13"
-                            android:paddingRight="@dimen/dimen_20"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/call_status"
-                                    android:textColor="@color/color_grey_txt" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dimen_2"
-                                    android:text="@string/attended"
-                                    android:textColor="@color/color_orange" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ll_call_category"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:visibility="gone"
-                                android:orientation="vertical"
-                                android:paddingLeft="@dimen/dimen_10">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/category"
-                                    android:textColor="@color/color_grey_txt" />
-
-                                <TextView
-                                    android:id="@+id/txt_call_response"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="No Response"
-                                    android:textColor="@color/color_orange" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/txt_medical_details"
-                            android:layout_marginTop="@dimen/dimen_10"
-                            android:layout_width="match_parent"
-                            android:background="@color/color_light_grey_bg"
-                            android:layout_height="wrap_content"
-                            android:minHeight="@dimen/dimen_30"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:text="@string/medical_details"
-                            android:textColor="@color/color_black"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ll_status_and_problems">
-
-                        </TextView>
-
-                        <LinearLayout
-                            android:id="@+id/ll_medical_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_15"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:paddingTop="@dimen/dimen_13"
-                            android:paddingRight="@dimen/dimen_20"
-                            app:layout_constraintEnd_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_medical_details">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/covid_symptoms"
-                                    android:textColor="@color/color_grey_txt" />
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:id="@+id/cl_covid_symptoms"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dimen_5">
-
-                                    <ImageView
-                                        android:id="@+id/img_cough_uneditable"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/ic_cough_selected"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/dimen_5"
-                                        android:text="@string/cough"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10"
-                                        app:layout_constraintStart_toStartOf="@id/img_cough_uneditable"
-                                        app:layout_constraintTop_toBottomOf="@id/img_cough_uneditable" />
-
-                                    <ImageView
-                                        android:id="@+id/img_fever_uneditable"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_10"
-                                        android:src="@drawable/ic_fever_icon_selected"
-                                        app:layout_constraintStart_toEndOf="@id/img_cough_uneditable"
-                                        app:layout_constraintTop_toTopOf="@id/img_cough_uneditable" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/dimen_5"
-                                        android:text="@string/fever"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10"
-                                        app:layout_constraintStart_toStartOf="@id/img_fever_uneditable"
-                                        app:layout_constraintTop_toBottomOf="@id/img_fever_uneditable" />
-
-                                    <ImageView
-                                        android:id="@+id/img_shortness_uneditable"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_10"
-                                        android:src="@drawable/ic_shortness_icon_selected"
-                                        app:layout_constraintStart_toEndOf="@id/img_fever_uneditable"
-                                        app:layout_constraintTop_toTopOf="@id/img_fever_uneditable" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/dimen_5"
-                                        android:lines="2"
-                                        android:maxWidth="@dimen/view_size_60"
-                                        android:minLines="2"
-                                        android:singleLine="false"
-                                        android:text="@string/shortness_of_breath"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10"
-                                        app:layout_constraintStart_toStartOf="@id/img_shortness_uneditable"
-                                        app:layout_constraintTop_toBottomOf="@id/img_shortness_uneditable" />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingLeft="@dimen/dimen_10">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/grivence"
-                                    android:textColor="@color/color_grey_txt" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dimen_2"
-                                    android:text="@string/no"
-                                    android:textColor="@color/color_orange" />
-
-                                <TextView
-                                    android:layout_marginTop="@dimen/dimen_10"
-                                    android:textColor="@color/color_grey_txt"
-                                    android:text="@string/quarantine_hospitalization_status"
-                                    android:layout_width="wrap_content"
-                                    android:textSize="@dimen/text_10"
-                                    android:layout_height="wrap_content"/>
-                                <TextView
-                                    android:layout_marginTop="@dimen/dimen_5"
-                                    android:textColor="@color/color_orange"
-                                    android:text="Not quarantined"
-                                    android:layout_width="wrap_content"
-                                    android:textSize="@dimen/text_10"
-                                    android:layout_height="wrap_content"/>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/txt_grievance_info"
-                            android:layout_marginTop="@dimen/dimen_10"
-                            android:layout_width="match_parent"
-                            android:background="@color/color_light_grey_bg"
-                            android:layout_height="wrap_content"
-                            android:minHeight="@dimen/dimen_30"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:text="@string/grievance_information"
-                            android:textColor="@color/color_black"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ll_medical_details">
-
-                        </TextView>
-                        <LinearLayout
-                            android:id="@+id/ll_grievance"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:paddingTop="@dimen/dimen_13"
-                            android:paddingRight="@dimen/dimen_20"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_grievance_info"
-                            android:baselineAligned="false">
-                          <LinearLayout
-                              android:layout_weight="1"
-                              android:orientation="vertical"
-                              android:layout_width="0dp"
-                              android:layout_height="wrap_content">
-
-                              <TextView
-                                  android:textColor="@color/color_grey_txt"
-                                  android:text="@string/grivence"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"/>
-                              <TextView
-                                  android:layout_marginTop="@dimen/dimen_5"
-                                  android:id="@+id/txt_grievance"
-                                  android:textColor="@color/color_orange"
-                                  android:text="@string/yes"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"/>
-                              <TextView
-                                  android:text="@string/priority"
-                                  android:textColor="@color/color_grey_txt"
-                                  android:layout_marginTop="@dimen/dimen_10"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"/>
-                              <TextView
-                                  android:id="@+id/txt_grievance_priority"
-                                  android:layout_marginTop="@dimen/dimen_5"
-                                  android:textColor="@color/color_orange"
-                                  android:text="High"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"/>
-
-                          </LinearLayout>
-                            <LinearLayout
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:textColor="@color/color_grey_txt"
-                                    android:text="@string/category"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-                                <TextView
-                                    android:id="@+id/txt_grievance_category"
-                                    android:text="Lack of food"
-                                    android:textColor="@color/color_orange"
-                                    android:layout_marginTop="@dimen/dimen_5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-                                <TextView
-                                    android:text="@string/description"
-                                    android:textColor="@color/color_grey_txt"
-                                    android:layout_marginTop="@dimen/dimen_10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-                                <TextView
-                                    android:text="--"
-                                    android:id="@+id/txt_grievance_desc"
-                                    android:textColor="@color/color_orange"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/txt_other_problems"
-                            android:layout_marginTop="@dimen/dimen_10"
-                            android:layout_width="match_parent"
-                            android:background="@color/color_light_grey_bg"
-                            android:layout_height="wrap_content"
-                            android:minHeight="@dimen/dimen_30"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:text="@string/other_problems"
-                            android:textColor="@color/color_black"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ll_grievance">
-
-                        </TextView>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:paddingLeft="@dimen/dimen_20"
-                            android:paddingTop="@dimen/dimen_13"
-                            android:paddingRight="@dimen/dimen_20"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_other_problems">
-
-                            <TextView
-                                android:textColor="@color/color_grey_txt"
-                                android:text="@string/other_problems"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                            <TextView
-                                android:id="@+id/txt_other_problem"
-                                android:text="--"
-                                android:textColor="@color/color_orange"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </TextView>
 
                     <LinearLayout
-                        android:id="@+id/ll_status_container"
+                        android:id="@+id/ll_medical_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_15"
                         android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/dimen_20"
+                        android:paddingTop="@dimen/dimen_13"
+                        android:paddingRight="@dimen/dimen_20"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_medical_details">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/covid_symptoms"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cl_covid_symptoms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5">
+
+                                <ImageView
+                                    android:id="@+id/img_cough_uneditable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_cough_selected"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dimen_5"
+                                    android:text="@string/cough"
+                                    android:textColor="@color/color_orange"
+                                    android:textSize="@dimen/text_10"
+                                    app:layout_constraintStart_toStartOf="@id/img_cough_uneditable"
+                                    app:layout_constraintTop_toBottomOf="@id/img_cough_uneditable" />
+
+                                <ImageView
+                                    android:id="@+id/img_fever_uneditable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_10"
+                                    android:src="@drawable/ic_fever_icon_selected"
+                                    app:layout_constraintStart_toEndOf="@id/img_cough_uneditable"
+                                    app:layout_constraintTop_toTopOf="@id/img_cough_uneditable" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dimen_5"
+                                    android:text="@string/fever"
+                                    android:textColor="@color/color_orange"
+                                    android:textSize="@dimen/text_10"
+                                    app:layout_constraintStart_toStartOf="@id/img_fever_uneditable"
+                                    app:layout_constraintTop_toBottomOf="@id/img_fever_uneditable" />
+
+                                <ImageView
+                                    android:id="@+id/img_shortness_uneditable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_10"
+                                    android:src="@drawable/ic_shortness_icon_selected"
+                                    app:layout_constraintStart_toEndOf="@id/img_fever_uneditable"
+                                    app:layout_constraintTop_toTopOf="@id/img_fever_uneditable" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dimen_5"
+                                    android:lines="2"
+                                    android:maxWidth="@dimen/view_size_60"
+                                    android:minLines="2"
+                                    android:singleLine="false"
+                                    android:text="@string/shortness_of_breath"
+                                    android:textColor="@color/color_orange"
+                                    android:textSize="@dimen/text_10"
+                                    app:layout_constraintStart_toStartOf="@id/img_shortness_uneditable"
+                                    app:layout_constraintTop_toBottomOf="@id/img_shortness_uneditable" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/grivence"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2"
+                                android:text="@string/no"
+                                android:textColor="@color/color_orange" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:text="@string/quarantine_hospitalization_status"
+                                android:textColor="@color/color_grey_txt"
+                                android:textSize="@dimen/text_10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5"
+                                android:text="Not quarantined"
+                                android:textColor="@color/color_orange"
+                                android:textSize="@dimen/text_10" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_grievance_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:background="@color/color_light_grey_bg"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/dimen_30"
+                        android:paddingLeft="@dimen/dimen_20"
+                        android:text="@string/grievance_information"
+                        android:textColor="@color/color_black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_medical_details">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:id="@+id/ll_grievance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/dimen_20"
+                        android:paddingTop="@dimen/dimen_13"
+                        android:paddingRight="@dimen/dimen_20"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_grievance_info">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/grivence"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/txt_grievance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5"
+                                android:text="@string/yes"
+                                android:textColor="@color/color_orange" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:text="@string/priority"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/txt_grievance_priority"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5"
+                                android:text="High"
+                                android:textColor="@color/color_orange" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/category"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/txt_grievance_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5"
+                                android:text="Lack of food"
+                                android:textColor="@color/color_orange" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:text="@string/description"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/txt_grievance_desc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="--"
+                                android:textColor="@color/color_orange" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_other_problems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:background="@color/color_light_grey_bg"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/dimen_30"
+                        android:paddingLeft="@dimen/dimen_20"
+                        android:text="@string/other_problems"
+                        android:textColor="@color/color_black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_grievance">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/dimen_20"
                         android:paddingTop="@dimen/dimen_13"
                         android:paddingRight="@dimen/dimen_20"
-                        android:visibility="visible"
-                        app:layout_constraintEnd_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/rcl_call_dates">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_other_problems">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/call_status"
+                            android:text="@string/other_problems"
                             android:textColor="@color/color_grey_txt" />
 
                         <TextView
+                            android:id="@+id/txt_other_problem"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_2"
-                            android:text="@string/not_attended"
+                            android:text="--"
                             android:textColor="@color/color_orange" />
 
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.core.widget.NestedScrollView>
 
-        </com.google.android.material.appbar.AppBarLayout>
+                <LinearLayout
+                    android:id="@+id/ll_status_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:baselineAligned="false"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingTop="@dimen/dimen_13"
+                    android:paddingRight="@dimen/dimen_20"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcl_call_dates">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/call_status"
+                        android:textColor="@color/color_grey_txt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2"
+                        android:text="@string/not_attended"
+                        android:textColor="@color/color_orange" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <TextView
         android:id="@+id/txt_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/view_size_60"
+        android:layout_marginBottom="@dimen/view_size_62"
         android:background="@color/color_dark_grey"
         android:gravity="center"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/view_size_62"
-        android:layout_marginTop="@dimen/view_size_60"
         android:minHeight="@dimen/view_size_40"
         android:text="@string/edit"
         android:textColor="@color/color_white"
         android:textSize="@dimen/text_16" />
+
     <FrameLayout
         android:id="@+id/fragment_edit_container"
         android:layout_width="match_parent"
