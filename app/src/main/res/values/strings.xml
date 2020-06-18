@@ -45,42 +45,42 @@
         <item>Jharkhand</item>
     </string-array>
     <string-array name="other_medical_problems">
-        <item>No problem</item>
-        <item>Diabetes</item>
-        <item>Arthritis</item>
-        <item>Kidney and bladder problems</item>
-        <item>Glaucoma</item>
-        <item>Parkinson\'s disease</item>
-        <item>Cataracts</item>
+        <item>@string/no_problems</item>
+        <item>@string/diabetes</item>
+        <item>@string/arthritis</item>
+        <item>@string/kidney_and_bladder_pbm</item>
+        <item>@string/glaucoma</item>
+        <item>@string/parkinson</item>
+        <item>@string/cataracts</item>
     </string-array>
     <string-array name="call_status_array">
-        <item>No response</item>
-        <item>Phone not picked</item>
-        <item>Phone not reachable</item>
-        <item>Call disconnected</item>
-        <item>Call connected</item>
+        <item>@string/no_response</item>
+        <item>@string/phone_not_picked</item>
+        <item>@string/phone_not_reachable</item>
+        <item>@string/call_disconnected</item>
+        <item>@string/call_connected</item>
     </string-array>
     <string-array name="quarantine_status_array">
-        <item>Yes, home quarantine</item>
-        <item>Yes, government quarantine</item>
-        <item>Yes, hospitalized</item>
-        <item>Not quarantine or hospitalized</item>
+        <item>@string/home_quarantine</item>
+        <item>@string/government_quarantine</item>
+        <item>@string/hospitalized</item>
+        <item>@string/not_quarantined</item>
     </string-array>
     <string-array name="priority_array">
-        <item>High</item>
-        <item>Low</item>
+        <item>@string/high</item>
+        <item>@string/low</item>
     </string-array>
     <string-array name="grievance_array">
-        <item>Lack of food</item>
-        <item>Lack of medicine</item>
-        <item>Lack of access to banking services</item>
-        <item>Lack of utilities supply(water,electricity)</item>
-        <item>Lack of hygiene and sanitation</item>
-        <item>Lack of safety</item>
-        <item>Lack of access to emergency services (ambulance, helpline nos, etc.)</item>
-        <item>Phone &amp; internet services</item>
-        <item>Other problems reported</item>
-        <item>Other</item>
+        <item>@string/lack_of_food</item>
+        <item>@string/lack_of_medicine</item>
+        <item>@string/lack_of_banking_service</item>
+        <item>@string/lack_of_utilities</item>
+        <item>@string/lack_of_hygine</item>
+        <item>@string/lack_of_safety</item>
+        <item>@string/lack_of_access_emergency</item>
+        <item>@string/phone_and_service</item>
+        <item>@string/other_problems_reported</item>
+        <item>@string/other</item>
     </string-array>
     <string-array name="districts_array">
         <item>Barpeta</item>
@@ -136,7 +136,6 @@
     <string name="donthave_receive_resend">Did\t recive any code ? Re-send</string>
     <string name="enterOtp">Enter OTP</string>
     <string name="todays_call">Today\'s calls</string>
-    <string name="call_connected">Calls connected</string>
     <string name="call_permission_denied">Calling Permission Denied</string>
     <string name="not_handle_action">Can not handle the action</string>
     <string name="personal_details">PERSONAL DETAILS</string>
@@ -209,6 +208,7 @@
     <string name="all_calls">All Calls</string>
     <string name="resolved">Resolved</string>
     <string name="pending">Pending</string>
+
     <string name="details_fragment">seniorCitizen detail fragment</string>
     <string name="select_a_category">Select a category</string>
     <string name="description">Description</string>
@@ -222,4 +222,32 @@
     <string name="medical_details">Medical Details</string>
     <string name="grievance_information">Grievance Information</string>
     <string name="other_problems">Other problems</string>
+    <string name="no_problems">No problems</string>
+    <string name="diabetes">Diabetes</string>
+    <string name="arthritis">Arthritis</string>
+    <string name="kidney_and_bladder_pbm">Kidney and bladder problems</string>
+    <string name="glaucoma">Glaucoma</string>
+    <string name="parkinson">Parkinson\'s disease</string>
+    <string name="cataracts">Cataracts</string>
+    <string name="no_response">No response</string>
+    <string name="phone_not_picked">Phone not picked</string>
+    <string name="phone_not_reachable">Phone not reachable</string>
+    <string name="call_disconnected">Call disconnected</string>
+    <string name="home_quarantine">Yes, home quarantine</string>
+    <string name="government_quarantine">Yes, government quarantine</string>
+    <string name="hospitalized">Yes, hospitalized</string>
+    <string name="not_quarantined">Not quarantine or hospitalized</string>
+    <string name="lack_of_food">Lack of food</string>
+    <string name="lack_of_medicine">Lack of medicine</string>
+    <string name="lack_of_banking_service">Lack of access to banking services</string>
+    <string name="lack_of_utilities">Lack of utilities supply(water,electricity)</string>
+    <string name="lack_of_hygine">Lack of hygiene and sanitation</string>
+    <string name="lack_of_safety">Lack of safety</string>
+    <string name="lack_of_access_emergency">Lack of access to emergency services (ambulance, helpline nos, etc.)</string>
+    <string name="phone_and_service">Phone &amp; internet services</string>
+    <string name="other_problems_reported">Other problems reported</string>
+    <string name="other">Other</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+    <string name="call_connected">Call connected</string>
 </resources>

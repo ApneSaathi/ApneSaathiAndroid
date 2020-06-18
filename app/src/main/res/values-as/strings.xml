@@ -160,4 +160,46 @@
     <string name="all_calls">All Calls</string>
     <string name="resolved">Resolved</string>
     <string name="pending">Pending</string>
+
+    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="select_a_category">Select a category</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+    <string name="other_important_information">Other important information</string>
+    <string name="edit_fragment">Edit fragment</string>
+    <string name="select_a_call_status">Select a call status</string>
+    <string name="quarantine_hospitalization_status">Quarantine/ Hospitalization Status</string>
+    <string name="select_status">Select a status</string>
+    <string name="category">Category</string>
+    <string name="medical_details">Medical Details</string>
+    <string name="grievance_information">Grievance Information</string>
+    <string name="other_problems">Other problems</string>
+
+    <string name="no_problems">No problems</string>
+    <string name="diabetes">Diabetes</string>
+    <string name="arthritis">Arthritis</string>
+    <string name="kidney_and_bladder_pbm">Kidney and bladder problems</string>
+    <string name="glaucoma">Glaucoma</string>
+    <string name="parkinson">Parkinson\'s disease</string>
+    <string name="cataracts">Cataracts</string>
+    <string name="no_response">No response</string>
+    <string name="phone_not_picked">Phone not picked</string>
+    <string name="phone_not_reachable">Phone not reachable</string>
+    <string name="call_disconnected">Call disconnected</string>
+    <string name="home_quarantine">Yes, home quarantine</string>
+    <string name="government_quarantine">Yes, government quarantine</string>
+    <string name="hospitalized">Yes, hospitalized</string>
+    <string name="not_quarantined">Not quarantine or hospitalized</string>
+    <string name="lack_of_food">Lack of food</string>
+    <string name="lack_of_medicine">Lack of medicine</string>
+    <string name="lack_of_banking_service">Lack of access to banking services</string>
+    <string name="lack_of_utilities">Lack of utilities supply(water,electricity)</string>
+    <string name="lack_of_hygine">Lack of hygiene and sanitation</string>
+    <string name="lack_of_safety">Lack of safety</string>
+    <string name="lack_of_access_emergency">Lack of access to emergency services (ambulance, helpline nos, etc.)</string>
+    <string name="phone_and_service">Phone &amp; internet services</string>
+    <string name="other_problems_reported">Other problems reported</string>
+    <string name="other">Other</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
 </resources>

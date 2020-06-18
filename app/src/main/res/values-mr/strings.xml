@@ -176,4 +176,46 @@
     <string name="menu_profile">प्रोफाइल</string>
     <string name="grievances_count">तक्रारी(%s)</string>
 
+    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="select_a_category">एक श्रेणी निवडा</string>
+    <string name="description">वर्णन</string>
+    <string name="priority">प्राधान्य</string>
+    <string name="other_important_information">इतर महत्वाची माहिती</string>
+    <string name="edit_fragment">Edit fragment</string>
+    <string name="select_a_call_status">कॉलची स्थिती निवडा</string>
+    <string name="quarantine_hospitalization_status">अलग ठेवणे / हॉस्पिटलायझेशन स्थिती</string>
+    <string name="select_status">स्थिती निवडा</string>
+    <string name="category">वर्ग</string>
+    <string name="medical_details">वैद्यकीय तपशील</string>
+    <string name="grievance_information">तक्रार माहिती</string>
+    <string name="other_problems">इतर समस्या</string>
+
+    <string name="no_problems">कोणतीही अडचण नाही</string>
+    <string name="diabetes">मधुमेह</string>
+    <string name="arthritis">संधिवात</string>
+    <string name="kidney_and_bladder_pbm">मूत्रपिंड आणि मूत्राशय समस्या</string>
+    <string name="glaucoma">काचबिंदू</string>
+    <string name="parkinson">पार्किन्सन रोग</string>
+    <string name="cataracts">मोतीबिंदू</string>
+    <string name="no_response">प्रतिसाद नाही</string>
+    <string name="phone_not_picked">फोन उचलला नाही</string>
+    <string name="phone_not_reachable">फोन पोहोचण्यायोग्य नाही</string>
+    <string name="call_disconnected">कॉल डिस्कनेक्ट झाला</string>
+    <string name="home_quarantine">होय, घर अलग ठेवणे</string>
+    <string name="government_quarantine">होय, सरकारी अलग ठेवणे</string>
+    <string name="hospitalized">होय, रुग्णालयात दाखल</string>
+    <string name="not_quarantined">अलग ठेवणे किंवा रुग्णालयात दाखल नाही</string>
+    <string name="lack_of_food">अन्नाची कमतरता</string>
+    <string name="lack_of_medicine">औषधाचा अभाव</string>
+    <string name="lack_of_banking_service">बँकिंग सेवांमध्ये प्रवेश नसणे</string>
+    <string name="lack_of_utilities">युटिलिटीज पुरवठा नसणे (पाणी, वीज)</string>
+    <string name="lack_of_hygine">स्वच्छता व स्वच्छतेचा अभाव</string>
+    <string name="lack_of_safety">सुरक्षेचा अभाव</string>
+    <string name="lack_of_access_emergency">आपत्कालीन सेवांमध्ये प्रवेश नसणे (रुग्णवाहिका, हेल्पलाइन नंबर इ.)</string>
+    <string name="phone_and_service">फोन आणि इंटरनेट सेवा</string>
+    <string name="other_problems_reported">इतर समस्या नोंदल्या गेल्या</string>
+    <string name="other">इतर</string>
+    <string name="high">उंच</string>
+    <string name="low">कमी</string>
+
 </resources>
