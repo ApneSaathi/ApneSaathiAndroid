@@ -46,9 +46,9 @@ class SeniorCitizenDateAdapter(private val dataList: MutableList<DateItem>) :
 
     inner class SeniorCitizenDateViewHolder(itemsView: View) : RecyclerView.ViewHolder(itemsView) {
 
-        val tvDay: TextView = itemsView.txt_day
-        val tvMonth: TextView = itemsView.txt_mnth
-        val llDateContainer: LinearLayout = itemsView.ll_date_container
+        private val tvDay: TextView = itemsView.txt_day
+        private val tvMonth: TextView = itemsView.txt_mnth
+        private val llDateContainer: LinearLayout = itemsView.ll_date_container
 
         init {
             llDateContainer.setOnClickListener {
@@ -63,13 +63,13 @@ class SeniorCitizenDateAdapter(private val dataList: MutableList<DateItem>) :
             tvDay.text = dateItem.day
             tvMonth.text = dateItem.month
             if (selectedPos == adapterPosition) {
-                tvDay.setTextColor(Color.WHITE)
-                tvMonth.setTextColor(Color.WHITE)
-                llDateContainer.setBackgroundColor(Color.parseColor("#253746"))
+                tvDay.isSelected = true
+                tvMonth.isSelected = true
+                llDateContainer.isSelected = true
             } else {
-                tvDay.setTextColor(Color.parseColor("#878cac"))
-                tvMonth.setTextColor(Color.parseColor("#878cac"))
-                llDateContainer.setBackgroundColor(Color.WHITE)
+                tvDay.isSelected = false
+                tvMonth.isSelected = false
+                llDateContainer.isSelected = false
             }
 
         }

@@ -14,7 +14,7 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.fragments.userDetails.SeniorCitizenDetailsFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -58,7 +58,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     override fun onMoreInfoClick(position: Int, user: User) {
         val fragment = SeniorCitizenDetailsFragment()
         addFragment(
-            R.id.fragmentHomeContainer, fragment, getString(R.string.pending_calls)
+            R.id.fragmentHomeContainer, fragment,getString(R.string.details_fragment)
         )
     }
 
