@@ -140,4 +140,24 @@
     <string name="proceed">पुढे जा</string>
     <string name="resendcode">मध्ये कोड पुन्हा पाठवा0:30</string>
     <string name="resendOTP">ओटीपी पुन्हा पाठवा</string>
+
+    <string name="attended">हजेरी लावली</string>
+    <string name="not_attended">उपस्थिती नाही</string>
+    <string name="call_status">कॉल स्थिती:</string>
+    <string name="cough">खोकला</string>
+    <string name="fever">ताप</string>
+    <string name="shortness_of_breath">धाप लागणे</string>
+    <string name="type_here">येथे लिहा…</string>
+    <string name="grivence">तक्रार</string>
+    <string name="save">जतन करा</string>
+    <string name="cancel">रद्द करा</string>
+    <string name="address"><b>पत्ता:</b>105, सिंगापूर टाउनशिप, ब्लॉक: 3, घाटकेसर, हैदराबाद</string>
+    <string name="unattended">दुर्लक्ष केलेले</string>
+    <string name="edit">सुधारणे</string>
+    <string name="app_bar_title">वापरकर्त्याचा तपशील</string>
+    <string name="txtSubmit">प्रस्तुत करणे</string>
+    <string name="call_status_1">कॉल स्थिती</string>
+    <string name="all_calls">सर्व कॉल</string>
+    <string name="resolved">निराकरण केले</string>
+    <string name="pending">प्रलंबित</string>
 </resources>

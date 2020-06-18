@@ -112,7 +112,9 @@
     <string name="happy">Happy</string>
     <string name="neutral">Neutral</string>
     <string name="sad">Sad</string>
-    <string name="covid_symptoms">Covid Symptoms:</string>
+
+    <string name="covid_symptoms">Covid Symptoms</string>
+
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="other_medical_problems">Other Medical Problems</string>
@@ -128,6 +130,7 @@
     <string name="feedback">Feedback</string>
     <string name="drawerOpen">Drawer Open</string>
     <string name="drawerClose">Drawer Close</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_calls">Calls</string>
     <string name="menu_notification">Notification</string>
@@ -141,12 +144,14 @@
     <string name="follow_up">Follow Up</string>
     <string name="attended_calls">Attended Calls</string>
     <string name="see_all">See All</string>
+
     <string name="letsgetstarted">Let\'s get started</string>
     <string name="logindescription">Enter your mobile number, we will send you OTP to verify later</string>
     <string name="confirm">Confirm</string>
     <string name="proceed">Proceed</string>
     <string name="resendcode">Resend code in 0:30</string>
     <string name="resendOTP">Resend OTP</string>
+
     <string name="attended">Attended</string>
     <string name="not_attended">Not Attended</string>
     <string name="call_status">Call Status:</string>
