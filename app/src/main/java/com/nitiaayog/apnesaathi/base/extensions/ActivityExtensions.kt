@@ -2,9 +2,11 @@ package com.nitiaayog.apnesaathi.base.extensions
 
 import android.content.Intent
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 
 inline fun <reified VM : ViewModel> AppCompatActivity.getViewModel(crossinline factory: () -> VM): VM =
     createViewModel(factory)
@@ -27,4 +29,9 @@ fun AppCompatActivity.setLightStatusBar() {
     var flags = window.decorView.systemUiVisibility
     flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     window.decorView.systemUiVisibility = flags
+}
+
+fun CallSnackbar(rootRelativeLayout: RelativeLayout, message: String) {
+    val snackbar: Snackbar = Snackbar.make(rootRelativeLayout, message, Snackbar.LENGTH_LONG)
+    snackbar.show()
 }

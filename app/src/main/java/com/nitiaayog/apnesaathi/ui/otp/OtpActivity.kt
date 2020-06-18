@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.ui.otp
 import android.os.Bundle
 import android.text.TextUtils
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
@@ -18,11 +19,27 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         btnVerify.throttleClick().subscribe() {
             if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
-                EditFirstChar.setError(resources.getString(R.string.enterOtp))
+                CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
             } else {
                 EditFirstChar.setError(null)
-                val targetIntent = getTargetIntent(DashBoardActivity::class.java)
-                startActivity(targetIntent)
+                if (TextUtils.isEmpty(editOtpsecondchar.text.toString().trim())) {
+                    CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+                } else {
+                    editOtpsecondchar.setError(null)
+                    if (TextUtils.isEmpty(editOtpthirdchar.text.toString().trim())) {
+                        CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+                    } else {
+                        editOtpfourthchar.setError(null)
+                        if (TextUtils.isEmpty(editOtpfourthchar.text.toString().trim())) {
+                            CallSnackbar(mainRootRelativeLayout,
+                                resources.getString(R.string.enterOtp))
+                        } else {
+                            editOtpfourthchar.setError(null)
+                            val targetIntent = getTargetIntent(DashBoardActivity::class.java)
+                            startActivity(targetIntent)
+                        }
+                    }
+                }
             }
         }.autoDispose(disposables)
     }

@@ -141,4 +141,24 @@
     <string name="resendcode">Resend code in 0:30</string>
     <string name="resendOTP">Resend OTP</string>
 
+
+    <string name="attended">Attended</string>
+    <string name="not_attended">Not Attended</string>
+    <string name="call_status">Call Status:</string>
+    <string name="cough">Cough</string>
+    <string name="fever">Fever</string>
+    <string name="shortness_of_breath">Shortness of breath</string>
+    <string name="type_here">Type here…</string>
+    <string name="grivence">Grivence</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="address"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
+    <string name="unattended">Unattended</string>
+    <string name="edit">Edit</string>
+    <string name="app_bar_title">User Details</string>
+    <string name="txtSubmit">Submit</string>
+    <string name="call_status_1">Call Status</string>
+    <string name="all_calls">All Calls</string>
+    <string name="resolved">Resolved</string>
+    <string name="pending">Pending</string>
 </resources>
