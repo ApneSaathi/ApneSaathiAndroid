@@ -40,6 +40,4 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     }
 
     override fun provideLayoutResource(): Int = R.layout.activity_login
-
-
 }
