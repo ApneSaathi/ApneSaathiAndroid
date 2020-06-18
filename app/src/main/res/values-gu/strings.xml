@@ -139,4 +139,24 @@
     <string name="resendcode">કોડ ફરીથી મોકલો 0:30</string>
     <string name="resendOTP">OTP ફરીથી મોકલો</string>
 
+
+    <string name="attended">હાજરી આપી</string>
+    <string name="not_attended">હાજરી આપી નથી</string>
+    <string name="call_status">ક Callલ સ્થિતિ:</string>
+    <string name="cough">ખાંસી</string>
+    <string name="fever">તાવ</string>
+    <string name="shortness_of_breath">હાંફ ચઢવી</string>
+    <string name="type_here">અહી લખો…</string>
+    <string name="grivence">ફરિયાદ</string>
+    <string name="save">સાચવો</string>
+    <string name="cancel">રદ કરો</string>
+    <string name="address"><b>સરનામું:</b>105, સિંગાપોર ટાઉનશીપ, બ્લોક: 3, ઘાટકેસર, હૈદરાબાદ</string>
+    <string name="unattended">અનુચિત</string>
+    <string name="edit">સંપાદિત કરો</string>
+    <string name="app_bar_title">વપરાશકર્તા વિગતો</string>
+    <string name="txtSubmit">સબમિટ કરો</string>
+    <string name="call_status_1">ક Callલ સ્થિતિ</string>
+    <string name="all_calls">બધા કallsલ્સ</string>
+    <string name="resolved">ઉકેલી</string>
+    <string name="pending">બાકી</string>
 </resources>

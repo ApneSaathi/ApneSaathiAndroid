@@ -2,11 +2,13 @@ package com.nitiaayog.apnesaathi.base.extensions
 
 import android.content.Intent
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 
 inline fun <reified VM : ViewModel> AppCompatActivity.getViewModel(crossinline factory: () -> VM): VM =
     createViewModel(factory)
@@ -30,6 +32,11 @@ fun <T : AppCompatActivity> AppCompatActivity.getTargetIntent(targetActivity: Cl
     flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     window.decorView.systemUiVisibility = flags
 }*/
+
+fun CallSnackbar(rootRelativeLayout: RelativeLayout, message: String) {
+    val snackbar: Snackbar = Snackbar.make(rootRelativeLayout, message, Snackbar.LENGTH_LONG)
+    snackbar.show()
+}
 
 fun AppCompatActivity.addFragment(
     containerId: Int, fragment: Fragment, fragmentTag: String, addToBackStack: Boolean = true

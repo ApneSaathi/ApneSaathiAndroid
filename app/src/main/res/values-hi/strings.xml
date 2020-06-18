@@ -139,4 +139,24 @@
     <string name="proceed">बढ़ना</string>
     <string name="resendcode">0:30 में कोड पुनः भेजें</string>
     <string name="resendOTP">ओटीपी पुनः भेजें</string>
+
+    <string name="attended">में भाग लिया</string>
+    <string name="not_attended">भाग नहीं लिया</string>
+    <string name="call_status">कॉल की स्थिति:</string>
+    <string name="cough">खांसी</string>
+    <string name="fever">बुखार</string>
+    <string name="shortness_of_breath">सांस लेने में कठिनाई</string>
+    <string name="type_here">यहा लिखो…</string>
+    <string name="grivence">शिकायत</string>
+    <string name="save">सहेजें</string>
+    <string name="cancel">रद्द करना</string>
+    <string name="address"><b>पता:</b> 105, सिंगापुर टाउनशिप, ब्लॉक: 3, घाटकेसर, हैदराबाद</string>
+    <string name="unattended">पहुंच से बाहर का</string>
+    <string name="edit">संपादित करें</string>
+    <string name="app_bar_title">उपभोक्ता का विवरण</string>
+    <string name="txtSubmit">प्रस्तुत</string>
+    <string name="call_status_1">कॉल की स्थिति</string>
+    <string name="all_calls">सभी कालेँ</string>
+    <string name="resolved">हल</string>
+    <string name="pending">विचाराधीन</string>
 </resources>
