@@ -3,17 +3,17 @@
 
     <string name="total_calls_vs_connected">વી.એસ. કનેક્ટેડ કુલ કોલ્સ</string>
     <string name="total_sr_citizens_supported">કુલ નં. વરિષ્ઠ નાગરિકો આધારભૂત છે</string>
-<string name="calls_connected_yesterday">ગઈકાલે કallsલ કરેલા છે</string>
-<string name="average_connected_called_per_day">દિવસ દીઠ સરેરાશ કનેક્ટેડ ક callલ</string>
-<string name="calls_connected_today">કallsલ્સ આજે જોડાયેલા છે</string>
-<string name="sr_citizens_supported_today">વરિષ્ઠ નાગરિકોએ આજે ​​ટેકો આપ્યો</string>
-<string name="Sr_citizen_calls_pending">સિનિયર નાગરિકની સંખ્યા બાકી છે</string>
-<string name="sr_citizens_grievances_vs_resolved">વરિષ્ઠ નાગરિકોની ફરિયાદો અંગે વી.એસ</string>
-<string name="on_call_sr_citizen_feedback_form">એક ક callલ પર સિનિયર સિટીઝન પ્રતિસાદ</string>
-<string name="wrong_detail_warning">તમારા દ્વારા આપવામાં આવેલી વિગતો જિલ્લા કક્ષાના સ્ટાફ સભ્ય દ્વારા ચકાસવામાં આવશે અને ખોટી વિગતો તમારી વિરુદ્ધ કાનૂની કાર્યવાહી કરી શકે છે</string>
+    <string name="calls_connected_yesterday">ગઈકાલે કallsલ કરેલા છે</string>
+    <string name="average_connected_called_per_day">દિવસ દીઠ સરેરાશ કનેક્ટેડ કૉલ</string>
+    <string name="calls_connected_today">કallsલ્સ આજે જોડાયેલા છે</string>
+    <string name="sr_citizens_supported_today">વરિષ્ઠ નાગરિકોએ આજે ​​ટેકો આપ્યો</string>
+    <string name="Sr_citizen_calls_pending">સિનિયર નાગરિકની સંખ્યા બાકી છે</string>
+    <string name="sr_citizens_grievances_vs_resolved">વરિષ્ઠ નાગરિકોની ફરિયાદો અંગે વી.એસ</string>
+    <string name="on_call_sr_citizen_feedback_form">એક કૉલ પર સિનિયર સિટીઝન પ્રતિસાદ</string>
+    <string name="wrong_detail_warning">તમારા દ્વારા આપવામાં આવેલી વિગતો જિલ્લા કક્ષાના સ્ટાફ સભ્ય દ્વારા ચકાસવામાં આવશે અને ખોટી વિગતો તમારી વિરુદ્ધ કાનૂની કાર્યવાહી કરી શકે છે</string>
 
-<string name="select_language">ભાષા પસંદ કરો</string>
-<string name="english_text">અંગ્રેજી</string>
+    <string name="select_language">ભાષા પસંદ કરો</string>
+    <string name="english_text">અંગ્રેજી</string>
     <string name="hindi_text">હિન્દી</string>
 
     <string name="volunteer_name">સ્વયંસેવકનું નામ *</string>
@@ -23,7 +23,7 @@
     <string name="state_of_person">તમે સંપર્ક કર્યો હોય તે વ્યક્તિનું રાજ્ય *</string>
     <string name="district_of_person">વ્યક્તિનો જિલ્લા પસંદ કરો *</string>
     <string name="block_name">બ્લોક નામ *</string>
-    <string name="is_call_connected">શું તમારો ક callલ સફળતાપૂર્વક કનેક્ટ થયો? *</string>
+    <string name="is_call_connected">શું તમારો કૉલ સફળતાપૂર્વક કનેક્ટ થયો? *</string>
     <string name="submit">સબમિટ કરો</string>
     <string name="validate_volunteer_name">સ્વયંસેવકનું નામ પ્રદાન કરો</string>
     <string name="validate_volunteer_phone_number">સ્વયંસેવક ફોન નંબર પ્રદાન કરો</string>
@@ -32,7 +32,7 @@
     <string name="validate_person_state">વ્યક્તિની સ્થિતિ પ્રદાન કરો</string>
     <string name="validate_person_district">વ્યક્તિનો જીલ્લા પ્રદાન કરો</string>
     <string name="validate_block_name">બ્લોક નામ પ્રદાન કરો</string>
-    <string name="validate_call_connection">ક callલની સ્થિતિ પ્રદાન કરો</string>
+    <string name="validate_call_connection">કૉલની સ્થિતિ પ્રદાન કરો</string>
     <string-array name="states_array">
         <item>આસામ</item>
         <item>બિહાર</item>
@@ -79,13 +79,13 @@
         <item>કોઈ જવાબ નથી</item>
         <item>ફોન લેવામાં આવ્યો નથી</item>
         <item>ફોન પહોંચી શકાય તેમ નથી</item>
-        <item>ક Callલ ડિસ્કનેક્ટેડ</item>
-        <item>ક Callલ કનેક્ટેડ</item>
+        <item>કૉલ ડિસ્કનેક્ટેડ</item>
+        <item>કૉલ કનેક્ટેડ</item>
     </string-array>
     <string name="permission_detail">પરવાનગી વિગત</string>
-    <string name="permission_text">એપ્લિકેશનમાં લક્ષણ છે કે સિનિયર સિટીઝન વિગતો પર માત્ર એક જ ક્લિકથી તમે દૈનિક ધોરણે નિયમિત ક callલ શરૂ કરી શકો છો. તેના માટે અમને ક Cલની પરવાનગીની જરૂર રહેશે.</string>
+    <string name="permission_text">એપ્લિકેશનમાં લક્ષણ છે કે સિનિયર સિટીઝન વિગતો પર માત્ર એક જ ક્લિકથી તમે દૈનિક ધોરણે નિયમિત કૉલ શરૂ કરી શકો છો. તેના માટે અમને ક Cલની પરવાનગીની જરૂર રહેશે.</string>
     <string name="accept">સ્વીકારો</string>
-    <string name="not_now">હવે નથી</string>
+    <string name="not_now">હમણા નથી</string>
     <string name="marathi_text">મરાઠી</string>
     <string name="gujrati_text">ગુજરતી</string>
     <string name="aasammi_text">આસામી</string>
@@ -103,8 +103,8 @@
     <string name="enterOtp">ઓટીપી દાખલ કરો</string>
 
     <string name="todays_call">આજે કોલ</string>
-    <string name="call_connected">કallsલ્સ કનેક્ટ થયાં</string>
-    <string name="call_permission_denied">કingલ કરવાની પરવાનગી નામંજૂર</string>
+    <string name="call_connected">કૉલ્સ કનેક્ટ થયાં</string>
+    <string name="call_permission_denied">કૉલ્સ કરવાની પરવાનગી નામંજૂર</string>
     <string name="not_handle_action">ક્રિયા નિયંત્રિત કરી શકતા નથી</string>
     <string name="personal_details">વ્યક્તિગત વિગતો</string>
     <string name="name">નામ</string>
@@ -113,7 +113,7 @@
     <string name="district">જીલ્લો</string>
     <string name="block">અવરોધિત કરો</string>
     <string name="health_care_information">આરોગ્ય સંભાળ માહિતી</string>
-    <string name="emotional_state">ભાવનાત્મક રાજ્ય</string>
+    <string name="emotional_state">ભાવનાત્મક સ્થિતિ</string>
     <string name="happy">ખુશ</string>
     <string name="neutral">તટસ્થ</string>
     <string name="sad">ઉદાસી</string>
@@ -122,13 +122,13 @@
     <string name="no">ના</string>
     <string name="other_medical_problems">અન્ય તબીબી સમસ્યાઓ</string>
     <string name="complaints">ફરિયાદો</string>
-    <string name="calls_information">માહિતી કALલ કરો</string>
-    <string name="call_type">ક Callલનો પ્રકાર</string>
+    <string name="calls_information">કૉલ માહિતી કરો</string>
+    <string name="call_type">કૉલનો પ્રકાર</string>
     <string name="update"><u>અપડેટ</u></string>
-    <string name="call_received_by">દ્વારા ક Callલ પ્રાપ્ત થયો</string>
-    <string name="appbar_title">સિનિયર સિટીઝન ડેટા</string>
+    <string name="call_received_by">દ્વારા કૉલ પ્રાપ્ત થયો</string>
+    <string name="appbar_title">સિનિયર સિટીઝન માહિતી</string>
     <string name="register_a_new_citizen">નવા નાગરિકની નોંધણી કરો</string>
-    <string name="emergency_call">ઇમર્જન્સી ક Callલ</string>
+    <string name="emergency_call">ઇમર્જન્સી કૉલ</string>
     <string name="report_a_problem">સમસ્યાનો અહેવાલ આપો</string>
     <string name="feedback">પ્રતિસાદ</string>
     <string name="drawerOpen">ડ્રોઅર ખુલ્લું</string>
@@ -139,10 +139,9 @@
     <string name="resendcode">કોડ ફરીથી મોકલો 0:30</string>
     <string name="resendOTP">OTP ફરીથી મોકલો</string>
 
-
     <string name="attended">હાજરી આપી</string>
     <string name="not_attended">હાજરી આપી નથી</string>
-    <string name="call_status">ક Callલ સ્થિતિ:</string>
+    <string name="call_status">કૉલ સ્થિતિ:</string>
     <string name="cough">ખાંસી</string>
     <string name="fever">તાવ</string>
     <string name="shortness_of_breath">હાંફ ચઢવી</string>
@@ -155,8 +154,24 @@
     <string name="edit">સંપાદિત કરો</string>
     <string name="app_bar_title">વપરાશકર્તા વિગતો</string>
     <string name="txtSubmit">સબમિટ કરો</string>
-    <string name="call_status_1">ક Callલ સ્થિતિ</string>
-    <string name="all_calls">બધા કallsલ્સ</string>
+    <string name="call_status_1">કૉલ સ્થિતિ</string>
+    <string name="all_calls">બધા કોલ્સ</string>
     <string name="resolved">ઉકેલી</string>
     <string name="pending">બાકી</string>
+
+    <string name="pending_calls">બાકી કૉલ</string>
+    <string name="grievances">ફરિયાદો</string>
+    <string name="see_all">બધા જુઓ</string>
+
+    <string name="menu_calls">કોલ્સ</string>
+    <string name="menu_home">મુખ્યપૃષ્ઠ</string>
+    <string name="pending_calls_count">બાકી કૉલ(%s)</string>
+    <string name="grievances_count">ફરિયાદો(%s)</string>
+    <string name="follow_up_count">પાછા કૉલ કરો(%s)</string>
+    <string name="follow_up">પાછા કૉલ કરો</string>
+    <string name="attended_calls_count">પ્રસ્તુત કૉલ(%s)</string>
+    <string name="attended_calls">પ્રસ્તુત કૉલ</string>
+    <string name="menu_notification">સૂચના</string>
+    <string name="menu_profile">પ્રોફાઇલ</string>
+
 </resources>
