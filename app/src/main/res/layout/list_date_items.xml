@@ -7,7 +7,7 @@
         android:id="@+id/ll_date_container"
         android:layout_width="@dimen/view_size_48"
         android:layout_height="@dimen/view_size_48"
-        android:background="@color/color_dark_blue"
+        android:background="@drawable/bg_date_selector"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,14 +16,14 @@
             android:id="@+id/txt_day"
             android:layout_width="wrap_content"
             android:text="08"
-            android:textColor="@color/color_white"
+            android:textColor="@drawable/text_date_selector"
             android:layout_height="wrap_content">
         </TextView>
         <TextView
             android:id="@+id/txt_mnth"
             android:layout_width="wrap_content"
             android:text="Jan"
-            android:textColor="@color/color_white"
+            android:textColor="@drawable/text_date_selector"
             android:layout_height="wrap_content">
         </TextView>
     </LinearLayout>
