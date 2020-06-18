@@ -16,7 +16,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         btnLogin.throttleClick().subscribe() {
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
                 CallSnackbar(rootRelativeLayout, resources.getString(R.string.txtenterMobilenumbe))
@@ -34,10 +33,8 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
             }
         }.autoDispose(disposables)
     }
-
     override fun provideViewModel(): LoginViewModel = getViewModel {
         LoginViewModel.getInstance(dataManager)
     }
-
     override fun provideLayoutResource(): Int = R.layout.activity_login
 }
