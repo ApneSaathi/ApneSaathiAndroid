@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -38,8 +39,11 @@ class SplashActivity : AppCompatActivity() {
     private fun navigateToNextActivity() {
         val dataManager = ApneSaathiApplication.getApiClient()
         val targetIntent = getTargetIntent(
-            if (dataManager.isLogin()) DashBoardActivity::class.java
-            else LanguageSelectionActivity::class.java
+            if (dataManager.getSelectedLanguage()
+                    .isEmpty()
+            ) LanguageSelectionActivity::class.java else
+                if (dataManager.isLogin() == false) LoginActivity::class.java
+                else DashBoardActivity::class.java
         )
         startActivity(targetIntent)
         finish()
