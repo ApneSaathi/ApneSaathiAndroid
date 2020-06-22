@@ -154,7 +154,6 @@
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="other_medical_problems">Other Medical Problems</string>
     <string name="complaints">COMPLAINTS</string>
     <string name="calls_information">CALLS INFORMATION</string>
     <string name="call_type">Call Type</string>
@@ -199,7 +198,7 @@
     <string name="grivence">Grivence</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="address"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
+    <string name="address">Address: </string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
     <string name="app_bar_title">User Details</string>
@@ -250,4 +249,11 @@
     <string name="high">High</string>
     <string name="low">Low</string>
     <string name="call_connected">Call connected</string>
+    <string name="not_picked">Not Picked</string>
+    <string name="whom_did_you_talk_with">Whom did you talk with?</string>
+    <string name="other_medical_problems">Other Medical Problems</string>
+    <string name="related_info_talked_about">Related info talked about</string>
+    <string name="sore_throat">Sore Throat</string>
+    <string name="lack_of_essential_services">Lack of Essential Services</string>
+    <string name="emergency_escalation">Emergency Escalation</string>
 </resources>

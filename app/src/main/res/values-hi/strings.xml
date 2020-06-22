@@ -150,7 +150,7 @@
     <string name="grivence">शिकायत</string>
     <string name="save">सहेजें</string>
     <string name="cancel">रद्द करना</string>
-    <string name="address"><b>पता:</b> 105, सिंगापुर टाउनशिप, ब्लॉक: 3, घाटकेसर, हैदराबाद</string>
+    <string name="address">पता: </string>
     <string name="unattended">पहुंच से बाहर का</string>
     <string name="edit">संपादित करें</string>
     <string name="app_bar_title">उपभोक्ता का विवरण</string>

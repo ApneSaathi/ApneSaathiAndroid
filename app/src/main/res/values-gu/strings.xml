@@ -149,7 +149,7 @@
     <string name="grivence">ફરિયાદ</string>
     <string name="save">સાચવો</string>
     <string name="cancel">રદ કરો</string>
-    <string name="address"><b>સરનામું:</b>105, સિંગાપોર ટાઉનશીપ, બ્લોક: 3, ઘાટકેસર, હૈદરાબાદ</string>
+    <string name="address">સરનામું: </string>
     <string name="unattended">અનુચિત</string>
     <string name="edit">સંપાદિત કરો</string>
     <string name="app_bar_title">વપરાશકર્તા વિગતો</string>
