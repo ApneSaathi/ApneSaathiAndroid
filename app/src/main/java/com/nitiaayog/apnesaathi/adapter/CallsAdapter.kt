@@ -42,6 +42,8 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         val tvAddress: TextView = itemView.tvAddress
 
         init {
+            tvAddress.isSelected = true
+
             itemView.constraintLayout.setOnClickListener(this)
             itemView.ivCall.setOnClickListener(this)
             itemView.ivMoreInfo.setOnClickListener(this)
@@ -61,7 +63,10 @@ class CallsAdapter(private val dataList: MutableList<User>) :
                 }
                 R.id.ivMoreInfo -> {
                     if (::itemClickListener.isInitialized)
-                        itemClickListener.onMoreInfoClick(adapterPosition, dataList[adapterPosition])
+                        itemClickListener.onMoreInfoClick(
+                            adapterPosition,
+                            dataList[adapterPosition]
+                        )
                 }
             }
         }

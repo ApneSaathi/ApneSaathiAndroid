@@ -11,11 +11,7 @@
 
     <style name="AppTheme.WithActivityTransition" parent="AppTheme">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowAnimationStyle">@style/ActivityLaunchAnimation</item>
     </style>

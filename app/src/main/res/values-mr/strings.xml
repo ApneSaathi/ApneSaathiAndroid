@@ -151,7 +151,7 @@
     <string name="grivence">तक्रार</string>
     <string name="save">जतन करा</string>
     <string name="cancel">रद्द करा</string>
-    <string name="address"><b>पत्ता:</b>105, सिंगापूर टाउनशिप, ब्लॉक: 3, घाटकेसर, हैदराबाद</string>
+    <string name="address_bold"><b>पत्ता:</b>105, सिंगापूर टाउनशिप, ब्लॉक: 3, घाटकेसर, हैदराबाद</string>
     <string name="unattended">दुर्लक्ष केलेले</string>
     <string name="edit">सुधारणे</string>
     <string name="app_bar_title">वापरकर्त्याचा तपशील</string>

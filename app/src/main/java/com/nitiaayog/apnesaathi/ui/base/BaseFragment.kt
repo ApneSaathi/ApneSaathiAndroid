@@ -100,7 +100,6 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     ) {
         val dialog = AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
             .setTitle(R.string.permission_detail).apply {
-                this.setCancelable(false)
                 this.setMessage(message)
                 this.setPositiveButton(R.string.accept) { dialog, _ ->
                     dialog.dismiss()
