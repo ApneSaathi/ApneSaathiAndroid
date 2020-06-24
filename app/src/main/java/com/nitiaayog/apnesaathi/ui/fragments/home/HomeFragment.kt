@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
 
     override fun onMoreInfoClick(position: Int, user: User) {
         val fragment = SeniorCitizenDetailsFragment()
+        fragment.setSelectedUser(user)
         addFragment(
             R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
         )
