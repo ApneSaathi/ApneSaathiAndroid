@@ -12,7 +12,6 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
@@ -222,12 +221,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // Button to save the data or go back
         btnSave.throttleClick().subscribe {
-            //BaseUtility.showAlertMessage(this, R.string.success, R.string.sr_feedback_saved)
-
-            ProgressDialog.Builder(this)
-                .setMessage(R.string.data_not_saved)
-                .show()
-
+            BaseUtility.showAlertMessage(this, R.string.success, R.string.sr_feedback_saved)
         }.autoDispose(disposables)
         btnCancelMe.throttleClick().subscribe {
             showAlertMessage(R.string.alert, R.string.data_not_saved)
