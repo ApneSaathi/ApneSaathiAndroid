@@ -48,7 +48,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         txt_user_name.text = user.userName
         txt_user_phone_number.text = user.phoneNumber
         val s = SpannableStringBuilder()
-            .bold { append(resources.getString(R.string.address)) }
+            .bold { append(resources.getString(R.string.address_bold)) }
         txt_address.text =
             s.append(" "+user.block + ", ").append(user.district + ", ").append(user.state)
         if (user.gender == "M") {

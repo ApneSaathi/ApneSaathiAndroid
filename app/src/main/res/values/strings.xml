@@ -198,8 +198,7 @@
     <string name="grivence">Grivence</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="address_bold"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
-    <string name="address">Address: </string>
+    <string name="address_bold">Address: </string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
     <string name="app_bar_title">User Details</string>
@@ -298,9 +297,6 @@
         <item>Female</item>
         <item>Other</item>
     </string-array>
-
-    <string name="whom_did_you_talk_with">Whom did you talk with?</string>
-    <string name="other_medical_problems">Other Medical Problems</string>
     <string name="related_info_talked_about">Related info talked about</string>
     <string name="sore_throat">Sore Throat</string>
     <string name="lack_of_essential_services">Lack of Essential Services</string>
