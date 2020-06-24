@@ -250,4 +250,6 @@
     <string name="high">High</string>
     <string name="low">Low</string>
     <string name="call_connected">Call connected</string>
+
+
 </resources>

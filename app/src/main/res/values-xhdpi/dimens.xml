@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dimen_1">2dp</dimen>
     <dimen name="dimen_2">4dp</dimen>
     <dimen name="dimen_4">6dp</dimen>
     <dimen name="dimen_5">7dp</dimen>
@@ -16,6 +17,8 @@
     <dimen name="dimen_30">32dp</dimen>
     <dimen name="dimen_3">4dp</dimen>
     <dimen name="dimen_35">36dp</dimen>
+    <dimen name="dime145dp">146dp</dimen>
+    <dimen name="dime120dp">121dp</dimen>
 
     <dimen name="view_size_32">34dp</dimen>
     <dimen name="view_size_36">38dp</dimen>

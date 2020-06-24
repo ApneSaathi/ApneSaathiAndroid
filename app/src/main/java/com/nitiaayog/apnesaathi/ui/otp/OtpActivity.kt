@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.activity_login_otpverify.*
 class OtpActivity : BaseActivity<OtpActivityModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        dataManager.setPhoneNumber("123456")
-
         EditFirstChar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (EditFirstChar.length() == 1) {
