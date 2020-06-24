@@ -53,7 +53,7 @@ class SeniorCitizenEditFragment : BaseFragment<SeniorCitizenEditViewModel>() {
         }
 
 
-        val otherMedicalProblemList = resources.getStringArray(R.array.other_medical_problems)
+        val otherMedicalProblemList = resources.getStringArray(R.array.medical_problems)
         val otherMedicalProblemsListAdapter =
             activity?.let {
                 ArrayAdapter(

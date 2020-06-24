@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_covid_1" />
+        android:scaleType="centerCrop" />
 
 </com.google.android.material.card.MaterialCardView>

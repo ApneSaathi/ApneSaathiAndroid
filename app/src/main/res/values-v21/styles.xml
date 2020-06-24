@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/color_orange</item>
-        <item name="android:colorPrimary">@color/color_orange</item>
+        <item name="colorPrimary">@android:color/background_light</item>
+        <item name="android:colorPrimary">@android:color/background_light</item>
     </style>
 </resources>

@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.view_pager_item_layout.view.*
 class ViewPagerAdapter : PagerAdapter() {
 
     private val imageResources =
-        intArrayOf(R.drawable.ic_covid_1, R.drawable.ic_covid_2, R.drawable.ic_covid_3)
+        intArrayOf(0, 1, 2)
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val customView = LayoutInflater.from(container.context)

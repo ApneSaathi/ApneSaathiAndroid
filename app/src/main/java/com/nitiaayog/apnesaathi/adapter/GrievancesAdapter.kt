@@ -56,7 +56,7 @@ class GrievancesAdapter(private val dataList: MutableList<Grievances>) :
                 )
                 btnComplaintStatus.setText(R.string.pending)
             }
-            civGender.setImageResource(R.drawable.ic_profile)
+            civGender.setImageResource(R.drawable.ic_male_user)
         }
     }
 }
