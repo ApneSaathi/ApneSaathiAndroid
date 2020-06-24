@@ -42,6 +42,8 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         val tvAddress: TextView = itemView.tvAddress
 
         init {
+            tvAddress.isSelected = true
+
             itemView.constraintLayout.setOnClickListener(this)
             itemView.ivCall.setOnClickListener(this)
             itemView.ivMoreInfo.setOnClickListener(this)
@@ -50,7 +52,7 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         fun bindData(user: User) {
             tvName.text = user.userName
             tvAddress.text = user.block.plus(", ").plus(user.district).plus(", ").plus(user.state)
-            civGender.setImageResource(R.drawable.ic_profile)
+            civGender.setImageResource(R.drawable.ic_male_user)
         }
 
         override fun onClick(view: View) {
@@ -61,7 +63,10 @@ class CallsAdapter(private val dataList: MutableList<User>) :
                 }
                 R.id.ivMoreInfo -> {
                     if (::itemClickListener.isInitialized)
-                        itemClickListener.onMoreInfoClick(adapterPosition, dataList[adapterPosition])
+                        itemClickListener.onMoreInfoClick(
+                            adapterPosition,
+                            dataList[adapterPosition]
+                        )
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,7 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -43,7 +45,13 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     override fun provideLayoutResource(): Int = R.layout.fragment_home
 
     override fun onCallPermissionGranted() {
-        lastSelectedItem?.let { placeCall(it, R.id.fragmentHomeContainer) }
+        val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+        startActivityForResult(intent, 1001)
+       // lastSelectedItem?.let { placeCall(it, R.id.fragmentHomeContainer) }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCallPermissionDenied() =

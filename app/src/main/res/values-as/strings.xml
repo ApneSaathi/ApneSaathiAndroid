@@ -152,6 +152,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="address">Address: </string>
+    <string name="address_bold"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
     <string name="app_bar_title">User Details</string>

@@ -15,7 +15,7 @@
     <string name="english_text">English</string>
     <string name="hindi_text">Hindi</string>
     <string name="marathi_text">Marathi</string>
-    <string name="gujrati_text">Gujrati</string>
+    <string name="gujrati_text">Gujarati</string>
     <string name="aasammi_text">Assamese</string>
     <string name="volunteer_name">Name of Volunteer *</string>
     <string name="volunteer_phone_number">Phone Number of Volunteer *</string>
@@ -44,7 +44,7 @@
         <item>Gujarat</item>
         <item>Jharkhand</item>
     </string-array>
-    <string-array name="other_medical_problems">
+    <string-array name="medical_problems">
         <item>@string/no_problems</item>
         <item>@string/diabetes</item>
         <item>@string/arthritis</item>
@@ -79,8 +79,7 @@
         <item>@string/lack_of_safety</item>
         <item>@string/lack_of_access_emergency</item>
         <item>@string/phone_and_service</item>
-        <item>@string/other_problems_reported</item>
-        <item>@string/other</item>
+        <item>@string/no_problems</item>
     </string-array>
     <string-array name="districts_array">
         <item>Barpeta</item>
@@ -154,7 +153,8 @@
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="complaints">COMPLAINTS</string>
+    <string name="other_medical_problems">Other Medical Problems</string>
+    <string name="complaints">Complaints</string>
     <string name="calls_information">CALLS INFORMATION</string>
     <string name="call_type">Call Type</string>
     <string name="update"><u>Update</u></string>
@@ -198,6 +198,7 @@
     <string name="grivence">Grivence</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="address_bold"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
     <string name="address">Address: </string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
@@ -215,7 +216,7 @@
     <string name="other_important_information">Other important information</string>
     <string name="edit_fragment">Edit fragment</string>
     <string name="select_a_call_status">Select a call status</string>
-    <string name="quarantine_hospitalization_status">Quarantine/ Hospitalization Status</string>
+    <string name="quarantine_hospitalization_status">Quarantine/Hospitalization Status</string>
     <string name="select_status">Select a status</string>
     <string name="category">Category</string>
     <string name="medical_details">Medical Details</string>
@@ -228,7 +229,7 @@
     <string name="glaucoma">Glaucoma</string>
     <string name="parkinson">Parkinson\'s disease</string>
     <string name="cataracts">Cataracts</string>
-    <string name="no_response">No response</string>
+    <string name="no_response">No\nResponse</string>
     <string name="phone_not_picked">Phone not picked</string>
     <string name="phone_not_reachable">Phone not reachable</string>
     <string name="call_disconnected">Call disconnected</string>
@@ -249,7 +250,55 @@
     <string name="high">High</string>
     <string name="low">Low</string>
     <string name="call_connected">Call connected</string>
-    <string name="not_picked">Not Picked</string>
+
+    <string name="not_picked">Not\nPicked</string>
+    <string name="not_reachable">Not\nReachable</string>
+    <string name="dis_connected">Disconnected</string>
+    <string name="connected">Connected</string>
+    <string name="talked_with">Talked with</string>
+    <string name="medical_history">Medical history</string>
+    <string name="medical_problems">Medical Problems</string>
+    <string name="whom_did_you_talk_with">Whom did you talk with ?</string>
+    <string name="medical_history_sr_citizen">Medical history of Sr. Citizen</string>
+    <string name="behavior_change_practice">Did the respondent take up the behavior change practices shared with them ?</string>
+    <string name="info_you_talked_about">Related nfo you talked about</string>
+    <string name="prevention">Prevention</string>
+    <string name="access">Access</string>
+    <string name="status">Status</string>
+    <string name="detection">Detection</string>
+    <string name="covid_19_symptoms">COVID-19 Symptoms</string>
+    <string name="select_category">Select category</string>
+    <string name="gender">Gender</string>
+    <string name="report_lack_of_essential_services">Report lack of Essential Services</string>
+    <string name="sr_citizen_report_lack_of_essintial_services">Does the senior citizen report a lack of access to essential services ?</string>
+    <string name="need_emergency_escalation">Is there a need for emergency and escalation ?</string>
+    <string name="any_sr_citizen_in_home">Do you have any Senior Citizen in your home ?</string>
+    <string name="new_sr_citizen_personal_details">New Sr. Citizen Person Details</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="address">Address</string>
+    <string name="register">Register</string>
+    <string-array name="talked_with">
+        <item>Senior Citizen</item>
+        <item>Family Member of Sr. Citizen</item>
+        <item>Community Member</item>
+    </string-array>
+    <string-array name="behavior_changes">
+        <item>Yes</item>
+        <item>No</item>
+        <item>May be</item>
+        <item>Not Applicable</item>
+    </string-array>
+    <string-array name="other_medical_problems_list">
+        <item>@string/covid_19_symptoms</item>
+        <item>Non-covid medical problems </item>
+        <item>No Problem</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
     <string name="whom_did_you_talk_with">Whom did you talk with?</string>
     <string name="other_medical_problems">Other Medical Problems</string>
     <string name="related_info_talked_about">Related info talked about</string>
