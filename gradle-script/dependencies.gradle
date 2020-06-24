@@ -3,7 +3,7 @@ ext {
     /* TODO : AppDetails ------------------------------------------------------------------------ */
 
     appId = "com.nitiaayog.apnesaathi"
-    minVersion = 19
+    minVersion = 21
     buildVersion = "29.0.3"
     targetVersion = 29
     versionCode = 1

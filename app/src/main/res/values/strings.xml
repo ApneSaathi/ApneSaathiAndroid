@@ -266,6 +266,7 @@
     <string name="status">Status</string>
     <string name="detection">Detection</string>
     <string name="covid_19_symptoms">COVID-19 Symptoms</string>
+    <string name="non_covid_symptoms">Non-covid medical problems</string>
     <string name="select_category">Select category</string>
     <string name="gender">Gender</string>
     <string name="report_lack_of_essential_services">Report lack of Essential Services</string>
@@ -276,10 +277,18 @@
     <string name="contact_number">Contact Number</string>
     <string name="address">Address</string>
     <string name="register">Register</string>
+    <string name="community_member">Community Member</string>
+    <string name="go_back">Go Back</string>
+    <string name="okay">Okay</string>
+    <string name="alert">Alert</string>
+    <string name="data_not_saved">Data is not saved yet.If you <b>Cancel</b> the process you will lose the data.</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
+    <string name="sr_feedback_saved">Sr. citizen feedback data is saved Successfully</string>
     <string-array name="talked_with">
         <item>Senior Citizen</item>
         <item>Family Member of Sr. Citizen</item>
-        <item>Community Member</item>
+        <item>@string/community_member</item>
     </string-array>
     <string-array name="behavior_changes">
         <item>Yes</item>
@@ -289,7 +298,7 @@
     </string-array>
     <string-array name="other_medical_problems_list">
         <item>@string/covid_19_symptoms</item>
-        <item>Non-covid medical problems </item>
+        <item>@string/non_covid_symptoms</item>
         <item>No Problem</item>
     </string-array>
     <string-array name="gender_array">
