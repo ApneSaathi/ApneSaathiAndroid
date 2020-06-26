@@ -365,29 +365,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMedicalDetails" />
 
-                <MultiAutoCompleteTextView
-                    android:id="@+id/actMedicalHistorySrCitizen"
+                <FrameLayout
+                    android:id="@+id/flMedicalHistorySrCitizen"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_size_48"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_2"
                     android:layout_marginEnd="@dimen/dimen_15"
                     android:background="@drawable/bg_rectangle_border_form"
-                    android:completionThreshold="0"
-                    android:cursorVisible="false"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:drawablePadding="@dimen/dimen_5"
-                    android:focusable="false"
-                    android:hint="@string/medical_history"
-                    android:inputType="none|textNoSuggestions"
-                    android:paddingStart="@dimen/dimen_10"
-                    android:paddingEnd="@dimen/dimen_10"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_14"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvMedicalHistorySrCitizen" />
+                    app:layout_constraintTop_toBottomOf="@id/tvMedicalHistorySrCitizen">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMedicalHistorySrCitizen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/dimen_5"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tvInfoYouTalkedAbout"
@@ -402,7 +404,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/actMedicalHistorySrCitizen" />
+                    app:layout_constraintTop_toBottomOf="@id/flMedicalHistorySrCitizen" />
 
                 <HorizontalScrollView
                     android:id="@+id/hsvInfoYouTalkedAbout"
@@ -797,28 +799,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btnLackOfEssentialServicesYes" />
 
-                <MultiAutoCompleteTextView
-                    android:id="@+id/actCategory"
+                <FrameLayout
+                    android:id="@+id/flCategory"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_size_48"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_2"
                     android:layout_marginEnd="@dimen/dimen_15"
                     android:background="@drawable/bg_rectangle_border_form"
-                    android:completionThreshold="0"
-                    android:cursorVisible="false"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:focusable="false"
-                    android:hint="@string/category"
-                    android:inputType="none|textNoSuggestions"
-                    android:paddingStart="@dimen/dimen_10"
-                    android:paddingEnd="@dimen/dimen_10"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_14"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvSelectCategory" />
+                    app:layout_constraintTop_toBottomOf="@id/tvSelectCategory">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/dimen_5"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tvDescription"
@@ -832,7 +837,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/actCategory" />
+                    app:layout_constraintTop_toBottomOf="@id/flCategory" />
 
                 <EditText
                     android:id="@+id/etDescription"
@@ -961,14 +966,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,actMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
+                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,flMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/cgComplaintDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids=",tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,actCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyYes,btnEmergencyNo" />
+                    app:constraint_referenced_ids="tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,flCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyYes,btnEmergencyNo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

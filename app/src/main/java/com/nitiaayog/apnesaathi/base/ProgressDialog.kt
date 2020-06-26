@@ -3,11 +3,11 @@ package com.nitiaayog.apnesaathi.base
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.StringRes
+import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
 import kotlinx.android.synthetic.main.progress_dialog_layout.*
 
@@ -139,10 +139,11 @@ class ProgressDialog private constructor(context: Context) : Dialog(context) {
 
         setContentView(R.layout.progress_dialog_layout)
 
-        getScreenSize(context)
-
         window?.apply {
-            this.setLayout((screenSize[0] * 0.95).toInt(), WindowManager.LayoutParams.WRAP_CONTENT)
+            this.setLayout(
+                (ApneSaathiApplication.screenSize[0] * 0.95).toInt(),
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
         }
 
         if (title.isNotEmpty()) {
@@ -206,14 +207,5 @@ class ProgressDialog private constructor(context: Context) : Dialog(context) {
     private fun addOnDialogDismissListener(onDialogDismiss: DialogEventListener): ProgressDialog {
         this.onDialogDismiss = onDialogDismiss
         return this
-    }
-
-    private fun getScreenSize(context: Context) {
-        val wManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wManager.defaultDisplay
-        val metrics = DisplayMetrics()
-        display.getMetrics(metrics)
-        screenSize[0] = metrics.widthPixels
-        screenSize[1] = metrics.heightPixels
     }
 }
