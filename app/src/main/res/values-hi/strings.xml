@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Apne Saathi</string>
+    <string name="app_name">अपना साथि</string>
 
     <string name="total_calls_vs_connected">कुल कॉल किए गए VS कनेक्टेड</string>
     <string name="total_sr_citizens_supported">कुल नं। वरिष्ठ नागरिकों का समर्थन किया</string>
@@ -48,7 +48,7 @@
     </string-array>
     <string-array name="districts_array">
         <item>बारपेटा</item>
-        <item>Baska</item>
+        <item>बास्का</item>
         <item>दरांग</item>
         <item>गोलपाड़ा</item>
         <item>धुबरी</item>
@@ -74,9 +74,9 @@
         <item>अमरावती</item>
         <item>गडचिरोली</item>
         <item>नर्मदा</item>
-        <item>Pakur</item>
-        <item>Sahibganj</item>
-        <item>SurendraNagar</item>
+        <item>पाकुर</item>
+        <item>साहिबगंज</item>
+        <item>सुरेंद्रनगर</item>
     </string-array>
     <string-array name="call_status">
         <item>कोई जवाब नहीं</item>
@@ -104,35 +104,28 @@
     <string name="senderNumber">+91 9673346489</string>
     <string name="verify">सत्यापित करें</string>
     <string name="donthave_receive_resend">क्या किसी भी कोड को पुनः प्राप्त नहीं किया? पुन: भेजें</string>
-    <string name="enterOtp">Otp दर्ज करें</string>
+    <string name="enterOtp">ओटीपी दर्ज करें</string>
 
-    <string name="personal_details">PERSONAL DETAILS</string>
-    <string name="name">Name</string>
-    <string name="age">Age</string>
-    <string name="state">State</string>
-    <string name="district">District</string>
-    <string name="block">Block</string>
-    <string name="health_care_information">HEALTH CARE INFORMATION</string>
-    <string name="emotional_state">Emotional State</string>
-    <string name="happy">Happy</string>
-    <string name="neutral">Neutral</string>
-    <string name="sad">Sad</string>
-    <string name="covid_symptoms">Covid Symptoms</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="name">नाम</string>
+    <string name="age">आयु</string>
+    <string name="state">राज्य</string>
+    <string name="district">जिला</string>
+    <string name="block">खंड मैथा</string>
+
+    <string name="covid_symptoms">कोरोना के लक्षण</string>
+    <string name="yes">हाँ</string>
+    <string name="no">नहीं</string>
     <string name="other_medical_problems">अन्य चिकित्सा समस्याएं</string>
-    <string name="complaints">COMPLAINTS</string>
-    <string name="calls_information">CALLS INFORMATION</string>
-    <string name="call_type">Call Type</string>
-    <string name="update"><u>Update</u></string>
-    <string name="call_received_by">Call Received By</string>
-    <string name="appbar_title">SENIOR CITIZEN DATA</string>
-    <string name="register_a_new_citizen">Register a new citizen</string>
-    <string name="emergency_call">Emergency Call</string>
-    <string name="report_a_problem">Report a problem</string>
-    <string name="feedback">Feedback</string>
-    <string name="drawerOpen">Drawer Open</string>
-    <string name="drawerClose">Drawer Close</string>
+    <string name="complaints">शिकायतें</string>
+    <string name="calls_information">कॉल जानकारी</string>
+    <string name="call_type">कॉल का प्रकार</string>
+    <string name="update"><u>अपडेट करें</u></string>
+    <string name="call_received_by">द्वारा प्राप्त कॉल</string>
+    <string name="appbar_title">वरिष्ठ नागरिक डेटा</string>
+    <string name="register_a_new_citizen">नए वरिष्ठ नागरिक का पंजीकरण करें</string>
+    <string name="emergency_call">आपातकालीन कॉल</string>
+    <string name="report_a_problem">समस्या के बारे में बताएं</string>
+    <string name="feedback">प्रतिपुष्टि</string>
     <string name="letsgetstarted">आएँ शुरू करें</string>
     <string name="logindescription">अपना मोबाइल नंबर दर्ज करें, हम आपको बाद में सत्यापित करने के लिए OTP भेजेंगे</string>
     <string name="confirm">पुष्टि करें</string>
@@ -217,4 +210,68 @@
     <string name="high">उच्च</string>
     <string name="low">कम</string>
 
+
+    <string name="not_picked">नहीं\nउठाया</string>
+    <string name="not_reachable">पहुँच से\nबाहर</string>
+    <string name="dis_connected">डिस्कनेक्ट किया गया</string>
+    <string name="connected">जुड़े हुए</string>
+    <string name="talked_with">किसके साथ बात की</string>
+    <string name="medical_history">चिकित्सा का इतिहास</string>
+    <string name="medical_problems">स्वास्थ्य समस्याएं</string>
+    <string name="whom_did_you_talk_with">किसके साथ बात की</string>
+    <string name="medical_history_sr_citizen">वरिष्ठ नागरिक का मेडिकल इतिहास</string>
+    <string name="behavior_change_practice">क्या वरिष्ठ नागरिक ने उनके साथ साझा किए गए व्यवहार परिवर्तन प्रथाओं को लिया ?</string>
+    <string name="info_you_talked_about">आप किस संबंधित जानकारी के बारे में बात करते हैं</string>
+    <string name="prevention">निवारण</string>
+    <string name="access">पहुंच</string>
+    <string name="detection">जांच</string>
+    <string name="status">स्थिति</string>
+    <string name="covid_19_symptoms">कोरोना लक्षण</string>
+    <string name="non_covid_symptoms">गैर-कोरोना चिकित्सा समस्याएं</string>
+    <string name="select_category">श्रेणी का चयन करें</string>
+    <string name="gender">लिंग-विशेष</string>
+    <string name="report_lack_of_essential_services">आवश्यक सेवाओं की कमी की रिपोर्ट करें</string>
+    <string name="sr_citizen_report_lack_of_essintial_services">क्या वरिष्ठ नागरिक आवश्यक सेवाओंकी कमी की रिपोर्ट करता है ?</string>
+    <string name="need_emergency_escalation">क्या इमरजेंसी और एस्केलेशन की जरूरत है ?</string>
+    <string name="any_sr_citizen_in_home">क्या आपके घर में कोई वरिष्ठ नागरिक है ?</string>
+    <string name="new_sr_citizen_personal_details">न्यू वरिष्ठ नागरिक डिटेल्स</string>
+    <string name="contact_number">संपर्क संख्या</string>
+    <string name="address">पता</string>
+    <string name="register">रजिस्टर करें</string>
+    <string name="community_member">सामुदायिक सदस्य</string>
+    <string name="go_back">वापस जाओ</string>
+    <string name="okay">ठीक है</string>
+    <string name="alert">चेतावनी</string>
+    <string name="data_not_saved">क्या आप इस पृष्ठ को सहेजे बिना छोड़ना चाहते हैं ?</string>
+    <string name="success">सफलता</string>
+    <string name="failed">अनुत्तीर्ण</string>
+    <string name="sr_feedback_saved">वरिष्ठ नागरिक प्रतिपुष्टि जानकारी सफलतापूर्वक सहेजी गई है</string>
+    <string name="sr_citizen">वरिष्ठ नागरिक</string>
+    <string name="family_member_of_sr_citizen">वरिष्ठ नागरिक के पारिवारिक सदस्य</string>
+    <string name="may_be">शायद</string>
+    <string name="not_applicable">लागू नहीं है</string>
+    <string name="gender_male">नर</string>
+    <string name="gender_female">महिला</string>
+    <string name="gender_others">अन्य</string>
+    <string-array name="talked_with">
+        <item>@string/sr_citizen</item>
+        <item>@string/family_member_of_sr_citizen</item>
+        <item>@string/community_member</item>
+    </string-array>
+    <string-array name="behavior_changes">
+        <item>@string/yes</item>
+        <item>@string/no</item>
+        <item>@string/may_be</item>
+        <item>@string/not_applicable</item>
+    </string-array>
+    <string-array name="other_medical_problems_list">
+        <item>@string/covid_19_symptoms</item>
+        <item>@string/non_covid_symptoms</item>
+        <item>@string/no_problems</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+        <item>@string/gender_others</item>
+    </string-array>
 </resources>

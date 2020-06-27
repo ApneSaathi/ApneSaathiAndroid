@@ -33,7 +33,10 @@
                     android:id="@+id/constraintLayoutHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_15"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingBottom="@dimen/dimen_15"
+                    android:paddingEnd="@dimen/dimen_15"
+                    android:paddingTop="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -41,7 +44,7 @@
                         android:id="@+id/civGender"
                         android:layout_width="@dimen/view_size_66"
                         android:layout_height="@dimen/view_size_66"
-                        android:padding="@dimen/dimen_5"
+                        android:padding="@dimen/dimen_3"
                         android:src="@drawable/ic_male_user"
                         app:civ_border_color="@color/colorAccent"
                         app:civ_border_width="1dp"
@@ -50,7 +53,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvName"
+                        android:id="@+id/tvSrCitizenName"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dimen_28"
                         android:fontFamily="sans-serif"
@@ -61,26 +64,29 @@
                         android:paddingEnd="0dp"
                         android:singleLine="true"
                         android:textAllCaps="false"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textIsSelectable="false"
-                        android:textSize="@dimen/text_14"
+                        android:textSize="@dimen/text_15"
                         app:layout_constraintEnd_toStartOf="@id/ivCall"
                         app:layout_constraintStart_toEndOf="@id/civGender"
                         app:layout_constraintTop_toTopOf="@id/civGender" />
 
                     <TextView
-                        android:id="@+id/tvPhoneNumber"
+                        android:id="@+id/tvSrCitizenPhoneNumber"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dimen_28"
                         android:fontFamily="sans-serif"
                         android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dimen_3"
+                        android:paddingEnd="0dp"
                         android:textAllCaps="false"
-                        android:textColor="@color/text_color_1"
+                        android:textColor="@color/color_dark_grey_txt"
                         android:textSize="@dimen/text_12"
                         app:layout_constraintBottom_toBottomOf="@id/civGender"
                         app:layout_constraintEnd_toStartOf="@id/ivCall"
                         app:layout_constraintStart_toEndOf="@id/civGender"
-                        app:layout_constraintTop_toBottomOf="@id/tvName" />
+                        app:layout_constraintTop_toBottomOf="@id/tvSrCitizenName" />
 
                     <ImageView
                         android:id="@+id/ivCall"
@@ -94,14 +100,16 @@
                         app:layout_constraintTop_toTopOf="@id/civGender" />
 
                     <TextView
-                        android:id="@+id/tvAddress"
+                        android:id="@+id/tvSrCitizenAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_7"
+                        android:layout_marginTop="@dimen/dimen_10"
                         android:fontFamily="sans-serif"
                         android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dimen_10"
+                        android:paddingEnd="@dimen/dimen_10"
                         android:textAllCaps="false"
-                        android:textColor="@color/text_color_1"
+                        android:textColor="@color/text_color"
                         android:textIsSelectable="false"
                         android:textSize="@dimen/text_14"
                         app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +373,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMedicalDetails" />
 
-                <FrameLayout
+                <LinearLayout
                     android:id="@+id/flMedicalHistorySrCitizen"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_size_48"
@@ -389,7 +397,7 @@
                         android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                </FrameLayout>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvInfoYouTalkedAbout"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Apne Saathi</string>
+    <string name="app_name">अपना साथि</string>
 
     <string name="total_calls_vs_connected">व्हीएस कनेक्ट केलेले एकूण कॉल</string>
     <string name="total_sr_citizens_supported">एकूण क्र. ज्येष्ठ नागरिक समर्थित</string>
@@ -48,36 +48,36 @@
         <item>झारखंड</item>
     </string-array>
     <string-array name="districts_array">
-        <item>Barpeta</item>
-        <item>Baska</item>
-        <item>Darrang</item>
-        <item>Goalpara</item>
-        <item>Dhubri</item>
-        <item>Halakandi</item>
-        <item>Araria</item>
-        <item>Sitamarhi</item>
-        <item>Begusarai</item>
-        <item>Katihar</item>
-        <item>Sheikhpura</item>
-        <item>Damoh</item>
-        <item>Barwani</item>
-        <item>Khandwa</item>
-        <item>Singrauli</item>
-        <item>Vidisha</item>
-        <item>Behraich</item>
-        <item>Balrampur</item>
-        <item>Shrawasti</item>
-        <item>Chitrakoot</item>
-        <item>Sonbhadra</item>
-        <item>Baran</item>
-        <item>Jaiselmer</item>
-        <item>Nandurbar</item>
-        <item>Amravati</item>
-        <item>Gadchiroli</item>
-        <item>Narmada</item>
-        <item>Pakur</item>
-        <item>Sahibganj</item>
-        <item>SurendraNagar</item>
+        <item>बरपेटा</item>
+        <item>बास्का</item>
+        <item>डारंग</item>
+        <item>गोलपारा</item>
+        <item>धुबरी</item>
+        <item>हलकांडी</item>
+        <item>अररिया</item>
+        <item>सीतामढी</item>
+        <item>बेगूसराय</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+        <item>दमोह</item>
+        <item>बारवानी</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
+        <item>बेहराइच</item>
+        <item>बलरामपूर</item>
+        <item>श्रावस्ती</item>
+        <item>चित्रकूट</item>
+        <item>सोनभद्र</item>
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+        <item>नंदुरबार</item>
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नर्मदा</item>
+        <item>पाकुर</item>
+        <item>साहिबगंज</item>
+        <item>सुरेंद्रनगर</item>
     </string-array>
     <string-array name="call_status">
         <item>प्रतिसाद नाही</item>
@@ -107,17 +107,13 @@
     <string name="call_connected">कॉल केलेले</string>
     <string name="call_permission_denied">कॉलिंग परवानगी नाकारली</string>
     <string name="not_handle_action">क्रिया हाताळू शकत नाही</string>
-    <string name="personal_details">वैयक्तिक माहिती</string>
+
     <string name="name">नाव</string>
     <string name="age">वय</string>
     <string name="state">राज्य</string>
     <string name="district">जिल्हा</string>
     <string name="block">ब्लॉक करा</string>
-    <string name="health_care_information">आरोग्य काळजी माहिती</string>
-    <string name="emotional_state">भावनिक स्थिती</string>
-    <string name="happy">आनंदी</string>
-    <string name="neutral">तटस्थ</string>
-    <string name="sad">दु: खी</string>
+
     <string name="covid_symptoms">कोविड लक्षणे</string>
     <string name="yes">होय</string>
     <string name="no">नाही</string>
@@ -197,7 +193,7 @@
     <string name="glaucoma">काचबिंदू</string>
     <string name="parkinson">पार्किन्सन रोग</string>
     <string name="cataracts">मोतीबिंदू</string>
-    <string name="no_response">प्रतिसाद नाही</string>
+    <string name="no_response">प्रतिसाद\nनाही</string>
     <string name="phone_not_picked">फोन उचलला नाही</string>
     <string name="phone_not_reachable">फोन पोहोचण्यायोग्य नाही</string>
     <string name="call_disconnected">कॉल डिस्कनेक्ट झाला</string>
@@ -218,4 +214,67 @@
     <string name="high">उंच</string>
     <string name="low">कमी</string>
 
+    <string name="not_picked">निवडलेले\nनाही</string>
+    <string name="not_reachable">पोहोचण्यायोग्य\nनाही</string>
+    <string name="dis_connected">डिस्कनेक्ट केलेले</string>
+    <string name="connected">जोडलेले</string>
+    <string name="talked_with">कोणाशी बोललो</string>
+    <string name="medical_history">वैद्यकीय इतिहास</string>
+    <string name="medical_problems">वैद्यकीय समस्या</string>
+    <string name="whom_did_you_talk_with">कोणाशी बोललो</string>
+    <string name="medical_history_sr_citizen">ज्येष्ठ नागरिकांचा वैद्यकीय इतिहास</string>
+    <string name="behavior_change_practice">ज्येष्ठ नागरिकाने त्यांच्यासह सामायिक वर्तन बदलण्याच्या पद्धती स्वीकारल्या ?</string>
+    <string name="info_you_talked_about">आपण कोणत्या संबंधित माहिती बद्दल बोललो</string>
+    <string name="prevention">प्रतिबंध</string>
+    <string name="access">पोहोच</string>
+    <string name="detection">चेक अप</string>
+    <string name="status">स्थिती</string>
+    <string name="covid_19_symptoms">कोरोना लक्षणे</string>
+    <string name="non_covid_symptoms">कोरोना नसलेली वैद्यकीय समस्या</string>
+    <string name="select_category">श्रेणी निवडा</string>
+    <string name="gender">लिंग-विशिष्ट</string>
+    <string name="report_lack_of_essential_services">अत्यावश्यक सेवांचा अभाव नोंदवा</string>
+    <string name="sr_citizen_report_lack_of_essintial_services">ज्येष्ठ नागरिक आवश्यक सेवांमध्ये प्रवेश नसल्याची तक्रार नोंदवित आहे ?</string>
+    <string name="need_emergency_escalation">आपत्कालीन परिस्थितीत वाढ होण्याची गरज आहे का ?</string>
+    <string name="any_sr_citizen_in_home">तुमच्या घरात जेष्ठ नागरिक आहे का ?</string>
+    <string name="new_sr_citizen_personal_details">नवीन वरिष्ठ नागरिक तपशील</string>
+    <string name="contact_number">संपर्क क्रमांक</string>
+    <string name="address">पत्ता</string>
+    <string name="register">नोंदणी करा</string>
+    <string name="community_member">समुदाय सदस्य</string>
+    <string name="go_back">परत जा</string>
+    <string name="okay">ठीक आहे</string>
+    <string name="alert">सतर्क</string>
+    <string name="data_not_saved">आपण हे पृष्ठ जतन न करता सोडू इच्छिता ?</string>
+    <string name="success">यश</string>
+    <string name="failed">अयशस्वी</string>
+    <string name="sr_feedback_saved">ज्येष्ठ नागरिक अभिप्राय माहिती यशस्वीरित्या जतन केली गेली आहे</string>
+    <string name="sr_citizen">ज्येष्ठ नागरिक</string>
+    <string name="family_member_of_sr_citizen">वरिष्ठ नागरिकांचे कुटुंब सदस्य</string>
+    <string name="may_be">कदाचित</string>
+    <string name="not_applicable">लागू नाही</string>
+    <string name="gender_male">नर</string>
+    <string name="gender_female">स्त्री</string>
+    <string name="gender_others">इतर</string>
+    <string-array name="talked_with">
+        <item>@string/sr_citizen</item>
+        <item>@string/family_member_of_sr_citizen</item>
+        <item>@string/community_member</item>
+    </string-array>
+    <string-array name="behavior_changes">
+        <item>@string/yes</item>
+        <item>@string/no</item>
+        <item>@string/may_be</item>
+        <item>@string/not_applicable</item>
+    </string-array>
+    <string-array name="other_medical_problems_list">
+        <item>@string/covid_19_symptoms</item>
+        <item>@string/non_covid_symptoms</item>
+        <item>@string/no_problems</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+        <item>@string/gender_others</item>
+    </string-array>
 </resources>

@@ -4,8 +4,11 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
@@ -23,8 +26,10 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.model.FormElements
+import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.USER_DETAILS
 import kotlinx.android.synthetic.main.include_recyclerview.view.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -39,6 +44,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private var selectedQuarantineStatus: String = ""
     private var selectedComplaintCategory: String = ""
     private var selectedEssentialServices: String = ""
+
+    private var selectedGender: String = ""
+    private var selectedDistrict: String = ""
+    private var selectedState: String = ""
 
     private var isSeniorCitizenAtHome: Boolean = false
     private var isLackOfEssentialServices: Boolean = false
@@ -130,6 +139,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
         toolBar.setNavigationOnClickListener { finish() }
 
+        ivCall.visibility = View.GONE
         tvCancel.visibility = View.GONE
         tvRegister.visibility = View.GONE
 
@@ -140,6 +150,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             popupCategoryList.add(FormElements(it))
         }
 
+        setData()
         initAutoCompleteTextViews()
         initClicks()
     }
@@ -149,7 +160,55 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     override fun provideLayoutResource(): Int = R.layout.senior_citizen_feedback_form
 
+    private fun setData() {
+        intent?.let { intent ->
+            val user: User? = intent.getParcelableExtra(USER_DETAILS)
+            user?.let {
+                val address = getString(R.string.address).plus(" : ")
+                val dataString = address.plus(it.block).plus(", ").plus(it.district)
+                    .plus(", ").plus(it.state)
+                val spanAddress = SpannableString(dataString)
+                spanAddress.setSpan(StyleSpan(Typeface.BOLD), 0, address.length, 0)
+                spanAddress.setSpan(StyleSpan(Typeface.ITALIC), 0, address.length, 0)
+
+                tvSrCitizenName.text = it.userName.plus("(").plus(it.age).plus(" Yrs)")
+                tvSrCitizenPhoneNumber.text = it.phoneNumber
+                tvSrCitizenAddress.text = spanAddress
+            }
+        }
+    }
+
     private fun initAutoCompleteTextViews() {
+        val genderList = resources.getStringArray(R.array.gender_array)
+        val gendersAdapter =
+            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, genderList)
+        actGender.threshold = 0
+        actGender.setAdapter(gendersAdapter)
+        actGender.setOnKeyListener(null)
+        actGender.setOnItemClickListener { _, _, position, _ ->
+            selectedGender = genderList[position]
+        }
+
+        val districtsList = resources.getStringArray(R.array.districts_array)
+        val districtsAdapter =
+            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
+        actDistrict.threshold = 0
+        actDistrict.setAdapter(districtsAdapter)
+        actDistrict.setOnKeyListener(null)
+        actDistrict.setOnItemClickListener { _, _, position, _ ->
+            selectedDistrict = districtsList[position]
+        }
+
+        val stateList = resources.getStringArray(R.array.states_array)
+        val stateAdapter =
+            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
+        actState.threshold = 0
+        actState.setAdapter(stateAdapter)
+        actState.setOnKeyListener(null)
+        actState.setOnItemClickListener { _, _, position, _ ->
+            selectedState = stateList[position]
+        }
+
         rvMedicalHistorySrCitizen.adapter = rvMedicalHistorySrCitizenAdapter
         rvCategory.adapter = rvCategoryAdapter
 
@@ -160,6 +219,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actTalkWith.setAdapter(statesAdapter)
         actTalkWith.setOnKeyListener(null)
         actTalkWith.setOnItemClickListener { _, _, position, _ ->
+            if (selectedTalkedWith == getString(R.string.community_member)) {
+                resetRegisterNewSrCitizenLayout()
+                resetAllFormElements()
+            }
             selectedTalkedWith = talkedWithList[position]
             manageViewVisibility()
         }
@@ -233,6 +296,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             .autoDispose(disposables)
 
         // All AutoCompleteTextView clicks
+        actGender.throttleClick().subscribe { actGender.showDropDown() }.autoDispose(disposables)
+        actDistrict.throttleClick().subscribe { actDistrict.showDropDown() }
+            .autoDispose(disposables)
+        actState.throttleClick().subscribe { actState.showDropDown() }.autoDispose(disposables)
         actTalkWith.throttleClick().subscribe { actTalkWith.showDropDown() }
             .autoDispose(disposables)
         actOtherMedicalProblems.throttleClick().subscribe { actOtherMedicalProblems.showDropDown() }
@@ -368,8 +435,43 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         resetForm()
     }
 
-    private fun resetForm() {
+    private fun resetAllFormElements() {
+        selectedTalkedWith = ""
+        selectedMedicalProblem = ""
+        selectedBehaviorChange = ""
+        selectedOtherMedicalProblem = ""
+        selectedQuarantineStatus = ""
+        selectedComplaintCategory = ""
+        selectedEssentialServices = ""
 
+        isSeniorCitizenAtHome = false
+        isLackOfEssentialServices = false
+        isAnyEmergency = false
+
+        resetAdapters()
+        resetAutoCompleteTextView()
+        resetCovidSymptomsViews()
+        resetTalkedRelatedToTopic()
+
+        etDescription.text.clear()
+        etDescription.clearFocus()
+
+        etOtherDescription.text.clear()
+        etOtherDescription.clearFocus()
+
+        if (btnLackOfEssentialServicesYes.isSelected)
+            toggleButtonSelection(btnLackOfEssentialServicesYes, null)
+        if (btnLackOfEssentialServicesNo.isSelected)
+            toggleButtonSelection(btnLackOfEssentialServicesNo, null)
+
+        if (btnEmergencyYes.isSelected) toggleButtonSelection(btnEmergencyYes, null)
+        if (btnEmergencyNo.isSelected) toggleButtonSelection(btnEmergencyNo, null)
+
+        selectedLackOfEssentialServices = null
+        selectedNeedOfEmergencyServices = null
+    }
+
+    private fun resetForm() {
         tvTalkWith.visibility = View.GONE
         actTalkWith.visibility = View.GONE
 
@@ -383,7 +485,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             actQuarantineHospitalizationStatus.visibility = View.GONE
         }
 
-        selectedTalkedWith = ""
+        actTalkWith.setText("")
+
+        /*selectedTalkedWith = ""
         selectedMedicalProblem = ""
         selectedBehaviorChange = ""
         selectedOtherMedicalProblem = ""
@@ -393,12 +497,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         isSeniorCitizenAtHome = false
         isLackOfEssentialServices = false
-        isAnyEmergency = false
+        isAnyEmergency = false*/
 
-        popupMedicalHistorySrCitizenAdapter.resetAdapter()
-        rvMedicalHistorySrCitizenAdapter.resetAdapter()
-        popupCategoryAdapter.resetAdapter()
-        rvCategoryAdapter.resetAdapter()
+        //resetAdapters()
+
+        resetAllFormElements()
 
         cgMedicalDetails.visibility = View.GONE
         cgComplaintDetails.visibility = View.GONE
@@ -408,19 +511,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (btnAnySrCitizenInHomeNo.isSelected)
             toggleSelectionForSrCitizenAtHome(btnAnySrCitizenInHomeNo, btnAnySrCitizenInHomeYes)
 
-        if (btnPrevention.isSelected) changeButtonSelectionWithIcon(btnPrevention)
-        if (btnAccess.isSelected) changeButtonSelectionWithIcon(btnAccess)
-        if (btnDetection.isSelected) changeButtonSelectionWithIcon(btnDetection)
+        //resetTalkedRelatedToTopic()
 
-        if (btnLackOfEssentialServicesYes.isSelected)
+        /*if (btnLackOfEssentialServicesYes.isSelected)
             toggleButtonSelection(btnLackOfEssentialServicesYes, null)
         if (btnLackOfEssentialServicesNo.isSelected)
-            toggleButtonSelection(btnLackOfEssentialServicesNo, null)
+            toggleButtonSelection(btnLackOfEssentialServicesNo, null)*/
 
-        if (btnEmergencyYes.isSelected) toggleButtonSelection(btnEmergencyYes, null)
-        if (btnEmergencyNo.isSelected) toggleButtonSelection(btnEmergencyNo, null)
+        /*if (btnEmergencyYes.isSelected) toggleButtonSelection(btnEmergencyYes, null)
+        if (btnEmergencyNo.isSelected) toggleButtonSelection(btnEmergencyNo, null)*/
 
-        resetAutoCompleteTextView()
+        /*resetAutoCompleteTextView()
         resetCovidSymptomsViews()
 
         etDescription.text.clear()
@@ -430,7 +531,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         etOtherDescription.clearFocus()
 
         selectedLackOfEssentialServices = null
-        selectedNeedOfEmergencyServices = null
+        selectedNeedOfEmergencyServices = null*/
+    }
+
+    private fun resetTalkedRelatedToTopic() {
+        if (btnPrevention.isSelected) changeButtonSelectionWithIcon(btnPrevention)
+        if (btnAccess.isSelected) changeButtonSelectionWithIcon(btnAccess)
+        if (btnDetection.isSelected) changeButtonSelectionWithIcon(btnDetection)
     }
 
     private fun resetCallStatus() {
@@ -453,6 +560,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         button.icon = null
     }
 
+    private fun resetAdapters() {
+        popupMedicalHistorySrCitizenAdapter.resetAdapter()
+        rvMedicalHistorySrCitizenAdapter.resetAdapter()
+        popupCategoryAdapter.resetAdapter()
+        rvCategoryAdapter.resetAdapter()
+    }
+
     private fun resetRegisterNewSrCitizenLayout() {
         tvAnySrCitizenInHome.visibility = View.GONE
         btnAnySrCitizenInHomeYes.visibility = View.GONE
@@ -463,31 +577,41 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             registerNewSrCitizen.visibility = View.GONE
         }
 
+        resetButton(btnAnySrCitizenInHomeYes)
+        resetButton(btnAnySrCitizenInHomeNo)
+
+        actGender.setText("")
+        actDistrict.setText("")
+        actState.setText("")
+
         etName.text.clear()
         etAge.text.clear()
         etContactNumber.text.clear()
         etAddress.text.clear()
+
+        selectedGender = ""
     }
 
     private fun resetCovidSymptomsViews() {
         if (hsvCovidSymptoms.visibility == View.VISIBLE) {
             tvCovidSymptoms.visibility = View.GONE
             hsvCovidSymptoms.visibility = View.GONE
-            if (ivCough.isSelected) ivCough.isSelected = false
-            if (ivFever.isSelected) ivFever.isSelected = false
-            if (ivShortnessOfBreath.isSelected) ivShortnessOfBreath.isSelected = false
+            if (ivCough.isSelected) changeCovidSymptomsSelection(ivCough, tvCough)
+            if (ivFever.isSelected) changeCovidSymptomsSelection(ivFever, tvFever)
+            if (ivShortnessOfBreath.isSelected)
+                changeCovidSymptomsSelection(ivShortnessOfBreath, tvShortnessOfBreath)
             tvQuarantineHospitalizationStatus.visibility = View.GONE
             actQuarantineHospitalizationStatus.visibility = View.GONE
         }
     }
 
     private fun resetAutoCompleteTextView() {
-        actTalkWith.setText("")
-        //actMedicalHistorySrCitizen.setText("")
+        actGender.setText("")
+        actDistrict.setText("")
+        actState.setText("")
         actBehaviorChange.setText("")
         actOtherMedicalProblems.setText("")
         actQuarantineHospitalizationStatus.setText("")
-        //actCategory.setText("")
     }
 
     private fun manageViewVisibility() {
@@ -539,11 +663,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private fun showAlertMessage(@StringRes title: Int, @StringRes message: Int) =
         AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
             .setMessage(message)
-            .setPositiveButton(R.string.go_back) { dialog, _ ->
+            .setPositiveButton(R.string.yes) { dialog, _ ->
                 dialog.dismiss()
                 finish()
             }
-            .setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .setNegativeButton(R.string.no) { dialog, _ -> dialog.dismiss() }
             .show()
 
     private fun showPopupWindow(anchorView: View) {

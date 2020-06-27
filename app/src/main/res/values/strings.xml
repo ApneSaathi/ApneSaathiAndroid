@@ -137,17 +137,11 @@
     <string name="todays_call">Today\'s calls</string>
     <string name="call_permission_denied">Calling Permission Denied</string>
     <string name="not_handle_action">Can not handle the action</string>
-    <string name="personal_details">PERSONAL DETAILS</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
     <string name="state">State</string>
     <string name="district">District</string>
     <string name="block">Block</string>
-    <string name="health_care_information">HEALTH CARE INFORMATION</string>
-    <string name="emotional_state">Emotional State</string>
-    <string name="happy">Happy</string>
-    <string name="neutral">Neutral</string>
-    <string name="sad">Sad</string>
 
     <string name="covid_symptoms">Covid Symptoms</string>
 
@@ -250,6 +244,7 @@
     <string name="low">Low</string>
     <string name="call_connected">Call connected</string>
 
+
     <string name="not_picked">Not\nPicked</string>
     <string name="not_reachable">Not\nReachable</string>
     <string name="dis_connected">Disconnected</string>
@@ -260,7 +255,7 @@
     <string name="whom_did_you_talk_with">Whom did you talk with ?</string>
     <string name="medical_history_sr_citizen">Medical history of Sr. Citizen</string>
     <string name="behavior_change_practice">Did the respondent take up the behavior change practices shared with them ?</string>
-    <string name="info_you_talked_about">Related nfo you talked about</string>
+    <string name="info_you_talked_about">Related info you talked about</string>
     <string name="prevention">Prevention</string>
     <string name="access">Access</string>
     <string name="status">Status</string>
@@ -281,30 +276,37 @@
     <string name="go_back">Go Back</string>
     <string name="okay">Okay</string>
     <string name="alert">Alert</string>
-    <string name="data_not_saved">Data is not saved yet.If you <b>Cancel</b> the process you will lose the data.</string>
+    <string name="data_not_saved">Do you want to leave this page without saving ?</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>
     <string name="sr_feedback_saved">Sr. citizen feedback data is saved Successfully</string>
+    <string name="sr_citizen">Senior Citizen</string>
+    <string name="family_member_of_sr_citizen">Family Member of Sr. Citizen</string>
+    <string name="may_be">May be</string>
+    <string name="not_applicable">Not Applicable</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_others">Others</string>
     <string-array name="talked_with">
-        <item>Senior Citizen</item>
-        <item>Family Member of Sr. Citizen</item>
+        <item>@string/sr_citizen</item>
+        <item>@string/family_member_of_sr_citizen</item>
         <item>@string/community_member</item>
     </string-array>
     <string-array name="behavior_changes">
-        <item>Yes</item>
-        <item>No</item>
-        <item>May be</item>
-        <item>Not Applicable</item>
+        <item>@string/yes</item>
+        <item>@string/no</item>
+        <item>@string/may_be</item>
+        <item>@string/not_applicable</item>
     </string-array>
     <string-array name="other_medical_problems_list">
         <item>@string/covid_19_symptoms</item>
         <item>@string/non_covid_symptoms</item>
-        <item>No Problem</item>
+        <item>@string/no_problems</item>
     </string-array>
     <string-array name="gender_array">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+        <item>@string/gender_others</item>
     </string-array>
 
 </resources>

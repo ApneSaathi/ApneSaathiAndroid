@@ -36,55 +36,55 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private fun preparePendingData() {
         pendingCallsList.add(
             User(
-                "1", "Sunil Sunny", "102/Shantinagar", "Pune",
+                "1", "Sunil Sunny","78", "102/Shantinagar", "Pune",
                 "Maharashtra", "M", "8893089872"
             )
         )
         pendingCallsList.add(
             User(
-                "2", "Amol Khose", "Panghat Row House", "Pune",
+                "2", "Amol Khose", "65","Panghat Row House", "Pune",
                 "Maharashtra", "M", "9673346489"
             )
         )
         pendingCallsList.add(
             User(
-                "3", "Omi H Mehta", "803/Nakshatra View", "Surat",
+                "3", "Omi H Mehta","55", "803/Nakshatra View", "Surat",
                 "Gujarat", "M", "9016903906"
             )
         )
         pendingCallsList.add(
             User(
-                "4", "Tejeshwar Chaudhary", "Niti Aayog", "Pune",
+                "4", "Tejeshwar Chaudhary", "60","Niti Aayog", "Pune",
                 "Maharashtra", "M", "9650650808"
             )
         )
         pendingCallsList.add(
             User(
-                "5", "Sucheta S.", "TCG 1005", "Pune",
+                "5", "Sucheta S.", "59","TCG 1005", "Pune",
                 "Maharashtra", "F", "9650650808"
             )
         )
         pendingCallsList.add(
             User(
-                "6", "Dushyant Datta", "Shree Hari Nagar", "Kota",
+                "6", "Dushyant Datta","63", "Shree Hari Nagar", "Kota",
                 "Rajasthan", "M", "8076982318"
             )
         )
         pendingCallsList.add(
             User(
-                "4", "Tejeshwar Chaudhary", "Niti Aayog", "Pune",
+                "4", "Tejeshwar Chaudhary","58", "Niti Aayog", "Pune",
                 "Maharashtra", "M", "9650650808"
             )
         )
         pendingCallsList.add(
             User(
-                "5", "Sucheta S.", "TCG 1005", "Pune",
+                "5", "Sucheta S.","75", "TCG 1005", "Pune",
                 "Maharashtra", "F", "9650650808"
             )
         )
         pendingCallsList.add(
             User(
-                "6", "Dushyant Datta", "Shree Hari Nagar", "Kota",
+                "6", "Dushyant Datta", "63","Shree Hari Nagar", "Kota",
                 "Rajasthan", "M", "8076982318"
             )
         )
@@ -94,13 +94,13 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private fun prepareFollowupData() {
         followupCallsList.add(
             User(
-                "5", "Sucheta S.", "TCG 1005", "Pune",
+                "5", "Sucheta S.","53", "TCG 1005", "Pune",
                 "Maharashtra", "F", "9650650808"
             )
         )
         followupCallsList.add(
             User(
-                "6", "Dushyant Datta", "Shree Hari Nagar", "Kota",
+                "6", "Dushyant Datta", "57","Shree Hari Nagar", "Kota",
                 "Rajasthan", "M", "8076982318"
             )
         )
@@ -110,25 +110,25 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private fun prepareAttendedData() {
         attendedCallsList.add(
             User(
-                "6", "RajShankar Khanal", "Rang Baugh Society", "Kota",
+                "6", "RajShankar Khanal", "67","Rang Baugh Society", "Kota",
                 "Haridwar", "M", "8076982318"
             )
         )
         attendedCallsList.add(
             User(
-                "7", "Sr. Narendra Modi", "Rashtrapati Bhavan", "Vadnager",
+                "7", "Sr. Narendra Modi","70", "Rashtrapati Bhavan", "Vadnager",
                 "Gujarat", "M", "9650650808"
             )
         )
         attendedCallsList.add(
             User(
-                "8", "Akshay Kumar", "Bandra", "Mumbai",
+                "8", "Akshay Kumar", "71","Bandra", "Mumbai",
                 "Maharashtra", "M", "9016903906"
             )
         )
         attendedCallsList.add(
             User(
-                "9", "Amitabh Bachchan", "Phase 2, Hinjewadi", "Pune",
+                "9", "Amitabh Bachchan","52", "Phase 2, Hinjewadi", "Pune",
                 "Maharashtra", "M", "8893089872"
             )
         )

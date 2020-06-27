@@ -1,7 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -15,7 +14,6 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -30,10 +28,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
 
         toolBar.title = getString(R.string.menu_home)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            rvPendingList.isNestedScrollingEnabled = false
-            rvGrievancesList.isNestedScrollingEnabled = false
-        }
+        rvPendingList.isNestedScrollingEnabled = false
+        rvGrievancesList.isNestedScrollingEnabled = false
 
         initRecyclerView()
         initViews()
@@ -45,9 +41,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickList
     override fun provideLayoutResource(): Int = R.layout.fragment_home
 
     override fun onCallPermissionGranted() {
-        val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-        startActivityForResult(intent, 1001)
-       // lastSelectedItem?.let { placeCall(it, R.id.fragmentHomeContainer) }
+        lastSelectedItem?.let { placeCall(it, R.id.fragmentHomeContainer) }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
