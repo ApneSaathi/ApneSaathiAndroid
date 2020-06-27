@@ -7,938 +7,1021 @@
 
     <include layout="@layout/include_appbar_layout_with_toolbar" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:paddingBottom="@dimen/dimen_30"
-        android:scrollbars="none"
-        app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="center"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true">
+            android:clipToPadding="false"
+            android:elevation="0dp"
+            android:paddingBottom="@dimen/view_size_48"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayoutHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:animateLayoutChanges="true">
 
-                <com.nitiaayog.apnesaathi.base.CircleImageView
-                    android:id="@+id/civGender"
-                    android:layout_width="@dimen/view_size_66"
-                    android:layout_height="@dimen/view_size_66"
-                    android:padding="@dimen/dimen_5"
-                    android:src="@drawable/ic_male_user"
-                    app:civ_border_color="@color/colorAccent"
-                    app:civ_border_width="1dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingBottom="@dimen/dimen_15"
+                    android:paddingEnd="@dimen/dimen_15"
+                    android:paddingTop="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.nitiaayog.apnesaathi.base.CircleImageView
+                        android:id="@+id/civGender"
+                        android:layout_width="@dimen/view_size_66"
+                        android:layout_height="@dimen/view_size_66"
+                        android:padding="@dimen/dimen_3"
+                        android:src="@drawable/ic_male_user"
+                        app:civ_border_color="@color/colorAccent"
+                        app:civ_border_width="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSrCitizenName"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_28"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:minHeight="@dimen/dimen_28"
+                        android:paddingStart="@dimen/dimen_3"
+                        android:paddingEnd="0dp"
+                        android:singleLine="true"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_15"
+                        app:layout_constraintEnd_toStartOf="@id/ivCall"
+                        app:layout_constraintStart_toEndOf="@id/civGender"
+                        app:layout_constraintTop_toTopOf="@id/civGender" />
+
+                    <TextView
+                        android:id="@+id/tvSrCitizenPhoneNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_28"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dimen_3"
+                        android:paddingEnd="0dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textSize="@dimen/text_12"
+                        app:layout_constraintBottom_toBottomOf="@id/civGender"
+                        app:layout_constraintEnd_toStartOf="@id/ivCall"
+                        app:layout_constraintStart_toEndOf="@id/civGender"
+                        app:layout_constraintTop_toBottomOf="@id/tvSrCitizenName" />
+
+                    <ImageView
+                        android:id="@+id/ivCall"
+                        android:layout_width="@dimen/view_size_36"
+                        android:layout_height="@dimen/view_size_36"
+                        android:background="?android:actionBarItemBackground"
+                        android:contentDescription="@string/menu_calls"
+                        android:src="@drawable/ic_call"
+                        app:layout_constraintBottom_toBottomOf="@id/civGender"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/civGender" />
+
+                    <TextView
+                        android:id="@+id/tvSrCitizenAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dimen_10"
+                        android:paddingEnd="@dimen/dimen_10"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_color"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_14"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/civGender" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dimen_28"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center_vertical"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:minHeight="@dimen/dimen_28"
-                    android:paddingStart="@dimen/dimen_3"
-                    android:paddingEnd="0dp"
-                    android:singleLine="true"
+                    android:id="@+id/tvCallStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_3"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/call_status_1"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
-                    app:layout_constraintEnd_toStartOf="@id/ivCall"
-                    app:layout_constraintStart_toEndOf="@id/civGender"
-                    app:layout_constraintTop_toTopOf="@id/civGender" />
-
-                <TextView
-                    android:id="@+id/tvPhoneNumber"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dimen_28"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center_vertical"
-                    android:textAllCaps="false"
-                    android:textColor="@color/text_color_1"
-                    android:textSize="@dimen/text_12"
-                    app:layout_constraintBottom_toBottomOf="@id/civGender"
-                    app:layout_constraintEnd_toStartOf="@id/ivCall"
-                    app:layout_constraintStart_toEndOf="@id/civGender"
-                    app:layout_constraintTop_toBottomOf="@id/tvName" />
-
-                <ImageView
-                    android:id="@+id/ivCall"
-                    android:layout_width="@dimen/view_size_36"
-                    android:layout_height="@dimen/view_size_36"
-                    android:background="?android:actionBarItemBackground"
-                    android:contentDescription="@string/menu_calls"
-                    android:src="@drawable/ic_call"
-                    app:layout_constraintBottom_toBottomOf="@id/civGender"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/civGender" />
-
-                <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_7"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center_vertical"
-                    android:textAllCaps="false"
-                    android:textColor="@color/text_color_1"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/civGender" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tvCallStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_3"
-                android:layout_marginEnd="0dp"
-                android:text="@string/call_status_1"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constraintLayoutHeader"
-                app:layout_goneMarginTop="@dimen/dimen_10" />
-
-            <LinearLayout
-                android:id="@+id/llCallStatusLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvCallStatus">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnNoResponse"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/no_response"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12"
-                    app:strokeColor="@color/color_dark_grey_txt" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnNotPicked"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_15"
-                    android:layout_weight="1"
-                    android:text="@string/not_picked"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12"
-                    app:strokeColor="@color/color_dark_grey_txt" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnNotReachable"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_15"
-                    android:layout_weight="1"
-                    android:text="@string/not_reachable"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12"
-                    app:strokeColor="@color/color_dark_grey_txt" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llCallStatusLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout1">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnDisConnected"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dis_connected"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12"
-                    app:strokeColor="@color/color_dark_grey_txt" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnConnected"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_15"
-                    android:text="@string/connected"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_dark_grey_txt"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12"
-                    app:strokeColor="@color/color_dark_grey_txt" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvTalkWith"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/whom_did_you_talk_with"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout2" />
-
-            <AutoCompleteTextView
-                android:id="@+id/actTalkWith"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_48"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:completionThreshold="0"
-                android:cursorVisible="false"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:focusable="false"
-                android:hint="@string/talked_with"
-                android:inputType="none|textNoSuggestions"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTalkWith" />
-
-            <TextView
-                android:id="@+id/tvAnySrCitizenInHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/any_sr_citizen_in_home"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actTalkWith" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAnySrCitizenInHomeYes"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:text="@string/yes"
-                android:textAllCaps="false"
-                android:textColor="@color/gray_background"
-                android:visibility="gone"
-                app:cornerRadius="@dimen/dimen_3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAnySrCitizenInHome"
-                app:strokeColor="@color/light_gray_orange_stroke_selector" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAnySrCitizenInHomeNo"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:text="@string/no"
-                android:textAllCaps="false"
-                android:textColor="@color/gray_background"
-                android:textIsSelectable="false"
-                android:visibility="gone"
-                app:cornerRadius="@dimen/dimen_3"
-                app:layout_constraintStart_toEndOf="@id/btnAnySrCitizenInHomeYes"
-                app:layout_constraintTop_toBottomOf="@id/tvAnySrCitizenInHome"
-                app:strokeColor="@color/light_gray_orange_stroke_selector" />
-
-            <TextView
-                android:id="@+id/tvNewSrCitizenPersonalDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:background="@android:color/darker_gray"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/dimen_35"
-                android:paddingStart="@dimen/dimen_15"
-                android:paddingEnd="0dp"
-                android:text="@string/new_sr_citizen_personal_details"
-                android:textAllCaps="false"
-                android:textSize="@dimen/text_14"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnAnySrCitizenInHomeNo" />
-
-            <include
-                android:id="@+id/registerNewSrCitizen"
-                layout="@layout/include_register_new_sr_citizen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNewSrCitizenPersonalDetails" />
-
-            <TextView
-                android:id="@+id/tvMedicalDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:background="@android:color/darker_gray"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/dimen_35"
-                android:paddingStart="@dimen/dimen_15"
-                android:paddingEnd="0dp"
-                android:text="@string/medical_details"
-                android:textAllCaps="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actTalkWith" />
-
-            <TextView
-                android:id="@+id/tvMedicalHistorySrCitizen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/medical_history_sr_citizen"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvMedicalDetails" />
-
-            <MultiAutoCompleteTextView
-                android:id="@+id/actMedicalHistorySrCitizen"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_48"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:completionThreshold="0"
-                android:cursorVisible="false"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:drawablePadding="@dimen/dimen_5"
-                android:focusable="false"
-                android:hint="@string/medical_history"
-                android:inputType="none|textNoSuggestions"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvMedicalHistorySrCitizen" />
-
-            <TextView
-                android:id="@+id/tvInfoYouTalkedAbout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/info_you_talked_about"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actMedicalHistorySrCitizen" />
-
-            <HorizontalScrollView
-                android:id="@+id/hsvInfoYouTalkedAbout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:clipToPadding="false"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:scrollbars="none"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvInfoYouTalkedAbout">
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayoutHeader"
+                    app:layout_goneMarginTop="@dimen/dimen_10" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/llCallStatusLayout1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCallStatus">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPrevention"
+                        android:id="@+id/btnNoResponse"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/prevention"
+                        android:layout_weight="1"
+                        android:text="@string/no_response"
                         android:textAllCaps="false"
                         android:textColor="@color/color_dark_grey_txt"
                         android:textIsSelectable="false"
-                        app:cornerRadius="@dimen/dimen_15"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="@dimen/dimen_3"
-                        app:iconTint="@color/color_orange"
+                        android:textSize="@dimen/text_12"
                         app:strokeColor="@color/color_dark_grey_txt" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAccess"
+                        android:id="@+id/btnNotPicked"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dimen_15"
-                        android:layout_marginEnd="@dimen/dimen_15"
-                        android:text="@string/access"
+                        android:layout_weight="1"
+                        android:text="@string/not_picked"
                         android:textAllCaps="false"
                         android:textColor="@color/color_dark_grey_txt"
                         android:textIsSelectable="false"
-                        app:cornerRadius="@dimen/dimen_15"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="@dimen/dimen_3"
-                        app:iconTint="@color/color_orange"
+                        android:textSize="@dimen/text_12"
                         app:strokeColor="@color/color_dark_grey_txt" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnDetection"
+                        android:id="@+id/btnNotReachable"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/detection"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:layout_weight="1"
+                        android:text="@string/not_reachable"
                         android:textAllCaps="false"
                         android:textColor="@color/color_dark_grey_txt"
                         android:textIsSelectable="false"
-                        app:cornerRadius="@dimen/dimen_15"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="@dimen/dimen_3"
-                        app:iconTint="@color/color_orange"
+                        android:textSize="@dimen/text_12"
                         app:strokeColor="@color/color_dark_grey_txt" />
 
                 </LinearLayout>
 
-            </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/tvBehaviorChangePractical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:text="@string/behavior_change_practice"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/hsvInfoYouTalkedAbout" />
-
-            <AutoCompleteTextView
-                android:id="@+id/actBehaviorChange"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_48"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:completionThreshold="0"
-                android:cursorVisible="false"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:focusable="false"
-                android:hint="@string/medical_history"
-                android:inputType="none|textNoSuggestions"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBehaviorChangePractical" />
-
-            <TextView
-                android:id="@+id/tvOtherMedicalProblems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/other_medical_problems"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actBehaviorChange" />
-
-            <AutoCompleteTextView
-                android:id="@+id/actOtherMedicalProblems"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_48"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:completionThreshold="0"
-                android:cursorVisible="false"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:focusable="false"
-                android:hint="@string/medical_problems"
-                android:inputType="none|textNoSuggestions"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOtherMedicalProblems" />
-
-            <TextView
-                android:id="@+id/tvCovidSymptoms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/covid_symptoms"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actOtherMedicalProblems" />
-
-            <LinearLayout
-                android:id="@+id/llCough"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:background="?selectableItemBackground"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvCovidSymptoms">
-
-                <ImageView
-                    android:id="@+id/ivCough"
-                    android:layout_width="@dimen/view_size_78"
-                    android:layout_height="@dimen/view_size_78"
-                    android:background="@drawable/bg_border_selector"
-                    android:contentDescription="@string/cough"
-                    android:padding="@dimen/dimen_7"
-                    android:src="@drawable/bg_cough_selector" />
-
-                <TextView
-                    android:id="@+id/tvCough"
+                <LinearLayout
+                    android:id="@+id/llCallStatusLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
                     android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout1">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDisConnected"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dis_connected"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_12"
+                        app:strokeColor="@color/color_dark_grey_txt" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnConnected"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:text="@string/connected"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_12"
+                        app:strokeColor="@color/color_dark_grey_txt" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvTalkWith"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/whom_did_you_talk_with"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout2" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/actTalkWith"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_size_48"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:completionThreshold="0"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:focusable="false"
+                    android:hint="@string/talked_with"
+                    android:inputType="none|textNoSuggestions"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:textColor="@color/color_dark_grey_txt"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTalkWith" />
+
+                <TextView
+                    android:id="@+id/tvAnySrCitizenInHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/any_sr_citizen_in_home"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actTalkWith" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAnySrCitizenInHomeYes"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:visibility="gone"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvAnySrCitizenInHome"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAnySrCitizenInHomeNo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/no"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:textIsSelectable="false"
+                    android:visibility="gone"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toEndOf="@id/btnAnySrCitizenInHomeYes"
+                    app:layout_constraintTop_toBottomOf="@id/tvAnySrCitizenInHome"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <TextView
+                    android:id="@+id/tvNewSrCitizenPersonalDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/dimen_35"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingEnd="0dp"
+                    android:text="@string/new_sr_citizen_personal_details"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnAnySrCitizenInHomeNo" />
+
+                <include
+                    android:id="@+id/registerNewSrCitizen"
+                    layout="@layout/include_register_new_sr_citizen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNewSrCitizenPersonalDetails" />
+
+                <TextView
+                    android:id="@+id/tvMedicalDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:background="@android:color/darker_gray"
+                    android:focusable="true"
+                    android:focusedByDefault="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/dimen_35"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingEnd="0dp"
+                    android:text="@string/medical_details"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actTalkWith" />
+
+                <TextView
+                    android:id="@+id/tvMedicalHistorySrCitizen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/medical_history_sr_citizen"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvMedicalDetails" />
+
+                <LinearLayout
+                    android:id="@+id/flMedicalHistorySrCitizen"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_size_48"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvMedicalHistorySrCitizen">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMedicalHistorySrCitizen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/dimen_5"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvInfoYouTalkedAbout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/info_you_talked_about"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flMedicalHistorySrCitizen" />
+
+                <HorizontalScrollView
+                    android:id="@+id/hsvInfoYouTalkedAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:scrollbars="none"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvInfoYouTalkedAbout">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPrevention"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/prevention"
+                            android:textAllCaps="false"
+                            android:textColor="@color/color_dark_grey_txt"
+                            android:textIsSelectable="false"
+                            app:cornerRadius="@dimen/dimen_15"
+                            app:iconGravity="textEnd"
+                            app:iconPadding="@dimen/dimen_3"
+                            app:iconTint="@color/color_orange"
+                            app:strokeColor="@color/color_dark_grey_txt" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAccess"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_15"
+                            android:layout_marginEnd="@dimen/dimen_15"
+                            android:text="@string/access"
+                            android:textAllCaps="false"
+                            android:textColor="@color/color_dark_grey_txt"
+                            android:textIsSelectable="false"
+                            app:cornerRadius="@dimen/dimen_15"
+                            app:iconGravity="textEnd"
+                            app:iconPadding="@dimen/dimen_3"
+                            app:iconTint="@color/color_orange"
+                            app:strokeColor="@color/color_dark_grey_txt" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnDetection"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detection"
+                            android:textAllCaps="false"
+                            android:textColor="@color/color_dark_grey_txt"
+                            android:textIsSelectable="false"
+                            app:cornerRadius="@dimen/dimen_15"
+                            app:iconGravity="textEnd"
+                            app:iconPadding="@dimen/dimen_3"
+                            app:iconTint="@color/color_orange"
+                            app:strokeColor="@color/color_dark_grey_txt" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/tvBehaviorChangePractical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:text="@string/behavior_change_practice"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hsvInfoYouTalkedAbout" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/actBehaviorChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_size_48"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:completionThreshold="0"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:focusable="false"
+                    android:hint="@string/medical_history"
+                    android:inputType="none|textNoSuggestions"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:textColor="@color/color_dark_grey_txt"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvBehaviorChangePractical" />
+
+                <TextView
+                    android:id="@+id/tvOtherMedicalProblems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/other_medical_problems"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actBehaviorChange" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/actOtherMedicalProblems"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_size_48"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:completionThreshold="0"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:focusable="false"
+                    android:hint="@string/medical_problems"
+                    android:inputType="none|textNoSuggestions"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:textColor="@color/color_dark_grey_txt"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOtherMedicalProblems" />
+
+                <TextView
+                    android:id="@+id/tvCovidSymptoms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/covid_symptoms"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actOtherMedicalProblems" />
+
+                <HorizontalScrollView
+                    android:id="@+id/hsvCovidSymptoms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingEnd="@dimen/dimen_15"
+                    android:scrollbars="none"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCovidSymptoms">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/llCough"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?selectableItemBackground"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivCough"
+                                android:layout_width="@dimen/view_size_78"
+                                android:layout_height="@dimen/view_size_78"
+                                android:background="@drawable/bg_border_selector"
+                                android:contentDescription="@string/cough"
+                                android:padding="@dimen/dimen_7"
+                                android:src="@drawable/bg_cough_selector" />
+
+                            <TextView
+                                android:id="@+id/tvCough"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:minLines="2"
+                                android:text="@string/cough"
+                                android:textAllCaps="false"
+                                android:textColor="@color/color_dark_grey_txt"
+                                android:textIsSelectable="false"
+                                android:textSize="@dimen/text_12" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llFever"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_15"
+                            android:background="?selectableItemBackground"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@id/llCough"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivFever"
+                                android:layout_width="@dimen/view_size_78"
+                                android:layout_height="@dimen/view_size_78"
+                                android:background="@drawable/bg_border_selector"
+                                android:contentDescription="@string/cough"
+                                android:padding="@dimen/dimen_7"
+                                android:src="@drawable/bg_fever_selector" />
+
+                            <TextView
+                                android:id="@+id/tvFever"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:minLines="2"
+                                android:text="@string/fever"
+                                android:textAllCaps="false"
+                                android:textIsSelectable="false"
+                                android:textSize="@dimen/text_12" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llShortOfBreath"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_15"
+                            android:background="?selectableItemBackground"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@id/llFever"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivShortnessOfBreath"
+                                android:layout_width="@dimen/view_size_78"
+                                android:layout_height="@dimen/view_size_78"
+                                android:background="@drawable/bg_border_selector"
+                                android:contentDescription="@string/cough"
+                                android:padding="@dimen/dimen_7"
+                                android:src="@drawable/bg_shortness_selector" />
+
+                            <TextView
+                                android:id="@+id/tvShortnessOfBreath"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:minLines="2"
+                                android:text="@string/shortness_of_breath"
+                                android:textAllCaps="false"
+                                android:textIsSelectable="false"
+                                android:textSize="@dimen/text_12" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/tvQuarantineHospitalizationStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/quarantine_hospitalization_status"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hsvCovidSymptoms" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/actQuarantineHospitalizationStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_size_48"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:completionThreshold="0"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:focusable="false"
+                    android:hint="@string/status"
+                    android:inputType="none|textNoSuggestions"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:textColor="@color/color_dark_grey_txt"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvQuarantineHospitalizationStatus" />
+
+                <TextView
+                    android:id="@+id/tvComplaints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/dimen_35"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingEnd="0dp"
+                    android:text="@string/complaints"
+                    android:textAllCaps="false"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actQuarantineHospitalizationStatus" />
+
+                <TextView
+                    android:id="@+id/tvReportEssentialServices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:text="@string/sr_citizen_report_lack_of_essintial_services"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplaints" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLackOfEssentialServicesYes"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvReportEssentialServices"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLackOfEssentialServicesNo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/no"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:textIsSelectable="false"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toEndOf="@id/btnLackOfEssentialServicesYes"
+                    app:layout_constraintTop_toBottomOf="@id/tvReportEssentialServices"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <TextView
+                    android:id="@+id/tvSelectCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:text="@string/select_category"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnLackOfEssentialServicesYes" />
+
+                <FrameLayout
+                    android:id="@+id/flCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_size_48"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSelectCategory">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/dimen_5"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:text="@string/description"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/flCategory" />
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:hint="@string/type_here"
+                    android:maxLines="5"
                     android:minLines="2"
-                    android:text="@string/cough"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingTop="@dimen/dimen_3"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:paddingBottom="@dimen/dimen_3"
                     android:textAllCaps="false"
                     android:textColor="@color/color_dark_grey_txt"
                     android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llFever"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:background="?selectableItemBackground"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@id/llCough"
-                app:layout_constraintTop_toBottomOf="@id/tvCovidSymptoms">
-
-                <ImageView
-                    android:id="@+id/ivFever"
-                    android:layout_width="@dimen/view_size_78"
-                    android:layout_height="@dimen/view_size_78"
-                    android:background="@drawable/bg_border_selector"
-                    android:contentDescription="@string/cough"
-                    android:padding="@dimen/dimen_7"
-                    android:src="@drawable/bg_fever_selector" />
+                    android:textSize="@dimen/text_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescription" />
 
                 <TextView
-                    android:id="@+id/tvFever"
+                    android:id="@+id/tvEmergencyEscalation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:text="@string/need_emergency_escalation"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etDescription" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEmergencyYes"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:text="@string/yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:textIsSelectable="false"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmergencyEscalation"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEmergencyNo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:text="@string/no"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:textIsSelectable="false"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toEndOf="@id/btnEmergencyYes"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmergencyEscalation"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <TextView
+                    android:id="@+id/tvOtherImpInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:minLines="2"
-                    android:text="@string/fever"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/dimen_35"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingEnd="0dp"
+                    android:text="@string/other_important_information"
                     android:textAllCaps="false"
                     android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llShortOfBreath"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:background="?selectableItemBackground"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@id/llFever"
-                app:layout_constraintTop_toBottomOf="@id/tvCovidSymptoms">
-
-                <ImageView
-                    android:id="@+id/ivShortnessOfBreath"
-                    android:layout_width="@dimen/view_size_78"
-                    android:layout_height="@dimen/view_size_78"
-                    android:background="@drawable/bg_border_selector"
-                    android:contentDescription="@string/cough"
-                    android:padding="@dimen/dimen_7"
-                    android:src="@drawable/bg_shortness_selector" />
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnEmergencyYes" />
 
                 <TextView
-                    android:id="@+id/tvShortnessOfBreath"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:minLines="2"
-                    android:text="@string/shortness_of_breath"
+                    android:id="@+id/tvOtherDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:text="@string/description"
                     android:textAllCaps="false"
+                    android:textColor="@color/text_color"
                     android:textIsSelectable="false"
-                    android:textSize="@dimen/text_12" />
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOtherImpInfo" />
 
-            </LinearLayout>
+                <EditText
+                    android:id="@+id/etOtherDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/type_here"
+                    android:maxLines="5"
+                    android:minLines="2"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingTop="@dimen/dimen_3"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:paddingBottom="@dimen/dimen_3"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_dark_grey_txt"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOtherDescription" />
 
-            <TextView
-                android:id="@+id/tvQuarantineHospitalizationStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="0dp"
-                android:text="@string/quarantine_hospitalization_status"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llCough" />
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/cgMedicalDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,flMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
 
-            <AutoCompleteTextView
-                android:id="@+id/actQuarantineHospitalizationStatus"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_48"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:completionThreshold="0"
-                android:cursorVisible="false"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:focusable="false"
-                android:hint="@string/status"
-                android:inputType="none|textNoSuggestions"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvQuarantineHospitalizationStatus" />
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/cgComplaintDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,flCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyYes,btnEmergencyNo" />
 
-            <TextView
-                android:id="@+id/tvComplaints"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:background="@android:color/darker_gray"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/dimen_35"
-                android:paddingStart="@dimen/dimen_15"
-                android:paddingEnd="0dp"
-                android:text="@string/complaints"
-                android:textAllCaps="false"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actQuarantineHospitalizationStatus" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tvReportEssentialServices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:text="@string/sr_citizen_report_lack_of_essintial_services"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvComplaints" />
+        </androidx.core.widget.NestedScrollView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLackOfEssentialServicesYes"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:text="@string/yes"
-                android:textAllCaps="false"
-                android:textColor="@color/gray_background"
-                app:cornerRadius="@dimen/dimen_3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvReportEssentialServices"
-                app:strokeColor="@color/light_gray_orange_stroke_selector" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/view_size_48"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:backgroundTint="@color/color_orange"
+            android:elevation="1dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnCancelMe"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLackOfEssentialServicesNo"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:text="@string/no"
-                android:textAllCaps="false"
-                android:textColor="@color/gray_background"
-                android:textIsSelectable="false"
-                app:cornerRadius="@dimen/dimen_3"
-                app:layout_constraintStart_toEndOf="@id/btnLackOfEssentialServicesYes"
-                app:layout_constraintTop_toBottomOf="@id/tvReportEssentialServices"
-                app:strokeColor="@color/light_gray_orange_stroke_selector" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelMe"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/view_size_48"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:backgroundTint="@color/text_color_2"
+            android:elevation="1dp"
+            android:fontFamily="sans-serif"
+            android:text="@android:string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/btnSave" />
 
-            <TextView
-                android:id="@+id/tvSelectCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:text="@string/select_category"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnLackOfEssentialServicesYes" />
-
-            <MultiAutoCompleteTextView
-                android:id="@+id/actCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_48"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:completionThreshold="0"
-                android:cursorVisible="false"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:focusable="false"
-                android:hint="@string/category"
-                android:inputType="none|textNoSuggestions"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingEnd="@dimen/dimen_10"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSelectCategory" />
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:text="@string/description"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actCategory" />
-
-            <EditText
-                android:id="@+id/etDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:hint="@string/type_here"
-                android:maxLines="5"
-                android:minLines="2"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingTop="@dimen/dimen_3"
-                android:paddingEnd="@dimen/dimen_10"
-                android:paddingBottom="@dimen/dimen_3"
-                android:textAllCaps="false"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_12"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
-
-            <TextView
-                android:id="@+id/tvEmergencyEscalation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:text="@string/need_emergency_escalation"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etDescription" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEmergencyYes"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/yes"
-                android:textAllCaps="false"
-                android:textColor="@color/gray_background"
-                android:textIsSelectable="false"
-                app:cornerRadius="@dimen/dimen_3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvEmergencyEscalation"
-                app:strokeColor="@color/light_gray_orange_stroke_selector" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEmergencyNo"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/no"
-                android:textAllCaps="false"
-                android:textColor="@color/gray_background"
-                android:textIsSelectable="false"
-                app:cornerRadius="@dimen/dimen_3"
-                app:layout_constraintStart_toEndOf="@id/btnEmergencyYes"
-                app:layout_constraintTop_toBottomOf="@id/tvEmergencyEscalation"
-                app:strokeColor="@color/light_gray_orange_stroke_selector" />
-
-            <TextView
-                android:id="@+id/tvOtherImpInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:background="@android:color/darker_gray"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/dimen_35"
-                android:paddingStart="@dimen/dimen_15"
-                android:paddingEnd="0dp"
-                android:text="@string/other_important_information"
-                android:textAllCaps="false"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnEmergencyYes" />
-
-            <TextView
-                android:id="@+id/tvOtherDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_15"
-                android:text="@string/description"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOtherImpInfo" />
-
-            <EditText
-                android:id="@+id/etOtherDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_15"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:layout_marginEnd="@dimen/dimen_15"
-                android:background="@drawable/bg_rectangle_border_form"
-                android:hint="@string/type_here"
-                android:maxLines="5"
-                android:minLines="2"
-                android:paddingStart="@dimen/dimen_10"
-                android:paddingTop="@dimen/dimen_3"
-                android:paddingEnd="@dimen/dimen_10"
-                android:paddingBottom="@dimen/dimen_3"
-                android:textAllCaps="false"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/text_12"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOtherDescription" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/cgMedicalDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,actMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvQuarantineHospitalizationStatus,actQuarantineHospitalizationStatus,tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,actCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyYes,btnEmergencyNo,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -18,11 +18,11 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.User
-import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenEditFragment
+import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
+import com.nitiaayog.apnesaathi.utility.USER_DETAILS
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -120,20 +120,25 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     }
 
     protected fun placeCall(selectedUser: User, containerId: Int) {
-        Intent(Intent.ACTION_CALL).apply {
+        /*Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:${selectedUser.phoneNumber}")
-            if (this.resolveActivity(activity!!.packageManager) != null)
-                startActivity(this)
+            if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
             else onCallPermissionDenied()
-        }
+        }*/
 
-        Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                addFragment(
-                    containerId, SeniorCitizenEditFragment(), getString(R.string.edit_fragment)
-                )
-                //startActivity(Intent(activity, SeniorCitizenFeedbackFormActivity::class.java))
-            }.autoDispose(disposables)
+//        Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
+//            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+//                /*addFragment(
+//                    containerId, SeniorCitizenEditFragment(), getString(R.string.edit_fragment)
+//                )*/
+//                val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+//                intent.putExtra(USER_DETAILS, selectedUser)
+//                startActivity(intent)
+//            }.autoDispose(disposables)
+
+        val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+        intent.putExtra(USER_DETAILS, selectedUser)
+        startActivity(intent)
     }
 
     abstract fun provideViewModel(): VM

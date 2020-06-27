@@ -11,6 +11,7 @@ object ApiConstants {
     const val District: String = "district"
     const val PhoneNumber: String = "phone_number"
     const val Gender: String = "gender"
+    const val Age: String = "age"
     const val UserInfo: String = "user_info"
 
     const val AssessmentQuestions: String = "assessment_questions"

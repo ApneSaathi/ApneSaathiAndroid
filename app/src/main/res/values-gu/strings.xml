@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Apne Saathi</string>
+    <string name="app_name">અપના સાથી</string>
 
     <string name="total_calls_vs_connected">વી.એસ. કનેક્ટેડ કુલ કોલ્સ</string>
     <string name="total_sr_citizens_supported">કુલ નં. વરિષ્ઠ નાગરિકો આધારભૂત છે</string>
@@ -106,17 +106,12 @@
     <string name="call_connected">કૉલ્સ કનેક્ટ થયાં</string>
     <string name="call_permission_denied">કૉલ્સ કરવાની પરવાનગી નામંજૂર</string>
     <string name="not_handle_action">ક્રિયા નિયંત્રિત કરી શકતા નથી</string>
-    <string name="personal_details">વ્યક્તિગત વિગતો</string>
     <string name="name">નામ</string>
     <string name="age">ઉંમર</string>
     <string name="state">રાજ્ય</string>
     <string name="district">જીલ્લો</string>
     <string name="block">અવરોધિત કરો</string>
-    <string name="health_care_information">આરોગ્ય સંભાળ માહિતી</string>
-    <string name="emotional_state">ભાવનાત્મક સ્થિતિ</string>
-    <string name="happy">ખુશ</string>
-    <string name="neutral">તટસ્થ</string>
-    <string name="sad">ઉદાસી</string>
+
     <string name="covid_symptoms">કોવિડના લક્ષણો</string>
     <string name="yes">હા</string>
     <string name="no">ના</string>
@@ -217,4 +212,68 @@
     <string name="low">નીચા</string>
 
 
+    <string name="not_picked">ઉઠાવી\nનથી</string>
+    <string name="not_reachable">પહોંચી શકાય\nતેવું નથી</string>
+    <string name="dis_connected">ડિસ્કનેક્ટ થયેલ</string>
+    <string name="connected">કનેક્ટેડ</string>
+    <string name="talked_with">કોની સાથે વાત કરી</string>
+    <string name="medical_history">તબીબી ઇતિહાસ</string>
+    <string name="medical_problems">તબીબી સમસ્યાઓ</string>
+    <string name="whom_did_you_talk_with">કોની સાથે વાત કરી</string>
+    <string name="medical_history_sr_citizen">વરિષ્ઠ નાગરિકનો તબીબી ઇતિહાસ</string>
+    <string name="behavior_change_practice">શું વરિષ્ઠ નાગરિકે તેમની સાથે વહેંચેલી વર્તણૂક પરિવર્તનની પદ્ધતિઓ હાથ ધરી છે ?</string>
+    <string name="info_you_talked_about">તમે કઈ સંબંધિત માહિતી વિશે વાત કરી હતી</string>
+    <string name="prevention">નિવારણ</string>
+    <string name="access">પહોંચ</string>
+    <string name="detection">તપાસ</string>
+    <string name="status">સ્થિતિ</string>
+    <string name="covid_19_symptoms">કોરોના લક્ષણો</string>
+    <string name="non_covid_symptoms">બિન-કોરોના તબીબી સમસ્યાઓ</string>
+    <string name="select_category">કેટેગરી પસંદ કરો</string>
+    <string name="gender">લિંગ-વિશિષ્ટ</string>
+    <string name="report_lack_of_essential_services">આવશ્યક સેવાઓનો અભાવ જાણ કરો</string>
+    <string name="sr_citizen_report_lack_of_essintial_services">શું વરિષ્ઠ નાગરિક આવશ્યક સેવાઓની અભાવની જાણ કરે છે ?</string>
+    <string name="need_emergency_escalation">શું કટોકટી અને વૃદ્ધિની આવશ્યકતા છે ?</string>
+    <string name="any_sr_citizen_in_home">શું તમારા ઘરમાં કોઈ વરિષ્ઠ નાગરિક છે? ?</string>
+    <string name="new_sr_citizen_personal_details">નવી વરિષ્ઠ નાગરિક વિગતો</string>
+    <string name="contact_number">સંપર્ક નંબર</string>
+    <string name="address">સરનામું</string>
+    <string name="register">નોંધણી કરો</string>
+    <string name="community_member">સમુદાય સભ્ય</string>
+    <string name="go_back">પાછા જાવ</string>
+    <string name="okay">બરાબર</string>
+    <string name="alert">ચેતવણી</string>
+    <string name="data_not_saved">શું તમે આ પૃષ્ઠને સંગ્રહ કર્યા વિના છોડવા માંગો છો ?</string>
+    <string name="success">સફળતા</string>
+    <string name="failed">નિષ્ફળ</string>
+    <string name="sr_feedback_saved">વરિષ્ઠ નાગરિકની પ્રતિસાદ માહિતી સફળતાપૂર્વક સાચવવામાં આવી છે</string>
+    <string name="sr_citizen">વરિષ્ઠ નાગરિક</string>
+    <string name="family_member_of_sr_citizen">વરિષ્ઠ નાગરિકના કુટુંબ સભ્ય</string>
+    <string name="may_be">કદાચ</string>
+    <string name="not_applicable">લાગુ પડતું નથી</string>
+    <string name="gender_male">પુરુષ</string>
+    <string name="gender_female">સ્ત્રી</string>
+    <string name="gender_others">અન્ય
+</string>
+    <string-array name="talked_with">
+        <item>@string/sr_citizen</item>
+        <item>@string/family_member_of_sr_citizen</item>
+        <item>@string/community_member</item>
+    </string-array>
+    <string-array name="behavior_changes">
+        <item>@string/yes</item>
+        <item>@string/no</item>
+        <item>@string/may_be</item>
+        <item>@string/not_applicable</item>
+    </string-array>
+    <string-array name="other_medical_problems_list">
+        <item>@string/covid_19_symptoms</item>
+        <item>@string/non_covid_symptoms</item>
+        <item>@string/no_problems</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+        <item>@string/gender_others</item>
+    </string-array>
 </resources>
