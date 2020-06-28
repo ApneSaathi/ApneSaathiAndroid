@@ -312,4 +312,8 @@
     <string name="sore_throat">Sore Throat</string>
     <string name="lack_of_essential_services">Lack of Essential Services</string>
     <string name="emergency_escalation">Emergency Escalation</string>
+    <string name="issue_raised">Issue Raised</string>
+    <string name="raised_on">Raised on:</string>
+    <string name="less_details"><u>Less details</u></string>
+    <string name="more_details"><u>More details</u></string>
 </resources>
