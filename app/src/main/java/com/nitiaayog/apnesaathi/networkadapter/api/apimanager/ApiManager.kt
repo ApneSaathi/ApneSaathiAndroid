@@ -14,7 +14,6 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
     companion object {
         @Volatile
         private var instance: ApiManager? = null
-
         @Synchronized
         fun getApiRequest(apiClient: ApiInterface): ApiManager =
             instance ?: synchronized(this) {
@@ -22,7 +21,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
             }
     }
 
-    override fun loginUser(phoneNumber: String): Single<LoginRepo> =
+    override fun loginUser(phoneNumber:String): Single<LoginRepo> =
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
     override fun getAssessmentQuestions(): Single<AssessmentRepo> =

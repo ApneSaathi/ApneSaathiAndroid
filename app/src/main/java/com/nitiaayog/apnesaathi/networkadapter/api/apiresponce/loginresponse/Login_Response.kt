@@ -1,16 +1,13 @@
-package com.nitiaayog.apnesaathi.networkadapter.api.apiresponce
+package com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class LoginRepo() {
-
+class Login_Response {
     @SerializedName("statusCode")
     @Expose
-    var statusCode: String = ""
-
+     var statusCode:String=""
     @SerializedName("message")
     @Expose
-    var message: String = ""
-
+    var message:String = ""
 }

@@ -250,6 +250,11 @@
     <string name="high">High</string>
     <string name="low">Low</string>
     <string name="call_connected">Call connected</string>
+    <string name="changelanguage">Change Language</string>
+    <string name="logout">Logout</string>
+    <string name="Txtaddress">Address</string>
+    <string name="contctNumber">Contact Number</string>
+    <string name="email">Email-ID</string>
 
 
 </resources>

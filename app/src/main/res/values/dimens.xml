@@ -50,5 +50,7 @@
     <dimen name="text_15">15sp</dimen>
     <dimen name="text_18">18sp</dimen>
     <dimen name="text_16">16sp</dimen>
+    <dimen name="dime90dp">90dp</dimen>
+    <dimen name="dime100dp">100dp</dimen>
 
 </resources>

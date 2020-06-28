@@ -2,7 +2,7 @@ package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
 object ApiConstants {
 
-    const val BASE_URL: String = "https://www.google.com"
+    const val BASE_URL: String = "http://3.7.39.123:8080/"
 
     const val UserId: String = "user_id"
     const val UserName: String = "user_name"
