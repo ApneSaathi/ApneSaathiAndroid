@@ -1,10 +1,11 @@
 package com.nitiaayog.apnesaathi.datamanager
 
 import android.app.Application
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.requestmodels.NewSeniorCitizen
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
@@ -32,11 +33,14 @@ class AppDataManager private constructor(
     }
 
     // ApiRequests
-    override fun loginUser(phoneNumber: String): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
         apiRequest.loginUser(phoneNumber)
 
-    override fun registerSeniorCitizen(srDetails: NewSeniorCitizen): Single<LoginRepo> =
+    override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
         apiRequest.registerSeniorCitizen(srDetails)
+
+    override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
+        apiRequest.saveSrCitizenFeedback(srCitizenFeedback)
 
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()

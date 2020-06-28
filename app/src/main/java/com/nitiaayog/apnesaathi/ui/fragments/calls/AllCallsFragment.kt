@@ -24,7 +24,7 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
         val adapter = CallsAdapter(viewModel.getAllCalls())
         adapter.setOnItemClickListener(this)
 
-        rvList.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.view_size_66))
+        rvList.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.view_size_120))
         rvList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         rvList.adapter = adapter
     }

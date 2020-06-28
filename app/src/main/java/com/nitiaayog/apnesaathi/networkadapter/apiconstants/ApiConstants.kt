@@ -17,4 +17,12 @@ object ApiConstants {
     const val FirstName: String = "firstName"
     const val Address: String = "address"
     const val VolunteerId: String = "volunteerId"
+
+    const val AssessmentQuestions: String = "assessment_questions"
+    const val QuestionId: String = "q_id"
+    const val QuestionData: String = "q_data"
+    const val OptionId: String = "option_id"
+    const val Option: String = "option"
+    const val IsCorrectOption: String = "is_correct_option"
+    const val AvailableOptions: String = "available_options"
 }
