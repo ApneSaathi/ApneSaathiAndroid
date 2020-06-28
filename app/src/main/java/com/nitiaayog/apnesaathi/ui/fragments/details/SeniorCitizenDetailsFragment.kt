@@ -1,20 +1,26 @@
 package com.nitiaayog.apnesaathi.ui.fragments.details
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.replaceFragment
+import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
+import com.nitiaayog.apnesaathi.database.ApneSathiDatabase_Impl
 import com.nitiaayog.apnesaathi.model.DateItem
+import com.nitiaayog.apnesaathi.model.SeniorCitizen
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
+import kotlinx.coroutines.*
 
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
@@ -45,6 +51,17 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun bindData() {
+        //Test for database
+//        val medical: List<String> = listOf("diabetes", "y", "z")
+//        val essential: List<String> = listOf("lack of food", "y", "z")
+//        val relatedInfo: List<String> = listOf("x", "y", "z")
+//        val covidSymptoms: List<String> = listOf("cough", "fever", "z")
+//
+//        val seniorCitizen = SeniorCitizen(3540,false,"na","na","senior citizen",medical,relatedInfo,"yes",
+//            "na",covidSymptoms,covidSymptoms,"home",false,essential,"na",true,"na")
+//        val database : ApneSathiDatabase? =
+//            activity?.let { ApneSathiDatabase.getDatabase(it, MainScope()) }
+//        GlobalScope.launch {database?.ApneSathiDao()?.insertItem(seniorCitizen) }
         txt_user_name.text = user.userName
         txt_user_phone_number.text = user.phoneNumber
         val s = SpannableStringBuilder()
@@ -61,9 +78,25 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun initClicks() {
+        txt_more_details.setOnClickListener {
+            if(cg_more_details_group.isVisible){
+                cg_more_details_group.visibility = View.GONE
+                txt_more_details.text = getString(R.string.more_details)
+                txt_more_details.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+            }else{
+                cg_more_details_group.visibility = View.VISIBLE
+                txt_more_details.text = getString(R.string.less_details)
+                txt_more_details.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+            }
+        }
         img_call_button.setOnClickListener { prepareToCallPerson() }
         txt_edit.setOnClickListener {
             val fragment = SeniorCitizenEditFragment()
+//            val database : ApneSathiDatabase? =
+//                activity?.let { ApneSathiDatabase.getDatabase(it, MainScope()) }
+//            GlobalScope.launch {
+//                val items = withContext(Dispatchers.IO) { database?.ApneSathiDao()?.getAll() }
+//            }
             fragment.setItemClickListener(this)
             replaceFragment(
                 R.id.fragment_edit_container, fragment, getString(R.string.edit_fragment)
