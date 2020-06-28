@@ -2,7 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
 
     <include layout="@layout/include_appbar_layout_with_toolbar" />
 
@@ -10,9 +11,10 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
         android:clipToPadding="false"
         android:paddingTop="@dimen/dimen_15"
-        android:paddingBottom="@dimen/dimen_15"
+        android:paddingBottom="@dimen/view_size_78"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <include layout="@layout/include_register_new_sr_citizen" />

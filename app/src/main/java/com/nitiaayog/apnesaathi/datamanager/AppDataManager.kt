@@ -1,10 +1,10 @@
 package com.nitiaayog.apnesaathi.datamanager
 
 import android.app.Application
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
@@ -33,14 +33,14 @@ class AppDataManager private constructor(
     }
 
     // ApiRequests
-    override fun loginUser(phoneNumber: String): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
         apiRequest.loginUser(phoneNumber)
 
-    override fun getAssessmentQuestions(): Single<AssessmentRepo> =
-        apiRequest.getAssessmentQuestions()
+    override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
+        apiRequest.registerSeniorCitizen(srDetails)
 
-    override fun syncAppDataWithServer(): Single<BaseRepo> =
-        apiRequest.syncAppDataWithServer()
+    override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
+        apiRequest.saveSrCitizenFeedback(srCitizenFeedback)
 
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()

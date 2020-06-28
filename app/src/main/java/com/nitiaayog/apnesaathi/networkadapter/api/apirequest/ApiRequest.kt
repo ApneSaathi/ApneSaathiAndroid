@@ -1,6 +1,6 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import io.reactivex.Single
@@ -8,11 +8,12 @@ import io.reactivex.Single
 interface ApiRequest {
 
     // Get Login User Data
-    fun loginUser(phoneNumber: String): Single<LoginRepo>
+    fun loginUser(phoneNumber: JsonObject): Single<LoginRepo>
 
-    // Get Assessment Questions List
-    fun getAssessmentQuestions(): Single<AssessmentRepo>
+    // Save Sr citizen feedback over a call
+    fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo>
 
-    // Sync App Data With Server
-    fun syncAppDataWithServer(): Single<BaseRepo>
+    // Register new Sr. Citizen
+    fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo>
+
 }

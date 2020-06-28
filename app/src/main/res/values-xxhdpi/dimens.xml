@@ -39,6 +39,7 @@
     <dimen name="view_size_62">65dp</dimen>
     <dimen name="view_size_66">69dp</dimen>
     <dimen name="view_size_78">81dp</dimen>
+    <dimen name="view_size_120">123dp</dimen>
 
     <dimen name="text_10">11sp</dimen>
     <dimen name="text_11">12sp</dimen>

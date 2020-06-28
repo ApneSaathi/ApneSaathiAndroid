@@ -3,6 +3,8 @@ apply plugin: kotlinPlugin
 apply plugin: kotlinAndroidPlugin
 apply plugin: kotlinKaptPlugin
 
+def host = API_HOST
+
 android {
     compileSdkVersion targetVersion
     buildToolsVersion buildVersion
@@ -18,6 +20,7 @@ android {
     }
 
     buildTypes {
+        buildTypes.each { it.buildConfigField "String", "HOST_URL", "\"${host}\"" }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

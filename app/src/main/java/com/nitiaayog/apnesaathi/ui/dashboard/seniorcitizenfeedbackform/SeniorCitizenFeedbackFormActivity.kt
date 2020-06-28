@@ -1,6 +1,5 @@
 package com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -11,12 +10,10 @@ import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.TextView
-import androidx.annotation.StringRes
+import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
@@ -27,13 +24,18 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.model.FormElements
 import com.nitiaayog.apnesaathi.model.User
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.LOAD_ACTIVITY_ELEMENTS_WITH_DELAY
 import com.nitiaayog.apnesaathi.utility.USER_DETAILS
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.android.synthetic.main.include_recyclerview.view.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import kotlinx.android.synthetic.main.senior_citizen_feedback_form.*
+import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
 
@@ -91,7 +93,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 }
 
                 override fun showPopup() {
-                    showPopupWindow(flMedicalHistorySrCitizen)
+                    showPopupWindow(llMedicalHistorySrCitizen)
                 }
             })
         }
@@ -150,15 +152,20 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             popupCategoryList.add(FormElements(it))
         }
 
-        setData()
-        initAutoCompleteTextViews()
-        initClicks()
+        observeData()
+
+        Observable.timer(LOAD_ACTIVITY_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                setData()
+                initAutoCompleteTextViews()
+                initClicks()
+            }.autoDispose(disposables)
     }
 
     override fun provideViewModel(): SeniorCitizenFeedbackViewModel =
         getViewModel { SeniorCitizenFeedbackViewModel.getInstance(dataManager) }
 
-    override fun provideLayoutResource(): Int = R.layout.senior_citizen_feedback_form
+    override fun provideLayoutResource(): Int = R.layout.activity_senior_citizen_feedback_form
 
     private fun setData() {
         intent?.let { intent ->
@@ -180,8 +187,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     private fun initAutoCompleteTextViews() {
         val genderList = resources.getStringArray(R.array.gender_array)
-        val gendersAdapter =
-            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, genderList)
+        val gendersAdapter = ArrayAdapter(this, R.layout.item_layout_dropdown_menu, genderList)
         actGender.threshold = 0
         actGender.setAdapter(gendersAdapter)
         actGender.setOnKeyListener(null)
@@ -190,8 +196,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
 
         val districtsList = resources.getStringArray(R.array.districts_array)
-        val districtsAdapter =
-            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
+        val districtsAdapter = ArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
         actDistrict.threshold = 0
         actDistrict.setAdapter(districtsAdapter)
         actDistrict.setOnKeyListener(null)
@@ -200,8 +205,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
 
         val stateList = resources.getStringArray(R.array.states_array)
-        val stateAdapter =
-            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
+        val stateAdapter = ArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
         actState.threshold = 0
         actState.setAdapter(stateAdapter)
         actState.setOnKeyListener(null)
@@ -209,15 +213,20 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             selectedState = stateList[position]
         }
 
+        val rvMedicalHistorySrCitizen = rvMedicalHistorySrCitizen as RecyclerView
         rvMedicalHistorySrCitizen.adapter = rvMedicalHistorySrCitizenAdapter
+
+        val rvCategory = rvCategory as RecyclerView
         rvCategory.adapter = rvCategoryAdapter
 
         val talkedWithList = resources.getStringArray(R.array.talked_with)
-        val statesAdapter =
-            ArrayAdapter(this, R.layout.item_layout_dropdown_menu, talkedWithList)
+        val statesAdapter = ArrayAdapter(this, R.layout.item_layout_dropdown_menu, talkedWithList)
         actTalkWith.threshold = 0
         actTalkWith.setAdapter(statesAdapter)
         actTalkWith.setOnKeyListener(null)
+        actTalkWith.setOnDismissListener {
+            updateDropDownIndicator(actTalkWith, R.drawable.ic_arrow_down)
+        }
         actTalkWith.setOnItemClickListener { _, _, position, _ ->
             if (selectedTalkedWith == getString(R.string.community_member)) {
                 resetRegisterNewSrCitizenLayout()
@@ -231,8 +240,12 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         val behaviorChangesAdapter =
             ArrayAdapter(this, R.layout.item_layout_dropdown_menu, behaviorChangesList)
         actBehaviorChange.threshold = 0
+        actBehaviorChange.setOnDismissListener { }
         actBehaviorChange.setAdapter(behaviorChangesAdapter)
         actBehaviorChange.setOnKeyListener(null)
+        actBehaviorChange.setOnDismissListener {
+            updateDropDownIndicator(actBehaviorChange, R.drawable.ic_arrow_down)
+        }
         actBehaviorChange.setOnItemClickListener { _, _, position, _ ->
             selectedBehaviorChange = behaviorChangesList[position]
         }
@@ -243,6 +256,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actOtherMedicalProblems.threshold = 0
         actOtherMedicalProblems.setAdapter(otherMedicalProblemsAdapter)
         actOtherMedicalProblems.setOnKeyListener(null)
+        actOtherMedicalProblems.setOnDismissListener {
+            updateDropDownIndicator(actOtherMedicalProblems, R.drawable.ic_arrow_down)
+        }
         actOtherMedicalProblems.setOnItemClickListener { _, _, position, _ ->
             selectedOtherMedicalProblem = otherMedicalProblemsList[position]
             manageOtherMedicalRelatedViews()
@@ -254,6 +270,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actQuarantineHospitalizationStatus.threshold = 0
         actQuarantineHospitalizationStatus.setAdapter(quarantineStatusAdapter)
         actQuarantineHospitalizationStatus.setOnKeyListener(null)
+        actQuarantineHospitalizationStatus.setOnDismissListener {
+            updateDropDownIndicator(actQuarantineHospitalizationStatus, R.drawable.ic_arrow_down)
+        }
         actQuarantineHospitalizationStatus.setOnItemClickListener { _, _, position, _ ->
             selectedQuarantineStatus = behaviorChangesList[position]
         }
@@ -289,8 +308,22 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             registerNewSrCitizen.visibility = View.GONE
         }.autoDispose(disposables)
 
-        flMedicalHistorySrCitizen.throttleClick().subscribe {
-            showPopupWindow(flMedicalHistorySrCitizen)
+        btnLessMoreDetails.throttleClick().subscribe {
+            flGrievances.visibility = if (flGrievances.visibility == View.VISIBLE) {
+                tvGrievances.visibility = View.GONE
+                btnLessMoreDetails.icon =
+                    ContextCompat.getDrawable(this, R.drawable.ic_downward_arrow)
+                View.GONE
+            } else {
+                tvGrievances.visibility = View.VISIBLE
+                btnLessMoreDetails.icon =
+                    ContextCompat.getDrawable(this, R.drawable.ic_upward_arrow)
+                View.VISIBLE
+            }
+        }.autoDispose(disposables)
+
+        llMedicalHistorySrCitizen.throttleClick().subscribe {
+            showPopupWindow(llMedicalHistorySrCitizen)
         }.autoDispose(disposables)
         flCategory.throttleClick().subscribe { showPopupWindow(flCategory) }
             .autoDispose(disposables)
@@ -300,15 +333,22 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actDistrict.throttleClick().subscribe { actDistrict.showDropDown() }
             .autoDispose(disposables)
         actState.throttleClick().subscribe { actState.showDropDown() }.autoDispose(disposables)
-        actTalkWith.throttleClick().subscribe { actTalkWith.showDropDown() }
-            .autoDispose(disposables)
-        actOtherMedicalProblems.throttleClick().subscribe { actOtherMedicalProblems.showDropDown() }
-            .autoDispose(disposables)
-        actBehaviorChange.throttleClick().subscribe { actBehaviorChange.showDropDown() }
-            .autoDispose(disposables)
-        actQuarantineHospitalizationStatus.throttleClick()
-            .subscribe { actQuarantineHospitalizationStatus.showDropDown() }
-            .autoDispose(disposables)
+        actTalkWith.throttleClick().subscribe {
+            actTalkWith.showDropDown()
+            updateDropDownIndicator(actTalkWith, R.drawable.ic_arrow_up)
+        }.autoDispose(disposables)
+        actOtherMedicalProblems.throttleClick().subscribe {
+            actOtherMedicalProblems.showDropDown()
+            updateDropDownIndicator(actOtherMedicalProblems, R.drawable.ic_arrow_up)
+        }.autoDispose(disposables)
+        actBehaviorChange.throttleClick().subscribe {
+            actBehaviorChange.showDropDown()
+            updateDropDownIndicator(actBehaviorChange, R.drawable.ic_arrow_up)
+        }.autoDispose(disposables)
+        actQuarantineHospitalizationStatus.throttleClick().subscribe {
+            actQuarantineHospitalizationStatus.showDropDown()
+            updateDropDownIndicator(actQuarantineHospitalizationStatus, R.drawable.ic_arrow_up)
+        }.autoDispose(disposables)
 
         // Had discussion about Prevention/Access/Detection
         btnPrevention.throttleClick().subscribe { changeButtonSelectionWithIcon(btnPrevention) }
@@ -319,12 +359,19 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             .autoDispose(disposables)
 
         // Which COVID-19 symptopms Sr. citizen is having
-        llCough.throttleClick().subscribe { changeCovidSymptomsSelection(ivCough, tvCough) }
-            .autoDispose(disposables)
-        llFever.throttleClick().subscribe { changeCovidSymptomsSelection(ivFever, tvFever) }
-            .autoDispose(disposables)
-        llShortOfBreath.throttleClick().subscribe {
-            changeCovidSymptomsSelection(ivShortnessOfBreath, tvShortnessOfBreath)
+        rlCough.throttleClick().subscribe {
+            changeCovidSymptomsSelection(ivCough, tvCough, ivDoneCough)
+        }.autoDispose(disposables)
+        rlFever.throttleClick().subscribe {
+            changeCovidSymptomsSelection(ivFever, tvFever, ivDoneFever)
+        }.autoDispose(disposables)
+        rlShortOfBreath.throttleClick().subscribe {
+            changeCovidSymptomsSelection(
+                ivShortnessOfBreath, tvShortnessOfBreath, ivDoneShortnessOfBreath
+            )
+        }.autoDispose(disposables)
+        rlSoreThroat.throttleClick().subscribe {
+            changeCovidSymptomsSelection(ivSoreThroat, tvSoreThroat, ivDoneSoreThroat)
         }.autoDispose(disposables)
 
         // Lack of essential services
@@ -356,9 +403,15 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         // Button to save the data or go back
         btnSave.throttleClick().subscribe {
             BaseUtility.showAlertMessage(this, R.string.success, R.string.sr_feedback_saved)
+            /*if (selectedTalkedWith == getString(R.string.community_member))
+                viewModel.saveSeniorCitizenFeedback(this)
+            else viewModel.saveSeniorCitizenFeedback(this)*/
         }.autoDispose(disposables)
         btnCancelMe.throttleClick().subscribe {
-            showAlertMessage(R.string.alert, R.string.data_not_saved)
+            BaseUtility.showAlertMessage(this, R.string.alert, R.string.data_not_saved,
+                onPositiveBtnClick = { dialog, _ -> },
+                onNegativeBtnClick = { dialog, _ -> dialog.dismiss() }
+            )
         }.autoDispose(disposables)
     }
 
@@ -379,9 +432,19 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private fun changeButtonSelectionWithIcon(button: MaterialButton) =
         button.apply { updateButtonState(this, true) }
 
-    private fun changeCovidSymptomsSelection(imageView: ImageView, textView: TextView) {
+    private fun changeCovidSymptomsSelection(
+        imageView: ImageView, textView: TextView, ivDone: ImageView
+    ) {
         imageView.isSelected = !imageView.isSelected
-        textView.setTextColor(if (imageView.isSelected) selectedColor else normalColor)
+        textView.setTextColor(
+            if (imageView.isSelected) {
+                ivDone.visibility = View.VISIBLE
+                selectedColor
+            } else {
+                ivDone.visibility = View.INVISIBLE
+                normalColor
+            }
+        )
     }
 
     private fun toggleButtonSelection(button: MaterialButton, lastSelectedButton: MaterialButton?):
@@ -419,9 +482,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             button.setTextColor(selectedColor)
             button.strokeColor = ColorStateList.valueOf(selectedColor)
             if (isShowIcon)
-                button.icon = ContextCompat.getDrawable(
-                    this@SeniorCitizenFeedbackFormActivity, R.drawable.ic_checked_circle
-                )
+                button.icon = ContextCompat.getDrawable(this, R.drawable.ic_checked_circle)
         } else {
             button.setTextColor(normalColor)
             button.strokeColor = ColorStateList.valueOf(normalColor)
@@ -486,6 +547,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
 
         actTalkWith.setText("")
+        updateDropDownIndicator(actTalkWith, R.drawable.ic_arrow_down)
 
         /*selectedTalkedWith = ""
         selectedMedicalProblem = ""
@@ -596,22 +658,35 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (hsvCovidSymptoms.visibility == View.VISIBLE) {
             tvCovidSymptoms.visibility = View.GONE
             hsvCovidSymptoms.visibility = View.GONE
-            if (ivCough.isSelected) changeCovidSymptomsSelection(ivCough, tvCough)
-            if (ivFever.isSelected) changeCovidSymptomsSelection(ivFever, tvFever)
+            if (ivCough.isSelected) changeCovidSymptomsSelection(ivCough, tvCough, ivDoneCough)
+            if (ivFever.isSelected) changeCovidSymptomsSelection(ivFever, tvFever, ivDoneFever)
             if (ivShortnessOfBreath.isSelected)
-                changeCovidSymptomsSelection(ivShortnessOfBreath, tvShortnessOfBreath)
+                changeCovidSymptomsSelection(
+                    ivShortnessOfBreath, tvShortnessOfBreath, ivDoneShortnessOfBreath
+                )
+            if (ivSoreThroat.isSelected)
+                changeCovidSymptomsSelection(ivSoreThroat, tvSoreThroat, ivDoneSoreThroat)
             tvQuarantineHospitalizationStatus.visibility = View.GONE
             actQuarantineHospitalizationStatus.visibility = View.GONE
         }
     }
 
+    private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =
+        autoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
+
     private fun resetAutoCompleteTextView() {
         actGender.setText("")
         actDistrict.setText("")
         actState.setText("")
+
         actBehaviorChange.setText("")
+        updateDropDownIndicator(actBehaviorChange, R.drawable.ic_arrow_down)
+
         actOtherMedicalProblems.setText("")
+        updateDropDownIndicator(actOtherMedicalProblems, R.drawable.ic_arrow_down)
+
         actQuarantineHospitalizationStatus.setText("")
+        updateDropDownIndicator(actQuarantineHospitalizationStatus, R.drawable.ic_arrow_down)
     }
 
     private fun manageViewVisibility() {
@@ -660,26 +735,16 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
-    private fun showAlertMessage(@StringRes title: Int, @StringRes message: Int) =
-        AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(R.string.yes) { dialog, _ ->
-                dialog.dismiss()
-                finish()
-            }
-            .setNegativeButton(R.string.no) { dialog, _ -> dialog.dismiss() }
-            .show()
-
     private fun showPopupWindow(anchorView: View) {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.include_recyclerview, null)
 
         view.rvList.adapter =
-            if (anchorView == flMedicalHistorySrCitizen) popupMedicalHistorySrCitizenAdapter
+            if (anchorView == llMedicalHistorySrCitizen) popupMedicalHistorySrCitizenAdapter
             else popupCategoryAdapter
 
         PopupWindow(
-            view, flMedicalHistorySrCitizen.width,
+            view, llMedicalHistorySrCitizen.width,
             (ApneSaathiApplication.screenSize[1] * 0.50).toInt()
         ).apply {
             this.isOutsideTouchable = true
@@ -689,4 +754,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             this.showAsDropDown(anchorView)
         }
     }
+
+    private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
+        when (it) {
+            is NetworkRequestState.NetworkNotAvailable -> {
+            }
+            is NetworkRequestState.LoadingData -> {
+            }
+            is NetworkRequestState.ErrorResponse -> {
+            }
+            is NetworkRequestState.SuccessResponse<*> -> {
+            }
+        }
+    })
 }

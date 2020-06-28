@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
 
     <TextView
         android:id="@+id/tvName"
@@ -42,6 +43,22 @@
         app:layout_constraintTop_toBottomOf="@id/tvName" />
 
     <TextView
+        android:id="@+id/tvNameError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:gravity="center"
+        android:text="@string/validate_sr_citizen_name"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etName" />
+
+    <TextView
         android:id="@+id/tvAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +71,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etName" />
+        app:layout_constraintTop_toBottomOf="@id/tvNameError" />
 
     <EditText
         android:id="@+id/etAge"
@@ -80,6 +97,22 @@
         app:layout_constraintTop_toBottomOf="@id/tvAge"
         app:layout_constraintWidth_percent="0.40" />
 
+    <TextView
+        android:id="@+id/tvAgeError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:text="@string/validate_age"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/etAge"
+        app:layout_constraintStart_toStartOf="@id/etAge"
+        app:layout_constraintTop_toBottomOf="@id/etAge" />
+
     <AutoCompleteTextView
         android:id="@+id/actGender"
         android:layout_width="0dp"
@@ -100,9 +133,24 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintTop_toBottomOf="@id/tvGender"
         app:layout_constraintWidth_percent="0.40" />
+
+    <TextView
+        android:id="@+id/tvGenderError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:text="@string/validate_gender"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/actGender"
+        app:layout_constraintStart_toStartOf="@id/actGender"
+        app:layout_constraintTop_toBottomOf="@id/actGender" />
 
     <TextView
         android:id="@+id/tvGender"
@@ -115,7 +163,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintStart_toStartOf="@id/actGender"
-        app:layout_constraintTop_toBottomOf="@id/etName" />
+        app:layout_constraintTop_toBottomOf="@id/tvNameError" />
 
     <TextView
         android:id="@+id/tvContactNumber"
@@ -129,7 +177,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etAge" />
+        app:layout_constraintTop_toBottomOf="@id/tvAgeError" />
 
     <EditText
         android:id="@+id/etContactNumber"
@@ -156,6 +204,22 @@
         app:layout_constraintTop_toBottomOf="@id/tvContactNumber" />
 
     <TextView
+        android:id="@+id/tvContactNumberError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:gravity="center"
+        android:text="@string/validate_contact_number"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etContactNumber" />
+
+    <TextView
         android:id="@+id/tvState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -167,7 +231,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etContactNumber" />
+        app:layout_constraintTop_toBottomOf="@id/tvContactNumberError" />
 
     <AutoCompleteTextView
         android:id="@+id/actState"
@@ -192,6 +256,22 @@
         app:layout_constraintTop_toBottomOf="@id/tvState" />
 
     <TextView
+        android:id="@+id/tvStateError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:gravity="center"
+        android:text="@string/validate_state"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actState" />
+
+    <TextView
         android:id="@+id/tvDistrict"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -203,7 +283,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actState" />
+        app:layout_constraintTop_toBottomOf="@id/tvStateError" />
 
     <AutoCompleteTextView
         android:id="@+id/actDistrict"
@@ -228,6 +308,22 @@
         app:layout_constraintTop_toBottomOf="@id/tvDistrict" />
 
     <TextView
+        android:id="@+id/tvDistrictError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:gravity="center"
+        android:text="@string/validate_district"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actDistrict" />
+
+    <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -240,7 +336,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actDistrict" />
+        app:layout_constraintTop_toBottomOf="@id/tvDistrictError" />
 
     <EditText
         android:id="@+id/etAddress"
@@ -265,6 +361,22 @@
         app:layout_constraintTop_toBottomOf="@id/tvAddress" />
 
     <TextView
+        android:id="@+id/tvAddressError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15"
+        android:layout_marginTop="@dimen/dimen_2"
+        android:layout_marginEnd="@dimen/dimen_15"
+        android:gravity="center"
+        android:text="@string/validate_address"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAddress" />
+
+    <TextView
         android:id="@+id/tvRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -278,7 +390,7 @@
         android:textColor="@android:color/background_light"
         android:textSize="@dimen/text_16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etAddress"
+        app:layout_constraintTop_toBottomOf="@id/tvAddressError"
         app:layout_constraintWidth_percent="0.50" />
 
     <TextView
@@ -295,7 +407,7 @@
         android:textColor="@android:color/background_light"
         android:textSize="@dimen/text_16"
         app:layout_constraintStart_toEndOf="@id/tvRegister"
-        app:layout_constraintTop_toBottomOf="@id/etAddress"
+        app:layout_constraintTop_toBottomOf="@id/tvAddressError"
         app:layout_constraintWidth_percent="0.50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
