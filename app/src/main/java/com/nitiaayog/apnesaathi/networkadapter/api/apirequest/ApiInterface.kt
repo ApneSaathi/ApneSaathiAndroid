@@ -1,21 +1,21 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
-import retrofit2.http.GET
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiInterface {
 
-    @GET(ApiProvider.ApiLoginUser)
-    fun loginUser(phoneNumber: String): Single<LoginRepo>
+    @POST(ApiProvider.ApiLoginUser)
+    fun loginUser(phoneNumber: JsonObject): Single<LoginRepo>
 
-    @POST(ApiProvider.ApiGetAssessmentQuestions)
-    fun getAssessmentQuestions(): Single<AssessmentRepo>
+    @POST(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
+    fun saveSrCitizenFeedback(@Body srCitizenFeedback: JsonObject): Single<BaseRepo>
 
-    @POST(ApiProvider.ApiSyncAppDataWithServer)
-    fun syncAppDataWithServer(): Single<BaseRepo>
+    @POST(ApiProvider.ApiRegisterSeniorCitizen)
+    fun registerSeniorCitizen(@Body srDetails: JsonObject): Single<BaseRepo>
 }

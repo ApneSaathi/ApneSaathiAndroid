@@ -17,6 +17,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
@@ -27,13 +28,18 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.model.FormElements
 import com.nitiaayog.apnesaathi.model.User
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.LOAD_ACTIVITY_ELEMENTS_WITH_DELAY
 import com.nitiaayog.apnesaathi.utility.USER_DETAILS
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.android.synthetic.main.include_recyclerview.view.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import kotlinx.android.synthetic.main.senior_citizen_feedback_form.*
+import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
 
@@ -150,15 +156,20 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             popupCategoryList.add(FormElements(it))
         }
 
-        setData()
-        initAutoCompleteTextViews()
-        initClicks()
+        observeData()
+
+        Observable.timer(LOAD_ACTIVITY_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                setData()
+                initAutoCompleteTextViews()
+                initClicks()
+            }.autoDispose(disposables)
     }
 
     override fun provideViewModel(): SeniorCitizenFeedbackViewModel =
         getViewModel { SeniorCitizenFeedbackViewModel.getInstance(dataManager) }
 
-    override fun provideLayoutResource(): Int = R.layout.senior_citizen_feedback_form
+    override fun provideLayoutResource(): Int = R.layout.activity_senior_citizen_feedback_form
 
     private fun setData() {
         intent?.let { intent ->
@@ -356,6 +367,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         // Button to save the data or go back
         btnSave.throttleClick().subscribe {
             BaseUtility.showAlertMessage(this, R.string.success, R.string.sr_feedback_saved)
+            /*if (selectedTalkedWith == getString(R.string.community_member))
+                viewModel.saveSeniorCitizenFeedback(this)
+            else viewModel.saveSeniorCitizenFeedback(this)*/
         }.autoDispose(disposables)
         btnCancelMe.throttleClick().subscribe {
             showAlertMessage(R.string.alert, R.string.data_not_saved)
@@ -689,4 +703,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             this.showAsDropDown(anchorView)
         }
     }
+
+    private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
+        when (it) {
+            is NetworkRequestState.NetworkNotAvailable -> {
+            }
+            is NetworkRequestState.LoadingData -> {
+            }
+            is NetworkRequestState.ErrorResponse -> {
+            }
+            is NetworkRequestState.SuccessResponse<*> -> {
+            }
+        }
+    })
 }

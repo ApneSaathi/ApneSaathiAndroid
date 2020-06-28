@@ -4,8 +4,7 @@ import android.app.Application
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.requestmodels.NewSeniorCitizen
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
@@ -36,11 +35,8 @@ class AppDataManager private constructor(
     override fun loginUser(phoneNumber: String): Single<LoginRepo> =
         apiRequest.loginUser(phoneNumber)
 
-    override fun getAssessmentQuestions(): Single<AssessmentRepo> =
-        apiRequest.getAssessmentQuestions()
-
-    override fun syncAppDataWithServer(): Single<BaseRepo> =
-        apiRequest.syncAppDataWithServer()
+    override fun registerSeniorCitizen(srDetails: NewSeniorCitizen): Single<LoginRepo> =
+        apiRequest.registerSeniorCitizen(srDetails)
 
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()
