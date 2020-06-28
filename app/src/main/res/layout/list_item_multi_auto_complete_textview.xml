@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dimen_14"
+    android:paddingTop="@dimen/dimen_2"
+    android:paddingEnd="@dimen/dimen_14"
+    android:paddingBottom="@dimen/dimen_2">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbItemChecked"
+        android:layout_width="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/color_dark_grey_txt"
+        android:checked="false"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dimen_5"
+        android:paddingEnd="0dp"
+        android:textAllCaps="false"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/color_dark_grey_txt"
+        app:buttonTint="@color/color_orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
