@@ -289,8 +289,6 @@
     <string name="gender_female">Female</string>
     <string name="gender_others">Others</string>
     <string name="data_not_available">Data not available</string>
-    <string name="less_details">Show Less</string>
-    <string name="more_details">Show More</string>
     <string name="validate_sr_citizen_name">Provide senior citizen\'s name</string>
     <string name="validate_age">Provide age</string>
     <string name="validate_gender">Select gender</string>
@@ -320,7 +318,6 @@
         <item>@string/gender_others</item>
     </string-array>
     <string name="related_info_talked_about">Related info talked about</string>
-    <string name="sore_throat">Sore Throat</string>
     <string name="lack_of_essential_services">Lack of Essential Services</string>
     <string name="emergency_escalation">Emergency Escalation</string>
     <string name="issue_raised">Issue Raised</string>
