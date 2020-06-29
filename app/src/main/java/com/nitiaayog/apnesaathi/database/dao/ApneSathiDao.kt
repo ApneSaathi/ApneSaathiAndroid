@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.database
+package com.nitiaayog.apnesaathi.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

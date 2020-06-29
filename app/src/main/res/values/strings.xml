@@ -293,6 +293,7 @@
     <string name="validate_age">Provide age</string>
     <string name="validate_gender">Select gender</string>
     <string name="validate_contact_number">Provide senior citizen\'s contact number</string>
+    <string name="valid_contact_number">Provide valid contact number</string>
     <string name="validate_state">Select state</string>
     <string name="validate_district">Select district</string>
     <string name="validate_address">Provide senior citizen\'s address</string>

@@ -263,6 +263,7 @@
     <string name="validate_age">ઉંમર જણાવો</string>
     <string name="validate_gender">જાતી પસંદ કરો</string>
     <string name="validate_contact_number">વરિષ્ઠ નાગરિકનો સંપર્ક નંબર પ્રદાન કરો</string>
+    <string name="valid_contact_number">માન્ય સંપર્ક નંબર પ્રદાન કરો</string>
     <string name="validate_state">રાજ્ય પસંદ કરો</string>
     <string name="validate_district">જીલ્લો પસંદ કરો</string>
     <string name="validate_address">વરિષ્ઠ નાગરિકનું સરનામું પ્રદાન કરો</string>

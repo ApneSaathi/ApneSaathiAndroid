@@ -265,6 +265,7 @@
     <string name="validate_age">वय द्या</string>
     <string name="validate_gender">जाती निवडा</string>
     <string name="validate_contact_number">ज्येष्ठ नागरिकाचा संपर्क क्रमांक द्या</string>
+    <string name="valid_contact_number">वैध संपर्क क्रमांक द्या</string>
     <string name="validate_state">राज्य निवडा</string>
     <string name="validate_district">जिल्हा निवडा</string>
     <string name="validate_address">ज्येष्ठ नागरिकाचा पत्ता द्या</string>

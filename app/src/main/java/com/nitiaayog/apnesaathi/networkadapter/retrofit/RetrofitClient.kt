@@ -92,9 +92,9 @@ object RetrofitClient {
         httpBuilder.addInterceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
+                .addHeader("Content-Type", "application/json")
                 /*.addHeader("Accept", "application/json")
                 .addHeader("Request-Type", "Android")
-                .addHeader("Content-Type", "application/json")
                 .addHeader("User-Agent", "Android")*/
                 .build()
             chain.proceed(request)

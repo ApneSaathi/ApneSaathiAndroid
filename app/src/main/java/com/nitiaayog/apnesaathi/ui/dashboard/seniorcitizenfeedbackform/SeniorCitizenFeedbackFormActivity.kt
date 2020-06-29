@@ -27,7 +27,7 @@ import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
-import com.nitiaayog.apnesaathi.utility.LOAD_ACTIVITY_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import com.nitiaayog.apnesaathi.utility.USER_DETAILS
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -154,7 +154,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         observeData()
 
-        Observable.timer(LOAD_ACTIVITY_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+        Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 setData()
                 initAutoCompleteTextViews()
