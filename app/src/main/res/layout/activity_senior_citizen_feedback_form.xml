@@ -34,9 +34,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/dimen_15"
-                    android:paddingBottom="@dimen/dimen_15"
-                    android:paddingEnd="@dimen/dimen_15"
                     android:paddingTop="0dp"
+                    android:paddingEnd="@dimen/dimen_15"
+                    android:paddingBottom="@dimen/dimen_15"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -64,10 +64,10 @@
                         android:paddingEnd="0dp"
                         android:singleLine="true"
                         android:textAllCaps="false"
-                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textIsSelectable="false"
                         android:textSize="@dimen/text_15"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/ivCall"
                         app:layout_constraintStart_toEndOf="@id/civGender"
                         app:layout_constraintTop_toTopOf="@id/civGender" />
@@ -117,12 +117,79 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLessMoreDetails"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5"
+                    android:gravity="center"
+                    android:text="@string/less_details"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/text_14"
+                    app:icon="@drawable/ic_upward_arrow"
+                    app:iconGravity="end"
+                    app:iconPadding="@dimen/dimen_5"
+                    app:iconTint="@android:color/holo_red_dark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayoutHeader" />
+
+                <TextView
+                    android:id="@+id/tvGrievances"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="0dp"
+                    android:background="@android:color/darker_gray"
+                    android:focusable="true"
+                    android:focusedByDefault="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/dimen_35"
+                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingEnd="0dp"
+                    android:text="@string/grievances"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnLessMoreDetails" />
+
+                <FrameLayout
+                    android:id="@+id/flGrievances"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvGrievances">
+
+                    <TextView
+                        android:id="@+id/tvNoData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:minHeight="@dimen/view_size_36"
+                        android:text="@string/data_not_available"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_15"
+                        android:visibility="visible" />
+
+                    <include layout="@layout/include_recyclerview" />
+
+                </FrameLayout>
+
                 <TextView
                     android:id="@+id/tvCallStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_15"
-                    android:layout_marginTop="@dimen/dimen_3"
+                    android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
                     android:text="@string/call_status_1"
                     android:textAllCaps="false"
@@ -130,7 +197,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/constraintLayoutHeader"
+                    app:layout_constraintTop_toBottomOf="@id/flGrievances"
                     app:layout_goneMarginTop="@dimen/dimen_10" />
 
                 <LinearLayout
@@ -374,7 +441,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tvMedicalDetails" />
 
                 <LinearLayout
-                    android:id="@+id/flMedicalHistorySrCitizen"
+                    android:id="@+id/llMedicalHistorySrCitizen"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_size_48"
                     android:layout_marginStart="@dimen/dimen_15"
@@ -385,7 +452,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMedicalHistorySrCitizen">
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <include
+                        android:id="@+id/rvMedicalHistorySrCitizen"
+                        layout="@layout/include_recyclerview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/dimen_5"
+                        android:visibility="gone" />
+
+                    <!--<androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvMedicalHistorySrCitizen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -395,7 +472,7 @@
                         android:paddingStart="0dp"
                         android:paddingEnd="@dimen/dimen_5"
                         android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
                 </LinearLayout>
 
@@ -412,7 +489,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/flMedicalHistorySrCitizen" />
+                    app:layout_constraintTop_toBottomOf="@id/llMedicalHistorySrCitizen" />
 
                 <HorizontalScrollView
                     android:id="@+id/hsvInfoYouTalkedAbout"
@@ -580,7 +657,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_2"
                     android:clipToPadding="false"
-                    android:paddingStart="@dimen/dimen_15"
+                    android:paddingStart="@dimen/dimen_7"
                     android:paddingEnd="@dimen/dimen_15"
                     android:scrollbars="none"
                     android:visibility="gone"
@@ -591,8 +668,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:id="@+id/llCough"
+                        <RelativeLayout
+                            android:id="@+id/rlCough"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackground"
@@ -604,6 +681,10 @@
                                 android:id="@+id/ivCough"
                                 android:layout_width="@dimen/view_size_78"
                                 android:layout_height="@dimen/view_size_78"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="@dimen/dimen_7"
+                                android:layout_marginTop="@dimen/dimen_7"
+                                android:layout_marginEnd="@dimen/dimen_7"
                                 android:background="@drawable/bg_border_selector"
                                 android:contentDescription="@string/cough"
                                 android:padding="@dimen/dimen_7"
@@ -613,6 +694,8 @@
                                 android:id="@+id/tvCough"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@id/ivCough"
+                                android:layout_centerHorizontal="true"
                                 android:gravity="center"
                                 android:minLines="2"
                                 android:text="@string/cough"
@@ -621,22 +704,35 @@
                                 android:textIsSelectable="false"
                                 android:textSize="@dimen/text_12" />
 
-                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/ivDoneCough"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:contentDescription="@string/cough"
+                                android:src="@drawable/ic_checked_circle"
+                                android:visibility="invisible" />
 
-                        <LinearLayout
-                            android:id="@+id/llFever"
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlFever"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dimen_15"
                             android:background="?selectableItemBackground"
                             android:orientation="vertical"
-                            app:layout_constraintStart_toEndOf="@id/llCough"
+                            app:layout_constraintStart_toEndOf="@id/rlCough"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
                                 android:id="@+id/ivFever"
                                 android:layout_width="@dimen/view_size_78"
                                 android:layout_height="@dimen/view_size_78"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="@dimen/dimen_7"
+                                android:layout_marginTop="@dimen/dimen_7"
+                                android:layout_marginEnd="@dimen/dimen_7"
                                 android:background="@drawable/bg_border_selector"
                                 android:contentDescription="@string/cough"
                                 android:padding="@dimen/dimen_7"
@@ -646,6 +742,8 @@
                                 android:id="@+id/tvFever"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@id/ivFever"
+                                android:layout_centerHorizontal="true"
                                 android:gravity="center"
                                 android:minLines="2"
                                 android:text="@string/fever"
@@ -653,22 +751,35 @@
                                 android:textIsSelectable="false"
                                 android:textSize="@dimen/text_12" />
 
-                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/ivDoneFever"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:contentDescription="@string/fever"
+                                android:src="@drawable/ic_checked_circle"
+                                android:visibility="invisible" />
 
-                        <LinearLayout
-                            android:id="@+id/llShortOfBreath"
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlShortOfBreath"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dimen_15"
                             android:background="?selectableItemBackground"
                             android:orientation="vertical"
-                            app:layout_constraintStart_toEndOf="@id/llFever"
+                            app:layout_constraintStart_toEndOf="@id/rlFever"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
                                 android:id="@+id/ivShortnessOfBreath"
                                 android:layout_width="@dimen/view_size_78"
                                 android:layout_height="@dimen/view_size_78"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="@dimen/dimen_7"
+                                android:layout_marginTop="@dimen/dimen_7"
+                                android:layout_marginEnd="@dimen/dimen_7"
                                 android:background="@drawable/bg_border_selector"
                                 android:contentDescription="@string/cough"
                                 android:padding="@dimen/dimen_7"
@@ -676,9 +787,10 @@
 
                             <TextView
                                 android:id="@+id/tvShortnessOfBreath"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ivShortnessOfBreath"
+                                android:layout_centerHorizontal="true"
                                 android:gravity="center"
                                 android:minLines="2"
                                 android:text="@string/shortness_of_breath"
@@ -686,7 +798,64 @@
                                 android:textIsSelectable="false"
                                 android:textSize="@dimen/text_12" />
 
-                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/ivDoneShortnessOfBreath"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:contentDescription="@string/shortness_of_breath"
+                                android:src="@drawable/ic_checked_circle"
+                                android:visibility="invisible" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlSoreThroat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?selectableItemBackground"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@id/rlShortOfBreath"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivSoreThroat"
+                                android:layout_width="@dimen/view_size_78"
+                                android:layout_height="@dimen/view_size_78"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="@dimen/dimen_7"
+                                android:layout_marginTop="@dimen/dimen_7"
+                                android:layout_marginEnd="@dimen/dimen_7"
+                                android:background="@drawable/bg_border_selector"
+                                android:contentDescription="@string/cough"
+                                android:padding="@dimen/dimen_7"
+                                android:src="@drawable/bg_shortness_selector" />
+
+                            <TextView
+                                android:id="@+id/tvSoreThroat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ivSoreThroat"
+                                android:layout_centerHorizontal="true"
+                                android:gravity="center"
+                                android:minLines="2"
+                                android:text="@string/sore_throat"
+                                android:textAllCaps="false"
+                                android:textIsSelectable="false"
+                                android:textSize="@dimen/text_12" />
+
+                            <ImageView
+                                android:id="@+id/ivDoneSoreThroat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:contentDescription="@string/sore_throat"
+                                android:src="@drawable/ic_checked_circle"
+                                android:visibility="invisible" />
+
+                        </RelativeLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -819,7 +988,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvSelectCategory">
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <include
+                        android:id="@+id/rvCategory"
+                        layout="@layout/include_recyclerview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/dimen_5"
+                        android:visibility="gone" />
+
+                    <!--<androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -829,7 +1008,7 @@
                         android:paddingStart="0dp"
                         android:paddingEnd="@dimen/dimen_5"
                         android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
                 </FrameLayout>
 
@@ -974,7 +1153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,flMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
+                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,llMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/cgComplaintDetails"

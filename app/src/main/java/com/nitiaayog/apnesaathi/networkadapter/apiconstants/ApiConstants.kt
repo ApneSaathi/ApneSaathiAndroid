@@ -9,10 +9,14 @@ object ApiConstants {
     const val Block: String = "block"
     const val State: String = "state"
     const val District: String = "district"
-    const val PhoneNumber: String = "phone_number"
+    const val PhoneNumber: String = "phoneNo"
     const val Gender: String = "gender"
     const val Age: String = "age"
     const val UserInfo: String = "user_info"
+
+    const val FirstName: String = "firstName"
+    const val Address: String = "address"
+    const val VolunteerId: String = "volunteerId"
 
     const val AssessmentQuestions: String = "assessment_questions"
     const val QuestionId: String = "q_id"

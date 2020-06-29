@@ -1,13 +1,16 @@
 package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
+import com.nitiaayog.apnesaathi.BuildConfig
+
 object ApiProvider {
 
-    private const val GET_LOGIN_USER = "login_user"
-    const val ApiLoginUser = ApiConstants.BASE_URL + GET_LOGIN_USER
+    private const val GET_LOGIN_USER = "Volunteer/LoginVolunteer"
+    const val ApiLoginUser = BuildConfig.HOST_URL + GET_LOGIN_USER
 
-    private const val GET_ASSESSMENT_QUESTIONS = "5926c34212000035026871cd"
-    const val ApiGetAssessmentQuestions = ApiConstants.BASE_URL + GET_ASSESSMENT_QUESTIONS
+    private const val GET_SAVE_SR_CITIZEN_FEED_BACK_FORM = "Volunteer/SaveSeniorCitizenFeedbackForm"
+    const val ApiSaveSeniorCitizenFeedbackForm =
+        BuildConfig.HOST_URL + GET_SAVE_SR_CITIZEN_FEED_BACK_FORM
 
-    private const val SYNC_APP_DATA_WITH_SERVER = "588d15f5100000a8072d2945"
-    const val ApiSyncAppDataWithServer = ApiConstants.BASE_URL + SYNC_APP_DATA_WITH_SERVER
+    private const val GET_REGISTER_SR_CITIZEN = "Volunteer/NewSrCitizenRegistration"
+    const val ApiRegisterSeniorCitizen = BuildConfig.HOST_URL + GET_REGISTER_SR_CITIZEN
 }

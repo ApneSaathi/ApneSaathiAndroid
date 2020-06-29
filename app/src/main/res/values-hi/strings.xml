@@ -138,7 +138,8 @@
     <string name="call_status">कॉल की स्थिति:</string>
     <string name="cough">खांसी</string>
     <string name="fever">बुखार</string>
-    <string name="shortness_of_breath">सांस लेने में कठिनाई</string>
+    <string name="shortness_of_breath">सांस लेने में\nकठिनाई</string>
+    <string name="sore_throat">गले में खरास</string>
     <string name="type_here">यहा लिखो…</string>
     <string name="grivence">शिकायत</string>
     <string name="save">सहेजें</string>
@@ -253,6 +254,18 @@
     <string name="gender_male">नर</string>
     <string name="gender_female">महिला</string>
     <string name="gender_others">अन्य</string>
+    <string name="data_not_available">जानकारी उपलब्ध नहीं है</string>
+    <string name="less_details">कम जानकारी दिखाएं</string>
+    <string name="more_details">अधिक जानकारी दिखाएं</string>
+
+    <string name="validate_sr_citizen_name">वरिष्ठ नागरिक का नाम प्रदान करें</string>
+    <string name="validate_age">आयु प्रदान करें</string>
+    <string name="validate_gender">जती का चयन करें</string>
+    <string name="validate_contact_number">वरिष्ठ नागरिक का संपर्क नंबर प्रदान करें</string>
+    <string name="validate_state">राज्य चुनें</string>
+    <string name="validate_district">जिले का चयन करें</string>
+    <string name="validate_address">वरिष्ठ नागरिक का पता प्रदान करें</string>
+
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>

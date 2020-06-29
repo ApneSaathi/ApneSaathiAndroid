@@ -1,10 +1,9 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apimanager
 
-import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserve
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserveWithDelaySubscription
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import io.reactivex.Single
@@ -22,12 +21,13 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
             }
     }
 
-    override fun loginUser(phoneNumber: String): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
-    override fun getAssessmentQuestions(): Single<AssessmentRepo> =
-        apiClient.getAssessmentQuestions().subscribeAndObserveWithDelaySubscription()
+    override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
+        apiClient.saveSrCitizenFeedback(srCitizenFeedback)
+            .subscribeAndObserveWithDelaySubscription()
 
-    override fun syncAppDataWithServer(): Single<BaseRepo> =
-        apiClient.syncAppDataWithServer().subscribeAndObserve()
+    override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
+        apiClient.registerSeniorCitizen(srDetails).subscribeAndObserveWithDelaySubscription()
 }

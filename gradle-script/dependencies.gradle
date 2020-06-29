@@ -1,5 +1,7 @@
 ext {
 
+    API_HOST = "http://3.7.39.123:8080/"
+
     /* TODO : AppDetails ------------------------------------------------------------------------ */
 
     appId = "com.nitiaayog.apnesaathi"
