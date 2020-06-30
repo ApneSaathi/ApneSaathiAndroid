@@ -48,10 +48,10 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
     }
 
     override fun onMoreInfoClick(position: Int, callData: CallData) {
-        /*val fragment = SeniorCitizenDetailsFragment()
+        val fragment = SeniorCitizenDetailsFragment()
         fragment.setSelectedUser(callData)
         addFragment(
             R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
-        )*/
+        )
     }
 }

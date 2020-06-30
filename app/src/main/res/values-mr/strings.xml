@@ -37,60 +37,11 @@
     <string name="validate_person_district">व्यक्तीचा जिल्हा प्रदान करा</string>
     <string name="validate_block_name">ब्लॉक नाव द्या</string>
     <string name="validate_call_connection">कॉलची स्थिती द्या</string>
-    <string-array name="states_array">
-        <item>आसाम</item>
-        <item>बिहार</item>
-        <item>मध्य प्रदेश</item>
-        <item>उत्तर प्रदेश</item>
-        <item>राजस्थान</item>
-        <item>महाराष्ट्र</item>
-        <item>गुजरात</item>
-        <item>झारखंड</item>
-    </string-array>
-    <string-array name="districts_array">
-        <item>बरपेटा</item>
-        <item>बास्का</item>
-        <item>डारंग</item>
-        <item>गोलपारा</item>
-        <item>धुबरी</item>
-        <item>हलकांडी</item>
-        <item>अररिया</item>
-        <item>सीतामढी</item>
-        <item>बेगूसराय</item>
-        <item>कटिहार</item>
-        <item>शेखपुरा</item>
-        <item>दमोह</item>
-        <item>बारवानी</item>
-        <item>खंडवा</item>
-        <item>सिंगरौली</item>
-        <item>विदिशा</item>
-        <item>बेहराइच</item>
-        <item>बलरामपूर</item>
-        <item>श्रावस्ती</item>
-        <item>चित्रकूट</item>
-        <item>सोनभद्र</item>
-        <item>बरन</item>
-        <item>जैसलमेर</item>
-        <item>नंदुरबार</item>
-        <item>अमरावती</item>
-        <item>गडचिरोली</item>
-        <item>नर्मदा</item>
-        <item>पाकुर</item>
-        <item>साहिबगंज</item>
-        <item>सुरेंद्रनगर</item>
-    </string-array>
-    <string-array name="call_status">
-        <item>प्रतिसाद नाही</item>
-        <item>फोन उचलला नाही</item>
-        <item>फोन पोहोचण्यायोग्य नाही</item>
-        <item>कॉल डिस्कनेक्ट झाला</item>
-        <item>कॉल कनेक्ट</item>
-    </string-array>
+
     <string name="permission_detail">परवानगी तपशील</string>
     <string name="permission_text">अ‍ॅपमध्ये असे वैशिष्ट्य आहे की ज्येष्ठ नागरिकांच्या तपशीलांवर फक्त एका क्लिकवरुन आपण दररोज नियमित कॉल सुरू करू शकता. त्यासाठी आम्हाला कॉल करण्याची परवानगी आवश्यक असेल.</string>
     <string name="accept">स्वीकारा</string>
     <string name="not_now">आता नाही</string>
-
 
     <string name="txtenterMobilenumbe">मोबाइल नंबर प्रविष्ट करा</string>
     <string name="txtValidmobilenumber">वैध भ्रमणध्वनी क्रमांक टाका</string>
@@ -273,6 +224,55 @@
     <string name="api_connection_error">सर्व्हरशी कनेक्ट करण्यात सक्षम नाही. कृपया आपणास इंटरनेट कनेक्शन तपासा</string>
     <string name="error">समस्या!</string>
 
+    <string-array name="states_array">
+        <item>आसाम</item>
+        <item>बिहार</item>
+        <item>मध्य प्रदेश</item>
+        <item>उत्तर प्रदेश</item>
+        <item>राजस्थान</item>
+        <item>महाराष्ट्र</item>
+        <item>गुजरात</item>
+        <item>झारखंड</item>
+    </string-array>
+    <string-array name="districts_array">
+        <item>बरपेटा</item>
+        <item>बास्का</item>
+        <item>डारंग</item>
+        <item>गोलपारा</item>
+        <item>धुबरी</item>
+        <item>हलकांडी</item>
+        <item>अररिया</item>
+        <item>सीतामढी</item>
+        <item>बेगूसराय</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+        <item>दमोह</item>
+        <item>बारवानी</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
+        <item>बेहराइच</item>
+        <item>बलरामपूर</item>
+        <item>श्रावस्ती</item>
+        <item>चित्रकूट</item>
+        <item>सोनभद्र</item>
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+        <item>नंदुरबार</item>
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नर्मदा</item>
+        <item>पाकुर</item>
+        <item>साहिबगंज</item>
+        <item>सुरेंद्रनगर</item>
+    </string-array>
+    <string-array name="call_status">
+        <item>प्रतिसाद नाही</item>
+        <item>फोन उचलला नाही</item>
+        <item>फोन पोहोचण्यायोग्य नाही</item>
+        <item>कॉल डिस्कनेक्ट झाला</item>
+        <item>कॉल कनेक्ट</item>
+    </string-array>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>

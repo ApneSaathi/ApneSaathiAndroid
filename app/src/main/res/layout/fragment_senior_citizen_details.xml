@@ -111,8 +111,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/txt_medical_history_title"
                     app:layout_constraintStart_toStartOf="@+id/txt_medical_history_title"
                     app:layout_constraintTop_toTopOf="@+id/txt_medical_history_title"
-                    app:constraint_referenced_ids="txt_medical_history_title,txt_medical_history,txt_issues_raised_title,txt_issue_raised,txt_status_title,txt_status,txt_issue_date_title,txt_issue_raised_date,txt_escalation_title,txt_escalation,txt_covid_symptoms_title,txt_covid_symptoms"
-                    android:visibility="visible">
+                    app:constraint_referenced_ids="txt_medical_history_title,txt_medical_history,txt_issues_raised_title,txt_issue_raised,txt_status_title,txt_status,txt_issue_date_title,txt_issue_raised_date,txt_escalation_title,txt_escalation,txt_covid_symptoms_title,txt_covid_symptoms">
                 </androidx.constraintlayout.widget.Group>
 
                 <TextView
@@ -229,14 +228,22 @@
                     app:layout_constraintTop_toBottomOf="@id/txt_escalation_title" />
                 <TextView
                     android:id="@+id/txt_more_details"
-                    android:text="@string/less_details"
-                    android:paddingTop="@dimen/dimen_15"
-                    android:paddingBottom="@dimen/dimen_5"
-                    android:gravity="center"
-                    android:textColor="@color/color_orange"
-                    android:paddingLeft="@dimen/dimen_2"
-                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5"
+                    android:gravity="center"
+                    android:text="@string/less_details"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/text_14"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_upward_arrow"
+                    app:iconGravity="end"
+                    app:iconPadding="@dimen/dimen_5"
+                    app:iconTint="@android:color/holo_red_dark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintStart_toEndOf="@id/txt_covid_symptoms_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_covid_symptoms" />
 
@@ -412,6 +419,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dimen_5"
                                     android:text="@string/cough"
+                                    android:gravity="center"
+                                    android:minWidth="@dimen/view_size_40"
                                     android:textColor="@color/color_orange"
                                     android:textSize="@dimen/text_10"
                                     app:layout_constraintStart_toStartOf="@id/img_cough_uneditable"
@@ -427,10 +436,11 @@
                                     app:layout_constraintTop_toTopOf="@id/img_cough_uneditable" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dimen_5"
                                     android:gravity="center"
+                                    android:minWidth="@dimen/view_size_40"
                                     android:text="@string/fever"
                                     android:textColor="@color/color_orange"
                                     android:textSize="@dimen/text_10"
@@ -475,6 +485,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dimen_5"
                                     android:gravity="center"
+                                    android:minWidth="@dimen/view_size_40"
                                     android:text="@string/sore_throat"
                                     android:textColor="@color/color_orange"
                                     android:textSize="@dimen/text_10"
@@ -707,7 +718,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/view_size_60"
-        android:layout_marginBottom="@dimen/view_size_62"
         android:background="@color/color_dark_grey"
         android:gravity="center"
         android:minHeight="@dimen/view_size_40"
