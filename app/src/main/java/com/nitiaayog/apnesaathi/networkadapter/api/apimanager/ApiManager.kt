@@ -36,4 +36,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
         apiClient.registerSeniorCitizen(srDetails).subscribeAndObserveWithDelaySubscription()
+
+    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
+        apiClient.getSeniorCitizenDetails(srDetails).subscribeAndObserveWithDelaySubscription()
 }
