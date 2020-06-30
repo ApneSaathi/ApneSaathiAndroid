@@ -7,8 +7,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -34,11 +36,11 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
             }
 
             override fun onMoreInfoClick(position: Int, callData: CallData) {
-                /*val fragment = SeniorCitizenDetailsFragment()
+                val fragment = SeniorCitizenDetailsFragment()
                   fragment.setSelectedUser(callData)
                    addFragment(
                        containerId, fragment, getString(R.string.details_fragment)
-                   )*/
+                   )
             }
         })
     }

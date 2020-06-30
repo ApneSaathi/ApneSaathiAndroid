@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_calls_status.*
 
@@ -46,11 +48,11 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
     }
 
     override fun onMoreInfoClick(position: Int, callData: CallData) {
-        /*val fragment = SeniorCitizenDetailsFragment()
+        val fragment = SeniorCitizenDetailsFragment()
         fragment.setSelectedUser(callData)
         addFragment(
             R.id.fragmentCallContainer, fragment,getString(R.string.details_fragment)
-        )*/
+        )
     }
 
     private fun initRecyclerView() {

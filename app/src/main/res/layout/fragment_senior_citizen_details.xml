@@ -718,7 +718,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/view_size_60"
-        android:layout_marginBottom="@dimen/view_size_62"
         android:background="@color/color_dark_grey"
         android:gravity="center"
         android:minHeight="@dimen/view_size_40"
