@@ -107,12 +107,12 @@
     <string name="call_connected">कॉल केलेले</string>
     <string name="call_permission_denied">कॉलिंग परवानगी नाकारली</string>
     <string name="not_handle_action">क्रिया हाताळू शकत नाही</string>
-    <string name="personal_details">वैयक्तिक माहिती</string>
     <string name="name">नाव</string>
     <string name="age">वय</string>
     <string name="state">राज्य</string>
     <string name="district">जिल्हा</string>
     <string name="block">ब्लॉक करा</string>
+    <string name="personal_details">वैयक्तिक माहिती</string>
     <string name="health_care_information">आरोग्य काळजी माहिती</string>
     <string name="emotional_state">भावनिक स्थिती</string>
     <string name="happy">आनंदी</string>
@@ -218,4 +218,59 @@
     <string name="high">उंच</string>
     <string name="low">कमी</string>
 
+
+    <string name="not_picked">उचलला नाही</string>
+    <string name="not_reachable">पोहोचण्यायोग्य नाही</string>
+    <string name="dis_connected">डिस्कनेक्ट केलेले</string>
+    <string name="connected">जोडलेले</string>
+    <string name="talked_with">यांच्याशी बोललो</string>
+    <string name="medical_history">वैद्यकीय इतिहास</string>
+    <string name="medical_problems">वैद्यकीय समस्या</string>
+    <string name="whom_did_you_talk_with">आपण कोणाशी बोललात ?</string>
+    <string name="medical_history_sr_citizen">वरिष्ठ नागरिकांचा वैद्यकीय इतिहास</string>
+    <string name="behavior_change_practice">प्रतिवादीने त्यांच्यासह सामायिक वर्तन बदलण्याच्या पद्धती स्वीकारल्या?</string>
+    <string name="info_you_talked_about">आपण ज्या विषयी बोललो त्यासंबंधित माहिती</string>
+    <string name="prevention">प्रतिबंध</string>
+    <string name="access">प्रवेश</string>
+    <string name="status">स्थिती</string>
+    <string name="detection">शोध</string>
+    <string name="covid_19_symptoms">कोविड 19 लक्षणे</string>
+    <string name="non_covid_symptoms">कोविड नसलेली वैद्यकीय समस्या</string>
+    <string name="select_category">श्रेणी निवडा</string>
+    <string name="gender">लिंग</string>
+    <string name="report_lack_of_essential_services">अत्यावश्यक सेवांचा अभाव नोंदवा</string>
+    <string name="sr_citizen_report_lack_of_essintial_services">ज्येष्ठ नागरिक आवश्यक सेवांमध्ये प्रवेश नसल्याची तक्रार नोंदवित आहे?</string>
+    <string name="need_emergency_escalation">आपत्कालीन परिस्थितीत वाढ होण्याची गरज आहे का ?</string>
+    <string name="any_sr_citizen_in_home">तुमच्या घरात जेष्ठ नागरिक आहे का?</string>
+    <string name="new_sr_citizen_personal_details">नवीन वरिष्ठ नागरिक तपशील</string>
+    <string name="contact_number">संपर्क क्रमांक</string>
+    <string name="register">नोंदणी करा</string>
+    <string name="community_member">समुदाय सदस्य</string>
+    <string name="go_back">परत जा</string>
+    <string name="okay">ठीक आहे</string>
+    <string name="alert">सतर्क</string>
+    <string name="data_not_saved">आपण हे पृष्ठ जतन न करता सोडू इच्छिता?</string>
+    <string name="success">यश</string>
+    <string name="failed">अयशस्वी</string>
+    <string name="sr_feedback_saved">वरिष्ठ नागरिक अभिप्राय डेटा यशस्वीरित्या जतन केला गेला</string>
+    <string name="sr_citizen">ज्येष्ठ नागरिक</string>
+    <string name="family_member_of_sr_citizen">वरिष्ठ नागरिकांचे कुटुंब सदस्य</string>
+    <string name="may_be">कदाचित</string>
+    <string name="not_applicable">लागू नाही</string>
+    <string name="gender_male">पुरुष</string>
+    <string name="gender_female">स्त्री</string>
+    <string name="gender_others">इतर</string>
+
+    <string name="related_info_talked_about">संबंधित माहिती बद्दल बोललो</string>
+    <string name="sore_throat">घसा खवखवणे</string>
+    <string name="lack_of_essential_services">अत्यावश्यक सेवांचा अभाव</string>
+    <string name="emergency_escalation">आणीबाणी वाढवणे</string>
+
+    <string name="address_bold">पत्ता: </string>
+
+    <string name="changelanguage">लॉन्गगे बदला</string>
+    <string name="logout">बाहेर पडणे</string>
+    <string name="contctNumber">संपर्क क्रमांक</string>
+    <string name="email">ईमेल</string>
+    <string name="Txtaddress">पत्ता</string>
 </resources>

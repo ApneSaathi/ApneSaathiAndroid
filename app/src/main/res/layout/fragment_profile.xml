@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/background_light"
     android:fitsSystemWindows="true">
 
+    <include layout="@layout/include_appbar_layout_with_toolbar" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,6 +41,7 @@
                 android:layout_height="@dimen/dime145dp">
 
                 <com.nitiaayog.apnesaathi.base.CircleImageView
+                    android:id="@+id/ProfileImage"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dime120dp"
                     android:layout_centerHorizontal="true"
@@ -277,7 +279,7 @@
                         android:weightSum="2">
 
                         <TextView
-
+android:id="@+id/TxtMainSave"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -289,7 +291,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-
+android:id="@+id/TxtMainCancel"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"

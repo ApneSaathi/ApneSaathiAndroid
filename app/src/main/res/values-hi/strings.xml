@@ -217,4 +217,59 @@
     <string name="high">उच्च</string>
     <string name="low">कम</string>
 
+
+    <string name="not_picked">नहीं उठाया</string>
+    <string name="not_reachable">पहुँच से बाहर</string>
+    <string name="dis_connected">डिस्कनेक्ट किया गया</string>
+    <string name="connected">जुड़े हुए</string>
+    <string name="talked_with">के साथ बातचीत की थी</string>
+    <string name="medical_history">चिकित्सा इतिहास</string>
+    <string name="medical_problems">स्वास्थ्य समस्याएं</string>
+    <string name="whom_did_you_talk_with">आपने किसके साथ बात की?</string>
+    <string name="medical_history_sr_citizen">सीनियर सिटीजन का मेडिकल इतिहास</string>
+    <string name="behavior_change_practice">क्या प्रतिवादी ने व्यवहार परिवर्तन प्रथाओं को उनके साथ साझा किया ?</string>
+    <string name="info_you_talked_about">संबंधित जानकारी के बारे में आपने बात की</string>
+    <string name="prevention">निवारण</string>
+    <string name="access">पहुंच</string>
+    <string name="status">स्थिति</string>
+    <string name="detection">खोज</string>
+    <string name="covid_19_symptoms">कोविडन 19 के लक्षण</string>
+    <string name="non_covid_symptoms">गैर-कोविद चिकित्सा समस्याएं</string>
+    <string name="select_category">श्रेणी का चयन करें</string>
+    <string name="gender">लिंग</string>
+    <string name="report_lack_of_essential_services">आवश्यक सेवाओं की कमी की रिपोर्ट करें</string>
+    <string name="sr_citizen_report_lack_of_essintial_services">क्या वरिष्ठ नागरिक आवश्यक सेवाओं तक पहुंच की कमी की रिपोर्ट करता है ?</string>
+    <string name="need_emergency_escalation">क्या इमरजेंसी और एस्केलेशन की जरूरत है ?</string>
+    <string name="any_sr_citizen_in_home">क्या आपके घर में कोई सीनियर सिटीजन है ?</string>
+    <string name="new_sr_citizen_personal_details">न्यू सीनियर सिटीजन पर्सन डिटेल्स</string>
+    <string name="contact_number">संपर्क संख्या</string>
+    <string name="register">रजिस्टर करें</string>
+    <string name="community_member">सामुदायिक सदस्य</string>
+    <string name="go_back">वापस जाओ</string>
+    <string name="okay">ठीक है</string>
+    <string name="alert">चेतावनी</string>
+    <string name="data_not_saved">क्या आप इस पृष्ठ को सहेजे बिना छोड़ना चाहते हैं ?</string>
+    <string name="success">सफलता</string>
+    <string name="failed">अनुत्तीर्ण होना</string>
+    <string name="sr_feedback_saved">सीनियर सिटीजन फीडबैक डेटा को सफलतापूर्वक सेव किया जाता है</string>
+    <string name="sr_citizen">वरिष्ठ नागरिक</string>
+    <string name="family_member_of_sr_citizen">सीनियर सिटीजन के पारिवारिक सदस्य</string>
+    <string name="may_be">शायद</string>
+    <string name="not_applicable">लागू नहीं</string>
+    <string name="gender_male">नर</string>
+    <string name="gender_female">महिला</string>
+    <string name="gender_others">अन्य</string>
+
+    <string name="related_info_talked_about">संबंधित जानकारी के बारे में बात की</string>
+    <string name="sore_throat">गले में खराश</string>
+    <string name="lack_of_essential_services">आवश्यक सेवाओं का अभाव</string>
+    <string name="emergency_escalation">आपातकालीन बढ़ाव</string>
+    <string name="address_bold">पता: </string>
+
+
+    <string name="changelanguage">भाषा बदलो</string>
+    <string name="logout">लॉग आउट</string>
+    <string name="contctNumber">संपर्क संख्या</string>
+    <string name="email">ईमेल</string>
+    <string name="Txtaddress">पता</string>
 </resources>
