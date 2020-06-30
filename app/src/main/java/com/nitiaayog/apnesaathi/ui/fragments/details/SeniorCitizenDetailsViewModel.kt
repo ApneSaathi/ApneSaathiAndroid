@@ -8,6 +8,7 @@ import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 class SeniorCitizenDetailsViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
@@ -16,41 +17,44 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         dataList.clear()
         dataList.add(
             DateItem(
-                "01", "Jan","Attended"
+                "01", "Jan", "Attended"
             )
         )
         dataList.add(
             DateItem(
-                "02", "Jan","Attended"
+                "02", "Jan", "Attended"
             )
         )
         dataList.add(
             DateItem(
-                "08", "Jan","Attended"
+                "08", "Jan", "Attended"
             )
         )
         dataList.add(
             DateItem(
-                "09", "Feb","Unattended"
+                "09", "Feb", "Unattended"
             )
         )
-        return  dataList
+        return dataList
     }
+
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
     fun getSeniorCitizenDetails(context: Context) {
         if (checkNetworkAvailability(context)) {
             val params = JsonObject()
-            params.addProperty("callid",11)
+            params.addProperty("callid", 11)
             dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
                 loaderObservable.value = NetworkRequestState.LoadingData
             }.doOnSuccess { loaderObservable.value = NetworkRequestState.SuccessResponse(it) }
-                .doOnError { loaderObservable.value = NetworkRequestState.ErrorResponse(it) }
-                .subscribe()
-                .autoDispose(disposables)
+                .doOnError {
+                    loaderObservable.value =
+                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                }.subscribe().autoDispose(disposables)
         }
     }
-    fun getDataList():MutableList<DateItem>{
-        return  dataList
+
+    fun getDataList(): MutableList<DateItem> {
+        return dataList
     }
 
     companion object {
@@ -61,11 +65,11 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         fun getInstance(dataManager: DataManager): SeniorCitizenDetailsViewModel =
             instance
                 ?: synchronized(this) {
-                instance
-                    ?: SeniorCitizenDetailsViewModel(
-                        dataManager
-                    )
-                        .also { instance = it }
-            }
+                    instance
+                        ?: SeniorCitizenDetailsViewModel(
+                            dataManager
+                        )
+                            .also { instance = it }
+                }
     }
 }

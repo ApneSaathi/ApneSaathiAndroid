@@ -1,35 +1,26 @@
 package com.nitiaayog.apnesaathi.ui.fragments.details
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
-import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
-import androidx.core.text.bold
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
-import com.nitiaayog.apnesaathi.base.extensions.replaceFragment
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
-import com.nitiaayog.apnesaathi.model.SeniorCitizen
-import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
-import com.nitiaayog.apnesaathi.utility.USER_DETAILS
-import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
+import com.nitiaayog.apnesaathi.utility.CALL_ID
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 
 
@@ -59,7 +50,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun bindData() {
-        if (user.gender == "M") {
+        if (callData.gender == "M") {
             img_user_icon.background =
                 activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_male_user) }
         } else {
@@ -67,7 +58,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
                 activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_female_user) }
         }
 
-        user?.let {
+        callData?.let {
             val address = getString(R.string.address).plus(" : ")
             val dataString = address.plus(it.block).plus(", ").plus(it.district)
                 .plus(", ").plus(it.state)
@@ -75,8 +66,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             spanAddress.setSpan(StyleSpan(Typeface.BOLD), 0, address.length, 0)
             spanAddress.setSpan(StyleSpan(Typeface.ITALIC), 0, address.length, 0)
 
-            txt_user_name.text = it.userName.plus("(").plus(it.age).plus(" Yrs)")
-            txt_user_phone_number.text = it.phoneNumber
+            txt_user_name.text = it.srCitizenName.plus("(").plus(it.age).plus(" Yrs)")
+            txt_user_phone_number.text = it.contactNumber
             txt_address.text = spanAddress
         }
 //       activity?.let { viewModel.getSeniorCitizenDetails(it) }  API call
@@ -119,7 +110,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         img_call_button.setOnClickListener { prepareToCallPerson() }
         txt_edit.setOnClickListener {
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-            intent.putExtra(USER_DETAILS, user)
+            intent.putExtra(CALL_ID, callData.callId)
+            startActivity(intent)
             startActivity(intent)
         }
     }
