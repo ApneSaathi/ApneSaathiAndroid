@@ -151,7 +151,7 @@
     <string name="grivence">Grivence</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="address"><b>Address:</b> 105, Singapore township, Block:3, Ghatkesar, Hyderabad</string>
+    <string name="address_bold">Address: </string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
     <string name="app_bar_title">User Details</string>
@@ -202,73 +202,4 @@
     <string name="other">Other</string>
     <string name="high">High</string>
     <string name="low">Low</string>
-
-    <string name="not_picked">Not\nPicked</string>
-    <string name="not_reachable">Not\nReachable</string>
-    <string name="dis_connected">Disconnected</string>
-    <string name="connected">Connected</string>
-    <string name="talked_with">Talked with</string>
-    <string name="medical_history">Medical history</string>
-    <string name="medical_problems">Medical Problems</string>
-    <string name="whom_did_you_talk_with">Whom did you talk with ?</string>
-    <string name="medical_history_sr_citizen">Medical history of Sr. Citizen</string>
-    <string name="behavior_change_practice">Did the respondent take up the behavior change practices shared with them ?</string>
-    <string name="info_you_talked_about">Related info you talked about</string>
-    <string name="prevention">Prevention</string>
-    <string name="access">Access</string>
-    <string name="status">Status</string>
-    <string name="detection">Detection</string>
-    <string name="covid_19_symptoms">COVID-19 Symptoms</string>
-    <string name="non_covid_symptoms">Non-covid medical problems</string>
-    <string name="select_category">Select category</string>
-    <string name="gender">Gender</string>
-    <string name="report_lack_of_essential_services">Report lack of Essential Services</string>
-    <string name="sr_citizen_report_lack_of_essintial_services">Does the senior citizen report a lack of access to essential services ?</string>
-    <string name="need_emergency_escalation">Is there a need for emergency and escalation ?</string>
-    <string name="any_sr_citizen_in_home">Do you have any Senior Citizen in your home ?</string>
-    <string name="new_sr_citizen_personal_details">New Sr. Citizen Person Details</string>
-    <string name="contact_number">Contact Number</string>
-    <string name="register">Register</string>
-    <string name="community_member">Community Member</string>
-    <string name="go_back">Go Back</string>
-    <string name="okay">Okay</string>
-    <string name="alert">Alert</string>
-    <string name="data_not_saved">Do you want to leave this page without saving ?</string>
-    <string name="success">Success</string>
-    <string name="failed">Failed</string>
-    <string name="sr_feedback_saved">Sr. citizen feedback data is saved Successfully</string>
-    <string name="sr_citizen">Senior Citizen</string>
-    <string name="family_member_of_sr_citizen">Family Member of Sr. Citizen</string>
-    <string name="may_be">May be</string>
-    <string name="not_applicable">Not Applicable</string>
-    <string name="gender_male">Male</string>
-    <string name="gender_female">Female</string>
-    <string name="gender_others">Others</string>
-    <string name="related_info_talked_about">Related info talked about</string>
-    <string name="sore_throat">Sore Throat</string>
-    <string name="lack_of_essential_services">Lack of Essential Services</string>
-    <string name="emergency_escalation">Emergency Escalation</string>
-
-
-    <string name="changelanguage">Change Laungauge</string>
-    <string name="logout">Logout</string>
-    <string name="contctNumber">Contact Number</string>
-    <string name="email">Email</string>
-    <string name="Txtaddress">Address</string>
-    <string name="address_bold">Address: </string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_calls">Calls</string>
-    <string name="menu_notification">Notification</string>
-    <string name="menu_profile">Profile</string>
-    <string name="pending_calls_count">Pending Calls(%s)</string>
-    <string name="grievances_count">Grievances(%s)</string>
-    <string name="follow_up_count">Follow Up(%s)</string>
-    <string name="attended_calls_count">Attended Calls(%s)</string>
-    <string name="pending_calls">Pending Calls</string>
-    <string name="grievances">Grievances</string>
-    <string name="follow_up">Follow Up</string>
-    <string name="attended_calls">Attended Calls</string>
-    <string name="see_all">See All</string>
-
 </resources>

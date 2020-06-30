@@ -18,7 +18,6 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         context = applicationContext
         if (dataManager.getSelectedLanguage().isEmpty()) {
             radiobtnEnglish.isChecked = true
-            dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_ENGLISH)
         } else {
             if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_ENGLISH)) {
                 radiobtnEnglish.isChecked = true

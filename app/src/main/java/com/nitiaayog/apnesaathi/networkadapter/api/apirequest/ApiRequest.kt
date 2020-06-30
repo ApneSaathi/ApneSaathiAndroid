@@ -1,24 +1,27 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
+import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
 
 interface ApiRequest {
 
     // Get Login User Data
-    @FormUrlEncoded
-    @POST(ApiProvider.ApiLoginUser+ApiProvider.GET_LOGIN_USER)
-    fun loginUser(@Field("phoneNo") phoneNo:String ): Single<LoginRepo>
+    fun loginUser(phoneNumber: JsonObject): Single<LoginRepo>
 
-    // Get Assessment Questions List
-    fun getAssessmentQuestions(): Single<AssessmentRepo>
+    // Get Calls list for Home
+    fun getCallDetails(details: JsonObject): Single<HomeRepo>
 
-    // Sync App Data With Server
-    fun syncAppDataWithServer(): Single<BaseRepo>
+    // Save Sr citizen feedback over a call
+    fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo>
+
+    // Register new Sr. Citizen
+    fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo>
+
+    // Get senior citizen details
+    fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo>
+
 }

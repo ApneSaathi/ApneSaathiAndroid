@@ -1,8 +1,12 @@
 package com.nitiaayog.apnesaathi.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
 
     @SerializedName(ApiConstants.UserId)
@@ -10,6 +14,9 @@ data class User(
 
     @SerializedName(ApiConstants.UserName)
     private val mUserName: String? = "",
+
+    @SerializedName(ApiConstants.Age)
+    private val mAge: String? = "",
 
     @SerializedName(ApiConstants.Block)
     private val mBlock: String? = "",
@@ -25,12 +32,28 @@ data class User(
 
     @SerializedName(ApiConstants.PhoneNumber)
     private val mPhoneNumber: String? = ""
-) {
+) : Parcelable {
+    @IgnoredOnParcel
     val userId: String = mUserId ?: ""
+
+    @IgnoredOnParcel
     val userName: String = mUserName ?: ""
+
+    @IgnoredOnParcel
+    val age: String = mAge ?: ""
+
+    @IgnoredOnParcel
     val state: String = mState ?: ""
+
+    @IgnoredOnParcel
     val district: String = mDistrict ?: ""
+
+    @IgnoredOnParcel
     val block: String = mBlock ?: ""
+
+    @IgnoredOnParcel
     val gender: String = mGender ?: ""
+
+    @IgnoredOnParcel
     val phoneNumber: String = mPhoneNumber ?: ""
 }

@@ -16,5 +16,5 @@ interface PreferenceRequest {
     fun getPhoneNumber(): String
     fun setPhoneNumber(phoneNumber: String)
     fun getSelectedLanguage(): String
-    fun setSelectedLanguage(Language: String)
+    fun setSelectedLanguage(language: String)
 }

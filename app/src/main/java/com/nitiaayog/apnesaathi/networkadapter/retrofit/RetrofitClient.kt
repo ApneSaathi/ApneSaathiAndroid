@@ -29,7 +29,7 @@ object RetrofitClient {
         if (httpClient == null) setupOkHttpWithCache(application)
 
         if (apiInterface == null) {
-            apiInterface = Retrofit.Builder().baseUrl(ApiConstants.BASE_URL)
+            apiInterface = Retrofit.Builder().baseUrl(BuildConfig.HOST_URL)
                 .client(httpClient!!)
                 .addConverterFactory(
                     GsonConverterFactory.create(GsonBuilder().setLenient().create())
@@ -92,9 +92,9 @@ object RetrofitClient {
         httpBuilder.addInterceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
+                .addHeader("Content-Type", "application/json")
                 /*.addHeader("Accept", "application/json")
                 .addHeader("Request-Type", "Android")
-                .addHeader("Content-Type", "application/json")
                 .addHeader("User-Agent", "Android")*/
                 .build()
             chain.proceed(request)

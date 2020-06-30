@@ -95,7 +95,6 @@
             android:background="@drawable/edittext_border"
             android:gravity="center"
             android:inputType="number"
-            android:imeOptions="actionNext"
             android:maxLength="1" />
     </LinearLayout>
 

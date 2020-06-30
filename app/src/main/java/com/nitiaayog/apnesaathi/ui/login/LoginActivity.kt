@@ -24,29 +24,17 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 if (EditMobileNumber.text.toString().trim().length < 10) {
                     CallSnackbar(
                         rootRelativeLayout,
-                        resources.getString(R.string.txtValidmobilenumber)
-                    )
+                        resources.getString(R.string.txtValidmobilenumber))
 
                 } else {
-
-//                    dataManager.loginUser(EditMobileNumber.text.toString().trim()).doOnSubscribe {
-//
-//                    }.doOnSuccess {
-//                        print(it)
-//                    }.doOnError {
-//                        print(it)
-//                    }.subscribe().autoDispose(disposables)
-
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
                     startActivity(targetIntent)
                 }
             }
         }.autoDispose(disposables)
     }
-
     override fun provideViewModel(): LoginViewModel = getViewModel {
         LoginViewModel.getInstance(dataManager)
     }
-
     override fun provideLayoutResource(): Int = R.layout.activity_login
 }

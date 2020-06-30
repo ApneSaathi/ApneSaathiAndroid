@@ -154,7 +154,7 @@
     <string name="update"><u>Update</u></string>
     <string name="call_received_by">Call Received By</string>
     <string name="appbar_title">SENIOR CITIZEN DATA</string>
-    <string name="register_a_new_citizen">Register a new citizen</string>
+    <string name="register_a_new_citizen">Register new citizen</string>
     <string name="emergency_call">Emergency Call</string>
     <string name="report_a_problem">Report a problem</string>
     <string name="feedback">Feedback</string>
@@ -187,7 +187,8 @@
     <string name="call_status">Call Status:</string>
     <string name="cough">Cough</string>
     <string name="fever">Fever</string>
-    <string name="shortness_of_breath">Shortness of breath</string>
+    <string name="shortness_of_breath">Shortness of\nbreath</string>
+    <string name="sore_throat">Sore Throat</string>
     <string name="type_here">Type here…</string>
     <string name="grivence">Grivence</string>
     <string name="save">Save</string>
@@ -287,6 +288,24 @@
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
     <string name="gender_others">Others</string>
+    <string name="data_not_available">Data not available</string>
+    <string name="validate_sr_citizen_name">Provide senior citizen\'s name</string>
+    <string name="validate_age">Provide age</string>
+    <string name="validate_gender">Select gender</string>
+    <string name="validate_contact_number">Provide senior citizen\'s contact number</string>
+    <string name="valid_contact_number">Provide valid contact number</string>
+    <string name="validate_state">Select state</string>
+    <string name="validate_district">Select district</string>
+    <string name="validate_address">Provide senior citizen\'s address</string>
+    <string name="api_connection_error">Not able to connect with server.Please check you internet connection</string>
+    <string name="related_info_talked_about">Related info talked about</string>
+    <string name="lack_of_essential_services">Lack of Essential Services</string>
+    <string name="emergency_escalation">Emergency Escalation</string>
+    <string name="issue_raised">Issue Raised</string>
+    <string name="raised_on">Raised on:</string>
+    <string name="less_details"><u>Less details</u></string>
+    <string name="more_details"><u>More details</u></string>
+    <string name="error">Error!</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -308,24 +327,4 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
-
-    <string name="personal_details">Personal Details</string>
-    <string name="health_care_information">Health Care Information</string>
-    <string name="emotional_state">Emotional State</string>
-    <string name="happy">Happy</string>
-    <string name="neutral">Neutral</string>
-    <string name="sad">sad</string>
-
-    <string name="related_info_talked_about">Related info talked about</string>
-    <string name="sore_throat">Sore Throat</string>
-    <string name="lack_of_essential_services">Lack of Essential Services</string>
-    <string name="emergency_escalation">Emergency Escalation</string>
-
-
-    <string name="changelanguage">Change Laungauge</string>
-    <string name="logout">Logout</string>
-    <string name="contctNumber">Contact Number</string>
-    <string name="email">Email</string>
-    <string name="Txtaddress">Address</string>
-    <string name="permission_denied">Permission denied</string>
 </resources>

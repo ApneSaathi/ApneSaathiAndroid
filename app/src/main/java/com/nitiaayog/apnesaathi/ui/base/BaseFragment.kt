@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.ui.base
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -17,11 +18,11 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.model.User
-import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenEditFragment
+import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
+import com.nitiaayog.apnesaathi.utility.CALL_ID
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -97,9 +98,8 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     private fun showPermissionTextPopup(
         @StringRes message: Int, navigateToSetting: Boolean, permission: String
     ) {
-        AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
+        val dialog = AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
             .setTitle(R.string.permission_detail).apply {
-                this.setCancelable(false)
                 this.setMessage(message)
                 this.setPositiveButton(R.string.accept) { dialog, _ ->
                     dialog.dismiss()
@@ -111,24 +111,34 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
                     } else requestPermission(permission)
                 }
                 this.setNegativeButton(R.string.not_now) { dialog, _ -> dialog.dismiss() }
-            }.create().show()
+            }.create()
+        dialog.show()
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
-    protected fun placeCall(selectedUser: User, containerId: Int) {
-        Intent(Intent.ACTION_CALL).apply {
+    protected fun placeCall(selectedCallData: CallData, containerId: Int) {
+        /*Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:${selectedUser.phoneNumber}")
-            if (this.resolveActivity(activity!!.packageManager) != null)
-                startActivity(this)
+            if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
             else onCallPermissionDenied()
-        }
+        }*/
 
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                addFragment(
+                /*addFragment(
                     containerId, SeniorCitizenEditFragment(), getString(R.string.edit_fragment)
-                )
-                //startActivity(Intent(activity, SeniorCitizenFeedbackFormActivity::class.java))
+                )*/
+                val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+                intent.putExtra(CALL_ID, selectedCallData.callId)
+                startActivity(intent)
             }.autoDispose(disposables)
+
+        val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+        intent.putExtra(CALL_ID, selectedCallData.callId)
+        startActivity(intent)
     }
 
     abstract fun provideViewModel(): VM

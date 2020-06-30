@@ -7,17 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
-import com.nitiaayog.apnesaathi.model.User
+import com.nitiaayog.apnesaathi.model.CallData
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 
-class CallsAdapter(private val dataList: MutableList<User>) :
-    RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
+class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
+    private val dataList: MutableList<CallData> = mutableListOf()
     private lateinit var itemClickListener: OnItemClickListener
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, user: User)
-        fun onMoreInfoClick(position: Int, user: User)
+        fun onItemClick(position: Int, callData: CallData)
+        fun onMoreInfoClick(position: Int, callData: CallData)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodaysCallsViewHolder {
@@ -35,6 +35,14 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         this.itemClickListener = itemClickListener
     }
 
+    fun setData(dataList: MutableList<CallData>) {
+        this.dataList.apply {
+            this.clear()
+            this.addAll(dataList)
+        }
+        notifyDataSetChanged()
+    }
+
     inner class TodaysCallsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val civGender: CircleImageView = itemView.civGender
@@ -42,15 +50,18 @@ class CallsAdapter(private val dataList: MutableList<User>) :
         val tvAddress: TextView = itemView.tvAddress
 
         init {
+            tvAddress.isSelected = true
+
             itemView.constraintLayout.setOnClickListener(this)
             itemView.ivCall.setOnClickListener(this)
             itemView.ivMoreInfo.setOnClickListener(this)
         }
 
-        fun bindData(user: User) {
-            tvName.text = user.userName
-            tvAddress.text = user.block.plus(", ").plus(user.district).plus(", ").plus(user.state)
-            civGender.setImageResource(R.drawable.ic_profile)
+        fun bindData(callData: CallData) {
+            tvName.text = callData.srCitizenName
+            tvAddress.text = callData.block.plus(", ").plus(callData.district).plus(", ")
+                .plus(callData.state)
+            civGender.setImageResource(R.drawable.ic_male_user)
         }
 
         override fun onClick(view: View) {
@@ -61,7 +72,9 @@ class CallsAdapter(private val dataList: MutableList<User>) :
                 }
                 R.id.ivMoreInfo -> {
                     if (::itemClickListener.isInitialized)
-                        itemClickListener.onMoreInfoClick(adapterPosition, dataList[adapterPosition])
+                        itemClickListener.onMoreInfoClick(
+                            adapterPosition, dataList[adapterPosition]
+                        )
                 }
             }
         }

@@ -1,11 +1,13 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apimanager
 
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserve
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserveWithDelaySubscription
+import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.AssessmentRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import io.reactivex.Single
 
@@ -14,6 +16,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
     companion object {
         @Volatile
         private var instance: ApiManager? = null
+
         @Synchronized
         fun getApiRequest(apiClient: ApiInterface): ApiManager =
             instance ?: synchronized(this) {
@@ -21,12 +24,19 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
             }
     }
 
-    override fun loginUser(phoneNumber:String): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
-    override fun getAssessmentQuestions(): Single<AssessmentRepo> =
-        apiClient.getAssessmentQuestions().subscribeAndObserveWithDelaySubscription()
+    override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
+        apiClient.getCallDetails(details).subscribeAndObserveWithDelaySubscription()
 
-    override fun syncAppDataWithServer(): Single<BaseRepo> =
-        apiClient.syncAppDataWithServer().subscribeAndObserve()
+    override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
+        apiClient.saveSrCitizenFeedback(srCitizenFeedback)
+            .subscribeAndObserveWithDelaySubscription()
+
+    override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
+        apiClient.registerSeniorCitizen(srDetails).subscribeAndObserveWithDelaySubscription()
+
+    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
+        apiClient.getSeniorCitizenDetails(srDetails).subscribeAndObserveWithDelaySubscription()
 }

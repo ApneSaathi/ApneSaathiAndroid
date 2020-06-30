@@ -1,13 +1,23 @@
 package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
+import com.nitiaayog.apnesaathi.BuildConfig
+
 object ApiProvider {
 
-    const val GET_LOGIN_USER = "Volunteer/LoginVolunteer"
-    const val ApiLoginUser = ApiConstants.BASE_URL
+    private const val GET_LOGIN_USER: String = "Volunteer/LoginVolunteer"
+    const val ApiLoginUser: String = BuildConfig.HOST_URL + GET_LOGIN_USER
 
-    private const val GET_ASSESSMENT_QUESTIONS = "5926c34212000035026871cd"
-    const val ApiGetAssessmentQuestions = ApiConstants.BASE_URL + GET_ASSESSMENT_QUESTIONS
+    private const val GET_LOAD_DASHBOARD: String = "Volunteer/loadDashboard"
+    const val ApiLoadDashboard: String = BuildConfig.HOST_URL + GET_LOAD_DASHBOARD
 
-    private const val SYNC_APP_DATA_WITH_SERVER = "588d15f5100000a8072d2945"
-    const val ApiSyncAppDataWithServer = ApiConstants.BASE_URL + SYNC_APP_DATA_WITH_SERVER
+    private const val GET_SAVE_SR_CITIZEN_FEED_BACK_FORM: String =
+        "Volunteer/SaveSeniorCitizenFeedbackForm"
+    const val ApiSaveSeniorCitizenFeedbackForm: String =
+        BuildConfig.HOST_URL + GET_SAVE_SR_CITIZEN_FEED_BACK_FORM
+
+    private const val GET_REGISTER_SR_CITIZEN: String = "Volunteer/registerNewSrCitizen"
+    const val ApiRegisterSeniorCitizen: String = BuildConfig.HOST_URL + GET_REGISTER_SR_CITIZEN
+
+    private const val GET_SR_CITIZEN_DETAILS = "Volunteer/seniorcitizenDetails"
+    const val ApiSeniorCitizenDetails = BuildConfig.HOST_URL + GET_SR_CITIZEN_DETAILS
 }
