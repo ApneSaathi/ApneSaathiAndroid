@@ -17,7 +17,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected fun checkNetworkAvailability(context: Context): Boolean {
         if (!NetworkProvider.isConnected(context)) {
-            loaderObservable.value = NetworkRequestState.LoadingData
+            loaderObservable.value = NetworkRequestState.NetworkNotAvailable
             return false
         }
         return true

@@ -13,26 +13,20 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.replaceFragment
-import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
-import com.nitiaayog.apnesaathi.database.ApneSathiDatabase_Impl
+import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
-import com.nitiaayog.apnesaathi.model.SeniorCitizen
-import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
-import kotlinx.coroutines.*
 
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     SeniorCitizenDateAdapter.OnItemClickListener, SeniorCitizenEditFragment.OnItemClickListener {
 
     private lateinit var adapter: SeniorCitizenDateAdapter
-    lateinit var user: User
+    lateinit var callData: CallData
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
         getViewModel {
-            SeniorCitizenDetailsViewModel.getInstance(
-                dataManager
-            )
+            SeniorCitizenDetailsViewModel.getInstance(dataManager)
         }
 
     override fun provideLayoutResource(): Int = R.layout.fragment_senior_citizen_details
@@ -62,13 +56,13 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 //        val database : ApneSathiDatabase? =
 //            activity?.let { ApneSathiDatabase.getDatabase(it, MainScope()) }
 //        GlobalScope.launch {database?.ApneSathiDao()?.insertItem(seniorCitizen) }
-        txt_user_name.text = user.userName
-        txt_user_phone_number.text = user.phoneNumber
+        txt_user_name.text = callData.srCitizenName
+        txt_user_phone_number.text = callData.contactNumber
         val s = SpannableStringBuilder()
             .bold { append(resources.getString(R.string.address_bold)) }
-        txt_address.text =
-            s.append(" "+user.block + ", ").append(user.district + ", ").append(user.state)
-        if (user.gender == "M") {
+        txt_address.text = s.append(" " + callData.block + ", ").append(callData.district + ", ")
+            .append(callData.state)
+        if (callData.gender == "M") {
             img_user_icon.background =
                 activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_male_user) }
         } else {
@@ -79,11 +73,11 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     private fun initClicks() {
         txt_more_details.setOnClickListener {
-            if(cg_more_details_group.isVisible){
+            if (cg_more_details_group.isVisible) {
                 cg_more_details_group.visibility = View.GONE
                 txt_more_details.text = getString(R.string.more_details)
                 txt_more_details.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-            }else{
+            } else {
                 cg_more_details_group.visibility = View.VISIBLE
                 txt_more_details.text = getString(R.string.less_details)
                 txt_more_details.paintFlags = Paint.UNDERLINE_TEXT_FLAG
@@ -130,7 +124,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     override fun onCallPermissionGranted() {
-        placeCall(user, R.id.fragment_edit_container)
+        placeCall(callData, R.id.fragment_edit_container)
     }
 
     override fun onCallPermissionDenied() =
@@ -150,7 +144,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     override fun onCancelButton() {
     }
 
-    fun setSelectedUser(selectedUser: User) {
-        user = selectedUser
+    fun setSelectedUser(callData: CallData) {
+        this.callData = callData
     }
 }

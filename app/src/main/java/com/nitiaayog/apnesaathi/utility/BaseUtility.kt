@@ -13,6 +13,8 @@ object BaseUtility {
 
     fun validateEmailFormat(emailId: String) = Patterns.EMAIL_ADDRESS.matcher(emailId).matches()
 
+    fun validatePhoneNumber(phoneNumber: String) = Patterns.PHONE.matcher(phoneNumber).matches()
+
     fun navigateToUrl(context: Context, url: String) =
         context.startActivity(Intent(Intent.ACTION_VIEW).apply {
             this.data = Uri.parse(url)

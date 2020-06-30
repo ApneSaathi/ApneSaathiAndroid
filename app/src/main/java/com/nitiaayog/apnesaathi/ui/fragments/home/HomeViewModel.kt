@@ -1,106 +1,58 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
+import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
+import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.Grievances
+import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.User
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
-        @Volatile
-        private var instance: HomeViewModel? = null
-
         @Synchronized
         fun getInstance(dataManager: DataManager): HomeViewModel =
-            instance ?: synchronized(this) {
-                instance ?: HomeViewModel(dataManager).also { instance = it }
-            }
+            synchronized(this) { HomeViewModel(dataManager) }
     }
 
-    private val pendingCallsList: MutableList<User> = mutableListOf()
+    private val TAG: String = "TAG -- ${HomeViewModel::class.java.simpleName} -->"
+
     private val followupCallsList: MutableList<User> = mutableListOf()
     private val attendedCallsList: MutableList<User> = mutableListOf()
     private val allCallsList: MutableList<User> = mutableListOf()
 
-    private val grievancesList: MutableList<Grievances> = mutableListOf()
+    private val grievances: MutableList<Grievances> = mutableListOf()
+
+    private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
+    private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
+        dataManager.getAllGrievances()
 
     init {
-        preparePendingData()
         prepareFollowupData()
         prepareAttendedData()
         prepareGrievancesData()
     }
 
-    private fun preparePendingData() {
-        pendingCallsList.add(
-            User(
-                "1", "Sunil Sunny","78", "102/Shantinagar", "Pune",
-                "Maharashtra", "M", "8893089872"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "2", "Amol Khose", "65","Panghat Row House", "Pune",
-                "Maharashtra", "M", "9673346489"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "3", "Omi H Mehta","55", "803/Nakshatra View", "Surat",
-                "Gujarat", "M", "9016903906"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "4", "Tejeshwar Chaudhary", "60","Niti Aayog", "Pune",
-                "Maharashtra", "M", "9650650808"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "5", "Sucheta S.", "59","TCG 1005", "Pune",
-                "Maharashtra", "F", "9650650808"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "6", "Dushyant Datta","63", "Shree Hari Nagar", "Kota",
-                "Rajasthan", "M", "8076982318"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "4", "Tejeshwar Chaudhary","58", "Niti Aayog", "Pune",
-                "Maharashtra", "M", "9650650808"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "5", "Sucheta S.","75", "TCG 1005", "Pune",
-                "Maharashtra", "F", "9650650808"
-            )
-        )
-        pendingCallsList.add(
-            User(
-                "6", "Dushyant Datta", "63","Shree Hari Nagar", "Kota",
-                "Rajasthan", "M", "8076982318"
-            )
-        )
-        allCallsList.addAll(pendingCallsList)
-    }
-
     private fun prepareFollowupData() {
         followupCallsList.add(
             User(
-                "5", "Sucheta S.","53", "TCG 1005", "Pune",
+                "5", "Sucheta S.", "53", "TCG 1005", "Pune",
                 "Maharashtra", "F", "9650650808"
             )
         )
         followupCallsList.add(
             User(
-                "6", "Dushyant Datta", "57","Shree Hari Nagar", "Kota",
+                "6", "Dushyant Datta", "57", "Shree Hari Nagar", "Kota",
                 "Rajasthan", "M", "8076982318"
             )
         )
@@ -110,25 +62,25 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private fun prepareAttendedData() {
         attendedCallsList.add(
             User(
-                "6", "RajShankar Khanal", "67","Rang Baugh Society", "Kota",
+                "6", "RajShankar Khanal", "67", "Rang Baugh Society", "Kota",
                 "Haridwar", "M", "8076982318"
             )
         )
         attendedCallsList.add(
             User(
-                "7", "Sr. Narendra Modi","70", "Rashtrapati Bhavan", "Vadnager",
+                "7", "Sr. Narendra Modi", "70", "Rashtrapati Bhavan", "Vadnager",
                 "Gujarat", "M", "9650650808"
             )
         )
         attendedCallsList.add(
             User(
-                "8", "Akshay Kumar", "71","Bandra", "Mumbai",
+                "8", "Akshay Kumar", "71", "Bandra", "Mumbai",
                 "Maharashtra", "M", "9016903906"
             )
         )
         attendedCallsList.add(
             User(
-                "9", "Amitabh Bachchan","52", "Phase 2, Hinjewadi", "Pune",
+                "9", "Amitabh Bachchan", "52", "Phase 2, Hinjewadi", "Pune",
                 "Maharashtra", "M", "8893089872"
             )
         )
@@ -136,47 +88,39 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     }
 
     private fun prepareGrievancesData() {
-        grievancesList.add(
+        grievances.add(
             Grievances(
                 "1", "Having food related issues", GrievancesAdapter.GRIEVANCE_PENDING
             )
         )
-        grievancesList.add(
+        grievances.add(
             Grievances(
                 "2", "Not receiving pension", GrievancesAdapter.GRIEVANCE_RESOLVED
             )
         )
-        grievancesList.add(
+        grievances.add(
             Grievances(
                 "3", "Having COVID-19 symptoms", GrievancesAdapter.GRIEVANCE_PENDING
             )
         )
-        grievancesList.add(
+        grievances.add(
             Grievances(
                 "4", "Medical checkup not possible", GrievancesAdapter.GRIEVANCE_RESOLVED
             )
         )
-        grievancesList.add(
-            Grievances(
-                "5", "Physically unfit", GrievancesAdapter.GRIEVANCE_PENDING
-            )
+        grievances.add(
+            Grievances("5", "Physically unfit", GrievancesAdapter.GRIEVANCE_PENDING)
         )
-        grievancesList.add(
+        grievances.add(
             Grievances(
                 "6", "Diabetic and Pressure related issues", GrievancesAdapter.GRIEVANCE_RESOLVED
             )
         )
     }
 
-    fun getFewPendingCalls(): MutableList<User> =
-        if (pendingCallsList.size > 3) pendingCallsList.subList(0, 3) else pendingCallsList
+    fun getFewGrievancesList() = if (grievances.size > 3) grievances.subList(0, 3) else grievances
 
-    fun getPendingCalls(): MutableList<User> = pendingCallsList
-
-    fun getFewGrievancesList() =
-        if (grievancesList.size > 3) grievancesList.subList(0, 3) else grievancesList
-
-    fun getGrievancesList() = grievancesList
+    fun getGrievances() = grievances
 
     fun getFewFollowupCalls(): MutableList<User> =
         if (followupCallsList.size > 3) followupCallsList.subList(0, 3) else followupCallsList
@@ -189,4 +133,51 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getAttendedCalls(): MutableList<User> = attendedCallsList
 
     fun getAllCalls(): MutableList<User> = allCallsList
+
+    private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
+        val callData = grievance.filter {
+            (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
+        }
+        val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
+        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        return grievances
+    }
+
+    fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
+
+    fun getCallsList(): LiveData<MutableList<CallData>> = callsList
+
+    fun getGrievancesList(): LiveData<MutableList<SrCitizenGrievance>> = grievancesList
+
+    fun getCallDetails(context: Context) {
+        if (checkNetworkAvailability(context)) {
+            val params = JsonObject()
+            params.addProperty(ApiConstants.VolunteerId, 1234 /*dataManager.getUserId()*/)
+            dataManager.getCallDetails(params).doOnSubscribe {
+                loaderObservable.value = NetworkRequestState.LoadingData
+            }.subscribe({
+                try {
+                    if (it.status == "0") {
+                        viewModelScope.launch {
+                            io {
+                                val data = it.getData()
+                                dataManager.insertCallData(data.callsList)
+
+                                val grievances: List<SrCitizenGrievance> =
+                                    prepareGrievances(data.callsList)
+                                dataManager.insertGrievances(grievances)
+                            }
+                            loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                        }
+                    } else loaderObservable.value =
+                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_ERROR)
+                } catch (e: Exception) {
+                    println("$TAG ${e.message}")
+                }
+            }, {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+            }).autoDispose(disposables)
+        }
+    }
 }
