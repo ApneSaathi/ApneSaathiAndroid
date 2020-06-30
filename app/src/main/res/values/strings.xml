@@ -297,6 +297,15 @@
     <string name="validate_state">Select state</string>
     <string name="validate_district">Select district</string>
     <string name="validate_address">Provide senior citizen\'s address</string>
+    <string name="api_connection_error">Not able to connect with server.Please check you internet connection</string>
+    <string name="related_info_talked_about">Related info talked about</string>
+    <string name="lack_of_essential_services">Lack of Essential Services</string>
+    <string name="emergency_escalation">Emergency Escalation</string>
+    <string name="issue_raised">Issue Raised</string>
+    <string name="raised_on">Raised on:</string>
+    <string name="less_details"><u>Less details</u></string>
+    <string name="more_details"><u>More details</u></string>
+    <string name="error">Error!</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -318,11 +327,4 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
-    <string name="related_info_talked_about">Related info talked about</string>
-    <string name="lack_of_essential_services">Lack of Essential Services</string>
-    <string name="emergency_escalation">Emergency Escalation</string>
-    <string name="issue_raised">Issue Raised</string>
-    <string name="raised_on">Raised on:</string>
-    <string name="less_details"><u>Less details</u></string>
-    <string name="more_details"><u>More details</u></string>
 </resources>

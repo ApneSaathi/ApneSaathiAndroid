@@ -17,6 +17,11 @@ interface CallDataDao {
     @Query("SELECT * FROM ${DbConstants.Tables.TABLE_CALL_DETAILS} LIMIT :dataCount")
     fun getFewCallsList(dataCount: Int = 3): LiveData<MutableList<CallData>>
 
+    @Query(
+        "SELECT * FROM ${DbConstants.Tables.TABLE_CALL_DETAILS} WHERE ${DbConstants.Columns.Id} =:id"
+    )
+    fun getCallDetailFromId(id: Int): CallData
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(callData: List<CallData>)
 }

@@ -62,7 +62,7 @@ class CallData {
 
     @ColumnInfo(name = DbConstants.Columns.Address, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenAddress)
-    var addresssrcitizen: String? = ""
+    var address: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
@@ -86,7 +86,7 @@ class CallData {
 
     @ColumnInfo(name = DbConstants.Columns.District, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenDistrict)
-    var districtsrcitizen: String? = ""
+    var district: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
@@ -94,7 +94,7 @@ class CallData {
 
     @ColumnInfo(name = DbConstants.Columns.Block, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenBlock)
-    var blocknamesrcitizen: String? = ""
+    var block: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
@@ -102,7 +102,7 @@ class CallData {
 
     @ColumnInfo(name = DbConstants.Columns.CallStatus, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenCallStatusCode)
-    var callstatusCode: String? = ""
+    var callStatusCode: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
@@ -110,7 +110,7 @@ class CallData {
 
     @ColumnInfo(name = DbConstants.Columns.CallSubStatus, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenSubStatusCode)
-    var callstatussubCode: String? = ""
+    var callStatusSubCode: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
@@ -118,7 +118,7 @@ class CallData {
 
     @ColumnInfo(name = DbConstants.Columns.TalkedWith, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenTalkedWith)
-    var talkedwith: String? = ""
+    var talkedWith: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
@@ -132,8 +132,10 @@ class CallData {
             field = value ?: ""
         }
 
+    //@TypeConverters(MedicalGrievancesConverter::class)
     @Ignore
-    var medicalandgreivance: MutableList<SrCitizenGrievance>? = mutableListOf()
+    @SerializedName(ApiConstants.MedicalGrievances)
+    var medicalGrievance: MutableList<SrCitizenGrievance>? = mutableListOf()
         get() = field ?: mutableListOf()
         set(value) {
             field = value ?: mutableListOf()

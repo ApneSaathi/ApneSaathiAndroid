@@ -1,11 +1,11 @@
 package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
-
 object ApiConstants {
 
-    const val BASE_URL: String = "https://www.google.com"
+    const val STATUS_EXCEPTION: Int = -1
+    const val STATUS_ERROR: Int = 0
 
+    const val StatusCode: String = "statusCode"
     const val UserId: String = "user_id"
     const val UserName: String = "user_name"
     const val Block: String = "block"
@@ -45,4 +45,31 @@ object ApiConstants {
     const val SrCitizenSubStatusCode: String = "callstatussubCode"
     const val SrCitizenTalkedWith: String = "talkedwith"
     const val Remark: String = "remarks"
+
+    const val GrievanceId: String = "idgrevance"
+    const val IsDiabetic: String = "diabetic"
+    const val IsBloodPressure: String = "bloodpressure"
+    const val LungAilment: String = "lungailment"
+    const val CancerOrMajorSurgery: String = "cancer_or_majorsurgery"
+    const val OtherAilments: String = "other_ailments"
+    const val RemarkOnMedicalHistory: String = "remarks_medical_history"
+    const val InfoTalkAbout: String = "related_info_talked_about"
+    const val NoticedBehaviouralChange: String = "behavioural_change_noticed"
+    const val HasCovidSymptoms: String = "iscovidsymptoms"
+    const val HasCough: String = "hascough"
+    const val HasFever: String = "hasfever"
+    const val HasShortnessOfBreath: String = "has_shortnes_of_breath"
+    const val HasSoreThroat: String = "has_sorethroat"
+    const val QuarantineStatus: String = "quarantinestatus"
+    const val FoodShortage: String = "foodshortage"
+    const val MedicineShortage: String = "medicineshortage"
+    const val AccessToBankingIssue: String = "aceesstobankingissue"
+    const val UtilityIssue: String = "utilitysupplyissue"
+    const val HygieneIssue: String = "hygieneissue"
+    const val SafetyIssue: String = "safetyissue"
+    const val EmergencyServiceIssue: String = "emergencyserviceissue"
+    const val PhoneInternetIssue: String = "phoneandinternetissue"
+    const val IsEmergencyServicesRequired: String = "isemergencyservicerequired"
+    const val ImpRemarkInfo: String = "remakrsimportantinfo"
+    const val CreatedDate: String = "loggeddattime"
 }

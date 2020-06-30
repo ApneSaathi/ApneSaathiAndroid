@@ -267,6 +267,9 @@
     <string name="validate_district">जिले का चयन करें</string>
     <string name="validate_address">वरिष्ठ नागरिक का पता प्रदान करें</string>
 
+    <string name="api_connection_error">सर्वर से कनेक्ट करने में सक्षम नहीं है। कृपया अपने इंटरनेट कनेक्शन की जाँच करें</string>
+    <string name="error">त्रुटि!</string>
+
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>

@@ -13,6 +13,7 @@ interface DataManager : ApiRequest, PreferenceRequest {
     // TODO : Database Methods
     fun insertCallData(callData: List<CallData>)
     fun getAllCallsList(): LiveData<MutableList<CallData>>
+    fun getCallDetailFromId(id: Int): CallData
 
     fun insertGrievances(grievances: List<SrCitizenGrievance>)
     fun getAllGrievances(): LiveData<MutableList<SrCitizenGrievance>>

@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/view_size_62"
             android:scrollbars="none"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -124,7 +123,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ProgressBar
-                            android:id="@+id/progressBarGrienvances"
+                            android:id="@+id/progressBarGrievances"
                             style="?android:attr/progressBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

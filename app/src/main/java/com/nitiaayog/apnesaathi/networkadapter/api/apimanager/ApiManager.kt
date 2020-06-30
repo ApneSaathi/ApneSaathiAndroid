@@ -28,7 +28,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
-        apiClient.getCallDetails(details).subscribeAndObserve()
+        apiClient.getCallDetails(details).subscribeAndObserveWithDelaySubscription()
 
     override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
         apiClient.saveSrCitizenFeedback(srCitizenFeedback)

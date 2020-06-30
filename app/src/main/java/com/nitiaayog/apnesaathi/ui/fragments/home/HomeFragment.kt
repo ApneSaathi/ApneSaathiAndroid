@@ -15,10 +15,10 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
-import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,43 +29,47 @@ import java.util.concurrent.TimeUnit
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private var lastSelectedPosition: Int = -1
-    private var lastSelectedItem: User? = null
+    private var lastSelectedCallData: CallData? = null
 
     private val pendingAdapter by lazy {
-        CallsAdapter(viewModel.getFewPendingCalls()).apply {
+        CallsAdapter().apply {
             this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, user: User) {
+                override fun onItemClick(position: Int, callData: CallData) {
                     lastSelectedPosition = position
-                    lastSelectedItem = user
+                    lastSelectedCallData = callData
                     prepareToCallPerson()
                 }
 
-                override fun onMoreInfoClick(position: Int, user: User) {
+                override fun onMoreInfoClick(position: Int, callData: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(user)
+                    /*fragment.setSelectedUser(callData)
                     addFragment(
                         R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
-                    )
+                    )*/
                 }
             })
         }
     }
 
-    private val grievancesAdapter by lazy { GrievancesAdapter(viewModel.getFewGrievancesList()) }
+    private val grievancesAdapter by lazy { GrievancesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         toolBar.title = getString(R.string.menu_home)
 
-        getObservableDataStream()
-        initRecyclerView()
+        try {
+            getObservableDataStream()
+            initRecyclerView()
 
-        Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                viewModel.getCallDetails(context!!)
-            }
-            .autoDispose(disposables)
+            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    viewModel.getCallDetails(context!!)
+                }
+                .autoDispose(disposables)
+        } catch (e: Exception) {
+            println("TAG -- MyData --> ${e.message}")
+        }
     }
 
     override fun provideViewModel(): HomeViewModel =
@@ -74,7 +78,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     override fun provideLayoutResource(): Int = R.layout.fragment_home
 
     override fun onCallPermissionGranted() {
-        lastSelectedItem?.let { placeCall(it, R.id.fragmentHomeContainer) }
+        lastSelectedCallData?.let { placeCall(it, R.id.fragmentHomeContainer) }
     }
 
     override fun onCallPermissionDenied() =
@@ -86,7 +90,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             this.isNestedScrollingEnabled = false
             this.addItemDecoration(
                 DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-                    setDrawable(ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!)
+                    setDrawable(
+                        ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!
+                    )
                 }
             )
             this.adapter = pendingAdapter
@@ -97,7 +103,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             this.isNestedScrollingEnabled = false
             this.addItemDecoration(
                 DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-                    setDrawable(ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!)
+                    setDrawable(
+                        ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!
+                    )
                 }
             )
             this.adapter = grievancesAdapter
@@ -137,20 +145,20 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun manageProgressBar(visibility: Int) {
         progressBarCalls.visibility = visibility
-        progressBarGrienvances.visibility = visibility
+        progressBarGrievances.visibility = visibility
     }
 
     private fun getObservableDataStream() {
         viewModel.getCallsList().removeObservers(viewLifecycleOwner)
         viewModel.getCallsList().observe(viewLifecycleOwner, Observer {
-            // TODO : Change List type in Adapter
+            pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             pendingAdapter.notifyDataSetChanged()
             managePendingCalls(it)
         })
 
-        viewModel.getGrievanceList().removeObservers(viewLifecycleOwner)
-        viewModel.getGrievanceList().observe(viewLifecycleOwner, Observer {
-            // TODO : Change List type in Adapter
+        viewModel.getGrievancesList().removeObservers(viewLifecycleOwner)
+        viewModel.getGrievancesList().observe(viewLifecycleOwner, Observer {
+            grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             grievancesAdapter.notifyDataSetChanged()
             manageGrievances(it)
         })
@@ -158,13 +166,20 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
             when (it) {
-                is NetworkRequestState.NetworkNotAvailable -> {
-                }
+                is NetworkRequestState.NetworkNotAvailable ->
+                    BaseUtility.showAlertMessage(
+                        context!!, R.string.error, R.string.api_connection_error
+                    )
                 is NetworkRequestState.LoadingData -> manageProgressBar(View.VISIBLE)
                 is NetworkRequestState.ErrorResponse -> {
                     manageProgressBar(View.GONE)
+                    BaseUtility.showAlertMessage(
+                        context!!, R.string.error, R.string.api_connection_error
+                    )
                 }
-                is NetworkRequestState.SuccessResponse<*> -> manageProgressBar(View.GONE)
+                is NetworkRequestState.SuccessResponse<*> -> {
+                    manageProgressBar(View.GONE)
+                }
             }
         })
     }

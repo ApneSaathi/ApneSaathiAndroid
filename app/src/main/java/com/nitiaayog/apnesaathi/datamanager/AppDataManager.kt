@@ -59,8 +59,8 @@ class AppDataManager private constructor(
 
     // Database Access
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertAll(callData)
-
     override fun getAllCallsList(): LiveData<MutableList<CallData>> = callsDataDao.getAllCallsList()
+    override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
 
     override fun insertGrievances(grievances: List<SrCitizenGrievance>) =
         grievancesDao.insertAll(grievances)
