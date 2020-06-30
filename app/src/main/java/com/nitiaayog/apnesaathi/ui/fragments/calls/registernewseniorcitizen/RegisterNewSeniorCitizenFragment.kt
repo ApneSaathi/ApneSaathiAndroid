@@ -4,11 +4,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.utility.BaseUtility
+import kotlinx.android.synthetic.main.fragment_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -25,6 +30,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         toolBar.title = getString(R.string.register_a_new_citizen)
         toolBar.setNavigationOnClickListener { fragmentManager?.popBackStack() }
 
+        observeStates()
         initAutoCompleteTextView()
         initClicks()
     }
@@ -101,7 +107,12 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         tvRegister.throttleClick().subscribe {
             if (validateFields())
                 viewModel.registerNewSeniorCitizen(
-                    context!!, etName.text.toString(), etAge.text.toString(), selectedGender,
+                    context!!, etName.text.toString(), etAge.text.toString(),
+                    when (selectedGender) {
+                        getString(R.string.gender_male) -> "M"
+                        getString(R.string.gender_female) -> "F"
+                        else -> "O"
+                    },
                     etContactNumber.text.toString(), selectedDistrict, selectedState,
                     etAddress.text.toString()
                 )
@@ -113,45 +124,61 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         autoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
 
     private fun validateFields(): Boolean {
-        when {
-            etName.text.isEmpty() -> {
-                tvNameError.visibility = View.VISIBLE
-                return false
-            }
-            etAge.text.isEmpty() -> {
-                tvAgeError.visibility = View.VISIBLE
-                return false
-            }
-            selectedGender.isEmpty() -> {
-                tvGenderError.visibility = View.VISIBLE
-                return false
-            }
-            etContactNumber.text.isEmpty() -> {
-                tvContactNumberError.visibility = View.VISIBLE
-                return false
-            }
-            selectedState.isEmpty() -> {
-                tvStateError.visibility = View.VISIBLE
-                return false
-            }
-            selectedDistrict.isEmpty() -> {
-                tvDistrictError.visibility = View.VISIBLE
-                return false
-            }
-            etAddress.text.isEmpty() -> {
-                tvAddressError.visibility = View.VISIBLE
-                return false
-            }
-            else -> {
-                tvNameError.visibility = View.GONE
-                tvAgeError.visibility = View.GONE
-                tvGenderError.visibility = View.GONE
-                tvContactNumberError.visibility = View.GONE
-                tvStateError.visibility = View.GONE
-                tvDistrictError.visibility = View.GONE
-                tvAddressError.visibility = View.GONE
-            }
+        if (etName.text.isEmpty()) {
+            tvNameError.visibility = View.VISIBLE
+            return false
+        } else if (etAge.text.isEmpty()) {
+            tvAgeError.visibility = View.VISIBLE
+            return false
+        } else if (selectedGender.isEmpty()) {
+            tvGenderError.visibility = View.VISIBLE
+            return false
+        } else if (etContactNumber.text.isEmpty()) {
+            tvContactNumberError.setText(R.string.validate_contact_number)
+            tvContactNumberError.visibility = View.VISIBLE
+            return false
+        } else if (!BaseUtility.validatePhoneNumber(etContactNumber.text.toString())) {
+            tvContactNumberError.setText(R.string.valid_contact_number)
+            tvContactNumberError.visibility = View.VISIBLE
+            return false
+        } else if (selectedState.isEmpty()) {
+            tvStateError.visibility = View.VISIBLE
+            return false
+        } else if (selectedDistrict.isEmpty()) {
+            tvDistrictError.visibility = View.VISIBLE
+            return false
+        } else if (etAddress.text.isEmpty()) {
+            tvAddressError.visibility = View.VISIBLE
+            return false
+        } else {
+            tvNameError.visibility = View.GONE
+            tvAgeError.visibility = View.GONE
+            tvGenderError.visibility = View.GONE
+            tvContactNumberError.visibility = View.GONE
+            tvStateError.visibility = View.GONE
+            tvDistrictError.visibility = View.GONE
+            tvAddressError.visibility = View.GONE
         }
         return true
+    }
+
+    private fun observeStates() {
+        viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
+        viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is NetworkRequestState.NetworkNotAvailable -> {
+                }
+                is NetworkRequestState.LoadingData -> {
+                }
+                is NetworkRequestState.ErrorResponse -> {
+                    Snackbar.make(rootLayoutRegisterSrCitizen, "Error", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+                is NetworkRequestState.SuccessResponse<*> -> {
+                    Snackbar.make(rootLayoutRegisterSrCitizen, "Registered", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        })
     }
 }

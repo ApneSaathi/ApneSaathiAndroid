@@ -31,19 +31,20 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
         if (checkNetworkAvailability(context)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.FirstName, name)
-            params.addProperty(ApiConstants.Age, age)
+            params.addProperty(ApiConstants.Age, age.toInt())
             params.addProperty(ApiConstants.Gender, gender)
             params.addProperty(ApiConstants.PhoneNumber, contactNumber)
             params.addProperty(ApiConstants.District, district)
             params.addProperty(ApiConstants.State, state)
             params.addProperty(ApiConstants.Address, address)
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+            //params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
                 loaderObservable.value = NetworkRequestState.LoadingData
             }.doOnSuccess {
                 loaderObservable.value = NetworkRequestState.SuccessResponse(it)
             }.doOnError {
-                loaderObservable.value = NetworkRequestState.ErrorResponse(it)
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
             }.subscribe().autoDispose(disposables)
         }
     }

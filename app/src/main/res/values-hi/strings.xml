@@ -262,9 +262,13 @@
     <string name="validate_age">आयु प्रदान करें</string>
     <string name="validate_gender">जती का चयन करें</string>
     <string name="validate_contact_number">वरिष्ठ नागरिक का संपर्क नंबर प्रदान करें</string>
+    <string name="valid_contact_number">मान्य संपर्क नंबर प्रदान करें</string>
     <string name="validate_state">राज्य चुनें</string>
     <string name="validate_district">जिले का चयन करें</string>
     <string name="validate_address">वरिष्ठ नागरिक का पता प्रदान करें</string>
+
+    <string name="api_connection_error">सर्वर से कनेक्ट करने में सक्षम नहीं है। कृपया अपने इंटरनेट कनेक्शन की जाँच करें</string>
+    <string name="error">त्रुटि!</string>
 
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>

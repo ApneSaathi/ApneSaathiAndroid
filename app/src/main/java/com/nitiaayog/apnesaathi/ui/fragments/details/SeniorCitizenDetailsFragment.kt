@@ -21,8 +21,7 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.replaceFragment
-import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
-import com.nitiaayog.apnesaathi.database.ApneSathiDatabase_Impl
+import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.model.SeniorCitizen
 import com.nitiaayog.apnesaathi.model.User
@@ -32,19 +31,16 @@ import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCit
 import com.nitiaayog.apnesaathi.utility.USER_DETAILS
 import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
-import kotlinx.coroutines.*
 
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     SeniorCitizenDateAdapter.OnItemClickListener, SeniorCitizenEditFragment.OnItemClickListener {
 
     private lateinit var adapter: SeniorCitizenDateAdapter
-    lateinit var user: User
+    lateinit var callData: CallData
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
         getViewModel {
-            SeniorCitizenDetailsViewModel.getInstance(
-                dataManager
-            )
+            SeniorCitizenDetailsViewModel.getInstance(dataManager)
         }
 
     override fun provideLayoutResource(): Int = R.layout.fragment_senior_citizen_details
@@ -154,7 +150,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     override fun onCallPermissionGranted() {
-        placeCall(user, R.id.fragment_edit_container)
+        placeCall(callData, R.id.fragment_edit_container)
     }
 
     override fun onCallPermissionDenied() =
@@ -191,7 +187,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     override fun onCancelButton() {
     }
 
-    fun setSelectedUser(selectedUser: User) {
-        user = selectedUser
+    fun setSelectedUser(callData: CallData) {
+        this.callData = callData
     }
 }
