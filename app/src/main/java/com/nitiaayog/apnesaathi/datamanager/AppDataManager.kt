@@ -42,6 +42,9 @@ class AppDataManager private constructor(
     override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
         apiRequest.saveSrCitizenFeedback(srCitizenFeedback)
 
+    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
+        apiRequest.getSeniorCitizenDetails(srDetails)
+
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()
 

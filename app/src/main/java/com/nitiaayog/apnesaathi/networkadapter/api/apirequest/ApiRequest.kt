@@ -16,4 +16,7 @@ interface ApiRequest {
     // Register new Sr. Citizen
     fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo>
 
+    // Get senior citizen details
+    fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo>
+
 }

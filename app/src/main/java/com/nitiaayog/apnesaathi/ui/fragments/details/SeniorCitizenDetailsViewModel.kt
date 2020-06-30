@@ -1,8 +1,13 @@
 package com.nitiaayog.apnesaathi.ui.fragments.details
 
+import android.content.Context
+import androidx.lifecycle.LiveData
+import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.model.DateItem
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 
 class SeniorCitizenDetailsViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
@@ -31,7 +36,19 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         )
         return  dataList
     }
-
+    fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
+    fun getSeniorCitizenDetails(context: Context) {
+        if (checkNetworkAvailability(context)) {
+            val params = JsonObject()
+            params.addProperty("callid",11)
+            dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
+                loaderObservable.value = NetworkRequestState.LoadingData
+            }.doOnSuccess { loaderObservable.value = NetworkRequestState.SuccessResponse(it) }
+                .doOnError { loaderObservable.value = NetworkRequestState.ErrorResponse(it) }
+                .subscribe()
+                .autoDispose(disposables)
+        }
+    }
     fun getDataList():MutableList<DateItem>{
         return  dataList
     }

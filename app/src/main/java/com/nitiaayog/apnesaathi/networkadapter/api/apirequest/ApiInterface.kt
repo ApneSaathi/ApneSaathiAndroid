@@ -18,4 +18,7 @@ interface ApiInterface {
 
     @POST(ApiProvider.ApiRegisterSeniorCitizen)
     fun registerSeniorCitizen(@Body srDetails: JsonObject): Single<BaseRepo>
+
+    @POST(ApiProvider.ApiSeniorCitizenDetails)
+    fun getSeniorCitizenDetails(@Body srDetails: JsonObject): Single<BaseRepo>
 }

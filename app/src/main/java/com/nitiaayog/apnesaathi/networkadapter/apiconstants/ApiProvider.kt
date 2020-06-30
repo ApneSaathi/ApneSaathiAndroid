@@ -13,4 +13,7 @@ object ApiProvider {
 
     private const val GET_REGISTER_SR_CITIZEN = "Volunteer/NewSrCitizenRegistration"
     const val ApiRegisterSeniorCitizen = BuildConfig.HOST_URL + GET_REGISTER_SR_CITIZEN
+
+    private const val GET_SR_CITIZEN_DETAILS = "Volunteer/seniorcitizenDetails"
+    const val ApiSeniorCitizenDetails = BuildConfig.HOST_URL + GET_SR_CITIZEN_DETAILS
 }
