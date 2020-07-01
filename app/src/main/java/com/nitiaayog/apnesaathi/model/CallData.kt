@@ -132,6 +132,9 @@ class CallData {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = DbConstants.Columns.IsSynced, defaultValue = "false")
+    var isSynced: Boolean = false
+
     //@TypeConverters(MedicalGrievancesConverter::class)
     @Ignore
     @SerializedName(ApiConstants.MedicalGrievances)

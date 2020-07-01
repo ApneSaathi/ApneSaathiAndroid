@@ -47,5 +47,6 @@ object DbConstants {
         const val IsEmergencyServiceRequired: String = "is_emergency_service_required"
         const val RemarksImportantInfo: String = "remarks_important_info"
         const val LoggedDateTime: String = "logged_date_time"
+        const val IsSynced: String = "is_synced"
     }
 }

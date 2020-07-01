@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.ConnectivityChangeJob
+import com.nitiaayog.apnesaathi.base.ConnectivityWorker
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
@@ -19,6 +21,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        //ConnectivityChangeJob.enqueueWork(this)
+        //ConnectivityWorker.enqueueWork(application)
 
         disposable = Observable.timer(2000L, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())

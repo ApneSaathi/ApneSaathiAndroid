@@ -22,7 +22,7 @@ import com.nitiaayog.apnesaathi.adapter.SimpleBaseAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
-import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.base.ui
 import com.nitiaayog.apnesaathi.model.FormElements
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
@@ -35,6 +35,9 @@ import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.android.synthetic.main.include_recyclerview.view.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
@@ -171,19 +174,23 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         intent?.let { intent ->
             val callId: Int = intent.getIntExtra(CALL_ID, -1)
             if (callId != -1) {
-                val callData: CallData = viewModel.getCallDetailFromId(callId)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val callData = viewModel.getCallDetailFromId(callId)
+                    val grievances = viewModel.getGrievanceFromId(callId)
+                    ui {
+                        val address = getString(R.string.address).plus(" : ")
+                        val dataString = address.plus(callData.block).plus(", ")
+                            .plus(callData.district).plus(", ").plus(callData.state)
+                        val spanAddress = SpannableString(dataString)
+                        spanAddress.setSpan(StyleSpan(Typeface.BOLD), 0, address.length, 0)
+                        spanAddress.setSpan(StyleSpan(Typeface.ITALIC), 0, address.length, 0)
 
-                val address = getString(R.string.address).plus(" : ")
-                val dataString = address.plus(callData.block).plus(", ")
-                    .plus(callData.district).plus(", ").plus(callData.state)
-                val spanAddress = SpannableString(dataString)
-                spanAddress.setSpan(StyleSpan(Typeface.BOLD), 0, address.length, 0)
-                spanAddress.setSpan(StyleSpan(Typeface.ITALIC), 0, address.length, 0)
-
-                tvSrCitizenName.text = callData.srCitizenName.plus("(").plus(callData.age)
-                    .plus(" Yrs)")
-                tvSrCitizenPhoneNumber.text = callData.contactNumber
-                tvSrCitizenAddress.text = spanAddress
+                        tvSrCitizenName.text = callData.srCitizenName.plus("(").plus(callData.age)
+                            .plus(" Yrs)")
+                        tvSrCitizenPhoneNumber.text = callData.contactNumber
+                        tvSrCitizenAddress.text = spanAddress
+                    }
+                }
             }
         }
     }

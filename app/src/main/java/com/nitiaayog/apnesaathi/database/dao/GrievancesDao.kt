@@ -17,6 +17,9 @@ interface GrievancesDao {
     @Query("SELECT * FROM ${DbConstants.Tables.TABLE_GRIEVANCES} LIMIT :dataCount")
     fun getFewGrievances(dataCount: Int = 3): LiveData<MutableList<SrCitizenGrievance>>
 
+    @Query("SELECT * FROM ${DbConstants.Tables.TABLE_GRIEVANCES} WHERE ${DbConstants.Columns.Id}=:id")
+    fun getGrievanceFromId(id: Int): SrCitizenGrievance?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(grievancesList: List<SrCitizenGrievance>)
 }

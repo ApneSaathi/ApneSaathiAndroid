@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
+import com.nitiaayog.apnesaathi.base.ConnectivityWorker
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 
@@ -22,6 +23,9 @@ class ApneSaathiApplication : Application() {
     override fun onCreate() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
+
+        //ConnectivityChangeJob.enqueueWork(this)
+        ConnectivityWorker.enqueueWork(this)// 8 : 26
 
         getScreenSize(this)
 

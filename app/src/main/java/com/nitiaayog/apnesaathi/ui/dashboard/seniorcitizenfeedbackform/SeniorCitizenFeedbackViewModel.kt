@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
@@ -18,7 +19,10 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
             synchronized(this) { SeniorCitizenFeedbackViewModel(dataManager) }
     }
 
+    private lateinit var callData: CallData
+
     fun getCallDetailFromId(id: Int): CallData = dataManager.getCallDetailFromId(id)
+    fun getGrievanceFromId(id: Int): SrCitizenGrievance? = dataManager.getGrievanceFromId(id)
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
