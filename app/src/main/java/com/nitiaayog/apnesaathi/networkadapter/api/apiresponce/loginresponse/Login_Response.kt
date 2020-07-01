@@ -6,8 +6,85 @@ import com.google.gson.annotations.SerializedName
 class Login_Response {
     @SerializedName("statusCode")
     @Expose
-     var statusCode:String=""
+    private var statusCode: String? = null
+
     @SerializedName("message")
     @Expose
-    var message:String = ""
+    private var message: String? = null
+
+    @SerializedName("volunteerId")
+    @Expose
+    private var volunteerId: String? = null
+
+    @SerializedName("volunteer")
+    @Expose
+    private var volunteer: Any? = null
+
+    @SerializedName("volunteerassignment")
+    @Expose
+    private var volunteerassignment: Any? = null
+
+    @SerializedName("medicalandgreivance")
+    @Expose
+    private var medicalandgreivance: Any? = null
+
+    @SerializedName("loginOTP")
+    @Expose
+    private var loginOTP: Any? = null
+
+    fun getStatusCode(): String? {
+        return statusCode
+    }
+
+    fun setStatusCode(statusCode: String?) {
+        this.statusCode = statusCode
+    }
+
+    fun getMessage(): String? {
+        return message
+    }
+
+    fun setMessage(message: String?) {
+        this.message = message
+    }
+
+    fun getVolunteerId(): String? {
+        return volunteerId
+    }
+
+    fun setVolunteerId(volunteerId: String?) {
+        this.volunteerId = volunteerId
+    }
+
+    fun getVolunteer(): Any? {
+        return volunteer
+    }
+
+    fun setVolunteer(volunteer: Any?) {
+        this.volunteer = volunteer
+    }
+
+    fun getVolunteerassignment(): Any? {
+        return volunteerassignment
+    }
+
+    fun setVolunteerassignment(volunteerassignment: Any?) {
+        this.volunteerassignment = volunteerassignment
+    }
+
+    fun getMedicalandgreivance(): Any? {
+        return medicalandgreivance
+    }
+
+    fun setMedicalandgreivance(medicalandgreivance: Any?) {
+        this.medicalandgreivance = medicalandgreivance
+    }
+
+    fun getLoginOTP(): Any? {
+        return loginOTP
+    }
+
+    fun setLoginOTP(loginOTP: Any?) {
+        this.loginOTP = loginOTP
+    }
 }

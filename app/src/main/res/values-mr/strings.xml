@@ -294,4 +294,26 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
+
+    <string name="personal_details">वैयक्तिक माहिती</string>
+    <string name="health_care_information">आरोग्य काळजी माहिती</string>
+    <string name="emotional_state">भावनिक स्थिती</string>
+    <string name="happy">आनंदी</string>
+    <string name="neutral">तटस्थ</string>
+    <string name="sad">दु: खी</string>
+
+
+    <string name="related_info_talked_about">संबंधित माहिती बद्दल बोललो</string>
+    <string name="lack_of_essential_services">अत्यावश्यक सेवांचा अभाव</string>
+    <string name="emergency_escalation">आणीबाणी वाढवणे</string>
+    <string name="issue_raised">मुद्दा उठविला</string>
+    <string name="raised_on">वर वाढविले:</string>
+
+
+    <string name="permission_denied">परवानगी नाकारली</string>
+    <string name="changelanguage">लॉन्गगे बदला</string>
+    <string name="logout">बाहेर पडणे</string>
+    <string name="contctNumber">संपर्क क्रमांक</string>
+    <string name="email">ईमेल</string>
+    <string name="Txtaddress">पत्ता</string>
 </resources>

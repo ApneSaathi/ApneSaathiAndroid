@@ -327,4 +327,18 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
+    <string name="personal_details">PERSONAL DETAILS</string>
+    <string name="health_care_information">HEALTH CARE INFORMATION</string>
+    <string name="emotional_state">Emotional State</string>
+    <string name="happy">Happy</string>
+    <string name="neutral">Neutral</string>
+    <string name="sad">Sad</string>
+
+
+    <string name="changelanguage">Change Laungauge</string>
+    <string name="logout">Logout</string>
+    <string name="contctNumber">Contact Number</string>
+    <string name="email">Email</string>
+    <string name="Txtaddress">Address</string>
+    <string name="permission_denied">Permission denied</string>
 </resources>
