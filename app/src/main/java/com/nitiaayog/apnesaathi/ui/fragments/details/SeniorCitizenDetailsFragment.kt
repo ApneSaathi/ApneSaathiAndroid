@@ -114,9 +114,9 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
         txt_issue_raised_date.text = srCitizenGrievance.loggeddattime?.let { getFormattedDate(it) }
         txt_call_response.text = callData.talkedWith
-        if (srCitizenGrievance.relatedInfoTalkedAbout == "P") {
-            txt_related_info.text = getString(R.string.prevention)
-        }
+
+        txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout?:"--"
+
         if (srCitizenGrievance.hasCovidSymptoms == "Y") {
             txt_covid_symptoms.text = getString(R.string.yes)
             txt_covid.visibility = View.GONE
@@ -223,7 +223,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val output = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
         val fa = input.parse(date)
-        return  output.format(fa)
+        return output.format(fa)
     }
 
     private fun makeGrievanceContainerInvisible() {
