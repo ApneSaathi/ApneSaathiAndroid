@@ -70,19 +70,37 @@ class AppDataManager private constructor(
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getAllCallsList(): LiveData<MutableList<CallData>> = callsDataDao.getAllCallsList()
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
+    override fun updateCallStatus(callStatus: String) = callsDataDao.update(callStatus)
 
     // => Table : grievances
     override fun insertGrievances(grievances: List<SrCitizenGrievance>) =
-        grievancesDao.insertOrUpdate(grievances)
+        grievancesDao.insertAll(grievances)
 
     override fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getGrievances()
 
     override fun getGrievance(callId: Int): SrCitizenGrievance? = grievancesDao.getGrievance(callId)
-    override fun update(grievance: SrCitizenGrievance) = grievancesDao.update(grievance)
+    override suspend fun update(grievance: SrCitizenGrievance) =
+        grievancesDao.update(
+            grievance.id!!, grievance.callId!!, grievance.hasDiabetic!!,
+            grievance.hasBloodPressure!!, grievance.hasLungAilment!!,
+            grievance.cancerOrMajorSurgery!!, grievance.otherAilments!!,
+            grievance.remarksMedicalHistory!!, grievance.relatedInfoTalkedAbout!!,
+            grievance.behavioralChangesNoticed!!, grievance.hasCovidSymptoms!!,
+            grievance.hasCough!!, grievance.hasFever!!, grievance.hasShortnessOfBreath!!,
+            grievance.hasSoreThroat!!, grievance.quarantineStatus!!,
+            grievance.lackOfEssentialServices!!, grievance.foodShortage!!,
+            grievance.medicineShortage!!, grievance.accessToBankingIssue!!,
+            grievance.utilitySupplyIssue!!, grievance.hygieneIssue!!, grievance.safetyIssue!!,
+            grievance.emergencyServiceIssue!!, grievance.phoneAndInternetIssue!!,
+            grievance.emergencyServiceIssue!!, grievance.impRemarkInfo!!
+        )
 
     // => Table : sync_grievances_data
-    override fun insert(syncData: SyncSrCitizenGrievance) =
+    override fun getGrievancesToSync(): List<SyncSrCitizenGrievance>? =
+        syncGrievancesDao.getGrievances()
+
+    override suspend fun insert(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
 
     override fun delete(syncData: SyncSrCitizenGrievance) =

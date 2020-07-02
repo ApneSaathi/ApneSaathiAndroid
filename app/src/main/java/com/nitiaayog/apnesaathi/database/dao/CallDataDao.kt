@@ -27,6 +27,9 @@ interface CallDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun update(callData: CallData): Long
 
+    @Query("UPDATE ${Tables.TABLE_CALL_DETAILS} SET ${Columns.CallSubStatus}=:callStatus")
+    fun update(callStatus: String)
+
     @Transaction
     fun insertOrUpdate(grievances: List<CallData>) = grievances.forEach {
         if (insert(it) == -1L)

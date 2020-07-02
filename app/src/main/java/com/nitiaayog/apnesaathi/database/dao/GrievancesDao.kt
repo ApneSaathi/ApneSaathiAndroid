@@ -25,12 +25,32 @@ interface GrievancesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(grievances: SrCitizenGrievance): Long
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(grievance: SrCitizenGrievance)
+    @Query(
+        "UPDATE ${Tables.TABLE_GRIEVANCES} SET ${Columns.IsDiabetic}=:hasDiabetic,${Columns.IsBloodPressure}=:hasBloodPressure,${Columns.IsLungAilment}=:hasLungAilment,${Columns.IsCancerOrMajorSurgery}=:cancerOrMajorSurgery,${Columns.OtherAilments}=:otherAilments,${Columns.RemarkOnMedicalHistory}=:remarksMedicalHistory,${Columns.InfoTalkAbout}=:relatedInfoTalkedAbout,${Columns.NoticedBehaviouralChanges}=:behavioralChangesNoticed,${Columns.HasCovidSymptoms}=:hasCovidSymptoms,${Columns.HasCough}=:hasCough,${Columns.HasFever}=:hasFever,${Columns.HasShortnessOfBreath}=:hasShortnessOfBreath,${Columns.HasSoreThroat}=:hasSoreThroat,${Columns.QuarantineStatus}=:quarantineStatus,${Columns.LackOfEssentialServices}=:lackOfEssentialServices,${Columns.FoodShortage}=:foodShortage,${Columns.MedicineShortage}=:medicineShortage,${Columns.AccessToBankingIssue}=:accessToBankingIssue,${Columns.UtilitySupplyIssue}=:utilitySupplyIssue,${Columns.HygieneIssue}=:hygieneIssue,${Columns.SafetyIssue}=:safetyIssue,${Columns.EmergencyServiceIssue}=:emergencyServiceIssue,${Columns.PhoneAndInternetIssue}=:phoneAndInternetIssue,${Columns.IsEmergencyServiceRequired}=:emergencyServiceRequired,${Columns.RemarksImportantInfo}=:impRemarkInfo WHERE ${Columns.Id}=:id AND ${Columns.CallId}=:callId"
+    )
+    fun update(
+        id: Int, callId: Int, hasDiabetic: String, hasBloodPressure: String, hasLungAilment: String,
+        cancerOrMajorSurgery: String, otherAilments: String, remarksMedicalHistory: String,
+        relatedInfoTalkedAbout: String, behavioralChangesNoticed: String, hasCovidSymptoms: String,
+        hasCough: String, hasFever: String, hasShortnessOfBreath: String, hasSoreThroat: String,
+        quarantineStatus: String, lackOfEssentialServices: String, foodShortage: String,
+        medicineShortage: String, accessToBankingIssue: String, utilitySupplyIssue: String,
+        hygieneIssue: String, safetyIssue: String, emergencyServiceIssue: String,
+        phoneAndInternetIssue: String, emergencyServiceRequired: String, impRemarkInfo: String
+    )
 
     @Transaction
     fun insertOrUpdate(grievances: List<SrCitizenGrievance>) = grievances.forEach {
         if (insert(it) == -1L)
-            update(it)
+            update(
+                it.id!!, it.callId!!, it.hasDiabetic!!, it.hasBloodPressure!!, it.hasLungAilment!!,
+                it.cancerOrMajorSurgery!!, it.otherAilments!!, it.remarksMedicalHistory!!,
+                it.relatedInfoTalkedAbout!!, it.behavioralChangesNoticed!!, it.hasCovidSymptoms!!,
+                it.hasCough!!, it.hasFever!!, it.hasShortnessOfBreath!!, it.hasSoreThroat!!,
+                it.quarantineStatus!!, it.lackOfEssentialServices!!, it.foodShortage!!,
+                it.medicineShortage!!, it.accessToBankingIssue!!, it.utilitySupplyIssue!!,
+                it.hygieneIssue!!, it.safetyIssue!!, it.emergencyServiceIssue!!,
+                it.phoneAndInternetIssue!!, it.emergencyServiceIssue!!, it.impRemarkInfo!!
+            )
     }
 }

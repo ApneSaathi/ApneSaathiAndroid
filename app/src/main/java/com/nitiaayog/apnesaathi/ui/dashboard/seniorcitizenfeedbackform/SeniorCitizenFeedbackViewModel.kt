@@ -34,7 +34,9 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     private var gender: String = ""
     private var district: String = ""
     private var state: String = ""
-    private var anyEmergency: String = ""
+    private var emergencyEscalation: String = "" // isemergencyservicerequired
+
+    //private var emergencyServiceRequired: Boolean = false
 
     private var covideSymptoms: Boolean = false
     private var symptomsCough: Boolean = false
@@ -51,9 +53,9 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     private lateinit var callData: CallData
     private var grievance: SrCitizenGrievance? = null
 
-    private fun insertInSyncTable(details: SrCitizenGrievance): SyncSrCitizenGrievance {
+    /*private fun insertInSyncTable(details: JsonObject): SyncSrCitizenGrievance {
         val syncData = SyncSrCitizenGrievance().apply {
-            this.id = details.id
+            this.id = details.get(ApiConstants.CallId) as Int
             this.callId = details.callId
             this.volunteerId = details.volunteerId
             this.hasDiabetic = details.hasDiabetic
@@ -84,7 +86,44 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         println("TAG -- MyData --> $syncData")
         dataManager.insert(syncData)
         return syncData
-    }
+    }*/
+
+    /*private fun preparePostParams(medicalHistory: Array<String>): JsonObject {
+        val params = JsonObject()
+        params.addProperty(ApiConstants.CallId, callData.callId)
+        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, callStatus)
+        params.addProperty(
+            ApiConstants.SrCitizenTalkedWith, talkedWith.toUpperCase(Locale.getDefault())
+        )
+
+        val arraySubParams = JsonObject()
+        params.addProperty(ApiConstants.CallId, callData.callId)
+        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+        medicalHistory.forEach {
+
+        }
+        params.addProperty(
+            ApiConstants.IsDiabetic,
+            if (medicalHistory.any { it == isDiabetic }) "Y" else "N"
+        )
+        params.addProperty(
+            ApiConstants.IsBloodPressure,
+            if (medicalHistory.any { it == bloodPressure }) "Y" else "N"
+        )
+        params.addProperty(
+            ApiConstants.LungAilment,
+            if (medicalHistory.any { it == bloodPressure }) "Y" else "N"
+        )
+
+
+        val jsonArray = JsonArray()
+        jsonArray[0] = arraySubParams
+
+        println("TAG -- MyData --> ${params.toString()}")
+
+        return params
+    }*/
 
     fun getCallDetailFromId(id: Int): CallData {
         callData = dataManager.getCallDetailFromId(id)
@@ -127,6 +166,12 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     }
 
     fun resetTalkedAbout() = talkedAbout.clear()
+
+    /*fun isEmergencyServiceRequired(): Boolean = emergencyServiceRequired
+
+    fun isEmergencyServiceRequired(emergencyServiceRequired: Boolean) {
+        this.emergencyServiceRequired = emergencyServiceRequired
+    }*/
 
     fun isCovideSymptoms(): Boolean = covideSymptoms
 
@@ -214,11 +259,11 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 
     fun isSeniorCitizenAtHome(): Boolean = seniorCitizenAtHome
 
-    fun isAnyEmergency(anyEmergency: String) {
-        this.anyEmergency = anyEmergency
+    fun isEmergencyEscalation(emergencyEscalation: String) {
+        this.emergencyEscalation = emergencyEscalation
     }
 
-    fun isAnyEmergency(): String = anyEmergency
+    fun isEmergencyEscalation(): String = emergencyEscalation
 
     fun getMedicalHistory() = medicalHistory
 
@@ -254,35 +299,57 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         otherMedicalProblem = ""
         quarantineStatus = ""
         essentialServices = ""
-        anyEmergency = ""
+        emergencyEscalation = ""
 
         seniorCitizenAtHome = false
     }
 
-    fun saveSrCitizenFeedback(context: Context, details: SrCitizenGrievance) {
-        val syncData = insertInSyncTable(details)
-        checkNetworkAvailability(context)
-        /* *
-         * we can add one more field in SeCitizenGrievances class and that will be
-         * our new primary key
-         * */
-        val params = JsonObject()
-        dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
-            loaderObservable.value = NetworkRequestState.LoadingData
-        }.doOnSuccess {
-            if (it.status == "0") {
-                viewModelScope.launch {
-                    io {
-                        dataManager.delete(syncData)
-                        dataManager.update(details)
-                    }
+    fun saveSrCitizenFeedback(
+        context: Context, params: JsonObject, syncData: SyncSrCitizenGrievance
+    ) {
+        viewModelScope.launch {
+            io {
+                if (callStatus == "5") {
+                    dataManager.insert(syncData)
+                    // Update details in Grievances Table
+                    val updateData: SrCitizenGrievance = syncData
+                    dataManager.update(updateData)
+                } else
+                    dataManager.updateCallStatus(callStatus)
+
+                val data = dataManager.getGrievance(callData.callId!!)
+                data?.run {
+                    println("TAG -- MyData --> ${this.hasDiabetic}")
+                    println("TAG -- MyData --> ${this.hasLungAilment}")
+                    println("TAG -- MyData --> ${this.relatedInfoTalkedAbout}")
                 }
-                loaderObservable.value = NetworkRequestState.SuccessResponse(it)
-            } else loaderObservable.value = NetworkRequestState.Error
-        }.doOnError {
-            loaderObservable.value =
-                NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
-        }.subscribe().autoDispose(disposables)
+
+                val mSyncData = dataManager.getGrievancesToSync()
+                println("TAG -- MyData --> ${mSyncData?.size}")
+            }
+            checkNetworkAvailability(context)
+            /* *
+             * we can add one more field in SeCitizenGrievances class and that will be
+             * our new primary key
+             * */
+            dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
+                loaderObservable.value = NetworkRequestState.LoadingData
+            }.doOnSuccess {
+                if (it.status == "0") {
+                    viewModelScope.launch {
+                        io {
+                            // If sunced successfully with server then just remove it from
+                            // SyncSrCitizenGrievance Table
+                            dataManager.delete(syncData)
+                        }
+                    }
+                    loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                } else loaderObservable.value = NetworkRequestState.Error
+            }.doOnError {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+            }.subscribe().autoDispose(disposables)
+        }
     }
 
     fun registerNewSeniorCitizen(context: Context) {

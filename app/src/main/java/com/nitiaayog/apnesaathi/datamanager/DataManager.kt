@@ -16,14 +16,16 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun insertCallData(callData: List<CallData>)
     fun getAllCallsList(): LiveData<MutableList<CallData>>
     fun getCallDetailFromId(id: Int): CallData
+    fun updateCallStatus(callStatus:String)
 
     // Table : grievances
     fun insertGrievances(grievances: List<SrCitizenGrievance>)
     fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>>
     fun getGrievance(callId: Int): SrCitizenGrievance?
-    fun update(grievance: SrCitizenGrievance)
+    suspend fun update(grievance: SrCitizenGrievance)
 
     // Table : sync_grievances_data
-    fun insert(syncData: SyncSrCitizenGrievance)
+    fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?
+    suspend fun insert(syncData: SyncSrCitizenGrievance)
     fun delete(syncData: SyncSrCitizenGrievance)
 }

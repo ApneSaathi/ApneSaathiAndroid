@@ -110,7 +110,7 @@ class CallData {
         }
 
     @ColumnInfo(name = Columns.CallSubStatus, defaultValue = "")
-    @SerializedName(ApiConstants.SrCitizenSubStatusCode)
+    @SerializedName(ApiConstants.SrCitizenCallStatusSubCode)
     var callStatusSubCode: String? = ""
         get() = field ?: ""
         set(value) {
