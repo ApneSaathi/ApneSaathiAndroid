@@ -9,6 +9,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import io.reactivex.Single
 
 class ApiManager private constructor(private val apiClient: ApiInterface) : ApiRequest {
@@ -24,7 +25,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
             }
     }
 
-    override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: JsonObject): Single<Login_Response> =
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =

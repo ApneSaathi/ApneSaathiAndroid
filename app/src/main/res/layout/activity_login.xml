@@ -43,11 +43,23 @@
         android:textSize="@dimen/text_14"
         android:textStyle="normal" />
 
+    <ProgressBar
+        android:layout_below="@+id/txtlogindisc"
+        android:id="@+id/progressBarlogin"
+        android:layout_centerHorizontal="true"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="@dimen/dimen_30"
+        android:layout_height="@dimen/dimen_30"
+        android:layout_marginEnd="@dimen/dimen_10"
+        android:visibility="gone"
+
+       />
+
     <LinearLayout
         android:id="@+id/linearloginfield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtlogindisc"
+        android:layout_below="@+id/progressBarlogin"
         android:layout_marginLeft="@dimen/dimen_10"
         android:layout_marginTop="@dimen/dimen_30"
         android:layout_marginRight="@dimen/dimen_10"
@@ -71,6 +83,7 @@
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
             android:background="@color/color_black" />
+
 
         <EditText
             android:id="@+id/EditMobileNumber"
