@@ -20,6 +20,7 @@ object ApiConstants {
     const val FirstName: String = "firstName"
     const val Address: String = "address"
     const val VolunteerId: String = "idvolunteer"
+    const val VolunteerNotRegisterErrorMessage: String = "Volunteer Not Register"
 
     const val AssessmentQuestions: String = "assessment_questions"
     const val QuestionId: String = "q_id"
@@ -72,4 +73,8 @@ object ApiConstants {
     const val IsEmergencyServicesRequired: String = "isemergencyservicerequired"
     const val ImpRemarkInfo: String = "remakrsimportantinfo"
     const val CreatedDate: String = "loggeddattime"
+
+    const val phoneNo: String = "phoneNo"
+
+
 }
