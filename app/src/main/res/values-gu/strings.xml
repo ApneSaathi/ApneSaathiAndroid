@@ -222,6 +222,12 @@
     <string name="api_connection_error">સર્વર સાથે કનેક્ટ કરવામાં સક્ષમ નથી. કૃપા કરીને ઇન્ટરનેટ કનેક્શન તપાસો</string>
     <string name="error">સમસ્યા!</string>
 
+    <string name="personal_details">અંગત વિગતો</string>
+    <string name="blood_pressure">લોહિનુ દબાણ</string>
+    <string name="lung_ailment">ફેફસાંની બીમારી</string>
+    <string name="cancer_major_surgery">કેન્સર / અન્ય મુખ્ય શસ્ત્રક્રિયા</string>
+    <string name="sr_citizen_follow_up">સિનિયર સિટીઝન પ્રતિસાદ</string>
+
     <string-array name="states_array">
         <item>આસામ</item>
         <item>બિહાર</item>

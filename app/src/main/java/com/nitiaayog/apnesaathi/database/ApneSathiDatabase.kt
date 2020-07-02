@@ -10,16 +10,18 @@ import com.nitiaayog.apnesaathi.BuildConfig
 import com.nitiaayog.apnesaathi.database.dao.ApneSathiDao
 import com.nitiaayog.apnesaathi.database.dao.CallDataDao
 import com.nitiaayog.apnesaathi.database.dao.GrievancesDao
+import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SeniorCitizen
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
+import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.utility.Converter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [SeniorCitizen::class, CallData::class, SrCitizenGrievance::class],
+    entities = [SeniorCitizen::class, CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class],
     version = BuildConfig.DB_VERSION
 )
 @TypeConverters(Converter::class)
@@ -28,6 +30,7 @@ abstract class ApneSathiDatabase : RoomDatabase() {
     abstract fun apneSathiDao(): ApneSathiDao
     abstract fun provideCallDataDao(): CallDataDao
     abstract fun provideGrievancesDao(): GrievancesDao
+    abstract fun provideSrCitizenGrievancesDao(): SyncSrCitizenGrievancesDao
 
     companion object {
         @Volatile

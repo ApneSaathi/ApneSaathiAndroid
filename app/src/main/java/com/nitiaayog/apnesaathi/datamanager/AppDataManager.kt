@@ -6,8 +6,10 @@ import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
 import com.nitiaayog.apnesaathi.database.dao.CallDataDao
 import com.nitiaayog.apnesaathi.database.dao.GrievancesDao
+import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
+import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
@@ -43,6 +45,9 @@ class AppDataManager private constructor(
 
     private val callsDataDao: CallDataDao by lazy { dbManager.provideCallDataDao() }
     private val grievancesDao: GrievancesDao by lazy { dbManager.provideGrievancesDao() }
+    private val syncGrievancesDao: SyncSrCitizenGrievancesDao by lazy {
+        dbManager.provideSrCitizenGrievancesDao()
+    }
 
     // ApiRequests
     override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
@@ -57,22 +62,31 @@ class AppDataManager private constructor(
     override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
         apiRequest.saveSrCitizenFeedback(srCitizenFeedback)
 
+    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
+        apiRequest.getSeniorCitizenDetails(srDetails)
+
     // Database Access
-    override fun insertCallData(callData: List<CallData>) = callsDataDao.insertAll(callData)
+    // => Table : call_details
+    override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getAllCallsList(): LiveData<MutableList<CallData>> = callsDataDao.getAllCallsList()
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
 
+    // => Table : grievances
     override fun insertGrievances(grievances: List<SrCitizenGrievance>) =
-        grievancesDao.insertAll(grievances)
+        grievancesDao.insertOrUpdate(grievances)
 
-    override fun getAllGrievances(): LiveData<MutableList<SrCitizenGrievance>> =
-        grievancesDao.getAllGrievances()
+    override fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>> =
+        grievancesDao.getGrievances()
 
-    override fun getGrievanceFromId(id: Int): SrCitizenGrievance? =
-        grievancesDao.getGrievanceFromId(id)
+    override fun getGrievance(callId: Int): SrCitizenGrievance? = grievancesDao.getGrievance(callId)
+    override fun update(grievance: SrCitizenGrievance) = grievancesDao.update(grievance)
 
-    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
-        apiRequest.getSeniorCitizenDetails(srDetails)
+    // => Table : sync_grievances_data
+    override fun insert(syncData: SyncSrCitizenGrievance) =
+        syncGrievancesDao.insertOrUpdate(syncData)
+
+    override fun delete(syncData: SyncSrCitizenGrievance) =
+        syncGrievancesDao.delete(syncData.id!!, syncData.callId!!, syncData.volunteerId!!)
 
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()

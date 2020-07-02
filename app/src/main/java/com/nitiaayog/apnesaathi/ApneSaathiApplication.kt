@@ -5,9 +5,11 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
-import com.nitiaayog.apnesaathi.base.ConnectivityWorker
+import com.nitiaayog.apnesaathi.base.SyncDataService
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ApneSaathiApplication : Application() {
 
@@ -24,8 +26,7 @@ class ApneSaathiApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
 
-        //ConnectivityChangeJob.enqueueWork(this)
-        ConnectivityWorker.enqueueWork(this)// 8 : 26
+        SyncDataService.enqueueWork(this)
 
         getScreenSize(this)
 

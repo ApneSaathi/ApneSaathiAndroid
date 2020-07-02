@@ -224,6 +224,12 @@
     <string name="api_connection_error">सर्व्हरशी कनेक्ट करण्यात सक्षम नाही. कृपया आपणास इंटरनेट कनेक्शन तपासा</string>
     <string name="error">समस्या!</string>
 
+    <string name="personal_details">वैयक्तिक माहिती</string>
+    <string name="blood_pressure">रक्तदाब</string>
+    <string name="lung_ailment">फुफ्फुसांचा आजार</string>
+    <string name="cancer_major_surgery">कर्करोग / इतर प्रमुख शस्त्रक्रिया</string>
+    <string name="sr_citizen_follow_up">वरिष्ठ नागरिक पाठपुरावा</string>
+
     <string-array name="states_array">
         <item>आसाम</item>
         <item>बिहार</item>

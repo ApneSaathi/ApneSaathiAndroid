@@ -35,7 +35,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
-        dataManager.getAllGrievances()
+        dataManager.getGrievances()
 
     init {
         prepareFollowupData()
@@ -166,6 +166,10 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                                 val grievances: List<SrCitizenGrievance> =
                                     prepareGrievances(data.callsList)
                                 dataManager.insertGrievances(grievances)
+                                /* val callData: MutableList<SrCitizenGrievance>? = dataManager.getAllGrievances()
+                                 callData?.run {
+                                     println("TAG -- ${callData.callId}")
+                                 }*/
                             }
                             loaderObservable.value = NetworkRequestState.SuccessResponse(it)
                         }

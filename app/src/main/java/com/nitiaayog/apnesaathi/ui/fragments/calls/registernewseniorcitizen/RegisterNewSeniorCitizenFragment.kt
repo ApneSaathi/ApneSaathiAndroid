@@ -11,6 +11,7 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.fragment_register_new_sr_citizen.*
@@ -175,6 +176,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                         .show()
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
+                    val data = it.data
+                    if (data is BaseRepo) {
+                    }
                     Snackbar.make(rootLayoutRegisterSrCitizen, "Registered", Snackbar.LENGTH_SHORT)
                         .show()
                 }

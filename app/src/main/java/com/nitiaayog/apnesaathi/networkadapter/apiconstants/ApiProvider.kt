@@ -10,8 +10,7 @@ object ApiProvider {
     private const val GET_LOAD_DASHBOARD: String = "Volunteer/loadDashboard"
     const val ApiLoadDashboard: String = BuildConfig.HOST_URL + GET_LOAD_DASHBOARD
 
-    private const val GET_SAVE_SR_CITIZEN_FEED_BACK_FORM: String =
-        "Volunteer/SaveSeniorCitizenFeedbackForm"
+    private const val GET_SAVE_SR_CITIZEN_FEED_BACK_FORM: String = "Volunteer/saveForm"
     const val ApiSaveSeniorCitizenFeedbackForm: String =
         BuildConfig.HOST_URL + GET_SAVE_SR_CITIZEN_FEED_BACK_FORM
 
