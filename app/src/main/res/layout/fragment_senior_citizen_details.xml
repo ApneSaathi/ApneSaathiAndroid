@@ -468,7 +468,7 @@
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:drawablePadding="@dimen/dimen_2"
-                                        android:drawableTop="@drawable/ic_shortness_icon_selected"
+                                        android:drawableTop="@drawable/ic_sore_throat_selected"
                                         android:minWidth="@dimen/view_size_40"
                                         android:text="@string/sore_throat"
                                         android:textColor="@color/color_orange"
