@@ -2,7 +2,7 @@ ext {
 
     API_HOST = "http://3.7.39.123:8080/"
     DATABASE_NAME = "apne_saathi.db"
-    DATABASE_VERSION = "1"
+    DATABASE_VERSION = "2"
 
     /* TODO : AppDetails ------------------------------------------------------------------------ */
 

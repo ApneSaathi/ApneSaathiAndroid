@@ -30,12 +30,14 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val followupCallsList: MutableList<User> = mutableListOf()
     private val attendedCallsList: MutableList<User> = mutableListOf()
     private val allCallsList: MutableList<User> = mutableListOf()
+    private var originalCallData: MutableList<CallData> = mutableListOf()
 
     private val grievances: MutableList<Grievances> = mutableListOf()
 
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getAllGrievances()
+    private var grievancesFromCall: MutableList<SrCitizenGrievance> = mutableListOf()
 
     init {
         prepareFollowupData()
@@ -122,6 +124,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     fun getGrievances() = grievances
 
+    fun getGrievancesFromCallData(pos:Int) = originalCallData[pos].medicalGrievance ?: mutableListOf()
+
     fun getFewFollowupCalls(): MutableList<User> =
         if (followupCallsList.size > 3) followupCallsList.subList(0, 3) else followupCallsList
 
@@ -161,6 +165,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                         viewModelScope.launch {
                             io {
                                 val data = it.getData()
+                                originalCallData = data.callsList
                                 dataManager.insertCallData(data.callsList)
 
                                 val grievances: List<SrCitizenGrievance> =

@@ -202,4 +202,9 @@
     <string name="other">Other</string>
     <string name="high">High</string>
     <string name="low">Low</string>
+    <string name="govt_quarantine">Government Qurantine</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="lung_ailment">Lung Ailment</string>
+    <string name="cancer_or_surgery">Cancer or Major Surgery</string>
+    <string name="no_issues">No issues</string>
 </resources>

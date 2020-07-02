@@ -90,6 +90,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
 
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
     // RxAnimation - Handle Animations Asynchronous
     //implementation 'com.mikhaellopez:rxanimation:1.0.0'
 

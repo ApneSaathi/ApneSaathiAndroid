@@ -49,7 +49,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
 
     override fun onMoreInfoClick(position: Int, callData: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(callData)
+        fragment.setSelectedUser(callData, viewModel.getGrievancesFromCallData(position))
         addFragment(
             R.id.fragmentCallContainer, fragment,getString(R.string.details_fragment)
         )

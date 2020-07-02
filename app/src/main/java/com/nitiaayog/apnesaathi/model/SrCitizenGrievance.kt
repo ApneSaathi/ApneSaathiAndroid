@@ -132,6 +132,13 @@ class SrCitizenGrievance {
         set(@NonNull value) {
             field = value ?: ""
         }
+    @ColumnInfo(name = DbConstants.Columns.LackOfEssentialService, defaultValue = "No")
+    @SerializedName(ApiConstants.LackOfEssentialService)
+    var lackOfEssentialStatus: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
 
     @ColumnInfo(name = DbConstants.Columns.FoodShortage, defaultValue = "-1")
     @SerializedName(ApiConstants.FoodShortage)
