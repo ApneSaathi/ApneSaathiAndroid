@@ -16,5 +16,6 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getCallDetailFromId(id: Int): CallData
 
     fun insertGrievances(grievances: List<SrCitizenGrievance>)
+    fun getAllUniqueGrievances(callId:Int): LiveData<MutableList<SrCitizenGrievance>>
     fun getAllGrievances(): LiveData<MutableList<SrCitizenGrievance>>
 }

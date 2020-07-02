@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.ui.fragments.calls
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
@@ -48,11 +49,19 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
     }
 
     override fun onMoreInfoClick(position: Int, callData: CallData) {
-        val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(callData, viewModel.getGrievancesFromCallData(position))
-        addFragment(
-            R.id.fragmentCallContainer, fragment,getString(R.string.details_fragment)
-        )
+        callData.callId?.let { viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner) }
+        callData.callId?.let { it ->
+            viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
+                val fragment = SeniorCitizenDetailsFragment()
+                fragment.setSelectedUser(
+                    callData,
+                    it
+                )
+                addFragment(
+                    R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                )
+            })
+        }
     }
 
     private fun initRecyclerView() {

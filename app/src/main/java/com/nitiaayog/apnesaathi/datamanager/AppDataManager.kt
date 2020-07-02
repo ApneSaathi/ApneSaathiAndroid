@@ -68,6 +68,8 @@ class AppDataManager private constructor(
 
     override fun getAllGrievances(): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllGrievances()
+    override fun getAllUniqueGrievances(callId:Int): LiveData<MutableList<SrCitizenGrievance>> =
+        grievancesDao.getAllUniqueGrievances(callId)
 
     override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
         apiRequest.getSeniorCitizenDetails(srDetails)

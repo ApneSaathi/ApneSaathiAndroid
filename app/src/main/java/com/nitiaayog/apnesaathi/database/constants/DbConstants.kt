@@ -9,6 +9,7 @@ object DbConstants {
 
     object Columns {
         const val Id: String = "id"
+        const val callId: String = "callId"
         const val VolunteerId: String = "volunteer_id"
         const val EmailId: String = "email_id"
         const val Name: String = "name"
