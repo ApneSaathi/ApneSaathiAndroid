@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.nitiaayog.apnesaathi.base.SyncDataService
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ApneSaathiApplication : Application() {
 
