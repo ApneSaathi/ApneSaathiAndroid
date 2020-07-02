@@ -269,6 +269,11 @@
 
     <string name="api_connection_error">सर्वर से कनेक्ट करने में सक्षम नहीं है। कृपया अपने इंटरनेट कनेक्शन की जाँच करें</string>
     <string name="error">त्रुटि!</string>
+    <string name="govt_quarantine">Government Qurantine</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="lung_ailment">Lung Ailment</string>
+    <string name="cancer_or_surgery">Cancer or Major Surgery</string>
+    <string name="no_issues">No issues</string>
 
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>

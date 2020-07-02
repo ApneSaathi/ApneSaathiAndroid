@@ -62,6 +62,7 @@ object ApiConstants {
     const val HasShortnessOfBreath: String = "has_shortnes_of_breath"
     const val HasSoreThroat: String = "has_sorethroat"
     const val QuarantineStatus: String = "quarantinestatus"
+    const val LackOfEssentialService: String = "lackofessentialservices"
     const val FoodShortage: String = "foodshortage"
     const val MedicineShortage: String = "medicineshortage"
     const val AccessToBankingIssue: String = "aceesstobankingissue"

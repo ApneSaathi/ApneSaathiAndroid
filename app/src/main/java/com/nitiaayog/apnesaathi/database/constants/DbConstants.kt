@@ -36,6 +36,7 @@ object DbConstants {
         const val HasShortnessOfBreath: String = "has_shortness_of_breath"
         const val HasSoreThroat: String = "has_sore_throat"
         const val QuarantineStatus: String = "quarantine_status"
+        const val LackOfEssentialService: String = "lack_of_essential_service"
         const val FoodShortage: String = "food_shortage"
         const val MedicineShortage: String = "medicine_shortage"
         const val AccessToBankingIssue: String = "access_to_banking_issue"

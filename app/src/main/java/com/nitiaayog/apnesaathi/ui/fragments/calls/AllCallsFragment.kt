@@ -8,7 +8,6 @@ import com.nitiaayog.apnesaathi.adapter.CallsAdapter
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
@@ -49,7 +48,7 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
 
     override fun onMoreInfoClick(position: Int, callData: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(callData)
+        fragment.setSelectedUser(callData, viewModel.getGrievancesFromCallData(position))
         addFragment(
             R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
         )
