@@ -1140,7 +1140,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     BaseUtility.showAlertMessage(
                         this, R.string.alert, R.string.no_internet_save_data_in_app,
                         R.string.thanks_go_back
-                    )
+                    ) { dialog, _ ->
+                        dialog.dismiss()
+                        finish()
+                    }
                 ApiProvider.ApiRegisterSeniorCitizen ->
                     BaseUtility.showAlertMessage(this, R.string.alert, R.string.check_internet)
             }
@@ -1308,7 +1311,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
-        arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+        arraySubParams.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
 
         var dataList = viewModel.getMedicalHistory()
         if (dataList.any { it == getString(R.string.no_problems) }) {

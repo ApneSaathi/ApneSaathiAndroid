@@ -8,6 +8,7 @@ import android.content.ComponentName
 import android.content.Context
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
@@ -51,7 +52,12 @@ class SyncDataService : JobService() {
                 processData?.run {
                     if (processData.isEmpty()) stopSelf()
                     else {
-                        processData.forEach { syncData(it) }
+                        io {
+                            startSyncing(processData)
+                        }
+                        io {
+
+                        }
                     }
                 }
             }
@@ -61,6 +67,8 @@ class SyncDataService : JobService() {
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
+        println("\nTAG -- JobService --> Job Completed")
+        disposeAll(params)
         return true
     }
 
@@ -145,7 +153,10 @@ class SyncDataService : JobService() {
         return params
     }
 
-    private suspend fun syncData(grievance: SyncSrCitizenGrievance) {
+    private fun startSyncing(processData: List<SyncSrCitizenGrievance>) =
+        processData.forEach { syncData(it) }
+
+    private fun syncData(grievance: SyncSrCitizenGrievance) {
         val params = preparePostParams(grievance)
         val disposable = dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
             println("TAG -- JobService -- params --> $params")

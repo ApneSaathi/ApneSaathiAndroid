@@ -30,8 +30,6 @@ class ApneSaathiApplication : Application() {
         getScreenSize(this)
 
         instance = this
-
-        BaseUtility.format("2020-7-3", "yyyy-MM-dd", "yyyy-MM-dd")
     }
 
     private fun getScreenSize(context: Context) {
