@@ -17,20 +17,18 @@ import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
-import org.threeten.bp.format.DateTimeFormatter
+
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     SeniorCitizenDateAdapter.OnItemClickListener {
 
-    private var adapter: SeniorCitizenDateAdapter? = null
+    private lateinit var adapter: SeniorCitizenDateAdapter
     lateinit var callData: CallData
-    lateinit var grievancesList: MutableList<SrCitizenGrievance>
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
         getViewModel {
             SeniorCitizenDetailsViewModel.getInstance(dataManager)
@@ -46,6 +44,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
         initClicks()
         initRecyclerView()
+        initAdapter()
         bindData()
 
     }
@@ -59,7 +58,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
                 activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_female_user) }
         }
 
-        callData.let {
+        callData?.let {
             val address = getString(R.string.address).plus(" : ")
             val dataString = address.plus(it.block).plus(", ").plus(it.district)
                 .plus(", ").plus(it.state)
@@ -71,171 +70,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_user_phone_number.text = it.contactNumber
             txt_address.text = spanAddress
         }
-        viewModel.getDataList().observe(viewLifecycleOwner, Observer {
-            initAdapter()
-        })
-        if (grievancesList.size > 0) {
-            grievancesList.let { viewModel.prepareData(it) }
-            makeGrievanceContainerVisible()
-            bindGrievanceData(grievancesList[grievancesList.size - 1])
-        } else {
-            viewModel.setCurrentDate()
-            makeGrievanceContainerInvisible()
-        }
-
-    }
-
-    private fun makeViewVisible(view: View) {
-        view.visibility = View.VISIBLE
-    }
-
-    private fun makeViewInvisible(view: View) {
-        view.visibility = View.GONE
-    }
-
-    private fun bindGrievanceData(srCitizenGrievance: SrCitizenGrievance) {
-        var medicalHistory = ""
-        if (srCitizenGrievance.diabetic == "Y") {
-            medicalHistory = getString(R.string.diabetes).plus(", ")
-        }
-        if (srCitizenGrievance.bloodPressure == "Y") {
-            medicalHistory = getString(R.string.blood_pressure).plus(", ")
-        }
-        if (srCitizenGrievance.lungAilment == "Y") {
-            medicalHistory = getString(R.string.lung_ailment).plus(", ")
-        }
-        if (srCitizenGrievance.cancerOrMajorsurgery == "Y") {
-            medicalHistory = getString(R.string.cancer_or_surgery).plus(", ")
-        }
-        if (medicalHistory.isEmpty()) {
-            txt_medical_history.text = getString(R.string.no_problems)
-        } else {
-            txt_medical_history.text = medicalHistory
-        }
-        txt_issue_raised_date.text = srCitizenGrievance.loggeddattime?.let { getFormattedDate(it) }
-        txt_call_response.text = callData.talkedWith
-
-        txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout?:"--"
-
-        if (srCitizenGrievance.hasCovidSymptoms == "Y") {
-            txt_covid_symptoms.text = getString(R.string.yes)
-            txt_covid.visibility = View.GONE
-            cl_covid_symptoms.visibility = View.VISIBLE
-            if (srCitizenGrievance.hasCough == "Y") {
-                makeViewVisible(txt_cough)
-            } else {
-                makeViewInvisible(txt_cough)
-            }
-            if (srCitizenGrievance.hasFever == "Y") {
-                makeViewVisible(txt_fever)
-            } else {
-                makeViewInvisible(txt_fever)
-            }
-            if (srCitizenGrievance.hasShortnessOfBreath == "Y") {
-                makeViewVisible(txt_shortness)
-            } else {
-                makeViewInvisible(txt_shortness)
-            }
-            if (srCitizenGrievance.hasSoreThroat == "Y") {
-                makeViewVisible(txt_sore_throat)
-            } else {
-                makeViewInvisible(txt_sore_throat)
-            }
-        } else {
-            txt_covid_symptoms.text = getString(R.string.no)
-            cl_covid_symptoms.visibility = View.GONE
-            txt_covid.visibility = View.VISIBLE
-        }
-        if (srCitizenGrievance.otherAilments == "Y") {
-            txt_other_medical_problems.text = getString(R.string.yes)
-        } else {
-            txt_other_medical_problems.text = getString(R.string.no)
-        }
-        when (srCitizenGrievance.quarantineStatus) {
-            "0" -> {
-                tv_quarantine_status.text = getText(R.string.not_quarantined)
-            }
-            "1" -> {
-                tv_quarantine_status.text = getText(R.string.home_quarantine)
-            }
-            "2" -> {
-                tv_quarantine_status.text = getText(R.string.govt_quarantine)
-            }
-            else -> {
-                tv_quarantine_status.text = getText(R.string.hospitalized)
-            }
-        }
-
-        if (srCitizenGrievance.isemergencyservicerequired == "N") {
-            txt_grievance_priority.text = getString(R.string.no)
-            txt_escalation.text = getString(R.string.no)
-        } else {
-            txt_grievance_priority.text = getString(R.string.yes)
-            txt_escalation.text = getString(R.string.yes)
-        }
-        if (srCitizenGrievance.lackOfEssentialStatus == "Yes") {
-            txt_grievance.text = getText(R.string.yes)
-            var grievanceCategory: String = ""
-            if (srCitizenGrievance.foodShortage != "4") {
-                grievanceCategory = getString(R.string.lack_of_food).plus(", ")
-            }
-            if (srCitizenGrievance.medicineShortage != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.lack_of_medicine)).plus(", ")
-            }
-            if (srCitizenGrievance.aceessToBankingIssue != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.lack_of_banking_service)).plus(", ")
-            }
-            if (srCitizenGrievance.utilitysupplyissue != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.lack_of_utilities)).plus(", ")
-            }
-            if (srCitizenGrievance.hygieneissue != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.lack_of_hygine)).plus(", ")
-            }
-            if (srCitizenGrievance.safetyissue != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.lack_of_safety)).plus(", ")
-            }
-            if (srCitizenGrievance.emergencyserviceissue != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.lack_of_access_emergency)).plus(", ")
-            }
-            if (srCitizenGrievance.phoneandinternetissue != "4") {
-                grievanceCategory =
-                    grievanceCategory.plus(getString(R.string.phone_and_service)).plus(", ")
-            }
-            txt_grievance_category.text = grievanceCategory
-            txt_issue_raised.text = grievanceCategory
-        } else {
-            txt_grievance.text = getString(R.string.no)
-            txt_grievance_category.text = getString(R.string.not_applicable)
-            txt_issue_raised.text = getString(R.string.no_issues)
-        }
-        txt_grievance_desc.text = "--"
-        txt_other_problem.text = srCitizenGrievance.remakrsimportantinfo ?: "--"
-
-    }
-
-    private fun getFormattedDate(date: String): String {
-        val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-        val output = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
-        val fa = input.parse(date)
-        return output.format(fa)
-    }
-
-    private fun makeGrievanceContainerInvisible() {
-        txt_edit.visibility = View.VISIBLE
-        cl_uneditable_container.visibility = View.GONE
-        ll_status_container.visibility = View.VISIBLE
-    }
-
-    private fun makeGrievanceContainerVisible() {
-        cl_uneditable_container.visibility = View.VISIBLE
-        ll_status_container.visibility = View.GONE
-        txt_edit.visibility = View.GONE
+//       activity?.let { viewModel.getSeniorCitizenDetails(it) }  API call
     }
 
     private fun initClicks() {
@@ -277,6 +112,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
             intent.putExtra(CALL_ID, callData.callId)
             startActivity(intent)
+            startActivity(intent)
         }
     }
 
@@ -287,23 +123,21 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun initAdapter() {
-        if (adapter == null) {
-            adapter = SeniorCitizenDateAdapter(viewModel.getDataList().value)
-            adapter?.setOnItemClickListener(this)
-            rcl_call_dates.adapter = adapter
-        } else {
-            adapter?.notifyDataSetChanged()
-        }
-
+        adapter = SeniorCitizenDateAdapter(viewModel.prepareData())
+        adapter.setOnItemClickListener(this)
+        rcl_call_dates.adapter = adapter
     }
 
     override fun onItemClick(position: Int, dateItem: DateItem) {
-        adapter?.notifyDataSetChanged()
-        if (grievancesList.size > 0) {
-            bindGrievanceData(grievancesList[position])
-            makeGrievanceContainerVisible()
+        adapter.notifyDataSetChanged()
+        if (dateItem.status == "Attended") {
+            cl_uneditable_container.visibility = View.VISIBLE
+            ll_status_container.visibility = View.GONE
+            txt_edit.visibility = View.GONE
         } else {
-            makeGrievanceContainerInvisible()
+            txt_edit.visibility = View.VISIBLE
+            cl_uneditable_container.visibility = View.GONE
+            ll_status_container.visibility = View.VISIBLE
         }
     }
 
@@ -313,6 +147,17 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
+
+    /*override fun onSaveButton(status: String) {
+        val index = viewModel.getDataList().size - 1
+        viewModel.getDataList().get(index).status = status
+        if (status == "Attended") {
+            cl_uneditable_container.visibility = View.VISIBLE
+            ll_status_container.visibility = View.GONE
+            txt_edit.visibility = View.GONE
+        }
+
+    }*/
 
     private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
         when (it) {
@@ -331,11 +176,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
     })
 
-    fun setSelectedUser(
-        callData: CallData,
-        grievancesList: MutableList<SrCitizenGrievance>
-    ) {
-        this.grievancesList = grievancesList
+   /* override fun onCancelButton() {
+    }*/
+
+    fun setSelectedUser(callData: CallData) {
         this.callData = callData
     }
 }

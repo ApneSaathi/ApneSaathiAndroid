@@ -10,10 +10,10 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.model.DateItem
 import kotlinx.android.synthetic.main.list_date_items.view.*
 
-class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
+class SeniorCitizenDateAdapter(private val dataList: MutableList<DateItem>) :
     RecyclerView.Adapter<SeniorCitizenDateAdapter.SeniorCitizenDateViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
-    var selectedPos: Int = dataList!!.size-1
+    var selectedPos: Int = dataList.size-1
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,7 +28,7 @@ class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
     }
 
     override fun getItemCount(): Int {
-        return dataList?.count()!!
+        return dataList.count()
     }
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
@@ -38,7 +38,7 @@ class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
     override fun onBindViewHolder(
         holder: SeniorCitizenDateAdapter.SeniorCitizenDateViewHolder, position: Int
     ) {
-        dataList?.get(position)?.let { holder.bindData(it) }
+        holder.bindData(dataList[position])
     }
 
     inner class SeniorCitizenDateViewHolder(itemsView: View) : RecyclerView.ViewHolder(itemsView) {
@@ -51,11 +51,7 @@ class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
             llDateContainer.setOnClickListener {
                 if (::itemClickListener.isInitialized) {
                     selectedPos = adapterPosition
-                    dataList?.get(adapterPosition)?.let { it1 ->
-                        itemClickListener.onItemClick(adapterPosition,
-                            it1
-                        )
-                    }
+                    itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
                 }
             }
         }

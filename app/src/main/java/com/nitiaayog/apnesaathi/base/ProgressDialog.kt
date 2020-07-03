@@ -33,6 +33,8 @@ class ProgressDialog private constructor(context: Context) : Dialog(context) {
         private var onCancelClick: DialogEventListener? = null
         private var onDialogDismiss: DialogEventListener? = null
 
+        private val dialog by lazy { ProgressDialog(context) }
+
         fun setCancellable(isCancellable: Boolean): Builder {
             this.isCancellable = isCancellable
             return this
@@ -102,8 +104,9 @@ class ProgressDialog private constructor(context: Context) : Dialog(context) {
 
         fun show() = create().show()
 
+        fun dismiss() = dialog.dismiss()
+
         private fun create(): ProgressDialog {
-            val dialog = ProgressDialog(context)
             dialog.setCancelable(isCancellable)
 
             dialog.setTitle(title)

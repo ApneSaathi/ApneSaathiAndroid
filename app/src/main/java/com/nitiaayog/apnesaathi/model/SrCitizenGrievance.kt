@@ -4,16 +4,20 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
-import com.nitiaayog.apnesaathi.database.constants.DbConstants
+import com.nitiaayog.apnesaathi.database.constants.Columns
+import com.nitiaayog.apnesaathi.database.constants.Tables
+import com.nitiaayog.apnesaathi.database.converters.DateTimeConverter
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
-@Entity(tableName = DbConstants.Tables.TABLE_GRIEVANCES)
-class SrCitizenGrievance {
+@Entity(tableName = Tables.TABLE_GRIEVANCES)
+open class SrCitizenGrievance {
 
     @PrimaryKey
-    @ColumnInfo(name = DbConstants.Columns.Id, defaultValue = "-1")
+    @ColumnInfo(name = Columns.Id, defaultValue = "-1")
     @SerializedName(ApiConstants.GrievanceId)
     var id: Int? = -1
         get() = field ?: -1
@@ -28,7 +32,15 @@ class SrCitizenGrievance {
             field = value ?: -1
         }
 
-    @ColumnInfo(name = DbConstants.Columns.VolunteerId, defaultValue = "-1")
+    @ColumnInfo(name = Columns.CallId, defaultValue = "-1")
+    @SerializedName(ApiConstants.CallId)
+    var callId: Int? = -1
+        get() = field ?: -1
+        set(@NonNull value) {
+            field = value ?: -1
+        }
+
+    @ColumnInfo(name = Columns.VolunteerId, defaultValue = "-1")
     @SerializedName(ApiConstants.VolunteerId)
     var volunteerId: String? = ""
         get() = field ?: ""
@@ -36,39 +48,39 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.IsDiabetic, defaultValue = "-1")
+    @ColumnInfo(name = Columns.IsDiabetic, defaultValue = "-1")
     @SerializedName(ApiConstants.IsDiabetic)
-    var diabetic: String? = ""
+    var hasDiabetic: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.IsBloodPressure, defaultValue = "-1")
+    @ColumnInfo(name = Columns.IsBloodPressure, defaultValue = "-1")
     @SerializedName(ApiConstants.IsBloodPressure)
-    var bloodPressure: String? = ""
+    var hasBloodPressure: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.IsLungAilment, defaultValue = "-1")
+    @ColumnInfo(name = Columns.IsLungAilment, defaultValue = "-1")
     @SerializedName(ApiConstants.LungAilment)
-    var lungAilment: String? = ""
+    var hasLungAilment: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.IsCancerOrMajorSurgery, defaultValue = "-1")
+    @ColumnInfo(name = Columns.IsCancerOrMajorSurgery, defaultValue = "-1")
     @SerializedName(ApiConstants.CancerOrMajorSurgery)
-    var cancerOrMajorsurgery: String? = ""
+    var cancerOrMajorSurgery: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.OtherAilments, defaultValue = "-1")
+    @ColumnInfo(name = Columns.OtherAilments, defaultValue = "-1")
     @SerializedName(ApiConstants.OtherAilments)
     var otherAilments: String? = ""
         get() = field ?: ""
@@ -76,7 +88,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.RemarkOnMedicalHistory, defaultValue = "-1")
+    @ColumnInfo(name = Columns.RemarkOnMedicalHistory, defaultValue = "-1")
     @SerializedName(ApiConstants.RemarkOnMedicalHistory)
     var remarksMedicalHistory: String? = ""
         get() = field ?: ""
@@ -84,7 +96,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.InfoTalkAbout, defaultValue = "-1")
+    @ColumnInfo(name = Columns.InfoTalkAbout, defaultValue = "-1")
     @SerializedName(ApiConstants.InfoTalkAbout)
     var relatedInfoTalkedAbout: String? = ""
         get() = field ?: ""
@@ -92,7 +104,15 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.HasCovidSymptoms, defaultValue = "-1")
+    @ColumnInfo(name = Columns.NoticedBehaviouralChanges, defaultValue = "-1")
+    @SerializedName(ApiConstants.NoticedBehaviouralChange)
+    var behavioralChangesNoticed: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.HasCovidSymptoms, defaultValue = "-1")
     @SerializedName(ApiConstants.HasCovidSymptoms)
     var hasCovidSymptoms: String? = ""
         get() = field ?: ""
@@ -100,7 +120,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.HasCough, defaultValue = "-1")
+    @ColumnInfo(name = Columns.HasCough, defaultValue = "-1")
     @SerializedName(ApiConstants.HasCough)
     var hasCough: String? = ""
         get() = field ?: ""
@@ -108,7 +128,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.HasFever, defaultValue = "-1")
+    @ColumnInfo(name = Columns.HasFever, defaultValue = "-1")
     @SerializedName(ApiConstants.HasFever)
     var hasFever: String? = ""
         get() = field ?: ""
@@ -116,7 +136,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.HasShortnessOfBreath, defaultValue = "-1")
+    @ColumnInfo(name = Columns.HasShortnessOfBreath, defaultValue = "-1")
     @SerializedName(ApiConstants.HasShortnessOfBreath)
     var hasShortnessOfBreath: String? = ""
         get() = field ?: ""
@@ -124,7 +144,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.HasSoreThroat, defaultValue = "-1")
+    @ColumnInfo(name = Columns.HasSoreThroat, defaultValue = "-1")
     @SerializedName(ApiConstants.HasSoreThroat)
     var hasSoreThroat: String? = ""
         get() = field ?: ""
@@ -132,22 +152,23 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.QuarantineStatus, defaultValue = "-1")
+    @ColumnInfo(name = Columns.QuarantineStatus, defaultValue = "-1")
     @SerializedName(ApiConstants.QuarantineStatus)
     var quarantineStatus: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
-    @ColumnInfo(name = DbConstants.Columns.LackOfEssentialService, defaultValue = "No")
-    @SerializedName(ApiConstants.LackOfEssentialService)
-    var lackOfEssentialStatus: String? = ""
+
+    @ColumnInfo(name = Columns.LackOfEssentialServices, defaultValue = "-1")
+    @SerializedName(ApiConstants.LackOfEssentialServices)
+    var lackOfEssentialServices: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.FoodShortage, defaultValue = "-1")
+    @ColumnInfo(name = Columns.FoodShortage, defaultValue = "-1")
     @SerializedName(ApiConstants.FoodShortage)
     var foodShortage: String? = ""
         get() = field ?: ""
@@ -155,7 +176,7 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.MedicineShortage, defaultValue = "-1")
+    @ColumnInfo(name = Columns.MedicineShortage, defaultValue = "-1")
     @SerializedName(ApiConstants.MedicineShortage)
     var medicineShortage: String? = ""
         get() = field ?: ""
@@ -163,73 +184,74 @@ class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.AccessToBankingIssue, defaultValue = "-1")
+    @ColumnInfo(name = Columns.AccessToBankingIssue, defaultValue = "-1")
     @SerializedName(ApiConstants.AccessToBankingIssue)
-    var aceessToBankingIssue: String? = ""
+    var accessToBankingIssue: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.UtilitySupplyIssue, defaultValue = "-1")
+    @ColumnInfo(name = Columns.UtilitySupplyIssue, defaultValue = "-1")
     @SerializedName(ApiConstants.UtilityIssue)
-    var utilitysupplyissue: String? = ""
+    var utilitySupplyIssue: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.HygieneIssue, defaultValue = "-1")
+    @ColumnInfo(name = Columns.HygieneIssue, defaultValue = "-1")
     @SerializedName(ApiConstants.HygieneIssue)
-    var hygieneissue: String? = ""
+    var hygieneIssue: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.SafetyIssue, defaultValue = "-1")
+    @ColumnInfo(name = Columns.SafetyIssue, defaultValue = "-1")
     @SerializedName(ApiConstants.SafetyIssue)
-    var safetyissue: String? = ""
+    var safetyIssue: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.EmergencyServiceIssue, defaultValue = "-1")
+    @ColumnInfo(name = Columns.EmergencyServiceIssue, defaultValue = "-1")
     @SerializedName(ApiConstants.EmergencyServiceIssue)
-    var emergencyserviceissue: String? = ""
+    var emergencyServiceIssue: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.PhoneAndInternetIssue, defaultValue = "-1")
+    @ColumnInfo(name = Columns.PhoneAndInternetIssue, defaultValue = "-1")
     @SerializedName(ApiConstants.PhoneInternetIssue)
-    var phoneandinternetissue: String? = ""
+    var phoneAndInternetIssue: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.IsEmergencyServiceRequired, defaultValue = "-1")
+    @ColumnInfo(name = Columns.IsEmergencyServiceRequired, defaultValue = "-1")
     @SerializedName(ApiConstants.IsEmergencyServicesRequired)
-    var isemergencyservicerequired: String? = ""
+    var emergencyServiceRequired: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.RemarksImportantInfo, defaultValue = "-1")
+    @ColumnInfo(name = Columns.RemarksImportantInfo, defaultValue = "-1")
     @SerializedName(ApiConstants.ImpRemarkInfo)
-    var remakrsimportantinfo: String? = ""
+    var impRemarkInfo: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.LoggedDateTime, defaultValue = "-1")
+    @TypeConverters(DateTimeConverter::class)
+    @ColumnInfo(name = Columns.CreatedDate, defaultValue = "-1")
     @SerializedName(ApiConstants.CreatedDate)
-    var loggeddattime: String? = ""
+    var createdDate: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -237,29 +259,8 @@ class SrCitizenGrievance {
 
     var status: String = GrievancesAdapter.GRIEVANCE_PENDING
 
-    /*var infoTalkedWith: String = related_info_talked_about ?: ""
-    var grievanceId: String = idgrevance.toString() ?: "-1"
-    var volunteerId: String = idvolunteer ?: ""
-    var isDiabetic: String = diabetic ?: ""
-    var isBloodpressure: String = bloodpressure ?: ""
-    var isLungailment: String = lungailment ?: ""
-    var cancerOrMajorSurgery: String = cancer_or_majorsurgery ?: ""
-    var otherAilments: String = other_ailments ?: ""
-    var remarksOnMedicalHistory: String = remarks_medical_history ?: ""
-    var isCovidSymptoms: String = iscovidsymptoms ?: ""
-    var hasCough: String = hascough ?: ""
-    var hasFever: String = hasfever ?: ""
-    var hasShortnessOfBreath: String = has_shortnes_of_breath ?: ""
-    var hasSoreThroat: String = has_sorethroat ?: ""
-    var quarantineStatus: String = quarantinestatus ?: ""
-    var foodShortage: String = foodshortage ?: ""
-    var medicineShortage: String = medicineshortage ?: ""
-    var accessToBankingIssue: String = aceesstobankingissue ?: ""
-    var utilitySupplyIssue: String = utilitysupplyissue ?: ""
-    var hygieneIssue: String = hygieneissue ?: ""
-    var safetyIssue: String = safetyissue ?: ""
-    var emergencyServiceIssue: String = emergencyserviceissue ?: ""
-    var phoneAndInternetIssue: String = phoneandinternetissue ?: ""
-    var isEmergencyServiceRequired: String = isemergencyservicerequired ?: ""
-    var remarksImpInfo: String = remakrsimportantinfo ?: ""*/
+    fun createCopy(): SrCitizenGrievance {
+        val json = Gson().toJson(this)
+        return Gson().fromJson(json, SrCitizenGrievance::class.java)
+    }
 }

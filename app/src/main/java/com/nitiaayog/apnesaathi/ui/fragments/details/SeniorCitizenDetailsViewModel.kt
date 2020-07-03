@@ -2,84 +2,62 @@ package com.nitiaayog.apnesaathi.ui.fragments.details
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.DateItem
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SeniorCitizenDetailsViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
-    private val dateList: MutableList<DateItem> = ArrayList()
-    private val dataList = MutableLiveData<List<DateItem>>()
-    fun prepareData(data: MutableList<SrCitizenGrievance>?) {
-        dateList.clear()
-        if (data != null) {
-            for (grievanceData: SrCitizenGrievance in data) run {
-                val dateItem = DateItem(
-                    grievanceData.loggeddattime?.let { getDayFromDate(it) },
-                    grievanceData.loggeddattime?.let { getMonthFromDate(it) },
-                    grievanceData.status
-                )
-                dateList.add(dateItem)
-                dataList.postValue(dateList)
-            }
-        }
-    }
-    private fun getMonthFromDate(date: String?): String {
-        val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-        val output = DateTimeFormatter.ofPattern("MMM")
-        val fa = input.parse(date)
-        return  output.format(fa)
-    }
-    private fun getDayFromDate(date: String?): String {
-        val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-        val output = DateTimeFormatter.ofPattern("dd")
-        val fa = input.parse(date)
-        return  output.format(fa)
-    }
-    fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
-    fun getSeniorCitizenDetails(context: Context) {
-        if (checkNetworkAvailability(context)) {
-            val params = JsonObject()
-            params.addProperty("callid", 11)
-            dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
-            }.doOnSuccess { loaderObservable.value = NetworkRequestState.SuccessResponse(it) }
-                .doOnError {
-                    loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
-                }.subscribe().autoDispose(disposables)
-        }
-    }
-
-    fun getDataList(): MutableLiveData<List<DateItem>> {
+    private val dataList: MutableList<DateItem> = mutableListOf()
+    fun prepareData(): MutableList<DateItem> {
+        dataList.clear()
+        dataList.add(
+            DateItem(
+                "01", "Jan", "Attended"
+            )
+        )
+        dataList.add(
+            DateItem(
+                "02", "Jan", "Attended"
+            )
+        )
+        dataList.add(
+            DateItem(
+                "08", "Jan", "Attended"
+            )
+        )
+        dataList.add(
+            DateItem(
+                "09", "Feb", "Unattended"
+            )
+        )
         return dataList
     }
 
-    fun setCurrentDate() {
-        dateList.clear()
-        val date = Calendar.getInstance().time
-        val formatterMonth = SimpleDateFormat("MMM",Locale.ROOT) //or use getDateInstance()
-        val formatterDay = SimpleDateFormat("dd",Locale.ROOT) //or use getDateInstance()
-        val formattedMonth = formatterMonth.format(date)
-        val formattedDay = formatterDay.format(date)
-        val dateItem = DateItem(
-            formattedDay,
-            formattedMonth,
-            "Not Connected"
-        )
-        dateList.add(dateItem)
-        dataList.postValue(dateList)
+    fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
+    fun getSeniorCitizenDetails(context: Context) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiSeniorCitizenDetails)) {
+            val params = JsonObject()
+            params.addProperty("callid", 11)
+            dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiSeniorCitizenDetails)
+            }.doOnSuccess {
+                loaderObservable.value =
+                    NetworkRequestState.SuccessResponse(ApiProvider.ApiSeniorCitizenDetails, it)
+            }.doOnError {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiSeniorCitizenDetails, it)
+            }.subscribe().autoDispose(disposables)
+        }
+    }
 
+    fun getDataList(): MutableList<DateItem> {
+        return dataList
     }
 
     companion object {

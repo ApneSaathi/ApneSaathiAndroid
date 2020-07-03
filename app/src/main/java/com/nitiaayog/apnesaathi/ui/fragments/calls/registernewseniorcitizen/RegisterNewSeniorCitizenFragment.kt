@@ -5,15 +5,14 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.lifecycle.Observer
-import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
-import kotlinx.android.synthetic.main.fragment_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -22,6 +21,10 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private var selectedGender: String = ""
     private var selectedDistrict: String = ""
     private var selectedState: String = ""
+
+    private val progressDialog: ProgressDialog.Builder by lazy {
+        ProgressDialog.Builder(context!!).setMessage(R.string.wait_saving_data)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -105,17 +108,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }.autoDispose(disposables)
 
         tvRegister.throttleClick().subscribe {
-            if (validateFields())
-                viewModel.registerNewSeniorCitizen(
-                    context!!, etName.text.toString(), etAge.text.toString(),
-                    when (selectedGender) {
-                        getString(R.string.gender_male) -> "M"
-                        getString(R.string.gender_female) -> "F"
-                        else -> "O"
-                    },
-                    etContactNumber.text.toString(), selectedDistrict, selectedState,
-                    etAddress.text.toString()
-                )
+            if (validateFields()) viewModel.registerNewSeniorCitizen(context!!)
         }.autoDispose(disposables)
         tvCancel.throttleClick().subscribe {}.autoDispose(disposables)
     }
@@ -162,21 +155,49 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         return true
     }
 
+    private fun resetRegisterNewSrCitizenLayout() {
+
+        etName.text.clear()
+        viewModel.setName("")
+
+        etAge.text.clear()
+        viewModel.setAge("")
+
+        actGender.setText("")
+        viewModel.setGender("")
+
+        etContactNumber.text.clear()
+        viewModel.setContactNumber("")
+
+        actDistrict.setText("")
+        viewModel.setDistrict("")
+
+        actState.setText("")
+        viewModel.setState("")
+
+        etAddress.text.clear()
+        viewModel.setAddress("")
+    }
+
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
             when (it) {
-                is NetworkRequestState.NetworkNotAvailable -> {
-                }
-                is NetworkRequestState.LoadingData -> {
-                }
+                is NetworkRequestState.NetworkNotAvailable ->
+                    BaseUtility.showAlertMessage(context!!, R.string.alert, R.string.check_internet)
+                is NetworkRequestState.LoadingData -> progressDialog.show()
                 is NetworkRequestState.ErrorResponse -> {
-                    Snackbar.make(rootLayoutRegisterSrCitizen, "Error", Snackbar.LENGTH_SHORT)
-                        .show()
+                    progressDialog.dismiss()
+                    BaseUtility.showAlertMessage(
+                        context!!, R.string.alert, R.string.can_not_connect_to_server
+                    )
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
-                    Snackbar.make(rootLayoutRegisterSrCitizen, "Registered", Snackbar.LENGTH_SHORT)
-                        .show()
+                    progressDialog.dismiss()
+                    resetRegisterNewSrCitizenLayout()
+                    BaseUtility.showAlertMessage(
+                        context!!, R.string.success, R.string.sr_citizen_registered_successfully
+                    )
                 }
             }
         })

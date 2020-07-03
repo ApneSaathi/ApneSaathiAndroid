@@ -17,12 +17,6 @@
     <dimen name="dimen_30">30dp</dimen>
     <dimen name="dimen_35">35dp</dimen>
 
-    <dimen name="dime145dp">145dp</dimen>
-    <dimen name="dime120dp">120dp</dimen>
-    <dimen name="dime100dp">100dp</dimen>
-    <dimen name="dime90dp">90dp</dimen>
-
-
     <dimen name="view_size_32">32dp</dimen>
     <dimen name="view_size_36">36dp</dimen>
     <dimen name="view_size_38">38dp</dimen>
@@ -58,5 +52,4 @@
     <dimen name="text_18">18sp</dimen>
     <dimen name="text_19">19sp</dimen>
     <dimen name="text_20">20sp</dimen>
-
 </resources>
