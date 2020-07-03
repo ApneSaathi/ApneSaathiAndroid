@@ -53,7 +53,7 @@ class GrievancesAdapter : RecyclerView.Adapter<GrievancesAdapter.GrievancesHolde
         }
 
         fun bindData(grievance: SrCitizenGrievance) {
-            tvComplaint.text = grievance.remakrsimportantinfo
+            tvComplaint.text = grievance.impRemarkInfo
             if (grievance.status == GRIEVANCE_RESOLVED) {
                 btnComplaintStatus.setTextColor(
                     ContextCompat.getColor(btnComplaintStatus.context, R.color.text_color_5)

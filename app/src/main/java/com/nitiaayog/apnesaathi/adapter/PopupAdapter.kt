@@ -10,23 +10,23 @@ import com.nitiaayog.apnesaathi.model.FormElements
 import kotlinx.android.synthetic.main.list_item_multi_auto_complete_textview.view.*
 
 class PopupAdapter(private val dataList: MutableList<FormElements>) :
-    RecyclerView.Adapter<PopupAdapter.TempViewHolder>() {
+    RecyclerView.Adapter<PopupAdapter.PopupViewHolder>() {
 
     private lateinit var onIteClickListener: OnItemClickListener
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopupViewHolder {
         val customView = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_multi_auto_complete_textview, parent, false)
-        return TempViewHolder(customView)
+        return PopupViewHolder(customView)
     }
 
     override fun getItemCount(): Int = dataList.size
 
-    override fun onBindViewHolder(holder: TempViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: PopupViewHolder, position: Int) =
         holder.bindData(dataList[position])
 
     interface OnItemClickListener {
-        fun onItemClicked(position: Int, formElement: FormElements)
+        fun onItemClicked(position: Int, element: FormElements)
     }
 
     fun setOnItemClickListener(onIteClickListener: OnItemClickListener) {
@@ -48,17 +48,17 @@ class PopupAdapter(private val dataList: MutableList<FormElements>) :
         notifyDataSetChanged()
     }
 
-    inner class TempViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PopupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val cbItemChecked: CheckBox = itemView.cbItemChecked
 
-        fun bindData(formElement: FormElements) {
-            cbItemChecked.text = formElement.name
-            cbItemChecked.isChecked = formElement.isSelected
+        fun bindData(element: FormElements) {
+            cbItemChecked.text = element.name
+            cbItemChecked.isChecked = element.isSelected
             cbItemChecked.setOnClickListener {
-                formElement.isSelected = !formElement.isSelected
+                element.isSelected = !element.isSelected
                 if (::onIteClickListener.isInitialized)
-                    onIteClickListener.onItemClicked(adapterPosition, formElement)
+                    onIteClickListener.onItemClicked(adapterPosition, element)
             }
         }
     }

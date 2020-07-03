@@ -15,9 +15,9 @@ abstract class BaseViewModel : ViewModel() {
         MutableLiveData<NetworkRequestState>()
     }
 
-    protected fun checkNetworkAvailability(context: Context): Boolean {
+    protected fun checkNetworkAvailability(context: Context, apiName: String): Boolean {
         if (!NetworkProvider.isConnected(context)) {
-            loaderObservable.value = NetworkRequestState.NetworkNotAvailable
+            loaderObservable.value = NetworkRequestState.NetworkNotAvailable(apiName)
             return false
         }
         return true

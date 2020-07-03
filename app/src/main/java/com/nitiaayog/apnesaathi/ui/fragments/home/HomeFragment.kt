@@ -24,6 +24,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<HomeViewModel>() {
@@ -42,7 +43,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, callData: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(callData,viewModel.getGrievancesFromCallData(position))
+                    fragment.setSelectedUser(callData)
                     addFragment(
                         R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
                     )

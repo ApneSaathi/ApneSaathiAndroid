@@ -120,25 +120,22 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     }
 
     protected fun placeCall(selectedCallData: CallData, containerId: Int) {
-        /*Intent(Intent.ACTION_CALL).apply {
-            data = Uri.parse("tel:${selectedUser.phoneNumber}")
+        Intent(Intent.ACTION_CALL).apply {
+            data = Uri.parse("tel:${selectedCallData.contactNumber}")
             if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
             else onCallPermissionDenied()
-        }*/
+        }
 
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                /*addFragment(
-                    containerId, SeniorCitizenEditFragment(), getString(R.string.edit_fragment)
-                )*/
                 val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
                 intent.putExtra(CALL_ID, selectedCallData.callId)
                 startActivity(intent)
             }.autoDispose(disposables)
 
-        val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+        /*val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
         intent.putExtra(CALL_ID, selectedCallData.callId)
-        startActivity(intent)
+        startActivity(intent)*/
     }
 
     abstract fun provideViewModel(): VM

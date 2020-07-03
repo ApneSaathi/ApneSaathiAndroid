@@ -37,7 +37,7 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
 
             override fun onMoreInfoClick(position: Int, callData: CallData) {
                 val fragment = SeniorCitizenDetailsFragment()
-                  fragment.setSelectedUser(callData, viewModel.getGrievancesFromCallData(position))
+                  fragment.setSelectedUser(callData)
                    addFragment(
                        containerId, fragment, getString(R.string.details_fragment)
                    )

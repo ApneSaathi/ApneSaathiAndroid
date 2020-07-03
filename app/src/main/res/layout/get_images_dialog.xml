@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/dimen_5"
-    android:padding="@dimen/dimen_5"
     android:orientation="vertical">
 
     <TextView
@@ -27,13 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left|center"
-        android:drawableTint="@color/text_color_3"
-        android:drawableLeft="@drawable/vector_camera"
-        android:drawablePadding="@dimen/dimen_5"
         android:minHeight="50dp"
         android:paddingLeft="@dimen/dimen_20"
-        android:textColor="@color/color_black"
-
         android:text="Take Photo"
         android:textSize="@dimen/text_18" />
 
@@ -43,17 +36,12 @@
         android:background="@color/color_black" />
 
     <TextView
-        android:drawableTint="@color/text_color_3"
         android:id="@+id/TxtGetFromGallery"
         android:layout_width="match_parent"
-        android:drawableLeft="@drawable/vector_camera"
-        android:drawablePadding="@dimen/dimen_5"
         android:layout_height="wrap_content"
         android:gravity="left|center"
         android:minHeight="50dp"
         android:paddingLeft="@dimen/dimen_20"
-        android:textColor="@color/color_black"
-
         android:text="Choose from Gallery"
         android:textSize="@dimen/text_18" />
 
@@ -63,16 +51,12 @@
         android:background="@color/color_black" />
 
     <TextView
-        android:drawableTint="@color/text_color_3"
         android:id="@+id/TxtCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left|center"
         android:minHeight="50dp"
         android:paddingLeft="@dimen/dimen_20"
-        android:textColor="@color/color_black"
-        android:drawableLeft="@drawable/cancel_img"
-        android:drawablePadding="@dimen/dimen_5"
         android:text="Cancel"
         android:textSize="@dimen/text_18" />
 

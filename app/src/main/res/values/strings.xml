@@ -34,92 +34,7 @@
     <string name="validate_person_district">Provide person\'s district</string>
     <string name="validate_block_name">Provide block name</string>
     <string name="validate_call_connection">Provide status of call</string>
-    <string-array name="states_array">
-        <item>Assam</item>
-        <item>Bihar</item>
-        <item>Madhya Pradesh</item>
-        <item>Uttar Pradesh</item>
-        <item>Rajasthan</item>
-        <item>Maharashtra</item>
-        <item>Gujarat</item>
-        <item>Jharkhand</item>
-    </string-array>
-    <string-array name="medical_problems">
-        <item>@string/no_problems</item>
-        <item>@string/diabetes</item>
-        <item>@string/arthritis</item>
-        <item>@string/kidney_and_bladder_pbm</item>
-        <item>@string/glaucoma</item>
-        <item>@string/parkinson</item>
-        <item>@string/cataracts</item>
-    </string-array>
-    <string-array name="call_status_array">
-        <item>@string/no_response</item>
-        <item>@string/phone_not_picked</item>
-        <item>@string/phone_not_reachable</item>
-        <item>@string/call_disconnected</item>
-        <item>@string/call_connected</item>
-    </string-array>
-    <string-array name="quarantine_status_array">
-        <item>@string/home_quarantine</item>
-        <item>@string/government_quarantine</item>
-        <item>@string/hospitalized</item>
-        <item>@string/not_quarantined</item>
-    </string-array>
-    <string-array name="priority_array">
-        <item>@string/high</item>
-        <item>@string/low</item>
-    </string-array>
-    <string-array name="grievance_array">
-        <item>@string/lack_of_food</item>
-        <item>@string/lack_of_medicine</item>
-        <item>@string/lack_of_banking_service</item>
-        <item>@string/lack_of_utilities</item>
-        <item>@string/lack_of_hygine</item>
-        <item>@string/lack_of_safety</item>
-        <item>@string/lack_of_access_emergency</item>
-        <item>@string/phone_and_service</item>
-        <item>@string/no_problems</item>
-    </string-array>
-    <string-array name="districts_array">
-        <item>Barpeta</item>
-        <item>Baska</item>
-        <item>Darrang</item>
-        <item>Goalpara</item>
-        <item>Dhubri</item>
-        <item>Halakandi</item>
-        <item>Araria</item>
-        <item>Sitamarhi</item>
-        <item>Begusarai</item>
-        <item>Katihar</item>
-        <item>Sheikhpura</item>
-        <item>Damoh</item>
-        <item>Barwani</item>
-        <item>Khandwa</item>
-        <item>Singrauli</item>
-        <item>Vidisha</item>
-        <item>Behraich</item>
-        <item>Balrampur</item>
-        <item>Shrawasti</item>
-        <item>Chitrakoot</item>
-        <item>Sonbhadra</item>
-        <item>Baran</item>
-        <item>Jaiselmer</item>
-        <item>Nandurbar</item>
-        <item>Amravati</item>
-        <item>Gadchiroli</item>
-        <item>Narmada</item>
-        <item>Pakur</item>
-        <item>Sahibganj</item>
-        <item>SurendraNagar</item>
-    </string-array>
-    <string-array name="call_status">
-        <item>No Response</item>
-        <item>Phone not picked</item>
-        <item>Phone not reachable</item>
-        <item>Call Disconnected</item>
-        <item>Call Connected</item>
-    </string-array>
+
     <string name="permission_detail">Permission Detail</string>
     <string name="permission_text">App has feature that with just a single click on Senior citizen details you can initiate a regular call on daily basis.For that we will require CALL permission.</string>
     <string name="accept">Accept</string>
@@ -306,11 +221,119 @@
     <string name="less_details"><u>Less details</u></string>
     <string name="more_details"><u>More details</u></string>
     <string name="error">Error!</string>
-    <string name="govt_quarantine">Government Qurantine</string>
+
+    <string name="personal_details">Personal Details</string>
     <string name="blood_pressure">Blood Pressure</string>
     <string name="lung_ailment">Lung Ailment</string>
-    <string name="cancer_or_surgery">Cancer or Major Surgery</string>
-    <string name="no_issues">No issues</string>
+    <string name="cancer_major_surgery">Cancer/Other Major Surgery</string>
+    <string name="sr_citizen_follow_up">Sr. Citizen Follow up</string>
+
+    <string name="no_internet_save_data_in_app">Your internet connection is slow/poor but we will store data inside an app and later on when internet will be available we will sync with server.</string>
+    <string name="thanks_go_back">Thanks, go back</string>
+    <string name="details_saved_successfully">Senior citizen details is synced up successfully.\n\nThank you, for serving us</string>
+    <string name="great">Great</string>
+    <string name="can_not_connect_to_server">Can not connect to server.\n\nWe have saved data in app and we will sync once we connect to server</string>
+    <string name="wait_saving_data">Please wait we are saving the data…</string>
+    <string name="validate_call_status">Provide call status</string>
+    <string name="validate_talked_with">Provide details about whom did you talked with over a call</string>
+    <string name="validate_medical_history">Select medical history of senior citizen</string>
+    <string name="validate_talked_about">Provide details what did you talked about i.e. <b>Prevention/Access/Detection</b></string>
+    <string name="validate_behavioural_changes">Provide details about behavioural changes of senior citizen</string>
+    <string name="validate_other_medical_details">Provide other medical details like COVID-19 symptoms, etc</string>
+    <string name="validate_covid_symptoms">Provide COVID-19 symptoms in Sr. citizen</string>
+    <string name="validate_quarantine_status">Provide Sr. citizen\'s quarantine status</string>
+    <string name="validate_complaint_category">Provide complaint category</string>
+    <string name="validate_emergency_required">Provide details of is any <b>emergency and/or escalation ?</b> </string>
+    <string name="check_internet">Please check internet connection</string>
+    <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
+
+    <string-array name="states_array">
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Madhya Pradesh</item>
+        <item>Uttar Pradesh</item>
+        <item>Rajasthan</item>
+        <item>Maharashtra</item>
+        <item>Gujarat</item>
+        <item>Jharkhand</item>
+    </string-array>
+    <string-array name="medical_problems">
+        <item>@string/no_problems</item>
+        <item>@string/diabetes</item>
+        <item>@string/blood_pressure</item>
+        <!--<item>@string/arthritis</item>-->
+        <item>@string/lung_ailment</item>
+        <!--<item>@string/kidney_and_bladder_pbm</item>-->
+        <item>@string/cancer_major_surgery</item>
+        <!--<item>@string/cataracts</item>-->
+    </string-array>
+    <string-array name="call_status_array">
+        <item>@string/no_response</item>
+        <item>@string/phone_not_picked</item>
+        <item>@string/phone_not_reachable</item>
+        <item>@string/call_disconnected</item>
+        <item>@string/call_connected</item>
+    </string-array>
+    <string-array name="quarantine_status_array">
+        <item>@string/home_quarantine</item>
+        <item>@string/government_quarantine</item>
+        <item>@string/hospitalized</item>
+        <item>@string/not_quarantined</item>
+    </string-array>
+    <string-array name="priority_array">
+        <item>@string/high</item>
+        <item>@string/low</item>
+    </string-array>
+    <string-array name="grievance_array">
+        <item>@string/lack_of_food</item>
+        <item>@string/lack_of_medicine</item>
+        <item>@string/lack_of_banking_service</item>
+        <item>@string/lack_of_utilities</item>
+        <item>@string/lack_of_hygine</item>
+        <item>@string/lack_of_safety</item>
+        <item>@string/lack_of_access_emergency</item>
+        <item>@string/phone_and_service</item>
+        <item>@string/no_problems</item>
+    </string-array>
+    <string-array name="districts_array">
+        <item>Barpeta</item>
+        <item>Baska</item>
+        <item>Darrang</item>
+        <item>Goalpara</item>
+        <item>Dhubri</item>
+        <item>Halakandi</item>
+        <item>Araria</item>
+        <item>Sitamarhi</item>
+        <item>Begusarai</item>
+        <item>Katihar</item>
+        <item>Sheikhpura</item>
+        <item>Damoh</item>
+        <item>Barwani</item>
+        <item>Khandwa</item>
+        <item>Singrauli</item>
+        <item>Vidisha</item>
+        <item>Behraich</item>
+        <item>Balrampur</item>
+        <item>Shrawasti</item>
+        <item>Chitrakoot</item>
+        <item>Sonbhadra</item>
+        <item>Baran</item>
+        <item>Jaiselmer</item>
+        <item>Nandurbar</item>
+        <item>Amravati</item>
+        <item>Gadchiroli</item>
+        <item>Narmada</item>
+        <item>Pakur</item>
+        <item>Sahibganj</item>
+        <item>SurendraNagar</item>
+    </string-array>
+    <string-array name="call_status">
+        <item>No Response</item>
+        <item>Phone not picked</item>
+        <item>Phone not reachable</item>
+        <item>Call Disconnected</item>
+        <item>Call Connected</item>
+    </string-array>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -332,18 +355,4 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
-    <string name="personal_details">PERSONAL DETAILS</string>
-    <string name="health_care_information">HEALTH CARE INFORMATION</string>
-    <string name="emotional_state">Emotional State</string>
-    <string name="happy">Happy</string>
-    <string name="neutral">Neutral</string>
-    <string name="sad">Sad</string>
-
-
-    <string name="changelanguage">Change Laungauge</string>
-    <string name="logout">Logout</string>
-    <string name="contctNumber">Contact Number</string>
-    <string name="email">Email</string>
-    <string name="Txtaddress">Address</string>
-    <string name="permission_denied">Permission denied</string>
 </resources>
