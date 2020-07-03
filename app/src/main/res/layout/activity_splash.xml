@@ -11,11 +11,40 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/image_2" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomlayout"
+        android:layout_centerHorizontal="true"
+        android:text="@string/splashbottomtagline"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/text_14" />
 
+    <RelativeLayout
+        android:id="@+id/bottomlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimen_20">
+
+        <ImageView
+            android:id="@+id/ii"
+            android:layout_width="@dimen/dime100dp"
+            android:layout_height="@dimen/view_size_50"
+
+            android:src="@drawable/ic_nitiaayog" />
+        <ImageView
+            android:layout_toRightOf="@id/ii"
+            android:layout_width="@dimen/dime100dp"
+            android:layout_height="@dimen/view_size_50"
+            android:src="@drawable/ic_pirmal" />
+
+
+    </RelativeLayout>
 </RelativeLayout>
