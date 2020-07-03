@@ -820,7 +820,7 @@
                                 android:background="@drawable/bg_border_selector"
                                 android:contentDescription="@string/cough"
                                 android:padding="@dimen/dimen_7"
-                                android:src="@drawable/bg_shortness_selector" />
+                                android:src="@drawable/bg_sore_throat_selector" />
 
                             <TextView
                                 android:id="@+id/tvSoreThroat"
