@@ -263,21 +263,22 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     private fun setTalkedWith(talkedWith: String) {
-        when (talkedWith) {
-            getString(R.string.sr_citizen) -> {
-                actTalkWith.setText(R.string.sr_citizen)
-                viewModel.setTalkedWith(getString(R.string.sr_citizen))
-                cgMedicalDetails.visibility = View.VISIBLE
-            }
-            getString(R.string.family_member_of_sr_citizen) -> {
-                actTalkWith.setText(R.string.family_member_of_sr_citizen)
-                viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
-                cgMedicalDetails.visibility = View.VISIBLE
-            }
-            getString(R.string.community_member) -> {
-                actTalkWith.setText(R.string.community_member)
-                viewModel.setTalkedWith(getString(R.string.community_member))
-            }
+        if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")) {
+            actTalkWith.setText(R.string.sr_citizen)
+            viewModel.setTalkedWith(getString(R.string.sr_citizen))
+            cgMedicalDetails.visibility = View.VISIBLE
+        } else if ((talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
+            (talkedWith.toLowerCase(Locale.getDefault()) == "f")
+        ) {
+            actTalkWith.setText(R.string.family_member_of_sr_citizen)
+            viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
+            cgMedicalDetails.visibility = View.VISIBLE
+        } else if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c")) {
+            actTalkWith.setText(R.string.community_member)
+            viewModel.setTalkedWith(getString(R.string.community_member))
+            tvAnySrCitizenInHome.visibility = View.VISIBLE
+            btnAnySrCitizenInHomeYes.visibility = View.VISIBLE
+            btnAnySrCitizenInHomeNo.visibility = View.VISIBLE
         }
     }
 

@@ -326,6 +326,13 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     ) {
         viewModelScope.launch {
             io {
+                if (::callData.isInitialized && ((callData.callStatusSubCode != callStatus) ||
+                            (callData.talkedWith != talkedWith))
+                ) {
+                    callData.callStatusSubCode = callStatus
+                    callData.talkedWith = syncData.talkedWith
+                    dataManager.updateCallData(callData)
+                }
                 if (callStatus == "5") {
                     /*if (callStatus == "5") {
                         dataManager.insert(syncData)
@@ -353,19 +360,14 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                         updateData.id = syncData.id
                         updateData.createdDate = syncData.createdDate
 
-                        if (::callData.isInitialized) {
-                            callData.callStatusSubCode = callStatus
-                            callData.talkedWith = syncData.talkedWith
-                            dataManager.updateCallData(callData)
-                        }
-
                         dataManager.updateCallStatus(callStatus)
                         dataManager.insertGrievance(updateData)
                     } else
                         dataManager.updateGrievance(updateData)
                     dataManager.insert(syncData)
-                } else
-                    dataManager.updateCallStatus(callStatus)
+                } //else
+                //dataManager.updateCallStatus(callStatus)
+                //dataManager.updateCallData(callData)
 
                 val data = dataManager.getGrievance(callData.callId!!)
                 data?.run {
@@ -391,6 +393,21 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                             io {
                                 // If synced successfully with server then just remove it from
                                 // SyncSrCitizenGrievance Table
+
+                                if (it.grievanceId.isNotEmpty() && (it.grievanceId != "-1") &&
+                                    ::callData.isInitialized
+                                ) {
+                                    syncData.id = it.grievanceId.toInt()
+                                    val updateData: SrCitizenGrievance = syncData
+
+                                    try {
+                                        dataManager.updateCallStatus(callStatus)
+                                        dataManager.insertGrievance(updateData)
+                                    } catch (e: Exception) {
+                                        println("TAG -- MyData --> ${e.message}")
+                                    }
+                                }
+
                                 dataManager.delete(syncData)
                             }
                         }
