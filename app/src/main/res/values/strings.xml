@@ -240,12 +240,15 @@
     <string name="raised_on">Raised on:</string>
     <string name="less_details"><u>Less details</u></string>
     <string name="more_details"><u>More details</u></string>
-    <string name="error">Error!</string>
-    <string name="govt_quarantine">Government Qurantine</string>
     <string name="blood_pressure">Blood Pressure</string>
     <string name="lung_ailment">Lung Ailment</string>
-    <string name="cancer_major_surgery">Cancer or Major Surgery</string>
+
+
+    <string name="error">Error!</string>
     <string name="no_issues">No issues</string>
+    <string name="cancer_major_surgery">Cancer or Major Surgery</string>
+
+    <string name="govt_quarantine">Government Qurantine</string>
     <string name="no_internet_save_data_in_app">Your internet connection is slow/poor but we will store data inside an app and later on when internet will be available we will sync with server.</string>
     <string name="thanks_go_back">Thanks, go back</string>
     <string name="details_saved_successfully">Senior citizen details is synced up successfully.\n\nThank you, for serving us</string>
@@ -264,6 +267,7 @@
     <string name="validate_emergency_required">Provide details of is any <b>emergency and/or escalation ?</b> </string>
     <string name="check_internet">Please check internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
+
     <string-array name="states_array">
         <item>Assam</item>
         <item>Bihar</item>
