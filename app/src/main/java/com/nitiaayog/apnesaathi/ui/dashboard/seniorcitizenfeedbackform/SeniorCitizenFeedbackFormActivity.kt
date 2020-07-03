@@ -718,12 +718,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // Lack of essential services
         btnLackOfEssentialServicesYes.throttleClick().subscribe {
+            viewModel.isLackOfEssential("Yes")
             selectedLackOfEssentialServices =
                 toggleButtonSelection(
                     btnLackOfEssentialServicesYes, selectedLackOfEssentialServices
                 )
         }.autoDispose(disposables)
         btnLackOfEssentialServicesNo.throttleClick().subscribe {
+            viewModel.isLackOfEssential("No")
             selectedLackOfEssentialServices =
                 toggleButtonSelection(btnLackOfEssentialServicesNo, selectedLackOfEssentialServices)
         }.autoDispose(disposables)
@@ -1446,6 +1448,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         syncData.emergencyServiceRequired = viewModel.isEmergencyEscalation()
         arraySubParams.addProperty(
             ApiConstants.IsEmergencyServicesRequired, syncData.emergencyServiceRequired
+        )
+        syncData.lackOfEssentialServices = viewModel.isLackOfEssential()
+        arraySubParams.addProperty(
+            ApiConstants.LackOfEssentialServices, syncData.lackOfEssentialServices
         )
 
         val jsonArray = JsonArray()
