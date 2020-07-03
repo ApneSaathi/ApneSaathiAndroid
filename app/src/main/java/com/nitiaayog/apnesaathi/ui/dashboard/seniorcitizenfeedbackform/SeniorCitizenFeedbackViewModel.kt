@@ -250,6 +250,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     fun isLackOfEssential(isLackOfEssential: String) {
         this.isLackOfEssential = isLackOfEssential
     }
+
     fun isEmergencyEscalation(): String = emergencyEscalation
 
     fun isLackOfEssential(): String = isLackOfEssential
@@ -399,7 +400,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                             io {
                                 // If synced successfully with server then just remove it from
                                 // SyncSrCitizenGrievance Table
-
                                 if (it.grievanceId.isNotEmpty() && (it.grievanceId != "-1") &&
                                     ::callData.isInitialized
                                 ) {
@@ -454,17 +454,17 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)
-            }.doOnSuccess {
+            }.subscribe({
                 if (it.status == "0")
                     loaderObservable.value = NetworkRequestState.SuccessResponse(
                         ApiProvider.ApiRegisterSeniorCitizen, it
                     )
                 else loaderObservable.value =
                     NetworkRequestState.Error(ApiProvider.ApiRegisterSeniorCitizen)
-            }.doOnError {
+            }, {
                 loaderObservable.value =
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
-            }.subscribe().autoDispose(disposables)
+            }).autoDispose(disposables)
         }
     }
 }
