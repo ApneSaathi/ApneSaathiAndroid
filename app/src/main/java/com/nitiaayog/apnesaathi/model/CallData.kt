@@ -5,14 +5,15 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.nitiaayog.apnesaathi.database.constants.DbConstants
+import com.nitiaayog.apnesaathi.database.constants.Columns
+import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
-@Entity(tableName = DbConstants.Tables.TABLE_CALL_DETAILS)
+@Entity(tableName = Tables.TABLE_CALL_DETAILS)
 class CallData {
 
     @PrimaryKey
-    @ColumnInfo(name = DbConstants.Columns.Id, defaultValue = "-1")
+    @ColumnInfo(name = Columns.Id, defaultValue = "-1")
     @SerializedName(ApiConstants.CallId)
     var callId: Int? = -1
         get() = field ?: -1
@@ -20,7 +21,7 @@ class CallData {
             field = value ?: -1
         }
 
-    @ColumnInfo(name = DbConstants.Columns.VolunteerId, defaultValue = "-1")
+    @ColumnInfo(name = Columns.VolunteerId, defaultValue = "-1")
     @SerializedName(ApiConstants.VolunteerId)
     var volunteerId: Int? = -1
         get() = field ?: -1
@@ -28,7 +29,7 @@ class CallData {
             field = value ?: -1
         }
 
-    @ColumnInfo(name = DbConstants.Columns.Name, defaultValue = "")
+    @ColumnInfo(name = Columns.Name, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenName)
     var srCitizenName: String? = ""
         get() = field ?: ""
@@ -36,7 +37,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.ContactNumber, defaultValue = "")
+    @ColumnInfo(name = Columns.ContactNumber, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenContactNumber)
     var contactNumber: String? = ""
         get() = field ?: ""
@@ -44,7 +45,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.Age, defaultValue = "")
+    @ColumnInfo(name = Columns.Age, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenAge)
     var age: String? = ""
         get() = field ?: ""
@@ -52,7 +53,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.Gender, defaultValue = "")
+    @ColumnInfo(name = Columns.Gender, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenGender)
     var gender: String? = ""
         get() = field ?: ""
@@ -60,7 +61,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.Address, defaultValue = "")
+    @ColumnInfo(name = Columns.Address, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenAddress)
     var address: String? = ""
         get() = field ?: ""
@@ -68,7 +69,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.EmailId, defaultValue = "")
+    @ColumnInfo(name = Columns.EmailId, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenEmailId)
     var emailId: String? = ""
         get() = field ?: ""
@@ -76,7 +77,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.State, defaultValue = "")
+    @ColumnInfo(name = Columns.State, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenState)
     var state: String? = ""
         get() = field ?: ""
@@ -84,7 +85,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.District, defaultValue = "")
+    @ColumnInfo(name = Columns.District, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenDistrict)
     var district: String? = ""
         get() = field ?: ""
@@ -92,7 +93,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.Block, defaultValue = "")
+    @ColumnInfo(name = Columns.Block, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenBlock)
     var block: String? = ""
         get() = field ?: ""
@@ -100,7 +101,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.CallStatus, defaultValue = "")
+    @ColumnInfo(name = Columns.CallStatus, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenCallStatusCode)
     var callStatusCode: String? = ""
         get() = field ?: ""
@@ -108,15 +109,15 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.CallSubStatus, defaultValue = "")
-    @SerializedName(ApiConstants.SrCitizenSubStatusCode)
+    @ColumnInfo(name = Columns.CallSubStatus, defaultValue = "")
+    @SerializedName(ApiConstants.SrCitizenCallStatusSubCode)
     var callStatusSubCode: String? = ""
         get() = field ?: ""
         set(value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.TalkedWith, defaultValue = "")
+    @ColumnInfo(name = Columns.TalkedWith, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenTalkedWith)
     var talkedWith: String? = ""
         get() = field ?: ""
@@ -124,7 +125,7 @@ class CallData {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = DbConstants.Columns.Remark, defaultValue = "")
+    @ColumnInfo(name = Columns.Remark, defaultValue = "")
     @SerializedName(ApiConstants.Remark)
     var remarks: String? = ""
         get() = field ?: ""

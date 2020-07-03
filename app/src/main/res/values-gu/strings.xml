@@ -33,55 +33,7 @@
     <string name="validate_person_district">વ્યક્તિનો જીલ્લા પ્રદાન કરો</string>
     <string name="validate_block_name">બ્લોક નામ પ્રદાન કરો</string>
     <string name="validate_call_connection">કૉલની સ્થિતિ પ્રદાન કરો</string>
-    <string-array name="states_array">
-        <item>આસામ</item>
-        <item>બિહાર</item>
-        <item>મધ્યપ્રદેશ</item>
-        <item>ઉત્તરપ્રદેશ</item>
-        <item>રાજસ્થાન</item>
-        <item>મહારાષ્ટ્ર</item>
-        <item>ગુજરાત</item>
-        <item>ઝારખંડ</item>
-    </string-array>
-    <string-array name="districts_array">
-        <item>બાર્પેટા</item>
-        <item>બાસ્કા</item>
-        <item>દારંગ</item>
-        <item>ગોલપરા</item>
-        <item>ધુબરી</item>
-        <item>હલકંડી</item>
-        <item>અરરિયા</item>
-        <item>સીતામhiી</item>
-        <item>બેગુસરાય</item>
-        <item>કતિહાર</item>
-        <item>શેઠપુરા</item>
-        <item>દામોહ</item>
-        <item>બરવાની</item>
-        <item>ખંડવા</item>
-        <item>સિંગરૌલી</item>
-        <item>વિદિશા</item>
-        <item>બેહરિચ</item>
-        <item>બલરામપુર</item>
-        <item>શ્રાવસ્તિ</item>
-        <item>ચિત્રકૂટ</item>
-        <item>સોનભદ્ર</item>
-        <item>બરાન</item>
-        <item>જેસલમેર</item>
-        <item>નંદુરબાર</item>
-        <item>અમરાવતી</item>
-        <item>ગડચિરોલી</item>
-        <item>નર્મદા</item>
-        <item>પાકુર</item>
-        <item>સાહિબગંજ</item>
-        <item>સુરેન્દ્રનગર</item>
-    </string-array>
-    <string-array name="call_status">
-        <item>કોઈ જવાબ નથી</item>
-        <item>ફોન લેવામાં આવ્યો નથી</item>
-        <item>ફોન પહોંચી શકાય તેમ નથી</item>
-        <item>કૉલ ડિસ્કનેક્ટેડ</item>
-        <item>કૉલ કનેક્ટેડ</item>
-    </string-array>
+
     <string name="permission_detail">પરવાનગી વિગત</string>
     <string name="permission_text">એપ્લિકેશનમાં લક્ષણ છે કે સિનિયર સિટીઝન વિગતો પર માત્ર એક જ ક્લિકથી તમે દૈનિક ધોરણે નિયમિત કૉલ શરૂ કરી શકો છો. તેના માટે અમને ક Cલની પરવાનગીની જરૂર રહેશે.</string>
     <string name="accept">સ્વીકારો</string>
@@ -212,7 +164,6 @@
     <string name="high">ઉચ્ચ</string>
     <string name="low">નીચા</string>
 
-
     <string name="not_picked">ઉઠાવી\nનથી</string>
     <string name="not_reachable">પહોંચી શકાય\nતેવું નથી</string>
     <string name="dis_connected">ડિસ્કનેક્ટ થયેલ</string>
@@ -271,6 +222,61 @@
     <string name="api_connection_error">સર્વર સાથે કનેક્ટ કરવામાં સક્ષમ નથી. કૃપા કરીને ઇન્ટરનેટ કનેક્શન તપાસો</string>
     <string name="error">સમસ્યા!</string>
 
+    <string name="blood_pressure">લોહિનુ દબાણ</string>
+    <string name="lung_ailment">ફેફસાંની બીમારી</string>
+    <string name="cancer_major_surgery">કેન્સર / અન્ય મુખ્ય શસ્ત્રક્રિયા</string>
+    <string name="sr_citizen_follow_up">સિનિયર સિટીઝન પ્રતિસાદ</string>
+    <string name="no_issues">No issues</string>
+
+    <string-array name="states_array">
+        <item>આસામ</item>
+        <item>બિહાર</item>
+        <item>મધ્યપ્રદેશ</item>
+        <item>ઉત્તરપ્રદેશ</item>
+        <item>રાજસ્થાન</item>
+        <item>મહારાષ્ટ્ર</item>
+        <item>ગુજરાત</item>
+        <item>ઝારખંડ</item>
+    </string-array>
+    <string-array name="districts_array">
+        <item>બાર્પેટા</item>
+        <item>બાસ્કા</item>
+        <item>દારંગ</item>
+        <item>ગોલપરા</item>
+        <item>ધુબરી</item>
+        <item>હલકંડી</item>
+        <item>અરરિયા</item>
+        <item>સીતામhiી</item>
+        <item>બેગુસરાય</item>
+        <item>કતિહાર</item>
+        <item>શેઠપુરા</item>
+        <item>દામોહ</item>
+        <item>બરવાની</item>
+        <item>ખંડવા</item>
+        <item>સિંગરૌલી</item>
+        <item>વિદિશા</item>
+        <item>બેહરિચ</item>
+        <item>બલરામપુર</item>
+        <item>શ્રાવસ્તિ</item>
+        <item>ચિત્રકૂટ</item>
+        <item>સોનભદ્ર</item>
+        <item>બરાન</item>
+        <item>જેસલમેર</item>
+        <item>નંદુરબાર</item>
+        <item>અમરાવતી</item>
+        <item>ગડચિરોલી</item>
+        <item>નર્મદા</item>
+        <item>પાકુર</item>
+        <item>સાહિબગંજ</item>
+        <item>સુરેન્દ્રનગર</item>
+    </string-array>
+    <string-array name="call_status">
+        <item>કોઈ જવાબ નથી</item>
+        <item>ફોન લેવામાં આવ્યો નથી</item>
+        <item>ફોન પહોંચી શકાય તેમ નથી</item>
+        <item>કૉલ ડિસ્કનેક્ટેડ</item>
+        <item>કૉલ કનેક્ટેડ</item>
+    </string-array>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>

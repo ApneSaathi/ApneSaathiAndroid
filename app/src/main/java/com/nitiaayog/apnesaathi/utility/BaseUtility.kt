@@ -8,6 +8,9 @@ import android.util.Patterns
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import com.nitiaayog.apnesaathi.R
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object BaseUtility {
 
@@ -19,6 +22,43 @@ object BaseUtility {
         context.startActivity(Intent(Intent.ACTION_VIEW).apply {
             this.data = Uri.parse(url)
         })
+
+    fun dateTimeFormatConversion(date: String, inputFormat: String): Date {
+        try {
+            val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
+            val outputDate: Date? = inputFormatter.parse(date)
+            return outputDate!!
+        } catch (e: Exception) {
+            println("TAG -- MyData -- ServerToLocal --> ${e.message}")
+        }
+        return Date(System.currentTimeMillis())
+    }
+
+    fun format(date: String, inputFormat: String, outputFormat: String): String {
+        val outFormatter: DateFormat = SimpleDateFormat(outputFormat, Locale.ENGLISH)
+        try {
+            val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
+            val outputDate: Date? = inputFormatter.parse(date)
+            val formattedDate = outFormatter.format(outputDate)
+            return formattedDate
+        } catch (e: Exception) {
+            println("TAG -- MyData -- ServerToLocal --> ${e.message}")
+        }
+        return outFormatter.format(Date(System.currentTimeMillis()))
+    }
+
+    /*fun fromDateTime(dateTime: Date?): String? {
+        return if (dateTime != null) {
+            val serverDate: String = DateTimeConverter.serverDateFormatter.format(dateTime)
+            println("TAG -- MyData -- LocalToServer --> $serverDate")
+            serverDate
+        } else {
+            val localDate =
+                DateTimeConverter.localDateFormatter.format(Date(System.currentTimeMillis()))
+            println("TAG -- MyData -- LocalToServer --> $localDate")
+            localDate
+        }
+    }*/
 
     fun showAlertMessage(
         context: Context, @StringRes title: Int, @StringRes message: Int,

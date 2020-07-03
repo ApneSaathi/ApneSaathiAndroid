@@ -36,55 +36,7 @@
     <string name="validate_person_district">्यक्ति का जिला चुनें </string>
     <string name="validate_block_name">ब्लॉक नाम प्रदान करें</string>
     <string name="validate_call_connection">कॉल की स्थिति प्रदान करें</string>
-    <string-array name="states_array">
-        <item>असम</item>
-        <item>बिहार</item>
-        <item>मध्य प्रदेश</item>
-        <item>उत्तर प्रदेश</item>
-        <item>राजस्थान </item>
-        <item>महाराष्ट्र</item>
-        <item>गुजरात</item>
-        <item>झारखंड</item>
-    </string-array>
-    <string-array name="districts_array">
-        <item>बारपेटा</item>
-        <item>बास्का</item>
-        <item>दरांग</item>
-        <item>गोलपाड़ा</item>
-        <item>धुबरी</item>
-        <item>हैलाकांडी</item>
-        <item>अररिया</item>
-        <item>सीतामढ़ी</item>
-        <item>बेगूसराय</item>
-        <item>कटिहार</item>
-        <item>शेखपुरा</item>
-        <item>दमोह</item>
-        <item>बड़वानी</item>
-        <item>खंडवा</item>
-        <item>सिंगरौली</item>
-        <item>विदिशा</item>
-        <item>Behraich</item>
-        <item>बलरामपुर</item>
-        <item>श्रावस्ती</item>
-        <item>चित्रकूट</item>
-        <item>सोनभद्र</item>
-        <item>बरन</item>
-        <item>जैसलमेर</item>
-        <item>नंदुरबार</item>
-        <item>अमरावती</item>
-        <item>गडचिरोली</item>
-        <item>नर्मदा</item>
-        <item>पाकुर</item>
-        <item>साहिबगंज</item>
-        <item>सुरेंद्रनगर</item>
-    </string-array>
-    <string-array name="call_status">
-        <item>कोई जवाब नहीं</item>
-        <item>फोन नहीं उठाया</item>
-        <item>फोन नहीं पहुंच पा रहा है</item>
-        <item>डिस्कनेक्ट किया गया कॉल</item>
-        <item>कनेक्टेड कॉल करें</item>
-    </string-array>
+
     <string name="permission_detail">अनुमति विस्तार</string>
     <string name="permission_text">ऐप में यह सुविधा है कि वरिष्ठ नागरिक विवरण पर केवल एक क्लिक से आप दैनिक आधार पर एक नियमित कॉल शुरू कर सकते हैं। इसके लिए हमें कॉल अनुमति की आवश्यकता होगी.</string>
     <string name="accept">स्वीकार करना</string>
@@ -211,7 +163,6 @@
     <string name="high">उच्च</string>
     <string name="low">कम</string>
 
-
     <string name="not_picked">नहीं\nउठाया</string>
     <string name="not_reachable">पहुँच से\nबाहर</string>
     <string name="dis_connected">डिस्कनेक्ट किया गया</string>
@@ -270,6 +221,62 @@
     <string name="api_connection_error">सर्वर से कनेक्ट करने में सक्षम नहीं है। कृपया अपने इंटरनेट कनेक्शन की जाँच करें</string>
     <string name="error">त्रुटि!</string>
 
+    <string name="personal_details">व्यक्तिगत विवरण</string>
+    <string name="blood_pressure">रक्तचाप</string>
+    <string name="lung_ailment">फेफड़े की बीमारी</string>
+    <string name="cancer_major_surgery">कर्करोग / अन्य प्रमुख सर्जरी</string>
+    <string name="sr_citizen_follow_up">सीनियर सिटीजन फॉलोअप</string>
+    <string name="no_issues">No issues</string>
+
+    <string-array name="states_array">
+        <item>असम</item>
+        <item>बिहार</item>
+        <item>मध्य प्रदेश</item>
+        <item>उत्तर प्रदेश</item>
+        <item>राजस्थान </item>
+        <item>महाराष्ट्र</item>
+        <item>गुजरात</item>
+        <item>झारखंड</item>
+    </string-array>
+    <string-array name="districts_array">
+        <item>बारपेटा</item>
+        <item>बास्का</item>
+        <item>दरांग</item>
+        <item>गोलपाड़ा</item>
+        <item>धुबरी</item>
+        <item>हैलाकांडी</item>
+        <item>अररिया</item>
+        <item>सीतामढ़ी</item>
+        <item>बेगूसराय</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+        <item>दमोह</item>
+        <item>बड़वानी</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
+        <item>Behraich</item>
+        <item>बलरामपुर</item>
+        <item>श्रावस्ती</item>
+        <item>चित्रकूट</item>
+        <item>सोनभद्र</item>
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+        <item>नंदुरबार</item>
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नर्मदा</item>
+        <item>पाकुर</item>
+        <item>साहिबगंज</item>
+        <item>सुरेंद्रनगर</item>
+    </string-array>
+    <string-array name="call_status">
+        <item>कोई जवाब नहीं</item>
+        <item>फोन नहीं उठाया</item>
+        <item>फोन नहीं पहुंच पा रहा है</item>
+        <item>डिस्कनेक्ट किया गया कॉल</item>
+        <item>कनेक्टेड कॉल करें</item>
+    </string-array>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -294,7 +301,6 @@
     <string name="drawerOpen">ड्रॉवर ओपन</string>
     <string name="drawerClose">ड्रॉवर बंद</string>
 
-    <string name="personal_details">व्यक्तिगत विवरण</string>
     <string name="health_care_information">स्वास्थ्य देखभाल की जानकारी</string>
     <string name="emotional_state">उत्तेजित अवस्था</string>
     <string name="happy">प्रसन्न</string>
