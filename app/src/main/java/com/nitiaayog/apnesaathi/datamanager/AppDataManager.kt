@@ -19,7 +19,9 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import io.reactivex.Single
+import java.util.*
 
 class AppDataManager private constructor(
     private val apiRequest: ApiRequest, private val preferences: PreferenceRequest,
@@ -79,7 +81,20 @@ class AppDataManager private constructor(
     override fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getGrievances()
 
-    override fun getGrievance(callId: Int): SrCitizenGrievance? = grievancesDao.getGrievance(callId)
+    override fun getGrievance(callId: Int): SrCitizenGrievance? {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        val date = "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-" +
+                "${calendar.get(Calendar.DAY_OF_MONTH)}"
+        return grievancesDao.getGrievance(
+            callId, BaseUtility.format(
+                "${date}T00:00:00", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss"
+            ), BaseUtility.format(
+                "${date}T23:59:59", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss"
+            )
+        )
+    }
+
     override suspend fun update(grievance: SrCitizenGrievance) =
         grievancesDao.update(
             grievance.id!!, grievance.callId!!, grievance.hasDiabetic!!,
@@ -93,7 +108,7 @@ class AppDataManager private constructor(
             grievance.medicineShortage!!, grievance.accessToBankingIssue!!,
             grievance.utilitySupplyIssue!!, grievance.hygieneIssue!!, grievance.safetyIssue!!,
             grievance.emergencyServiceIssue!!, grievance.phoneAndInternetIssue!!,
-            grievance.emergencyServiceIssue!!, grievance.impRemarkInfo!!
+            grievance.emergencyServiceRequired!!, grievance.impRemarkInfo!!
         )
 
     // => Table : sync_grievances_data

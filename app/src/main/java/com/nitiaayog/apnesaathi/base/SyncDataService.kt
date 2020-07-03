@@ -6,11 +6,11 @@ import android.app.job.JobScheduler
 import android.app.job.JobService
 import android.content.ComponentName
 import android.content.Context
-import android.os.Handler
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.utility.NetworkProvider
 import io.reactivex.disposables.CompositeDisposable
@@ -36,41 +36,32 @@ class SyncDataService : JobService() {
         }
     }
 
-    private val handler: Handler by lazy { Handler() }
     private val disposables: CompositeDisposable by lazy { CompositeDisposable() }
     private val dataManager: DataManager by lazy { AppDataManager.getDataManager(application) }
-
-    override fun onStopJob(params: JobParameters?): Boolean {
-        return true
-    }
 
     override fun onStartJob(params: JobParameters?): Boolean {
         val calendar: Calendar = Calendar.getInstance()
         val dateTime: String = "${calendar.get(Calendar.HOUR_OF_DAY)} :" +
                 " ${calendar.get(Calendar.MINUTE)} ${calendar.get(Calendar.AM_PM)}"
         if (NetworkProvider.isConnected(applicationContext)) {
-            printLogs("\n\nTAG -- MyData --> Internet Available - $dateTime")
+            println("\n\nTAG -- JobService --> Internet Available - $dateTime")
             CoroutineScope(Dispatchers.IO).launch {
-                val apiParams = JsonObject()
-                apiParams.addProperty(ApiConstants.VolunteerId, 1234)
-                dataManager.getCallDetails(apiParams).subscribe(
-                    {
-                        printLogs("\nTAG -- MyData --> Api Success - $dateTime")
-                        disposeAll(params)
-                    },
-                    {
-                        printLogs("\nTAG -- MyData --> Api Error - $dateTime")
-                        disposeAll(params)
-                    }).autoDispose(disposables)
+                val processData = dataManager.getGrievancesToSync()
+                println("\nTAG -- JobService --> ${processData?.size} data will be synced")
+                processData?.run {
+                    if (processData.isEmpty()) stopSelf()
+                    else {
+                        processData.forEach { syncData(it) }
+                    }
+                }
             }
-        } else printLogs("\nTAG -- MyData --> No Internet - $dateTime")
+        } else println("\nTAG -- JobService --> No Internet - $dateTime")
 
         return true
     }
 
-    private fun printLogs(logText: String) {
-        println(logText)
-        //logsGenerator(logText)
+    override fun onStopJob(params: JobParameters?): Boolean {
+        return true
     }
 
     private fun disposeAll(params: JobParameters?) {
@@ -79,5 +70,97 @@ class SyncDataService : JobService() {
             disposables.clear()
         }
         jobFinished(params, true)
+    }
+
+    private fun preparePostParams(grievance: SyncSrCitizenGrievance): JsonObject {
+        val params = JsonObject()
+        params.addProperty(ApiConstants.CallId, grievance.callId!!)
+        params.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, grievance.callStatusSubCode)
+
+        val callStatus = if (grievance.callStatusSubCode == "5") "2" else "1"
+        params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
+
+        params.addProperty(ApiConstants.SrCitizenTalkedWith, grievance.talkedWith)
+
+        if (callStatus == "1") return params
+
+        val arraySubParams = JsonObject()
+        arraySubParams.addProperty(ApiConstants.CallId, grievance.callId)
+        arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+
+        arraySubParams.addProperty(ApiConstants.IsDiabetic, grievance.hasDiabetic)
+        arraySubParams.addProperty(ApiConstants.IsBloodPressure, grievance.hasBloodPressure)
+        arraySubParams.addProperty(ApiConstants.LungAilment, grievance.hasLungAilment)
+        arraySubParams.addProperty(
+            ApiConstants.CancerOrMajorSurgery, grievance.cancerOrMajorSurgery
+        )
+        arraySubParams.addProperty(ApiConstants.OtherAilments, "N")
+
+        arraySubParams.addProperty(ApiConstants.RemarkOnMedicalHistory, "")
+
+        arraySubParams.addProperty(ApiConstants.InfoTalkAbout, grievance.relatedInfoTalkedAbout)
+        arraySubParams.addProperty(
+            ApiConstants.NoticedBehaviouralChange, grievance.behavioralChangesNoticed
+        )
+
+        arraySubParams.addProperty(ApiConstants.HasCovidSymptoms, grievance.hasCovidSymptoms)
+        arraySubParams.addProperty(ApiConstants.HasCough, grievance.hasCough)
+        arraySubParams.addProperty(ApiConstants.HasFever, grievance.hasFever)
+        arraySubParams.addProperty(
+            ApiConstants.HasShortnessOfBreath, grievance.hasShortnessOfBreath
+        )
+        arraySubParams.addProperty(ApiConstants.HasSoreThroat, grievance.hasCovidSymptoms)
+        arraySubParams.addProperty(ApiConstants.HasSoreThroat, grievance.hasSoreThroat)
+        arraySubParams.addProperty(ApiConstants.QuarantineStatus, grievance.quarantineStatus!!)
+
+        arraySubParams.addProperty(ApiConstants.FoodShortage, grievance.foodShortage!!.toInt())
+        arraySubParams.addProperty(
+            ApiConstants.MedicineShortage, grievance.medicineShortage!!.toInt()
+        )
+        arraySubParams.addProperty(
+            ApiConstants.AccessToBankingIssue, grievance.accessToBankingIssue!!.toInt()
+        )
+        arraySubParams.addProperty(
+            ApiConstants.UtilityIssue, grievance.utilitySupplyIssue!!.toInt()
+        )
+        arraySubParams.addProperty(ApiConstants.HygieneIssue, grievance.hygieneIssue!!.toInt())
+        arraySubParams.addProperty(ApiConstants.SafetyIssue, grievance.safetyIssue!!.toInt())
+        arraySubParams.addProperty(
+            ApiConstants.EmergencyServiceIssue, grievance.emergencyServiceIssue!!.toInt()
+        )
+        arraySubParams.addProperty(
+            ApiConstants.PhoneInternetIssue, grievance.phoneAndInternetIssue!!.toInt()
+        )
+
+        arraySubParams.addProperty(
+            ApiConstants.IsEmergencyServicesRequired, grievance.emergencyServiceRequired
+        )
+
+        val jsonArray = JsonArray()
+        jsonArray.add(arraySubParams)
+
+        params.add(ApiConstants.MedicalGrievances, jsonArray)
+
+        return params
+    }
+
+    private suspend fun syncData(grievance: SyncSrCitizenGrievance) {
+        val params = preparePostParams(grievance)
+        val disposable = dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
+            println("TAG -- JobService -- params --> $params")
+        }.subscribe({
+            if (it.status == "0") {
+                CoroutineScope(Dispatchers.IO).launch {
+                    dataManager.update(grievance)
+                    dataManager.delete(grievance)
+                    println("TAG -- JobService -- sync --> success")
+                }
+            }
+        }, {
+            println("TAG -- JobService -- params --> Exception")
+            println("TAG -- JobService -- params --> ${it?.message}")
+        })
+        disposables.add(disposable)
     }
 }

@@ -209,10 +209,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                         tvSrCitizenAddress.text = spanAddress
 
                         setCallStatus(callData.callStatusSubCode!!)
-
-                        /*when (callData.talkedWith) {
-
-                        }*/
+                        setTalkedWith(callData.talkedWith!!)
 
                         if (callData.callStatusSubCode == "5") {
                             grievances?.run {
@@ -234,19 +231,49 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         (dataString.toLowerCase(Locale.getDefault()) == "y") && (element == compareString)
 
     private fun checkComplainData(dataString: String, element: String, compareString: String):
-            Boolean = (dataString == "1") && (element == compareString)
+            Boolean = (dataString == "0") && (element == compareString)
 
     private fun setCallStatus(callStatus: String) = when (callStatus) {
-        "1" -> changeButtonSelection(btnNoResponse)
-        "2" -> changeButtonSelection(btnNotPicked)
-        "3" -> changeButtonSelection(btnNotReachable)
-        "4" -> changeButtonSelection(btnDisConnected)
+        "1" -> {
+            changeButtonSelection(btnNoResponse)
+            viewModel.setCallStatus("1")
+        }
+        "2" -> {
+            changeButtonSelection(btnNotPicked)
+            viewModel.setCallStatus("2")
+        }
+        "3" -> {
+            changeButtonSelection(btnNotReachable)
+            viewModel.setCallStatus("3")
+        }
+        "4" -> {
+            changeButtonSelection(btnDisConnected)
+            viewModel.setCallStatus("4")
+        }
         "5" -> {
             changeButtonSelection(btnConnected)
+            viewModel.setCallStatus("5")
             tvTalkWith.visibility = View.VISIBLE
             actTalkWith.visibility = View.VISIBLE
         }
         else -> {
+        }
+    }
+
+    private fun setTalkedWith(talkedWith: String) {
+        when (talkedWith) {
+            getString(R.string.sr_citizen) -> {
+                actTalkWith.setText(R.string.sr_citizen)
+                viewModel.setTalkedWith(getString(R.string.sr_citizen))
+            }
+            getString(R.string.family_member_of_sr_citizen) -> {
+                actTalkWith.setText(R.string.family_member_of_sr_citizen)
+                viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
+            }
+            getString(R.string.community_member) -> {
+                actTalkWith.setText(R.string.community_member)
+                viewModel.setTalkedWith(getString(R.string.community_member))
+            }
         }
     }
 
@@ -326,16 +353,24 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     private fun setCovidData(grievance: SrCitizenGrievance) {
-        if (grievance.hasCough!!.toLowerCase(Locale.getDefault()) == "y")
+        if (grievance.hasCough!!.toLowerCase(Locale.getDefault()) == "y") {
             changeCovidSymptomsSelection(ivCough, tvCough, ivDoneCough)
-        if (grievance.hasFever!!.toLowerCase(Locale.getDefault()) == "y")
+            viewModel.isCoughSymptoms(true)
+        }
+        if (grievance.hasFever!!.toLowerCase(Locale.getDefault()) == "y") {
             changeCovidSymptomsSelection(ivFever, tvFever, ivDoneFever)
-        if (grievance.hasShortnessOfBreath!!.toLowerCase(Locale.getDefault()) == "y")
+            viewModel.isFeverSymptom(true)
+        }
+        if (grievance.hasShortnessOfBreath!!.toLowerCase(Locale.getDefault()) == "y") {
             changeCovidSymptomsSelection(
                 ivShortnessOfBreath, tvShortnessOfBreath, ivDoneShortnessOfBreath
             )
-        if (grievance.hasSoreThroat!!.toLowerCase(Locale.getDefault()) == "y")
-            changeCovidSymptomsSelection(ivCough, tvSoreThroat, ivDoneSoreThroat)
+            viewModel.isShortBreathSymptoms(true)
+        }
+        if (grievance.hasSoreThroat!!.toLowerCase(Locale.getDefault()) == "y") {
+            changeCovidSymptomsSelection(ivSoreThroat, tvSoreThroat, ivDoneSoreThroat)
+            viewModel.isSoreThroatSymptom(true)
+        }
 
         if ((grievance.hasCough!!.toLowerCase(Locale.getDefault()) == "y") ||
             (grievance.hasFever!!.toLowerCase(Locale.getDefault()) == "y") ||
@@ -447,12 +482,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         val selectedItems = popupCategoryList.filter { it.isSelected }.map {
             viewModel.addComplaint(it.name)
         }
-        if (selectedItems.isNotEmpty() || (grievance.emergencyServiceIssue!! == "1") ||
+        if (selectedItems.isNotEmpty() || (grievance.emergencyServiceIssue!! == "0") ||
             (grievance.emergencyServiceRequired!! == "Y")
         ) {
-            cgMedicalDetails.visibility = View.VISIBLE
+            actOtherMedicalProblems.setText(getString(R.string.non_covid_symptoms))
             viewModel.setOtherMedicalProblem(getString(R.string.non_covid_symptoms))
             viewModel.isCovideSymptoms(false)
+
+            cgMedicalDetails.visibility = View.VISIBLE
 
             if (cgComplaintDetails.visibility == View.GONE)
                 cgComplaintDetails.visibility = View.VISIBLE
@@ -1173,7 +1210,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (callStatus == "1") return params
 
         val arraySubParams = JsonObject()
-        arraySubParams.addProperty(ApiConstants.CallId, callId)
+        arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
         arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
 
         var dataList = viewModel.getMedicalHistory()
@@ -1205,8 +1242,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             syncData.cancerOrMajorSurgery =
                 if (dataList.any { it == getString(R.string.cancer_major_surgery) }) "Y" else "N"
             arraySubParams.addProperty(
-                ApiConstants.CancerOrMajorSurgery,
-                syncData.cancerOrMajorSurgery
+                ApiConstants.CancerOrMajorSurgery, syncData.cancerOrMajorSurgery
             )
         }
 
@@ -1225,7 +1261,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             ApiConstants.NoticedBehaviouralChange, syncData.behavioralChangesNoticed
         )
 
-        syncData.hasCovidSymptoms = if (viewModel.isCoughSymptoms()) "Y" else "N"
+        syncData.hasCovidSymptoms = if (viewModel.isCovideSymptoms()) "Y" else "N"
         arraySubParams.addProperty(ApiConstants.HasCovidSymptoms, syncData.hasCovidSymptoms)
 
         syncData.hasCough = if (viewModel.isCoughSymptoms()) "Y" else "N"
@@ -1237,16 +1273,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         syncData.hasShortnessOfBreath = if (viewModel.isShortBreathSymptoms()) "Y" else "N"
         arraySubParams.addProperty(ApiConstants.HasShortnessOfBreath, syncData.hasShortnessOfBreath)
 
-        syncData.hasCovidSymptoms = if (viewModel.isSoreThroatSymptom()) "Y" else "N"
-        arraySubParams.addProperty(ApiConstants.HasSoreThroat, syncData.hasCovidSymptoms)
-
         syncData.hasSoreThroat = if (viewModel.isSoreThroatSymptom()) "Y" else "N"
         arraySubParams.addProperty(ApiConstants.HasSoreThroat, syncData.hasSoreThroat)
 
         syncData.quarantineStatus = viewModel.getQuarantineStatus()
-        arraySubParams.addProperty(
-            ApiConstants.QuarantineStatus, syncData.quarantineStatus!!.toInt()
-        )
+        arraySubParams.addProperty(ApiConstants.QuarantineStatus, syncData.quarantineStatus!!)
 
         dataList = viewModel.getComplaints()
         if (dataList.any { it == getString(R.string.no_problems) }) {
@@ -1284,8 +1315,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             syncData.accessToBankingIssue =
                 if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "0" else "4"
             arraySubParams.addProperty(
-                ApiConstants.AccessToBankingIssue,
-                syncData.accessToBankingIssue!!.toInt()
+                ApiConstants.AccessToBankingIssue, syncData.accessToBankingIssue!!.toInt()
             )
 
             syncData.utilitySupplyIssue =
@@ -1307,15 +1337,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             syncData.emergencyServiceIssue =
                 if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "0" else "4"
             arraySubParams.addProperty(
-                ApiConstants.EmergencyServiceIssue,
-                syncData.emergencyServiceIssue!!.toInt()
+                ApiConstants.EmergencyServiceIssue, syncData.emergencyServiceIssue!!.toInt()
             )
 
             syncData.phoneAndInternetIssue =
                 if (dataList.any { it == getString(R.string.phone_and_service) }) "0" else "4"
             arraySubParams.addProperty(
-                ApiConstants.PhoneInternetIssue,
-                syncData.phoneAndInternetIssue!!.toInt()
+                ApiConstants.PhoneInternetIssue, syncData.phoneAndInternetIssue!!.toInt()
             )
         }
         syncData.emergencyServiceRequired = viewModel.isEmergencyEscalation()

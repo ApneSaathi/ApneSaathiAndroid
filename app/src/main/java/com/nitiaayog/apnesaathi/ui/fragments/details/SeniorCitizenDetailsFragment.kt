@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
-    SeniorCitizenDateAdapter.OnItemClickListener, SeniorCitizenEditFragment.OnItemClickListener {
+    SeniorCitizenDateAdapter.OnItemClickListener {
 
     private lateinit var adapter: SeniorCitizenDateAdapter
     lateinit var callData: CallData
@@ -148,7 +148,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
-    override fun onSaveButton(status: String) {
+    /*override fun onSaveButton(status: String) {
         val index = viewModel.getDataList().size - 1
         viewModel.getDataList().get(index).status = status
         if (status == "Attended") {
@@ -157,7 +157,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_edit.visibility = View.GONE
         }
 
-    }
+    }*/
 
     private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
         when (it) {
@@ -176,8 +176,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
     })
 
-    override fun onCancelButton() {
-    }
+   /* override fun onCancelButton() {
+    }*/
 
     fun setSelectedUser(callData: CallData) {
         this.callData = callData

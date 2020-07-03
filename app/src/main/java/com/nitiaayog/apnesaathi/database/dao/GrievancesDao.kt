@@ -16,8 +16,8 @@ interface GrievancesDao {
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} LIMIT :dataCount")
     fun getFewGrievances(dataCount: Int = 3): LiveData<MutableList<SrCitizenGrievance>>
 
-    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.CallId}=:callId ORDER BY ${Columns.CreatedDate} DESC")
-    fun getGrievance(callId: Int): SrCitizenGrievance?
+    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE (${Columns.CallId}=:callId) AND (${Columns.CreatedDate} BETWEEN :start AND :end) ORDER BY ${Columns.CreatedDate} DESC LIMIT 1")
+    fun getGrievance(callId: Int, start: String, end: String): SrCitizenGrievance?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(grievances: List<SrCitizenGrievance>)

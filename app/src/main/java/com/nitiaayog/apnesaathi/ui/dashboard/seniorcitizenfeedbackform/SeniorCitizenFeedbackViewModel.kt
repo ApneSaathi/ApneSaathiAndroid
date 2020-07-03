@@ -36,8 +36,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     private var state: String = ""
     private var emergencyEscalation: String = "" // isemergencyservicerequired
 
-    //private var emergencyServiceRequired: Boolean = false
-
     private var covideSymptoms: Boolean = false
     private var symptomsCough: Boolean = false
     private var symptomsFever: Boolean = false
@@ -166,12 +164,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     }
 
     fun resetTalkedAbout() = talkedAbout.clear()
-
-    /*fun isEmergencyServiceRequired(): Boolean = emergencyServiceRequired
-
-    fun isEmergencyServiceRequired(emergencyServiceRequired: Boolean) {
-        this.emergencyServiceRequired = emergencyServiceRequired
-    }*/
 
     fun isCovideSymptoms(): Boolean = covideSymptoms
 
@@ -327,28 +319,29 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                 val mSyncData = dataManager.getGrievancesToSync()
                 println("TAG -- MyData --> ${mSyncData?.size}")
             }
-            checkNetworkAvailability(context)
-            /* *
+            if (checkNetworkAvailability(context)) {
+                /* *
              * we can add one more field in SeCitizenGrievances class and that will be
              * our new primary key
              * */
-            dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
-            }.doOnSuccess {
-                if (it.status == "0") {
-                    viewModelScope.launch {
-                        io {
-                            // If sunced successfully with server then just remove it from
-                            // SyncSrCitizenGrievance Table
-                            dataManager.delete(syncData)
+                dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
+                    loaderObservable.value = NetworkRequestState.LoadingData
+                }.doOnSuccess {
+                    if (it.status == "0") {
+                        viewModelScope.launch {
+                            io {
+                                // If sunced successfully with server then just remove it from
+                                // SyncSrCitizenGrievance Table
+                                dataManager.delete(syncData)
+                            }
                         }
-                    }
-                    loaderObservable.value = NetworkRequestState.SuccessResponse(it)
-                } else loaderObservable.value = NetworkRequestState.Error
-            }.doOnError {
-                loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
-            }.subscribe().autoDispose(disposables)
+                        loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                    } else loaderObservable.value = NetworkRequestState.Error
+                }.doOnError {
+                    loaderObservable.value =
+                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                }.subscribe().autoDispose(disposables)
+            }
         }
     }
 

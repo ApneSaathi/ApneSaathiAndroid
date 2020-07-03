@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.nitiaayog.apnesaathi.base.SyncDataService
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.utility.BaseUtility
+import java.util.*
 
 class ApneSaathiApplication : Application() {
 
@@ -29,6 +31,8 @@ class ApneSaathiApplication : Application() {
         getScreenSize(this)
 
         instance = this
+
+        BaseUtility.format("2020-7-3", "yyyy-MM-dd", "yyyy-MM-dd")
     }
 
     private fun getScreenSize(context: Context) {
