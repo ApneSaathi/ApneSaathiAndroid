@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.lifecycle.Observer
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
@@ -36,6 +37,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         observeStates()
         initAutoCompleteTextView()
         initClicks()
+        initTextWatcher()
     }
 
     override fun provideViewModel(): RegisterSeniorCitizenViewModel =
@@ -63,6 +65,14 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
         actGender.setOnItemClickListener { _, _, position, _ ->
             selectedGender = genderList[position]
+            viewModel.setGender(
+                when (selectedGender) {
+                    getString(R.string.gender_male) -> "M"
+                    getString(R.string.gender_female) -> "F"
+                    getString(R.string.gender_others) -> "O"
+                    else -> ""
+                }
+            )
         }
 
         val stateList = resources.getStringArray(R.array.states_array)
@@ -75,6 +85,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
         actState.setOnItemClickListener { _, _, position, _ ->
             selectedState = stateList[position]
+            viewModel.setState(selectedState)
         }
 
         val districtsList = resources.getStringArray(R.array.districts_array)
@@ -88,6 +99,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
         actDistrict.setOnItemClickListener { _, _, position, _ ->
             selectedDistrict = districtsList[position]
+            viewModel.setDistrict(selectedDistrict)
         }
     }
 
@@ -95,16 +107,19 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         actGender.throttleClick().subscribe {
             actGender.showDropDown()
             updateDropDownIndicator(actGender, R.drawable.ic_arrow_up)
+            if (tvGenderError.visibility == View.VISIBLE) tvGenderError.visibility = View.GONE
         }.autoDispose(disposables)
 
         actState.throttleClick().subscribe {
             actState.showDropDown()
             updateDropDownIndicator(actState, R.drawable.ic_arrow_up)
+            if (tvStateError.visibility == View.VISIBLE) tvStateError.visibility = View.GONE
         }.autoDispose(disposables)
 
         actDistrict.throttleClick().subscribe {
             actDistrict.showDropDown()
             updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
+            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
         }.autoDispose(disposables)
 
         tvRegister.throttleClick().subscribe {
@@ -130,7 +145,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
             tvContactNumberError.setText(R.string.validate_contact_number)
             tvContactNumberError.visibility = View.VISIBLE
             return false
-        } else if (!BaseUtility.validatePhoneNumber(etContactNumber.text.toString())) {
+        } else if (!BaseUtility.validatePhoneNumber(etContactNumber.text.toString()) ||
+            (etContactNumber.text.length < 7)
+        ) {
             tvContactNumberError.setText(R.string.valid_contact_number)
             tvContactNumberError.visibility = View.VISIBLE
             return false
@@ -145,12 +162,21 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
             return false
         } else {
             tvNameError.visibility = View.GONE
+            viewModel.setName(etName.text.toString())
+
             tvAgeError.visibility = View.GONE
+            viewModel.setAge(etAge.text.toString())
+
             tvGenderError.visibility = View.GONE
+
             tvContactNumberError.visibility = View.GONE
+            viewModel.setContactNumber(etContactNumber.text.toString())
+
             tvStateError.visibility = View.GONE
             tvDistrictError.visibility = View.GONE
+
             tvAddressError.visibility = View.GONE
+            viewModel.setAddress(etAddress.text.toString())
         }
         return true
     }
@@ -186,7 +212,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                 is NetworkRequestState.NetworkNotAvailable ->
                     BaseUtility.showAlertMessage(context!!, R.string.alert, R.string.check_internet)
                 is NetworkRequestState.LoadingData -> progressDialog.show()
-                is NetworkRequestState.ErrorResponse -> {
+                is NetworkRequestState.ErrorResponse, is NetworkRequestState.Error -> {
                     progressDialog.dismiss()
                     BaseUtility.showAlertMessage(
                         context!!, R.string.alert, R.string.can_not_connect_to_server
@@ -201,5 +227,25 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                 }
             }
         })
+    }
+
+    private fun initTextWatcher() {
+        etName.textChanges().subscribe {
+            it?.run { if (this.toString().isNotEmpty()) tvNameError.visibility = View.GONE }
+        }.autoDispose(disposables)
+
+        etAge.textChanges().subscribe {
+            it?.run { if (this.toString().isNotEmpty()) tvAgeError.visibility = View.GONE }
+        }.autoDispose(disposables)
+
+        etContactNumber.textChanges().subscribe {
+            it?.run {
+                if (this.toString().isNotEmpty()) tvContactNumberError.visibility = View.GONE
+            }
+        }.autoDispose(disposables)
+
+        etAddress.textChanges().subscribe {
+            it?.run { if (this.toString().isNotEmpty()) tvAddressError.visibility = View.GONE }
+        }.autoDispose(disposables)
     }
 }

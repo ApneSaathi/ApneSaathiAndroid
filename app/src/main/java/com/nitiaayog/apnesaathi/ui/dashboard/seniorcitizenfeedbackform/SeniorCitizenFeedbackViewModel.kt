@@ -443,7 +443,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     fun registerNewSeniorCitizen(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, 1001/*dataManager.getUserId().toInt()*/)
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
             params.addProperty(ApiConstants.SrCitizenName, name)
             params.addProperty(ApiConstants.SrCitizenAge, age.toInt())
             params.addProperty(ApiConstants.SrCitizenGender, gender)

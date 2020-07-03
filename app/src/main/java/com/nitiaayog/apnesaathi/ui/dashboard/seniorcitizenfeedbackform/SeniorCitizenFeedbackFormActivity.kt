@@ -1304,8 +1304,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.CallId, callId.toInt())
         syncData.callId = callId.toInt()
 
-        params.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
-        syncData.volunteerId = "1234"/*dataManager.getUserId()*/
+        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+        syncData.volunteerId = dataManager.getUserId()
 
         params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
         syncData.callStatusSubCode = viewModel.getCallStatus()
@@ -1320,7 +1320,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
-        arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+        arraySubParams.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
 
         var dataList = viewModel.getMedicalHistory()
         if (dataList.any { it == getString(R.string.no_problems) }) {

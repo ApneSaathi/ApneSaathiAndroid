@@ -87,7 +87,7 @@ class SyncDataService : JobService() {
     private fun preparePostParams(grievance: SyncSrCitizenGrievance): JsonObject {
         val params = JsonObject()
         params.addProperty(ApiConstants.CallId, grievance.callId!!)
-        params.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
         params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, grievance.callStatusSubCode)
 
         val callStatus = if (grievance.callStatusSubCode == "5") "2" else "1"
@@ -99,7 +99,7 @@ class SyncDataService : JobService() {
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, grievance.callId)
-        arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+        arraySubParams.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
 
         arraySubParams.addProperty(ApiConstants.IsDiabetic, grievance.hasDiabetic)
         arraySubParams.addProperty(ApiConstants.IsBloodPressure, grievance.hasBloodPressure)
@@ -205,7 +205,7 @@ class SyncDataService : JobService() {
 
     private fun getFetchData() {
         val params = JsonObject()
-        params.addProperty(ApiConstants.VolunteerId, 1001/*dataManager.getUserId()*/)
+        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
         dataManager.getCallDetails(params).doOnSubscribe {
             println("\n\n$TAG -- Start fetching data")
         }.subscribe({
