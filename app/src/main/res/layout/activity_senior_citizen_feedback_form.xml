@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:elevation="0dp"
-            android:paddingBottom="@dimen/view_size_48"
+            android:paddingBottom="@dimen/view_size_56"
             android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -448,6 +448,7 @@
                     android:layout_marginTop="@dimen/dimen_2"
                     android:layout_marginEnd="@dimen/dimen_15"
                     android:background="@drawable/bg_rectangle_border_form"
+                    android:gravity="center_vertical"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMedicalHistorySrCitizen">
@@ -457,22 +458,11 @@
                         layout="@layout/include_recyclerview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="0dp"
                         android:paddingEnd="@dimen/dimen_5"
                         android:visibility="gone" />
-
-                    <!--<androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvMedicalHistorySrCitizen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:clipToPadding="false"
-                        android:orientation="horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="@dimen/dimen_5"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
                 </LinearLayout>
 
@@ -830,7 +820,7 @@
                                 android:background="@drawable/bg_border_selector"
                                 android:contentDescription="@string/cough"
                                 android:padding="@dimen/dimen_7"
-                                android:src="@drawable/bg_shortness_selector" />
+                                android:src="@drawable/bg_sore_throat_selector" />
 
                             <TextView
                                 android:id="@+id/tvSoreThroat"
@@ -993,22 +983,11 @@
                         layout="@layout/include_recyclerview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="0dp"
                         android:paddingEnd="@dimen/dimen_5"
                         android:visibility="gone" />
-
-                    <!--<androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCategory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:clipToPadding="false"
-                        android:orientation="horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="@dimen/dimen_5"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
                 </FrameLayout>
 
@@ -1063,7 +1042,7 @@
                     app:layout_constraintTop_toBottomOf="@id/etDescription" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnEmergencyYes"
+                    android:id="@+id/btnEmergencyEscalationYes"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1079,7 +1058,7 @@
                     app:strokeColor="@color/color_dark_grey_txt" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnEmergencyNo"
+                    android:id="@+id/btnEmergencyEscalationNo"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1090,7 +1069,7 @@
                     android:textColor="@color/gray_background"
                     android:textIsSelectable="false"
                     app:cornerRadius="@dimen/dimen_3"
-                    app:layout_constraintStart_toEndOf="@id/btnEmergencyYes"
+                    app:layout_constraintStart_toEndOf="@id/btnEmergencyEscalationYes"
                     app:layout_constraintTop_toBottomOf="@id/tvEmergencyEscalation"
                     app:strokeColor="@color/color_dark_grey_txt" />
 
@@ -1109,7 +1088,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btnEmergencyYes" />
+                    app:layout_constraintTop_toBottomOf="@id/btnEmergencyEscalationYes" />
 
                 <TextView
                     android:id="@+id/tvOtherDescription"
@@ -1160,7 +1139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,flCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyYes,btnEmergencyNo" />
+                    app:constraint_referenced_ids="tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,flCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyEscalationYes,btnEmergencyEscalationNo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

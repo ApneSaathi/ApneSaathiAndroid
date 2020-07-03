@@ -31,7 +31,6 @@ object ApiConstants {
     const val AvailableOptions: String = "available_options"
 
     const val MedicalGrievances: String = "medicalandgreivance"
-    const val CallsList: String = "volunteercallList"
     const val CallId: String = "callid"
     const val SrCitizenName: String = "namesrcitizen"
     const val SrCitizenContactNumber: String = "phonenosrcitizen"
@@ -43,7 +42,7 @@ object ApiConstants {
     const val SrCitizenDistrict: String = "districtsrcitizen"
     const val SrCitizenBlock: String = "blocknamesrcitizen"
     const val SrCitizenCallStatusCode: String = "callstatusCode"
-    const val SrCitizenSubStatusCode: String = "callstatussubCode"
+    const val SrCitizenCallStatusSubCode: String = "callstatussubCode"
     const val SrCitizenTalkedWith: String = "talkedwith"
     const val Remark: String = "remarks"
 
@@ -62,6 +61,7 @@ object ApiConstants {
     const val HasShortnessOfBreath: String = "has_shortnes_of_breath"
     const val HasSoreThroat: String = "has_sorethroat"
     const val QuarantineStatus: String = "quarantinestatus"
+    const val LackOfEssentialServices: String = "lackofessentialservices"
     const val FoodShortage: String = "foodshortage"
     const val MedicineShortage: String = "medicineshortage"
     const val AccessToBankingIssue: String = "aceesstobankingissue"

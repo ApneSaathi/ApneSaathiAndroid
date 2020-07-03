@@ -2,6 +2,7 @@ package com.nitiaayog.apnesaathi.ui.fragments.calls
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
@@ -48,10 +49,18 @@ class AllCallsFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClick
     }
 
     override fun onMoreInfoClick(position: Int, callData: CallData) {
-        val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(callData)
-        addFragment(
-            R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
-        )
+        callData.callId?.let { viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner) }
+        callData.callId?.let { it ->
+            viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
+                val fragment = SeniorCitizenDetailsFragment()
+                fragment.setSelectedUser(
+                    callData,
+                    it
+                )
+                addFragment(
+                    R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                )
+            })
+        }
     }
 }

@@ -11,6 +11,7 @@ import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -33,34 +34,34 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
 
     fun callLogin(mContext: Context, phone: String) {
 
-        if (checkNetworkAvailability(mContext)) {
+        if (checkNetworkAvailability(mContext,"")) {
             val params = JsonObject()
             params.addProperty(ApiConstants.phoneNo, phone)
 
 
             dataManager.loginUser(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
+                loaderObservable.value = NetworkRequestState.LoadingData(ApiProvider.ApiLoginUser)
             }.subscribe({
                 try {
                     if (it.getStatusCode() == "0") {
-                        loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                        loaderObservable.value = NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser,it)
                         viewModelScope.launch {
                             io {
 
                                 val data = it.getStatusCode()
 
                             }
-                            loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                            loaderObservable.value = NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser,it)
 
                         }
                     } else loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_ERROR)
+                        NetworkRequestState.ErrorResponse(ApiProvider.ApiLoginUser)
                 } catch (e: Exception) {
                     println(e.printStackTrace())
                 }
             }, {
                 loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiLoginUser, it)
 
             }).autoDispose(disposables)
         }
