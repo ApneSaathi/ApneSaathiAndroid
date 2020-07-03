@@ -47,7 +47,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun bindview(view: View) {
-
         view.EditImageView.setOnClickListener {
             showGetImageDialog()
         }

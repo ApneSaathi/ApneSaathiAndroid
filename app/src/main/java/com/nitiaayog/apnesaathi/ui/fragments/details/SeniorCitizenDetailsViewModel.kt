@@ -33,20 +33,24 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
             }
         }
     }
+
     private fun getMonthFromDate(date: String?): String {
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val output = DateTimeFormatter.ofPattern("MMM")
         val fa = input.parse(date)
-        return  output.format(fa)
+        return output.format(fa)
     }
+
     private fun getDayFromDate(date: String?): String {
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val output = DateTimeFormatter.ofPattern("dd")
         val fa = input.parse(date)
-        return  output.format(fa)
+        return output.format(fa)
     }
+
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
-//    fun getSeniorCitizenDetails(context: Context) {
+
+    //    fun getSeniorCitizenDetails(context: Context) {
 //        if (checkNetworkAvailability(context)) {
 //            val params = JsonObject()
 //            params.addProperty("callid", 11)
@@ -59,6 +63,8 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
 //                }.subscribe().autoDispose(disposables)
 //        }
 //    }
+    fun getUniqueGrievanceList(id: Int): LiveData<MutableList<SrCitizenGrievance>> =
+        dataManager.getAllUniqueGrievances(id)
 
     fun getDataList(): MutableLiveData<List<DateItem>> {
         return dataList
@@ -67,8 +73,8 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     fun setCurrentDate() {
         dateList.clear()
         val date = Calendar.getInstance().time
-        val formatterMonth = SimpleDateFormat("MMM",Locale.ROOT) //or use getDateInstance()
-        val formatterDay = SimpleDateFormat("dd",Locale.ROOT) //or use getDateInstance()
+        val formatterMonth = SimpleDateFormat("MMM", Locale.ROOT) //or use getDateInstance()
+        val formatterDay = SimpleDateFormat("dd", Locale.ROOT) //or use getDateInstance()
         val formattedMonth = formatterMonth.format(date)
         val formattedDay = formatterDay.format(date)
         val dateItem = DateItem(
