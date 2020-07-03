@@ -18,6 +18,7 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         context = applicationContext
         if (dataManager.getSelectedLanguage().isEmpty()) {
             radiobtnEnglish.isChecked = true
+            dataManager.setSelectedLanguage(LanguageUtils.LANGUAGE_ENGLISH)
         } else {
             if (dataManager.getSelectedLanguage().equals(LanguageUtils.LANGUAGE_ENGLISH)) {
                 radiobtnEnglish.isChecked = true
@@ -64,5 +65,4 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         LanguageSelectionModel.getInstance(dataManager)
 
     override fun provideLayoutResource(): Int = R.layout.activity_launguage_selection
-
 }

@@ -2,6 +2,9 @@ package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
 object ApiConstants {
 
+    const val STATUS_EXCEPTION: Int = -1
+    const val STATUS_ERROR: Int = 0
+
     const val StatusCode: String = "statusCode"
     const val UserId: String = "user_id"
     const val UserName: String = "user_name"

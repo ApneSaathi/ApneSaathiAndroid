@@ -16,6 +16,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
@@ -52,7 +53,7 @@ class AppDataManager private constructor(
     }
 
     // ApiRequests
-    override fun loginUser(phoneNumber: JsonObject): Single<LoginRepo> =
+    override fun loginUser(phoneNumber: JsonObject): Single<Login_Response> =
         apiRequest.loginUser(phoneNumber)
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
@@ -114,8 +115,7 @@ class AppDataManager private constructor(
     // => Table : sync_grievances_data
     override fun getGrievancesToSync(): List<SyncSrCitizenGrievance>? =
         syncGrievancesDao.getGrievances()
-    override fun getAllGrievances(): LiveData<MutableList<SrCitizenGrievance>> =
-        grievancesDao.getAllGrievances()
+
     override fun getAllUniqueGrievances(callId:Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 

@@ -24,13 +24,6 @@ open class SrCitizenGrievance {
         set(@NonNull value) {
             field = value ?: -1
         }
-    @ColumnInfo(name = DbConstants.Columns.callId, defaultValue = "-1")
-    @SerializedName(ApiConstants.CallId)
-    var callId: Int? = -1
-        get() = field ?: -1
-        set(value) {
-            field = value ?: -1
-        }
 
     @ColumnInfo(name = Columns.CallId, defaultValue = "-1")
     @SerializedName(ApiConstants.CallId)
