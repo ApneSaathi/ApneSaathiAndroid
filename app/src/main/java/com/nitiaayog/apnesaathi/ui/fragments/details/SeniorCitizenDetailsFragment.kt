@@ -29,7 +29,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     SeniorCitizenDateAdapter.OnItemClickListener {
 
     private var adapter: SeniorCitizenDateAdapter? = null
-    lateinit var callData: CallData
+    var callData: CallData? = null
     lateinit var grievancesList: MutableList<SrCitizenGrievance>
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
         getViewModel {
@@ -51,7 +51,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun bindData() {
-        if (callData.gender == "M") {
+        if (callData?.gender == "M") {
             img_user_icon.background =
                 activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_male_user) }
         } else {
@@ -59,7 +59,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
                 activity?.let { ContextCompat.getDrawable(it, R.drawable.ic_female_user) }
         }
 
-        callData.let {
+        callData?.let {
             val address = getString(R.string.address).plus(" : ")
             val dataString = address.plus(it.block).plus(", ").plus(it.district)
                 .plus(", ").plus(it.state)
@@ -69,6 +69,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
             txt_user_name.text = it.srCitizenName.plus("(").plus(it.age).plus(" Yrs)")
             txt_user_phone_number.text = it.contactNumber
+
             txt_address.text = spanAddress
         }
         viewModel.getDataList().observe(viewLifecycleOwner, Observer {
@@ -113,7 +114,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_medical_history.text = medicalHistory
         }
         txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
-        txt_call_response.text = callData.talkedWith
+        txt_call_response.text = callData?.talkedWith
 
         txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout?:"--"
 
@@ -275,7 +276,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         img_call_button.setOnClickListener { prepareToCallPerson() }
         txt_edit.setOnClickListener {
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-            intent.putExtra(CALL_ID, callData.callId)
+            intent.putExtra(CALL_ID, callData?.callId)
             startActivity(intent)
         }
     }
@@ -308,7 +309,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     override fun onCallPermissionGranted() {
-        placeCall(callData, R.id.fragment_edit_container)
+        callData?.let { placeCall(it, R.id.fragment_edit_container) }
     }
 
     override fun onCallPermissionDenied() =
