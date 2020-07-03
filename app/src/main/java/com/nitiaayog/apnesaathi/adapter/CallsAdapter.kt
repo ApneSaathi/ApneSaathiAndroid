@@ -61,7 +61,9 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
             tvName.text = callData.srCitizenName
             tvAddress.text = callData.block.plus(", ").plus(callData.district).plus(", ")
                 .plus(callData.state)
-            civGender.setImageResource(R.drawable.ic_male_user)
+            civGender.setImageResource(
+                if (callData.gender == "M") R.drawable.ic_male_user else R.drawable.ic_female_user
+            )
         }
 
         override fun onClick(view: View) {

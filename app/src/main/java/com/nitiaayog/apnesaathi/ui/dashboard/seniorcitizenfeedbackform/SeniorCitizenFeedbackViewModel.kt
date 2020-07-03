@@ -387,7 +387,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                 dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
                     loaderObservable.value =
                         NetworkRequestState.LoadingData(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
-                }.doOnSuccess {
+                }.subscribe({
                     if (it.status == "0") {
                         viewModelScope.launch {
                             io {
@@ -416,12 +416,16 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                         )
                     } else loaderObservable.value =
                         NetworkRequestState.Error(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
-                }.doOnError {
-                    loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(
-                            ApiProvider.ApiSaveSeniorCitizenFeedbackForm, it
-                        )
-                }.subscribe().autoDispose(disposables)
+                }, {
+                    try {
+                        loaderObservable.value =
+                            NetworkRequestState.ErrorResponse(
+                                ApiProvider.ApiSaveSeniorCitizenFeedbackForm
+                            )
+                    } catch (e: Exception) {
+                        println("TAG -- MyData --> ${e.message}")
+                    }
+                }).autoDispose(disposables)
             }
         }
     }
@@ -429,7 +433,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     fun registerNewSeniorCitizen(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.VolunteerId, 1001/*dataManager.getUserId().toInt()*/)
             params.addProperty(ApiConstants.SrCitizenName, name)
             params.addProperty(ApiConstants.SrCitizenAge, age.toInt())
             params.addProperty(ApiConstants.SrCitizenGender, gender)

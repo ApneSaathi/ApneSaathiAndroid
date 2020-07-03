@@ -49,7 +49,6 @@ import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.android.synthetic.main.include_recyclerview.view.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import kotlinx.android.synthetic.main.progress_dialog_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -198,6 +197,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     val grievances = viewModel.getGrievance(callId)
                     syncData.id = grievances?.id
                     ui {
+                        civGender.setImageResource(
+                            if (callData.gender == "M") R.drawable.ic_male_user
+                            else R.drawable.ic_female_user
+                        )
+
                         val address = getString(R.string.address).plus(" : ")
                         val dataString = address.plus(callData.block).plus(", ")
                             .plus(callData.district).plus(", ").plus(callData.state)
@@ -1152,7 +1156,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             }
             is NetworkRequestState.LoadingData -> progressDialog.show()
             is NetworkRequestState.ErrorResponse -> {
-                progressBar.visibility = View.GONE
+                progressDialog.dismiss()
                 BaseUtility.showAlertMessage(
                     this, R.string.alert, R.string.can_not_connect_to_server
                 )
@@ -1314,7 +1318,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
-        arraySubParams.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+        arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
 
         var dataList = viewModel.getMedicalHistory()
         if (dataList.any { it == getString(R.string.no_problems) }) {
