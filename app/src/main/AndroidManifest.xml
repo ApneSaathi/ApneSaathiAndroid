@@ -8,6 +8,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".ApneSaathiApplication"
         android:allowBackup="false"
@@ -15,8 +19,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.WithActivityTransition"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme.WithActivityTransition">
 
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
@@ -44,7 +48,7 @@
         <activity
             android:name=".ui.dashboard.DashBoardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity"
@@ -62,9 +66,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <service
-            android:name=".service.SyncDataService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+<!--        <service-->
+<!--            android:name=".service.SyncDataService"-->
+<!--            android:permission="android.permission.BIND_JOB_SERVICE" />-->
 
     </application>
 

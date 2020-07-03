@@ -222,11 +222,11 @@
     <string name="api_connection_error">સર્વર સાથે કનેક્ટ કરવામાં સક્ષમ નથી. કૃપા કરીને ઇન્ટરનેટ કનેક્શન તપાસો</string>
     <string name="error">સમસ્યા!</string>
 
-    <string name="personal_details">અંગત વિગતો</string>
     <string name="blood_pressure">લોહિનુ દબાણ</string>
     <string name="lung_ailment">ફેફસાંની બીમારી</string>
     <string name="cancer_major_surgery">કેન્સર / અન્ય મુખ્ય શસ્ત્રક્રિયા</string>
     <string name="sr_citizen_follow_up">સિનિયર સિટીઝન પ્રતિસાદ</string>
+    <string name="no_issues">No issues</string>
 
     <string-array name="states_array">
         <item>આસામ</item>
@@ -298,4 +298,27 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
+    <string name="personal_details">વ્યક્તિગત વિગતો</string>
+    <string name="health_care_information">આરોગ્ય સંભાળ માહિતી</string>
+    <string name="emotional_state">ભાવનાત્મક સ્થિતિ</string>
+    <string name="happy">ખુશ</string>
+    <string name="neutral">તટસ્થ</string>
+    <string name="sad">ઉદાસી</string>
+
+
+
+    <string name="changelanguage">લungંગૌજ બદલો</string>
+    <string name="logout">લૉગ આઉટ</string>
+    <string name="contctNumber">સંપર્ક નંબર</string>
+    <string name="email">ઇમેઇલ</string>
+    <string name="Txtaddress">સરનામું</string>
+
+    <string name="permission_denied">Permission denied</string>
+
+    <string name="related_info_talked_about">સંબંધિત માહિતી વિશે વાત કરી</string>
+    <string name="lack_of_essential_services">આવશ્યક સેવાઓનો અભાવ</string>
+    <string name="emergency_escalation">ઇમર્જન્સી એસ્કેલેશન</string>
+    <string name="issue_raised">Issue Raised</string>
+    <string name="raised_on">Raised on:</string>
+
 </resources>
