@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
-import com.nitiaayog.apnesaathi.service.SyncDataService
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -24,9 +24,7 @@ class ApneSaathiApplication : Application() {
     override fun onCreate() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
-
-        SyncDataService.enqueueWork(this)
-
+        AndroidThreeTen.init(this)
         getScreenSize(this)
 
         instance = this

@@ -28,4 +28,5 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?
     suspend fun insert(syncData: SyncSrCitizenGrievance)
     fun delete(syncData: SyncSrCitizenGrievance)
+    fun getAllUniqueGrievances(callId:Int): LiveData<MutableList<SrCitizenGrievance>>
 }

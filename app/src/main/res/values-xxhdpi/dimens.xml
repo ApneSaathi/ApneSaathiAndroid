@@ -17,6 +17,11 @@
     <dimen name="dimen_3">6dp</dimen>
     <dimen name="dimen_35">38dp</dimen>
 
+    <dimen name="dime145dp">148dp</dimen>
+    <dimen name="dime120dp">123dp</dimen>
+    <dimen name="dime100dp">103dp</dimen>
+    <dimen name="dime90dp">93dp</dimen>
+
     <dimen name="view_size_32">35dp</dimen>
     <dimen name="view_size_36">39dp</dimen>
     <dimen name="view_size_38">41dp</dimen>

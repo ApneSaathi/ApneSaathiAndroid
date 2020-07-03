@@ -226,6 +226,7 @@
     <string name="lung_ailment">फेफड़े की बीमारी</string>
     <string name="cancer_major_surgery">कर्करोग / अन्य प्रमुख सर्जरी</string>
     <string name="sr_citizen_follow_up">सीनियर सिटीजन फॉलोअप</string>
+    <string name="no_issues">No issues</string>
 
     <string-array name="states_array">
         <item>असम</item>
@@ -297,4 +298,29 @@
         <item>@string/gender_female</item>
         <item>@string/gender_others</item>
     </string-array>
+    <string name="drawerOpen">ड्रॉवर ओपन</string>
+    <string name="drawerClose">ड्रॉवर बंद</string>
+
+    <string name="health_care_information">स्वास्थ्य देखभाल की जानकारी</string>
+    <string name="emotional_state">उत्तेजित अवस्था</string>
+    <string name="happy">प्रसन्न</string>
+    <string name="neutral">तटस्थ</string>
+    <string name="sad">दुखी</string>
+
+
+    <string name="related_info_talked_about">संबंधित जानकारी के बारे में बात की</string>
+    <string name="lack_of_essential_services">आवश्यक सेवाओं का अभाव</string>
+    <string name="issue_raised">मुद्दा उठाया</string>
+    <string name="raised_on">बढ़ोतरी:</string>
+    <string name="emergency_escalation">आपातकालीन बढ़ाव</string>
+
+
+    <string name="changelanguage">भाषा बदलो</string>
+    <string name="logout">लॉग आउट</string>
+    <string name="contctNumber">संपर्क संख्या</string>
+    <string name="email">ईमेल</string>
+    <string name="Txtaddress">पता</string>
+
+
+    <string name="permission_denied">अनुमति नहीं मिली</string>
 </resources>
