@@ -43,8 +43,7 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
             }.doOnSuccess {
                 loaderObservable.value = NetworkRequestState.SuccessResponse(it)
             }.doOnError {
-                loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                loaderObservable.value =  NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
             }.subscribe().autoDispose(disposables)
         }
     }

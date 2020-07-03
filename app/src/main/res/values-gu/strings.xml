@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">અપના સાથી</string>
-
+    <string name="splashbottomtagline">a colaborative campaign by </string>
     <string name="total_calls_vs_connected">વી.એસ. કનેક્ટેડ કુલ કોલ્સ</string>
     <string name="total_sr_citizens_supported">કુલ નં. વરિષ્ઠ નાગરિકો આધારભૂત છે</string>
     <string name="calls_connected_yesterday">ગઈકાલે કallsલ કરેલા છે</string>
