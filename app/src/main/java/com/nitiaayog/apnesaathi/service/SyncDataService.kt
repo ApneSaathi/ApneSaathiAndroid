@@ -176,8 +176,23 @@ class SyncDataService : JobService() {
         }.subscribe({
             if (it.status == "0") {
                 CoroutineScope(Dispatchers.IO).launch {
-                    dataManager.updateGrievance(grievance)
-                    dataManager.delete(grievance)
+                    // (it.grievanceId != "-1") grievance is not added if added then
+                    // that id will returned
+                    dataManager.updateCallStatus(grievance.callStatusSubCode)
+                    if (it.grievanceId.isNotEmpty() && (it.grievanceId != "-1")) {
+                        try {
+                            if (dataManager.isDataExist(grievance.id!!, grievance.callId!!)
+                                == null
+                            ) {
+                                dataManager.delete(grievance)
+                                grievance.id = it.grievanceId.toInt()
+                                dataManager.insertGrievance(grievance)
+                            } else
+                                dataManager.updateGrievance(grievance)
+                        } catch (e: Exception) {
+                            println("TAG -- MyData --> ${e.message}")
+                        }
+                    }
                     println("$TAG -- sync --> success")
                 }
             }

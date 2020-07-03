@@ -397,17 +397,21 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                                 if (it.grievanceId.isNotEmpty() && (it.grievanceId != "-1") &&
                                     ::callData.isInitialized
                                 ) {
-                                    syncData.id = it.grievanceId.toInt()
-                                    val updateData: SrCitizenGrievance = syncData
-
                                     try {
                                         dataManager.updateCallStatus(callStatus)
-                                        dataManager.insertGrievance(updateData)
+                                        if (dataManager.isDataExist(
+                                                syncData.id!!, syncData.callId!!
+                                            ) == null
+                                        ) {
+                                            dataManager.delete(syncData)
+                                            syncData.id = it.grievanceId.toInt()
+                                            dataManager.insertGrievance(syncData)
+                                        } /*else
+                                            dataManager.updateGrievance(syncData)*/
                                     } catch (e: Exception) {
                                         println("TAG -- MyData --> ${e.message}")
                                     }
                                 }
-
                                 dataManager.delete(syncData)
                             }
                         }

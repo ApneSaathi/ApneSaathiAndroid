@@ -15,7 +15,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
@@ -100,6 +99,12 @@ class AppDataManager private constructor(
         )
     }
 
+    override fun isDataExist(id: Int, callId: Int): SrCitizenGrievance? =
+        grievancesDao.isDataExist(id, callId)
+
+    override fun deleteGrievance(grievance: SrCitizenGrievance) =
+        grievancesDao.deleteGrievance(grievance)
+
     override suspend fun updateGrievance(grievance: SrCitizenGrievance) =
         grievancesDao.update(
             grievance.id!!, grievance.callId!!, grievance.hasDiabetic!!,
@@ -120,7 +125,7 @@ class AppDataManager private constructor(
     override fun getGrievancesToSync(): List<SyncSrCitizenGrievance>? =
         syncGrievancesDao.getGrievances()
 
-    override fun getAllUniqueGrievances(callId:Int): LiveData<MutableList<SrCitizenGrievance>> =
+    override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
     override suspend fun insert(syncData: SyncSrCitizenGrievance) =
