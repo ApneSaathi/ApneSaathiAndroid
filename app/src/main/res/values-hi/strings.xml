@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">अपना साथि</string>
-    <string name="splashbottomtagline">a colaborative campaign by </string>
+    <string name="splashbottomtagline">द्वारा एक सहयोगात्मक अभियान </string>
     <string name="total_calls_vs_connected">कुल कॉल किए गए VS कनेक्टेड</string>
     <string name="total_sr_citizens_supported">कुल नं। वरिष्ठ नागरिकों का समर्थन किया</string>
     <string name="calls_connected_yesterday">कल जुड़े कॉल</string>
