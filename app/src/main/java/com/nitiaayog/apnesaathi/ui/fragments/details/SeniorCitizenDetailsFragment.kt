@@ -30,7 +30,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     private var adapter: SeniorCitizenDateAdapter? = null
     var callData: CallData? = null
-    var grievancesList: MutableList<SrCitizenGrievance>? = null
+    var grievancesList: MutableList<SrCitizenGrievance> = mutableListOf()
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
         getViewModel {
             SeniorCitizenDetailsViewModel.getInstance(dataManager)
@@ -44,10 +44,21 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         toolBar.setNavigationIcon(R.drawable.ic_back)
         toolBar.setNavigationOnClickListener { activity?.onBackPressed() }
 
+        getGrievanceData()
         initClicks()
-        initRecyclerView()
-        bindData()
+    }
 
+    private fun getGrievanceData() {
+        callData?.callId?.let {
+            viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner)
+        }
+        callData?.callId?.let { it ->
+            viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
+                grievancesList = it
+                initRecyclerView()
+                bindData()
+            })
+        }
     }
 
     private fun bindData() {
@@ -75,10 +86,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         viewModel.getDataList().observe(viewLifecycleOwner, Observer {
             initAdapter()
         })
-        if (grievancesList?.size?:0 > 0) {
-            grievancesList.let { viewModel.prepareData(it) }
+        if (grievancesList.size > 0) {
+            viewModel.prepareData(grievancesList)
             makeGrievanceContainerVisible()
-            grievancesList?.get(grievancesList!!.size - 1)?.let { bindGrievanceData(it) }
+            bindGrievanceData(grievancesList[grievancesList.size - 1])
         } else {
             viewModel.setCurrentDate()
             makeGrievanceContainerInvisible()
@@ -116,7 +127,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
         txt_call_response.text = callData?.talkedWith
 
-        txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout?:"--"
+        txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout ?: "--"
 
         if (srCitizenGrievance.hasCovidSymptoms == "Y") {
             txt_covid_symptoms.text = getString(R.string.yes)
@@ -176,7 +187,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
         if (srCitizenGrievance.lackOfEssentialServices == "Yes") {
             txt_grievance.text = getText(R.string.yes)
-            var grievanceCategory: String = ""
+            var grievanceCategory = ""
             if (srCitizenGrievance.foodShortage != "4") {
                 grievanceCategory = getString(R.string.lack_of_food).plus(", ")
             }
@@ -300,8 +311,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     override fun onItemClick(position: Int, dateItem: DateItem) {
         adapter?.notifyDataSetChanged()
-        if (grievancesList?.size ?: 0 > 0) {
-            this.grievancesList?.get(position)?.let { bindGrievanceData(it) }
+        if (grievancesList.size > 0) {
+            bindGrievanceData(grievancesList[position])
             makeGrievanceContainerVisible()
         } else {
             makeGrievanceContainerInvisible()
@@ -333,10 +344,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     })
 
     fun setSelectedUser(
-        callData: CallData,
-        grievancesList: MutableList<SrCitizenGrievance>
+        callData: CallData
     ) {
-        this.grievancesList = grievancesList
         this.callData = callData
     }
 }
