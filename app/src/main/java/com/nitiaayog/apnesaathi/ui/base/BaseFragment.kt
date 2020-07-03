@@ -120,7 +120,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     }
 
     protected fun placeCall(selectedCallData: CallData, containerId: Int) {
-        Intent(Intent.ACTION_CALL).apply {
+        /*Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:${selectedCallData.contactNumber}")
             if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
             else onCallPermissionDenied()
@@ -131,11 +131,11 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
                 val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
                 intent.putExtra(CALL_ID, selectedCallData.callId)
                 startActivity(intent)
-            }.autoDispose(disposables)
+            }.autoDispose(disposables)*/
 
-        /*val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+        val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
         intent.putExtra(CALL_ID, selectedCallData.callId)
-        startActivity(intent)*/
+        startActivity(intent)
     }
 
     abstract fun provideViewModel(): VM

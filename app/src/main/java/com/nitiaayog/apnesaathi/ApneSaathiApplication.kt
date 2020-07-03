@@ -5,11 +5,10 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
-import com.nitiaayog.apnesaathi.base.SyncDataService
+import com.nitiaayog.apnesaathi.service.SyncDataService
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.utility.BaseUtility
-import java.util.*
 
 class ApneSaathiApplication : Application() {
 
