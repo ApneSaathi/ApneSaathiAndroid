@@ -12,6 +12,7 @@ import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
             synchronized(this) { SeniorCitizenFeedbackViewModel(dataManager) }
     }
 
+    // For updating Sr. Citizen data / Feedback form over a call
     private var callStatus: String = ""
     private var talkedWith: String = ""
     private var behaviorChange: String = ""
@@ -30,10 +32,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     private var quarantineStatus: String = ""
     private var essentialServices: String = ""
     private var impDescription: String = ""
-
-    private var gender: String = ""
-    private var district: String = ""
-    private var state: String = ""
     private var emergencyEscalation: String = "" // isemergencyservicerequired
 
     private var covideSymptoms: Boolean = false
@@ -50,6 +48,15 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 
     private lateinit var callData: CallData
     private var grievance: SrCitizenGrievance? = null
+
+    // For Registering new Sr. Citizen
+    private var name: String = ""
+    private var age: String = ""
+    private var gender: String = ""
+    private var state: String = ""
+    private var district: String = ""
+    private var contactNumber: String = ""
+    private var address: String = ""
 
     /*private fun insertInSyncTable(details: JsonObject): SyncSrCitizenGrievance {
         val syncData = SyncSrCitizenGrievance().apply {
@@ -227,24 +234,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 
     fun getImpDescription(): String = impDescription
 
-    fun setGender(gender: String) {
-        this.gender = gender
-    }
-
-    fun getGender(): String = gender
-
-    fun setDistrict(district: String) {
-        this.district = district
-    }
-
-    fun getDistrict(): String = district
-
-    fun setState(state: String) {
-        this.state = state
-    }
-
-    fun getState(): String = state
-
     fun isSeniorCitizenAtHome(seniorCitizenAtHome: Boolean) {
         this.seniorCitizenAtHome = seniorCitizenAtHome
     }
@@ -258,6 +247,40 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     fun isEmergencyEscalation(): String = emergencyEscalation
 
     fun getMedicalHistory() = medicalHistory
+
+    fun setName(name: String) {
+        this.name = name
+    }
+
+    fun setAge(age: String) {
+        this.age = age
+    }
+
+    fun setGender(gender: String) {
+        this.gender = gender
+    }
+
+    fun getGender(): String = gender
+
+    fun setContactNumber(contactNumber: String) {
+        this.contactNumber = contactNumber
+    }
+
+    fun setState(state: String) {
+        this.state = state
+    }
+
+    fun getState(): String = state
+
+    fun setDistrict(district: String) {
+        this.district = district
+    }
+
+    fun getDistrict(): String = district
+
+    fun setAddress(address: String) {
+        this.address = address
+    }
 
     fun addMedicalHistory(history: String) {
         val filterList = medicalHistory.filter { it == history }
@@ -319,13 +342,14 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                 val mSyncData = dataManager.getGrievancesToSync()
                 println("TAG -- MyData --> ${mSyncData?.size}")
             }
-            if (checkNetworkAvailability(context)) {
+            if (checkNetworkAvailability(context, ApiProvider.ApiSaveSeniorCitizenFeedbackForm)) {
                 /* *
              * we can add one more field in SeCitizenGrievances class and that will be
              * our new primary key
              * */
                 dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
-                    loaderObservable.value = NetworkRequestState.LoadingData
+                    loaderObservable.value =
+                        NetworkRequestState.LoadingData(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
                 }.doOnSuccess {
                     if (it.status == "0") {
                         viewModelScope.launch {
@@ -335,26 +359,46 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                                 dataManager.delete(syncData)
                             }
                         }
-                        loaderObservable.value = NetworkRequestState.SuccessResponse(it)
-                    } else loaderObservable.value = NetworkRequestState.Error
+                        loaderObservable.value = NetworkRequestState.SuccessResponse(
+                            ApiProvider.ApiSaveSeniorCitizenFeedbackForm, it
+                        )
+                    } else loaderObservable.value =
+                        NetworkRequestState.Error(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
                 }.doOnError {
                     loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                        NetworkRequestState.ErrorResponse(
+                            ApiProvider.ApiSaveSeniorCitizenFeedbackForm, it
+                        )
                 }.subscribe().autoDispose(disposables)
             }
         }
     }
 
     fun registerNewSeniorCitizen(context: Context) {
-        if (checkNetworkAvailability(context)) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.SrCitizenName, name)
+            params.addProperty(ApiConstants.SrCitizenAge, age.toInt())
+            params.addProperty(ApiConstants.SrCitizenGender, gender)
+            params.addProperty(ApiConstants.SrCitizenContactNumber, contactNumber)
+            params.addProperty(ApiConstants.SrCitizenState, state)
+            params.addProperty(ApiConstants.SrCitizenDistrict, district)
+            params.addProperty(ApiConstants.SrCitizenBlock, address)
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
-            }.doOnSuccess { loaderObservable.value = NetworkRequestState.SuccessResponse(it) }
-                .doOnError {
-                    loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
-                }.subscribe().autoDispose(disposables)
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)
+            }.doOnSuccess {
+                if (it.status == "0")
+                    loaderObservable.value = NetworkRequestState.SuccessResponse(
+                        ApiProvider.ApiRegisterSeniorCitizen, it
+                    )
+                else loaderObservable.value =
+                    NetworkRequestState.Error(ApiProvider.ApiRegisterSeniorCitizen)
+            }.doOnError {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
+            }.subscribe().autoDispose(disposables)
         }
     }
 }

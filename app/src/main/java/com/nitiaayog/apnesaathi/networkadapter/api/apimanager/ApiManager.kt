@@ -1,9 +1,7 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apimanager
 
 import com.google.gson.JsonObject
-import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserve
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserveWithDelaySubscription
-import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo

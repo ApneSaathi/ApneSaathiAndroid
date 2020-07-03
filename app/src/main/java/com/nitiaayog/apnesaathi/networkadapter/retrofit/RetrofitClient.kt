@@ -4,7 +4,6 @@ import android.app.Application
 import com.google.gson.GsonBuilder
 import com.nitiaayog.apnesaathi.BuildConfig
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

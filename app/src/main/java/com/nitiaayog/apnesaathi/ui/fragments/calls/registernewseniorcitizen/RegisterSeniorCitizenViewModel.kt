@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
 class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -22,14 +23,54 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
             }
     }
 
+    private var name: String = ""
+    private var age: String = ""
+    private var gender: String = ""
+    private var state: String = ""
+    private var district: String = ""
+    private var contactNumber: String = ""
+    private var address: String = ""
+
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
-    fun registerNewSeniorCitizen(
-        context: Context, name: String, age: String, gender: String, contactNumber: String,
-        district: String, state: String, address: String
-    ) {
-        if (checkNetworkAvailability(context)) {
+    fun setName(name: String) {
+        this.name = name
+    }
+
+    fun setAge(age: String) {
+        this.age = age
+    }
+
+    fun setGender(gender: String) {
+        this.gender = gender
+    }
+
+    fun getGender(): String = gender
+
+    fun setContactNumber(contactNumber: String) {
+        this.contactNumber = contactNumber
+    }
+
+    fun setState(state: String) {
+        this.state = state
+    }
+
+    fun getState(): String = state
+
+    fun setDistrict(district: String) {
+        this.district = district
+    }
+
+    fun getDistrict(): String = district
+
+    fun setAddress(address: String) {
+        this.address = address
+    }
+
+    fun registerNewSeniorCitizen(context: Context) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
             params.addProperty(ApiConstants.FirstName, name)
             params.addProperty(ApiConstants.Age, age.toInt())
             params.addProperty(ApiConstants.Gender, gender)
@@ -37,14 +78,15 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
             params.addProperty(ApiConstants.District, district)
             params.addProperty(ApiConstants.State, state)
             params.addProperty(ApiConstants.Address, address)
-            //params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)
             }.doOnSuccess {
-                loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                loaderObservable.value =
+                    NetworkRequestState.SuccessResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
             }.doOnError {
                 loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
             }.subscribe().autoDispose(disposables)
         }
     }

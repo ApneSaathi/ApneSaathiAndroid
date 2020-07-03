@@ -14,6 +14,7 @@ import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -125,7 +126,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     fun getGrievances() = grievances
 
-    fun getGrievancesFromCallData(pos:Int) = originalCallData[pos].medicalGrievance ?: mutableListOf()
+    fun getGrievancesFromCallData(pos: Int) =
+        originalCallData[pos].medicalGrievance ?: mutableListOf()
 
     fun getFewFollowupCalls(): MutableList<User> =
         if (followupCallsList.size > 3) followupCallsList.subList(0, 3) else followupCallsList
@@ -155,11 +157,12 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getGrievancesList(): LiveData<MutableList<SrCitizenGrievance>> = grievancesList
 
     fun getCallDetails(context: Context) {
-        if (checkNetworkAvailability(context)) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.VolunteerId, 1234 /*dataManager.getUserId()*/)
             dataManager.getCallDetails(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard)
             }.subscribe({
                 try {
                     if (it.status == "0") {
@@ -173,16 +176,18 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                                     prepareGrievances(data.callsList)
                                 dataManager.insertGrievances(grievances)
                             }
-                            loaderObservable.value = NetworkRequestState.SuccessResponse(it)
+                            loaderObservable.value = NetworkRequestState.SuccessResponse(
+                                ApiProvider.ApiLoadDashboard, it
+                            )
                         }
                     } else loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_ERROR)
+                        NetworkRequestState.ErrorResponse(ApiProvider.ApiLoadDashboard)
                 } catch (e: Exception) {
                     println("$TAG ${e.message}")
                 }
             }, {
                 loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiLoadDashboard, it)
             }).autoDispose(disposables)
         }
     }

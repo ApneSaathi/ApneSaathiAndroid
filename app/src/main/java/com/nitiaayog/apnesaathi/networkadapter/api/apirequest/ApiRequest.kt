@@ -1,7 +1,6 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 
 import com.google.gson.JsonObject
-import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo

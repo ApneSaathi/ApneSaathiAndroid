@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
+import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
 class SeniorCitizenDetailsViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
@@ -40,16 +40,19 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
     fun getSeniorCitizenDetails(context: Context) {
-        if (checkNetworkAvailability(context)) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiSeniorCitizenDetails)) {
             val params = JsonObject()
             params.addProperty("callid", 11)
             dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData
-            }.doOnSuccess { loaderObservable.value = NetworkRequestState.SuccessResponse(it) }
-                .doOnError {
-                    loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
-                }.subscribe().autoDispose(disposables)
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiSeniorCitizenDetails)
+            }.doOnSuccess {
+                loaderObservable.value =
+                    NetworkRequestState.SuccessResponse(ApiProvider.ApiSeniorCitizenDetails, it)
+            }.doOnError {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiSeniorCitizenDetails, it)
+            }.subscribe().autoDispose(disposables)
         }
     }
 

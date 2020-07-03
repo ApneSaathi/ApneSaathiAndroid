@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.BaseArrayAdapter
@@ -37,6 +38,7 @@ import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.CALL_ID
@@ -505,7 +507,15 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actGender.setAdapter(gendersAdapter)
         actGender.setOnKeyListener(null)
         actGender.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setGender(genderList[position])
+            viewModel.setGender(
+                when (genderList[position]) {
+                    getString(R.string.gender_male) -> "M"
+                    getString(R.string.gender_female) -> "F"
+                    getString(R.string.gender_others) -> "O"
+                    else -> ""
+                }
+            )
+            if (tvGenderError.visibility == View.VISIBLE) tvGenderError.visibility = View.GONE
         }
 
         val districtsList = resources.getStringArray(R.array.districts_array)
@@ -516,6 +526,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actDistrict.setOnKeyListener(null)
         actDistrict.setOnItemClickListener { _, _, position, _ ->
             viewModel.setDistrict(districtsList[position])
+            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
         }
 
         val stateList = resources.getStringArray(R.array.states_array)
@@ -525,6 +536,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actState.setOnKeyListener(null)
         actState.setOnItemClickListener { _, _, position, _ ->
             viewModel.setState(stateList[position])
+            if (tvStateError.visibility == View.VISIBLE) tvStateError.visibility = View.GONE
         }
 
         val rvMedicalHistorySrCitizen = rvMedicalHistorySrCitizen as RecyclerView
@@ -728,10 +740,25 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 toggleButtonSelection(btnEmergencyEscalationNo, selectedNeedOfEmergencyServices)
         }.autoDispose(disposables)
 
+        etName.textChanges().subscribe {
+            it?.run { if (this.toString().isNotEmpty()) tvNameError.visibility = View.GONE }
+        }.autoDispose(disposables)
+        etAge.textChanges().subscribe {
+            it?.run { if (this.toString().isNotEmpty()) tvAgeError.visibility = View.GONE }
+        }.autoDispose(disposables)
+        etContactNumber.textChanges().subscribe {
+            it?.run {
+                if (this.toString().isNotEmpty()) tvContactNumberError.visibility = View.GONE
+            }
+        }.autoDispose(disposables)
+        etAddress.textChanges().subscribe {
+            it?.run { if (this.toString().isNotEmpty()) tvAddressError.visibility = View.GONE }
+        }.autoDispose(disposables)
+
         // Button to save the data or go back
         btnSave.throttleClick().subscribe {
             if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
-
+                if (validateSrCitizenRegistrationForm()) viewModel.registerNewSeniorCitizen(this)
             } else {
                 if (validateFields())
                     viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
@@ -962,8 +989,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         resetButton(btnAnySrCitizenInHomeYes)
         resetButton(btnAnySrCitizenInHomeNo)
 
+        etName.text.clear()
+        viewModel.setName("")
+
+        etAge.text.clear()
+        viewModel.setAge("")
+
         actGender.setText("")
         viewModel.setGender("")
+
+        etContactNumber.text.clear()
+        viewModel.setContactNumber("")
 
         actDistrict.setText("")
         viewModel.setDistrict("")
@@ -971,10 +1007,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actState.setText("")
         viewModel.setState("")
 
-        etName.text.clear()
-        etAge.text.clear()
-        etContactNumber.text.clear()
         etAddress.text.clear()
+        viewModel.setAddress("")
     }
 
     private fun resetCovidSymptomsViews() {
@@ -1101,31 +1135,38 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
         when (it) {
-            is NetworkRequestState.NetworkNotAvailable ->
-                BaseUtility.showAlertMessage(
-                    this, R.string.alert, R.string.no_internet_save_data_in_app,
-                    R.string.thanks_go_back
-                ) { dialog, _ ->
-                    dialog.dismiss()
-                    finish()
-                }
+            is NetworkRequestState.NetworkNotAvailable -> when (it.apiName) {
+                ApiProvider.ApiSaveSeniorCitizenFeedbackForm ->
+                    BaseUtility.showAlertMessage(
+                        this, R.string.alert, R.string.no_internet_save_data_in_app,
+                        R.string.thanks_go_back
+                    )
+                ApiProvider.ApiRegisterSeniorCitizen ->
+                    BaseUtility.showAlertMessage(this, R.string.alert, R.string.check_internet)
+            }
             is NetworkRequestState.LoadingData -> progressDialog.show()
             is NetworkRequestState.ErrorResponse -> {
                 progressBar.visibility = View.GONE
                 BaseUtility.showAlertMessage(
-                    this, R.string.alert, R.string.can_not_connect_to_server, R.string.okay
+                    this, R.string.alert, R.string.can_not_connect_to_server
                 )
             }
             is NetworkRequestState.SuccessResponse<*> -> {
                 progressDialog.dismiss()
-                BaseUtility.showAlertMessage(
-                    this,
-                    R.string.success,
-                    R.string.details_saved_successfully,
-                    R.string.thanks_go_back
-                ) { dialog, _ ->
-                    dialog.dismiss()
-                    finish()
+                when (it.apiName) {
+                    ApiProvider.ApiSaveSeniorCitizenFeedbackForm -> BaseUtility.showAlertMessage(
+                        this, R.string.success, R.string.details_saved_successfully,
+                        R.string.thanks_go_back
+                    ) { dialog, _ ->
+                        dialog.dismiss()
+                        finish()
+                    }
+                    ApiProvider.ApiRegisterSeniorCitizen -> {
+                        resetRegisterNewSrCitizenLayout()
+                        BaseUtility.showAlertMessage(
+                            this, R.string.success, R.string.sr_citizen_registered_successfully
+                        )
+                    }
                 }
             }
         }
@@ -1140,8 +1181,6 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             if (viewModel.getTalkedWith().isEmpty()) {
                 BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_talked_with)
                 return false
-            } else if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
-
             } else if (viewModel.getMedicalHistory().size == 0) {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_medical_history
@@ -1188,6 +1227,64 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             }
         } else return true
         return true
+    }
+
+    private fun validateSrCitizenRegistrationForm(): Boolean = when {
+        etName.text.toString().isEmpty() -> {
+            tvNameError.visibility = View.VISIBLE
+            false
+        }
+        etAge.text.toString().isEmpty() -> {
+            tvAgeError.visibility = View.VISIBLE
+            false
+        }
+        viewModel.getGender().isEmpty() -> {
+            tvGenderError.visibility = View.VISIBLE
+            false
+        }
+        etContactNumber.text.toString().isEmpty() -> {
+            tvContactNumberError.setText(R.string.validate_contact_number)
+            tvContactNumberError.visibility = View.VISIBLE
+            false
+        }
+        ((etContactNumber.text.toString().length < 7) ||
+                !BaseUtility.validatePhoneNumber(etContactNumber.text.toString())) -> {
+            tvContactNumberError.setText(R.string.valid_contact_number)
+            tvContactNumberError.visibility = View.VISIBLE
+            false
+        }
+        viewModel.getState().isEmpty() -> {
+            tvStateError.visibility = View.VISIBLE
+            false
+        }
+        viewModel.getDistrict().isEmpty() -> {
+            tvDistrictError.visibility = View.VISIBLE
+            false
+        }
+        etAddress.text.toString().isEmpty() -> {
+            tvAddressError.visibility = View.VISIBLE
+            false
+        }
+        else -> {
+            tvNameError.visibility = View.GONE
+            viewModel.setName(etName.text.toString())
+
+            tvAgeError.visibility = View.GONE
+            viewModel.setAge(etAge.text.toString())
+
+            tvGenderError.visibility = View.GONE
+
+            tvContactNumberError.visibility = View.GONE
+            viewModel.setContactNumber(etContactNumber.text.toString())
+
+            tvStateError.visibility = View.GONE
+            tvDistrictError.visibility = View.GONE
+
+            tvAddressError.visibility = View.GONE
+            viewModel.setAddress(etAddress.text.toString())
+
+            true
+        }
     }
 
     private fun preparePostParams(): JsonObject {

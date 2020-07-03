@@ -14,10 +14,6 @@ import java.util.*
 
 object BaseUtility {
 
-    private const val FORMAT_SERVER_DATE_TIME: String = "yyyy-MM-dd'T'HH:mm:ss"
-    private const val FORMAT_LOCAL_DATE_TIME: String = "yyyy-MM-dd HH:mm:ss"
-
-
     fun validateEmailFormat(emailId: String) = Patterns.EMAIL_ADDRESS.matcher(emailId).matches()
 
     fun validatePhoneNumber(phoneNumber: String) = Patterns.PHONE.matcher(phoneNumber).matches()
