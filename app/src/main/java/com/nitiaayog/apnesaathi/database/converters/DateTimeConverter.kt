@@ -1,20 +1,18 @@
 package com.nitiaayog.apnesaathi.database.converters
 
 import androidx.room.TypeConverter
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import java.text.SimpleDateFormat
 import java.util.*
 
 object DateTimeConverter {
 
-    private const val FORMAT_SERVER_DATE_TIME: String = "yyyy-MM-dd'T'HH:mm:ss"
-    private const val FORMAT_LOCAL_DATE_TIME: String = "yyyy-MM-dd HH:mm:ss"
-
     private val localDateFormatter by lazy {
-        SimpleDateFormat(FORMAT_LOCAL_DATE_TIME, Locale.ENGLISH)
+        SimpleDateFormat(BaseUtility.FORMAT_LOCAL_DATE_TIME, Locale.ENGLISH)
     }
 
     private val serverDateFormatter by lazy {
-        SimpleDateFormat(FORMAT_SERVER_DATE_TIME, Locale.ENGLISH)
+        SimpleDateFormat(BaseUtility.FORMAT_SERVER_DATE_TIME, Locale.ENGLISH)
     }
 
     @TypeConverter

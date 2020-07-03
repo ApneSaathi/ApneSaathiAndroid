@@ -14,7 +14,9 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.coroutines.launch
+import java.util.*
 
 class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
@@ -325,10 +327,43 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         viewModelScope.launch {
             io {
                 if (callStatus == "5") {
-                    dataManager.insert(syncData)
-                    // Update details in Grievances Table
+                    /*if (callStatus == "5") {
+                        dataManager.insert(syncData)
+
+                        val updateData: SrCitizenGrievance = syncData
+                        dataManager.update(updateData)
+                    } else
+                        dataManager.updateCallStatus(callStatus)*/
+
                     val updateData: SrCitizenGrievance = syncData
-                    dataManager.update(updateData)
+                    if (syncData.id == -1) {
+                        val calendar = Calendar.getInstance()
+                        calendar.timeInMillis = System.currentTimeMillis()
+                        val date: String =
+                            "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-" +
+                                    "${calendar.get(Calendar.DAY_OF_MONTH)} ${calendar.get(Calendar.HOUR_OF_DAY)}" +
+                                    ":${calendar.get(Calendar.MINUTE)}:${calendar.get(Calendar.SECOND)}"
+                        val createdDate = BaseUtility.format(
+                            date, BaseUtility.FORMAT_LOCAL_DATE_TIME,
+                            BaseUtility.FORMAT_SERVER_DATE_TIME
+                        )
+                        syncData.id = BaseUtility.getRandomNumber(8).toInt()
+                        syncData.createdDate = createdDate
+
+                        updateData.id = syncData.id
+                        updateData.createdDate = syncData.createdDate
+
+                        if (::callData.isInitialized) {
+                            callData.callStatusSubCode = callStatus
+                            callData.talkedWith = syncData.talkedWith
+                            dataManager.updateCallData(callData)
+                        }
+
+                        dataManager.updateCallStatus(callStatus)
+                        dataManager.insertGrievance(updateData)
+                    } else
+                        dataManager.updateGrievance(updateData)
+                    dataManager.insert(syncData)
                 } else
                     dataManager.updateCallStatus(callStatus)
 
@@ -354,7 +389,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                     if (it.status == "0") {
                         viewModelScope.launch {
                             io {
-                                // If sunced successfully with server then just remove it from
+                                // If synced successfully with server then just remove it from
                                 // SyncSrCitizenGrievance Table
                                 dataManager.delete(syncData)
                             }

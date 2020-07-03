@@ -73,8 +73,12 @@ class AppDataManager private constructor(
     override fun getAllCallsList(): LiveData<MutableList<CallData>> = callsDataDao.getAllCallsList()
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
     override fun updateCallStatus(callStatus: String) = callsDataDao.update(callStatus)
+    override fun updateCallData(callData: CallData): Long = callsDataDao.update(callData)
 
     // => Table : grievances
+    override fun insertGrievance(grievance: SrCitizenGrievance): Long =
+        grievancesDao.insert(grievance)
+
     override fun insertGrievances(grievances: List<SrCitizenGrievance>) =
         grievancesDao.insertAll(grievances)
 
@@ -95,7 +99,7 @@ class AppDataManager private constructor(
         )
     }
 
-    override suspend fun update(grievance: SrCitizenGrievance) =
+    override suspend fun updateGrievance(grievance: SrCitizenGrievance) =
         grievancesDao.update(
             grievance.id!!, grievance.callId!!, grievance.hasDiabetic!!,
             grievance.hasBloodPressure!!, grievance.hasLungAilment!!,

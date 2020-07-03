@@ -25,8 +25,6 @@ class ApneSaathiApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
 
-        SyncDataService.enqueueWork(this)
-
         getScreenSize(this)
 
         instance = this

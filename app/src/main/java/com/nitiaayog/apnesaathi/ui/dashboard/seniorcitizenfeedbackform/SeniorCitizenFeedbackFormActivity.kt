@@ -267,10 +267,12 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             getString(R.string.sr_citizen) -> {
                 actTalkWith.setText(R.string.sr_citizen)
                 viewModel.setTalkedWith(getString(R.string.sr_citizen))
+                cgMedicalDetails.visibility = View.VISIBLE
             }
             getString(R.string.family_member_of_sr_citizen) -> {
                 actTalkWith.setText(R.string.family_member_of_sr_citizen)
                 viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
+                cgMedicalDetails.visibility = View.VISIBLE
             }
             getString(R.string.community_member) -> {
                 actTalkWith.setText(R.string.community_member)
@@ -315,7 +317,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             viewModel.addMedicalHistory(it.name)
         }
         if (selectedItems.isNotEmpty()) {
-            if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+            //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
             rvMedicalHistorySrCitizenAdapter.notifyDataSetChanged()
             rvMedicalHistorySrCitizen.visibility = View.VISIBLE
         }
@@ -335,7 +337,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         ) changeButtonSelectionWithIcon(btnDetection)
 
         checkTalkedAbout()
-        if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
     }
 
     private fun setBehavioralChangesData(behavioralChange: String) {
@@ -351,7 +353,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             }
         )
         actBehaviorChange.setText(viewModel.getBehaviorChange())
-        if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
     }
 
     private fun setCovidData(grievance: SrCitizenGrievance) {
@@ -400,7 +402,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 }
             )
         }
-        if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
     }
 
     private fun setComplaintData(grievance: SrCitizenGrievance) {

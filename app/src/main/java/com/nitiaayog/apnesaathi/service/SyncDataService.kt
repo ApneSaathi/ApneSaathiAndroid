@@ -8,9 +8,12 @@ import android.content.ComponentName
 import android.content.Context
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.utility.NetworkProvider
@@ -23,7 +26,10 @@ import java.util.*
 class SyncDataService : JobService() {
 
     companion object {
+
+        private const val TAG: String = "TAG -- JobService -->"
         private const val JOB_ID: Int = 1959
+
         fun enqueueWork(context: Context) {
             val jobScheduler =
                 context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler?
@@ -45,29 +51,27 @@ class SyncDataService : JobService() {
         val dateTime: String = "${calendar.get(Calendar.HOUR_OF_DAY)} :" +
                 " ${calendar.get(Calendar.MINUTE)} ${calendar.get(Calendar.AM_PM)}"
         if (NetworkProvider.isConnected(applicationContext)) {
-            println("\n\nTAG -- JobService --> Internet Available - $dateTime")
+            println("\n\n$TAG Internet Available - $dateTime")
             CoroutineScope(Dispatchers.IO).launch {
                 val processData = dataManager.getGrievancesToSync()
-                println("\nTAG -- JobService --> ${processData?.size} data will be synced")
+                println("\n$TAG ${processData?.size} data will be synced")
                 processData?.run {
                     if (processData.isEmpty()) stopSelf()
                     else {
                         io {
                             startSyncing(processData)
                         }
-                        io {
-
-                        }
                     }
+                    getFetchData()
                 }
             }
-        } else println("\nTAG -- JobService --> No Internet - $dateTime")
+        } else println("\n$TAG No Internet - $dateTime")
 
         return true
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
-        println("\nTAG -- JobService --> Job Completed")
+        println("\n$TAG Job Completed")
         disposeAll(params)
         return true
     }
@@ -153,25 +157,63 @@ class SyncDataService : JobService() {
         return params
     }
 
+    private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
+        val callData = grievance.filter {
+            (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
+        }
+        val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
+        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        return grievances
+    }
+
     private fun startSyncing(processData: List<SyncSrCitizenGrievance>) =
         processData.forEach { syncData(it) }
 
     private fun syncData(grievance: SyncSrCitizenGrievance) {
         val params = preparePostParams(grievance)
         val disposable = dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
-            println("TAG -- JobService -- params --> $params")
+            println("$TAG -- params --> $params")
         }.subscribe({
             if (it.status == "0") {
                 CoroutineScope(Dispatchers.IO).launch {
-                    dataManager.update(grievance)
+                    dataManager.updateGrievance(grievance)
                     dataManager.delete(grievance)
-                    println("TAG -- JobService -- sync --> success")
+                    println("$TAG -- sync --> success")
                 }
             }
         }, {
-            println("TAG -- JobService -- params --> Exception")
-            println("TAG -- JobService -- params --> ${it?.message}")
+            println("$TAG params --> Exception")
+            println("$TAG params --> ${it?.message}")
         })
         disposables.add(disposable)
+    }
+
+    private fun getFetchData() {
+        val params = JsonObject()
+        params.addProperty(ApiConstants.VolunteerId, 1001/*dataManager.getUserId()*/)
+        dataManager.getCallDetails(params).doOnSubscribe {
+            println("\n\n$TAG -- Start fetching data")
+        }.subscribe({
+            try {
+                if (it.status == "0") {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        io {
+                            val data = it.getData()
+                            dataManager.insertCallData(data.callsList)
+
+                            val grievances: List<SrCitizenGrievance> =
+                                prepareGrievances(data.callsList)
+                            dataManager.insertGrievances(grievances)
+                            println("$TAG -- Fetched data successfully")
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                println("$TAG ${e.message}")
+            }
+        }, {
+            println("$TAG -- Error -- data fetching")
+            println("$TAG -- Error -- ${it?.message}")
+        }).autoDispose(disposables)
     }
 }

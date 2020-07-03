@@ -32,7 +32,6 @@ interface CallDataDao {
 
     @Transaction
     fun insertOrUpdate(grievances: List<CallData>) = grievances.forEach {
-        if (insert(it) == -1L)
-            update(it)
+        if (insert(it) == -1L) update(it)
     }
 }
