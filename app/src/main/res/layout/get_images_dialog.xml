@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:minHeight="50dp"
-        android:text="Add Photo"
+        android:text="@string/txtaddPhoto"
         android:textColor="@color/color_black"
         android:textSize="@dimen/text_18"
         android:textStyle="bold" />
@@ -34,7 +34,7 @@
         android:paddingLeft="@dimen/dimen_20"
         android:textColor="@color/color_black"
 
-        android:text="Take Photo"
+        android:text="@string/txttakePhoto"
         android:textSize="@dimen/text_18" />
 
     <View
@@ -54,7 +54,7 @@
         android:paddingLeft="@dimen/dimen_20"
         android:textColor="@color/color_black"
 
-        android:text="Choose from Gallery"
+        android:text="@string/txtchoosefromgallry"
         android:textSize="@dimen/text_18" />
 
     <View
@@ -73,7 +73,7 @@
         android:textColor="@color/color_black"
         android:drawableLeft="@drawable/cancel_img"
         android:drawablePadding="@dimen/dimen_5"
-        android:text="Cancel"
+        android:text="@string/txtcancel"
         android:textSize="@dimen/text_18" />
 
     <View

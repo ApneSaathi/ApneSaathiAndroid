@@ -17,4 +17,19 @@ interface PreferenceRequest {
     fun setPhoneNumber(phoneNumber: String)
     fun getSelectedLanguage(): String
     fun setSelectedLanguage(language: String)
+
+
+    fun getFirstname(): String
+    fun setFirstName(fname: String)
+
+
+    fun getLastname(): String
+    fun setLastname(lastname: String)
+
+
+    fun getEmail(): String
+    fun setEmail(email: String)
+
+    fun getAddress(): String
+    fun setAddress(address: String)
 }

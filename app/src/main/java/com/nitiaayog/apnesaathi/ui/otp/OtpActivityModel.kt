@@ -15,4 +15,5 @@ class OtpActivityModel private constructor(dataManager: DataManager) : BaseViewM
                 instance ?: OtpActivityModel(dataManager).also { instance = it }
             }
     }
+
 }

@@ -323,4 +323,8 @@
 
 
     <string name="permission_denied">अनुमति नहीं मिली</string>
+    <string name="txtaddPhoto">तस्वीर जोड़ो</string>
+    <string name="txttakePhoto">फोटो लो</string>
+    <string name="txtchoosefromgallry">गैलरी से चयन करो</string>
+    <string name="txtcancel">रद्द करना</string>
 </resources>

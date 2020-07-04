@@ -1,7 +1,17 @@
 package com.nitiaayog.apnesaathi.ui.fragments.profile
 
+import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import kotlinx.coroutines.launch
 
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
@@ -19,5 +29,45 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
                         )
                             .also { instance = it }
                 }
+    }
+
+    fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
+
+    fun getvolunteerData(mContext: Context, volunteerId: String) {
+        if (checkNetworkAvailability(mContext, ApiProvider.Api_volunteer_Data)) {
+            val params = JsonObject()
+            params.addProperty(ApiConstants.phoneNo, volunteerId)
+
+            dataManager.volunteerData(params).doOnSubscribe {
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.Api_volunteer_Data)
+            }.subscribe({
+                try {
+                    if (it.getStatusCode() == "0") {
+                        loaderObservable.value =
+                            NetworkRequestState.SuccessResponse(ApiProvider.Api_volunteer_Data, it)
+                        viewModelScope.launch {
+                            io {
+                            }
+                            loaderObservable.value =
+                                NetworkRequestState.SuccessResponse(
+                                    ApiProvider.Api_volunteer_Data,
+                                    it
+                                )
+
+                        }
+                    } else loaderObservable.value =
+                        NetworkRequestState.ErrorResponse(ApiProvider.Api_volunteer_Data)
+                } catch (e: Exception) {
+                    println(e.printStackTrace())
+                }
+            }, {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiProvider.Api_volunteer_Data, it)
+
+            }).autoDispose(disposables)
+        }
+
+
     }
 }

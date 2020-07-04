@@ -51,10 +51,44 @@ open class PreferenceManager private constructor(application: Application) : Pre
         preferences.putString(PreferenceConstants.PhoneNumber, phoneNumber)
 
     override fun getSelectedLanguage(): String {
-     return preferences.getString(PreferenceConstants.SELECTED_LANGUAGE)!!
+        return preferences.getString(PreferenceConstants.SELECTED_LANGUAGE)!!
     }
 
     override fun setSelectedLanguage(language: String) {
-        preferences.putString(PreferenceConstants.SELECTED_LANGUAGE,language)
+        preferences.putString(PreferenceConstants.SELECTED_LANGUAGE, language)
     }
+
+    override fun getFirstname(): String {
+        return preferences.getString(PreferenceConstants.FirstName)!!
+    }
+
+    override fun setFirstName(fname: String) {
+        preferences.putString(PreferenceConstants.FirstName, fname)
+    }
+
+    override fun getLastname(): String {
+        return preferences.getString(PreferenceConstants.LastName)!!
+    }
+
+    override fun setLastname(lastname: String) {
+        preferences.putString(PreferenceConstants.LastName, lastname)
+    }
+
+    override fun getEmail(): String {
+        return preferences.getString(PreferenceConstants.Email)!!
+    }
+
+    override fun setEmail(email: String) {
+        preferences.putString(PreferenceConstants.Email, email)
+    }
+
+    override fun getAddress(): String {
+        return preferences.getString(PreferenceConstants.Address)!!
+    }
+
+    override fun setAddress(address: String) {
+        preferences.putString(PreferenceConstants.Address, address)
+    }
+
+
 }

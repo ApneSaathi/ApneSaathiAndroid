@@ -42,7 +42,8 @@ class SplashActivity : AppCompatActivity() {
             if (dataManager.getSelectedLanguage()
                     .isEmpty()
             ) LanguageSelectionActivity::class.java else
-                if (dataManager.isLogin() == false) LoginActivity::class.java
+                if (dataManager.isLogin() == false)
+                    LoginActivity::class.java
                 else DashBoardActivity::class.java
         )
         startActivity(targetIntent)

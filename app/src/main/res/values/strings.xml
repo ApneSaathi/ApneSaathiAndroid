@@ -370,4 +370,11 @@
     <string name="Txtaddress">Address</string>
     <string name="permission_denied">Permission denied</string>
     <string name="splashbottomtagline">a colaborative campaign by </string>
+    <string name="txtaddPhoto">Add Photo</string>
+    <string name="txttakePhoto">Take Photo</string>
+    <string name="txtchoosefromgallry">Choose from Gallery</string>
+    <string name="txtcancel">Cancel</string>
+    <string name="wait_profile_data">we are fetching your profile data</string>
+    <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
+
 </resources>

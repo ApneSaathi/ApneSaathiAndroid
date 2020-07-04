@@ -321,4 +321,8 @@
     <string name="issue_raised">Issue Raised</string>
     <string name="raised_on">Raised on:</string>
 
+    <string name="txtaddPhoto">ફોટો ઉમેરો</string>
+    <string name="txttakePhoto">ફોટો પાડ</string>
+    <string name="txtchoosefromgallry">ગેલેરીમાંથી પસંદ કરો</string>
+    <string name="txtcancel">રદ કરો</string>
 </resources>

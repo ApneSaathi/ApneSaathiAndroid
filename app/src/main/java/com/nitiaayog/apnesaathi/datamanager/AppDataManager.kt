@@ -10,13 +10,12 @@ import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
-import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
@@ -55,6 +54,10 @@ class AppDataManager private constructor(
     // ApiRequests
     override fun loginUser(phoneNumber: JsonObject): Single<Login_Response> =
         apiRequest.loginUser(phoneNumber)
+
+    override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
+        return apiRequest.volunteerData(phoneNumber)
+    }
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
         apiRequest.getCallDetails(details)
@@ -116,7 +119,7 @@ class AppDataManager private constructor(
     override fun getGrievancesToSync(): List<SyncSrCitizenGrievance>? =
         syncGrievancesDao.getGrievances()
 
-    override fun getAllUniqueGrievances(callId:Int): LiveData<MutableList<SrCitizenGrievance>> =
+    override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
     override suspend fun insert(syncData: SyncSrCitizenGrievance) =
@@ -128,11 +131,12 @@ class AppDataManager private constructor(
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()
 
-    override fun updateUserPreference(loginUser: User) {
-        setUserId(loginUser.userId)
-        setUserName(loginUser.userName)
-        //setProfileImage(loginUser.userProfileImage)
-        setPhoneNumber(loginUser.phoneNumber)
+    override fun updateUserPreference(loginUser: Login_Response) {
+        setUserId(loginUser.getVolunteerId()!!)
+//        setUserName(loginUser.userName)
+//        //setProfileImage(loginUser.userProfileImage)
+//        setPhoneNumber(loginUser.phoneNumber)
+
     }
 
     override fun getUserId(): String = preferences.getUserId()
@@ -154,4 +158,23 @@ class AppDataManager private constructor(
     override fun getSelectedLanguage(): String = preferences.getSelectedLanguage()
 
     override fun setSelectedLanguage(language: String) = preferences.setSelectedLanguage(language)
+    override fun getFirstname(): String = preferences.getFirstname()
+
+    override fun setFirstName(fname: String) = preferences.setFirstName(fname)
+
+
+    override fun getLastname(): String = preferences.getLastname()
+
+    override fun setLastname(lastname: String) = preferences.setLastname(lastname)
+
+
+    override fun getEmail(): String = preferences.getEmail()
+
+    override fun setEmail(email: String) = preferences.setEmail(email)
+
+
+    override fun getAddress(): String = preferences.getAddress()
+
+    override fun setAddress(address: String) = preferences.setAddress(address)
+
 }

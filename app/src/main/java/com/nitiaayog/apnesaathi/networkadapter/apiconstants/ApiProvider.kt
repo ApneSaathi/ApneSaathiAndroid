@@ -7,6 +7,9 @@ object ApiProvider {
     private const val GET_LOGIN_USER: String = "Volunteer/LoginVolunteer"
     const val ApiLoginUser: String = BuildConfig.HOST_URL + GET_LOGIN_USER
 
+    private const val GET_VOLUNTEER_DATA: String = "Volunteer/VolunteerData"
+    const val Api_volunteer_Data: String = BuildConfig.HOST_URL + GET_VOLUNTEER_DATA
+
     private const val GET_LOAD_DASHBOARD: String = "Volunteer/loadDashboard"
     const val ApiLoadDashboard: String = BuildConfig.HOST_URL + GET_LOAD_DASHBOARD
 

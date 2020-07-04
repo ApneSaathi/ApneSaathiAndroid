@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
+import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
 import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import kotlinx.android.synthetic.main.activity_launguage_selection.*
@@ -55,9 +56,17 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         }
 
         btnSubmit.throttleClick().subscribe() {
-            val targetIntent = getTargetIntent(LoginActivity::class.java)
+
+            val targetIntent = getTargetIntent(
+
+                if (dataManager.isLogin() == false)
+                    LoginActivity::class.java
+                else DashBoardActivity::class.java
+            )
             startActivity(targetIntent)
             finish()
+
+
         }.autoDispose(disposables)
     }
 

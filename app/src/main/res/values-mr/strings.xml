@@ -12,10 +12,10 @@
     <string name="on_call_sr_citizen_feedback_form">एका कॉलवर ज्येष्ठ नागरिकाचा अभिप्राय</string>
     <string name="wrong_detail_warning">आपण प्रदान केलेला तपशील जिल्हास्तरीय कर्मचारी सदस्याद्वारे सत्यापित केला जाईल आणि चुकीचे तपशील आपल्याविरूद्ध कायदेशीर कारवाई करू शकतात</string>
 
+
     <string name="select_language">भाषा निवडा</string>
     <string name="english_text">इंग्रजी</string>
     <string name="hindi_text">हिंदी</string>
-
     <string name="marathi_text">मराठी</string>
     <string name="gujrati_text">गुजराती</string>
     <string name="aasammi_text">आसामी</string>
@@ -322,4 +322,9 @@
     <string name="contctNumber">संपर्क क्रमांक</string>
     <string name="email">ईमेल</string>
     <string name="Txtaddress">पत्ता</string>
+
+    <string name="txtaddPhoto">फोटो जोडा</string>
+    <string name="txttakePhoto">छायाचित्र घे</string>
+    <string name="txtchoosefromgallry">गॅलरीमधून निवडा</string>
+    <string name="txtcancel">रद्द करा</string>
 </resources>
