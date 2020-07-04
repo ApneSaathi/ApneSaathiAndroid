@@ -229,7 +229,29 @@
     <string name="lung_ailment">फुफ्फुसांचा आजार</string>
     <string name="cancer_major_surgery">कर्करोग / इतर प्रमुख शस्त्रक्रिया</string>
     <string name="sr_citizen_follow_up">वरिष्ठ नागरिक पाठपुरावा</string>
-    <string name="no_issues">No issues</string>
+    <string name="no_issues">कोणतीही समस्या नाही</string>
+
+    <string name="govt_quarantine">सरकारी विलग्नवास</string>
+    <string name="no_internet_save_data_in_app">आपले इंटरनेट कनेक्शन धीमे / दुर्बल आहे परंतु आम्ही अनुप्रयोगात माहिती संचयित करू आणि नंतर जेव्हा इंटरनेट उपलब्ध असेल तेव्हा आम्ही सर्व्हरसह समक्रमित करू.</string>
+    <string name="thanks_go_back">धन्यवाद, परत जा</string>
+    <string name="details_saved_successfully">ज्येष्ठ नागरिक तपशील यशस्वीरित्या समक्रमित केले गेले आहेत.\n\nआमची सेवा केल्याबद्दल धन्यवाद</string>
+    <string name="great">खुप छान</string>
+    <string name="can_not_connect_to_server">सर्व्हरशी कनेक्ट करणे शक्य नाही.\n\nआम्ही अ‍ॅपमध्ये डेटा जतन केला आहे आणि आम्ही सर्व्हरशी कनेक्ट झाल्यावर आम्ही समक्रमित करू</string>
+    <string name="wait_saving_data">कृपया प्रतीक्षा करा आम्ही डेटा जतन करीत आहोत…</string>
+    <string name="validate_call_status">कॉल तपशील प्रदान करा</string>
+    <string name="validate_talked_with">आपण कॉलवर कोणाशी बोलला याबद्दल तपशील प्रदान करा</string>
+    <string name="validate_medical_history">ज्येष्ठ नागरिकाचा वैद्यकीय इतिहास निवडा</string>
+    <string name="validate_talked_about">आपण काय बोलले याचा तपशील प्रदान करा म्हणजे <b>प्रतिबंध/प्रवेश/शोध</b></string>
+    <string name="validate_behavioural_changes">ज्येष्ठ नागरिकांच्या वर्तनात्मक बदलांविषयी तपशील द्या</string>
+    <string name="validate_other_medical_details">इतर वैद्यकीय तपशील द्या जसे की COVID-19 symptoms लक्षणे इ</string>
+    <string name="validate_covid_symptoms">वरिष्ठ नागरिकात COVID-19 symptoms लक्षणे द्या</string>
+    <string name="validate_quarantine_status">वरिष्ठ नागरिकांची अलग ठेवण्याची स्थिती प्रदान करा</string>
+    <string name="validate_complaint_category">तक्रार श्रेणी द्या</string>
+    <string name="validate_emergency_required">कोणतीही <b>आपत्कालीन आणि/किंवा वाढीचा तपशील</b> द्या ?</string>
+    <string name="check_internet">कृपया इंटरनेट कनेक्शन तपासा</string>
+    <string name="sr_citizen_registered_successfully">ज्येष्ठ नागरिकांनी यशस्वीरित्या नोंदणी केली.</string>
+
+    <string name="not_available">माहिती उपलब्ध नाही</string>
 
     <string-array name="states_array">
         <item>आसाम</item>
@@ -312,7 +334,7 @@
     <string name="related_info_talked_about">संबंधित माहिती बद्दल बोललो</string>
     <string name="lack_of_essential_services">अत्यावश्यक सेवांचा अभाव</string>
     <string name="emergency_escalation">आणीबाणी वाढवणे</string>
-    <string name="issue_raised">मुद्दा उठविला</string>
+    <string name="issue_raised">समस्या नोंदविली आहे</string>
     <string name="raised_on">वर वाढविले:</string>
 
 

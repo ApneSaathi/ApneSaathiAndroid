@@ -226,7 +226,29 @@
     <string name="lung_ailment">ફેફસાંની બીમારી</string>
     <string name="cancer_major_surgery">કેન્સર / અન્ય મુખ્ય શસ્ત્રક્રિયા</string>
     <string name="sr_citizen_follow_up">સિનિયર સિટીઝન પ્રતિસાદ</string>
-    <string name="no_issues">No issues</string>
+    <string name="no_issues">કોઇ વાંધો નહી</string>
+
+    <string name="govt_quarantine">સરકારી ક્વોરૅન્ટીન</string>
+    <string name="no_internet_save_data_in_app">તમારું ઇન્ટરનેટ કનેક્શન ધીમું / નબળું છે પરંતુ અમે એપ્લિકેશનની અંદર માહિતી સ્ટોર કરીશું અને પછી જ્યારે ઇન્ટરનેટ ઉપલબ્ધ થશે ત્યારે અમે સર્વર સાથે સિંક કરીશું.</string>
+    <string name="thanks_go_back">આભાર, પાછા જાઓ</string>
+    <string name="details_saved_successfully">વરિષ્ઠ નાગરિક વિગતો સફળતાપૂર્વક સમન્વયિત થઈ છે.\n\nઅમારી સેવા કરવા બદલ આભાર</string>
+    <string name="great">ખૂબ સારું</string>
+    <string name="can_not_connect_to_server">સર્વરથી કનેક્ટ થઈ શકતા નથી. અમે એપ્લિકેશનમાં ડેટા સાચવ્યો છે અને એકવાર સર્વર સાથે કનેક્ટ થઈ જઈશું ત્યારે અમે સમન્વયિત થઈશું</string>
+    <string name="wait_saving_data">કૃપા કરી પ્રતીક્ષા કરો અમે ડેટા સાચવી રહ્યા છીએ…</string>
+    <string name="validate_call_status">કોલની સ્થિતિ પ્રદાન કરો</string>
+    <string name="validate_talked_with">કોલ પર તમે કોની સાથે વાત કરી તે વિશે વિગતો પ્રદાન કરો</string>
+    <string name="validate_medical_history">વરિષ્ઠ નાગરિકનો તબીબી ઇતિહાસ પસંદ કરો</string>
+    <string name="validate_talked_about">તમે કઈ વાત કરી છે તેની વિગતો પ્રદાન કરો એટલે કે <b>નિવારણ/પ્રવેશ/ડિટેક્શન</b></string>
+    <string name="validate_behavioural_changes">વરિષ્ઠ નાગરિકના વર્તણૂકીય ફેરફારો વિશે વિગતો પ્રદાન કરો</string>
+    <string name="validate_other_medical_details">અન્ય તબીબી વિગતો પ્રદાન કરો જેમ કે COVID-19 લક્ષણો, વગેરે</string>
+    <string name="validate_covid_symptoms">સિનિયર સિટિઝનમાં COVID-19 લક્ષણો પ્રદાન કરો</string>
+    <string name="validate_quarantine_status">વરિષ્ઠ નાગરિકની સંસર્ગનિષેધની સ્થિતિ પ્રદાન કરો</string>
+    <string name="validate_complaint_category">ફરિયાદ વર્ગ પ્રદાન કરો</string>
+    <string name="validate_emergency_required">કોઈપણ <b>કટોકટી અને/અથવા વૃદ્ધિની</b> વિગતો પ્રદાન કરો ?</string>
+    <string name="check_internet">કૃપા કરીને ઇન્ટરનેટ કનેક્શન તપાસો</string>
+    <string name="sr_citizen_registered_successfully">વરિષ્ઠ નાગરિક સફળતાપૂર્વક નોંધાયેલું છે.</string>
+
+    <string name="not_available">માહિતી ઉપલબ્ધ નથી</string>
 
     <string-array name="states_array">
         <item>આસામ</item>
@@ -305,20 +327,18 @@
     <string name="neutral">તટસ્થ</string>
     <string name="sad">ઉદાસી</string>
 
-
-
     <string name="changelanguage">લungંગૌજ બદલો</string>
     <string name="logout">લૉગ આઉટ</string>
     <string name="contctNumber">સંપર્ક નંબર</string>
     <string name="email">ઇમેઇલ</string>
     <string name="Txtaddress">સરનામું</string>
 
-    <string name="permission_denied">Permission denied</string>
+    <string name="permission_denied">પરવાનગી નકારી</string>
 
     <string name="related_info_talked_about">સંબંધિત માહિતી વિશે વાત કરી</string>
     <string name="lack_of_essential_services">આવશ્યક સેવાઓનો અભાવ</string>
     <string name="emergency_escalation">ઇમર્જન્સી એસ્કેલેશન</string>
-    <string name="issue_raised">Issue Raised</string>
-    <string name="raised_on">Raised on:</string>
+    <string name="issue_raised">સમસ્યા રજીસ્ટર થઈ ચૂકી છે</string>
+    <string name="raised_on">समस्या दर्ज की गई है</string>
 
 </resources>

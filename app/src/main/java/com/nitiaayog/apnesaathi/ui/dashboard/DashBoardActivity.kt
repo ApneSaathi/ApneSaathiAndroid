@@ -23,6 +23,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.startSyncingData(this)
+
         initViewPager()
         initBottomNavigationView()
     }

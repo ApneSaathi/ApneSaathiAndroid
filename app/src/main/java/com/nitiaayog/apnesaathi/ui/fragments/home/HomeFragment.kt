@@ -24,7 +24,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<HomeViewModel>() {
@@ -151,7 +150,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun getObservableDataStream() {
         viewModel.getCallsList().removeObservers(viewLifecycleOwner)
-        viewModel.getCallsList().observe(viewLifecycleOwner, Observer {
+        viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
             pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             pendingAdapter.notifyDataSetChanged()
             managePendingCalls(it)

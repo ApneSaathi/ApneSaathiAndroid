@@ -13,14 +13,10 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
-        @Volatile
-        private var instance: RegisterSeniorCitizenViewModel? = null
 
         @Synchronized
         fun getInstance(dataManager: DataManager): RegisterSeniorCitizenViewModel =
-            instance ?: synchronized(this) {
-                instance ?: RegisterSeniorCitizenViewModel(dataManager).also { instance = it }
-            }
+            synchronized(this) { RegisterSeniorCitizenViewModel(dataManager) }
     }
 
     private var name: String = ""
@@ -70,24 +66,25 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
     fun registerNewSeniorCitizen(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
-            params.addProperty(ApiConstants.FirstName, name)
-            params.addProperty(ApiConstants.Age, age.toInt())
-            params.addProperty(ApiConstants.Gender, gender)
-            params.addProperty(ApiConstants.PhoneNumber, contactNumber)
-            params.addProperty(ApiConstants.District, district)
-            params.addProperty(ApiConstants.State, state)
-            params.addProperty(ApiConstants.Address, address)
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.SrCitizenName, name)
+            params.addProperty(ApiConstants.SrCitizenAge, age.toInt())
+            params.addProperty(ApiConstants.SrCitizenGender, gender)
+            params.addProperty(ApiConstants.SrCitizenContactNumber, contactNumber)
+            params.addProperty(ApiConstants.SrCitizenDistrict, district)
+            params.addProperty(ApiConstants.SrCitizenState, state)
+            params.addProperty(ApiConstants.SrCitizenBlock, address)
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)
-            }.doOnSuccess {
-                loaderObservable.value =
+            }.subscribe({
+                loaderObservable.value = if (it.status == "0")
                     NetworkRequestState.SuccessResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
-            }.doOnError {
+                else NetworkRequestState.Error(ApiProvider.ApiRegisterSeniorCitizen)
+            }, {
                 loaderObservable.value =
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
-            }.subscribe().autoDispose(disposables)
+            }).autoDispose(disposables)
         }
     }
 }
