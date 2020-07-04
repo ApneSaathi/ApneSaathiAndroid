@@ -33,6 +33,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     private var essentialServices: String = ""
     private var impDescription: String = ""
     private var emergencyEscalation: String = "" // isemergencyservicerequired
+    private var isLackOfEssential: String = "" // isemergencyservicerequired
 
     private var covideSymptoms: Boolean = false
     private var symptomsCough: Boolean = false
@@ -244,7 +245,12 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         this.emergencyEscalation = emergencyEscalation
     }
 
+    fun isLackOfEssential(isLackOfEssential: String) {
+        this.isLackOfEssential = isLackOfEssential
+    }
     fun isEmergencyEscalation(): String = emergencyEscalation
+
+    fun isLackOfEssential(): String = isLackOfEssential
 
     fun getMedicalHistory() = medicalHistory
 

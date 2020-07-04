@@ -36,20 +36,11 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
             }
 
             override fun onMoreInfoClick(position: Int, callData: CallData) {
-                callData.callId?.let { viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner) }
-                callData.callId?.let { it ->
-                    viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
-                        val fragment = SeniorCitizenDetailsFragment()
-                        fragment.setSelectedUser(
-                            callData,
-                            it
-                        )
-                        addFragment(
-                            containerId, fragment, getString(R.string.details_fragment)
-                        )
-                    })
-                }
-
+                val fragment = SeniorCitizenDetailsFragment()
+                fragment.setSelectedUser(callData)
+                addFragment(
+                    containerId, fragment, getString(R.string.details_fragment)
+                )
             }
         })
     }
