@@ -93,9 +93,9 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
 
-                    if (loginres is Login_Response) {
-                        dataManager.updateUserPreference(loginres)
-                    }
+//                    if (loginres is Login_Response) {
+//                        dataManager.updateUserPreference(loginres)
+//                    }
 
                     progressBarlogin.visibility = GONE
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
