@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View.GONE
@@ -16,12 +17,19 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Log
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.otp.OtpActivity
+import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.concurrent.TimeUnit
+
 
 class LoginActivity : BaseActivity<LoginViewModel>() {
-
+    lateinit var mContext: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mContext = this
         btnLogin.throttleClick().subscribe() {
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
                 CallSnackbar(rootRelativeLayout, resources.getString(R.string.txtenterMobilenumbe))
@@ -34,14 +42,30 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 //                    )
 //
 //                } else {
-                    progressBarlogin.visibility = VISIBLE
-                    viewModel.callLogin(applicationContext, EditMobileNumber.text.toString())
-                    EditMobileNumber.isFocusable = false
+
+                try {
+                    observeStates()
+
+                    Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                            viewModel.callLogin(
+                                applicationContext,
+                                EditMobileNumber.text.toString()
+                            )
+                        }
+                        .autoDispose(disposables)
+                } catch (e: Exception) {
+                    println("TAG -- MyData --> ${e.message}")
+                }
+
+
+
+                EditMobileNumber.isFocusable = false
 
 //                }
             }
         }.autoDispose(disposables)
-        observeStates()
+
     }
 
     private fun observeStates() {
@@ -50,27 +74,34 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         viewModel.getDataObserver().observe(this, Observer {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable -> {
+                    BaseUtility.showAlertMessage(
+                        mContext!!,
+                        R.string.alert,
+                        R.string.check_internet
+                    )
                 }
                 is NetworkRequestState.LoadingData -> {
+                    progressBarlogin.visibility = VISIBLE
                 }
                 is NetworkRequestState.ErrorResponse -> {
                     progressBarlogin.visibility = GONE
                     EditMobileNumber.isFocusableInTouchMode = true
                     CallSnackbar(
-                        rootRelativeLayout,
-                        ApiConstants.VolunteerNotRegisterErrorMessage
+                        rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage
                     )
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
 
                     if (loginres is Login_Response) {
-                        loginres.getVolunteerId()
+                        dataManager.updateUserPreference(loginres)
                     }
 
                     progressBarlogin.visibility = GONE
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
+                    targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
                     startActivity(targetIntent)
+                    finish()
 
                 }
             }
@@ -83,4 +114,10 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     }
 
     override fun provideLayoutResource(): Int = R.layout.activity_login
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+
+    }
 }

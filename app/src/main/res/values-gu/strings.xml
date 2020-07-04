@@ -346,4 +346,8 @@
     <string name="assigned">સોંપ્યું</string>
     <string name="completed">પૂર્ણ</string>
 
+    <string name="txtaddPhoto">ફોટો ઉમેરો</string>
+    <string name="txttakePhoto">ફોટો પાડ</string>
+    <string name="txtchoosefromgallry">ગેલેરીમાંથી પસંદ કરો</string>
+    <string name="txtcancel">રદ કરો</string>
 </resources>

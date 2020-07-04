@@ -5,6 +5,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
 import retrofit2.http.Body
@@ -14,6 +15,10 @@ interface ApiInterface {
 
     @POST(ApiProvider.ApiLoginUser)
     fun loginUser(@Body phoneNumber: JsonObject): Single<Login_Response>
+
+    @POST(ApiProvider.Api_volunteer_Data)
+    fun getVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>
+
 
     @POST(ApiProvider.ApiLoadDashboard)
     fun getCallDetails(@Body details: JsonObject): Single<HomeRepo>

@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
-import com.nitiaayog.apnesaathi.model.User
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 
 interface DataManager : ApiRequest, PreferenceRequest {
-    fun updateUserPreference(loginUser: User)
+    fun updateUserPreference(loginUser: Login_Response)
 
     // TODO : Database Methods
     // Table : call_details

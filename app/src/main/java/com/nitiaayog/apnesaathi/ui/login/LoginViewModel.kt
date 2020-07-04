@@ -32,7 +32,7 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
 
     fun callLogin(mContext: Context, phone: String) {
 
-        if (checkNetworkAvailability(mContext, "")) {
+        if (checkNetworkAvailability(mContext, ApiProvider.ApiLoginUser)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.phoneNo, phone)
 
@@ -42,7 +42,6 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
             }.subscribe({
                 try {
                     if (it.getStatusCode() == "0") {
-
                         loaderObservable.value =
                             NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
                         viewModelScope.launch {

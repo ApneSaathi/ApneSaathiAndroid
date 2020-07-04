@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.otp
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -14,9 +15,13 @@ import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import kotlinx.android.synthetic.main.activity_login_otpverify.*
 
+
 class OtpActivity : BaseActivity<OtpActivityModel>() {
+    lateinit var mContext: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mContext = this@OtpActivity
         EditFirstChar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (EditFirstChar.length() == 1) {
@@ -110,7 +115,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         val targetIntent = getTargetIntent(DashBoardActivity::class.java)
         startActivity(targetIntent)
-        dataManager.setPhoneNumber("123456")
+        dataManager.setPhoneNumber(intent.getStringExtra("PhoneNo"))
+        finishAffinity()
+
     }
 
     override fun provideViewModel(): OtpActivityModel = getViewModel {
