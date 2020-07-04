@@ -248,6 +248,8 @@
     <string name="check_internet">कृपया इंटरनेट कनेक्शन की जाँच करें</string>
     <string name="sr_citizen_registered_successfully">वरिष्ठ नागरिक सफलतापूर्वक पंजीकृत.</string>
 
+    <string name="not_available">जानकारी उपलब्ध नहीं है</string>
+
     <string-array name="states_array">
         <item>असम</item>
         <item>बिहार</item>

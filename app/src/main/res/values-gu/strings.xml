@@ -248,6 +248,8 @@
     <string name="check_internet">કૃપા કરીને ઇન્ટરનેટ કનેક્શન તપાસો</string>
     <string name="sr_citizen_registered_successfully">વરિષ્ઠ નાગરિક સફળતાપૂર્વક નોંધાયેલું છે.</string>
 
+    <string name="not_available">માહિતી ઉપલબ્ધ નથી</string>
+
     <string-array name="states_array">
         <item>આસામ</item>
         <item>બિહાર</item>

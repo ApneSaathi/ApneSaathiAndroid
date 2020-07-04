@@ -67,13 +67,13 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
         if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
-            params.addProperty(ApiConstants.FirstName, name)
-            params.addProperty(ApiConstants.Age, age.toInt())
-            params.addProperty(ApiConstants.Gender, gender)
-            params.addProperty(ApiConstants.PhoneNumber, contactNumber)
-            params.addProperty(ApiConstants.District, district)
-            params.addProperty(ApiConstants.State, state)
-            params.addProperty(ApiConstants.Address, address)
+            params.addProperty(ApiConstants.SrCitizenName, name)
+            params.addProperty(ApiConstants.SrCitizenAge, age.toInt())
+            params.addProperty(ApiConstants.SrCitizenGender, gender)
+            params.addProperty(ApiConstants.SrCitizenContactNumber, contactNumber)
+            params.addProperty(ApiConstants.SrCitizenDistrict, district)
+            params.addProperty(ApiConstants.SrCitizenState, state)
+            params.addProperty(ApiConstants.SrCitizenBlock, address)
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)

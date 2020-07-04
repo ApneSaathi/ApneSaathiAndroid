@@ -251,6 +251,8 @@
     <string name="check_internet">कृपया इंटरनेट कनेक्शन तपासा</string>
     <string name="sr_citizen_registered_successfully">ज्येष्ठ नागरिकांनी यशस्वीरित्या नोंदणी केली.</string>
 
+    <string name="not_available">माहिती उपलब्ध नाही</string>
+
     <string-array name="states_array">
         <item>आसाम</item>
         <item>बिहार</item>

@@ -267,6 +267,7 @@
     <string name="validate_emergency_required">Provide details of is any <b>emergency and/or escalation ?</b> </string>
     <string name="check_internet">Please check internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
+    <string name="not_available">Not Available</string>
 
     <string-array name="states_array">
         <item>Assam</item>
