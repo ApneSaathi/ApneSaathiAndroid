@@ -28,7 +28,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     SeniorCitizenDateAdapter.OnItemClickListener {
 
-    private var adapter: SeniorCitizenDateAdapter? = null
+    private var adapter: SeniorCitizenDateAdapter = SeniorCitizenDateAdapter()
     var callData: CallData? = null
     var grievancesList: MutableList<SrCitizenGrievance> = mutableListOf()
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
@@ -45,6 +45,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         toolBar.setNavigationOnClickListener { activity?.onBackPressed() }
 
         getGrievanceData()
+        initRecyclerView()
         initClicks()
     }
 
@@ -55,7 +56,6 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         callData?.callId?.let { it ->
             viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
                 grievancesList = it
-                initRecyclerView()
                 bindData()
             })
         }
@@ -84,7 +84,9 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_address.text = spanAddress
         }
         viewModel.getDataList().observe(viewLifecycleOwner, Observer {
-            initAdapter()
+            adapter.setData(it)
+            adapter.setOnItemClickListener(this)
+            rcl_call_dates.layoutManager?.scrollToPosition(adapter.selectedPos)
         })
         if (grievancesList.size > 0) {
             viewModel.prepareData(grievancesList)
@@ -127,18 +129,23 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         when (callData?.callStatusSubCode) {
             "1" -> {
                 tv_call_status.text = getString(R.string.no_response_single_line)
+                tv_call_status_new.text = getString(R.string.no_response_single_line)
             }
             "2" -> {
                 tv_call_status.text = getString(R.string.not_picked_single_line)
+                tv_call_status_new.text = getString(R.string.not_picked_single_line)
             }
             "3" -> {
                 tv_call_status.text = getString(R.string.not_reachable_single_line)
+                tv_call_status_new.text = getString(R.string.not_reachable_single_line)
             }
             "4" -> {
                 tv_call_status.text = getString(R.string.dis_connected)
+                tv_call_status_new.text = getString(R.string.dis_connected)
             }
             "5" -> {
                 tv_call_status.text = getString(R.string.connected)
+                tv_call_status_new.text = getString(R.string.connected)
             }
         }
         when (callData?.callStatusCode) {
@@ -324,21 +331,12 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         val layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         rcl_call_dates.layoutManager = layoutManager
+        rcl_call_dates.adapter = adapter
     }
 
-    private fun initAdapter() {
-        if (adapter == null) {
-            adapter = SeniorCitizenDateAdapter(viewModel.getDataList().value)
-            adapter?.setOnItemClickListener(this)
-            rcl_call_dates.adapter = adapter
-        } else {
-            adapter?.notifyDataSetChanged()
-        }
-
-    }
 
     override fun onItemClick(position: Int, dateItem: DateItem) {
-        adapter?.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
         if (grievancesList.size > 0) {
             bindGrievanceData(grievancesList[position])
             makeGrievanceContainerVisible()

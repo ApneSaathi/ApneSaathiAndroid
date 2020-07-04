@@ -272,8 +272,7 @@
                     android:id="@+id/rcl_call_dates"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/dimen_5"
-                    android:paddingBottom="@dimen/dimen_5"
+                    android:padding="@dimen/dimen_5"
                     android:visibility="visible"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_border" />
@@ -683,6 +682,7 @@
                         android:textColor="@color/color_grey_txt" />
 
                     <TextView
+                        android:id="@+id/tv_call_status_new"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_2"

@@ -15,6 +15,7 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     BaseViewModel() {
     private val dateList: MutableList<DateItem> = ArrayList()
     private val dataList = MutableLiveData<List<DateItem>>()
+    private lateinit var grievanceList:LiveData<MutableList<SrCitizenGrievance>>
     fun prepareData(data: MutableList<SrCitizenGrievance>?) {
         dateList.clear()
         if (data != null) {
@@ -43,7 +44,7 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         val fa = input.parse(date)
         return output.format(fa)
     }
-
+    fun getGrievanceList():LiveData<MutableList<SrCitizenGrievance>> = grievanceList
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     //    fun getSeniorCitizenDetails(context: Context) {

@@ -73,7 +73,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+            params.addProperty(ApiConstants.VolunteerId, 1234)
             dataManager.getCallDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard)
