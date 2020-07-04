@@ -48,6 +48,7 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
                             io {
 
                                 val data = it.getStatusCode()
+                                dataManager.setUserId(it.getVolunteerId()!!)
 
                             }
                             loaderObservable.value =
