@@ -322,4 +322,6 @@
     <string name="contctNumber">संपर्क क्रमांक</string>
     <string name="email">ईमेल</string>
     <string name="Txtaddress">पत्ता</string>
+    <string name="assigned">Assigned</string>
+    <string name="completed">Completed</string>
 </resources>

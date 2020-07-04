@@ -124,6 +124,34 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         } else {
             txt_medical_history.text = medicalHistory
         }
+        when (callData?.callStatusSubCode) {
+            "1" -> {
+                tv_call_status.text = getString(R.string.no_response_single_line)
+            }
+            "2" -> {
+                tv_call_status.text = getString(R.string.not_picked_single_line)
+            }
+            "3" -> {
+                tv_call_status.text = getString(R.string.not_reachable_single_line)
+            }
+            "4" -> {
+                tv_call_status.text = getString(R.string.dis_connected)
+            }
+            "5" -> {
+                tv_call_status.text = getString(R.string.connected)
+            }
+        }
+        when (callData?.callStatusCode) {
+            "0" -> {
+                txt_status.text = getString(R.string.assigned)
+            }
+            "1" -> {
+                txt_status.text = getString(R.string.pending)
+            }
+            "2" -> {
+                txt_status.text = getString(R.string.completed)
+            }
+        }
         txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
         txt_call_response.text = callData?.talkedWith
 

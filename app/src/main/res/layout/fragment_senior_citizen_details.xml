@@ -45,11 +45,11 @@
                     android:background="@drawable/bg_item_background"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="visible"
                     android:paddingLeft="@dimen/dimen_20"
                     android:paddingTop="@dimen/dimen_20"
                     android:paddingRight="@dimen/dimen_20"
                     android:paddingBottom="@dimen/dimen_15"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -75,14 +75,12 @@
                                 android:id="@+id/txt_user_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Scott Osborne (60Y)"
                                 android:textColor="@color/color_black" />
 
                             <TextView
                                 android:id="@+id/txt_user_phone_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="96084309390"
                                 android:textColor="@color/color_dark_grey" />
                         </LinearLayout>
 
@@ -101,160 +99,169 @@
                         android:text="@string/address_bold"
                         android:textColor="@color/color_black" />
                 </LinearLayout>
+
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/cg_more_details_group"
-                    android:background="@color/color_transparent_light_blue"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:background="@color/color_transparent_light_blue"
                     android:paddingTop="@dimen/dimen_5"
-                    android:visibility="visible"
                     android:paddingBottom="@dimen/dimen_5"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="txt_medical_history_title,txt_medical_history,txt_issues_raised_title,txt_issue_raised,txt_status_title,txt_status,txt_issue_date_title,txt_issue_raised_date,txt_escalation_title,txt_escalation,txt_covid_symptoms_title,txt_covid_symptoms"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_covid_symptoms_title"
                     app:layout_constraintEnd_toEndOf="@+id/txt_medical_history_title"
                     app:layout_constraintStart_toStartOf="@+id/txt_medical_history_title"
-                    app:layout_constraintTop_toTopOf="@+id/txt_medical_history_title"
-                    app:constraint_referenced_ids="txt_medical_history_title,txt_medical_history,txt_issues_raised_title,txt_issue_raised,txt_status_title,txt_status,txt_issue_date_title,txt_issue_raised_date,txt_escalation_title,txt_escalation,txt_covid_symptoms_title,txt_covid_symptoms">
-                </androidx.constraintlayout.widget.Group>
+                    app:layout_constraintTop_toTopOf="@+id/txt_medical_history_title"></androidx.constraintlayout.widget.Group>
 
                 <TextView
                     android:id="@+id/txt_medical_history_title"
-                    android:textStyle="bold"
-                    android:text="@string/medical_history"
-                    android:paddingLeft="@dimen/dimen_20"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20"
                     android:paddingTop="@dimen/dimen_10"
                     android:paddingBottom="@dimen/dimen_5"
-                    android:layout_height="wrap_content"
+                    android:text="@string/medical_history"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container" />
 
                 <TextView
-                    android:paddingTop="@dimen/dimen_10"
                     android:id="@+id/txt_medical_history"
-                    android:text="Diabetes, Blood Pressure"
-                    android:paddingLeft="@dimen/dimen_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_2"
+                    android:paddingTop="@dimen/dimen_10"
                     app:layout_constraintStart_toEndOf="@id/txt_medical_history_title"
                     app:layout_constraintTop_toBottomOf="@id/ll_personal_details_container" />
+
                 <TextView
                     android:id="@+id/txt_issues_raised_title"
-                    android:textStyle="bold"
-                    android:text="@string/issue_raised"
-                    android:paddingLeft="@dimen/dimen_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:text="@string/issue_raised"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_medical_history_title" />
 
                 <TextView
-                    android:paddingBottom="@dimen/dimen_5"
                     android:id="@+id/txt_issue_raised"
-                    android:text="@string/no_issues"
-                    android:minWidth="100dp"
-                    android:maxWidth="100dp"
-                    android:paddingLeft="@dimen/dimen_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="100dp"
+                    android:minWidth="100dp"
+                    android:paddingLeft="@dimen/dimen_2"
+                    android:paddingBottom="@dimen/dimen_5"
+                    android:text="@string/no_issues"
                     app:layout_constraintStart_toEndOf="@id/txt_issues_raised_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_medical_history_title" />
+
                 <TextView
                     android:id="@+id/txt_status_title"
-                    android:textStyle="bold"
-                    android:text="@string/status"
-                    android:paddingLeft="@dimen/dimen_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:text="@string/status"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/txt_issue_raised"
                     app:layout_constraintTop_toBottomOf="@id/txt_medical_history_title" />
+
                 <TextView
                     android:id="@+id/txt_status"
-                    android:textColor="@color/color_orange"
-                    android:text="Under review"
-                    android:paddingLeft="@dimen/dimen_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_2"
+                    android:text="--"
+                    android:textColor="@color/color_orange"
                     app:layout_constraintStart_toEndOf="@id/txt_status_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_medical_history_title" />
+
                 <TextView
                     android:id="@+id/txt_issue_date_title"
-                    android:textStyle="bold"
-                    android:text="@string/raised_on"
-                    android:paddingLeft="@dimen/dimen_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:text="@string/raised_on"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_issue_raised" />
+
                 <TextView
                     android:id="@+id/txt_issue_raised_date"
-                    android:text="--"
-                    android:paddingLeft="@dimen/dimen_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_2"
+                    android:text="--"
                     app:layout_constraintStart_toEndOf="@id/txt_issue_date_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_issue_raised" />
+
                 <TextView
                     android:id="@+id/txt_escalation_title"
-                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20"
                     android:paddingBottom="@dimen/dimen_5"
                     android:text="Escalation:"
-                    android:paddingLeft="@dimen/dimen_20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/txt_status_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_issue_raised" />
+
                 <TextView
                     android:id="@+id/txt_escalation"
-                    android:text="@string/yes"
-                    android:paddingLeft="@dimen/dimen_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_2"
+                    android:text="@string/yes"
                     app:layout_constraintStart_toEndOf="@id/txt_escalation_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_issue_raised" />
+
                 <TextView
                     android:id="@+id/txt_covid_symptoms_title"
-                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_20"
                     android:paddingBottom="@dimen/dimen_10"
                     android:text="@string/covid_symptoms"
-                    android:paddingLeft="@dimen/dimen_20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_escalation_title" />
+
                 <TextView
                     android:id="@+id/txt_covid_symptoms"
-                    android:text="Yes"
-                    android:paddingLeft="@dimen/dimen_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_2"
+                    android:text="Yes"
                     app:layout_constraintStart_toEndOf="@id/txt_covid_symptoms_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_escalation_title" />
+
                 <TextView
                     android:id="@+id/txt_more_details"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_upward_arrow"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:gravity="center"
                     android:text="@string/less_details"
                     android:textAllCaps="false"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="@dimen/text_14"
-                    android:drawablePadding="@dimen/dimen_5"
-                    android:drawableEnd="@drawable/ic_upward_arrow"
                     app:iconGravity="end"
                     app:iconPadding="@dimen/dimen_5"
                     app:iconTint="@android:color/holo_red_dark"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintStart_toEndOf="@id/txt_covid_symptoms_title"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_covid_symptoms" />
 
                 <View
-                    android:layout_marginTop="@dimen/dimen_5"
                     android:id="@+id/view_border"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dimen_5"
                     android:background="@color/color_light_grey_bg"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_more_details">
@@ -315,11 +322,11 @@
 
                             <TextView
                                 android:id="@+id/tv_call_status"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_2"
-                                android:text="@string/attended"
-                                android:textColor="@color/color_orange" />
+                                android:text="@string/attended" />
 
                         </LinearLayout>
 
@@ -340,11 +347,10 @@
 
                             <TextView
                                 android:id="@+id/txt_call_response"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_2"
-                                android:text="Senior Citizen"
-                                android:textColor="@color/color_orange" />
+                                android:layout_marginTop="@dimen/dimen_2" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -391,11 +397,10 @@
 
                             <TextView
                                 android:id="@+id/txt_related_info"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_2"
-                                android:text="Prevention, Access"
-                                android:textColor="@color/color_orange" />
+                                android:layout_marginTop="@dimen/dimen_2" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -403,76 +408,76 @@
                                 android:layout_marginTop="@dimen/dimen_10"
                                 android:text="@string/covid_symptoms"
                                 android:textColor="@color/color_grey_txt" />
+
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/txt_covid"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_2"
                                 android:text="@string/no"
                                 android:textColor="@color/color_orange"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:visibility="gone" />
+
                             <HorizontalScrollView
                                 android:id="@+id/cl_covid_symptoms"
                                 android:layout_width="wrap_content"
-                                android:scrollbars="none"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:scrollbars="none">
+
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="@dimen/dimen_5">
+                                    android:layout_marginTop="@dimen/dimen_5"
+                                    android:orientation="horizontal">
+
                                     <TextView
                                         android:id="@+id/txt_cough"
+                                        style="@style/form_default_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/cough"
-                                        android:layout_marginRight="@dimen/dimen_10"
+                                        android:layout_marginRight="@dimen/dimen_5"
                                         android:drawableTop="@drawable/ic_cough_selected"
-                                        android:gravity="center"
                                         android:drawablePadding="@dimen/dimen_2"
+                                        android:gravity="center"
                                         android:minWidth="@dimen/view_size_40"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10"
+                                        android:text="@string/cough"
                                         tools:ignore="TooDeepLayout" />
+
                                     <TextView
                                         android:id="@+id/txt_fever"
-                                        android:drawableTop="@drawable/ic_fever_icon_selected"
+                                        style="@style/form_default_text"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:layout_marginRight="@dimen/dimen_10"
+                                        android:layout_marginRight="@dimen/dimen_5"
+                                        android:drawableTop="@drawable/ic_fever_icon_selected"
                                         android:drawablePadding="@dimen/dimen_2"
+                                        android:gravity="center"
                                         android:minWidth="@dimen/view_size_40"
-                                        android:text="@string/fever"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10" />
+                                        android:text="@string/fever" />
+
                                     <TextView
                                         android:id="@+id/txt_shortness"
+                                        style="@style/form_default_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:layout_marginRight="@dimen/dimen_10"
+                                        android:layout_marginRight="@dimen/dimen_5"
                                         android:drawableTop="@drawable/ic_shortness_icon_selected"
-                                        android:lines="2"
                                         android:drawablePadding="@dimen/dimen_2"
+                                        android:gravity="center"
                                         android:maxWidth="@dimen/view_size_60"
-                                        android:minLines="2"
                                         android:singleLine="false"
-                                        android:text="@string/shortness_of_breath"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10" />
+                                        android:text="@string/shortness_of_breath" />
 
                                     <TextView
                                         android:id="@+id/txt_sore_throat"
+                                        style="@style/form_default_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:drawablePadding="@dimen/dimen_2"
                                         android:drawableTop="@drawable/ic_sore_throat_selected"
+                                        android:drawablePadding="@dimen/dimen_2"
+                                        android:gravity="center"
                                         android:minWidth="@dimen/view_size_40"
-                                        android:text="@string/sore_throat"
-                                        android:textColor="@color/color_orange"
-                                        android:textSize="@dimen/text_10" />
+                                        android:text="@string/sore_throat" />
 
                                 </LinearLayout>
                             </HorizontalScrollView>
@@ -494,11 +499,10 @@
 
                             <TextView
                                 android:id="@+id/txt_other_medical_problems"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_2"
-                                android:text="@string/no"
-                                android:textColor="@color/color_orange" />
+                                android:layout_marginTop="@dimen/dimen_2" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -509,12 +513,10 @@
 
                             <TextView
                                 android:id="@+id/tv_quarantine_status"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_5"
-                                android:text="@string/not_quarantined"
-                                android:textColor="@color/color_orange"
-                                />
+                                android:layout_marginTop="@dimen/dimen_5" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -556,16 +558,16 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text= "@string/lack_of_essential_services"
+                                android:text="@string/lack_of_essential_services"
                                 android:textColor="@color/color_grey_txt" />
 
                             <TextView
                                 android:id="@+id/txt_grievance"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5"
-                                android:text="@string/yes"
-                                android:textColor="@color/color_orange" />
+                                android:text="@string/yes" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -576,11 +578,10 @@
 
                             <TextView
                                 android:id="@+id/txt_grievance_priority"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_5"
-                                android:text="Yes"
-                                android:textColor="@color/color_orange" />
+                                android:layout_marginTop="@dimen/dimen_5" />
 
                         </LinearLayout>
 
@@ -598,11 +599,10 @@
 
                             <TextView
                                 android:id="@+id/txt_grievance_category"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_5"
-                                android:text="Lack of food"
-                                android:textColor="@color/color_orange" />
+                                android:layout_marginTop="@dimen/dimen_5" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -613,10 +613,9 @@
 
                             <TextView
                                 android:id="@+id/txt_grievance_desc"
+                                style="@style/form_default_text"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="--"
-                                android:textColor="@color/color_orange" />
+                                android:layout_height="wrap_content" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -655,10 +654,9 @@
 
                         <TextView
                             android:id="@+id/txt_other_problem"
+                            style="@style/form_default_text"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="--"
-                            android:textColor="@color/color_orange" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 

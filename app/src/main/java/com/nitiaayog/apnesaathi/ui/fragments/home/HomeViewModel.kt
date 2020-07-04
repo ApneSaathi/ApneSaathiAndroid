@@ -34,7 +34,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val grievances: MutableList<Grievances> = mutableListOf()
 
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
-    fun getUniqueGrievanceList(id: Int): LiveData<MutableList<SrCitizenGrievance>> = dataManager.getAllUniqueGrievances(id)
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getGrievances()
 

@@ -320,5 +320,7 @@
     <string name="emergency_escalation">ઇમર્જન્સી એસ્કેલેશન</string>
     <string name="issue_raised">Issue Raised</string>
     <string name="raised_on">Raised on:</string>
+    <string name="assigned">Assigned</string>
+    <string name="completed">Completed</string>
 
 </resources>
