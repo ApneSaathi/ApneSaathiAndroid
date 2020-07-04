@@ -7,9 +7,7 @@ import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
@@ -34,7 +32,7 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
 
     fun callLogin(mContext: Context, phone: String) {
 
-        if (checkNetworkAvailability(mContext,"")) {
+        if (checkNetworkAvailability(mContext, "")) {
             val params = JsonObject()
             params.addProperty(ApiConstants.phoneNo, phone)
 
@@ -44,14 +42,17 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
             }.subscribe({
                 try {
                     if (it.getStatusCode() == "0") {
-                        loaderObservable.value = NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser,it)
+
+                        loaderObservable.value =
+                            NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
                         viewModelScope.launch {
                             io {
 
                                 val data = it.getStatusCode()
 
                             }
-                            loaderObservable.value = NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser,it)
+                            loaderObservable.value =
+                                NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
 
                         }
                     } else loaderObservable.value =

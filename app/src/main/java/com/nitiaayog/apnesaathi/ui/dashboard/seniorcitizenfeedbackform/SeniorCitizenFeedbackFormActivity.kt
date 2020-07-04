@@ -49,7 +49,6 @@ import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.android.synthetic.main.include_recyclerview.view.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import kotlinx.android.synthetic.main.progress_dialog_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -198,6 +197,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     val grievances = viewModel.getGrievance(callId)
                     syncData.id = grievances?.id
                     ui {
+                        civGender.setImageResource(
+                            if (callData.gender == "M") R.drawable.ic_male_user
+                            else R.drawable.ic_female_user
+                        )
+
                         val address = getString(R.string.address).plus(" : ")
                         val dataString = address.plus(callData.block).plus(", ")
                             .plus(callData.district).plus(", ").plus(callData.state)
@@ -211,7 +215,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                         tvSrCitizenAddress.text = spanAddress
 
                         setCallStatus(callData.callStatusSubCode!!)
-                        setTalkedWith(callData.talkedWith!!)
+                        setTalkedWith(callData.talkedWith!!, callData.callStatusSubCode!!)
 
                         if (callData.callStatusSubCode == "5") {
                             grievances?.run {
@@ -254,6 +258,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
         "5" -> {
             changeButtonSelection(btnConnected)
+
             viewModel.setCallStatus("5")
             tvTalkWith.visibility = View.VISIBLE
             actTalkWith.visibility = View.VISIBLE
@@ -262,21 +267,33 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
-    private fun setTalkedWith(talkedWith: String) {
-        when (talkedWith) {
-            getString(R.string.sr_citizen) -> {
-                actTalkWith.setText(R.string.sr_citizen)
-                viewModel.setTalkedWith(getString(R.string.sr_citizen))
-            }
-            getString(R.string.family_member_of_sr_citizen) -> {
-                actTalkWith.setText(R.string.family_member_of_sr_citizen)
-                viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
-            }
-            getString(R.string.community_member) -> {
-                actTalkWith.setText(R.string.community_member)
-                viewModel.setTalkedWith(getString(R.string.community_member))
-            }
+    private fun setTalkedWith(talkedWith: String, callStatus: String) {
+        if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")) {
+            actTalkWith.setText(R.string.sr_citizen)
+            viewModel.setTalkedWith(getString(R.string.sr_citizen))
+
+            cgMedicalDetails.visibility = View.VISIBLE
+        } else if ((talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
+            (talkedWith.toLowerCase(Locale.getDefault()) == "f")
+        ) {
+            actTalkWith.setText(R.string.family_member_of_sr_citizen)
+            viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
+            cgMedicalDetails.visibility = View.VISIBLE
+        } else if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c")) {
+            actTalkWith.setText(R.string.community_member)
+            viewModel.setTalkedWith(getString(R.string.community_member))
+            tvAnySrCitizenInHome.visibility = View.VISIBLE
         }
+
+        if (((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")
+                    || (talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
+                    (talkedWith.toLowerCase(Locale.getDefault()) == "f") ||
+                    (talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c") &&
+                    (callStatus == "5"))
+        ) {
+            tvTalkWith.visibility == View.VISIBLE
+            actTalkWith.visibility == View.VISIBLE
+        } else cgMedicalDetails.visibility = View.GONE
     }
 
     private fun setCheckForMedicalHistoryData(grievance: SrCitizenGrievance) {
@@ -315,7 +332,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             viewModel.addMedicalHistory(it.name)
         }
         if (selectedItems.isNotEmpty()) {
-            if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+            //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
             rvMedicalHistorySrCitizenAdapter.notifyDataSetChanged()
             rvMedicalHistorySrCitizen.visibility = View.VISIBLE
         }
@@ -335,7 +352,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         ) changeButtonSelectionWithIcon(btnDetection)
 
         checkTalkedAbout()
-        if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
     }
 
     private fun setBehavioralChangesData(behavioralChange: String) {
@@ -351,7 +368,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             }
         )
         actBehaviorChange.setText(viewModel.getBehaviorChange())
-        if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
     }
 
     private fun setCovidData(grievance: SrCitizenGrievance) {
@@ -400,7 +417,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 }
             )
         }
-        if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
+        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
     }
 
     private fun setComplaintData(grievance: SrCitizenGrievance) {
@@ -615,11 +632,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         // Call Status Button Clicks
         btnNoResponse.throttleClick().subscribe {
             manageResetForm(btnNoResponse)
-            viewModel.setCallStatus("3")
+            viewModel.setCallStatus("1")
         }.autoDispose(disposables)
         btnNotPicked.throttleClick().subscribe {
             manageResetForm(btnNotPicked)
-            viewModel.setCallStatus("3")
+            viewModel.setCallStatus("2")
         }.autoDispose(disposables)
         btnNotReachable.throttleClick().subscribe {
             manageResetForm(btnNotReachable)
@@ -1142,13 +1159,16 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     BaseUtility.showAlertMessage(
                         this, R.string.alert, R.string.no_internet_save_data_in_app,
                         R.string.thanks_go_back
-                    )
+                    ) { dialog, _ ->
+                        dialog.dismiss()
+                        finish()
+                    }
                 ApiProvider.ApiRegisterSeniorCitizen ->
                     BaseUtility.showAlertMessage(this, R.string.alert, R.string.check_internet)
             }
             is NetworkRequestState.LoadingData -> progressDialog.show()
             is NetworkRequestState.ErrorResponse -> {
-                progressBar.visibility = View.GONE
+                progressDialog.dismiss()
                 BaseUtility.showAlertMessage(
                     this, R.string.alert, R.string.can_not_connect_to_server
                 )
@@ -1294,8 +1314,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.CallId, callId.toInt())
         syncData.callId = callId.toInt()
 
-        params.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
-        syncData.volunteerId = "1234"/*dataManager.getUserId()*/
+        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+        syncData.volunteerId = dataManager.getUserId()
 
         params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
         syncData.callStatusSubCode = viewModel.getCallStatus()
@@ -1310,7 +1330,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
-        arraySubParams.addProperty(ApiConstants.VolunteerId, 1234/*dataManager.getUserId()*/)
+        arraySubParams.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
 
         var dataList = viewModel.getMedicalHistory()
         if (dataList.any { it == getString(R.string.no_problems) }) {
