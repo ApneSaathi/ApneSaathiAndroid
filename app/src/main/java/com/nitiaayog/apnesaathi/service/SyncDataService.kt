@@ -178,13 +178,13 @@ class SyncDataService : JobService() {
                 CoroutineScope(Dispatchers.IO).launch {
                     // (it.grievanceId != "-1") grievance is not added if added then
                     // that id will returned
-                    dataManager.updateCallStatus(grievance.callStatusSubCode)
+                    //dataManager.updateCallStatus(grievance.callStatusSubCode)
+                    dataManager.delete(grievance)
                     if (it.grievanceId.isNotEmpty() && (it.grievanceId != "-1")) {
                         try {
                             if (dataManager.isDataExist(grievance.id!!, grievance.callId!!)
                                 == null
                             ) {
-                                dataManager.delete(grievance)
                                 grievance.id = it.grievanceId.toInt()
                                 dataManager.insertGrievance(grievance)
                             } else

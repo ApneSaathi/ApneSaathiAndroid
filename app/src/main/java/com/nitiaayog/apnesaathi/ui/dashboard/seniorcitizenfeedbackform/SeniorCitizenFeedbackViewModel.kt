@@ -15,6 +15,9 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -367,11 +370,11 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                         updateData.id = syncData.id
                         updateData.createdDate = syncData.createdDate
 
-                        dataManager.updateCallStatus(callStatus)
+                        //dataManager.updateCallStatus(callStatus)
                         dataManager.insertGrievance(updateData)
                     } else
                         dataManager.updateGrievance(updateData)
-                    dataManager.insert(syncData)
+
                 } //else
                 //dataManager.updateCallStatus(callStatus)
                 //dataManager.updateCallData(callData)
@@ -424,18 +427,30 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                         loaderObservable.value = NetworkRequestState.SuccessResponse(
                             ApiProvider.ApiSaveSeniorCitizenFeedbackForm, it
                         )
-                    } else loaderObservable.value =
-                        NetworkRequestState.Error(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
+                    } else {
+                        loaderObservable.value =
+                            NetworkRequestState.Error(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
+                        val data = async {
+                            dataManager.insertSyncGrievance(syncData)
+                        }
+                    }
                 }, {
                     try {
                         loaderObservable.value =
                             NetworkRequestState.ErrorResponse(
                                 ApiProvider.ApiSaveSeniorCitizenFeedbackForm
                             )
+                        val data = async {
+                            dataManager.insertSyncGrievance(syncData)
+                        }
                     } catch (e: Exception) {
                         println("TAG -- MyData --> ${e.message}")
                     }
                 }).autoDispose(disposables)
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    dataManager.insertSyncGrievance(syncData)
+                }
             }
         }
     }

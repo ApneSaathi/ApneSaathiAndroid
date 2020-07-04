@@ -69,8 +69,19 @@ class AppDataManager private constructor(
 
     // Database Access
     // => Table : call_details
+    override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
+        callsDataDao.getAllCallsList(arrayOf("null", ""))
+
+    override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
+        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4"))
+
+    override fun getCompletedCallsList(): LiveData<MutableList<CallData>> =
+        callsDataDao.getAllCallsList(arrayOf("5"))
+
+    override fun getAllCallsList(): LiveData<MutableList<CallData>> =
+        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5"))
+
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
-    override fun getAllCallsList(): LiveData<MutableList<CallData>> = callsDataDao.getAllCallsList()
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
     override fun updateCallStatus(callStatus: String) = callsDataDao.update(callStatus)
     override fun updateCallData(callData: CallData): Long = callsDataDao.update(callData)
@@ -128,7 +139,7 @@ class AppDataManager private constructor(
     override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
-    override suspend fun insert(syncData: SyncSrCitizenGrievance) =
+    override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
 
     override fun delete(syncData: SyncSrCitizenGrievance) =
