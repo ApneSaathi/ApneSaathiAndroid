@@ -85,7 +85,7 @@ class ProfileFragment : Fragment() {
                     openCamera()
                 } else {
                     Snackbar.make(
-                        constraintLayout,
+                        this.requireView(),
                         resources.getString(R.string.permission_denied),
                         Snackbar.LENGTH_LONG
                     ).show()

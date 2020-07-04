@@ -14,7 +14,7 @@ interface GrievancesDao {
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES}")
     fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>>
 
-    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.CallId}=:callId")
+    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.CallId}=:callId ORDER BY ${Columns.CreatedDate}")
     fun getAllUniqueGrievances(callId: Int = 11): LiveData<MutableList<SrCitizenGrievance>>
 
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} LIMIT :dataCount")

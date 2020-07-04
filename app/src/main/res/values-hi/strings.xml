@@ -143,6 +143,7 @@
     <string name="parkinson">पार्किंसंस रोग</string>
     <string name="cataracts">मोतियाबिंद</string>
     <string name="no_response">कोई जवाब नहीं</string>
+    <string name="no_response_single_line">कोई जवाब नहीं</string>
     <string name="phone_not_picked">फोन नहीं उठाया</string>
     <string name="phone_not_reachable">फोन नहीं पहुंच पा रहा है</string>
     <string name="call_disconnected">कॉल काट दिया गया</string>
@@ -164,7 +165,9 @@
     <string name="low">कम</string>
 
     <string name="not_picked">नहीं\nउठाया</string>
+    <string name="not_picked_single_line">नहीं उठाया</string>
     <string name="not_reachable">पहुँच से\nबाहर</string>
+    <string name="not_reachable_single_line">पहुँच से बाहर</string>
     <string name="dis_connected">डिस्कनेक्ट किया गया</string>
     <string name="connected">जुड़े हुए</string>
     <string name="talked_with">किसके साथ बात की</string>
@@ -345,4 +348,6 @@
 
 
     <string name="permission_denied">अनुमति नहीं मिली</string>
+    <string name="assigned">निरुपित</string>
+    <string name="completed">पूरा कर लिया है</string>
 </resources>

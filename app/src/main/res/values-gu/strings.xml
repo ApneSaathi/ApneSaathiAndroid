@@ -144,6 +144,7 @@
     <string name="parkinson">ધ્રુજારી ની બીમારી</string>
     <string name="cataracts">મોતિયા</string>
     <string name="no_response">કોઈ જવાબ નથી</string>
+    <string name="no_response_single_line">કોઈ જવાબ નથી</string>
     <string name="phone_not_picked">ફોન લેવામાં આવ્યો નથી</string>
     <string name="phone_not_reachable">ફોન પહોંચી શકાય તેમ નથી</string>
     <string name="call_disconnected">ક Callલ ડિસ્કનેક્ટ થયો</string>
@@ -165,7 +166,9 @@
     <string name="low">નીચા</string>
 
     <string name="not_picked">ઉઠાવી\nનથી</string>
+    <string name="not_picked_single_line">ઉઠાવી નથી</string>
     <string name="not_reachable">પહોંચી શકાય\nતેવું નથી</string>
+    <string name="not_reachable_single_line">પહોંચી શકાય તેવું નથી</string>
     <string name="dis_connected">ડિસ્કનેક્ટ થયેલ</string>
     <string name="connected">કનેક્ટેડ</string>
     <string name="talked_with">કોની સાથે વાત કરી</string>
@@ -340,5 +343,7 @@
     <string name="emergency_escalation">ઇમર્જન્સી એસ્કેલેશન</string>
     <string name="issue_raised">સમસ્યા રજીસ્ટર થઈ ચૂકી છે</string>
     <string name="raised_on">समस्या दर्ज की गई है</string>
+    <string name="assigned">સોંપ્યું</string>
+    <string name="completed">પૂર્ણ</string>
 
 </resources>

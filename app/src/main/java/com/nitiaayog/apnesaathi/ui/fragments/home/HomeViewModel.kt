@@ -44,9 +44,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.getCompletedCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
 
-    fun getUniqueGrievanceList(id: Int): LiveData<MutableList<SrCitizenGrievance>> =
-        dataManager.getAllUniqueGrievances(id)
-
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getGrievances()
 
@@ -76,7 +73,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+            params.addProperty(ApiConstants.VolunteerId, 1234)
             dataManager.getCallDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard)

@@ -146,6 +146,7 @@
     <string name="parkinson">पार्किन्सन रोग</string>
     <string name="cataracts">मोतीबिंदू</string>
     <string name="no_response">प्रतिसाद\nनाही</string>
+    <string name="no_response_single_line">प्रतिसाद\nनाही</string>
     <string name="phone_not_picked">फोन उचलला नाही</string>
     <string name="phone_not_reachable">फोन पोहोचण्यायोग्य नाही</string>
     <string name="call_disconnected">कॉल डिस्कनेक्ट झाला</string>
@@ -167,7 +168,9 @@
     <string name="low">कमी</string>
 
     <string name="not_picked">निवडलेले\nनाही</string>
+    <string name="not_picked_single_line">निवडलेले नाही</string>
     <string name="not_reachable">पोहोचण्यायोग्य\nनाही</string>
+    <string name="not_reachable_single_line">पोहोचण्यायोग्य नाही</string>
     <string name="dis_connected">डिस्कनेक्ट केलेले</string>
     <string name="connected">जोडलेले</string>
     <string name="talked_with">कोणाशी बोललो</string>
@@ -344,4 +347,6 @@
     <string name="contctNumber">संपर्क क्रमांक</string>
     <string name="email">ईमेल</string>
     <string name="Txtaddress">पत्ता</string>
+    <string name="assigned">नियुक्त केले</string>
+    <string name="completed">पूर्ण झाले</string>
 </resources>

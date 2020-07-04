@@ -101,7 +101,7 @@
     <string name="cough">Cough</string>
     <string name="fever">Fever</string>
     <string name="shortness_of_breath">Shortness of\nbreath</string>
-    <string name="sore_throat">Sore Throat</string>
+    <string name="sore_throat">Sore \nthroat</string>
     <string name="type_here">Type here…</string>
     <string name="grivence">Grivence</string>
     <string name="save">Save</string>
@@ -137,6 +137,7 @@
     <string name="parkinson">Parkinson\'s disease</string>
     <string name="cataracts">Cataracts</string>
     <string name="no_response">No\nResponse</string>
+    <string name="no_response_single_line">No Response</string>
     <string name="phone_not_picked">Phone not picked</string>
     <string name="phone_not_reachable">Phone not reachable</string>
     <string name="call_disconnected">Call disconnected</string>
@@ -182,7 +183,9 @@
     <string name="personal_details">Personal Details</string>
     <string name="sr_citizen_follow_up">Sr. Citizen Follow up</string>
     <string name="not_picked">Not\nPicked</string>
+    <string name="not_picked_single_line">Not Picked</string>
     <string name="not_reachable">Not\nReachable</string>
+    <string name="not_reachable_single_line">Not Reachable</string>
     <string name="dis_connected">Disconnected</string>
     <string name="connected">Connected</string>
     <string name="talked_with">Talked with</string>
@@ -375,4 +378,6 @@
     <string name="Txtaddress">Address</string>
     <string name="permission_denied">Permission denied</string>
     <string name="splashbottomtagline">a colaborative campaign by </string>
+    <string name="assigned">Assigned</string>
+    <string name="completed">Completed</string>
 </resources>
