@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
+import com.nitiaayog.apnesaathi.model.Grievances
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 
 @Dao
@@ -13,7 +14,7 @@ interface GrievancesDao {
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES}")
     fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>>
 
-    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.CallId}=:callId")
+    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.CallId}=:callId ORDER BY ${Columns.CreatedDate}")
     fun getAllUniqueGrievances(callId: Int = 11): LiveData<MutableList<SrCitizenGrievance>>
 
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} LIMIT :dataCount")
@@ -27,6 +28,17 @@ interface GrievancesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(grievances: SrCitizenGrievance): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun updateJustId() {
+
+    }
+
+    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.Id}=:id AND ${Columns.CallId}=:callId")
+    fun isDataExist(id: Int, callId: Int): SrCitizenGrievance?
+
+    @Delete
+    fun deleteGrievance(grievances: SrCitizenGrievance)
 
     @Query(
         "UPDATE ${Tables.TABLE_GRIEVANCES} SET ${Columns.IsDiabetic}=:hasDiabetic,${Columns.IsBloodPressure}=:hasBloodPressure,${Columns.IsLungAilment}=:hasLungAilment,${Columns.IsCancerOrMajorSurgery}=:cancerOrMajorSurgery,${Columns.OtherAilments}=:otherAilments,${Columns.RemarkOnMedicalHistory}=:remarksMedicalHistory,${Columns.InfoTalkAbout}=:relatedInfoTalkedAbout,${Columns.NoticedBehaviouralChanges}=:behavioralChangesNoticed,${Columns.HasCovidSymptoms}=:hasCovidSymptoms,${Columns.HasCough}=:hasCough,${Columns.HasFever}=:hasFever,${Columns.HasShortnessOfBreath}=:hasShortnessOfBreath,${Columns.HasSoreThroat}=:hasSoreThroat,${Columns.QuarantineStatus}=:quarantineStatus,${Columns.LackOfEssentialServices}=:lackOfEssentialServices,${Columns.FoodShortage}=:foodShortage,${Columns.MedicineShortage}=:medicineShortage,${Columns.AccessToBankingIssue}=:accessToBankingIssue,${Columns.UtilitySupplyIssue}=:utilitySupplyIssue,${Columns.HygieneIssue}=:hygieneIssue,${Columns.SafetyIssue}=:safetyIssue,${Columns.EmergencyServiceIssue}=:emergencyServiceIssue,${Columns.PhoneAndInternetIssue}=:phoneAndInternetIssue,${Columns.IsEmergencyServiceRequired}=:emergencyServiceRequired,${Columns.RemarksImportantInfo}=:impRemarkInfo WHERE ${Columns.Id}=:id AND ${Columns.CallId}=:callId"

@@ -14,6 +14,12 @@ import java.util.*
 
 object BaseUtility {
 
+    const val FORMAT_SERVER_DATE_TIME: String = "yyyy-MM-dd'T'HH:mm:ss"
+    const val FORMAT_LOCAL_DATE_TIME: String = "yyyy-MM-dd HH:mm:ss"
+
+    private const val ALLOWED_NUMBERS = "0123456789"
+    private const val ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm"
+
     fun validateEmailFormat(emailId: String) = Patterns.EMAIL_ADDRESS.matcher(emailId).matches()
 
     fun validatePhoneNumber(phoneNumber: String) = Patterns.PHONE.matcher(phoneNumber).matches()
@@ -39,12 +45,27 @@ object BaseUtility {
         try {
             val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
             val outputDate: Date? = inputFormatter.parse(date)
-            val formattedDate = outFormatter.format(outputDate)
-            return formattedDate
+            return outFormatter.format(outputDate)
         } catch (e: Exception) {
             println("TAG -- MyData -- ServerToLocal --> ${e.message}")
         }
         return outFormatter.format(Date(System.currentTimeMillis()))
+    }
+
+    fun getRandomNumber(numberLength: Int): String {
+        val random = Random()
+        val sb = StringBuilder(numberLength)
+        for (i in 0 until numberLength)
+            sb.append(ALLOWED_NUMBERS[random.nextInt(ALLOWED_NUMBERS.length)])
+        return sb.toString()
+    }
+
+    fun getRandomString(sizeOfRandomString: Int): String {
+        val random = Random()
+        val sb = StringBuilder(sizeOfRandomString)
+        for (i in 0 until sizeOfRandomString)
+            sb.append(ALLOWED_CHARACTERS[random.nextInt(ALLOWED_CHARACTERS.length)])
+        return sb.toString()
     }
 
     /*fun fromDateTime(dateTime: Date?): String? {

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.utility.BaseUtility
 
 class ApneSaathiApplication : Application() {
 
@@ -24,12 +23,11 @@ class ApneSaathiApplication : Application() {
     override fun onCreate() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
+
         AndroidThreeTen.init(this)
         getScreenSize(this)
 
         instance = this
-
-        BaseUtility.format("2020-7-3", "yyyy-MM-dd", "yyyy-MM-dd")
     }
 
     private fun getScreenSize(context: Context) {

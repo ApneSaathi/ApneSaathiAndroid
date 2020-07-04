@@ -9,8 +9,8 @@ import com.nitiaayog.apnesaathi.model.CallData
 @Dao
 interface CallDataDao {
 
-    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS}")
-    fun getAllCallsList(): LiveData<MutableList<CallData>>
+    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallSubStatus} IN (:status)")
+    fun getAllCallsList(status: Array<String>): LiveData<MutableList<CallData>>
 
     @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} LIMIT :dataCount")
     fun getFewCallsList(dataCount: Int = 3): LiveData<MutableList<CallData>>
@@ -32,7 +32,6 @@ interface CallDataDao {
 
     @Transaction
     fun insertOrUpdate(grievances: List<CallData>) = grievances.forEach {
-        if (insert(it) == -1L)
-            update(it)
+        if (insert(it) == -1L) update(it)
     }
 }

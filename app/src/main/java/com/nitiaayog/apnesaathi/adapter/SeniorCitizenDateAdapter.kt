@@ -7,13 +7,23 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
 import kotlinx.android.synthetic.main.list_date_items.view.*
 
-class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
+class SeniorCitizenDateAdapter() :
     RecyclerView.Adapter<SeniorCitizenDateAdapter.SeniorCitizenDateViewHolder>() {
+    var selectedPos = -1
+    private val dataList: MutableList<DateItem> = mutableListOf()
     private lateinit var itemClickListener: OnItemClickListener
-    var selectedPos: Int = dataList!!.size-1
+    fun setData(dataList: List<DateItem>) {
+        this.dataList.apply {
+            this.clear()
+            this.addAll(dataList)
+            selectedPos = itemCount -1
+        }
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,7 +38,7 @@ class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
     }
 
     override fun getItemCount(): Int {
-        return dataList?.count()!!
+        return dataList?.count() ?: 0
     }
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
@@ -52,7 +62,8 @@ class SeniorCitizenDateAdapter(private val dataList: List<DateItem>?) :
                 if (::itemClickListener.isInitialized) {
                     selectedPos = adapterPosition
                     dataList?.get(adapterPosition)?.let { it1 ->
-                        itemClickListener.onItemClick(adapterPosition,
+                        itemClickListener.onItemClick(
+                            adapterPosition,
                             it1
                         )
                     }
