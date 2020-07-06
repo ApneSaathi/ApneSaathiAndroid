@@ -29,7 +29,6 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".ui.localization.LanguageSelectionActivity"
             android:screenOrientation="portrait"
