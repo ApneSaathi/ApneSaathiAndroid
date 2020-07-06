@@ -28,7 +28,7 @@ class SyncDataService : JobService() {
     companion object {
 
         private const val TAG: String = "TAG -- JobService -->"
-        private const val JOB_ID: Int = 1959
+        const val JOB_ID: Int = 1959
 
         fun enqueueWork(context: Context) {
             val jobScheduler =
@@ -56,7 +56,7 @@ class SyncDataService : JobService() {
                 val processData = dataManager.getGrievancesToSync()
                 println("\n$TAG ${processData?.size} data will be synced")
                 processData?.run {
-                    if (processData.isEmpty()) stopSelf()
+                    if (processData.isEmpty()) jobFinished(params, true)
                     else {
                         io {
                             startSyncing(processData)
