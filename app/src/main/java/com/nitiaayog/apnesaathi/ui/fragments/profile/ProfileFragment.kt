@@ -82,7 +82,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         view.TxtChangeLanguage.setOnClickListener {
             val intent = Intent(activity, LanguageSelectionActivity::class.java)
             startActivity(intent)
-            activity!!.finish()
+
         }
         view.TxtLogout.setOnClickListener {
             val intent = Intent(activity, LoginActivity::class.java)

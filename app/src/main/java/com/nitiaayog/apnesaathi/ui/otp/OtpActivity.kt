@@ -17,11 +17,9 @@ import kotlinx.android.synthetic.main.activity_login_otpverify.*
 
 
 class OtpActivity : BaseActivity<OtpActivityModel>() {
-    lateinit var mContext: Context
-    override fun onCreate(savedInstanceState: Bundle?) {
+       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mContext = this@OtpActivity
         EditFirstChar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (EditFirstChar.length() == 1) {
@@ -125,4 +123,8 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
     }
 
     override fun provideLayoutResource(): Int = R.layout.activity_login_otpverify
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }

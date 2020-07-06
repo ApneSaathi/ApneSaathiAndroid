@@ -79,8 +79,7 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
             params.addProperty(ApiConstants.State, state)
             params.addProperty(ApiConstants.Address, address)
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
-                loaderObservable.value =
-                    NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)
+                loaderObservable.value =NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)
             }.doOnSuccess {
                 loaderObservable.value =
                     NetworkRequestState.SuccessResponse(ApiProvider.ApiRegisterSeniorCitizen, it)
