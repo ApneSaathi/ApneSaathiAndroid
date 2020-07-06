@@ -13,20 +13,28 @@ interface DataManager : ApiRequest, PreferenceRequest {
 
     // TODO : Database Methods
     // Table : call_details
-    fun insertCallData(callData: List<CallData>)
+    fun getPendingCallsList(): LiveData<MutableList<CallData>>
+    fun getFollowupCallsList(): LiveData<MutableList<CallData>>
+    fun getCompletedCallsList(): LiveData<MutableList<CallData>>
     fun getAllCallsList(): LiveData<MutableList<CallData>>
+
+    fun insertCallData(callData: List<CallData>)
     fun getCallDetailFromId(id: Int): CallData
     fun updateCallStatus(callStatus: String)
+    fun updateCallData(callData: CallData): Long
 
     // Table : grievances
+    fun insertGrievance(grievance: SrCitizenGrievance): Long
     fun insertGrievances(grievances: List<SrCitizenGrievance>)
     fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>>
     fun getGrievance(callId: Int): SrCitizenGrievance?
-    suspend fun update(grievance: SrCitizenGrievance)
+    fun isDataExist(id: Int, callId: Int): SrCitizenGrievance?
+    fun deleteGrievance(grievance: SrCitizenGrievance)
+    suspend fun updateGrievance(grievance: SrCitizenGrievance)
 
     // Table : sync_grievances_data
     fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?
-    suspend fun insert(syncData: SyncSrCitizenGrievance)
+    suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance)
     fun delete(syncData: SyncSrCitizenGrievance)
     fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>>
 }

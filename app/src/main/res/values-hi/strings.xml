@@ -143,6 +143,7 @@
     <string name="parkinson">पार्किंसंस रोग</string>
     <string name="cataracts">मोतियाबिंद</string>
     <string name="no_response">कोई जवाब नहीं</string>
+    <string name="no_response_single_line">कोई जवाब नहीं</string>
     <string name="phone_not_picked">फोन नहीं उठाया</string>
     <string name="phone_not_reachable">फोन नहीं पहुंच पा रहा है</string>
     <string name="call_disconnected">कॉल काट दिया गया</string>
@@ -164,7 +165,9 @@
     <string name="low">कम</string>
 
     <string name="not_picked">नहीं\nउठाया</string>
+    <string name="not_picked_single_line">नहीं उठाया</string>
     <string name="not_reachable">पहुँच से\nबाहर</string>
+    <string name="not_reachable_single_line">पहुँच से बाहर</string>
     <string name="dis_connected">डिस्कनेक्ट किया गया</string>
     <string name="connected">जुड़े हुए</string>
     <string name="talked_with">किसके साथ बात की</string>
@@ -226,7 +229,29 @@
     <string name="lung_ailment">फेफड़े की बीमारी</string>
     <string name="cancer_major_surgery">कर्करोग / अन्य प्रमुख सर्जरी</string>
     <string name="sr_citizen_follow_up">सीनियर सिटीजन फॉलोअप</string>
-    <string name="no_issues">No issues</string>
+    <string name="no_issues">कोई दिक्कत नहीं है</string>
+
+    <string name="govt_quarantine">सरकारी संगरोध</string>
+    <string name="no_internet_save_data_in_app">आपका इंटरनेट कनेक्शन धीमा / खराब है, लेकिन हम जानकारी को ऐप में संग्रहीत करेंगे और बाद में जब इंटरनेट उपलब्ध होगा तब हम सर्वर के साथ सिंक करेंगे।.</string>
+    <string name="thanks_go_back">આભાર, પાછા જાઓ</string>
+    <string name="details_saved_successfully">वरिष्ठ नागरिक विवरण को सफलतापूर्वक समन्वयित किया जाता है।\n\nहमारी मदद करने के लिए, धन्यवाद</string>
+    <string name="great">बहुत अच्छा</string>
+    <string name="can_not_connect_to_server">सर्वर से कनेक्ट नहीं कर सकते।\n\nहमने डेटा को ऐप में सेव कर लिया है और सर्वर से कनेक्ट होते ही हम सिंक कर देंगे</string>
+    <string name="wait_saving_data">कृपया प्रतीक्षा करें हम डेटा सहेज रहे हैं…</string>
+    <string name="validate_call_status">कॉल स्थिति प्रदान करें</string>
+    <string name="validate_talked_with">जिस पर आपने कॉल के साथ बात की थी, उसके बारे में विवरण दें</string>
+    <string name="validate_medical_history">वरिष्ठ नागरिक का मेडिकल इतिहास चुनें</string>
+    <string name="validate_talked_about">आपने जो बात की, यानी <b>निवारण/पहुंच/जांच</b> के बारे में जानकारी दी</string>
+    <string name="validate_behavioural_changes">वरिष्ठ नागरिक के व्यवहार परिवर्तन के बारे में विवरण प्रदान करें</string>
+    <string name="validate_other_medical_details">अन्य चिकित्सा विवरण प्रदान करें जैसे COVID-19 लक्षण, आदि</string>
+    <string name="validate_covid_symptoms">सीनियर सिटीजन में COVID-19 लक्षण प्रदान करे</string>
+    <string name="validate_quarantine_status">सीनियर सिटीजन की संगरोध स्थिति प्रदान करें</string>
+    <string name="validate_complaint_category">शिकायत श्रेणी प्रदान करें</string>
+    <string name="validate_emergency_required">किसी भी आपात <b>स्थिति और/या वृद्धि</b> का विवरण प्रदान करें ?</string>
+    <string name="check_internet">कृपया इंटरनेट कनेक्शन की जाँच करें</string>
+    <string name="sr_citizen_registered_successfully">वरिष्ठ नागरिक सफलतापूर्वक पंजीकृत.</string>
+
+    <string name="not_available">जानकारी उपलब्ध नहीं है</string>
 
     <string-array name="states_array">
         <item>असम</item>
@@ -323,6 +348,8 @@
 
 
     <string name="permission_denied">अनुमति नहीं मिली</string>
+    <string name="assigned">निरुपित</string>
+    <string name="completed">पूरा कर लिया है</string>
     <string name="txtaddPhoto">तस्वीर जोड़ो</string>
     <string name="txttakePhoto">फोटो लो</string>
     <string name="txtchoosefromgallry">गैलरी से चयन करो</string>

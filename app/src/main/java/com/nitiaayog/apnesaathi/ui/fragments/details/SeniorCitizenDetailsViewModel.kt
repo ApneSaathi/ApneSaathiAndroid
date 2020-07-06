@@ -1,15 +1,11 @@
 package com.nitiaayog.apnesaathi.ui.fragments.details
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.JsonObject
-import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import org.threeten.bp.format.DateTimeFormatter
 import java.text.SimpleDateFormat
@@ -19,6 +15,7 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     BaseViewModel() {
     private val dateList: MutableList<DateItem> = ArrayList()
     private val dataList = MutableLiveData<List<DateItem>>()
+    private lateinit var grievanceList:LiveData<MutableList<SrCitizenGrievance>>
     fun prepareData(data: MutableList<SrCitizenGrievance>?) {
         dateList.clear()
         if (data != null) {
@@ -47,7 +44,7 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         val fa = input.parse(date)
         return output.format(fa)
     }
-
+    fun getGrievanceList():LiveData<MutableList<SrCitizenGrievance>> = grievanceList
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     //    fun getSeniorCitizenDetails(context: Context) {
