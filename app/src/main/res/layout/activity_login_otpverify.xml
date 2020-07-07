@@ -7,7 +7,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">                    EditMobileNumber.setError())
+        android:layout_height="match_parent">
 
 
     <ImageView
@@ -126,15 +126,6 @@
         android:textSize="@dimen/text_16"
         android:textColor="@color/color_black" />
 
-    <TextView
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dimen_10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txttimer"
-        android:layout_centerHorizontal="true"
-        android:text="@string/resendOTP"
-        android:textSize="@dimen/text_16"
-        android:textColor="@color/text_color_grey" />
+
     </LinearLayout>
 </RelativeLayout>

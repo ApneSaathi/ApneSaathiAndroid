@@ -54,61 +54,57 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                             )
                         }
                         .autoDispose(disposables)
+                    observeStates()
+
                 } catch (e: Exception) {
                     println("TAG -- MyData --> ${e.message}")
                 }
-
-
 
                 EditMobileNumber.isFocusable = false
 
 //                }
             }
         }.autoDispose(disposables)
-        observeStates()
+
+
     }
 
-    private fun observeStates() {
-
-        viewModel.getDataObserver().removeObservers(this)
-        viewModel.getDataObserver().observe(this, Observer {
-            when (it) {
-                is NetworkRequestState.NetworkNotAvailable -> {
-                    BaseUtility.showAlertMessage(
-                        mContext!!,
-                        R.string.alert,
-                        R.string.check_internet
-                    )
-                }
-                is NetworkRequestState.LoadingData -> {
-                    progressBarlogin.visibility = VISIBLE
-                }
-                is NetworkRequestState.ErrorResponse -> {
-                    progressBarlogin.visibility = GONE
-                    EditMobileNumber.isFocusableInTouchMode = true
-                    CallSnackbar(
-                        rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage
-                    )
-                }
-                is NetworkRequestState.SuccessResponse<*> -> {
-
-                    val loginres = it.data
-                    if (loginres is Login_Response) {
-                        dataManager.updateUserPreference(loginres)
-                    }
-
-
-                    progressBarlogin.visibility = GONE
-                    val targetIntent = getTargetIntent(OtpActivity::class.java)
-                    targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
-                    startActivity(targetIntent)
-                    finish()
-
-                }
+    private fun observeStates() =viewModel.getDataObserver().observe(this, Observer {
+        when (it) {
+            is NetworkRequestState.NetworkNotAvailable -> {
+                BaseUtility.showAlertMessage(
+                    mContext!!,
+                    R.string.alert,
+                    R.string.check_internet
+                )
             }
-        })
-    }
+            is NetworkRequestState.LoadingData -> {
+                progressBarlogin.visibility = VISIBLE
+            }
+            is NetworkRequestState.ErrorResponse -> {
+                progressBarlogin.visibility = GONE
+                EditMobileNumber.isFocusableInTouchMode = true
+                CallSnackbar(
+                    rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage
+                )
+            }
+            is NetworkRequestState.SuccessResponse<*> -> {
 
+                val loginres = it.data
+                if (loginres is Login_Response) {
+                    dataManager.updateUserPreference(loginres)
+                }
+
+
+                progressBarlogin.visibility = GONE
+                val targetIntent = getTargetIntent(OtpActivity::class.java)
+                targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
+                startActivity(targetIntent)
+
+
+            }
+        }
+    })
 
     override fun provideViewModel(): LoginViewModel = getViewModel {
         LoginViewModel.getInstance(dataManager)

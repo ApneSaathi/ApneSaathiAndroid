@@ -1,10 +1,11 @@
 package com.nitiaayog.apnesaathi.ui.otp
 
-import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.KeyEvent
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
@@ -17,7 +18,8 @@ import kotlinx.android.synthetic.main.activity_login_otpverify.*
 
 
 class OtpActivity : BaseActivity<OtpActivityModel>() {
-       override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         EditFirstChar.addTextChangedListener(object : TextWatcher {
@@ -33,6 +35,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
+
+
+
         editOtpsecondchar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (editOtpsecondchar.length() == 1) {
@@ -107,6 +112,17 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                 }
             }
         }.autoDispose(disposables)
+
+        val timer = object : CountDownTimer(60000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                txttimer.setText("Seconds remaining: " + millisUntilFinished / 1000)
+            }
+
+            override fun onFinish() {
+                txttimer.text = "Resend OTP"
+            }
+        }
+        timer.start()
     }
 
     private fun callnextActivity() {
@@ -123,8 +139,8 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
     }
 
     override fun provideLayoutResource(): Int = R.layout.activity_login_otpverify
+
     override fun onBackPressed() {
         super.onBackPressed()
-        finishAffinity()
     }
 }

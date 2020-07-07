@@ -42,18 +42,20 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
             }.subscribe({
                 try {
                     if (it.getStatusCode() == "0") {
-                        loaderObservable.value =
-                            NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
-                        dataManager.setUserId(
-                            when {
-                                it.getVolunteerId() == null -> "1001"
-                                it.getVolunteerId()!!.isEmpty() -> "1001"
-                                else -> it.getVolunteerId()!!
-                            }
-                        )
-                        loaderObservable.value =
-                            NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
+                        viewModelScope.launch {
+                            loaderObservable.value =
+                                NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
+                            dataManager.setUserId(
+                                when {
+                                    it.getVolunteerId() == null -> "1001"
+                                    it.getVolunteerId()!!.isEmpty() -> "1001"
+                                    else -> it.getVolunteerId()!!
+                                }
+                            )
+                            loaderObservable.value =
+                                NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
 
+                        }
 
                     } else loaderObservable.value =
                         NetworkRequestState.ErrorResponse(ApiProvider.ApiLoginUser)
