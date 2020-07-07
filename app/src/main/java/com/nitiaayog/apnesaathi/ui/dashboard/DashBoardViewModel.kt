@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.dashboard
 
+import android.app.job.JobScheduler
 import android.content.Context
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.service.SyncDataService
@@ -15,5 +16,16 @@ class DashBoardViewModel(private val dataManager: DataManager) : BaseViewModel()
         }
     }
 
-    fun startSyncingData(context: Context) = SyncDataService.enqueueWork(context)
+    fun startSyncingData(context: Context) {
+        val jobSchedular = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler?
+        jobSchedular?.run {
+            var isJobScheduled: Boolean = false
+            val jobList = this.allPendingJobs
+            jobList.forEach {
+                if (it.id == SyncDataService.JOB_ID) isJobScheduled = true
+            }
+            if (!isJobScheduled)
+                SyncDataService.enqueueWork(context)
+        }
+    }
 }

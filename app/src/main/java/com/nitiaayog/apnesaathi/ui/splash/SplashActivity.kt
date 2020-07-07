@@ -39,12 +39,9 @@ class SplashActivity : AppCompatActivity() {
     private fun navigateToNextActivity() {
         val dataManager = ApneSaathiApplication.getApiClient()
         val targetIntent = getTargetIntent(
-            if (dataManager.getSelectedLanguage()
-                    .isEmpty()
-            ) LanguageSelectionActivity::class.java else
-                if (dataManager.isLogin() == false)
-                    LoginActivity::class.java
-                else DashBoardActivity::class.java
+            if (dataManager.getSelectedLanguage().isEmpty()) LanguageSelectionActivity::class.java
+            else if (!dataManager.isLogin()) LoginActivity::class.java
+            else DashBoardActivity::class.java
         )
         startActivity(targetIntent)
         finish()

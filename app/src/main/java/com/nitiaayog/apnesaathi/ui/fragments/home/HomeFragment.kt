@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -32,6 +33,8 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     private var lastSelectedPosition: Int = -1
     private var lastSelectedCallData: CallData? = null
 
+    private val handler: Handler by lazy { Handler() }
+
     private val pendingAdapter by lazy {
         CallsAdapter().apply {
             this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
@@ -60,11 +63,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         toolBar.title = getString(R.string.menu_home)
 
         try {
-            getObservableDataStream()
             initRecyclerView()
 
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    getObservableDataStream()
                     viewModel.getCallDetails(context!!)
                 }.autoDispose(disposables)
         } catch (e: Exception) {
@@ -147,8 +150,8 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun manageProgressBar(visibility: Int) {
-        progressBarCalls.visibility = visibility
-        progressBarGrievances.visibility = visibility
+        progressBarCalls?.visibility = visibility
+        progressBarGrievances?.visibility = visibility
     }
 
     private fun getObservableDataStream() {
@@ -173,16 +176,17 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                     BaseUtility.showAlertMessage(
                         context!!, R.string.error, R.string.api_connection_error
                     )
-                is NetworkRequestState.LoadingData -> manageProgressBar(View.VISIBLE)
+                is NetworkRequestState.LoadingData -> {
+                    manageProgressBar(View.VISIBLE)
+                    handler.postDelayed({ manageProgressBar(View.GONE) }, 10000)
+                }
                 is NetworkRequestState.ErrorResponse -> {
                     manageProgressBar(View.GONE)
                     BaseUtility.showAlertMessage(
                         context!!, R.string.error, R.string.api_connection_error
                     )
                 }
-                is NetworkRequestState.SuccessResponse<*> -> {
-                    manageProgressBar(View.GONE)
-                }
+                is NetworkRequestState.SuccessResponse<*> -> manageProgressBar(View.GONE)
             }
         })
     }
