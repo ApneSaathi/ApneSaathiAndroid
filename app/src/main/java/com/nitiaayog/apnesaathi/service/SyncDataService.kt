@@ -162,7 +162,13 @@ class SyncDataService : JobService() {
             (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
-        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        callData.forEach { data ->
+            data.medicalGrievance?.forEach {
+                it.srCitizenName = data.srCitizenName
+                it.gender = data.gender
+            }
+            grievances.addAll(data.medicalGrievance!!)
+        }
         return grievances
     }
 

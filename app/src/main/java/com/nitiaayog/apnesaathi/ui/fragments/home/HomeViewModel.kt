@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
+import com.nitiaayog.apnesaathi.database.dao.GrievancesDao_Impl
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
@@ -47,14 +48,18 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getGrievances()
 
-    private var grievancesFromCall: MutableList<SrCitizenGrievance> = mutableListOf()
-
     private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
         val callData = grievance.filter {
             (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
-        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        callData.forEach { data ->
+            data.medicalGrievance?.forEach {
+                it.srCitizenName = data.srCitizenName
+                it.gender = data.gender
+            }
+            grievances.addAll(data.medicalGrievance!!)
+        }
         return grievances
     }
 
@@ -73,7 +78,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, 1234)
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
             dataManager.getCallDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard)

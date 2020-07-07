@@ -25,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
+import kotlin.system.exitProcess
 
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
@@ -51,7 +52,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
-    private val grievancesAdapter by lazy { GrievancesAdapter() }
+    private val grievancesAdapter by lazy { GrievancesAdapter(context!!) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,8 +66,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     viewModel.getCallDetails(context!!)
-                }
-                .autoDispose(disposables)
+                }.autoDispose(disposables)
         } catch (e: Exception) {
             println("TAG -- MyData --> ${e.message}")
         }
@@ -112,6 +112,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
+
     private fun managePendingCalls(dataList: MutableList<CallData>) {
         val size: Int = dataList.size
         tvPendingCalls.text = getString(R.string.pending_calls_count, size.toString())
@@ -137,7 +138,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         tvGrievances.text = getString(R.string.grievances_count, size.toString())
         btnSeeAllGrievances.visibility = if (size > 3) {
             btnSeeAllGrievances.setOnClickListener {
-
+                viewModel.getGrievancesList().value?.let { it1 -> grievancesAdapter.setData(it1) }
+                grievancesAdapter.notifyDataSetChanged()
+                btnSeeAllGrievances.visibility = View.GONE
             }
             View.VISIBLE
         } else View.GONE
