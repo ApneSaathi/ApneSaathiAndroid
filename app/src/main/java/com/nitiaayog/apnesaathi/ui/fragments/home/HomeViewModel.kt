@@ -114,7 +114,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getGrievanceTrackingList(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, 7890)
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
             dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiGrievanceTracking)
