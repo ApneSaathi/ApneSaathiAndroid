@@ -33,6 +33,20 @@ open class SrCitizenGrievance {
             field = value ?: -1
         }
 
+    @ColumnInfo(name = Columns.Name, defaultValue = "")
+    var srCitizenName: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.Gender, defaultValue = "")
+    var gender: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
     @ColumnInfo(name = Columns.VolunteerId, defaultValue = "-1")
     @SerializedName(ApiConstants.VolunteerId)
     var volunteerId: String? = ""
@@ -250,7 +264,7 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    var status: String = GrievancesAdapter.GRIEVANCE_PENDING
+    var status: String = GrievancesAdapter.GRIEVANCE_RAISED
 
     fun createCopy(): SrCitizenGrievance {
         val json = Gson().toJson(this)

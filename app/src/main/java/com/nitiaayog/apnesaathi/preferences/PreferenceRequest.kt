@@ -7,6 +7,9 @@ interface PreferenceRequest {
     fun getUserId(): String
     fun setUserId(userId: String)
 
+    fun setGender(gender: String)
+    fun getGender(): String
+
     fun getUserName(): String
     fun setUserName(userName: String)
 

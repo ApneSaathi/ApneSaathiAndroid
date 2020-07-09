@@ -1,5 +1,11 @@
 package com.nitiaayog.apnesaathi.adapter
 
+import android.content.Context
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,18 +14,21 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
-import com.nitiaayog.apnesaathi.model.Grievances
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import kotlinx.android.synthetic.main.list_item_grievances.view.*
+import java.util.*
 
-class GrievancesAdapter : RecyclerView.Adapter<GrievancesAdapter.GrievancesHolder>() {
+class GrievancesAdapter(private val context: Context) :
+    RecyclerView.Adapter<GrievancesAdapter.GrievancesHolder>() {
 
     companion object {
-        const val GRIEVANCE_RESOLVED: String = "resolved"
-        const val GRIEVANCE_PENDING: String = "pending"
+        const val GRIEVANCE_RESOLVED: String = "RESOLVED"
+        const val GRIEVANCE_UNDER_REVIEW: String = "UNDER REVIEW"
+        const val GRIEVANCE_RAISED: String = "RAISED"
     }
 
-    private val dataList: MutableList<SrCitizenGrievance> = mutableListOf()
+    private val dataList: MutableList<GrievanceData> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GrievancesHolder {
         val customView = LayoutInflater.from(parent.context)
@@ -32,7 +41,7 @@ class GrievancesAdapter : RecyclerView.Adapter<GrievancesAdapter.GrievancesHolde
     override fun onBindViewHolder(holder: GrievancesHolder, position: Int) =
         holder.bindData(dataList[position])
 
-    fun setData(dataList: MutableList<SrCitizenGrievance>) {
+    fun setData(dataList: MutableList<GrievanceData>) {
         this.dataList.apply {
             this.clear()
             this.addAll(dataList)
@@ -52,20 +61,51 @@ class GrievancesAdapter : RecyclerView.Adapter<GrievancesAdapter.GrievancesHolde
             }
         }
 
-        fun bindData(grievance: SrCitizenGrievance) {
-            tvComplaint.text = grievance.impRemarkInfo
+        fun bindData(grievance: GrievanceData) {
+            val complaint = " ".plus(context.getString(R.string.complaint_on)).plus(" ")
+            val was = context.getString(R.string.was)
+            val dataString =
+                grievance.srCitizenName?.plus(complaint)?.plus(grievance.grievanceType).plus(" ")
+                    .plus(was).plus(" ").plus(grievance.status?.toLowerCase(Locale.getDefault()))
+            val spanGrievance = SpannableString(dataString)
+            spanGrievance.setSpan(
+                StyleSpan(Typeface.BOLD),
+                grievance.srCitizenName!!.length + complaint.length,
+                dataString.length - (was.length + grievance.status?.length!! +1),
+                0
+            )
+
+            val spanStatus = SpannableString(spanGrievance)
+            btnComplaintStatus.visibility = View.GONE
             if (grievance.status == GRIEVANCE_RESOLVED) {
-                btnComplaintStatus.setTextColor(
-                    ContextCompat.getColor(btnComplaintStatus.context, R.color.text_color_5)
+                spanStatus.setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_color_5)),
+                    spanStatus.length - grievance.status!!.length,
+                    spanStatus.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
-                btnComplaintStatus.setText(R.string.resolved)
-            } else {
-                btnComplaintStatus.setTextColor(
-                    ContextCompat.getColor(btnComplaintStatus.context, R.color.text_color_3)
+            } else if (grievance.status == GRIEVANCE_UNDER_REVIEW) {
+                spanStatus.setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_color_3)),
+                    spanStatus.length - grievance.status!!.length,
+                    spanStatus.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
-                btnComplaintStatus.setText(R.string.pending)
+            }else{
+                spanStatus.setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(context, R.color.color_grey_txt)),
+                    spanStatus.length - grievance.status!!.length,
+                    spanStatus.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
-            civGender.setImageResource(R.drawable.ic_male_user)
+            tvComplaint.text = spanStatus
+            if (grievance.gender == "M") {
+                civGender.setImageResource(R.drawable.ic_male_user)
+            } else {
+                civGender.setImageResource(R.drawable.ic_female_user)
+            }
+
         }
     }
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
-import com.nitiaayog.apnesaathi.model.Grievances
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 
 @Dao
@@ -15,7 +14,7 @@ interface GrievancesDao {
     fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>>
 
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.CallId}=:callId ORDER BY ${Columns.CreatedDate}")
-    fun getAllUniqueGrievances(callId: Int = 11): LiveData<MutableList<SrCitizenGrievance>>
+    fun getAllUniqueGrievances(callId: Int = -1): LiveData<MutableList<SrCitizenGrievance>>
 
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} LIMIT :dataCount")
     fun getFewGrievances(dataCount: Int = 3): LiveData<MutableList<SrCitizenGrievance>>

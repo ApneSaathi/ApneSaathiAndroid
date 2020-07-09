@@ -5,6 +5,7 @@ import android.text.InputFilter
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.nitiaayog.apnesaathi.R
@@ -23,6 +24,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private var selectedGender: String = ""
     private var selectedDistrict: String = ""
     private var selectedState: String = ""
+    private var selectedStatePos: Int = -1
 
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_saving_data)
@@ -86,10 +88,28 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
         actState.setOnItemClickListener { _, _, position, _ ->
             selectedState = stateList[position]
+            selectedStatePos = position
             viewModel.setState(selectedState)
+            setDistrictAdapter()
         }
 
-        val districtsList = resources.getStringArray(R.array.districts_array)
+
+    }
+
+    private fun setDistrictAdapter() {
+        var districtsList = resources.getStringArray(R.array.districts_array)
+        if(selectedStatePos != -1){
+            when(selectedStatePos){
+                0-> districtsList = resources.getStringArray(R.array.district0)
+                1-> districtsList = resources.getStringArray(R.array.district1)
+                2-> districtsList = resources.getStringArray(R.array.district2)
+                3-> districtsList = resources.getStringArray(R.array.district3)
+                4-> districtsList = resources.getStringArray(R.array.district4)
+                5-> districtsList = resources.getStringArray(R.array.district5)
+                6-> districtsList = resources.getStringArray(R.array.district6)
+                7-> districtsList = resources.getStringArray(R.array.district7)
+            }
+        }
         val districtsAdapter =
             ArrayAdapter(activity!!, R.layout.item_layout_dropdown_menu, districtsList)
         actDistrict.threshold = 0
@@ -121,9 +141,14 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }.autoDispose(disposables)
 
         actDistrict.throttleClick().subscribe {
-            actDistrict.showDropDown()
-            updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
-            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
+            if(selectedStatePos !=-1) {
+                actDistrict.showDropDown()
+                updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
+                if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility =
+                    View.GONE
+            }else{
+                Toast.makeText(context,getString(R.string.select_a_state),Toast.LENGTH_SHORT).show()
+            }
         }.autoDispose(disposables)
 
         tvRegister.throttleClick().subscribe {

@@ -322,6 +322,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         img_call_button.setOnClickListener { prepareToCallPerson() }
         txt_edit.setOnClickListener {
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+            dataManager.setUserName(callData?.srCitizenName?:"")
+            dataManager.setGender(callData?.gender?:"")
             intent.putExtra(CALL_ID, callData?.callId)
             startActivity(intent)
         }

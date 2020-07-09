@@ -28,7 +28,7 @@ class SyncDataService : JobService() {
     companion object {
 
         private const val TAG: String = "TAG -- JobService -->"
-        private const val JOB_ID: Int = 1959
+        const val JOB_ID: Int = 1959
 
         fun enqueueWork(context: Context) {
             val jobScheduler =
@@ -56,7 +56,7 @@ class SyncDataService : JobService() {
                 val processData = dataManager.getGrievancesToSync()
                 println("\n$TAG ${processData?.size} data will be synced")
                 processData?.run {
-                    if (processData.isEmpty()) stopSelf()
+                    if (processData.isEmpty()) jobFinished(params, true)
                     else {
                         io {
                             startSyncing(processData)
@@ -94,6 +94,8 @@ class SyncDataService : JobService() {
         params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
 
         params.addProperty(ApiConstants.SrCitizenTalkedWith, grievance.talkedWith)
+        params.addProperty(ApiConstants.SrCitizenName, grievance.srCitizenName)
+        params.addProperty(ApiConstants.SrCitizenGender, grievance.gender)
 
         if (callStatus == "1") return params
 
@@ -162,7 +164,8 @@ class SyncDataService : JobService() {
             (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
-        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        callData.forEach { data -> grievances.addAll(data.medicalGrievance!!)
+        }
         return grievances
     }
 
@@ -230,5 +233,25 @@ class SyncDataService : JobService() {
             println("$TAG -- Error -- data fetching")
             println("$TAG -- Error -- ${it?.message}")
         }).autoDispose(disposables)
+//        dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+//            println("\n\n$TAG -- Start fetching grievances data")
+//        }.subscribe({
+//            try {
+//                if (it.getStatus() == "0") {
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        io {
+//                            val data = it.getTrackingList()
+//                            dataManager.insertGrievanceTrackingList(it.getTrackingList())
+//                            println("$TAG -- Fetched data successfully")
+//                        }
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                println("$TAG ${e.message}")
+//            }
+//        }, {
+//            println("$TAG -- Error -- data fetching")
+//            println("$TAG -- Error -- ${it?.message}")
+//        }).autoDispose(disposables)
     }
 }

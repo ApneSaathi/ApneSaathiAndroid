@@ -11,10 +11,7 @@ import android.text.TextUtils
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AutoCompleteTextView
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +57,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private var selectedCallStatusButton: MaterialButton? = null
     private var selectedLackOfEssentialServices: MaterialButton? = null
     private var selectedNeedOfEmergencyServices: MaterialButton? = null
+    private var selectedState: String = ""
 
     private val selectedColor: Int by lazy { ContextCompat.getColor(this, R.color.color_orange) }
     private val normalColor: Int by lazy {
@@ -535,16 +533,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             if (tvGenderError.visibility == View.VISIBLE) tvGenderError.visibility = View.GONE
         }
 
-        val districtsList = resources.getStringArray(R.array.districts_array)
-        val districtsAdapter =
-            BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
-        actDistrict.threshold = 0
-        actDistrict.setAdapter(districtsAdapter)
-        actDistrict.setOnKeyListener(null)
-        actDistrict.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setDistrict(districtsList[position])
-            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
-        }
+
 
         val stateList = resources.getStringArray(R.array.states_array)
         val stateAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
@@ -553,7 +542,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actState.setOnKeyListener(null)
         actState.setOnItemClickListener { _, _, position, _ ->
             viewModel.setState(stateList[position])
+            selectedState = stateList[position]
             if (tvStateError.visibility == View.VISIBLE) tvStateError.visibility = View.GONE
+            setDistrictAdapter(position)
         }
 
         val rvMedicalHistorySrCitizen = rvMedicalHistorySrCitizen as RecyclerView
@@ -628,6 +619,31 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    private fun setDistrictAdapter(position: Int) {
+        var districtsList = resources.getStringArray(R.array.districts_array)
+        if(position != -1){
+            when(position){
+                0-> districtsList = resources.getStringArray(R.array.district0)
+                1-> districtsList = resources.getStringArray(R.array.district1)
+                2-> districtsList = resources.getStringArray(R.array.district2)
+                3-> districtsList = resources.getStringArray(R.array.district3)
+                4-> districtsList = resources.getStringArray(R.array.district4)
+                5-> districtsList = resources.getStringArray(R.array.district5)
+                6-> districtsList = resources.getStringArray(R.array.district6)
+                7-> districtsList = resources.getStringArray(R.array.district7)
+            }
+        }
+        val districtsAdapter =
+            BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
+        actDistrict.threshold = 0
+        actDistrict.setAdapter(districtsAdapter)
+        actDistrict.setOnKeyListener(null)
+        actDistrict.setOnItemClickListener { _, _, position, _ ->
+            viewModel.setDistrict(districtsList[position])
+            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
+        }
+    }
+
     private fun initClicks() {
         // Call Status Button Clicks
         btnNoResponse.throttleClick().subscribe {
@@ -689,7 +705,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // All AutoCompleteTextView clicks
         actGender.throttleClick().subscribe { actGender.showDropDown() }.autoDispose(disposables)
-        actDistrict.throttleClick().subscribe { actDistrict.showDropDown() }
+        actDistrict.throttleClick().subscribe {
+            if(selectedState.isNotEmpty()){
+            actDistrict.showDropDown()
+            }else{
+                Toast.makeText(this,getString(R.string.select_a_state), Toast.LENGTH_SHORT).show()
+            }
+        }
             .autoDispose(disposables)
         actState.throttleClick().subscribe { actState.showDropDown() }.autoDispose(disposables)
         actTalkWith.throttleClick().subscribe {
@@ -736,6 +758,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         // Lack of essential services
         btnLackOfEssentialServicesYes.throttleClick().subscribe {
             viewModel.isLackOfEssential("Yes")
+            cg_complaint.visibility = View.VISIBLE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(
                     btnLackOfEssentialServicesYes, selectedLackOfEssentialServices
@@ -743,6 +766,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }.autoDispose(disposables)
         btnLackOfEssentialServicesNo.throttleClick().subscribe {
             viewModel.isLackOfEssential("No")
+            cg_complaint.visibility = View.GONE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(btnLackOfEssentialServicesNo, selectedLackOfEssentialServices)
         }.autoDispose(disposables)
@@ -1112,7 +1136,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private fun manageOtherMedicalRelatedViews() {
         when (viewModel.getOtherMedicalProblem()) {
             getString(R.string.covid_19_symptoms) -> {
-                cgComplaintDetails.visibility = View.GONE
+                cgComplaintDetails.visibility = View.VISIBLE
 
                 tvCovidSymptoms.visibility = View.VISIBLE
                 hsvCovidSymptoms.visibility = View.VISIBLE
@@ -1127,7 +1151,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             }
             else -> {
                 resetCovidSymptomsViews()
-                cgComplaintDetails.visibility = View.GONE
+                cgComplaintDetails.visibility = View.VISIBLE
             }
         }
     }
@@ -1260,6 +1284,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             tvAgeError.visibility = View.VISIBLE
             false
         }
+        etAge.text.toString().toInt() < 60 -> {
+            tvAgeError.visibility = View.VISIBLE
+            false
+        }
+        etAge.text.toString().toInt() > 110 -> {
+            tvAgeError.visibility = View.VISIBLE
+            false
+        }
         viewModel.getGender().isEmpty() -> {
             tvGenderError.visibility = View.VISIBLE
             false
@@ -1317,14 +1349,20 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
         syncData.volunteerId = dataManager.getUserId()
 
-        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
-        syncData.callStatusSubCode = viewModel.getCallStatus()
-
         val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
         params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
 
+        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
+        syncData.callStatusSubCode = viewModel.getCallStatus()
+
         syncData.talkedWith = viewModel.getTalkedWith()
         params.addProperty(ApiConstants.SrCitizenTalkedWith, syncData.talkedWith)
+
+        params.addProperty(ApiConstants.SrCitizenName, dataManager.getUserName())
+        syncData.srCitizenName = dataManager.getUserName()
+
+        params.addProperty(ApiConstants.SrCitizenGender, dataManager.getGender())
+        syncData.gender = dataManager.getGender()
 
         if (callStatus == "1") return params
 
@@ -1421,46 +1459,46 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             syncData.phoneAndInternetIssue = "4"
             arraySubParams.addProperty(ApiConstants.PhoneInternetIssue, 4)
         } else {
-            syncData.foodShortage = if (dataList.any { it == getString(R.string.lack_of_food) }) "0"
+            syncData.foodShortage = if (dataList.any { it == getString(R.string.lack_of_food) }) "1"
             else "4"
             arraySubParams.addProperty(ApiConstants.FoodShortage, syncData.foodShortage!!.toInt())
 
             syncData.medicineShortage =
-                if (dataList.any { it == getString(R.string.lack_of_medicine) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_medicine) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.MedicineShortage, syncData.medicineShortage!!.toInt()
             )
 
             syncData.accessToBankingIssue =
-                if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.AccessToBankingIssue, syncData.accessToBankingIssue!!.toInt()
             )
 
             syncData.utilitySupplyIssue =
-                if (dataList.any { it == getString(R.string.lack_of_utilities) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_utilities) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.UtilityIssue, syncData.utilitySupplyIssue!!.toInt()
             )
 
             syncData.hygieneIssue =
-                if (dataList.any { it == getString(R.string.lack_of_hygine) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_hygine) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.HygieneIssue, syncData.hygieneIssue!!.toInt()
             )
 
             syncData.safetyIssue =
-                if (dataList.any { it == getString(R.string.lack_of_safety) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_safety) }) "1" else "4"
             arraySubParams.addProperty(ApiConstants.SafetyIssue, syncData.safetyIssue!!.toInt())
 
             syncData.emergencyServiceIssue =
-                if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.EmergencyServiceIssue, syncData.emergencyServiceIssue!!.toInt()
             )
 
             syncData.phoneAndInternetIssue =
-                if (dataList.any { it == getString(R.string.phone_and_service) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.phone_and_service) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.PhoneInternetIssue, syncData.phoneAndInternetIssue!!.toInt()
             )
