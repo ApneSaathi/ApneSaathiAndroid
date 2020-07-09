@@ -68,7 +68,7 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
 
         override fun onClick(view: View) {
             when (view.id) {
-                R.id.constraintLayout, R.id.ivCall -> {
+                R.id.ivCall -> {
                     if (::itemClickListener.isInitialized)
                         itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
                 }

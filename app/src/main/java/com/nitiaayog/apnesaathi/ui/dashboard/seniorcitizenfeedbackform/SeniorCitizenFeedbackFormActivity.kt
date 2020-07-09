@@ -11,10 +11,7 @@ import android.text.TextUtils
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AutoCompleteTextView
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +57,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private var selectedCallStatusButton: MaterialButton? = null
     private var selectedLackOfEssentialServices: MaterialButton? = null
     private var selectedNeedOfEmergencyServices: MaterialButton? = null
+    private var selectedState: String = ""
 
     private val selectedColor: Int by lazy { ContextCompat.getColor(this, R.color.color_orange) }
     private val normalColor: Int by lazy {
@@ -535,16 +533,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             if (tvGenderError.visibility == View.VISIBLE) tvGenderError.visibility = View.GONE
         }
 
-        val districtsList = resources.getStringArray(R.array.districts_array)
-        val districtsAdapter =
-            BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
-        actDistrict.threshold = 0
-        actDistrict.setAdapter(districtsAdapter)
-        actDistrict.setOnKeyListener(null)
-        actDistrict.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setDistrict(districtsList[position])
-            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
-        }
+
 
         val stateList = resources.getStringArray(R.array.states_array)
         val stateAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
@@ -553,7 +542,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actState.setOnKeyListener(null)
         actState.setOnItemClickListener { _, _, position, _ ->
             viewModel.setState(stateList[position])
+            selectedState = stateList[position]
             if (tvStateError.visibility == View.VISIBLE) tvStateError.visibility = View.GONE
+            setDistrictAdapter(position)
         }
 
         val rvMedicalHistorySrCitizen = rvMedicalHistorySrCitizen as RecyclerView
@@ -628,6 +619,31 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    private fun setDistrictAdapter(position: Int) {
+        var districtsList = resources.getStringArray(R.array.districts_array)
+        if(position != -1){
+            when(position){
+                0-> districtsList = resources.getStringArray(R.array.district0)
+                1-> districtsList = resources.getStringArray(R.array.district1)
+                2-> districtsList = resources.getStringArray(R.array.district2)
+                3-> districtsList = resources.getStringArray(R.array.district3)
+                4-> districtsList = resources.getStringArray(R.array.district4)
+                5-> districtsList = resources.getStringArray(R.array.district5)
+                6-> districtsList = resources.getStringArray(R.array.district6)
+                7-> districtsList = resources.getStringArray(R.array.district7)
+            }
+        }
+        val districtsAdapter =
+            BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
+        actDistrict.threshold = 0
+        actDistrict.setAdapter(districtsAdapter)
+        actDistrict.setOnKeyListener(null)
+        actDistrict.setOnItemClickListener { _, _, position, _ ->
+            viewModel.setDistrict(districtsList[position])
+            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
+        }
+    }
+
     private fun initClicks() {
         // Call Status Button Clicks
         btnNoResponse.throttleClick().subscribe {
@@ -689,7 +705,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // All AutoCompleteTextView clicks
         actGender.throttleClick().subscribe { actGender.showDropDown() }.autoDispose(disposables)
-        actDistrict.throttleClick().subscribe { actDistrict.showDropDown() }
+        actDistrict.throttleClick().subscribe {
+            if(selectedState.isNotEmpty()){
+            actDistrict.showDropDown()
+            }else{
+                Toast.makeText(this,getString(R.string.select_a_state), Toast.LENGTH_SHORT).show()
+            }
+        }
             .autoDispose(disposables)
         actState.throttleClick().subscribe { actState.showDropDown() }.autoDispose(disposables)
         actTalkWith.throttleClick().subscribe {
@@ -736,6 +758,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         // Lack of essential services
         btnLackOfEssentialServicesYes.throttleClick().subscribe {
             viewModel.isLackOfEssential("Yes")
+            cg_complaint.visibility = View.VISIBLE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(
                     btnLackOfEssentialServicesYes, selectedLackOfEssentialServices
@@ -743,6 +766,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }.autoDispose(disposables)
         btnLackOfEssentialServicesNo.throttleClick().subscribe {
             viewModel.isLackOfEssential("No")
+            cg_complaint.visibility = View.GONE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(btnLackOfEssentialServicesNo, selectedLackOfEssentialServices)
         }.autoDispose(disposables)
@@ -1112,7 +1136,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private fun manageOtherMedicalRelatedViews() {
         when (viewModel.getOtherMedicalProblem()) {
             getString(R.string.covid_19_symptoms) -> {
-                cgComplaintDetails.visibility = View.GONE
+                cgComplaintDetails.visibility = View.VISIBLE
 
                 tvCovidSymptoms.visibility = View.VISIBLE
                 hsvCovidSymptoms.visibility = View.VISIBLE
@@ -1127,7 +1151,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             }
             else -> {
                 resetCovidSymptomsViews()
-                cgComplaintDetails.visibility = View.GONE
+                cgComplaintDetails.visibility = View.VISIBLE
             }
         }
     }
@@ -1257,6 +1281,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             false
         }
         etAge.text.toString().isEmpty() -> {
+            tvAgeError.visibility = View.VISIBLE
+            false
+        }
+        etAge.text.toString().toInt() < 60 -> {
+            tvAgeError.visibility = View.VISIBLE
+            false
+        }
+        etAge.text.toString().toInt() > 110 -> {
             tvAgeError.visibility = View.VISIBLE
             false
         }

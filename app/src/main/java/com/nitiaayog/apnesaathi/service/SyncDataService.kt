@@ -164,12 +164,7 @@ class SyncDataService : JobService() {
             (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
-        callData.forEach { data ->
-            data.medicalGrievance?.forEach {
-                it.srCitizenName = data.srCitizenName
-                it.gender = data.gender
-            }
-            grievances.addAll(data.medicalGrievance!!)
+        callData.forEach { data -> grievances.addAll(data.medicalGrievance!!)
         }
         return grievances
     }
@@ -238,5 +233,25 @@ class SyncDataService : JobService() {
             println("$TAG -- Error -- data fetching")
             println("$TAG -- Error -- ${it?.message}")
         }).autoDispose(disposables)
+//        dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+//            println("\n\n$TAG -- Start fetching grievances data")
+//        }.subscribe({
+//            try {
+//                if (it.getStatus() == "0") {
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        io {
+//                            val data = it.getTrackingList()
+//                            dataManager.insertGrievanceTrackingList(it.getTrackingList())
+//                            println("$TAG -- Fetched data successfully")
+//                        }
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                println("$TAG ${e.message}")
+//            }
+//        }, {
+//            println("$TAG -- Error -- data fetching")
+//            println("$TAG -- Error -- ${it?.message}")
+//        }).autoDispose(disposables)
     }
 }

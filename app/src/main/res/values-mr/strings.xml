@@ -266,6 +266,51 @@
         <item>गुजरात</item>
         <item>झारखंड</item>
     </string-array>
+    <string-array name="district0">
+        <item>बक्सा</item>
+        <item>बरपेटा</item>
+        <item>डारंग</item>
+        <item>धुबरी</item>
+        <item>गोलपारा</item>
+        <item>हैलाकांडी</item>
+    </string-array>
+    <string-array name="district1">
+        <item>अररिया</item>
+        <item>बेगूसराय</item>
+        <item>सीतामढी</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+    </string-array>
+    <string-array name="district2">
+        <item>बारवानी</item>
+        <item>दमोह</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
+    </string-array>
+    <string-array name="district3">
+        <item>बलरामपूर</item>
+        <item>बेहराइच</item>
+        <item>चित्रकूट</item>
+        <item>श्रावस्ती</item>
+        <item>सोनभद्र</item>
+    </string-array>
+    <string-array name="district4">
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+    </string-array>
+    <string-array name="district5">
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नंदुरबार</item>
+    </string-array>
+    <string-array name="district6">
+        <item>नर्मदा</item>
+    </string-array>
+    <string-array name="district7">
+        <item>पाकुर</item>
+        <item>साहिबगंज</item>
+    </string-array>
     <string-array name="districts_array">
         <item>बरपेटा</item>
         <item>बास्का</item>
@@ -354,9 +399,11 @@
     <string name="txttakePhoto">छायाचित्र घे</string>
     <string name="txtchoosefromgallry">गॅलरीमधून निवडा</string>
     <string name="txtcancel">रद्द करा</string>
-    <string name="calls_summary">"Calls Summary "</string>
-    <string name="total">Total:</string>
+    <string name="calls_summary">कॉल सारांश</string>
+    <string name="total">एकूण:</string>
+    <string name="was">होते</string>
     <string name="wait_profile_data">we are fetching your profile data</string>
     <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
+    <string name="select_a_state">Please select a state</string>
 
 </resources>

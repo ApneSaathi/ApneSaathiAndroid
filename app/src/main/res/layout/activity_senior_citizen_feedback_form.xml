@@ -302,6 +302,8 @@
                     android:layout_marginEnd="0dp"
                     android:text="@string/whom_did_you_talk_with"
                     android:textAllCaps="false"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:textColor="@color/text_color"
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
@@ -340,6 +342,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:text="@string/any_sr_citizen_in_home"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -432,6 +436,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:text="@string/medical_history_sr_citizen"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -473,6 +479,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:text="@string/info_you_talked_about"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -555,6 +563,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:layout_marginEnd="@dimen/dimen_15"
                     android:text="@string/behavior_change_practice"
                     android:textAllCaps="false"
@@ -594,6 +604,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:text="@string/other_medical_problems"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -1128,6 +1140,12 @@
                     app:layout_constraintTop_toBottomOf="@id/tvOtherDescription" />
 
                 <androidx.constraintlayout.widget.Group
+                    android:id="@+id/cg_complaint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="etDescription,tvDescription,flCategory,tvSelectCategory"/>
+                <androidx.constraintlayout.widget.Group
                     android:id="@+id/cgMedicalDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1139,7 +1157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvSelectCategory,flCategory,tvDescription,etDescription,tvEmergencyEscalation,btnEmergencyEscalationYes,btnEmergencyEscalationNo" />
+                    app:constraint_referenced_ids="tvComplaints,tvReportEssentialServices,btnLackOfEssentialServicesYes,btnLackOfEssentialServicesNo,tvEmergencyEscalation,btnEmergencyEscalationYes,btnEmergencyEscalationNo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

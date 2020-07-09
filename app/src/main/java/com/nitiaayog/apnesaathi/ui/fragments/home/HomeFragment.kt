@@ -221,9 +221,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 }
                 is NetworkRequestState.ErrorResponse -> {
                     manageProgressBar(View.GONE)
-                    BaseUtility.showAlertMessage(
-                        context!!, R.string.error, R.string.api_connection_error
-                    )
+                    if (it.apiName == ApiProvider.ApiLoadDashboard) {
+                        BaseUtility.showAlertMessage(
+                            context!!, R.string.error, R.string.api_connection_error
+                        )
+                    }
                 }
                 is NetworkRequestState.SuccessResponse<*> -> manageProgressBar(View.GONE)
             }
