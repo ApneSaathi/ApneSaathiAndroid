@@ -343,7 +343,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
             grievanceEssential.gender = syncData.gender
             grievanceEssential.grievanceId = syncData.id
             grievanceEssential.srCitizenName = syncData.srCitizenName
-            grievanceEssential.status = "UNDER REVIEW"
+            grievanceEssential.status = "RAISED"
             if (getComplaints().any { it == context.getString(R.string.lack_of_food) }) {
                 grievanceEssential.grievanceType = context.getString(R.string.lack_of_food)
                 grievanceList.add(grievanceEssential)

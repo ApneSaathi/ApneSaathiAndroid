@@ -1427,46 +1427,46 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             syncData.phoneAndInternetIssue = "4"
             arraySubParams.addProperty(ApiConstants.PhoneInternetIssue, 4)
         } else {
-            syncData.foodShortage = if (dataList.any { it == getString(R.string.lack_of_food) }) "0"
+            syncData.foodShortage = if (dataList.any { it == getString(R.string.lack_of_food) }) "1"
             else "4"
             arraySubParams.addProperty(ApiConstants.FoodShortage, syncData.foodShortage!!.toInt())
 
             syncData.medicineShortage =
-                if (dataList.any { it == getString(R.string.lack_of_medicine) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_medicine) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.MedicineShortage, syncData.medicineShortage!!.toInt()
             )
 
             syncData.accessToBankingIssue =
-                if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.AccessToBankingIssue, syncData.accessToBankingIssue!!.toInt()
             )
 
             syncData.utilitySupplyIssue =
-                if (dataList.any { it == getString(R.string.lack_of_utilities) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_utilities) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.UtilityIssue, syncData.utilitySupplyIssue!!.toInt()
             )
 
             syncData.hygieneIssue =
-                if (dataList.any { it == getString(R.string.lack_of_hygine) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_hygine) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.HygieneIssue, syncData.hygieneIssue!!.toInt()
             )
 
             syncData.safetyIssue =
-                if (dataList.any { it == getString(R.string.lack_of_safety) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_safety) }) "1" else "4"
             arraySubParams.addProperty(ApiConstants.SafetyIssue, syncData.safetyIssue!!.toInt())
 
             syncData.emergencyServiceIssue =
-                if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.EmergencyServiceIssue, syncData.emergencyServiceIssue!!.toInt()
             )
 
             syncData.phoneAndInternetIssue =
-                if (dataList.any { it == getString(R.string.phone_and_service) }) "0" else "4"
+                if (dataList.any { it == getString(R.string.phone_and_service) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.PhoneInternetIssue, syncData.phoneAndInternetIssue!!.toInt()
             )
