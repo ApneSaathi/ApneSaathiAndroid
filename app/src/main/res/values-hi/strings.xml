@@ -356,4 +356,7 @@
     <string name="txtcancel">रद्द करना</string>
     <string name="calls_summary">"Calls Summary "</string>
     <string name="total">Total:</string>
+    <string name="wait_profile_data">we are fetching your profile data</string>
+    <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
+
 </resources>

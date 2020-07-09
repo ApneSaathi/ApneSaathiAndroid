@@ -245,6 +245,7 @@
                             android:background="@drawable/edittext_border"
                             android:padding="@dimen/dimen_5"
                             android:text=""
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:textSize="@dimen/text_12" />
 
                         <TextView
@@ -261,8 +262,9 @@
                             android:layout_marginLeft="@dimen/dimen_5"
                             android:layout_marginRight="@dimen/dimen_10"
                             android:background="@drawable/edittext_border"
+                            android:inputType="number"
+                            android:maxLength="10"
                             android:padding="@dimen/dimen_5"
-                            android:text=""
                             android:textSize="@dimen/text_12" />
 
 

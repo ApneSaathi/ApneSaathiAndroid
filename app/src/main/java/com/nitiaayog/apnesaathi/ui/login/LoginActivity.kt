@@ -32,7 +32,8 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         mContext = this
         btnLogin.throttleClick().subscribe() {
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
-                CallSnackbar(rootRelativeLayout, resources.getString(R.string.txtenterMobilenumbe))
+                EditMobileNumber.setError(resources.getString(R.string.txtenterMobilenumbe))
+//                CallSnackbar(rootRelativeLayout, resources.getString(R.string.txtenterMobilenumbe))
             } else {
                 EditMobileNumber.setError(null)
 //                if (EditMobileNumber.text.toString().trim().length <10) {
@@ -44,8 +45,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 //                } else {
 
                 try {
-                    observeStates()
-
                     Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
                             viewModel.callLogin(
@@ -54,10 +53,10 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                             )
                         }
                         .autoDispose(disposables)
+
                 } catch (e: Exception) {
                     println("TAG -- MyData --> ${e.message}")
                 }
-
 
 
                 EditMobileNumber.isFocusable = false
@@ -66,43 +65,36 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
             }
         }.autoDispose(disposables)
 
+        observeStates()
+
+
     }
 
     private fun observeStates() {
-
         viewModel.getDataObserver().removeObservers(this)
         viewModel.getDataObserver().observe(this, Observer {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable -> {
-                    BaseUtility.showAlertMessage(
-                        mContext!!,
-                        R.string.alert,
-                        R.string.check_internet
-                    )
+                    BaseUtility.showAlertMessage( mContext!!, R.string.alert,  R.string.check_internet  )
                 }
                 is NetworkRequestState.LoadingData -> {
                     progressBarlogin.visibility = VISIBLE
                 }
                 is NetworkRequestState.ErrorResponse -> {
+
                     progressBarlogin.visibility = GONE
                     EditMobileNumber.isFocusableInTouchMode = true
-                    CallSnackbar(
-                        rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage
-                    )
+                    CallSnackbar(rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage)
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
-
-//                    if (loginres is Login_Response) {
-//                        dataManager.updateUserPreference(loginres)
-//                    }
+                    if (loginres is Login_Response)
+                        dataManager.updateUserPreference(loginres)
 
                     progressBarlogin.visibility = GONE
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
                     targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
                     startActivity(targetIntent)
-                    finish()
-
                 }
             }
         })
@@ -118,6 +110,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
-
     }
+
 }
