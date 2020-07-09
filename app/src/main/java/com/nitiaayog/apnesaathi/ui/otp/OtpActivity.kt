@@ -5,7 +5,7 @@ import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.view.KeyEvent
+import android.widget.Toast
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
@@ -87,22 +87,24 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         btnVerify.throttleClick().subscribe() {
             if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
-                CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+                EditFirstChar.setError(resources.getString(R.string.enterOtp))
+//                CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
             } else {
                 EditFirstChar.setError(null)
                 if (TextUtils.isEmpty(editOtpsecondchar.text.toString().trim())) {
-                    CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+                    editOtpsecondchar.setError(resources.getString(R.string.enterOtp))
+//                    CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
                 } else {
                     editOtpsecondchar.setError(null)
                     if (TextUtils.isEmpty(editOtpthirdchar.text.toString().trim())) {
+                        editOtpthirdchar.setError(resources.getString(R.string.enterOtp))
                         CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+
                     } else {
                         editOtpfourthchar.setError(null)
                         if (TextUtils.isEmpty(editOtpfourthchar.text.toString().trim())) {
-                            CallSnackbar(
-                                mainRootRelativeLayout,
-                                resources.getString(R.string.enterOtp)
-                            )
+                            editOtpfourthchar.setError(resources.getString(R.string.enterOtp))
+//                            CallSnackbar(  mainRootRelativeLayout,  resources.getString(R.string.enterOtp)   )
                         } else {
                             editOtpfourthchar.setError(null)
 
@@ -112,17 +114,28 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                 }
             }
         }.autoDispose(disposables)
+        txttimer.throttleClick().subscribe() {
+            Toast.makeText(applicationContext, "Coming soon", Toast.LENGTH_LONG).show()
+        }.autoDispose(disposables)
 
-        val timer = object : CountDownTimer(60000, 1000) {
+        val timer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                txttimer.setText("Seconds remaining: " + millisUntilFinished / 1000)
+                txttimer.setText("OTP Verification : " + millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
                 txttimer.text = "Resend OTP"
+                btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
+                btnVerify.isClickable = false
             }
         }
         timer.start()
+
+        if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
+            TxtMobileNumber.setText(intent.getStringExtra("PhoneNo"))
+        } else {
+            TxtMobileNumber.setText("1234")
+        }
     }
 
     private fun callnextActivity() {

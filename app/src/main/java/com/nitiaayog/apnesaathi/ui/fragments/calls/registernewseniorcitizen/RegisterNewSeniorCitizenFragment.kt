@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.ui.fragments.calls.registernewseniorcitizen
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -104,6 +105,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     }
 
     private fun initClicks() {
+
+        etContactNumber.setFilters(arrayOf<InputFilter>(InputFilter.LengthFilter(10)))
+
         actGender.throttleClick().subscribe {
             actGender.showDropDown()
             updateDropDownIndicator(actGender, R.drawable.ic_arrow_up)
@@ -136,6 +140,12 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
             tvNameError.visibility = View.VISIBLE
             return false
         } else if (etAge.text.isEmpty()) {
+            tvAgeError.visibility = View.VISIBLE
+            return false
+        } else if (etAge.text.toString().toInt() < 60) {
+            tvAgeError.visibility = View.VISIBLE
+            return false
+        } else if (etAge.text.toString().toInt() > 110) {
             tvAgeError.visibility = View.VISIBLE
             return false
         } else if (selectedGender.isEmpty()) {
@@ -220,10 +230,19 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     progressDialog.dismiss()
+
                     resetRegisterNewSrCitizenLayout()
                     BaseUtility.showAlertMessage(
-                        context!!, R.string.success, R.string.sr_citizen_registered_successfully
-                    )
+                        activity!!, R.string.success, R.string.sr_citizen_registered_successfully,
+                        R.string.okay
+                    ) { dialog, _ ->
+                        dialog.dismiss()
+                        fragmentManager?.popBackStack()
+                    }
+
+//                    BaseUtility.showAlertMessage(
+//                        context!!, R.string.success, R.string.sr_citizen_registered_successfully
+//                    )
                 }
             }
         })
