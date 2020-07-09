@@ -354,7 +354,8 @@
     <string name="txttakePhoto">छायाचित्र घे</string>
     <string name="txtchoosefromgallry">गॅलरीमधून निवडा</string>
     <string name="txtcancel">रद्द करा</string>
-    <string name="wait_profile_data">we are fetching your profile data</string>
-    <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
+    <string name="wait_profile_data">आम्ही आपला प्रोफाइल डेटा आणत आहोत</string>
+    <string name="Camera_permission_text">अ‍ॅपमध्ये वैशिष्ट्य आहे की या अनुप्रयोगासाठी कॅमेरा आणि स्टोरेज परवानगी आवश्यक आहे</string>
+    <string name="otpverification">ओटीपी पडताळणी</string>
 
 </resources>

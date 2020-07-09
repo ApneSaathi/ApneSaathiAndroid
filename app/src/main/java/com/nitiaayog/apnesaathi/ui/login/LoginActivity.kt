@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
@@ -30,7 +33,11 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
+
+        observeStates()
+
         btnLogin.throttleClick().subscribe() {
+            hideKeyboard()
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
                 EditMobileNumber.setError(resources.getString(R.string.txtenterMobilenumbe))
 //                CallSnackbar(rootRelativeLayout, resources.getString(R.string.txtenterMobilenumbe))
@@ -48,26 +55,19 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
                             viewModel.callLogin(
-                                applicationContext,
+                                mContext,
                                 EditMobileNumber.text.toString()
                             )
-                        }
-                        .autoDispose(disposables)
+                        }.autoDispose(disposables)
 
                 } catch (e: Exception) {
                     println("TAG -- MyData --> ${e.message}")
                 }
-
-
                 EditMobileNumber.isFocusable = false
 
 //                }
             }
         }.autoDispose(disposables)
-
-        observeStates()
-
-
     }
 
     private fun observeStates() {
@@ -75,7 +75,11 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         viewModel.getDataObserver().observe(this, Observer {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable -> {
-                    BaseUtility.showAlertMessage( mContext!!, R.string.alert,  R.string.check_internet  )
+                    BaseUtility.showAlertMessage(
+                        mContext!!,
+                        R.string.alert,
+                        R.string.check_internet
+                    )
                 }
                 is NetworkRequestState.LoadingData -> {
                     progressBarlogin.visibility = VISIBLE
@@ -88,6 +92,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
+
                     if (loginres is Login_Response)
                         dataManager.updateUserPreference(loginres)
 
@@ -96,6 +101,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
                     startActivity(targetIntent)
                 }
+
             }
         })
     }
@@ -110,6 +116,27 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
+
     }
 
+    override fun onStop() {
+        super.onStop()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
+    fun AppCompatActivity.hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        // else {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        // }
+    }
 }
