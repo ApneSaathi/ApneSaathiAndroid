@@ -1317,14 +1317,20 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
         syncData.volunteerId = dataManager.getUserId()
 
-        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
-        syncData.callStatusSubCode = viewModel.getCallStatus()
-
         val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
         params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
 
+        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
+        syncData.callStatusSubCode = viewModel.getCallStatus()
+
         syncData.talkedWith = viewModel.getTalkedWith()
         params.addProperty(ApiConstants.SrCitizenTalkedWith, syncData.talkedWith)
+
+        params.addProperty(ApiConstants.SrCitizenName, dataManager.getUserName())
+        syncData.srCitizenName = dataManager.getUserName()
+
+        params.addProperty(ApiConstants.SrCitizenGender, dataManager.getGender())
+        syncData.gender = dataManager.getGender()
 
         if (callStatus == "1") return params
 

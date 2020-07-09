@@ -264,7 +264,7 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    var status: String = GrievancesAdapter.GRIEVANCE_PENDING
+    var status: String = GrievancesAdapter.GRIEVANCE_RAISED
 
     fun createCopy(): SrCitizenGrievance {
         val json = Gson().toJson(this)

@@ -2,10 +2,10 @@ package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
 object ApiConstants {
 
-    const val STATUS_EXCEPTION: Int = -1
-    const val STATUS_ERROR: Int = 0
-
     const val StatusCode: String = "statusCode"
+    const val Message: String = "message"
+    const val VolunteerAssignment: String = "volunteerassignment"
+    const val LoginOtp: String = "loginOTP"
     const val UserId: String = "user_id"
     const val UserName: String = "user_name"
     const val Block: String = "block"
@@ -17,6 +17,7 @@ object ApiConstants {
     const val UserInfo: String = "user_info"
 
     const val Volunteer: String = "volunteer"
+    const val GrievanceTracking: String = "greivanceTrackingList"
     const val FirstName: String = "firstName"
     const val Address: String = "address"
     const val VolunteerId: String = "idvolunteer"
@@ -47,6 +48,8 @@ object ApiConstants {
     const val Remark: String = "remarks"
 
     const val GrievanceId: String = "idgrevance"
+    const val GrievanceType: String = "greivanceType"
+    const val GrievanceStatus: String = "status"
     const val IsDiabetic: String = "diabetic"
     const val IsBloodPressure: String = "bloodpressure"
     const val LungAilment: String = "lungailment"
@@ -75,5 +78,7 @@ object ApiConstants {
     const val CreatedDate: String = "loggeddattime"
 
     const val phoneNo: String = "phoneNo"
+
+    const val GrievanceTrackingId:String ="trackingId"
 
 }

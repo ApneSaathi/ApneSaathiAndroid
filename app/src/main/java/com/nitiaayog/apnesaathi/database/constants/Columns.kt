@@ -4,6 +4,7 @@ object Columns {
     const val Id: String = "id"
     const val CallId: String = "call_id"
     const val VolunteerId: String = "volunteer_id"
+    const val GrievanceId: String = "grievance_id"
     const val EmailId: String = "email_id"
     const val Name: String = "name"
     const val ContactNumber: String = "contact_number"
@@ -14,6 +15,7 @@ object Columns {
     const val District: String = "district"
     const val Block: String = "block"
     const val CallStatus: String = "call_status"
+    const val GrievanceStatus: String = "grievance_status"
     const val CallSubStatus: String = "call_sub_status"
     const val TalkedWith: String = "talked_with"
     const val Remark: String = "remark"
@@ -43,5 +45,6 @@ object Columns {
     const val IsEmergencyServiceRequired: String = "is_emergency_service_required"
     const val RemarksImportantInfo: String = "important_remark"
     const val CreatedDate: String = "created_date"
+    const val GrievanceType: String = "grievance_type"
     const val IsSynced: String = "is_synced"
 }

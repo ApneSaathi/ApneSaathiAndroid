@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:background="?selectableItemBackground"
     android:paddingTop="@dimen/dimen_5"
     android:paddingBottom="@dimen/dimen_5">
@@ -15,24 +16,20 @@
         android:padding="@dimen/dimen_5"
         android:src="@drawable/ic_profile"
         app:civ_border_color="@color/colorAccent"
-        app:civ_border_width="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:civ_border_width="1dp" />
 
     <TextView
         android:id="@+id/tvComplaint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fontFamily="sans-serif"
+        android:paddingLeft="@dimen/dimen_5"
+        android:paddingRight="@dimen/dimen_5"
         android:gravity="center_vertical"
         android:marqueeRepeatLimit="marquee_forever"
         android:textAllCaps="false"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/text_14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/civGender"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/text_14" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnComplaintStatus"
@@ -47,4 +44,4 @@
         app:layout_constraintStart_toEndOf="@id/civGender"
         app:layout_constraintTop_toBottomOf="@id/tvComplaint" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import io.reactivex.Single
@@ -18,6 +19,9 @@ interface ApiRequest {
 
     // Get Calls list for Home
     fun getCallDetails(details: JsonObject): Single<HomeRepo>
+
+    // Get grievance tracking details
+    fun getGrievanceTrackingDetails(details: JsonObject): Single<GrievanceRespData>
 
     // Save Sr citizen feedback over a call
     fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo>

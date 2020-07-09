@@ -15,8 +15,10 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -69,6 +71,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     getObservableDataStream()
                     viewModel.getCallDetails(context!!)
+                    viewModel.getGrievanceTrackingList(context!!)
                 }.autoDispose(disposables)
         } catch (e: Exception) {
             println("TAG -- MyData --> ${e.message}")
@@ -136,12 +139,29 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         } else View.GONE
     }
 
-    private fun manageGrievances(dataList: MutableList<SrCitizenGrievance>) {
+    private fun manageProgressBarData() {
+        val pendingCalls =  viewModel.getPendingCalls().value?.size?:0
+        val followUpCalls = viewModel.getFollowupCalls().value?.size?:0
+        val completedCalls = viewModel.getCompletedCalls().value?.size?:0
+        val totalCalls:Int = pendingCalls + followUpCalls + completedCalls
+        tvTotal.text  = getString(R.string.total).plus(" ").plus(totalCalls)
+
+        val completedPer:Int = ((completedCalls.toDouble()/totalCalls.toDouble())*100).toInt()
+        val followUpPer:Int = ((followUpCalls.toDouble()/totalCalls.toDouble())*100).toInt() + completedPer
+        pbCallSummary.progress = completedPer
+        pbCallSummary.secondaryProgress = followUpPer
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        exitProcess(0)
+    }
+    private fun manageGrievances(dataList: MutableList<GrievanceData>) {
         val size = dataList.size
         tvGrievances.text = getString(R.string.grievances_count, size.toString())
         btnSeeAllGrievances.visibility = if (size > 3) {
             btnSeeAllGrievances.setOnClickListener {
-                viewModel.getGrievancesList().value?.let { it1 -> grievancesAdapter.setData(it1) }
+                viewModel.getGrievancesTrackingList().value?.let { it1 -> grievancesAdapter.setData(it1) }
                 grievancesAdapter.notifyDataSetChanged()
                 btnSeeAllGrievances.visibility = View.GONE
             }
@@ -155,15 +175,33 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun getObservableDataStream() {
-        viewModel.getCallsList().removeObservers(viewLifecycleOwner)
+        viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
             pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             pendingAdapter.notifyDataSetChanged()
             managePendingCalls(it)
+            manageProgressBarData()
         })
 
-        viewModel.getGrievancesList().removeObservers(viewLifecycleOwner)
-        viewModel.getGrievancesList().observe(viewLifecycleOwner, Observer {
+        viewModel.getCompletedCalls().removeObservers(viewLifecycleOwner)
+        viewModel.getCompletedCalls().observe(viewLifecycleOwner, Observer {
+            manageProgressBarData()
+        })
+
+        viewModel.getFollowupCalls().removeObservers(viewLifecycleOwner)
+        viewModel.getFollowupCalls().observe(viewLifecycleOwner, Observer {
+            manageProgressBarData()
+        })
+
+//        viewModel.getGrievancesList().removeObservers(viewLifecycleOwner)
+//        viewModel.getGrievancesList().observe(viewLifecycleOwner, Observer {
+//            grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
+//            grievancesAdapter.notifyDataSetChanged()
+//            manageGrievances(it)
+//        })
+        viewModel.getGrievancesTrackingList().removeObservers(viewLifecycleOwner)
+        viewModel.getGrievancesTrackingList().observe(viewLifecycleOwner, Observer {
+
             grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             grievancesAdapter.notifyDataSetChanged()
             manageGrievances(it)
@@ -177,8 +215,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                         context!!, R.string.error, R.string.api_connection_error
                     )
                 is NetworkRequestState.LoadingData -> {
-                    manageProgressBar(View.VISIBLE)
-                    handler.postDelayed({ manageProgressBar(View.GONE) }, 10000)
+                    if (it.apiName == ApiProvider.ApiLoadDashboard){
+                        manageProgressBar(View.VISIBLE)
+                    }
                 }
                 is NetworkRequestState.ErrorResponse -> {
                     manageProgressBar(View.GONE)

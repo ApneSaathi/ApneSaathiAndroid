@@ -26,7 +26,7 @@
                 android:padding="@dimen/dimen_10">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardViewPendingCalls"
+                    android:id="@+id/cardViewCallSummary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/card_background"
@@ -34,6 +34,102 @@
                     app:cardUseCompatPadding="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvCallSummary"
+                            style="@style/TextAppearance.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/dimen_15"
+                            android:paddingTop="@dimen/dimen_10"
+                            android:paddingEnd="0dp"
+                            android:paddingBottom="@dimen/dimen_5"
+                            android:text="@string/calls_summary"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvTotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total:"
+                            android:layout_marginTop="@dimen/dimen_5"
+                            android:layout_marginLeft="@dimen/dimen_30"
+                            android:layout_marginRight="@dimen/dimen_30"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvCallSummary">
+
+                        </TextView>
+
+                        <ProgressBar
+                            android:id="@+id/pbCallSummary"
+                            android:layout_marginTop="@dimen/dimen_5"
+                            android:layout_marginLeft="@dimen/dimen_30"
+                            android:layout_marginRight="@dimen/dimen_30"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            style="@style/Horizontal.Progressbar"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvTotal">
+
+                        </ProgressBar>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/dimen_15"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dimen_30"
+                            android:layout_marginLeft="@dimen/dimen_30"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:paddingBottom="@dimen/dimen_12"
+                            app:layout_constraintTop_toBottomOf="@id/pbCallSummary">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="-- Completed"
+                                android:gravity="center"
+                                android:textSize="@dimen/text_10"
+                                android:textColor="@color/color_orange"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textSize="@dimen/text_10"
+                                android:textColor="@color/color_black"
+                                android:text="-- Need Followup"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="@color/color_grey_txt"
+                                android:textSize="@dimen/text_10"
+                                android:text="-- Pending"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewPendingCalls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/card_background"
+                    app:cardCornerRadius="@dimen/dimen_2"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewCallSummary">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"

@@ -94,6 +94,8 @@ class SyncDataService : JobService() {
         params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
 
         params.addProperty(ApiConstants.SrCitizenTalkedWith, grievance.talkedWith)
+        params.addProperty(ApiConstants.SrCitizenName, grievance.srCitizenName)
+        params.addProperty(ApiConstants.SrCitizenGender, grievance.gender)
 
         if (callStatus == "1") return params
 

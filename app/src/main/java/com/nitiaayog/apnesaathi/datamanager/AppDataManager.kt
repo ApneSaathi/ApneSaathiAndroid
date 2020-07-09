@@ -5,15 +5,18 @@ import androidx.lifecycle.LiveData
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
 import com.nitiaayog.apnesaathi.database.dao.CallDataDao
+import com.nitiaayog.apnesaathi.database.dao.GrievanceTrackingDao
 import com.nitiaayog.apnesaathi.database.dao.GrievancesDao
 import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
@@ -47,6 +50,7 @@ class AppDataManager private constructor(
 
     private val callsDataDao: CallDataDao by lazy { dbManager.provideCallDataDao() }
     private val grievancesDao: GrievancesDao by lazy { dbManager.provideGrievancesDao() }
+    private val grievancesTrackingDao: GrievanceTrackingDao by lazy { dbManager.provideGrievancesTrackingDao() }
     private val syncGrievancesDao: SyncSrCitizenGrievancesDao by lazy {
         dbManager.provideSrCitizenGrievancesDao()
     }
@@ -61,6 +65,9 @@ class AppDataManager private constructor(
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
         apiRequest.getCallDetails(details)
+
+    override fun getGrievanceTrackingDetails(details: JsonObject): Single<GrievanceRespData> =
+        apiRequest.getGrievanceTrackingDetails(details)
 
     override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
         apiRequest.registerSeniorCitizen(srDetails)
@@ -89,6 +96,9 @@ class AppDataManager private constructor(
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
     override fun updateCallStatus(callStatus: String) = callsDataDao.update(callStatus)
     override fun updateCallData(callData: CallData): Long = callsDataDao.update(callData)
+
+    override fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>) =
+        grievancesTrackingDao.insertAll(grievanceTracking)
 
     // => Table : grievances
     override fun insertGrievance(grievance: SrCitizenGrievance): Long =
@@ -143,6 +153,9 @@ class AppDataManager private constructor(
     override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
+    override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getAllGrievances()
+
     override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
 
@@ -167,6 +180,10 @@ class AppDataManager private constructor(
     override fun getUserName(): String = preferences.getUserName()
 
     override fun setUserName(userName: String) = preferences.setUserName(userName)
+
+    override fun getGender() = preferences.getGender()
+
+    override fun setGender(gender: String) = preferences.setGender(gender)
 
     override fun getProfileImage(): String = preferences.getProfileImage()
 

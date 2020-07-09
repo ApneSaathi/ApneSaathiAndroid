@@ -354,4 +354,6 @@
     <string name="txttakePhoto">छायाचित्र घे</string>
     <string name="txtchoosefromgallry">गॅलरीमधून निवडा</string>
     <string name="txtcancel">रद्द करा</string>
+    <string name="calls_summary">"Calls Summary "</string>
+    <string name="total">Total:</string>
 </resources>

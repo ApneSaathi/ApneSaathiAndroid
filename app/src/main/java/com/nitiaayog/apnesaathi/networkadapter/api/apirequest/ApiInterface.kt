@@ -3,7 +3,7 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
@@ -22,6 +22,9 @@ interface ApiInterface {
 
     @POST(ApiProvider.ApiLoadDashboard)
     fun getCallDetails(@Body details: JsonObject): Single<HomeRepo>
+
+    @POST(ApiProvider.ApiGrievanceTracking)
+    fun getGrievanceTrackingDetails(@Body details: JsonObject): Single<GrievanceRespData>
 
     @POST(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
     fun saveSrCitizenFeedback(@Body srCitizenFeedback: JsonObject): Single<BaseRepo>
