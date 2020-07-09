@@ -1,11 +1,15 @@
 package com.nitiaayog.apnesaathi.ui.otp
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
@@ -86,25 +90,25 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         })
 
         btnVerify.throttleClick().subscribe() {
+            hideKeyboard()
             if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
-                EditFirstChar.setError(resources.getString(R.string.enterOtp))
-//                CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+//                EditFirstChar.setError(resources.getString(R.string.enterOtp))
+                CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
             } else {
                 EditFirstChar.setError(null)
                 if (TextUtils.isEmpty(editOtpsecondchar.text.toString().trim())) {
-                    editOtpsecondchar.setError(resources.getString(R.string.enterOtp))
-//                    CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+//                    editOtpsecondchar.setError(resources.getString(R.string.enterOtp))
+                    CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
                 } else {
                     editOtpsecondchar.setError(null)
                     if (TextUtils.isEmpty(editOtpthirdchar.text.toString().trim())) {
-                        editOtpthirdchar.setError(resources.getString(R.string.enterOtp))
+//                        editOtpthirdchar.setError(resources.getString(R.string.enterOtp))
                         CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
 
                     } else {
                         editOtpfourthchar.setError(null)
                         if (TextUtils.isEmpty(editOtpfourthchar.text.toString().trim())) {
-                            editOtpfourthchar.setError(resources.getString(R.string.enterOtp))
-//                            CallSnackbar(  mainRootRelativeLayout,  resources.getString(R.string.enterOtp)   )
+                            CallSnackbar(  mainRootRelativeLayout,  resources.getString(R.string.enterOtp)   )
                         } else {
                             editOtpfourthchar.setError(null)
 
@@ -120,11 +124,11 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         val timer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                txttimer.setText("OTP Verification : " + millisUntilFinished / 1000)
+                txttimer.setText(resources.getString(R.string.otpverification) + millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
-                txttimer.text = "Resend OTP"
+                txttimer.text = resources.getString(R.string.resendOTP)
                 btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
                 btnVerify.isClickable = false
             }
@@ -153,7 +157,12 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
     override fun provideLayoutResource(): Int = R.layout.activity_login_otpverify
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    fun AppCompatActivity.hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 }
