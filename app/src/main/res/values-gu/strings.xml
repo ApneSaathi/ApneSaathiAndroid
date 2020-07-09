@@ -395,11 +395,11 @@
     <string name="txttakePhoto">ફોટો પાડ</string>
     <string name="txtchoosefromgallry">ગેલેરીમાંથી પસંદ કરો</string>
     <string name="txtcancel">રદ કરો</string>
+    <string name="wait_profile_data">અમે તમારો પ્રોફાઇલ ડેટા લઈ રહ્યાં છીએ</string>
+    <string name="Camera_permission_text">એપ્લિકેશનમાં આ સુવિધા માટે કેમેરા અને સ્ટોરેજ પરવાનગીની સુવિધા છે</string>
+    <string name="otpverification">OTP ચકાસણી : </string>
     <string name="calls_summary">કોલ્સ સારાંશ</string>
     <string name="total">કુલ:</string>
     <string name="was">હતી</string>
-    <string name="wait_profile_data">we are fetching your profile data</string>
-    <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
     <string name="select_a_state">Please select a state</string>
-
 </resources>

@@ -399,11 +399,11 @@
     <string name="txttakePhoto">फोटो लो</string>
     <string name="txtchoosefromgallry">गैलरी से चयन करो</string>
     <string name="txtcancel">रद्द करना</string>
+    <string name="wait_profile_data">हम आपका प्रोफ़ाइल डेटा ला रहे हैं</string>
+    <string name="Camera_permission_text">ऐप में इस एप्लिकेशन के लिए आवश्यक कैमरा और स्टोरेज अनुमति है</string>
+    <string name="otpverification">OTP सत्यापन : </string>
     <string name="calls_summary">सारांश कहता है</string>
     <string name="total">संपूर्ण:</string>
     <string name="was">था</string>
-    <string name="wait_profile_data">we are fetching your profile data</string>
-    <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
     <string name="select_a_state">Please select a state</string>
-
 </resources>

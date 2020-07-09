@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/rootRelativeLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
@@ -44,16 +44,16 @@
         android:textStyle="normal" />
 
     <ProgressBar
-        android:layout_below="@+id/txtlogindisc"
         android:id="@+id/progressBarlogin"
-        android:layout_centerHorizontal="true"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="@dimen/dimen_30"
         android:layout_height="@dimen/dimen_30"
+        android:layout_below="@+id/txtlogindisc"
+        android:layout_centerHorizontal="true"
         android:layout_marginEnd="@dimen/dimen_10"
         android:visibility="gone"
 
-       />
+        />
 
     <LinearLayout
         android:id="@+id/linearloginfield"
@@ -68,7 +68,6 @@
         android:orientation="horizontal">
 
         <EditText
-            android:visibility="gone"
             android:layout_width="@dimen/view_size_62"
             android:layout_height="@dimen/view_size_50"
             android:layout_gravity="center"
@@ -76,13 +75,14 @@
             android:gravity="center"
             android:padding="@dimen/dimen_13"
             android:text="+91"
-            android:textSize="@dimen/text_16" />
+            android:textSize="@dimen/text_16"
+            android:visibility="gone" />
 
         <View
-            android:visibility="gone"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
-            android:background="@color/color_black" />
+            android:background="@color/color_black"
+            android:visibility="gone" />
 
 
         <EditText
@@ -111,9 +111,9 @@
         android:layout_marginRight="@dimen/dimen_10"
         android:background="@color/btn_bg"
         android:gravity="center"
-        android:textSize="@dimen/text_16"
         android:text="@string/confirm"
-        android:textColor="@color/color_white" />
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_16" />
 
 
 </RelativeLayout>
