@@ -77,6 +77,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_calls">Calls</string>
     <string name="menu_notification">Notification</string>
+    <string name="menu_issues">Issues</string>
     <string name="menu_profile">Profile</string>
     <string name="pending_calls_count">Pending Calls(%s)</string>
     <string name="grievances_count">Grievances(%s)</string>
@@ -438,5 +439,7 @@
     <string name="update_call_status">Update Call Status</string>
     <string name="total">Total:</string>
     <string name="select_a_state">Please select a state</string>
+    <string name="wrong_number">Wrong Number</string>
+    <string name="in_progress">In Progress</string>
 
 </resources>

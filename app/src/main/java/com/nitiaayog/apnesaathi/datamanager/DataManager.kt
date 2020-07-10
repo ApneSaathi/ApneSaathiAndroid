@@ -35,7 +35,10 @@ interface DataManager : ApiRequest, PreferenceRequest {
     suspend fun updateGrievance(grievance: SrCitizenGrievance)
 
     // Table : grievance_Tracking
-    fun getAllTrackingGrievances():LiveData<MutableList<GrievanceData>>
+    fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>>
+    fun getPendingGrievances(): LiveData<MutableList<GrievanceData>>
+    fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>>
+    fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>>
 
     // Table : sync_grievances_data
     fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?

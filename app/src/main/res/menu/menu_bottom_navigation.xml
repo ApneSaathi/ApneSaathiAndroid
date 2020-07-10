@@ -15,10 +15,10 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuNotification"
+        android:id="@+id/menuGrievances"
         android:enabled="true"
         android:icon="@drawable/menu_notification_selector"
-        android:title="@string/menu_notification"
+        android:title="@string/menu_issues"
         app:showAsAction="ifRoom" />
 
     <item
