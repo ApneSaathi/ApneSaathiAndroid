@@ -1,7 +1,9 @@
 package com.nitiaayog.apnesaathi.ui.fragments.calls.registernewseniorcitizen
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -107,6 +109,41 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private fun initClicks() {
 
         etContactNumber.setFilters(arrayOf<InputFilter>(InputFilter.LengthFilter(10)))
+
+        etAge.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etAge.length() == 1) {
+                    tvAgeError.visibility = View.VISIBLE
+                }
+
+                if (etAge.length() == 2) {
+                    if (etAge.text.toString().trim().toInt() < 60) {
+                        tvAgeError.visibility = View.VISIBLE
+                    }else{
+
+                    }
+                }
+
+                if (etAge.length() == 3) {
+                    if (etAge.text.toString().trim().toInt() < 60) {
+                        tvAgeError.visibility = View.VISIBLE
+                    } else if (etAge.text.toString().trim().toInt() > 110) {
+                        tvAgeError.visibility = View.VISIBLE
+                    }else{
+
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
+
+
 
         actGender.throttleClick().subscribe {
             actGender.showDropDown()
