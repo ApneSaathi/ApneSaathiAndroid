@@ -41,6 +41,10 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.getCompletedCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
 
+    private val pendingGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getPendingGrievances()
+    private val inProgressGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getInProgressGrievances()
+    private val resolvedGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getResolvedGrievances()
+
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getGrievances()
 
@@ -71,6 +75,10 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList
 
     fun getCompletedCalls(): LiveData<MutableList<CallData>> = completedCallsList
+
+    fun getPendingGrievances():LiveData<MutableList<GrievanceData>> = pendingGrievance
+    fun getInProgressGrievances():LiveData<MutableList<GrievanceData>> = inProgressGrievance
+    fun getResolvedGrievances():LiveData<MutableList<GrievanceData>> = resolvedGrievance
 
     fun getGrievancesList(): LiveData<MutableList<SrCitizenGrievance>> = grievancesList
 

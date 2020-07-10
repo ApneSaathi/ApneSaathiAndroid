@@ -290,6 +290,68 @@
                         android:textIsSelectable="false"
                         android:textSize="@dimen/text_12"
                         app:strokeColor="@color/color_dark_grey_txt" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnWrongNumber"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:text="@string/wrong_number"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_12"
+                        app:strokeColor="@color/color_dark_grey_txt" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llCallStatusLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout2">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCallLater"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Call Later"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_12"
+                        app:strokeColor="@color/color_dark_grey_txt" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnNumberBusy"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:text="Number Busy"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_12"
+                        app:strokeColor="@color/color_dark_grey_txt" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnNumberNotExist"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:text="Number not existing"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_dark_grey_txt"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/text_12"
+                        app:strokeColor="@color/color_dark_grey_txt" />
 
                 </LinearLayout>
 
@@ -309,7 +371,7 @@
                     android:textSize="@dimen/text_14"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout2" />
+                    app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout3" />
 
                 <AutoCompleteTextView
                     android:id="@+id/actTalkWith"

@@ -8,7 +8,7 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.fragments.calls.CallsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
-import com.nitiaayog.apnesaathi.ui.fragments.notifications.NotificationsFragment
+import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievancesFragment
 import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -17,7 +17,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
 
     private val homeFragment = HomeFragment()
     private val callsFragment = CallsFragment()
-    private val notificationFragment = NotificationsFragment()
+    private val notificationFragment = GrievancesFragment()
     private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
                 bottomNavigationView.selectedItemId = when (position) {
                     0 -> R.id.menuHome
                     1 -> R.id.menuCalls
-                    2 -> R.id.menuNotification
+                    2 -> R.id.menuGrievances
                     3 -> R.id.menuProfile
                     else -> R.id.menuHome
                 }
@@ -68,7 +68,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
             when (it.itemId) {
                 R.id.menuHome -> viewPager.currentItem = 0
                 R.id.menuCalls -> viewPager.currentItem = 1
-                R.id.menuNotification -> viewPager.currentItem = 2
+                R.id.menuGrievances -> viewPager.currentItem = 2
                 R.id.menuProfile -> viewPager.currentItem = 3
             }
             updateToolbarTittle()
@@ -80,7 +80,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
         when (viewPager.currentItem) {
             0 -> toolBar.setTitle(R.string.menu_home)
             1 -> toolBar.setTitle(R.string.menu_calls)
-            2 -> toolBar.setTitle(R.string.menu_notification)
+            2 -> toolBar.setTitle(R.string.menu_issues)
             3 -> toolBar.setTitle(R.string.menu_profile)
         }
         if (supportFragmentManager.backStackEntryCount > 0)

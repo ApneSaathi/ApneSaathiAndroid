@@ -156,6 +156,15 @@ class AppDataManager private constructor(
     override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getAllGrievances()
 
+    override fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getGrievancesWithStatus("UNDER REVIEW")
+
+    override fun getPendingGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getGrievancesWithStatus("RAISED")
+
+    override fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getGrievancesWithStatus("RESOLVED")
+
     override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
 
