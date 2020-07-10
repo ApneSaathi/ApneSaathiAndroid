@@ -17,7 +17,7 @@ object RetrofitClient {
 
     private val TAG: String = RetrofitClient::class.java.simpleName
 
-    private const val REQUEST_TIMEOUT = 10L
+    private const val REQUEST_TIMEOUT:Long = 10
 
     private var apiInterface: ApiInterface? = null
     private var httpClient: OkHttpClient? = null

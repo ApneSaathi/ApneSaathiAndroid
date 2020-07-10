@@ -263,6 +263,51 @@
         <item>गुजरात</item>
         <item>झारखंड</item>
     </string-array>
+    <string-array name="district0">
+        <item>बक्सा</item>
+        <item>बारपेटा</item>
+        <item>दरांग</item>
+        <item>धुबरी</item>
+        <item>गोलपाड़ा</item>
+        <item>हैलाकांडी</item>
+    </string-array>
+    <string-array name="district1">
+        <item>अररिया</item>
+        <item>बेगूसराय</item>
+        <item>सीतामढ़ी</item>
+        <item>कटिहार</item>
+        <item>शेखपुरा</item>
+    </string-array>
+    <string-array name="district2">
+        <item>बड़वानी</item>
+        <item>दमोह</item>
+        <item>खंडवा</item>
+        <item>सिंगरौली</item>
+        <item>विदिशा</item>
+    </string-array>
+    <string-array name="district3">
+        <item>बलरामपुर</item>
+        <item>बहराइच</item>
+        <item>चित्रकूट</item>
+        <item>श्रावस्ती</item>
+        <item>सोनभद्र</item>
+    </string-array>
+    <string-array name="district4">
+        <item>बरन</item>
+        <item>जैसलमेर</item>
+    </string-array>
+    <string-array name="district5">
+        <item>अमरावती</item>
+        <item>गडचिरोली</item>
+        <item>नंदुरबार</item>
+    </string-array>
+    <string-array name="district6">
+        <item>नर्मदा</item>
+    </string-array>
+    <string-array name="district7">
+        <item>पाकुर</item>
+        <item>साहिबगंज</item>
+    </string-array>
     <string-array name="districts_array">
         <item>बारपेटा</item>
         <item>बास्का</item>
@@ -357,5 +402,8 @@
     <string name="wait_profile_data">हम आपका प्रोफ़ाइल डेटा ला रहे हैं</string>
     <string name="Camera_permission_text">ऐप में इस एप्लिकेशन के लिए आवश्यक कैमरा और स्टोरेज अनुमति है</string>
     <string name="otpverification">OTP सत्यापन : </string>
-
+    <string name="calls_summary">सारांश कहता है</string>
+    <string name="total">संपूर्ण:</string>
+    <string name="was">था</string>
+    <string name="select_a_state">Please select a state</string>
 </resources>

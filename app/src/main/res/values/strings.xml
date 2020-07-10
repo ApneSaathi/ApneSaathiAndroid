@@ -282,6 +282,51 @@
         <item>Gujarat</item>
         <item>Jharkhand</item>
     </string-array>
+    <string-array name="district0">
+         <item>Baksa</item>
+         <item>Barpeta</item>
+         <item>Darrang</item>
+         <item>Dhubri</item>
+         <item>Goalpara</item>
+         <item>Hailakandi</item>
+    </string-array>
+    <string-array name="district1">
+        <item>Araria</item>
+        <item>Begusarai</item>
+        <item>Sitamarhi</item>
+        <item>Katihar</item>
+        <item>Sheikhpura</item>
+    </string-array>
+    <string-array name="district2">
+        <item>Barwani</item>
+        <item>Damoh</item>
+        <item>Khandwa</item>
+        <item>Singrauli</item>
+        <item>Vidisha</item>
+    </string-array>
+    <string-array name="district3">
+        <item>Balrampur</item>
+        <item>Behraich</item>
+        <item>Chitrakoot</item>
+        <item>Shrawasti</item>
+        <item>Sonbhadra</item>
+    </string-array>
+    <string-array name="district4">
+        <item>Baran</item>
+        <item>Jaisalmer</item>
+    </string-array>
+    <string-array name="district5">
+        <item>Amravati</item>
+        <item>Gadchiroli</item>
+        <item>Nandurbar</item>
+    </string-array>
+    <string-array name="district6">
+        <item>Narmada</item>
+    </string-array>
+    <string-array name="district7">
+        <item>Pakur</item>
+        <item>Sahibganj</item>
+    </string-array>
     <string-array name="medical_problems">
         <item>@string/no_problems</item>
         <item>@string/diabetes</item>
@@ -387,5 +432,11 @@
     <string name="wait_profile_data">we are fetching your profile data</string>
     <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
     <string name="otpverification">"OTP Verification : "</string>
+    <string name="complaint_on">Complaint on</string>
+    <string name="calls_summary">Calls Summary</string>
+    <string name="was">was</string>
+    <string name="update_call_status">Update Call Status</string>
+    <string name="total">Total:</string>
+    <string name="select_a_state">Please select a state</string>
 
 </resources>

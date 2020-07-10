@@ -2,6 +2,7 @@ package com.nitiaayog.apnesaathi.datamanager
 
 import androidx.lifecycle.LiveData
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
@@ -19,6 +20,7 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getAllCallsList(): LiveData<MutableList<CallData>>
 
     fun insertCallData(callData: List<CallData>)
+    fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>)
     fun getCallDetailFromId(id: Int): CallData
     fun updateCallStatus(callStatus: String)
     fun updateCallData(callData: CallData): Long
@@ -31,6 +33,9 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun isDataExist(id: Int, callId: Int): SrCitizenGrievance?
     fun deleteGrievance(grievance: SrCitizenGrievance)
     suspend fun updateGrievance(grievance: SrCitizenGrievance)
+
+    // Table : grievance_Tracking
+    fun getAllTrackingGrievances():LiveData<MutableList<GrievanceData>>
 
     // Table : sync_grievances_data
     fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?

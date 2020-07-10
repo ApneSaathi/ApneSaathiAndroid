@@ -88,4 +88,12 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/title_text_color</item>
   </style>
+
+    <style name="Horizontal.Progressbar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressBackgroundTint">#d2daf0</item>
+        <item name="android:progressTint">#fe4612</item>
+        <item name="android:secondaryProgressTint">#253746</item>
+        <item name="android:progressDrawable">@drawable/bg_horizontal_pb</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
 </resources>

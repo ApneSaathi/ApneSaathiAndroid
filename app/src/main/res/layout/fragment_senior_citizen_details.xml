@@ -703,7 +703,7 @@
         android:background="@color/color_dark_grey"
         android:gravity="center"
         android:minHeight="@dimen/view_size_40"
-        android:text="@string/edit"
+        android:text="@string/update_call_status"
         android:textColor="@color/color_white"
         android:textSize="@dimen/text_16" />
 
