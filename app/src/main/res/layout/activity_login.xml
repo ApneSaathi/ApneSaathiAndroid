@@ -31,6 +31,7 @@
         app:srcCompat="@drawable/applogo" />
 
     <TextView
+        style="@style/TextAppearance.Title"
         android:id="@+id/txtlogindisc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,8 +40,7 @@
         android:layout_marginTop="@dimen/dimen_20"
         android:gravity="center"
         android:text="@string/logindescription"
-        android:textColor="@color/textcolor"
-        android:textSize="@dimen/text_14"
+
         android:textStyle="normal" />
 
     <ProgressBar
@@ -64,7 +64,7 @@
         android:layout_marginTop="@dimen/dimen_30"
         android:layout_marginRight="@dimen/dimen_10"
 
-        android:background="@drawable/edittext_border"
+        android:background="@drawable/bg_rectangle_border_form"
         android:orientation="horizontal">
 
         <EditText
@@ -112,6 +112,7 @@
         android:background="@color/btn_bg"
         android:gravity="center"
         android:text="@string/confirm"
+        android:fontFamily="sans-serif"
         android:textColor="@color/color_white"
         android:textSize="@dimen/text_16" />
 

@@ -7,17 +7,17 @@
     android:orientation="vertical">
 
     <TextView
+        style="@style/TextAppearance.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:minHeight="50dp"
         android:text="@string/txtaddPhoto"
         android:textColor="@color/color_black"
-        android:textSize="@dimen/text_18"
         android:textStyle="bold" />
 
     <View
-        android:layout_marginTop="@dimen/dimen_5"
+
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/color_black" />
@@ -27,15 +27,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left|center"
+        android:fontFamily="sans-serif"
+
         android:drawableTint="@color/text_color_3"
         android:drawableLeft="@drawable/vector_camera"
         android:drawablePadding="@dimen/dimen_5"
         android:minHeight="50dp"
         android:paddingLeft="@dimen/dimen_20"
         android:textColor="@color/color_black"
-
         android:text="@string/txttakePhoto"
-        android:textSize="@dimen/text_18" />
+        android:textSize="@dimen/text_16" />
 
     <View
         android:layout_width="match_parent"
@@ -53,9 +54,10 @@
         android:minHeight="50dp"
         android:paddingLeft="@dimen/dimen_20"
         android:textColor="@color/color_black"
+        android:fontFamily="sans-serif"
 
         android:text="@string/txtchoosefromgallry"
-        android:textSize="@dimen/text_18" />
+        android:textSize="@dimen/text_16" />
 
     <View
         android:layout_width="match_parent"
@@ -69,12 +71,14 @@
         android:layout_height="wrap_content"
         android:gravity="left|center"
         android:minHeight="50dp"
+        android:fontFamily="sans-serif"
+
         android:paddingLeft="@dimen/dimen_20"
         android:textColor="@color/color_black"
         android:drawableLeft="@drawable/cancel_img"
         android:drawablePadding="@dimen/dimen_5"
         android:text="@string/txtcancel"
-        android:textSize="@dimen/text_18" />
+        android:textSize="@dimen/text_16" />
 
     <View
         android:layout_width="match_parent"
