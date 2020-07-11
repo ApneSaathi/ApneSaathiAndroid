@@ -3,11 +3,9 @@ package com.nitiaayog.apnesaathi.ui.fragments.grievances
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
-import com.nitiaayog.apnesaathi.database.dao.GrievanceTrackingDao_Impl
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.include_recyclerview.*
