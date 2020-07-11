@@ -47,6 +47,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
 
         viewPager.isUserInputEnabled = false
         viewPager.adapter = adapter
+        viewPager.offscreenPageLimit = 4
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
