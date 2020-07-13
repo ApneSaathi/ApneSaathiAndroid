@@ -238,22 +238,21 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         dialog!!.setCancelable(true)
         dialog!!.setContentView(R.layout.get_images_dialog)
         dialog!!.TxtGetFromcamera.setOnClickListener {
-            Toast.makeText(context,"Working progress", Toast.LENGTH_LONG).show()
-            dialog!!.dismiss()
-//            capturePhoto()
+//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
+//            dialog!!.dismiss()
+            capturePhoto()
         }
         dialog!!.TxtCancel.setOnClickListener {
             dialog!!.dismiss()
         }
 
         dialog!!.TxtGetFromGallery.setOnClickListener {
-//            fromGallery()
-            Toast.makeText(context,"Working progress",Toast.LENGTH_LONG).show()
-            dialog!!.dismiss()
+            fromGallery()
+//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
+//            dialog!!.dismiss()
         }
         dialog!!.show()
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

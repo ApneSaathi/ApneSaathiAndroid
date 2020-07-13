@@ -22,6 +22,7 @@
 
 
     <TextView
+        style="@style/TextAppearance.Title"
 
         android:id="@+id/txt1"
         android:layout_width="match_parent"
@@ -42,6 +43,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimen_3"
         android:gravity="center"
+        style="@style/TextAppearance.Title"
+
         android:text="+91 9673346489">
 
     </TextView>
@@ -99,22 +102,24 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/btnVerify"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_size_45"
-        android:layout_below="@+id/linearloginfield"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/dimen_10"
-        android:layout_marginTop="@dimen/dimen_30"
-        android:layout_marginRight="@dimen/dimen_10"
-        android:background="@color/btn_bg"
-        android:gravity="center"
-        android:text="@string/proceed"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/text_16" />
+        <TextView
+            android:id="@+id/btnVerify"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_size_45"
+            android:layout_below="@+id/linearloginfield"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:background="@color/btn_bg"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
 
-    <TextView
+            android:text="@string/proceed"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
         android:id="@+id/txttimer"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dimen_20"
@@ -123,8 +128,7 @@
         android:layout_below="@+id/btnVerify"
         android:layout_centerHorizontal="true"
         android:text="@string/resendcode"
-        android:textSize="@dimen/text_16"
-        android:textColor="@color/color_black" />
+        style="@style/TextAppearance.Title" />
 
 
     </LinearLayout>

@@ -1,7 +1,5 @@
 package com.nitiaayog.apnesaathi.preferences
 
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.Volunteer
-
 object PreferenceConstants {
 
     const val UserId: String = "user_id"

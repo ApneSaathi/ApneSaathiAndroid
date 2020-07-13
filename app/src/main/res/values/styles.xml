@@ -70,7 +70,7 @@
         <item name="hintTextAppearance">@style/Base.InputLayout.TextAppearance</item>
     </style>
 
-    <style name="form_default_text" parent= "TextAppearance.MaterialComponents.Caption">
+    <style name="form_default_text" parent="TextAppearance.MaterialComponents.Caption">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_11</item>
         <item name="android:textColor">@color/color_orange</item>
@@ -87,7 +87,7 @@
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/title_text_color</item>
-  </style>
+    </style>
 
     <style name="Horizontal.Progressbar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressBackgroundTint">#d2daf0</item>

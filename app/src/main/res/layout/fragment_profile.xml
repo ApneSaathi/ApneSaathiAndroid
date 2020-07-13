@@ -58,6 +58,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="-8dp"
                     app:cardCornerRadius="@dimen/dimen_10">
 
                     <LinearLayout
@@ -68,12 +69,11 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextAppearance.Title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5"
-                            android:text="@string/personal_details"
-                            android:textColor="@color/color_black"
-                            android:textSize="@dimen/text_16" />
+                            android:text="@string/personal_details" />
 
                         <TextView
                             android:id="@+id/TxtName"
@@ -84,7 +84,10 @@
                             android:drawableLeft="@drawable/ic_profile"
                             android:drawablePadding="@dimen/dimen_5"
                             android:drawableTint="@color/text_color_3"
+                            android:fontFamily="sans-serif"
+
                             android:text="Amol Ramnath khose"
+                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <TextView
@@ -95,7 +98,10 @@
                             android:layout_marginTop="@dimen/dimen_10"
                             android:drawableLeft="@drawable/location_vector"
                             android:drawablePadding="@dimen/dimen_5"
+                            android:fontFamily="sans-serif"
+
                             android:text="Infosys ltd.hinjewadi phase 2 Pune"
+                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <TextView
@@ -107,7 +113,9 @@
                             android:drawableLeft="@drawable/vector_phoncall"
                             android:drawablePadding="@dimen/dimen_5"
 
+                            android:fontFamily="sans-serif"
                             android:text="9673346489"
+                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <TextView
@@ -119,11 +127,15 @@
                             android:drawableLeft="@drawable/vector_gmail"
                             android:drawablePadding="@dimen/dimen_5"
 
+                            android:fontFamily="sans-serif"
+
                             android:text="amol@gmail.com"
+                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <TextView
                             android:id="@+id/TxtChangeLanguage"
+                            style="@style/TextAppearance.Title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -133,16 +145,17 @@
                             android:background="@drawable/border_profile"
                             android:gravity="center"
                             android:padding="@dimen/dimen_7"
-                            android:text="@string/changelanguage"
-                            android:textSize="@dimen/text_14" />
+                            android:text="@string/changelanguage" />
 
                         <TextView
                             android:id="@+id/TxtLogout"
+                            style="@style/TextAppearance.Title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dimen_20"
                             android:layout_marginRight="@dimen/dimen_15"
+                            android:layout_marginBottom="@dimen/dimen_10"
                             android:background="@drawable/border_orange"
                             android:gravity="center"
                             android:paddingLeft="@dimen/dimen_10"
@@ -150,8 +163,7 @@
                             android:paddingRight="@dimen/dimen_10"
                             android:paddingBottom="@dimen/dimen_3"
                             android:text="@string/logout"
-                            android:textColor="@color/text_color_3"
-                            android:textSize="@dimen/text_14" />
+                            android:textColor="@color/text_color_3" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -193,6 +205,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="-8dp"
                     app:cardCornerRadius="@dimen/dimen_10">
 
                     <LinearLayout
@@ -201,22 +214,24 @@
                         android:layout_marginLeft="@dimen/dimen_10"
                         android:layout_marginTop="@dimen/dimen_15"
                         android:layout_marginRight="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_10"
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextAppearance.Title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5"
-                            android:text="@string/personal_details"
-                            android:textColor="@color/color_black"
-                            android:textSize="@dimen/text_14" />
+                            android:text="@string/personal_details" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/name"
-                            android:textSize="@dimen/text_12" />
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_14" />
 
                         <EditText
                             android:id="@+id/EditFirstName"
@@ -224,18 +239,20 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_5"
                             android:layout_marginRight="@dimen/dimen_10"
-                            android:background="@drawable/edittext_border"
-                            android:padding="@dimen/dimen_5"
+                            android:background="@drawable/bg_rectangle_border_form"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                            android:padding="@dimen/dimen_5"
                             android:text=""
                             android:textSize="@dimen/text_12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/Txtaddress"
-                            android:textSize="@dimen/text_12" />
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_14" />
 
                         <EditText
                             android:id="@+id/EditAddress"
@@ -243,7 +260,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_5"
                             android:layout_marginRight="@dimen/dimen_10"
-                            android:background="@drawable/edittext_border"
+                            android:background="@drawable/bg_rectangle_border_form"
                             android:padding="@dimen/dimen_5"
                             android:text=""
                             android:textSize="@dimen/text_12" />
@@ -251,9 +268,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/contctNumber"
-                            android:textSize="@dimen/text_12" />
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_14" />
 
                         <EditText
                             android:id="@+id/EditPhone"
@@ -261,10 +280,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_5"
                             android:layout_marginRight="@dimen/dimen_10"
-                            android:background="@drawable/edittext_border"
+                            android:background="@drawable/bg_rectangle_border_form"
+                            android:clickable="false"
+                            android:focusable="false"
                             android:inputType="number"
                             android:maxLength="10"
-                            android:editable="false"
                             android:padding="@dimen/dimen_5"
                             android:textSize="@dimen/text_12" />
 
@@ -272,9 +292,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/email"
-                            android:textSize="@dimen/text_12" />
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_14" />
 
                         <EditText
                             android:id="@+id/EditEmail"
@@ -282,7 +304,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_5"
                             android:layout_marginRight="@dimen/dimen_10"
-                            android:background="@drawable/edittext_border"
+                            android:background="@drawable/bg_rectangle_border_form"
                             android:padding="@dimen/dimen_5"
                             android:text=""
                             android:textSize="@dimen/text_12" />
@@ -300,6 +322,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@color/text_color_3"
+                                android:fontFamily="sans-serif"
                                 android:gravity="center"
                                 android:text="@string/save"
                                 android:textColor="@color/color_white"
@@ -312,6 +335,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@color/color_grey_bg"
+                                android:fontFamily="sans-serif"
                                 android:gravity="center"
                                 android:text="@string/cancel"
                                 android:textSize="@dimen/text_12"
