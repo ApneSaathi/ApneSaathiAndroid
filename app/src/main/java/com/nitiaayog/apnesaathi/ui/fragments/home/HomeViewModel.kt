@@ -149,5 +149,4 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         }
 
     }
-
 }

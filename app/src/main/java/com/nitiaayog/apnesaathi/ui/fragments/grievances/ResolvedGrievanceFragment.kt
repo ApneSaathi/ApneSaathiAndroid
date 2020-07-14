@@ -4,25 +4,41 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.include_recyclerview.*
 
-class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>() {
+class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>(),
+    GrievanceStatusAdapter.OnItemClickListener {
+    private lateinit var pageTitleChangeListener: PageTitleChangeListener
     private val grievanceAdapter = GrievanceStatusAdapter()
+    private lateinit var itemClickListener: GrievanceStatusAdapter.OnItemClickListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDataStream()
         rvList.adapter = grievanceAdapter
     }
+
     private fun getDataStream() {
+        grievanceAdapter.setOnItemClickListener(this)
         viewModel.getResolvedGrievances().removeObservers(viewLifecycleOwner)
         viewModel.getResolvedGrievances().observe(viewLifecycleOwner, Observer {
             grievanceAdapter.setData(it)
             grievanceAdapter.notifyDataSetChanged()
+            pageTitleChangeListener.onDataLoaded(getString(R.string.resolved_count), 2, it.size)
         })
+    }
+
+    fun setOnItemClickListener(itemClickListener: GrievanceStatusAdapter.OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
+    fun setPageTitleChangeListener(pageTitleChangeListener: PageTitleChangeListener) {
+        this.pageTitleChangeListener = pageTitleChangeListener
     }
 
     override fun provideViewModel(): HomeViewModel =
@@ -34,5 +50,9 @@ class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>() {
     }
 
     override fun onCallPermissionDenied() {
+    }
+
+    override fun onItemClick(position: Int, grievanceData: GrievanceData) {
+        itemClickListener.onItemClick(position, grievanceData)
     }
 }

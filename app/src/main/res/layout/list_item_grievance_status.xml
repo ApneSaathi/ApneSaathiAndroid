@@ -23,23 +23,24 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_grievance_type"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:textColor="@color/color_black"
-                    android:text="Food Shortage"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/tv_priority"
                     android:minWidth="@dimen/view_size_40"
                     android:layout_width="wrap_content"
-                    android:text="Priority: High"
                     android:layout_height="wrap_content">
                 </TextView>
 
             </LinearLayout>
             <TextView
+                android:id="@+id/tv_description"
                 android:layout_marginTop="@dimen/dimen_10"
                 android:layout_width="match_parent"
-                android:text="hdsgfhgdshgfhdsgfhdsgfhdsgh"
                 android:layout_height="wrap_content"/>
             <LinearLayout
                 android:orientation="horizontal"
@@ -54,14 +55,15 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="Issue ID"
+                        android:text="@string/issue_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
                     <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/tv_issue_id"
                         android:textColor="@color/color_black"
-                        android:text="003892"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -74,14 +76,15 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="Created Date"
+                        android:text="@string/created_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
                     <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/tv_created_date"
                         android:textColor="@color/color_black"
-                        android:text="Mar11,2020"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -96,20 +99,20 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="Last update on"
+                        android:text="@string/last_update_on"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
                     <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/tv_update_on"
                         android:textColor="@color/color_black"
-                        android:text="Mar 12, 2020"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
                 </LinearLayout>
-
 
             </LinearLayout>
             <View
@@ -117,17 +120,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp">
             </View>
-            <TextView
-                android:layout_marginTop="@dimen/dimen_2"
-                android:drawableLeft="@drawable/ic_male_user"
-                android:text="Scott"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:drawablePadding="@dimen/dimen_10"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/dimen_2"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/img_gender"
+                    android:background="@drawable/ic_male_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:paddingLeft="@dimen/dimen_10"
+                    android:gravity="center"
+                    android:textColor="@color/color_orange"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            </TextView>
+                </TextView>
+            </LinearLayout>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

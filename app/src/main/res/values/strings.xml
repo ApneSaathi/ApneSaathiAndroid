@@ -116,6 +116,7 @@
     <string name="all_calls">All Calls</string>
     <string name="resolved">Resolved</string>
     <string name="pending">Pending</string>
+    <string name="pending_count">Pending(%s)</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
     <string name="select_a_category">Select a category</string>
@@ -399,12 +400,21 @@
         <item>SurendraNagar</item>
     </string-array>
     <string-array name="call_status">
-        <item>No Response</item>
-        <item>Phone not picked</item>
-        <item>Phone not reachable</item>
-        <item>Call Disconnected</item>
-        <item>Call Connected</item>
+        <item>@string/connected</item>
+        <item>@string/call_dropped</item>
+        <item>@string/not_picked_single_line</item>
+        <item>@string/not_reachable_single_line</item>
+        <item>@string/dis_connected</item>
+        <item>@string/wrong_number</item>
+        <item>@string/call_later</item>
+        <item>@string/number_busy</item>
+        <item>@string/number_not_existing</item>
     </string-array>
+    <string name="call_dropped">Call dropped</string>
+    <string name="wrong_number">Wrong Number</string>
+    <string name="call_later">Call Later</string>
+    <string name="number_busy">Number Busy</string>
+    <string name="number_not_existing">Number not existing</string>
 
     <string name="health_care_information">HEALTH CARE INFORMATION</string>
     <string name="emotional_state">Emotional State</string>
@@ -439,7 +449,11 @@
     <string name="update_call_status">Update Call Status</string>
     <string name="total">Total:</string>
     <string name="select_a_state">Please select a state</string>
-    <string name="wrong_number">Wrong Number</string>
     <string name="in_progress">In Progress</string>
+    <string name="issue_id">Issue ID</string>
+    <string name="created_date">Created Date</string>
+    <string name="last_update_on">Last update on</string>
+    <string name="resolved_count">Resolved(%s)</string>
+    <string name="inprogress_count">In Progress(%s)</string>
 
 </resources>

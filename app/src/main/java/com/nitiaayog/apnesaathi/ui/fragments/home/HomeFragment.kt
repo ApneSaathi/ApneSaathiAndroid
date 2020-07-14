@@ -16,11 +16,11 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
+import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
-class HomeFragment : BaseFragment<HomeViewModel>() {
+class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClickListener {
 
     private var lastSelectedPosition: Int = -1
     private var lastSelectedCallData: CallData? = null
@@ -116,6 +116,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             )
             this.adapter = grievancesAdapter
         }
+        grievancesAdapter.setOnItemClickListener(this)
     }
 
 
@@ -140,14 +141,15 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun manageProgressBarData() {
-        val pendingCalls =  viewModel.getPendingCalls().value?.size?:0
-        val followUpCalls = viewModel.getFollowupCalls().value?.size?:0
-        val completedCalls = viewModel.getCompletedCalls().value?.size?:0
-        val totalCalls:Int = pendingCalls + followUpCalls + completedCalls
-        tvTotal.text  = getString(R.string.total).plus(" ").plus(totalCalls)
+        val pendingCalls = viewModel.getPendingCalls().value?.size ?: 0
+        val followUpCalls = viewModel.getFollowupCalls().value?.size ?: 0
+        val completedCalls = viewModel.getCompletedCalls().value?.size ?: 0
+        val totalCalls: Int = pendingCalls + followUpCalls + completedCalls
+        tvTotal.text = getString(R.string.total).plus(" ").plus(totalCalls)
 
-        val completedPer:Int = ((completedCalls.toDouble()/totalCalls.toDouble())*100).toInt()
-        val followUpPer:Int = ((followUpCalls.toDouble()/totalCalls.toDouble())*100).toInt() + completedPer
+        val completedPer: Int = ((completedCalls.toDouble() / totalCalls.toDouble()) * 100).toInt()
+        val followUpPer: Int =
+            ((followUpCalls.toDouble() / totalCalls.toDouble()) * 100).toInt() + completedPer
         pbCallSummary.progress = completedPer
         pbCallSummary.secondaryProgress = followUpPer
     }
@@ -156,12 +158,17 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         super.onDestroy()
         exitProcess(0)
     }
+
     private fun manageGrievances(dataList: MutableList<GrievanceData>) {
         val size = dataList.size
         tvGrievances.text = getString(R.string.grievances_count, size.toString())
         btnSeeAllGrievances.visibility = if (size > 3) {
             btnSeeAllGrievances.setOnClickListener {
-                viewModel.getGrievancesTrackingList().value?.let { it1 -> grievancesAdapter.setData(it1) }
+                viewModel.getGrievancesTrackingList().value?.let { it1 ->
+                    grievancesAdapter.setData(
+                        it1
+                    )
+                }
                 grievancesAdapter.notifyDataSetChanged()
                 btnSeeAllGrievances.visibility = View.GONE
             }
@@ -200,7 +207,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 //            manageGrievances(it)
 //        })
         viewModel.getGrievancesTrackingList().removeObservers(viewLifecycleOwner)
-        viewModel.getGrievancesTrackingList().observe(viewLifecycleOwner, Observer {
+        viewModel.getGrievancesTrackingList().observe(viewLifecycleOwner, Observer { it ->
 
             grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             grievancesAdapter.notifyDataSetChanged()
@@ -215,7 +222,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                         context!!, R.string.error, R.string.api_connection_error
                     )
                 is NetworkRequestState.LoadingData -> {
-                    if (it.apiName == ApiProvider.ApiLoadDashboard){
+                    if (it.apiName == ApiProvider.ApiLoadDashboard) {
                         manageProgressBar(View.VISIBLE)
                     }
                 }
@@ -230,5 +237,13 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> manageProgressBar(View.GONE)
             }
         })
+    }
+
+    override fun onItemClick(position: Int, grievanceData: GrievanceData) {
+        addFragment(
+            R.id.fragmentHomeContainer,
+            GrievanceDetailFragment(grievanceData),
+            "grievaneceDetails"
+        )
     }
 }

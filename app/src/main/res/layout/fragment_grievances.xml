@@ -46,6 +46,11 @@
                 android:layout_height="match_parent" />
 
         </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fl_detailed_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

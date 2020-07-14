@@ -73,4 +73,35 @@ class GrievanceData {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.Description, defaultValue = "")
+    @SerializedName(ApiConstants.Description)
+    var description: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.CreatedDate, defaultValue = "")
+    @SerializedName(ApiConstants.GrievanceCreatedDate)
+    var createdDate: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.Priority, defaultValue = "")
+    @SerializedName(ApiConstants.Priority)
+    var priority: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.LastUpdateOn, defaultValue = "")
+    @SerializedName(ApiConstants.LastUpdateOn)
+    var lastUpdateOn: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
 }
