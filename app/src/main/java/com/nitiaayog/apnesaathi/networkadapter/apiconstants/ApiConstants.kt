@@ -51,6 +51,7 @@ object ApiConstants {
     const val GrievanceType: String = "greivanceType"
     const val GrievanceStatus: String = "status"
     const val IsDiabetic: String = "diabetic"
+    const val Description: String = "description"
     const val IsBloodPressure: String = "bloodpressure"
     const val LungAilment: String = "lungailment"
     const val CancerOrMajorSurgery: String = "cancer_or_majorsurgery"
@@ -76,7 +77,9 @@ object ApiConstants {
     const val IsEmergencyServicesRequired: String = "isemergencyservicerequired"
     const val ImpRemarkInfo: String = "remakrsimportantinfo"
     const val CreatedDate: String = "loggeddattime"
-
+    const val GrievanceCreatedDate: String = "createdDate"
+    const val Priority: String = "priority"
+    const val LastUpdateOn: String = "lastUpdateOn"
     const val phoneNo: String = "phoneNo"
 
     const val GrievanceTrackingId:String ="trackingId"

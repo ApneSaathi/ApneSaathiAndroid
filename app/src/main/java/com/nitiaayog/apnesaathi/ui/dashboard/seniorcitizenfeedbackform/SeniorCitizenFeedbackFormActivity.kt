@@ -212,17 +212,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                         tvSrCitizenPhoneNumber.text = callData.contactNumber
                         tvSrCitizenAddress.text = spanAddress
 
-                        setCallStatus(callData.callStatusSubCode!!)
-                        setTalkedWith(callData.talkedWith!!, callData.callStatusSubCode!!)
+//                        setCallStatus(callData.callStatusCode!!)
+//                        setTalkedWith(callData.talkedWith!!, callData.callStatusCode!!)
 
-                        if (callData.callStatusSubCode == "5") {
+                        if (callData.callStatusCode == "10") {
                             grievances?.run {
                                 setCheckForMedicalHistoryData(this)
-                                setRelatedInfoTalkedAboutData(this.relatedInfoTalkedAbout!!)
-                                setBehavioralChangesData(this.behavioralChangesNoticed!!)
-                                setCovidData(this)
-                                setComplaintData(this)
-                                etOtherDescription.setText(this.impRemarkInfo)
+//                                setRelatedInfoTalkedAboutData(this.relatedInfoTalkedAbout!!)
+//                                setBehavioralChangesData(this.behavioralChangesNoticed!!)
+//                                setCovidData(this)
+//                                setComplaintData(this)
+//                                etOtherDescription.setText(this.impRemarkInfo)
                             }
                         }
                     }
@@ -238,28 +238,34 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             Boolean = (dataString == "0") && (element == compareString)
 
     private fun setCallStatus(callStatus: String) = when (callStatus) {
-        "1" -> {
-            changeButtonSelection(btnNoResponse)
-            viewModel.setCallStatus("1")
-        }
-        "2" -> {
-            changeButtonSelection(btnNotPicked)
-            viewModel.setCallStatus("2")
-        }
-        "3" -> {
-            changeButtonSelection(btnNotReachable)
-            viewModel.setCallStatus("3")
-        }
-        "4" -> {
-            changeButtonSelection(btnDisConnected)
-            viewModel.setCallStatus("4")
-        }
-        "5" -> {
-            changeButtonSelection(btnConnected)
-
-            viewModel.setCallStatus("5")
+        this.getString(R.string.connected) -> {
+            viewModel.setCallStatus("10")
             tvTalkWith.visibility = View.VISIBLE
             actTalkWith.visibility = View.VISIBLE
+        }
+        this.getString(R.string.not_picked_single_line) -> {
+            viewModel.setCallStatus("2")
+        }
+        this.getString(R.string.not_reachable_single_line) -> {
+            viewModel.setCallStatus("3")
+        }
+        this.getString(R.string.number_busy) -> {
+            viewModel.setCallStatus("4")
+        }
+        this.getString(R.string.call_later) -> {
+            viewModel.setCallStatus("5")
+        }
+        this.getString(R.string.call_dropped) -> {
+            viewModel.setCallStatus("6")
+        }
+        this.getString(R.string.wrong_number) -> {
+            viewModel.setCallStatus("7")
+        }
+        this.getString(R.string.number_not_existing) -> {
+            viewModel.setCallStatus("8")
+        }
+        this.getString(R.string.dis_connected) -> {
+            viewModel.setCallStatus("9")
         }
         else -> {
         }
@@ -280,14 +286,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         } else if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c")) {
             actTalkWith.setText(R.string.community_member)
             viewModel.setTalkedWith(getString(R.string.community_member))
-            tvAnySrCitizenInHome.visibility = View.VISIBLE
+//            tvAnySrCitizenInHome.visibility = View.VISIBLE
         }
 
         if (((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")
                     || (talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
                     (talkedWith.toLowerCase(Locale.getDefault()) == "f") ||
                     (talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c") &&
-                    (callStatus == "5"))
+                    (callStatus == "10"))
         ) {
             tvTalkWith.visibility == View.VISIBLE
             actTalkWith.visibility == View.VISIBLE
@@ -332,7 +338,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (selectedItems.isNotEmpty()) {
             //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
             rvMedicalHistorySrCitizenAdapter.notifyDataSetChanged()
-            rvMedicalHistorySrCitizen.visibility = View.VISIBLE
+//            rvMedicalHistorySrCitizen.visibility = View.VISIBLE
         }
     }
 
@@ -533,7 +539,15 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             if (tvGenderError.visibility == View.VISIBLE) tvGenderError.visibility = View.GONE
         }
 
-
+        val callStatusList = resources.getStringArray(R.array.call_status)
+        val callStatusAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu,callStatusList)
+        actCallStatus.threshold = 0
+        actCallStatus.setAdapter(callStatusAdapter)
+        actCallStatus.setOnKeyListener(null)
+        actCallStatus.setOnItemClickListener{_,_,position,_->
+            resetForm()
+            setCallStatus(callStatusList[position])
+        }
 
         val stateList = resources.getStringArray(R.array.states_array)
         val stateAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
@@ -705,6 +719,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // All AutoCompleteTextView clicks
         actGender.throttleClick().subscribe { actGender.showDropDown() }.autoDispose(disposables)
+        actCallStatus.throttleClick().subscribe{actCallStatus.showDropDown()}.autoDispose(disposables)
         actDistrict.throttleClick().subscribe {
             if(selectedState.isNotEmpty()){
             actDistrict.showDropDown()
@@ -1223,7 +1238,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_call_status)
             return false
         }
-        if (viewModel.getCallStatus() == "5") {
+        if (viewModel.getCallStatus() == "10") {
             if (viewModel.getTalkedWith().isEmpty()) {
                 BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_talked_with)
                 return false
@@ -1349,11 +1364,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
         syncData.volunteerId = dataManager.getUserId()
 
-        val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
-        params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
-
-        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, viewModel.getCallStatus())
-        syncData.callStatusSubCode = viewModel.getCallStatus()
+//        val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
+        params.addProperty(ApiConstants.SrCitizenCallStatusCode, viewModel.getCallStatus())
 
         syncData.talkedWith = viewModel.getTalkedWith()
         params.addProperty(ApiConstants.SrCitizenTalkedWith, syncData.talkedWith)
@@ -1364,7 +1376,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.SrCitizenGender, dataManager.getGender())
         syncData.gender = dataManager.getGender()
 
-        if (callStatus == "1") return params
+        if (viewModel.getCallStatus() != "10") return params
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
@@ -1501,6 +1513,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 if (dataList.any { it == getString(R.string.phone_and_service) }) "1" else "4"
             arraySubParams.addProperty(
                 ApiConstants.PhoneInternetIssue, syncData.phoneAndInternetIssue!!.toInt()
+            )
+            syncData.description = etDescription.text.toString()
+            arraySubParams.addProperty(
+                ApiConstants.Description, syncData.description
             )
         }
         syncData.emergencyServiceRequired = viewModel.isEmergencyEscalation()

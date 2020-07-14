@@ -27,13 +27,22 @@ class GrievancesAdapter(private val context: Context) :
         const val GRIEVANCE_UNDER_REVIEW: String = "UNDER REVIEW"
         const val GRIEVANCE_RAISED: String = "RAISED"
     }
+    private lateinit var itemClickListener: GrievancesAdapter.OnItemClickListener
 
+    fun setOnItemClickListener(itemClickListener: GrievancesAdapter.OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+    interface OnItemClickListener {
+        fun onItemClick(position: Int, grievanceData: GrievanceData)
+    }
     private val dataList: MutableList<GrievanceData> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GrievancesHolder {
         val customView = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_grievances, parent, false)
-        return GrievancesHolder(customView)
+        val holder = GrievancesHolder(customView)
+        customView.ll_grievance_container.setOnClickListener { itemClickListener.onItemClick(holder.adapterPosition,dataList[holder.adapterPosition]) }
+        return holder
     }
 
     override fun getItemCount(): Int = dataList.size

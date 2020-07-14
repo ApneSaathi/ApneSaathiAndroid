@@ -175,6 +175,14 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.Description, defaultValue = "")
+    @SerializedName(ApiConstants.Description)
+    var description: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
     @ColumnInfo(name = Columns.FoodShortage, defaultValue = "-1")
     @SerializedName(ApiConstants.FoodShortage)
     var foodShortage: String? = ""

@@ -380,14 +380,13 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         }
         viewModelScope.launch {
             io {
-                if (::callData.isInitialized && ((callData.callStatusSubCode != callStatus) ||
-                            (callData.talkedWith != talkedWith))
-                ) {
-                    callData.callStatusSubCode = callStatus
+                if (::callData.isInitialized && callData.talkedWith != talkedWith)
+                {
+                    callData.callStatusCode = callStatus
                     callData.talkedWith = syncData.talkedWith
                     dataManager.updateCallData(callData)
                 }
-                if (callStatus == "5") {
+                if (callStatus == "10") {
                     /*if (callStatus == "5") {
                         dataManager.insert(syncData)
 

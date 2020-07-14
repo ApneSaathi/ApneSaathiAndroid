@@ -145,7 +145,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     @LayoutRes
     abstract fun provideLayoutResource(): Int
 
-    abstract fun onCallPermissionGranted()
+     abstract fun onCallPermissionGranted()
 
     abstract fun onCallPermissionDenied()
 }

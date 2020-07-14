@@ -14,7 +14,7 @@ import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 @Dao
 interface GrievanceTrackingDao {
 
-    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCE_TRACKING} WHERE ${Columns.GrievanceStatus} = :status")
+    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCE_TRACKING} WHERE ${Columns.GrievanceStatus} = :status ORDER BY ${Columns.Priority}")
     fun getGrievancesWithStatus(status: String): LiveData<MutableList<GrievanceData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -344,12 +344,21 @@
         <item>सुरेंद्रनगर</item>
     </string-array>
     <string-array name="call_status">
-        <item>प्रतिसाद नाही</item>
-        <item>फोन उचलला नाही</item>
-        <item>फोन पोहोचण्यायोग्य नाही</item>
-        <item>कॉल डिस्कनेक्ट झाला</item>
-        <item>कॉल कनेक्ट</item>
+        <item>@string/connected</item>
+        <item>@string/call_dropped</item>
+        <item>@string/not_picked_single_line</item>
+        <item>@string/not_reachable_single_line</item>
+        <item>@string/dis_connected</item>
+        <item>@string/wrong_number</item>
+        <item>@string/call_later</item>
+        <item>@string/number_busy</item>
+        <item>@string/number_not_existing</item>
     </string-array>
+    <string name="call_dropped">Call dropped</string>
+    <string name="wrong_number">Wrong Number</string>
+    <string name="call_later">Call Later</string>
+    <string name="number_busy">Number Busy</string>
+    <string name="number_not_existing">Number not existing</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
