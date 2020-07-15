@@ -455,5 +455,6 @@
     <string name="last_update_on">Last update on</string>
     <string name="resolved_count">Resolved(%s)</string>
     <string name="inprogress_count">In Progress(%s)</string>
+    <string name="invalidOTP">Invalid OTP</string>
 
 </resources>

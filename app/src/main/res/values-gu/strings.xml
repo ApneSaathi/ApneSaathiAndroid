@@ -396,7 +396,7 @@
     <string name="lack_of_essential_services">આવશ્યક સેવાઓનો અભાવ</string>
     <string name="emergency_escalation">ઇમર્જન્સી એસ્કેલેશન</string>
     <string name="issue_raised">સમસ્યા રજીસ્ટર થઈ ચૂકી છે</string>
-    <string name="raised_on">समस्या दर्ज की गई है</string>
+    <string name="raised_on">સમસ્યા નોંધાઈ છે</string>
     <string name="assigned">સોંપ્યું</string>
     <string name="completed">પૂર્ણ</string>
 
@@ -411,4 +411,5 @@
     <string name="total">કુલ:</string>
     <string name="was">હતી</string>
     <string name="select_a_state">Please select a state</string>
+    <string name="invalidOTP">અમાન્ય OTP</string>
 </resources>

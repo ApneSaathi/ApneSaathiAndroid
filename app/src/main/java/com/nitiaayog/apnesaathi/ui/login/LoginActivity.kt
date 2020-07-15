@@ -36,8 +36,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         mContext = this
 
         observeStates()
-
-
         btnLogin.throttleClick().subscribe() {
             hideKeyboard()
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
