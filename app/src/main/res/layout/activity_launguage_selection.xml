@@ -131,6 +131,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/TextAppearance.Title"
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

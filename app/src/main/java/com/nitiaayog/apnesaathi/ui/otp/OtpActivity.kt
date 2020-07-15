@@ -75,10 +75,10 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         editOtpfourthchar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (editOtpthirdchar.length() == 1) {
-
-                } else {
+                if (editOtpfourthchar.length() == 0) {
                     editOtpthirdchar.requestFocus();
+                } else {
+
                 }
             }
 
@@ -92,27 +92,37 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         btnVerify.throttleClick().subscribe() {
             hideKeyboard()
             if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
-//                EditFirstChar.setError(resources.getString(R.string.enterOtp))
                 CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
             } else {
                 EditFirstChar.setError(null)
                 if (TextUtils.isEmpty(editOtpsecondchar.text.toString().trim())) {
-//                    editOtpsecondchar.setError(resources.getString(R.string.enterOtp))
                     CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
                 } else {
                     editOtpsecondchar.setError(null)
                     if (TextUtils.isEmpty(editOtpthirdchar.text.toString().trim())) {
-//                        editOtpthirdchar.setError(resources.getString(R.string.enterOtp))
                         CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
 
                     } else {
                         editOtpfourthchar.setError(null)
                         if (TextUtils.isEmpty(editOtpfourthchar.text.toString().trim())) {
-                            CallSnackbar(  mainRootRelativeLayout,  resources.getString(R.string.enterOtp)   )
+                            CallSnackbar(
+                                mainRootRelativeLayout,
+                                resources.getString(R.string.enterOtp)
+                            )
                         } else {
                             editOtpfourthchar.setError(null)
-
-                            callnextActivity();
+                            if (EditFirstChar.text.toString()
+                                    .trim() + editOtpsecondchar.text.toString()
+                                    .trim() + editOtpthirdchar.text.toString()
+                                    .trim() + editOtpfourthchar.text.toString().trim() == "1122"
+                            ) {
+                                callnextActivity();
+                            } else {
+                                CallSnackbar(
+                                    mainRootRelativeLayout,
+                                    resources.getString(R.string.invalidOTP)
+                                )
+                            }
                         }
                     }
                 }

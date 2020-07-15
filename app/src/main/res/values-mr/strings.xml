@@ -414,4 +414,5 @@
     <string name="total">एकूण:</string>
     <string name="was">होते</string>
     <string name="select_a_state">Please select a state</string>
+    <string name="invalidOTP">अवैध ओटीपी</string>
 </resources>
