@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
@@ -36,22 +37,16 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 
         observeStates()
 
+
         btnLogin.throttleClick().subscribe() {
             hideKeyboard()
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
                 EditMobileNumber.setError(resources.getString(R.string.txtenterMobilenumbe))
-//                CallSnackbar(rootRelativeLayout, resources.getString(R.string.txtenterMobilenumbe))
             } else {
                 EditMobileNumber.setError(null)
-//                if (EditMobileNumber.text.toString().trim().length <10) {
-//                    CallSnackbar(
-//                        rootRelativeLayout,
-//                        resources.getString(R.string.txtValidmobilenumber)
-//                    )
-//
-//                } else {
-
                 try {
+
+
                     Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
                             viewModel.callLogin(
@@ -65,10 +60,11 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 }
                 EditMobileNumber.isFocusable = false
 
-//                }
             }
         }.autoDispose(disposables)
     }
+
+
 
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(this)
@@ -119,15 +115,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 
     }
 
-    override fun onStop() {
-        super.onStop()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-    }
 
     fun AppCompatActivity.hideKeyboard() {
         val view = this.currentFocus

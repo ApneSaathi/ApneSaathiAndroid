@@ -6,8 +6,8 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.GrievanceData
@@ -58,12 +58,20 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
 
         tv_volunteer_name2.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         tv_update_status.setOnClickListener {
-            Toast.makeText(
-                context,
-                "Work in progress",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                context,
+//                "Work in progress",
+//                Toast.LENGTH_SHORT
+//            ).show()
+            showBottomSheetDialogFragment()
         }
+    }
+
+    private fun showBottomSheetDialogFragment() {
+        val view = layoutInflater.inflate(R.layout.updated_progress_layout, null)
+        val dialog = BottomSheetDialog(activity!!)
+        dialog.setContentView(view)
+        dialog.show()
     }
 
     private fun getFormattedDate(date: String?): String {
