@@ -19,6 +19,7 @@ object Columns {
     const val CallSubStatus: String = "call_sub_status"
     const val TalkedWith: String = "talked_with"
     const val Remark: String = "remark"
+    const val LoggedDateTime: String = "logged_date_time"
     const val IsDiabetic: String = "is_diabetic"
     const val IsBloodPressure: String = "is_blood_pressure"
     const val IsLungAilment: String = "is_lung_ailment"

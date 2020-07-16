@@ -15,8 +15,10 @@ import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.interfaces.NewSrCitizenRegisterListener
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -27,7 +29,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private var selectedDistrict: String = ""
     private var selectedState: String = ""
     private var selectedStatePos: Int = -1
-
+    private lateinit var newSrCitizenRegisterListener: NewSrCitizenRegisterListener
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_saving_data)
     }
@@ -43,6 +45,10 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         initAutoCompleteTextView()
         initClicks()
         initTextWatcher()
+    }
+
+    fun setNewCitizenRegisterListener(newSrCitizenRegisterListener: NewSrCitizenRegisterListener){
+        this.newSrCitizenRegisterListener = newSrCitizenRegisterListener
     }
 
     override fun provideViewModel(): RegisterSeniorCitizenViewModel =
@@ -100,16 +106,16 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
 
     private fun setDistrictAdapter() {
         var districtsList = resources.getStringArray(R.array.districts_array)
-        if(selectedStatePos != -1){
-            when(selectedStatePos){
-                0-> districtsList = resources.getStringArray(R.array.district0)
-                1-> districtsList = resources.getStringArray(R.array.district1)
-                2-> districtsList = resources.getStringArray(R.array.district2)
-                3-> districtsList = resources.getStringArray(R.array.district3)
-                4-> districtsList = resources.getStringArray(R.array.district4)
-                5-> districtsList = resources.getStringArray(R.array.district5)
-                6-> districtsList = resources.getStringArray(R.array.district6)
-                7-> districtsList = resources.getStringArray(R.array.district7)
+        if (selectedStatePos != -1) {
+            when (selectedStatePos) {
+                0 -> districtsList = resources.getStringArray(R.array.district0)
+                1 -> districtsList = resources.getStringArray(R.array.district1)
+                2 -> districtsList = resources.getStringArray(R.array.district2)
+                3 -> districtsList = resources.getStringArray(R.array.district3)
+                4 -> districtsList = resources.getStringArray(R.array.district4)
+                5 -> districtsList = resources.getStringArray(R.array.district5)
+                6 -> districtsList = resources.getStringArray(R.array.district6)
+                7 -> districtsList = resources.getStringArray(R.array.district7)
             }
         }
         val districtsAdapter =
@@ -139,18 +145,17 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                 if (etAge.length() == 2) {
                     if (etAge.text.toString().trim().toInt() < 60) {
                         tvAgeError.visibility = View.VISIBLE
-                    }else{
-
                     }
                 }
 
                 if (etAge.length() == 3) {
-                    if (etAge.text.toString().trim().toInt() < 60) {
-                        tvAgeError.visibility = View.VISIBLE
-                    } else if (etAge.text.toString().trim().toInt() > 110) {
-                        tvAgeError.visibility = View.VISIBLE
-                    }else{
-
+                    when {
+                        etAge.text.toString().trim().toInt() < 60 -> {
+                            tvAgeError.visibility = View.VISIBLE
+                        }
+                        etAge.text.toString().trim().toInt() > 110 -> {
+                            tvAgeError.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
@@ -178,13 +183,14 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }.autoDispose(disposables)
 
         actDistrict.throttleClick().subscribe {
-            if(selectedStatePos !=-1) {
+            if (selectedStatePos != -1) {
                 actDistrict.showDropDown()
                 updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
                 if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility =
                     View.GONE
-            }else{
-                Toast.makeText(context,getString(R.string.select_a_state),Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, getString(R.string.select_a_state), Toast.LENGTH_SHORT)
+                    .show()
             }
         }.autoDispose(disposables)
 
@@ -294,6 +300,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                     progressDialog.dismiss()
 
                     resetRegisterNewSrCitizenLayout()
+                    newSrCitizenRegisterListener.onNewCitizenRegistered()
                     BaseUtility.showAlertMessage(
                         activity!!, R.string.success, R.string.sr_citizen_registered_successfully,
                         R.string.okay

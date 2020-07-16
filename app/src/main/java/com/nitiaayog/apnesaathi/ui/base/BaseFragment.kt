@@ -23,6 +23,7 @@ import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
+import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -132,7 +133,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
                 dataManager.setUserName(selectedCallData.srCitizenName?:"")
                 dataManager.setGender(selectedCallData.gender?:"")
                 intent.putExtra(CALL_ID, selectedCallData.callId)
-                startActivity(intent)
+                activity!!.startActivityForResult(intent,REQUEST_CODE)
             }.autoDispose(disposables)
 
         /*val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
