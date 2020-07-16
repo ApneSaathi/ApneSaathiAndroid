@@ -9,7 +9,6 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
@@ -63,7 +62,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     }
 
 
-
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(this)
         viewModel.getDataObserver().observe(this, Observer {
@@ -87,13 +85,15 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
                     EditMobileNumber.isFocusableInTouchMode = true
-                    if (loginres is Login_Response)
+                     if (loginres is Login_Response)
                         dataManager.updateUserPreference(loginres)
 
                     progressBarlogin.visibility = GONE
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
                     targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
                     startActivity(targetIntent)
+                    EditMobileNumber.text.clear()
+
                 }
 
             }

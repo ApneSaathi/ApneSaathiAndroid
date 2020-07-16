@@ -133,12 +133,13 @@
         <TextView
             android:id="@+id/TxtChangeNumber"
             style="@style/TextAppearance.Title"
+            android:textSize="@dimen/text_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dimen_10"
             android:layout_toLeftOf="@+id/txttimer"
-            android:text=" Change number ? "
+            android:text="@string/chnagenumber"
             android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
