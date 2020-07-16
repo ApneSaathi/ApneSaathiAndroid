@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.ui.otp
 
 import android.content.Context
+import android.graphics.Paint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -144,9 +145,11 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             }
         }
         timer.start()
+        TxtChangeNumber.paintFlags=Paint.UNDERLINE_TEXT_FLAG
 
         if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
             TxtMobileNumber.setText(intent.getStringExtra("PhoneNo"))
+
         } else {
             TxtMobileNumber.setText("1234")
         }

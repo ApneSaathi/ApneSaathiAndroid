@@ -86,7 +86,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
-
+                    EditMobileNumber.isFocusableInTouchMode = true
                     if (loginres is Login_Response)
                         dataManager.updateUserPreference(loginres)
 
