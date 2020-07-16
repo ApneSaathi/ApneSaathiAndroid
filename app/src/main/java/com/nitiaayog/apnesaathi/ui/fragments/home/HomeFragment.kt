@@ -246,4 +246,17 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
             "grievaneceDetails"
         )
     }
+
+    fun reloadApi() {
+        try {
+            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    getObservableDataStream()
+                    viewModel.getCallDetails(context!!)
+                    viewModel.getGrievanceTrackingList(context!!)
+                }.autoDispose(disposables)
+        } catch (ex: Exception) {
+            println("TAG -- MyData --> ${ex.message}")
+        }
+    }
 }
