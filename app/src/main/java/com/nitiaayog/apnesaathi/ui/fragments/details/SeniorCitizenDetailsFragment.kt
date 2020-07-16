@@ -22,6 +22,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
+import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -325,7 +326,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             dataManager.setUserName(callData?.srCitizenName?:"")
             dataManager.setGender(callData?.gender?:"")
             intent.putExtra(CALL_ID, callData?.callId)
-            startActivity(intent)
+            activity!!.startActivityForResult(intent, REQUEST_CODE)
         }
     }
 

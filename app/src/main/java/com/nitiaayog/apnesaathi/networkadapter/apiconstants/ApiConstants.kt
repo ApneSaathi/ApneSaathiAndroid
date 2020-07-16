@@ -46,6 +46,7 @@ object ApiConstants {
     const val SrCitizenCallStatusSubCode: String = "callstatussubCode"
     const val SrCitizenTalkedWith: String = "talkedwith"
     const val Remark: String = "remarks"
+    const val LoggedDateTime: String = "loggeddateTime"
 
     const val GrievanceId: String = "idgrevance"
     const val GrievanceType: String = "greivanceType"

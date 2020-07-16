@@ -81,7 +81,7 @@ class AppDataManager private constructor(
     // Database Access
     // => Table : call_details
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1","null", ""))
+        callsDataDao.getAllCallsList(arrayOf("1","null", "")) //Null and empty should be removed
 
     override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("2", "3", "4", "5", "6"))
@@ -90,7 +90,7 @@ class AppDataManager private constructor(
         callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10"))
+        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10","null", ""))  //Null and empty should be removed
 
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)

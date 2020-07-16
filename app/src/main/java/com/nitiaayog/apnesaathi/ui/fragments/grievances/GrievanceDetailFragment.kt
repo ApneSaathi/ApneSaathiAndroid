@@ -58,11 +58,6 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
 
         tv_volunteer_name2.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         tv_update_status.setOnClickListener {
-//            Toast.makeText(
-//                context,
-//                "Work in progress",
-//                Toast.LENGTH_SHORT
-//            ).show()
             showBottomSheetDialogFragment()
         }
     }

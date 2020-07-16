@@ -1,19 +1,22 @@
 package com.nitiaayog.apnesaathi.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
+import com.nitiaayog.apnesaathi.interfaces.NewSrCitizenRegisterListener
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.fragments.calls.CallsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievancesFragment
 import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
+import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
-class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
+class DashBoardActivity : BaseActivity<DashBoardViewModel>(),NewSrCitizenRegisterListener {
 
     private val homeFragment = HomeFragment()
     private val callsFragment = CallsFragment()
@@ -44,6 +47,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
         adapter.addFragment(callsFragment, getString(R.string.menu_calls))
         adapter.addFragment(notificationFragment, getString(R.string.menu_notification))
         adapter.addFragment(profileFragment, getString(R.string.menu_profile))
+
+        callsFragment.setNewCitizenRegisterListener(this)
 
         viewPager.isUserInputEnabled = false
         viewPager.adapter = adapter
@@ -77,6 +82,13 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == REQUEST_CODE){
+            homeFragment.reloadApi()
+        }
+    }
+
     private fun updateToolbarTittle() {
         when (viewPager.currentItem) {
             0 -> toolBar.setTitle(R.string.menu_home)
@@ -86,5 +98,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>() {
         }
         if (supportFragmentManager.backStackEntryCount > 0)
             supportFragmentManager.fragments.forEach { _ -> supportFragmentManager.popBackStack() }
+    }
+
+    override fun onNewCitizenRegistered() {
+        homeFragment.reloadApi()
     }
 }
