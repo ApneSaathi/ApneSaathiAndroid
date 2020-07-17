@@ -100,7 +100,7 @@
     <string name="address_bold">સરનામું: </string>
     <string name="unattended">અનુચિત</string>
     <string name="edit">સંપાદિત કરો</string>
-    <string name="app_bar_title">વપરાશકર્તા વિગતો</string>
+    <string name="app_bar_title">Sr. Citizen details</string>
     <string name="txtSubmit">સબમિટ કરો</string>
     <string name="call_status_1">કૉલ સ્થિતિ</string>
     <string name="all_calls">બધા કોલ્સ</string>
@@ -115,6 +115,7 @@
     <string name="menu_home">મુખ્યપૃષ્ઠ</string>
     <string name="pending_calls_count">બાકી કૉલ(%s)</string>
     <string name="grievances_count">ફરિયાદો(%s)</string>
+    <string name="issues_count">Issues(%s)</string>
     <string name="follow_up_count">પાછા કૉલ કરો(%s)</string>
     <string name="follow_up">પાછા કૉલ કરો</string>
     <string name="attended_calls_count">પ્રસ્તુત કૉલ(%s)</string>
@@ -412,4 +413,13 @@
     <string name="was">હતી</string>
     <string name="select_a_state">Please select a state</string>
     <string name="invalidOTP">અમાન્ય OTP</string>
+    <string name="update_issue_progress">Update Issue progress</string>
+    <string name="completed_count">"-- Completed: "</string>
+    <string name="need_follow_up_count">"-- Need Followup: "</string>
+    <string name="pending_g_count">"-- Pending: "</string>
+    <string name="update_status">Update Status</string>
+    <string name="reopen">Reopen</string>
+    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
+    <string name="raised_on_remarks">Issue was raised on</string>
+    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
 </resources>

@@ -51,22 +51,18 @@ class GrievanceStatusAdapter :
 
         fun bindData(grievanceData: GrievanceData) {
             itemView.tv_grievance_type.text = grievanceData.grievanceType
-            var priorityText = ""
-            if (grievanceData.priority == "High") {
-                priorityText = "Emergency"
-            } else {
-                priorityText = "Regular"
-            }
+            val priorityText = grievanceData.priority
             val priority =
                 context.getString(R.string.priority).plus(": ").plus(priorityText)
             val spanPriority = SpannableString(priority)
             spanPriority.setSpan(
                 ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorAccent)),
-                spanPriority.length - priorityText.length,
+                spanPriority.length - priorityText!!.length,
                 spanPriority.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             itemView.tv_priority.text = spanPriority
+
             itemView.tv_description.text = grievanceData.description
             itemView.tv_issue_id.text = grievanceData.trackingId.toString()
             itemView.tv_created_date.text = getFormattedDate(grievanceData.createdDate)

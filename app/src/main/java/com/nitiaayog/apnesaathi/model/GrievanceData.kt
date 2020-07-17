@@ -104,4 +104,34 @@ class GrievanceData {
         set(value) {
             field = value ?: ""
         }
+
+    @ColumnInfo(name = Columns.UnderReviewDate, defaultValue = "")
+    @SerializedName(ApiConstants.UnderReviewDate)
+    var reviewDate: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.ResolvedDate, defaultValue = "")
+    @SerializedName(ApiConstants.ResolvedDate)
+    var resolvedDate: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+    @ColumnInfo(name = Columns.ReviewRemarks, defaultValue = "")
+    @SerializedName(ApiConstants.ReviewRemarks)
+    var reviewRemarks: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+    @ColumnInfo(name = Columns.ResolvedRemarks, defaultValue = "")
+    @SerializedName(ApiConstants.ResolvedRemarks)
+    var resolvedRemarks: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
 }

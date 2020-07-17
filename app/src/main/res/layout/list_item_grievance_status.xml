@@ -94,7 +94,8 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:gravity="end"
+                    android:gravity="start"
+                    android:layout_marginLeft="@dimen/dimen_15"
                     android:layout_weight="1"
                     android:layout_height="wrap_content">
 
@@ -107,8 +108,9 @@
                     <TextView
                         android:textStyle="bold"
                         android:id="@+id/tv_update_on"
+                        android:gravity="start"
                         android:textColor="@color/color_black"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                     </TextView>

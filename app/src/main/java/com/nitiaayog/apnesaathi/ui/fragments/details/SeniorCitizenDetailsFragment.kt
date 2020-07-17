@@ -209,14 +209,17 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             "2" -> {
                 tv_quarantine_status.text = getText(R.string.govt_quarantine)
             }
-            else -> {
+            "3" -> {
                 tv_quarantine_status.text = getText(R.string.hospitalized)
+            }
+            else -> {
+                tv_quarantine_status.text = getText(R.string.no_problems)
             }
         }
 
         if (srCitizenGrievance.emergencyServiceRequired == "N") {
             txt_grievance_priority.text = getString(R.string.no)
-            txt_escalation.text = getString(R.string.no)
+            txt_escalation.text = "--"
         } else {
             txt_grievance_priority.text = getString(R.string.yes)
             txt_escalation.text = getString(R.string.yes)
@@ -262,7 +265,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_grievance_category.text = getString(R.string.not_applicable)
             txt_issue_raised.text = getString(R.string.no_issues)
         }
-        txt_grievance_desc.text = "--"
+        txt_grievance_desc.text = srCitizenGrievance.description
         txt_other_problem.text = srCitizenGrievance.impRemarkInfo ?: "--"
 
     }
@@ -323,8 +326,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         img_call_button.setOnClickListener { prepareToCallPerson() }
         txt_edit.setOnClickListener {
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-            dataManager.setUserName(callData?.srCitizenName?:"")
-            dataManager.setGender(callData?.gender?:"")
+            dataManager.setUserName(callData?.srCitizenName ?: "")
+            dataManager.setGender(callData?.gender ?: "")
             intent.putExtra(CALL_ID, callData?.callId)
             activity!!.startActivityForResult(intent, REQUEST_CODE)
         }

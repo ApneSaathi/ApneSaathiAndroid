@@ -81,6 +81,7 @@
     <string name="menu_profile">Profile</string>
     <string name="pending_calls_count">Pending Calls(%s)</string>
     <string name="grievances_count">Grievances(%s)</string>
+    <string name="issues_count">Issues(%s)</string>
     <string name="follow_up_count">Follow Up(%s)</string>
     <string name="attended_calls_count">Attended Calls(%s)</string>
     <string name="pending_calls">Pending Calls</string>
@@ -110,7 +111,7 @@
     <string name="address_bold">Address: </string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
-    <string name="app_bar_title">User Details</string>
+    <string name="app_bar_title">Sr. Citizen details</string>
     <string name="txtSubmit">Submit</string>
     <string name="call_status_1">Call Status</string>
     <string name="all_calls">All Calls</string>
@@ -273,6 +274,11 @@
     <string name="check_internet">Please check internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
     <string name="not_available">Not Available</string>
+    <string-array name="grievance_status_array">
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Resolved</item>
+    </string-array>
 
     <string-array name="states_array">
         <item>Assam</item>
@@ -285,12 +291,12 @@
         <item>Jharkhand</item>
     </string-array>
     <string-array name="district0">
-         <item>Baksa</item>
-         <item>Barpeta</item>
-         <item>Darrang</item>
-         <item>Dhubri</item>
-         <item>Goalpara</item>
-         <item>Hailakandi</item>
+        <item>Baksa</item>
+        <item>Barpeta</item>
+        <item>Darrang</item>
+        <item>Dhubri</item>
+        <item>Goalpara</item>
+        <item>Hailakandi</item>
     </string-array>
     <string-array name="district1">
         <item>Araria</item>
@@ -456,5 +462,17 @@
     <string name="resolved_count">Resolved(%s)</string>
     <string name="inprogress_count">In Progress(%s)</string>
     <string name="invalidOTP">Invalid OTP</string>
+    <string name="escalation">Escalation:</string>
+    <string name="type_reason">Type reason...</string>
+    <string name="update_issue_progress">Update Issue progress</string>
+    <string name="update_the_progress_happen">Update the progress happen</string>
+    <string name="completed_count">"-- Completed: "</string>
+    <string name="need_follow_up_count">"-- Need Followup: "</string>
+    <string name="pending_g_count">"-- Pending: "</string>
+    <string name="update_status">Update Status</string>
+    <string name="reopen">Reopen</string>
+    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
+    <string name="raised_on_remarks">Issue was raised on</string>
+    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
 
 </resources>

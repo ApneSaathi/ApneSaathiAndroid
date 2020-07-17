@@ -33,7 +33,7 @@ fun <T : AppCompatActivity> AppCompatActivity.getTargetIntent(targetActivity: Cl
     window.decorView.systemUiVisibility = flags
 }*/
 
-fun CallSnackbar(rootRelativeLayout: RelativeLayout, message: String) {
+fun CallSnackbar(rootRelativeLayout: View, message: String) {
     val snackbar: Snackbar = Snackbar.make(rootRelativeLayout, message, Snackbar.LENGTH_LONG)
     snackbar.show()
 }

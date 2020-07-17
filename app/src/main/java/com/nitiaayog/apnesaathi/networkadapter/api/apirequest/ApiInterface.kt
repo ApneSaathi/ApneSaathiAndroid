@@ -10,6 +10,7 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface ApiInterface {
 
@@ -34,4 +35,7 @@ interface ApiInterface {
 
     @POST(ApiProvider.ApiSeniorCitizenDetails)
     fun getSeniorCitizenDetails(@Body srDetails: JsonObject): Single<BaseRepo>
+
+    @PUT(ApiProvider.ApiUpdateGrievanceDetails)
+    fun updateGrievanceDetails(@Body srDetails: JsonObject): Single<BaseRepo>
 }
