@@ -474,5 +474,8 @@
     <string name="resolvd_remarks">Issue was resolved with remarks:</string>
     <string name="raised_on_remarks">Issue was raised on</string>
     <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
+    <string name="limitecros">You’ve reached the maximum attempts.</string>
+    <string name="getnewOTP">Get New OTP</string>
+    <string name="chnagenumber">" Change number ? "</string>
 
 </resources>

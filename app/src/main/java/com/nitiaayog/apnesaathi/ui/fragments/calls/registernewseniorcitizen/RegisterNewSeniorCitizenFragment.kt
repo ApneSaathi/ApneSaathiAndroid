@@ -196,7 +196,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         tvRegister.throttleClick().subscribe {
             if (validateFields()) viewModel.registerNewSeniorCitizen(context!!)
         }.autoDispose(disposables)
-        tvCancel.throttleClick().subscribe {}.autoDispose(disposables)
+        tvCancel.throttleClick().subscribe {
+            fragmentManager?.popBackStack()
+        }.autoDispose(disposables)
     }
 
     private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =

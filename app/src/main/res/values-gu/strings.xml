@@ -413,6 +413,10 @@
     <string name="was">હતી</string>
     <string name="select_a_state">Please select a state</string>
     <string name="invalidOTP">અમાન્ય OTP</string>
+    <string name="limitecros">તમે મહત્તમ પ્રયત્નો પર પહોંચી ગયા છો</string>
+    <string name="getnewOTP">નવું ઓટીપી મેળવો</string>
+    <string name="chnagenumber"> નંબર બદલો ? </string>
+
     <string name="update_issue_progress">Update Issue progress</string>
     <string name="completed_count">"-- Completed: "</string>
     <string name="need_follow_up_count">"-- Need Followup: "</string>

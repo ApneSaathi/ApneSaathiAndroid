@@ -112,7 +112,7 @@
         android:background="@color/btn_bg"
         android:gravity="center"
         android:text="@string/confirm"
-        android:fontFamily="sans-serif"
+        style="@style/TextAppearance.Title"
         android:textColor="@color/color_white"
         android:textSize="@dimen/text_16" />
 

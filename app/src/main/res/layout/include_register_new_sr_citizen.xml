@@ -36,6 +36,7 @@
         android:minHeight="@dimen/view_size_48"
         android:paddingStart="@dimen/dimen_10"
         android:paddingEnd="@dimen/dimen_10"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         android:singleLine="true"
         android:textAllCaps="false"
         android:textColor="@color/color_dark_grey_txt"
