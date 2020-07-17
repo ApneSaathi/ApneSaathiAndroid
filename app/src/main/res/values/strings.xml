@@ -456,5 +456,8 @@
     <string name="resolved_count">Resolved(%s)</string>
     <string name="inprogress_count">In Progress(%s)</string>
     <string name="invalidOTP">Invalid OTP</string>
+    <string name="limitecros">You’ve reached the maximum attempts.</string>
+    <string name="getnewOTP">Get New OTP</string>
+    <string name="chnagenumber">" Change number ? "</string>
 
 </resources>

@@ -18,7 +18,6 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.interfaces.NewSrCitizenRegisterListener
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -47,7 +46,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         initTextWatcher()
     }
 
-    fun setNewCitizenRegisterListener(newSrCitizenRegisterListener: NewSrCitizenRegisterListener){
+    fun setNewCitizenRegisterListener(newSrCitizenRegisterListener: NewSrCitizenRegisterListener) {
         this.newSrCitizenRegisterListener = newSrCitizenRegisterListener
     }
 
@@ -197,7 +196,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         tvRegister.throttleClick().subscribe {
             if (validateFields()) viewModel.registerNewSeniorCitizen(context!!)
         }.autoDispose(disposables)
-        tvCancel.throttleClick().subscribe {}.autoDispose(disposables)
+        tvCancel.throttleClick().subscribe {
+            fragmentManager?.popBackStack()
+        }.autoDispose(disposables)
     }
 
     private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =

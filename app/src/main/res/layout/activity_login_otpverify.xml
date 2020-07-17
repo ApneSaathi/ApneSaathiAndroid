@@ -1,135 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainRootRelativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/mainRootRelativeLayout">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dimen_30"
-        android:src="@drawable/otp_image">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:src="@drawable/otp_image">
 
-    </ImageView>
-
-
-    <TextView
-        style="@style/TextAppearance.Title"
-
-        android:id="@+id/txt1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_20"
-        android:gravity="center"
-        android:text="@string/wehavesendverificaiton_code">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/TxtMobileNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_3"
-        android:gravity="center"
-        style="@style/TextAppearance.Title"
-
-        android:text="+91 9673346489">
-
-    </TextView>
-
-    <LinearLayout
-        android:id="@+id/LinearDigitLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_below="@id/TxtMobileNumber"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dimen_20"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/EditFirstChar"
-            android:layout_width="@dimen/view_size_40"
-            android:layout_height="@dimen/dimen_35"
-            android:background="@drawable/edittext_border"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1" />
-
-        <EditText
-            android:id="@+id/editOtpsecondchar"
-            android:layout_width="@dimen/view_size_40"
-            android:layout_height="@dimen/dimen_35"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:background="@drawable/edittext_border"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1" />
-
-        <EditText
-            android:id="@+id/editOtpthirdchar"
-            android:layout_width="@dimen/view_size_40"
-            android:layout_height="@dimen/dimen_35"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:background="@drawable/edittext_border"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1" />
-
-        <EditText
-            android:id="@+id/editOtpfourthchar"
-            android:layout_width="@dimen/view_size_40"
-            android:layout_height="@dimen/dimen_35"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:background="@drawable/edittext_border"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1" />
-    </LinearLayout>
+        </ImageView>
 
 
         <TextView
+            android:id="@+id/txt1"
+
+            style="@style/TextAppearance.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:gravity="center"
+            android:text="@string/wehavesendverificaiton_code">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/TxtMobileNumber"
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt1"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_3"
+            android:gravity="center"
+
+            android:text="+91 9673346489">
+
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/LinearDigitLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_below="@id/TxtMobileNumber"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/EditFirstChar"
+                android:layout_width="@dimen/view_size_40"
+                android:layout_height="@dimen/dimen_35"
+                android:background="@drawable/edittext_border"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/editOtpsecondchar"
+                android:layout_width="@dimen/view_size_40"
+                android:layout_height="@dimen/dimen_35"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/edittext_border"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/editOtpthirdchar"
+                android:layout_width="@dimen/view_size_40"
+                android:layout_height="@dimen/dimen_35"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/edittext_border"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/editOtpfourthchar"
+                android:layout_width="@dimen/view_size_40"
+                android:layout_height="@dimen/dimen_35"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/edittext_border"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/btnVerify"
+            style="@style/TextAppearance.Title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_size_45"
             android:layout_below="@+id/linearloginfield"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dimen_10"
-            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginRight="@dimen/dimen_10"
             android:background="@color/btn_bg"
             android:gravity="center"
-            android:fontFamily="sans-serif"
-
             android:text="@string/proceed"
             android:textColor="@color/color_white"
             android:textSize="@dimen/text_16" />
 
-        <TextView
-        android:id="@+id/txttimer"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dimen_20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnVerify"
-        android:layout_centerHorizontal="true"
-        android:text="@string/resendcode"
-        style="@style/TextAppearance.Title" />
 
+        <TextView
+            android:id="@+id/txttimer"
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:gravity="center"
+            android:text="@string/resendcode" />
+
+        <TextView
+            android:id="@+id/TxtChangeNumber"
+            style="@style/TextAppearance.Title"
+            android:textSize="@dimen/text_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_toLeftOf="@+id/txttimer"
+            android:text="@string/chnagenumber"
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 </RelativeLayout>

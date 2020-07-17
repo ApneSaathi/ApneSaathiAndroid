@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.ui.otp
 
 import android.content.Context
+import android.graphics.Paint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -8,7 +9,6 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_login_otpverify.*
 
 
 class OtpActivity : BaseActivity<OtpActivityModel>() {
-
+    var wrongAttempCount: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -91,37 +91,63 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         btnVerify.throttleClick().subscribe() {
             hideKeyboard()
-            if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
-                CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
+            if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
+                onBackPressed()
             } else {
-                EditFirstChar.setError(null)
-                if (TextUtils.isEmpty(editOtpsecondchar.text.toString().trim())) {
+                if (TextUtils.isEmpty(EditFirstChar.text.toString().trim())) {
                     CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
                 } else {
-                    editOtpsecondchar.setError(null)
-                    if (TextUtils.isEmpty(editOtpthirdchar.text.toString().trim())) {
+                    EditFirstChar.setError(null)
+                    if (TextUtils.isEmpty(editOtpsecondchar.text.toString().trim())) {
                         CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
-
                     } else {
-                        editOtpfourthchar.setError(null)
-                        if (TextUtils.isEmpty(editOtpfourthchar.text.toString().trim())) {
+                        editOtpsecondchar.setError(null)
+                        if (TextUtils.isEmpty(editOtpthirdchar.text.toString().trim())) {
                             CallSnackbar(
                                 mainRootRelativeLayout,
                                 resources.getString(R.string.enterOtp)
                             )
+
                         } else {
                             editOtpfourthchar.setError(null)
-                            if (EditFirstChar.text.toString()
-                                    .trim() + editOtpsecondchar.text.toString()
-                                    .trim() + editOtpthirdchar.text.toString()
-                                    .trim() + editOtpfourthchar.text.toString().trim() == "1122"
-                            ) {
-                                callnextActivity();
-                            } else {
+                            if (TextUtils.isEmpty(editOtpfourthchar.text.toString().trim())) {
                                 CallSnackbar(
                                     mainRootRelativeLayout,
-                                    resources.getString(R.string.invalidOTP)
+                                    resources.getString(R.string.enterOtp)
                                 )
+                            } else {
+                                editOtpfourthchar.setError(null)
+                                if (EditFirstChar.text.toString()
+                                        .trim() + editOtpsecondchar.text.toString()
+                                        .trim() + editOtpthirdchar.text.toString()
+                                        .trim() + editOtpfourthchar.text.toString().trim() == "1122"
+                                ) {
+                                    if (wrongAttempCount <= 3) {
+                                        callnextActivity();
+                                    } else {
+                                        CallSnackbar(
+                                            mainRootRelativeLayout,
+                                            resources.getString(R.string.limitecros)
+                                        )
+                                    }
+                                } else {
+                                    if (wrongAttempCount >= 3) {
+                                        CallSnackbar(
+                                            mainRootRelativeLayout,
+                                            resources.getString(R.string.limitecros)
+                                        )
+                                        btnVerify.text = resources.getString(R.string.getnewOTP)
+                                        btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
+                                    } else {
+                                        CallSnackbar(
+                                            mainRootRelativeLayout,
+                                            resources.getString(R.string.invalidOTP)
+                                        )
+                                    }
+                                    wrongAttempCount = wrongAttempCount + 1
+                                }
+
+
                             }
                         }
                     }
@@ -129,7 +155,7 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             }
         }.autoDispose(disposables)
         txttimer.throttleClick().subscribe() {
-            Toast.makeText(applicationContext, "Coming soon", Toast.LENGTH_LONG).show()
+            onBackPressed()
         }.autoDispose(disposables)
 
         val timer = object : CountDownTimer(30000, 1000) {
@@ -140,13 +166,26 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             override fun onFinish() {
                 txttimer.text = resources.getString(R.string.resendOTP)
                 btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
-                btnVerify.isClickable = false
+                if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
+                } else {
+                    btnVerify.isClickable = false
+                }
             }
         }
         timer.start()
+        TxtChangeNumber.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+        TxtChangeNumber.throttleClick().subscribe() {
+            onBackPressed()
+        }.autoDispose(disposables)
+        txttimer.throttleClick().subscribe() {
+            if (txttimer.text.toString() == resources.getString(R.string.resendOTP)) {
+                onBackPressed()
+            }
+        }.autoDispose(disposables)
 
         if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
             TxtMobileNumber.setText(intent.getStringExtra("PhoneNo"))
+
         } else {
             TxtMobileNumber.setText("1234")
         }

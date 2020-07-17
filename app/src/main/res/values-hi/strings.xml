@@ -416,4 +416,8 @@
     <string name="was">था</string>
     <string name="select_a_state">Please select a state</string>
     <string name="invalidOTP">अमान्य ओटीपी</string>
+    <string name="limitecros">आप अधिकतम प्रयास तक पहुँच गए हैं.s</string>
+    <string name="getnewOTP">नया ओटीपी प्राप्त करें</string>
+    <string name="chnagenumber"> अंक बदलो ? </string>
+
 </resources>
