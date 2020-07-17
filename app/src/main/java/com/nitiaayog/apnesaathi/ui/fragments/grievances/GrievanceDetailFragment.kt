@@ -154,11 +154,11 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
                         updateStatus(edt)
                         dialog.dismiss()
                     } else {
-                        Toast.makeText(context, "Please enter a description", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, getString(R.string.enter_description_warning), Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {
-                    Toast.makeText(context, "Please select a status", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.status_warning), Toast.LENGTH_SHORT).show()
                 }
 
             }

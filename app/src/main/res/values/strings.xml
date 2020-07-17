@@ -477,5 +477,7 @@
     <string name="limitecros">You’ve reached the maximum attempts.</string>
     <string name="getnewOTP">Get New OTP</string>
     <string name="chnagenumber">" Change number ? "</string>
+    <string name="enter_description_warning">Please enter a description</string>
+    <string name="status_warning">Please select a status</string>
 
 </resources>
