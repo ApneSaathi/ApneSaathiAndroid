@@ -78,6 +78,9 @@ class AppDataManager private constructor(
     override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
         apiRequest.getSeniorCitizenDetails(srDetails)
 
+    override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
+        apiRequest.updateGrievanceDetails(grDetails)
+
     // Database Access
     // => Table : call_details
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
@@ -153,6 +156,8 @@ class AppDataManager private constructor(
     override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
+    override fun clearPreviousData() = grievancesDao.deletePreviousData()
+
     override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getAllGrievances()
 
@@ -164,6 +169,8 @@ class AppDataManager private constructor(
 
     override fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getGrievancesWithStatus("RESOLVED")
+
+    override fun clearPreviousTrackingData() =  grievancesTrackingDao.deletePreviousGrievanceData()
 
     override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)

@@ -6,7 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
-import com.nitiaayog.apnesaathi.interfaces.NewSrCitizenRegisterListener
+import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.fragments.calls.CallsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
@@ -16,11 +16,11 @@ import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
-class DashBoardActivity : BaseActivity<DashBoardViewModel>(),NewSrCitizenRegisterListener {
+class DashBoardActivity : BaseActivity<DashBoardViewModel>(),ReloadApiRequiredListener {
 
     private val homeFragment = HomeFragment()
     private val callsFragment = CallsFragment()
-    private val notificationFragment = GrievancesFragment()
+    private val grievancesFragment = GrievancesFragment()
     private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +45,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(),NewSrCitizenRegiste
         val adapter = FragmentViewPagerAdapter(this)
         adapter.addFragment(homeFragment, getString(R.string.menu_home))
         adapter.addFragment(callsFragment, getString(R.string.menu_calls))
-        adapter.addFragment(notificationFragment, getString(R.string.menu_notification))
+        adapter.addFragment(grievancesFragment, getString(R.string.menu_issues))
         adapter.addFragment(profileFragment, getString(R.string.menu_profile))
 
         callsFragment.setNewCitizenRegisterListener(this)
+        homeFragment.setReloadApiListener(this)
+        grievancesFragment.setReloadApiListener(this)
 
         viewPager.isUserInputEnabled = false
         viewPager.adapter = adapter
@@ -100,7 +102,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(),NewSrCitizenRegiste
             supportFragmentManager.fragments.forEach { _ -> supportFragmentManager.popBackStack() }
     }
 
-    override fun onNewCitizenRegistered() {
+    override fun onReloadRequired() {
         homeFragment.reloadApi()
     }
 }

@@ -153,7 +153,7 @@
                     android:minWidth="100dp"
                     android:paddingLeft="@dimen/dimen_2"
                     android:paddingBottom="@dimen/dimen_5"
-                    android:text="@string/no_issues"
+                    android:text="--"
                     app:layout_constraintStart_toEndOf="@id/txt_issues_raised_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_medical_history_title" />
 
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/dimen_20"
                     android:paddingBottom="@dimen/dimen_5"
-                    android:text="Escalation:"
+                    android:text="@string/escalation"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/txt_status_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_issue_raised" />
@@ -212,7 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/dimen_2"
-                    android:text="@string/yes"
+                    android:text="--"
                     app:layout_constraintStart_toEndOf="@id/txt_escalation_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_issue_raised" />
 
@@ -232,7 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/dimen_2"
-                    android:text="Yes"
+                    android:text="--"
                     app:layout_constraintStart_toEndOf="@id/txt_covid_symptoms_title"
                     app:layout_constraintTop_toBottomOf="@id/txt_escalation_title" />
 

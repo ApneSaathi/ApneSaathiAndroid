@@ -97,6 +97,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                         viewModelScope.launch {
                             io {
                                 val data = it.getData()
+                                dataManager.clearPreviousData()
                                 dataManager.insertCallData(data.callsList)
 
                                 val grievances: List<SrCitizenGrievance> =
@@ -131,6 +132,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.getStatus() == "0") {
                         viewModelScope.launch {
                             io {
+                                dataManager.clearPreviousTrackingData()
                                 dataManager.insertGrievanceTrackingList(it.getTrackingList())
                             }
                             loaderObservable.value = NetworkRequestState.SuccessResponse(

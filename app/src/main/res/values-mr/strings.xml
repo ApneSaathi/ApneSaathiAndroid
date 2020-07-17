@@ -102,7 +102,7 @@
     <string name="address_bold">पत्ता:</string>
     <string name="unattended">दुर्लक्ष केलेले</string>
     <string name="edit">सुधारणे</string>
-    <string name="app_bar_title">वापरकर्त्याचा तपशील</string>
+    <string name="app_bar_title">Sr. Citizen details</string>
     <string name="txtSubmit">प्रस्तुत करणे</string>
     <string name="call_status_1">कॉल स्थिती</string>
     <string name="all_calls">सर्व कॉल</string>
@@ -123,6 +123,7 @@
     <string name="menu_notification">सूचना</string>
     <string name="menu_profile">प्रोफाइल</string>
     <string name="grievances_count">तक्रारी(%s)</string>
+    <string name="issues_count">Issues(%s)</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
     <string name="select_a_category">एक श्रेणी निवडा</string>
@@ -419,4 +420,15 @@
     <string name="getnewOTP">नवीन ओटीपी मिळवा</string>
     <string name="chnagenumber"> नंबर बदलायचा ? </string>
 
+    <string name="update_issue_progress">Update Issue progress</string>
+    <string name="completed_count">"-- Completed: "</string>
+    <string name="need_follow_up_count">"-- Need Followup: "</string>
+    <string name="pending_g_count">"-- Pending: "</string>
+    <string name="update_status">Update Status</string>
+    <string name="reopen">Reopen</string>
+    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
+    <string name="raised_on_remarks">Issue was raised on</string>
+    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
+    <string name="enter_description_warning">Please enter a description</string>
+    <string name="status_warning">Please select a status</string>
 </resources>

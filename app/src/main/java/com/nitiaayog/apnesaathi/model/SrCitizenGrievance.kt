@@ -263,6 +263,13 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.DeleteIDAfterSync, defaultValue = "-1")
+    var deleteAfterSync: Int? = -1
+        get() = field ?: -1
+        set(@NonNull value) {
+            field = value ?: -1
+        }
+
     @TypeConverters(DateTimeConverter::class)
     @ColumnInfo(name = Columns.CreatedDate, defaultValue = "-1")
     @SerializedName(ApiConstants.CreatedDate)

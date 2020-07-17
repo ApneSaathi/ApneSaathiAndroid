@@ -9,9 +9,11 @@ import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
+import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
+import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
@@ -20,6 +22,8 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(),
     GrievanceStatusAdapter.OnItemClickListener,
     PageTitleChangeListener {
 
+
+    private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +39,9 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(),
                     2 -> tab.text = getString(R.string.resolved)
                 }
             }).attach()
+    }
+    fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
+        this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 
     private fun setUpViewPager() {
@@ -70,10 +77,12 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(),
     }
 
     override fun onItemClick(position: Int, grievanceData: GrievanceData) {
+        val fragment = GrievanceDetailFragment(grievanceData)
+        fragment.setReloadApiListener(reloadApiRequiredListener)
         addFragment(
             R.id.fl_detailed_container,
-            GrievanceDetailFragment(grievanceData),
-            "grievaneceDetails"
+            fragment,
+            GRIEVANCE_DETAIL_FRAGMENT
         )
     }
 

@@ -266,6 +266,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
         this.getString(R.string.dis_connected) -> {
             viewModel.setCallStatus("9")
+            edt_call_status_comment.visibility = View.VISIBLE
         }
         else -> {
         }
@@ -546,6 +547,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actCallStatus.setOnKeyListener(null)
         actCallStatus.setOnItemClickListener{_,_,position,_->
             resetForm()
+            edt_call_status_comment.visibility = View.GONE
             setCallStatus(callStatusList[position])
         }
 
@@ -660,28 +662,28 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     private fun initClicks() {
         // Call Status Button Clicks
-        btnNoResponse.throttleClick().subscribe {
-            manageResetForm(btnNoResponse)
-            viewModel.setCallStatus("1")
-        }.autoDispose(disposables)
-        btnNotPicked.throttleClick().subscribe {
-            manageResetForm(btnNotPicked)
-            viewModel.setCallStatus("2")
-        }.autoDispose(disposables)
-        btnNotReachable.throttleClick().subscribe {
-            manageResetForm(btnNotReachable)
-            viewModel.setCallStatus("3")
-        }.autoDispose(disposables)
-        btnDisConnected.throttleClick().subscribe {
-            manageResetForm(btnDisConnected)
-            viewModel.setCallStatus("4")
-        }.autoDispose(disposables)
-        btnConnected.throttleClick().subscribe {
-            changeButtonSelection(btnConnected)
-            viewModel.setCallStatus("5")
-            tvTalkWith.visibility = View.VISIBLE
-            actTalkWith.visibility = View.VISIBLE
-        }.autoDispose(disposables)
+//        btnNoResponse.throttleClick().subscribe {
+//            manageResetForm(btnNoResponse)
+//            viewModel.setCallStatus("1")
+//        }.autoDispose(disposables)
+//        btnNotPicked.throttleClick().subscribe {
+//            manageResetForm(btnNotPicked)
+//            viewModel.setCallStatus("2")
+//        }.autoDispose(disposables)
+//        btnNotReachable.throttleClick().subscribe {
+//            manageResetForm(btnNotReachable)
+//            viewModel.setCallStatus("3")
+//        }.autoDispose(disposables)
+//        btnDisConnected.throttleClick().subscribe {
+//            manageResetForm(btnDisConnected)
+//            viewModel.setCallStatus("4")
+//        }.autoDispose(disposables)
+//        btnConnected.throttleClick().subscribe {
+//            changeButtonSelection(btnConnected)
+//            viewModel.setCallStatus("5")
+//            tvTalkWith.visibility = View.VISIBLE
+//            actTalkWith.visibility = View.VISIBLE
+//        }.autoDispose(disposables)
 
         // Is Sr citizen at home
         btnAnySrCitizenInHomeYes.throttleClick().subscribe {
@@ -1365,6 +1367,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         syncData.volunteerId = dataManager.getUserId()
 
 //        val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
+        syncData.callStatusSubCode = viewModel.getCallStatus()
         params.addProperty(ApiConstants.SrCitizenCallStatusCode, viewModel.getCallStatus())
 
         syncData.talkedWith = viewModel.getTalkedWith()

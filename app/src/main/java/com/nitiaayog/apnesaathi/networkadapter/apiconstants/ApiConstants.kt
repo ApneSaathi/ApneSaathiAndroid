@@ -80,7 +80,11 @@ object ApiConstants {
     const val CreatedDate: String = "loggeddattime"
     const val GrievanceCreatedDate: String = "createdDate"
     const val Priority: String = "priority"
-    const val LastUpdateOn: String = "lastUpdateOn"
+    const val LastUpdateOn: String = "lastUpdatedOn"
+    const val UnderReviewDate: String = "underReviewDate"
+    const val ResolvedDate: String = "resolvedDate"
+    const val ReviewRemarks: String = "underReviewRemarks"
+    const val ResolvedRemarks: String = "resolvedRemarks"
     const val phoneNo: String = "phoneNo"
 
     const val GrievanceTrackingId:String ="trackingId"

@@ -14,6 +14,7 @@ import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
@@ -22,6 +23,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,10 +34,9 @@ import kotlin.system.exitProcess
 
 class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClickListener {
 
+    private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
     private var lastSelectedPosition: Int = -1
     private var lastSelectedCallData: CallData? = null
-
-    private val handler: Handler by lazy { Handler() }
 
     private val pendingAdapter by lazy {
         CallsAdapter().apply {
@@ -152,6 +153,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
             ((followUpCalls.toDouble() / totalCalls.toDouble()) * 100).toInt() + completedPer
         pbCallSummary.progress = completedPer
         pbCallSummary.secondaryProgress = followUpPer
+        tv_completed.text=getString(R.string.completed_count).plus(completedCalls)
+        tv_need_followup.text = getString(R.string.need_follow_up_count).plus(followUpCalls)
+        tv_pending.text = getString(R.string.pending_g_count).plus(pendingCalls)
     }
 
     override fun onDestroy() {
@@ -161,7 +165,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
 
     private fun manageGrievances(dataList: MutableList<GrievanceData>) {
         val size = dataList.size
-        tvGrievances.text = getString(R.string.grievances_count, size.toString())
+        tvGrievances.text = getString(R.string.issues_count, size.toString())
         btnSeeAllGrievances.visibility = if (size > 3) {
             btnSeeAllGrievances.setOnClickListener {
                 viewModel.getGrievancesTrackingList().value?.let { it1 ->
@@ -240,10 +244,11 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
     }
 
     override fun onItemClick(position: Int, grievanceData: GrievanceData) {
+        val fragment = GrievanceDetailFragment(grievanceData)
+        fragment.setReloadApiListener(reloadApiRequiredListener)
         addFragment(
             R.id.fragmentHomeContainer,
-            GrievanceDetailFragment(grievanceData),
-            "grievaneceDetails"
+            fragment,GRIEVANCE_DETAIL_FRAGMENT
         )
     }
 
@@ -258,5 +263,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
         } catch (ex: Exception) {
             println("TAG -- MyData --> ${ex.message}")
         }
+    }
+
+    fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
+        this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 }

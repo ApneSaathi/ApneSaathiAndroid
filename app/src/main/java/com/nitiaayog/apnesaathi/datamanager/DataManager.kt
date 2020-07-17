@@ -39,10 +39,12 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getPendingGrievances(): LiveData<MutableList<GrievanceData>>
     fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>>
     fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>>
+    fun clearPreviousTrackingData()
 
     // Table : sync_grievances_data
     fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?
     suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance)
     fun delete(syncData: SyncSrCitizenGrievance)
     fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>>
+    fun clearPreviousData()
 }

@@ -15,7 +15,7 @@ import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
-import com.nitiaayog.apnesaathi.interfaces.NewSrCitizenRegisterListener
+import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -28,7 +28,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private var selectedDistrict: String = ""
     private var selectedState: String = ""
     private var selectedStatePos: Int = -1
-    private lateinit var newSrCitizenRegisterListener: NewSrCitizenRegisterListener
+    private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_saving_data)
     }
@@ -46,8 +46,8 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         initTextWatcher()
     }
 
-    fun setNewCitizenRegisterListener(newSrCitizenRegisterListener: NewSrCitizenRegisterListener) {
-        this.newSrCitizenRegisterListener = newSrCitizenRegisterListener
+    fun setNewCitizenRegisterListener(reloadApiRequiredListener: ReloadApiRequiredListener){
+        this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 
     override fun provideViewModel(): RegisterSeniorCitizenViewModel =
@@ -301,7 +301,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                     progressDialog.dismiss()
 
                     resetRegisterNewSrCitizenLayout()
-                    newSrCitizenRegisterListener.onNewCitizenRegistered()
+                    reloadApiRequiredListener.onReloadRequired()
                     BaseUtility.showAlertMessage(
                         activity!!, R.string.success, R.string.sr_citizen_registered_successfully,
                         R.string.okay

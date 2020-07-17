@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.base.extensions
 
 import android.content.Intent
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -32,7 +33,7 @@ fun <T : AppCompatActivity> AppCompatActivity.getTargetIntent(targetActivity: Cl
     window.decorView.systemUiVisibility = flags
 }*/
 
-fun CallSnackbar(rootRelativeLayout: RelativeLayout, message: String) {
+fun CallSnackbar(rootRelativeLayout: View, message: String) {
     val snackbar: Snackbar = Snackbar.make(rootRelativeLayout, message, Snackbar.LENGTH_LONG)
     snackbar.show()
 }

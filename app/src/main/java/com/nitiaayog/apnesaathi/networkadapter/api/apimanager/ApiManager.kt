@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apimanager
 
 import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserve
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserveWithDelaySubscription
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
@@ -46,4 +47,8 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
         apiClient.getSeniorCitizenDetails(srDetails).subscribeAndObserveWithDelaySubscription()
+
+    override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
+        apiClient.updateGrievanceDetails(grDetails).subscribeAndObserve()
+
 }

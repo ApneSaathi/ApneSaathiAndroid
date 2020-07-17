@@ -28,6 +28,9 @@ interface GrievancesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(grievances: SrCitizenGrievance): Long
 
+    @Query("DELETE FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.DeleteIDAfterSync} =1")
+    fun deletePreviousData()
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun updateJustId() {
 
