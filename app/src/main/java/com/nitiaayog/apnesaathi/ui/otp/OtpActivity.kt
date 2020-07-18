@@ -40,8 +40,6 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             }
         })
 
-
-
         editOtpsecondchar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (editOtpsecondchar.length() == 1) {
@@ -49,6 +47,7 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                 } else {
                     EditFirstChar.requestFocus();
                 }
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -70,11 +69,14 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             }
         })
 
+        
         editOtpfourthchar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
+
                 if (editOtpfourthchar.length() == 0) {
                     editOtpthirdchar.requestFocus();
                 } else {
@@ -86,6 +88,7 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             }
         })
 

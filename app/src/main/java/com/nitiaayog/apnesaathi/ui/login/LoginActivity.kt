@@ -2,11 +2,16 @@ package com.nitiaayog.apnesaathi.ui.login
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
+import android.view.Gravity
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
@@ -33,8 +38,9 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
-
         observeStates()
+
+
         btnLogin.throttleClick().subscribe() {
             hideKeyboard()
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
@@ -59,6 +65,20 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 
             }
         }.autoDispose(disposables)
+
+    }
+
+
+    private fun layoutGravitySet(
+        rootRelativeLayout: RelativeLayout?,
+        center: Int
+    ) {
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT, 0
+        )
+        params.gravity = center
+        rootRelativeLayout?.setLayoutParams(params)
     }
 
 
@@ -85,7 +105,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
                     EditMobileNumber.isFocusableInTouchMode = true
-                     if (loginres is Login_Response)
+                    if (loginres is Login_Response)
                         dataManager.updateUserPreference(loginres)
 
                     progressBarlogin.visibility = GONE
