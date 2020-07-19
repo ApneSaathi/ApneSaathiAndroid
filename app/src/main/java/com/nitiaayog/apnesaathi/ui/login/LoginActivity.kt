@@ -93,11 +93,12 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                         R.string.check_internet
                     )
                 }
+
+
                 is NetworkRequestState.LoadingData -> {
                     progressBarlogin.visibility = VISIBLE
                 }
                 is NetworkRequestState.ErrorResponse -> {
-
                     progressBarlogin.visibility = GONE
                     EditMobileNumber.isFocusableInTouchMode = true
                     CallSnackbar(rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage)
@@ -107,13 +108,11 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     EditMobileNumber.isFocusableInTouchMode = true
                     if (loginres is Login_Response)
                         dataManager.updateUserPreference(loginres)
-
                     progressBarlogin.visibility = GONE
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
                     targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
                     startActivity(targetIntent)
                     EditMobileNumber.text.clear()
-
                 }
 
             }
