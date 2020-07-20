@@ -33,8 +33,8 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
-
         observeStates()
+
         btnLogin.throttleClick().subscribe() {
             hideKeyboard()
             if (TextUtils.isEmpty(EditMobileNumber.text.toString().trim())) {
@@ -42,8 +42,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
             } else {
                 EditMobileNumber.setError(null)
                 try {
-
-
                     Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
                             viewModel.callLogin(
@@ -59,6 +57,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 
             }
         }.autoDispose(disposables)
+
     }
 
 
@@ -73,11 +72,12 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                         R.string.check_internet
                     )
                 }
+
+
                 is NetworkRequestState.LoadingData -> {
                     progressBarlogin.visibility = VISIBLE
                 }
                 is NetworkRequestState.ErrorResponse -> {
-
                     progressBarlogin.visibility = GONE
                     EditMobileNumber.isFocusableInTouchMode = true
                     CallSnackbar(rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage)
@@ -85,15 +85,13 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
                     EditMobileNumber.isFocusableInTouchMode = true
-                     if (loginres is Login_Response)
+                    if (loginres is Login_Response)
                         dataManager.updateUserPreference(loginres)
-
                     progressBarlogin.visibility = GONE
                     val targetIntent = getTargetIntent(OtpActivity::class.java)
                     targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
                     startActivity(targetIntent)
                     EditMobileNumber.text.clear()
-
                 }
 
             }
