@@ -541,11 +541,12 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
 
         val callStatusList = resources.getStringArray(R.array.call_status)
-        val callStatusAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu,callStatusList)
+        val callStatusAdapter =
+            BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, callStatusList)
         actCallStatus.threshold = 0
         actCallStatus.setAdapter(callStatusAdapter)
         actCallStatus.setOnKeyListener(null)
-        actCallStatus.setOnItemClickListener{_,_,position,_->
+        actCallStatus.setOnItemClickListener { _, _, position, _ ->
             resetForm()
             edt_call_status_comment.visibility = View.GONE
             setCallStatus(callStatusList[position])
@@ -637,16 +638,16 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     private fun setDistrictAdapter(position: Int) {
         var districtsList = resources.getStringArray(R.array.districts_array)
-        if(position != -1){
-            when(position){
-                0-> districtsList = resources.getStringArray(R.array.district0)
-                1-> districtsList = resources.getStringArray(R.array.district1)
-                2-> districtsList = resources.getStringArray(R.array.district2)
-                3-> districtsList = resources.getStringArray(R.array.district3)
-                4-> districtsList = resources.getStringArray(R.array.district4)
-                5-> districtsList = resources.getStringArray(R.array.district5)
-                6-> districtsList = resources.getStringArray(R.array.district6)
-                7-> districtsList = resources.getStringArray(R.array.district7)
+        if (position != -1) {
+            when (position) {
+                0 -> districtsList = resources.getStringArray(R.array.district0)
+                1 -> districtsList = resources.getStringArray(R.array.district1)
+                2 -> districtsList = resources.getStringArray(R.array.district2)
+                3 -> districtsList = resources.getStringArray(R.array.district3)
+                4 -> districtsList = resources.getStringArray(R.array.district4)
+                5 -> districtsList = resources.getStringArray(R.array.district5)
+                6 -> districtsList = resources.getStringArray(R.array.district6)
+                7 -> districtsList = resources.getStringArray(R.array.district7)
             }
         }
         val districtsAdapter =
@@ -721,12 +722,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // All AutoCompleteTextView clicks
         actGender.throttleClick().subscribe { actGender.showDropDown() }.autoDispose(disposables)
-        actCallStatus.throttleClick().subscribe{actCallStatus.showDropDown()}.autoDispose(disposables)
+        actCallStatus.throttleClick().subscribe { actCallStatus.showDropDown() }
+            .autoDispose(disposables)
         actDistrict.throttleClick().subscribe {
-            if(selectedState.isNotEmpty()){
-            actDistrict.showDropDown()
-            }else{
-                Toast.makeText(this,getString(R.string.select_a_state), Toast.LENGTH_SHORT).show()
+            if (selectedState.isNotEmpty()) {
+                actDistrict.showDropDown()
+            } else {
+                Toast.makeText(this, getString(R.string.select_a_state), Toast.LENGTH_SHORT).show()
             }
         }
             .autoDispose(disposables)
@@ -1240,6 +1242,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_call_status)
             return false
         }
+        if (viewModel.getCallStatus() == "9" && edt_call_status_comment.text.toString().isEmpty()) {
+            BaseUtility.showAlertMessage(this, R.string.error, R.string.provide_remarks)
+            return false
+        }
         if (viewModel.getCallStatus() == "10") {
             if (viewModel.getTalkedWith().isEmpty()) {
                 BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_talked_with)
@@ -1379,8 +1385,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.SrCitizenGender, dataManager.getGender())
         syncData.gender = dataManager.getGender()
 
-        if (viewModel.getCallStatus() != "10") return params
+        if (viewModel.getCallStatus() == "9") {
+            syncData.impRemarkInfo = edt_call_status_comment.text.toString()
+            params.addProperty(ApiConstants.ImpRemarkInfo, edt_call_status_comment.text.toString())
+        }
 
+        if (viewModel.getCallStatus() != "10") return params
+        syncData.impRemarkInfo = etOtherDescription.text.toString()
+        params.addProperty(ApiConstants.ImpRemarkInfo, etOtherDescription.text.toString())
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, callId.toInt())
         arraySubParams.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())

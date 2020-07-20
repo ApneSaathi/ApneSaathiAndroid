@@ -31,6 +31,8 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_grievance_details.*
+import kotlinx.android.synthetic.main.fragment_grievance_details.toolBar
+import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.list_item_grievance_status.*
 import kotlinx.android.synthetic.main.updated_progress_layout.view.*
@@ -48,6 +50,8 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolBar.setNavigationIcon(R.drawable.ic_back)
+        toolBar.setNavigationOnClickListener { activity?.onBackPressed() }
         bindData()
         getDataStream()
     }
@@ -105,11 +109,15 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
             tv_volunteer_desc3.text =
                 getString(R.string.resolvd_remarks).plus(" ").plus(grievanceData.resolvedRemarks)
             cgResolved.visibility = View.VISIBLE
+            tv_volunteer_desc2.text = getString(R.string.in_progress_remarks).plus(" ")
+                .plus(grievanceData.reviewRemarks)
+            cgInProgress.visibility = View.VISIBLE
         } else {
             cgResolved.visibility = View.GONE
         }
         tv_volunteer_desc.text =
-            getString(R.string.raised_on_remarks).plus(" ").plus(getFormattedDate(grievanceData.createdDate))
+            getString(R.string.raised_on_remarks).plus(" ")
+                .plus(getFormattedDate(grievanceData.createdDate))
         tv_description.text = grievanceData.description
         tv_issue_id.text = grievanceData.trackingId.toString()
         tv_created_date.text = getFormattedDate(grievanceData.createdDate)
@@ -154,11 +162,16 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
                         updateStatus(edt)
                         dialog.dismiss()
                     } else {
-                        Toast.makeText(context, getString(R.string.enter_description_warning), Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            context,
+                            getString(R.string.enter_description_warning),
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 } else {
-                    Toast.makeText(context, getString(R.string.status_warning), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.status_warning), Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }
