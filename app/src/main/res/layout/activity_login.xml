@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
     <RelativeLayout
-        android:layout_gravity="top"
         android:id="@+id/rootRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
 
 
-        <ImageView
-            android:id="@+id/splash_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/splash_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/view_size_40"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/applogo" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/view_size_40"
+        app:srcCompat="@drawable/applogo" />
 
-        <TextView
-            android:id="@+id/txtlogindisc"
-            style="@style/TextAppearance.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/splash_logo"
-            android:layout_centerHorizontal="true"
+    <TextView
+        android:id="@+id/txtlogindisc"
+        style="@style/TextAppearance.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splash_logo"
+        android:layout_centerHorizontal="true"
+
             android:layout_marginTop="@dimen/dimen_20"
             android:gravity="center"
             android:text="@string/logindescription"
@@ -102,12 +102,27 @@
             android:layout_marginTop="@dimen/dimen_30"
             android:layout_marginRight="@dimen/dimen_10"
             android:background="@color/btn_bg"
-            android:gravity="center"
             android:text="@string/confirm"
+            android:gravity="center"
 
             android:textColor="@color/color_white"
             android:textSize="@dimen/text_16" />
 
+        <TextView
+            android:layout_height="@dimen/view_size_45"
+            android:layout_below="@+id/btnLogin"
+            android:id="@+id/btnLogigfdn"
+            style="@style/TextAppearance.Title"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:background="@color/btn_bg"
+            android:text="@string/confirm"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_16" />
 
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
