@@ -56,17 +56,13 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         }
 
         btnSubmit.throttleClick().subscribe() {
-
             val targetIntent = getTargetIntent(
-
                 if (dataManager.isLogin() == false)
                     LoginActivity::class.java
                 else DashBoardActivity::class.java
             )
             startActivity(targetIntent)
             finish()
-
-
         }.autoDispose(disposables)
     }
 
@@ -74,4 +70,9 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
         LanguageSelectionModel.getInstance(dataManager)
 
     override fun provideLayoutResource(): Int = R.layout.activity_launguage_selection
+
+
+    override fun onBackPressed() {
+       super.onBackPressed()
+    }
 }

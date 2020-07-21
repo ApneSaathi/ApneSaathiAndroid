@@ -14,6 +14,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -26,6 +27,7 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
@@ -64,6 +66,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         return view;
     }
 
+    fun String.isEmailValid(): Boolean {
+        return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
+            .matches()
+    }
+
     private fun bindview(view: View) {
         view.EditImageView.setOnClickListener {
             showGetImageDialog()
@@ -82,7 +89,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         view.TxtChangeLanguage.setOnClickListener {
             val intent = Intent(activity, LanguageSelectionActivity::class.java)
             startActivity(intent)
-            activity!!.finish()
+
         }
         view.TxtLogout.setOnClickListener {
             val intent = Intent(activity, LoginActivity::class.java)
@@ -91,7 +98,13 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             startActivity(intent)
 
         }
+        view.TxtMainSave.throttleClick().subscribe() {
+            if (view.EditEmail.text.toString().isEmailValid()) {
 
+            } else {
+                view.EditEmail.setError("Enter valid email")
+            }
+        }.autoDispose(disposables)
 
     }
 
@@ -225,22 +238,21 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         dialog!!.setCancelable(true)
         dialog!!.setContentView(R.layout.get_images_dialog)
         dialog!!.TxtGetFromcamera.setOnClickListener {
-            Toast.makeText(context,"Working progress",Toast.LENGTH_LONG).show()
-            dialog!!.dismiss()
-//            capturePhoto()
+//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
+//            dialog!!.dismiss()
+            capturePhoto()
         }
         dialog!!.TxtCancel.setOnClickListener {
             dialog!!.dismiss()
         }
 
         dialog!!.TxtGetFromGallery.setOnClickListener {
-//            fromGallery()
-            Toast.makeText(context,"Working progress",Toast.LENGTH_LONG).show()
-            dialog!!.dismiss()
+            fromGallery()
+//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
+//            dialog!!.dismiss()
         }
         dialog!!.show()
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

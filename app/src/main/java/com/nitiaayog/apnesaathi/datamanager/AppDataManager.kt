@@ -5,15 +5,18 @@ import androidx.lifecycle.LiveData
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
 import com.nitiaayog.apnesaathi.database.dao.CallDataDao
+import com.nitiaayog.apnesaathi.database.dao.GrievanceTrackingDao
 import com.nitiaayog.apnesaathi.database.dao.GrievancesDao
 import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
@@ -47,6 +50,7 @@ class AppDataManager private constructor(
 
     private val callsDataDao: CallDataDao by lazy { dbManager.provideCallDataDao() }
     private val grievancesDao: GrievancesDao by lazy { dbManager.provideGrievancesDao() }
+    private val grievancesTrackingDao: GrievanceTrackingDao by lazy { dbManager.provideGrievancesTrackingDao() }
     private val syncGrievancesDao: SyncSrCitizenGrievancesDao by lazy {
         dbManager.provideSrCitizenGrievancesDao()
     }
@@ -62,6 +66,9 @@ class AppDataManager private constructor(
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
         apiRequest.getCallDetails(details)
 
+    override fun getGrievanceTrackingDetails(details: JsonObject): Single<GrievanceRespData> =
+        apiRequest.getGrievanceTrackingDetails(details)
+
     override fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo> =
         apiRequest.registerSeniorCitizen(srDetails)
 
@@ -71,24 +78,30 @@ class AppDataManager private constructor(
     override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
         apiRequest.getSeniorCitizenDetails(srDetails)
 
+    override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
+        apiRequest.updateGrievanceDetails(grDetails)
+
     // Database Access
     // => Table : call_details
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("null", ""))
+        callsDataDao.getAllCallsList(arrayOf("1","null", "")) //Null and empty should be removed
 
     override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4"))
+        callsDataDao.getAllCallsList(arrayOf("2", "3", "4", "5", "6"))
 
     override fun getCompletedCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("5"))
+        callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5"))
+        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10","null", ""))  //Null and empty should be removed
 
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
     override fun updateCallStatus(callStatus: String) = callsDataDao.update(callStatus)
     override fun updateCallData(callData: CallData): Long = callsDataDao.update(callData)
+
+    override fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>) =
+        grievancesTrackingDao.insertAll(grievanceTracking)
 
     // => Table : grievances
     override fun insertGrievance(grievance: SrCitizenGrievance): Long =
@@ -143,6 +156,22 @@ class AppDataManager private constructor(
     override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
+    override fun clearPreviousData() = grievancesDao.deletePreviousData()
+
+    override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getAllGrievances()
+
+    override fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getGrievancesWithStatus("UNDER REVIEW")
+
+    override fun getPendingGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getGrievancesWithStatus("RAISED")
+
+    override fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>> =
+        grievancesTrackingDao.getGrievancesWithStatus("RESOLVED")
+
+    override fun clearPreviousTrackingData() =  grievancesTrackingDao.deletePreviousGrievanceData()
+
     override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
 
@@ -167,6 +196,10 @@ class AppDataManager private constructor(
     override fun getUserName(): String = preferences.getUserName()
 
     override fun setUserName(userName: String) = preferences.setUserName(userName)
+
+    override fun getGender() = preferences.getGender()
+
+    override fun setGender(gender: String) = preferences.setGender(gender)
 
     override fun getProfileImage(): String = preferences.getProfileImage()
 

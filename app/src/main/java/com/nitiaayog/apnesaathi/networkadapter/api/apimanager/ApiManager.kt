@@ -3,12 +3,11 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apimanager
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserve
 import com.nitiaayog.apnesaathi.base.extensions.rx.subscribeAndObserveWithDelaySubscription
-import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.LoginRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import io.reactivex.Single
@@ -36,6 +35,9 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
         apiClient.getCallDetails(details).subscribeAndObserveWithDelaySubscription()
 
+    override fun getGrievanceTrackingDetails(details: JsonObject): Single<GrievanceRespData> =
+        apiClient.getGrievanceTrackingDetails(details).subscribeAndObserveWithDelaySubscription()
+
     override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
         apiClient.saveSrCitizenFeedback(srCitizenFeedback)
             .subscribeAndObserveWithDelaySubscription()
@@ -45,4 +47,8 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
         apiClient.getSeniorCitizenDetails(srDetails).subscribeAndObserveWithDelaySubscription()
+
+    override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
+        apiClient.updateGrievanceDetails(grDetails).subscribeAndObserve()
+
 }

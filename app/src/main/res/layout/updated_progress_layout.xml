@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="56dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <TextView
+
+        android:id="@+id/textViewTwitter"
+        style="@style/TextAppearance.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/update_issue_progress"
+        android:textColor="@color/color_white"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dimen_10"
+        android:paddingRight="@dimen/dimen_10">
+
+
+        <TextView
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimen_10"
+            android:drawablePadding="@dimen/dimen_5"
+            android:drawableEnd="@drawable/ic_astrix_icon"
+            android:paddingTop="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:paddingBottom="@dimen/dimen_5"
+            android:text="@string/status"
+            android:textColor="@color/color_black" />
+
+        <AutoCompleteTextView
+            android:id="@+id/actGrievanceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_size_48"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:background="@drawable/bg_rectangle_border_form"
+            android:completionThreshold="0"
+            android:cursorVisible="false"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:focusable="false"
+            android:hint="@string/select_status"
+            android:inputType="none|textNoSuggestions"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textColor="@color/color_dark_grey_txt"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:paddingLeft="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
+            android:drawablePadding="@dimen/dimen_5"
+            android:drawableEnd="@drawable/ic_astrix_icon"
+            android:paddingBottom="@dimen/dimen_5"
+            android:text="@string/description"
+            android:textColor="@color/color_black" />
+
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:background="@drawable/bg_rectangle_border_form"
+            android:gravity="start"
+            android:hint="@string/update_the_progress_happen"
+            android:lines="3"
+            android:padding="@dimen/dimen_7"
+            android:textColorHint="@color/gray_background"
+            android:textSize="@dimen/text_13" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:layout_marginBottom="@dimen/dimen_20"
+            android:paddingTop="@dimen/dimen_15"
+            android:paddingBottom="@dimen/dimen_15">
+
+            <TextView
+                android:id="@+id/txtProgressCancel"
+                style="@style/TextAppearance.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:layout_toLeftOf="@id/txtProgressUpdate"
+                android:paddingLeft="@dimen/dimen_20"
+                android:paddingTop="@dimen/dimen_7"
+                android:paddingRight="@dimen/dimen_20"
+                android:paddingBottom="@dimen/dimen_7"
+                android:text="@string/cancel"
+                android:textColor="@color/color_black" />
+
+            <RelativeLayout
+                android:id="@+id/txtProgressUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_rectangle_border_form">
+
+                <TextView
+                    style="@style/TextAppearance.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingTop="@dimen/dimen_7"
+                    android:paddingRight="@dimen/dimen_20"
+                    android:paddingBottom="@dimen/dimen_7"
+                    android:text="@string/update"
+                    android:textColor="@color/color_white" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

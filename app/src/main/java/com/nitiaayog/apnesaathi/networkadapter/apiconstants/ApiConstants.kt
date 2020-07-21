@@ -2,10 +2,10 @@ package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
 object ApiConstants {
 
-    const val STATUS_EXCEPTION: Int = -1
-    const val STATUS_ERROR: Int = 0
-
     const val StatusCode: String = "statusCode"
+    const val Message: String = "message"
+    const val VolunteerAssignment: String = "volunteerassignment"
+    const val LoginOtp: String = "loginOTP"
     const val UserId: String = "user_id"
     const val UserName: String = "user_name"
     const val Block: String = "block"
@@ -17,6 +17,7 @@ object ApiConstants {
     const val UserInfo: String = "user_info"
 
     const val Volunteer: String = "volunteer"
+    const val GrievanceTracking: String = "greivanceTrackingList"
     const val FirstName: String = "firstName"
     const val Address: String = "address"
     const val VolunteerId: String = "idvolunteer"
@@ -45,9 +46,13 @@ object ApiConstants {
     const val SrCitizenCallStatusSubCode: String = "callstatussubCode"
     const val SrCitizenTalkedWith: String = "talkedwith"
     const val Remark: String = "remarks"
+    const val LoggedDateTime: String = "loggeddateTime"
 
     const val GrievanceId: String = "idgrevance"
+    const val GrievanceType: String = "greivanceType"
+    const val GrievanceStatus: String = "status"
     const val IsDiabetic: String = "diabetic"
+    const val Description: String = "description"
     const val IsBloodPressure: String = "bloodpressure"
     const val LungAilment: String = "lungailment"
     const val CancerOrMajorSurgery: String = "cancer_or_majorsurgery"
@@ -73,7 +78,15 @@ object ApiConstants {
     const val IsEmergencyServicesRequired: String = "isemergencyservicerequired"
     const val ImpRemarkInfo: String = "remakrsimportantinfo"
     const val CreatedDate: String = "loggeddattime"
-
+    const val GrievanceCreatedDate: String = "createdDate"
+    const val Priority: String = "priority"
+    const val LastUpdateOn: String = "lastUpdatedOn"
+    const val UnderReviewDate: String = "underReviewDate"
+    const val ResolvedDate: String = "resolvedDate"
+    const val ReviewRemarks: String = "underReviewRemarks"
+    const val ResolvedRemarks: String = "resolvedRemarks"
     const val phoneNo: String = "phoneNo"
+
+    const val GrievanceTrackingId:String ="trackingId"
 
 }

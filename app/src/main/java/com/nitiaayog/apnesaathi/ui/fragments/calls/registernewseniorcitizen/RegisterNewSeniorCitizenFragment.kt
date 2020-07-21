@@ -1,9 +1,13 @@
 package com.nitiaayog.apnesaathi.ui.fragments.calls.registernewseniorcitizen
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.nitiaayog.apnesaathi.R
@@ -11,6 +15,7 @@ import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -22,7 +27,8 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private var selectedGender: String = ""
     private var selectedDistrict: String = ""
     private var selectedState: String = ""
-
+    private var selectedStatePos: Int = -1
+    private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_saving_data)
     }
@@ -38,6 +44,10 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         initAutoCompleteTextView()
         initClicks()
         initTextWatcher()
+    }
+
+    fun setNewCitizenRegisterListener(reloadApiRequiredListener: ReloadApiRequiredListener){
+        this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 
     override fun provideViewModel(): RegisterSeniorCitizenViewModel =
@@ -85,10 +95,28 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
         actState.setOnItemClickListener { _, _, position, _ ->
             selectedState = stateList[position]
+            selectedStatePos = position
             viewModel.setState(selectedState)
+            setDistrictAdapter()
         }
 
-        val districtsList = resources.getStringArray(R.array.districts_array)
+
+    }
+
+    private fun setDistrictAdapter() {
+        var districtsList = resources.getStringArray(R.array.districts_array)
+        if (selectedStatePos != -1) {
+            when (selectedStatePos) {
+                0 -> districtsList = resources.getStringArray(R.array.district0)
+                1 -> districtsList = resources.getStringArray(R.array.district1)
+                2 -> districtsList = resources.getStringArray(R.array.district2)
+                3 -> districtsList = resources.getStringArray(R.array.district3)
+                4 -> districtsList = resources.getStringArray(R.array.district4)
+                5 -> districtsList = resources.getStringArray(R.array.district5)
+                6 -> districtsList = resources.getStringArray(R.array.district6)
+                7 -> districtsList = resources.getStringArray(R.array.district7)
+            }
+        }
         val districtsAdapter =
             ArrayAdapter(activity!!, R.layout.item_layout_dropdown_menu, districtsList)
         actDistrict.threshold = 0
@@ -104,6 +132,43 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     }
 
     private fun initClicks() {
+
+        etContactNumber.setFilters(arrayOf<InputFilter>(InputFilter.LengthFilter(10)))
+
+        etAge.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etAge.length() == 1) {
+                    tvAgeError.visibility = View.VISIBLE
+                }
+
+                if (etAge.length() == 2) {
+                    if (etAge.text.toString().trim().toInt() < 60) {
+                        tvAgeError.visibility = View.VISIBLE
+                    }
+                }
+
+                if (etAge.length() == 3) {
+                    when {
+                        etAge.text.toString().trim().toInt() < 60 -> {
+                            tvAgeError.visibility = View.VISIBLE
+                        }
+                        etAge.text.toString().trim().toInt() > 110 -> {
+                            tvAgeError.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
+
+
+
         actGender.throttleClick().subscribe {
             actGender.showDropDown()
             updateDropDownIndicator(actGender, R.drawable.ic_arrow_up)
@@ -117,15 +182,23 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }.autoDispose(disposables)
 
         actDistrict.throttleClick().subscribe {
-            actDistrict.showDropDown()
-            updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
-            if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility = View.GONE
+            if (selectedStatePos != -1) {
+                actDistrict.showDropDown()
+                updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
+                if (tvDistrictError.visibility == View.VISIBLE) tvDistrictError.visibility =
+                    View.GONE
+            } else {
+                Toast.makeText(context, getString(R.string.select_a_state), Toast.LENGTH_SHORT)
+                    .show()
+            }
         }.autoDispose(disposables)
 
         tvRegister.throttleClick().subscribe {
             if (validateFields()) viewModel.registerNewSeniorCitizen(context!!)
         }.autoDispose(disposables)
-        tvCancel.throttleClick().subscribe {}.autoDispose(disposables)
+        tvCancel.throttleClick().subscribe {
+            fragmentManager?.popBackStack()
+        }.autoDispose(disposables)
     }
 
     private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =
@@ -136,6 +209,12 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
             tvNameError.visibility = View.VISIBLE
             return false
         } else if (etAge.text.isEmpty()) {
+            tvAgeError.visibility = View.VISIBLE
+            return false
+        } else if (etAge.text.toString().toInt() < 60) {
+            tvAgeError.visibility = View.VISIBLE
+            return false
+        } else if (etAge.text.toString().toInt() > 110) {
             tvAgeError.visibility = View.VISIBLE
             return false
         } else if (selectedGender.isEmpty()) {
@@ -220,10 +299,20 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     progressDialog.dismiss()
+
                     resetRegisterNewSrCitizenLayout()
+                    reloadApiRequiredListener.onReloadRequired()
                     BaseUtility.showAlertMessage(
-                        context!!, R.string.success, R.string.sr_citizen_registered_successfully
-                    )
+                        activity!!, R.string.success, R.string.sr_citizen_registered_successfully,
+                        R.string.okay
+                    ) { dialog, _ ->
+                        dialog.dismiss()
+                        fragmentManager?.popBackStack()
+                    }
+
+//                    BaseUtility.showAlertMessage(
+//                        context!!, R.string.success, R.string.sr_citizen_registered_successfully
+//                    )
                 }
             }
         })

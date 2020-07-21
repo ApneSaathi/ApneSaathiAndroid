@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 
 class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
@@ -45,14 +46,15 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
 
     inner class TodaysCallsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        val civGender: CircleImageView = itemView.civGender
-        val tvName: TextView = itemView.tvName
-        val tvAddress: TextView = itemView.tvAddress
+        private val civGender: CircleImageView = itemView.civGender
+        private val tvName: TextView = itemView.tvName
+        private val tvAddress: TextView = itemView.tvAddress
+        private val tvDate: TextView = itemView.tvDate
 
         init {
             tvAddress.isSelected = true
 
-            itemView.constraintLayout.setOnClickListener(this)
+//            itemView.constraintLayout.setOnClickListener(this)
             itemView.ivCall.setOnClickListener(this)
             itemView.ivMoreInfo.setOnClickListener(this)
         }
@@ -64,11 +66,12 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
             civGender.setImageResource(
                 if (callData.gender == "M") R.drawable.ic_male_user else R.drawable.ic_female_user
             )
+            tvDate.text = BaseUtility.getFormattedDate(callData.loggedDateTime?:"")
         }
 
         override fun onClick(view: View) {
             when (view.id) {
-                R.id.constraintLayout, R.id.ivCall -> {
+                R.id.ivCall -> {
                     if (::itemClickListener.isInitialized)
                         itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
                 }

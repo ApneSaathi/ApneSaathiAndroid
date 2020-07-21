@@ -22,6 +22,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
+import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -159,7 +160,6 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
                 txt_status.text = getString(R.string.completed)
             }
         }
-        txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
         txt_call_response.text = callData?.talkedWith
 
         txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout ?: "--"
@@ -208,19 +208,23 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             "2" -> {
                 tv_quarantine_status.text = getText(R.string.govt_quarantine)
             }
-            else -> {
+            "3" -> {
                 tv_quarantine_status.text = getText(R.string.hospitalized)
+            }
+            else -> {
+                tv_quarantine_status.text = getText(R.string.no_problems)
             }
         }
 
         if (srCitizenGrievance.emergencyServiceRequired == "N") {
             txt_grievance_priority.text = getString(R.string.no)
-            txt_escalation.text = getString(R.string.no)
+            txt_escalation.text = "--"
         } else {
             txt_grievance_priority.text = getString(R.string.yes)
             txt_escalation.text = getString(R.string.yes)
         }
         if (srCitizenGrievance.lackOfEssentialServices == "Yes") {
+            txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
             txt_grievance.text = getText(R.string.yes)
             var grievanceCategory = ""
             if (srCitizenGrievance.foodShortage != "4") {
@@ -260,8 +264,9 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_grievance.text = getString(R.string.no)
             txt_grievance_category.text = getString(R.string.not_applicable)
             txt_issue_raised.text = getString(R.string.no_issues)
+            txt_issue_raised_date.text ="--"
         }
-        txt_grievance_desc.text = "--"
+        txt_grievance_desc.text = srCitizenGrievance.description
         txt_other_problem.text = srCitizenGrievance.impRemarkInfo ?: "--"
 
     }
@@ -322,8 +327,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         img_call_button.setOnClickListener { prepareToCallPerson() }
         txt_edit.setOnClickListener {
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
+            dataManager.setUserName(callData?.srCitizenName ?: "")
+            dataManager.setGender(callData?.gender ?: "")
             intent.putExtra(CALL_ID, callData?.callId)
-            startActivity(intent)
+            activity!!.startActivityForResult(intent, REQUEST_CODE)
         }
     }
 

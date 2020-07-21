@@ -18,6 +18,7 @@ import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.utility.NetworkProvider
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_senior_citizen_feedback_form.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -62,7 +63,9 @@ class SyncDataService : JobService() {
                             startSyncing(processData)
                         }
                     }
-                    getFetchData()
+                    if(processData.isNotEmpty()){
+                        getFetchData()
+                    }
                 }
             }
         } else println("\n$TAG No Internet - $dateTime")
@@ -88,14 +91,14 @@ class SyncDataService : JobService() {
         val params = JsonObject()
         params.addProperty(ApiConstants.CallId, grievance.callId!!)
         params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
-        params.addProperty(ApiConstants.SrCitizenCallStatusSubCode, grievance.callStatusSubCode)
 
-        val callStatus = if (grievance.callStatusSubCode == "5") "2" else "1"
-        params.addProperty(ApiConstants.SrCitizenCallStatusCode, callStatus)
+        params.addProperty(ApiConstants.SrCitizenCallStatusCode, grievance.callStatusSubCode)
 
         params.addProperty(ApiConstants.SrCitizenTalkedWith, grievance.talkedWith)
+        params.addProperty(ApiConstants.SrCitizenName, grievance.srCitizenName)
+        params.addProperty(ApiConstants.SrCitizenGender, grievance.gender)
 
-        if (callStatus == "1") return params
+        if (grievance.callStatusSubCode != "10") return params
 
         val arraySubParams = JsonObject()
         arraySubParams.addProperty(ApiConstants.CallId, grievance.callId)
@@ -148,7 +151,9 @@ class SyncDataService : JobService() {
         arraySubParams.addProperty(
             ApiConstants.IsEmergencyServicesRequired, grievance.emergencyServiceRequired
         )
-
+        arraySubParams.addProperty(
+            ApiConstants.Description, grievance.description
+        )
         val jsonArray = JsonArray()
         jsonArray.add(arraySubParams)
 
@@ -162,7 +167,8 @@ class SyncDataService : JobService() {
             (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
-        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        callData.forEach { data -> grievances.addAll(data.medicalGrievance!!)
+        }
         return grievances
     }
 
@@ -186,6 +192,7 @@ class SyncDataService : JobService() {
                                 == null
                             ) {
                                 grievance.id = it.grievanceId.toInt()
+                                grievance.deleteAfterSync = 1
                                 dataManager.insertGrievance(grievance)
                             } else
                                 dataManager.updateGrievance(grievance)
@@ -214,6 +221,7 @@ class SyncDataService : JobService() {
                     CoroutineScope(Dispatchers.IO).launch {
                         io {
                             val data = it.getData()
+                            dataManager.clearPreviousData()
                             dataManager.insertCallData(data.callsList)
 
                             val grievances: List<SrCitizenGrievance> =
@@ -230,5 +238,25 @@ class SyncDataService : JobService() {
             println("$TAG -- Error -- data fetching")
             println("$TAG -- Error -- ${it?.message}")
         }).autoDispose(disposables)
+//        dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+//            println("\n\n$TAG -- Start fetching grievances data")
+//        }.subscribe({
+//            try {
+//                if (it.getStatus() == "0") {
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        io {
+//                            val data = it.getTrackingList()
+//                            dataManager.insertGrievanceTrackingList(it.getTrackingList())
+//                            println("$TAG -- Fetched data successfully")
+//                        }
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                println("$TAG ${e.message}")
+//            }
+//        }, {
+//            println("$TAG -- Error -- data fetching")
+//            println("$TAG -- Error -- ${it?.message}")
+//        }).autoDispose(disposables)
     }
 }

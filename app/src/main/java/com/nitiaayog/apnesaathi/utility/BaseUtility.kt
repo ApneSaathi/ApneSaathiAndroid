@@ -8,6 +8,7 @@ import android.util.Patterns
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import com.nitiaayog.apnesaathi.R
+import org.threeten.bp.format.DateTimeFormatter
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,7 +29,13 @@ object BaseUtility {
         context.startActivity(Intent(Intent.ACTION_VIEW).apply {
             this.data = Uri.parse(url)
         })
-
+    fun getFormattedDate(date: String): String {
+        if(date.isEmpty()) return ""
+        val input = DateTimeFormatter.ofPattern(FORMAT_SERVER_DATE_TIME)
+        val output = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
+        val fa = input.parse(date)
+        return output.format(fa)
+    }
     fun dateTimeFormatConversion(date: String, inputFormat: String): Date {
         try {
             val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
@@ -92,7 +99,7 @@ object BaseUtility {
         context: Context, @StringRes title: Int, @StringRes message: Int,
         @StringRes positiveTitle: Int = R.string.okay,
         onPositiveBtnClick: (dialog: DialogInterface, which: Int) -> Unit
-    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
+    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title).setCancelable(false)
         .setMessage(message).setPositiveButton(positiveTitle, onPositiveBtnClick).show()
 
     fun showAlertMessage(
@@ -121,7 +128,7 @@ object BaseUtility {
         @StringRes positiveTitle: Int = R.string.yes, @StringRes negativeTitle: Int = R.string.no,
         onPositiveBtnClick: (dialog: DialogInterface, which: Int) -> Unit,
         onNegativeBtnClick: (dialog: DialogInterface, which: Int) -> Unit
-    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
+    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title).setCancelable(false)
         .setMessage(message)
         .setPositiveButton(positiveTitle, onPositiveBtnClick)
         .setNegativeButton(negativeTitle, onNegativeBtnClick)

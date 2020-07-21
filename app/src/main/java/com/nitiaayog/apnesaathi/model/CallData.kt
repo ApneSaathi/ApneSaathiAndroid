@@ -132,6 +132,13 @@ class CallData {
         set(value) {
             field = value ?: ""
         }
+    @ColumnInfo(name = Columns.LoggedDateTime, defaultValue = "")
+    @SerializedName(ApiConstants.LoggedDateTime)
+    var loggedDateTime: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
 
     //@TypeConverters(MedicalGrievancesConverter::class)
     @Ignore

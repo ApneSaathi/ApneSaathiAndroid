@@ -2,6 +2,7 @@ package com.nitiaayog.apnesaathi.datamanager
 
 import androidx.lifecycle.LiveData
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
@@ -19,6 +20,7 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getAllCallsList(): LiveData<MutableList<CallData>>
 
     fun insertCallData(callData: List<CallData>)
+    fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>)
     fun getCallDetailFromId(id: Int): CallData
     fun updateCallStatus(callStatus: String)
     fun updateCallData(callData: CallData): Long
@@ -32,9 +34,17 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun deleteGrievance(grievance: SrCitizenGrievance)
     suspend fun updateGrievance(grievance: SrCitizenGrievance)
 
+    // Table : grievance_Tracking
+    fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>>
+    fun getPendingGrievances(): LiveData<MutableList<GrievanceData>>
+    fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>>
+    fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>>
+    fun clearPreviousTrackingData()
+
     // Table : sync_grievances_data
     fun getGrievancesToSync(): List<SyncSrCitizenGrievance>?
     suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance)
     fun delete(syncData: SyncSrCitizenGrievance)
     fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>>
+    fun clearPreviousData()
 }

@@ -93,10 +93,36 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun getObservableDataStream() {
-        viewModel.getCallsList().removeObservers(viewLifecycleOwner)
-        viewModel.getCallsList().observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
-        })
+        when (typeOfData) {
+            getString(R.string.pending_calls) -> {
+                viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
+                viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
+                    adapter.setData(it)
+                    adapter.notifyDataSetChanged()
+                })
+            }
+            getString(R.string.follow_up) -> {
+                viewModel.getFollowupCalls().removeObservers(viewLifecycleOwner)
+                viewModel.getFollowupCalls().observe(viewLifecycleOwner, Observer {
+                    adapter.setData(it)
+                    adapter.notifyDataSetChanged()
+                })
+            }
+            getString(R.string.attended_calls) -> {
+                viewModel.getCompletedCalls().removeObservers(viewLifecycleOwner)
+                viewModel.getCompletedCalls().observe(viewLifecycleOwner, Observer {
+                    adapter.setData(it)
+                    adapter.notifyDataSetChanged()
+                })
+            }
+            else -> {
+                viewModel.getCallsList().removeObservers(viewLifecycleOwner)
+                viewModel.getCallsList().observe(viewLifecycleOwner, Observer {
+                    adapter.setData(it)
+                    adapter.notifyDataSetChanged()
+                })
+            }
+        }
+
     }
 }

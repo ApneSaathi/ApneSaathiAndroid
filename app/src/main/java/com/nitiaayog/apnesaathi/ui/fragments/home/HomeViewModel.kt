@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
+import com.nitiaayog.apnesaathi.database.dao.GrievancesDao_Impl
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
@@ -38,10 +40,15 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.getCompletedCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
 
+    private val pendingGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getPendingGrievances()
+    private val inProgressGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getInProgressGrievances()
+    private val resolvedGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getResolvedGrievances()
+
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getGrievances()
 
-    private var grievancesFromCall: MutableList<SrCitizenGrievance> = mutableListOf()
+    private val grievancesTrackingList: LiveData<MutableList<GrievanceData>> =
+        dataManager.getAllTrackingGrievances()
 
     override fun onCleared() {
         instance?.let { instance = null }
@@ -53,7 +60,13 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             (it.medicalGrievance != null && it.medicalGrievance!!.size > 0)
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
-        callData.forEach { grievances.addAll(it.medicalGrievance!!) }
+        callData.forEach { data ->
+            data.medicalGrievance?.forEach {
+                it.srCitizenName = data.srCitizenName
+                it.gender = data.gender
+            }
+            grievances.addAll(data.medicalGrievance!!)
+        }
         return grievances
     }
 
@@ -67,7 +80,13 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     fun getCompletedCalls(): LiveData<MutableList<CallData>> = completedCallsList
 
+    fun getPendingGrievances():LiveData<MutableList<GrievanceData>> = pendingGrievance
+    fun getInProgressGrievances():LiveData<MutableList<GrievanceData>> = inProgressGrievance
+    fun getResolvedGrievances():LiveData<MutableList<GrievanceData>> = resolvedGrievance
+
     fun getGrievancesList(): LiveData<MutableList<SrCitizenGrievance>> = grievancesList
+
+    fun getGrievancesTrackingList(): LiveData<MutableList<GrievanceData>> = grievancesTrackingList
 
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
@@ -82,6 +101,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                         viewModelScope.launch {
                             io {
                                 val data = it.getData()
+                                dataManager.clearPreviousData()
                                 dataManager.insertCallData(data.callsList)
 
                                 val grievances: List<SrCitizenGrievance> =
@@ -102,5 +122,37 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiLoadDashboard, it)
             }).autoDispose(disposables)
         }
+    }
+
+    fun getGrievanceTrackingList(context: Context) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
+            val params = JsonObject()
+            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+            dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiGrievanceTracking)
+            }.subscribe({
+                try {
+                    if (it.getStatus() == "0") {
+                        viewModelScope.launch {
+                            io {
+                                dataManager.clearPreviousTrackingData()
+                                dataManager.insertGrievanceTrackingList(it.getTrackingList())
+                            }
+                            loaderObservable.value = NetworkRequestState.SuccessResponse(
+                                ApiProvider.ApiGrievanceTracking, it
+                            )
+                        }
+                    } else loaderObservable.value =
+                        NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking)
+                } catch (e: Exception) {
+                    println("$TAG ${e.message}")
+                }
+            }, {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking, it)
+            }).autoDispose(disposables)
+        }
+
     }
 }

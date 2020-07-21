@@ -33,6 +33,20 @@ open class SrCitizenGrievance {
             field = value ?: -1
         }
 
+    @ColumnInfo(name = Columns.Name, defaultValue = "")
+    var srCitizenName: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.Gender, defaultValue = "")
+    var gender: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
     @ColumnInfo(name = Columns.VolunteerId, defaultValue = "-1")
     @SerializedName(ApiConstants.VolunteerId)
     var volunteerId: String? = ""
@@ -161,6 +175,14 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.Description, defaultValue = "")
+    @SerializedName(ApiConstants.Description)
+    var description: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
     @ColumnInfo(name = Columns.FoodShortage, defaultValue = "-1")
     @SerializedName(ApiConstants.FoodShortage)
     var foodShortage: String? = ""
@@ -241,6 +263,13 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.DeleteIDAfterSync, defaultValue = "-1")
+    var deleteAfterSync: Int? = -1
+        get() = field ?: -1
+        set(@NonNull value) {
+            field = value ?: -1
+        }
+
     @TypeConverters(DateTimeConverter::class)
     @ColumnInfo(name = Columns.CreatedDate, defaultValue = "-1")
     @SerializedName(ApiConstants.CreatedDate)
@@ -250,7 +279,7 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    var status: String = GrievancesAdapter.GRIEVANCE_PENDING
+    var status: String = GrievancesAdapter.GRIEVANCE_RAISED
 
     fun createCopy(): SrCitizenGrievance {
         val json = Gson().toJson(this)

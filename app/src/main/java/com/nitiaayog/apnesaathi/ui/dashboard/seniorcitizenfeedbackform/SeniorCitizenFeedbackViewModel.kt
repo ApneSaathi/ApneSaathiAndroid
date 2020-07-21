@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
+import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
@@ -334,16 +336,57 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     fun saveSrCitizenFeedback(
         context: Context, params: JsonObject, syncData: SyncSrCitizenGrievance
     ) {
+//        val grievanceList: MutableList<GrievanceData> = mutableListOf()
+//        val grievanceEssential = GrievanceData()
+//        if (syncData.lackOfEssentialServices == "Yes") {
+//            grievanceEssential.callId = syncData.callId
+//            grievanceEssential.gender = syncData.gender
+//            grievanceEssential.grievanceId = syncData.id
+//            grievanceEssential.srCitizenName = syncData.srCitizenName
+//            grievanceEssential.status = "RAISED"
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_food) }) {
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_food)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_medicine) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_medicine)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_banking_service) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_banking_service)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_utilities) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_utilities)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_hygine) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_hygine)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_safety) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_safety)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.lack_of_access_emergency) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_access_emergency)
+//                grievanceList.add(grievanceEssential)
+//            }
+//            if (getComplaints().any { it == context.getString(R.string.phone_and_service) }){
+//                grievanceEssential.grievanceType = context.getString(R.string.phone_and_service)
+//                grievanceList.add(grievanceEssential)
+//            }
+
+//        }
         viewModelScope.launch {
             io {
-                if (::callData.isInitialized && ((callData.callStatusSubCode != callStatus) ||
-                            (callData.talkedWith != talkedWith))
-                ) {
-                    callData.callStatusSubCode = callStatus
+                if (::callData.isInitialized && callData.talkedWith != talkedWith)
+                {
+                    callData.callStatusCode = callStatus
                     callData.talkedWith = syncData.talkedWith
                     dataManager.updateCallData(callData)
                 }
-                if (callStatus == "5") {
+                if (callStatus == "10") {
                     /*if (callStatus == "5") {
                         dataManager.insert(syncData)
 
@@ -369,11 +412,12 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 
                         updateData.id = syncData.id
                         updateData.createdDate = syncData.createdDate
-
+                        updateData.deleteAfterSync = 1
                         //dataManager.updateCallStatus(callStatus)
                         dataManager.insertGrievance(updateData)
-                    } else
+                    } else {
                         dataManager.updateGrievance(updateData)
+                    }
 
                 } //else
                 //dataManager.updateCallStatus(callStatus)
@@ -414,6 +458,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                                         ) {
                                             dataManager.delete(syncData)
                                             syncData.id = it.grievanceId.toInt()
+                                            syncData.deleteAfterSync =1
                                             dataManager.insertGrievance(syncData)
                                         } /*else
                                             dataManager.updateGrievance(syncData)*/

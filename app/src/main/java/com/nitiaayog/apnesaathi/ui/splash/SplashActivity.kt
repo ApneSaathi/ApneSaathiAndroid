@@ -26,8 +26,6 @@ class SplashActivity : AppCompatActivity() {
             .subscribe { navigateToNextActivity() }
     }
 
-    override fun onBackPressed() {
-    }
 
     override fun onDestroy() {
         disposable?.run {

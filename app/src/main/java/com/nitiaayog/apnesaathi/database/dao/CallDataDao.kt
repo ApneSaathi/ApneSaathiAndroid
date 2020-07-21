@@ -9,7 +9,7 @@ import com.nitiaayog.apnesaathi.model.CallData
 @Dao
 interface CallDataDao {
 
-    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallSubStatus} IN (:status)")
+    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallStatus} IN (:status) ORDER BY ${Columns.LoggedDateTime} DESC")
     fun getAllCallsList(status: Array<String>): LiveData<MutableList<CallData>>
 
     @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} LIMIT :dataCount")
@@ -27,7 +27,7 @@ interface CallDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun update(callData: CallData): Long
 
-    @Query("UPDATE ${Tables.TABLE_CALL_DETAILS} SET ${Columns.CallSubStatus}=:callStatus")
+    @Query("UPDATE ${Tables.TABLE_CALL_DETAILS} SET ${Columns.CallStatus}=:callStatus")
     fun update(callStatus: String)
 
     @Transaction

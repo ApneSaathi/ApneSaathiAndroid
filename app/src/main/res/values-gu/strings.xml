@@ -100,7 +100,7 @@
     <string name="address_bold">સરનામું: </string>
     <string name="unattended">અનુચિત</string>
     <string name="edit">સંપાદિત કરો</string>
-    <string name="app_bar_title">વપરાશકર્તા વિગતો</string>
+    <string name="app_bar_title">Sr. Citizen details</string>
     <string name="txtSubmit">સબમિટ કરો</string>
     <string name="call_status_1">કૉલ સ્થિતિ</string>
     <string name="all_calls">બધા કોલ્સ</string>
@@ -115,6 +115,7 @@
     <string name="menu_home">મુખ્યપૃષ્ઠ</string>
     <string name="pending_calls_count">બાકી કૉલ(%s)</string>
     <string name="grievances_count">ફરિયાદો(%s)</string>
+    <string name="issues_count">Issues(%s)</string>
     <string name="follow_up_count">પાછા કૉલ કરો(%s)</string>
     <string name="follow_up">પાછા કૉલ કરો</string>
     <string name="attended_calls_count">પ્રસ્તુત કૉલ(%s)</string>
@@ -263,6 +264,51 @@
         <item>ગુજરાત</item>
         <item>ઝારખંડ</item>
     </string-array>
+    <string-array name="district0">
+        <item>બકસા</item>
+        <item>બાર્પેટા</item>
+        <item>દારંગ</item>
+        <item>ધુબરી</item>
+        <item>ગોલપરા</item>
+        <item>હીલાકાંડી</item>
+    </string-array>
+    <string-array name="district1">
+        <item>અરરિયા</item>
+        <item>બેગુસરાય</item>
+        <item>સીતામhiી</item>
+        <item>કતિહાર</item>
+        <item>શેઠપુરા</item>
+    </string-array>
+    <string-array name="district2">
+        <item>બરવાની</item>
+        <item>દામોહ</item>
+        <item>ખંડવા</item>
+        <item>સિંગરૌલી</item>
+        <item>વિદિશા</item>
+    </string-array>
+    <string-array name="district3">
+        <item>બલરામપુર</item>
+        <item>બેહરિચ</item>
+        <item>ચિત્રકૂટ</item>
+        <item>શ્રાવસ્તિ</item>
+        <item>સોનભદ્ર</item>
+    </string-array>
+    <string-array name="district4">
+        <item>બરાન</item>
+        <item>જેસલમેર</item>
+    </string-array>
+    <string-array name="district5">
+        <item>અમરાવતી</item>
+        <item>ગડચિરોલી</item>
+        <item>નંદુરબાર</item>
+    </string-array>
+    <string-array name="district6">
+        <item>નર્મદા</item>
+    </string-array>
+    <string-array name="district7">
+        <item>પાકુર</item>
+        <item>સાહિબગંજ</item>
+    </string-array>
     <string-array name="districts_array">
         <item>બાર્પેટા</item>
         <item>બાસ્કા</item>
@@ -296,12 +342,21 @@
         <item>સુરેન્દ્રનગર</item>
     </string-array>
     <string-array name="call_status">
-        <item>કોઈ જવાબ નથી</item>
-        <item>ફોન લેવામાં આવ્યો નથી</item>
-        <item>ફોન પહોંચી શકાય તેમ નથી</item>
-        <item>કૉલ ડિસ્કનેક્ટેડ</item>
-        <item>કૉલ કનેક્ટેડ</item>
+        <item>@string/connected</item>
+        <item>@string/call_dropped</item>
+        <item>@string/not_picked_single_line</item>
+        <item>@string/not_reachable_single_line</item>
+        <item>@string/dis_connected</item>
+        <item>@string/wrong_number</item>
+        <item>@string/call_later</item>
+        <item>@string/number_busy</item>
+        <item>@string/number_not_existing</item>
     </string-array>
+    <string name="call_dropped">Call dropped</string>
+    <string name="wrong_number">Wrong Number</string>
+    <string name="call_later">Call Later</string>
+    <string name="number_busy">Number Busy</string>
+    <string name="number_not_existing">Number not existing</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -342,7 +397,7 @@
     <string name="lack_of_essential_services">આવશ્યક સેવાઓનો અભાવ</string>
     <string name="emergency_escalation">ઇમર્જન્સી એસ્કેલેશન</string>
     <string name="issue_raised">સમસ્યા રજીસ્ટર થઈ ચૂકી છે</string>
-    <string name="raised_on">समस्या दर्ज की गई है</string>
+    <string name="raised_on">સમસ્યા નોંધાઈ છે</string>
     <string name="assigned">સોંપ્યું</string>
     <string name="completed">પૂર્ણ</string>
 
@@ -350,4 +405,28 @@
     <string name="txttakePhoto">ફોટો પાડ</string>
     <string name="txtchoosefromgallry">ગેલેરીમાંથી પસંદ કરો</string>
     <string name="txtcancel">રદ કરો</string>
+    <string name="wait_profile_data">અમે તમારો પ્રોફાઇલ ડેટા લઈ રહ્યાં છીએ</string>
+    <string name="Camera_permission_text">એપ્લિકેશનમાં આ સુવિધા માટે કેમેરા અને સ્ટોરેજ પરવાનગીની સુવિધા છે</string>
+    <string name="otpverification">OTP ચકાસણી : </string>
+    <string name="calls_summary">કોલ્સ સારાંશ</string>
+    <string name="total">કુલ:</string>
+    <string name="was">હતી</string>
+    <string name="select_a_state">Please select a state</string>
+    <string name="invalidOTP">અમાન્ય OTP</string>
+    <string name="limitecros">તમે મહત્તમ પ્રયત્નો પર પહોંચી ગયા છો</string>
+    <string name="getnewOTP">નવું ઓટીપી મેળવો</string>
+    <string name="chnagenumber"> નંબર બદલો ? </string>
+
+    <string name="update_issue_progress">Update Issue progress</string>
+    <string name="completed_count">"-- Completed: "</string>
+    <string name="need_follow_up_count">"-- Need Followup: "</string>
+    <string name="pending_g_count">"-- Pending: "</string>
+    <string name="update_status">Update Status</string>
+    <string name="reopen">Reopen</string>
+    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
+    <string name="raised_on_remarks">Issue was raised on</string>
+    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
+    <string name="enter_description_warning">Please enter a description</string>
+    <string name="status_warning">Please select a status</string>
+    <string name="provide_remarks">Please provide remarks</string>
 </resources>

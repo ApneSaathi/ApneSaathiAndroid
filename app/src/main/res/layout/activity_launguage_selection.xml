@@ -23,6 +23,7 @@
 
     <TextView
         android:id="@+id/select_language"
+        style="@style/TextAppearance.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rhodes_logo"
@@ -30,8 +31,6 @@
         android:layout_marginTop="40dp"
         android:text="@string/select_language"
         android:textAlignment="center"
-        android:textSize="@dimen/text_16"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rhodes_logo" />
@@ -53,6 +52,7 @@
                 android:id="@+id/radiobtnEnglish"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_60"
+                android:fontFamily="sans-serif"
                 android:text="@string/english_text"
                 android:textSize="@dimen/text_16" />
 
@@ -67,6 +67,7 @@
                 android:id="@+id/radiobtnHindi"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/view_size_60"
+                android:fontFamily="sans-serif"
                 android:text="@string/hindi_text"
                 android:textSize="@dimen/text_16" />
 
@@ -81,6 +82,7 @@
                 android:id="@+id/radiobtnMarathi"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/view_size_60"
+                android:fontFamily="sans-serif"
                 android:text="@string/marathi_text"
                 android:textSize="@dimen/text_16" />
 
@@ -95,6 +97,7 @@
                 android:id="@+id/radiobtnGujrati"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/view_size_60"
+                android:fontFamily="sans-serif"
                 android:text="@string/gujrati_text"
                 android:textSize="@dimen/text_16" />
 
@@ -128,6 +131,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/TextAppearance.Title"
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -77,9 +77,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_calls">Calls</string>
     <string name="menu_notification">Notification</string>
+    <string name="menu_issues">Issues</string>
     <string name="menu_profile">Profile</string>
     <string name="pending_calls_count">Pending Calls(%s)</string>
     <string name="grievances_count">Grievances(%s)</string>
+    <string name="issues_count">Issues(%s)</string>
     <string name="follow_up_count">Follow Up(%s)</string>
     <string name="attended_calls_count">Attended Calls(%s)</string>
     <string name="pending_calls">Pending Calls</string>
@@ -109,12 +111,13 @@
     <string name="address_bold">Address: </string>
     <string name="unattended">Unattended</string>
     <string name="edit">Edit</string>
-    <string name="app_bar_title">User Details</string>
+    <string name="app_bar_title">Sr. Citizen details</string>
     <string name="txtSubmit">Submit</string>
     <string name="call_status_1">Call Status</string>
     <string name="all_calls">All Calls</string>
     <string name="resolved">Resolved</string>
     <string name="pending">Pending</string>
+    <string name="pending_count">Pending(%s)</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
     <string name="select_a_category">Select a category</string>
@@ -228,7 +231,7 @@
     <string name="gender_others">Others</string>
     <string name="data_not_available">Data not available</string>
     <string name="validate_sr_citizen_name">Provide senior citizen\'s name</string>
-    <string name="validate_age">Provide age</string>
+    <string name="validate_age">Provide age between 60-110 </string>
     <string name="validate_gender">Select gender</string>
     <string name="validate_contact_number">Provide senior citizen\'s contact number</string>
     <string name="valid_contact_number">Provide valid contact number</string>
@@ -271,6 +274,11 @@
     <string name="check_internet">Please check internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
     <string name="not_available">Not Available</string>
+    <string-array name="grievance_status_array">
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Resolved</item>
+    </string-array>
 
     <string-array name="states_array">
         <item>Assam</item>
@@ -281,6 +289,51 @@
         <item>Maharashtra</item>
         <item>Gujarat</item>
         <item>Jharkhand</item>
+    </string-array>
+    <string-array name="district0">
+        <item>Baksa</item>
+        <item>Barpeta</item>
+        <item>Darrang</item>
+        <item>Dhubri</item>
+        <item>Goalpara</item>
+        <item>Hailakandi</item>
+    </string-array>
+    <string-array name="district1">
+        <item>Araria</item>
+        <item>Begusarai</item>
+        <item>Sitamarhi</item>
+        <item>Katihar</item>
+        <item>Sheikhpura</item>
+    </string-array>
+    <string-array name="district2">
+        <item>Barwani</item>
+        <item>Damoh</item>
+        <item>Khandwa</item>
+        <item>Singrauli</item>
+        <item>Vidisha</item>
+    </string-array>
+    <string-array name="district3">
+        <item>Balrampur</item>
+        <item>Behraich</item>
+        <item>Chitrakoot</item>
+        <item>Shrawasti</item>
+        <item>Sonbhadra</item>
+    </string-array>
+    <string-array name="district4">
+        <item>Baran</item>
+        <item>Jaisalmer</item>
+    </string-array>
+    <string-array name="district5">
+        <item>Amravati</item>
+        <item>Gadchiroli</item>
+        <item>Nandurbar</item>
+    </string-array>
+    <string-array name="district6">
+        <item>Narmada</item>
+    </string-array>
+    <string-array name="district7">
+        <item>Pakur</item>
+        <item>Sahibganj</item>
     </string-array>
     <string-array name="medical_problems">
         <item>@string/no_problems</item>
@@ -353,12 +406,21 @@
         <item>SurendraNagar</item>
     </string-array>
     <string-array name="call_status">
-        <item>No Response</item>
-        <item>Phone not picked</item>
-        <item>Phone not reachable</item>
-        <item>Call Disconnected</item>
-        <item>Call Connected</item>
+        <item>@string/connected</item>
+        <item>@string/call_dropped</item>
+        <item>@string/not_picked_single_line</item>
+        <item>@string/not_reachable_single_line</item>
+        <item>@string/dis_connected</item>
+        <item>@string/wrong_number</item>
+        <item>@string/call_later</item>
+        <item>@string/number_busy</item>
+        <item>@string/number_not_existing</item>
     </string-array>
+    <string name="call_dropped">Call dropped</string>
+    <string name="wrong_number">Wrong Number</string>
+    <string name="call_later">Call Later</string>
+    <string name="number_busy">Number Busy</string>
+    <string name="number_not_existing">Number not existing</string>
 
     <string name="health_care_information">HEALTH CARE INFORMATION</string>
     <string name="emotional_state">Emotional State</string>
@@ -386,5 +448,39 @@
     <string name="txtcancel">Cancel</string>
     <string name="wait_profile_data">we are fetching your profile data</string>
     <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
+    <string name="otpverification">"OTP Verification : "</string>
+    <string name="complaint_on">Complaint on</string>
+    <string name="calls_summary">Calls Summary</string>
+    <string name="was">was</string>
+    <string name="update_call_status">Update Call Status</string>
+    <string name="total">Total:</string>
+    <string name="select_a_state">Please select a state</string>
+    <string name="in_progress">In Progress</string>
+    <string name="issue_id">Issue ID</string>
+    <string name="created_date">Created Date</string>
+    <string name="last_update_on">Last update on</string>
+    <string name="resolved_count">Resolved(%s)</string>
+    <string name="inprogress_count">In Progress(%s)</string>
+    <string name="invalidOTP">Invalid OTP</string>
+    <string name="escalation">Escalation:</string>
+    <string name="type_reason">Type reason...</string>
+    <string name="update_issue_progress">Update Issue progress</string>
+    <string name="update_the_progress_happen">Update the progress happen</string>
+    <string name="completed_count">"-- Completed: "</string>
+    <string name="need_follow_up_count">"-- Need Followup: "</string>
+    <string name="pending_g_count">"-- Pending: "</string>
+    <string name="update_status">Update Status</string>
+    <string name="reopen">Reopen</string>
+    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
+    <string name="raised_on_remarks">Issue was raised on</string>
+    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
+    <string name="limitecros">You’ve reached the maximum attempts.</string>
+    <string name="getnewOTP">Get New OTP</string>
+    <string name="chnagenumber">" Change number ? "</string>
+    <string name="enter_description_warning">Please enter a description</string>
+    <string name="status_warning">Please select a status</string>
+    <string name="provide_remarks">Please provide remarks</string>
+    <string name="type_remarks">Type remarks...</string>
+    <string name="remarks">Remarks</string>
 
 </resources>
