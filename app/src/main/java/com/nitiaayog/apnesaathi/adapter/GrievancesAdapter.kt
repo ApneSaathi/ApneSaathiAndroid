@@ -86,27 +86,31 @@ class GrievancesAdapter(private val context: Context) :
 
             val spanStatus = SpannableString(spanGrievance)
             btnComplaintStatus.visibility = View.GONE
-            if (grievance.status == GRIEVANCE_RESOLVED) {
-                spanStatus.setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_color_5)),
-                    spanStatus.length - grievance.status!!.length,
-                    spanStatus.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            } else if (grievance.status == GRIEVANCE_UNDER_REVIEW) {
-                spanStatus.setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_color_3)),
-                    spanStatus.length - grievance.status!!.length,
-                    spanStatus.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }else{
-                spanStatus.setSpan(
-                    ForegroundColorSpan(ContextCompat.getColor(context, R.color.color_grey_txt)),
-                    spanStatus.length - grievance.status!!.length,
-                    spanStatus.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
+            when (grievance.status) {
+                GRIEVANCE_RESOLVED -> {
+                    spanStatus.setSpan(
+                        ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_color_5)),
+                        spanStatus.length - grievance.status!!.length,
+                        spanStatus.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                GRIEVANCE_UNDER_REVIEW -> {
+                    spanStatus.setSpan(
+                        ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_color_3)),
+                        spanStatus.length - grievance.status!!.length,
+                        spanStatus.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                else -> {
+                    spanStatus.setSpan(
+                        ForegroundColorSpan(ContextCompat.getColor(context, R.color.color_grey_txt)),
+                        spanStatus.length - grievance.status!!.length,
+                        spanStatus.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
             }
             tvComplaint.text = spanStatus
             if (grievance.gender == "M") {
