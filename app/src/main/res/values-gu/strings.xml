@@ -254,6 +254,9 @@
 
     <string name="not_available">માહિતી ઉપલબ્ધ નથી</string>
 
+    <string name="use_other_number">બીજો નંબર વાપરો</string>
+    <string name="select_mobile_number">મોબાઇલ નંબર પસંદ કરો</string>
+
     <string-array name="states_array">
         <item>આસામ</item>
         <item>બિહાર</item>

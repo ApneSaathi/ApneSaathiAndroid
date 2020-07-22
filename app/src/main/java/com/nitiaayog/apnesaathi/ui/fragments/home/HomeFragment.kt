@@ -79,9 +79,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
         }
     }
 
-    override fun provideViewModel(): HomeViewModel = getViewModel {
-        HomeViewModel.getInstance(dataManager)
-    }
+    override fun provideViewModel(): HomeViewModel =
+        getViewModel { HomeViewModel.getInstance(dataManager) }
 
     override fun provideLayoutResource(): Int = R.layout.fragment_home
 
