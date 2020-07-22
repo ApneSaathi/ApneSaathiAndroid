@@ -123,7 +123,7 @@
     <string name="menu_notification">सूचना</string>
     <string name="menu_profile">प्रोफाइल</string>
     <string name="grievances_count">तक्रारी(%s)</string>
-    <string name="issues_count">Issues(%s)</string>
+    <string name="issues_count">मुद्दे(%s)</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
     <string name="select_a_category">एक श्रेणी निवडा</string>
@@ -355,11 +355,11 @@
         <item>@string/number_busy</item>
         <item>@string/number_not_existing</item>
     </string-array>
-    <string name="call_dropped">Call dropped</string>
-    <string name="wrong_number">Wrong Number</string>
-    <string name="call_later">Call Later</string>
-    <string name="number_busy">Number Busy</string>
-    <string name="number_not_existing">Number not existing</string>
+    <string name="call_dropped">संपर्क तुटला</string>
+    <string name="wrong_number">चुकीचा क्रमांक</string>
+    <string name="call_later">नंतर कॉल करा</string>
+    <string name="number_busy">क्रमांक व्यस्त</string>
+    <string name="number_not_existing">संख्या विद्यमान नाही</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -414,22 +414,38 @@
     <string name="calls_summary">कॉल सारांश</string>
     <string name="total">एकूण:</string>
     <string name="was">होते</string>
-    <string name="select_a_state">Please select a state</string>
+    <string name="select_a_state">कृपया एखादे राज्य निवडा</string>
     <string name="invalidOTP">अवैध ओटीपी</string>
     <string name="limitecros">आपण जास्तीत जास्त प्रयत्नांवर पोहोचला आहात</string>
     <string name="getnewOTP">नवीन ओटीपी मिळवा</string>
     <string name="chnagenumber"> नंबर बदलायचा ? </string>
 
-    <string name="update_issue_progress">Update Issue progress</string>
-    <string name="completed_count">"-- Completed: "</string>
-    <string name="need_follow_up_count">"-- Need Followup: "</string>
-    <string name="pending_g_count">"-- Pending: "</string>
-    <string name="update_status">Update Status</string>
-    <string name="reopen">Reopen</string>
-    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
-    <string name="raised_on_remarks">Issue was raised on</string>
-    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
-    <string name="enter_description_warning">Please enter a description</string>
-    <string name="status_warning">Please select a status</string>
-    <string name="provide_remarks">Please provide remarks</string>
+    <string name="update_issue_progress">अद्यतन प्रगती</string>
+    <string name="pending_count">प्रलंबित(%s)</string>
+    <string name="menu_issues">मुद्दे</string>
+    <string name="completed_count">- पूर्णः</string>
+    <string name="need_follow_up_count">- पाठपुरावा आवश्यक आहे:</string>
+    <string name="pending_g_count">प्रलंबित:</string>
+    <string name="update_status">अद्यतन स्थिती</string>
+    <string name="reopen">पुन्हा उघडा</string>
+    <string name="resolvd_remarks">टीकेसह समस्येचे निराकरण केले गेले:</string>
+    <string name="raised_on_remarks">यावर मुद्दा उपस्थित केला होता</string>
+    <string name="in_progress_remarks">टिपणीसह स्थिती प्रगतीपथावर बदलली:</string>
+    <string name="enter_description_warning">कृपया वर्णन प्रविष्ट करा</string>
+    <string name="status_warning">कृपया एक स्थिती निवडा</string>
+    <string name="provide_remarks">कृपया टिप्पणी द्या</string>
+    <string name="type_remarks">शेरा टाइप करा…</string>
+    <string name="remarks">टीका</string>
+    <string name="progress_updates">प्रगती अद्यतने:</string>
+    <string name="complaint_on">चालू आहे</string>
+    <string name="update_call_status">कॉल स्थिती अद्यतनित करा</string>
+    <string name="in_progress">प्रगतीपथावर</string>
+    <string name="issue_id">जारी आयडी</string>
+    <string name="created_date">तयार केलेली तारीख</string>
+    <string name="last_update_on">शेवटचे अद्यतन</string>
+    <string name="resolved_count">निराकरण केले(%s)</string>
+    <string name="inprogress_count">प्रगतीपथावर(%s)</string>
+    <string name="escalation">वाढवणे:</string>
+    <string name="type_reason">प्रकार कारण…</string>
+    <string name="update_the_progress_happen">अद्ययावत प्रगती घडू</string>
 </resources>

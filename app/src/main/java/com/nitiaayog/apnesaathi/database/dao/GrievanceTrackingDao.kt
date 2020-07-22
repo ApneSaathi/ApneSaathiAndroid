@@ -20,8 +20,8 @@ interface GrievanceTrackingDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(grievances: List<GrievanceData>)
 
-    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCE_TRACKING} ORDER BY ${Columns.LastUpdateOn} DESC")
-    fun getAllGrievances(): LiveData<MutableList<GrievanceData>>
+    @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCE_TRACKING} WHERE ${Columns.GrievanceStatus} !=:status ORDER BY ${Columns.CreatedDate}")
+    fun getAllGrievances(status:String): LiveData<MutableList<GrievanceData>>
 
     @Query("DELETE FROM ${Tables.TABLE_GRIEVANCE_TRACKING}")
     fun deletePreviousGrievanceData()
