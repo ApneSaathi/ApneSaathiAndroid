@@ -173,14 +173,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             if (checkSelfPermission(
                     activity!!,
                     Manifest.permission.CAMERA
-                ) == PackageManager.PERMISSION_DENIED ||
-                checkSelfPermission(
-                    activity!!,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_DENIED
-            ) {
-                val permission =
-                    arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            ) { val permission =
+                    arrayOf(Manifest.permission.CAMERA)
                 requestPermissions(permission, PERMISSION_CODE)
             } else {
                 openCamera()
@@ -193,16 +188,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private fun openCamera() {
         try {
-//            val values = ContentValues()
-//            values.put(MediaStore.Images.Media.TITLE, "New Picture")
-//            values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-//            image_uri = activity!!.contentResolver.insert(
-//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//                values
-//            )
-//            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
-//            startActivityForResult(cameraIntent, TAKE_PHOTO_REQUEST)
+
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(cameraIntent, TAKE_PHOTO_REQUEST)
 
@@ -230,9 +216,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 var fileq: String = imageto64String(data.extras?.get("data") as Bitmap);
                 createABitmap(fileq)
                 dialog!!.dismiss()
-//                EditImageView.setImageURI(image_uri)
-//                ProfileImage.setImageURI(image_uri)
-//                dialog!!.dismiss()
+
             }
         } catch (ex: Exception) {
             ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
@@ -241,8 +225,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun createABitmap(base64String: String) {
-
-
         val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
         EditImageView.setImageBitmap(decodedImage)
