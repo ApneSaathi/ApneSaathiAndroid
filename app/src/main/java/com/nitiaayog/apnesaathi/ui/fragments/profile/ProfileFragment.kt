@@ -241,6 +241,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun createABitmap(base64String: String) {
+
+
         val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
         EditImageView.setImageBitmap(decodedImage)
