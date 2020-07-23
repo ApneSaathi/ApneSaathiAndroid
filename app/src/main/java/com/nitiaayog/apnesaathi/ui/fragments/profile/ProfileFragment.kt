@@ -5,18 +5,19 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
+import android.util.Base64
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -41,6 +42,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.get_images_dialog.*
 import kotlinx.android.synthetic.main.include_toolbar.toolBar
+import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 
 class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
@@ -191,17 +193,19 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private fun openCamera() {
         try {
-            val values = ContentValues()
-            values.put(MediaStore.Images.Media.TITLE, "New Picture")
-            values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-            image_uri =
-                activity!!.contentResolver.insert(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    values
-                )
+//            val values = ContentValues()
+//            values.put(MediaStore.Images.Media.TITLE, "New Picture")
+//            values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
+//            image_uri = activity!!.contentResolver.insert(
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                values
+//            )
+//            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
+//            startActivityForResult(cameraIntent, TAKE_PHOTO_REQUEST)
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
             startActivityForResult(cameraIntent, TAKE_PHOTO_REQUEST)
+
         } catch (ex: Exception) {
             ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
         }
@@ -220,15 +224,34 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 ProfileImage.setImageURI(data?.data)
 
                 dialog!!.dismiss()
-            } else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
-                EditImageView.setImageURI(image_uri)
-                ProfileImage.setImageURI(image_uri)
+            } else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST && data != null) {
+//                EditImageView.setImageBitmap(data.extras?.get("data") as Bitmap)
+
+                var fileq: String = imageto64String(data.extras?.get("data") as Bitmap);
+                createABitmap(fileq)
                 dialog!!.dismiss()
+//                EditImageView.setImageURI(image_uri)
+//                ProfileImage.setImageURI(image_uri)
+//                dialog!!.dismiss()
             }
         } catch (ex: Exception) {
             ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
 
         }
+    }
+
+    private fun createABitmap(base64String: String) {
+        val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        EditImageView.setImageBitmap(decodedImage)
+    }
+
+    private fun imageto64String(bitmap: Bitmap): String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+
     }
 
 
@@ -238,8 +261,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         dialog!!.setCancelable(true)
         dialog!!.setContentView(R.layout.get_images_dialog)
         dialog!!.TxtGetFromcamera.setOnClickListener {
-//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
-//            dialog!!.dismiss()
             capturePhoto()
         }
         dialog!!.TxtCancel.setOnClickListener {
@@ -248,8 +269,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         dialog!!.TxtGetFromGallery.setOnClickListener {
             fromGallery()
-//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
-//            dialog!!.dismiss()
         }
         dialog!!.show()
     }
