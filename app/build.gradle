@@ -4,6 +4,7 @@ apply plugin: kotlinAndroidPlugin
 apply plugin: kotlinKaptPlugin
 
 def host = API_HOST
+def devHost = API_DEV_HOST
 def databaseName = DATABASE_NAME
 def databaseVersion = DATABASE_VERSION
 
@@ -23,6 +24,7 @@ android {
 
     buildTypes {
         buildTypes.each { it.buildConfigField "String", "HOST_URL", "\"${host}\"" }
+        buildTypes.each { it.buildConfigField "String", "DEV_HOST_URL", "\"${devHost}\"" }
         buildTypes.each { it.buildConfigField "String", "DB_NAME", "\"${databaseName}\"" }
         buildTypes.each { it.buildConfigField "int", "DB_VERSION", "${databaseVersion}" }
         release {
@@ -86,7 +88,7 @@ dependencies {
     // JSON to Response Class converter
     implementation retrofit.gsonConverter
     implementation retrofit.rxJava
-    
+
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
 

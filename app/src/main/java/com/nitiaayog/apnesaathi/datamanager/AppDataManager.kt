@@ -159,7 +159,7 @@ class AppDataManager private constructor(
     override fun clearPreviousData() = grievancesDao.deletePreviousData()
 
     override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
-        grievancesTrackingDao.getAllGrievances()
+        grievancesTrackingDao.getAllGrievances("RESOLVED")
 
     override fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getGrievancesWithStatus("UNDER REVIEW")

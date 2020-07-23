@@ -109,9 +109,11 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
             tv_volunteer_desc3.text =
                 getString(R.string.resolvd_remarks).plus(" ").plus(grievanceData.resolvedRemarks)
             cgResolved.visibility = View.VISIBLE
-            tv_volunteer_desc2.text = getString(R.string.in_progress_remarks).plus(" ")
-                .plus(grievanceData.reviewRemarks)
-            cgInProgress.visibility = View.VISIBLE
+            if(!grievanceData.reviewRemarks.isNullOrEmpty()){
+                tv_volunteer_desc2.text = getString(R.string.in_progress_remarks).plus(" ")
+                    .plus(grievanceData.reviewRemarks)
+                cgInProgress.visibility = View.VISIBLE
+            }
         } else {
             cgResolved.visibility = View.GONE
         }
@@ -129,10 +131,13 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
         } else {
             img_gender.background = context?.getDrawable(R.drawable.ic_female_user)
         }
+        tv_volunteer_name.text = dataManager.getFirstname()
+        tv_volunteer_name2.text = dataManager.getFirstname()
+        tv_volunteer_name3.text = dataManager.getFirstname()
 
         tv_volunteer_name.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-
         tv_volunteer_name2.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+        tv_volunteer_name3.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         tv_update_status.setOnClickListener {
             showBottomSheetDialogFragment()
         }
