@@ -279,10 +279,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             TxtContactNumber.text = dataManager.getPhoneNumber()
             TxtEmail.text = dataManager.getEmail()
         }
-
         updateEditField()
-
-
     }
 
     private fun updateEditField() {
