@@ -86,7 +86,7 @@
                             android:drawableTint="@color/text_color_3"
                             android:fontFamily="sans-serif"
 
-                            android:text="Amol Ramnath khose"
+                            android:text="XXXXX XXXXX"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
@@ -114,7 +114,7 @@
                             android:drawablePadding="@dimen/dimen_5"
 
                             android:fontFamily="sans-serif"
-                            android:text="9673346489"
+                            android:text="XXXXXXXXX"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
@@ -129,7 +129,7 @@
 
                             android:fontFamily="sans-serif"
 
-                            android:text="amol@gmail.com"
+                            android:text="XXXX@gmail.com"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 

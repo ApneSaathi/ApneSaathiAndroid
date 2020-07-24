@@ -446,7 +446,7 @@
     <string name="txttakePhoto">Take Photo</string>
     <string name="txtchoosefromgallry">Choose from Gallery</string>
     <string name="txtcancel">Cancel</string>
-    <string name="wait_profile_data">we are fetching your profile data</string>
+    <string name="wait_profile_data">we are updating your profile data</string>
     <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
     <string name="otpverification">"OTP Verification : "</string>
     <string name="complaint_on">Complaint on</string>
@@ -483,5 +483,7 @@
     <string name="type_remarks">Type remarks…</string>
     <string name="remarks">Remarks</string>
     <string name="progress_updates">Progress updates:</string>
+    <string name="otpsendsuccesfully">Otp sent successfully</string>
+    <string name="profile_details_saved_successfully">Volunteer details is synced up successfully.\n\nThank you, for serving us</string>
 
 </resources>

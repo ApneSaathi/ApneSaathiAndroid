@@ -86,9 +86,11 @@ object ApiConstants {
     const val ReviewRemarks: String = "underReviewRemarks"
     const val ResolvedRemarks: String = "resolvedRemarks"
     const val phoneNo: String = "phoneNo"
-    const val ProfileFullName: String = "phoneNo"
-    const val ProfileAddress: String = "phoneNo"
-    const val ProfileEmail: String = "phoneNo"
+
+    const val Profileidvolunteer: String = "idvolunteer"
+    const val ProfileFullName: String = "firstName"
+    const val ProfileAddress: String = "address"
+    const val ProfileEmail: String = "email"
 
     const val GrievanceTrackingId:String ="trackingId"
 

@@ -15,24 +15,32 @@ import kotlinx.coroutines.launch
 
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
+
     companion object {
         @Volatile
         private var instance: ProfileFragmentViewModel? = null
 
         @Synchronized
         fun getInstance(dataManager: DataManager): ProfileFragmentViewModel =
-            instance
-                ?: synchronized(this) {
-                    instance
-                        ?: ProfileFragmentViewModel(
-                            dataManager
-                        )
-                            .also { instance = it }
-                }
+            instance ?: synchronized(this) {
+                instance
+                    ?: ProfileFragmentViewModel(
+                        dataManager
+                    )
+                        .also { instance = it }
+            }
     }
+//companion object {
+//
+//    @Synchronized
+//    fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
+//        ProfileFragmentViewModel(dataManager)
+//    }
+//}
+
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
-    fun getPutDataObserver(): LiveData<NetworkRequestState> = loaderObservable
+    fun updateDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getvolunteerData(mContext: Context, volunteerId: String) {
         if (checkNetworkAvailability(mContext, ApiProvider.Api_volunteer_Data)) {
@@ -80,26 +88,26 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         email: String
     ) {
         if (checkNetworkAvailability(mContext, ApiProvider.Api_UPDATEPROFILE)) {
-            val params = JsonObject()
-            params.addProperty(ApiConstants.phoneNo, volunteerId)
-            params.addProperty(ApiConstants.ProfileFullName, fullname)
-            params.addProperty(ApiConstants.ProfileAddress, address)
-            params.addProperty(ApiConstants.ProfileEmail, email)
+            val params1 = JsonObject()
+            params1.addProperty(ApiConstants.Profileidvolunteer, volunteerId)
+            params1.addProperty(ApiConstants.ProfileFullName, fullname)
+            params1.addProperty(ApiConstants.ProfileAddress, address)
+            params1.addProperty(ApiConstants.ProfileEmail, email)
 
-            dataManager.updatevolunteerData(params).doOnSubscribe {
+            dataManager.updatevolunteerData(params1).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.Api_UPDATEPROFILE)
             }.subscribe({
                 try {
                     if (it.getStatusCode() == "0") {
                         loaderObservable.value =
-                            NetworkRequestState.SuccessResponse(ApiProvider.Api_volunteer_Data, it)
+                            NetworkRequestState.SuccessResponse(ApiProvider.Api_UPDATEPROFILE, it)
                         viewModelScope.launch {
                             io {
                             }
                             loaderObservable.value =
                                 NetworkRequestState.SuccessResponse(
-                                    ApiProvider.Api_volunteer_Data,
+                                    ApiProvider.Api_UPDATEPROFILE,
                                     it
                                 )
 

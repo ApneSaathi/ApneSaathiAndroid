@@ -31,6 +31,7 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
@@ -48,11 +49,12 @@ import java.util.concurrent.TimeUnit
 class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private val TAKE_GALLARY_PHOTO_REQUEST_CODE: Int = 1101
-    private var image_uri: Uri? = null
     val PERMISSION_CODE: Int = 200
-    val TAKE_PHOTO_REQUEST: Int = 201;
-    var dialog: Dialog? = null;
+    val TAKE_PHOTO_REQUEST: Int = 201
+    var dialog: Dialog? = null
     var menuBar: Menu? = null
+
+
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_profile_data)
     }
@@ -64,8 +66,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     ): View? {
 
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
-        bindview(view);
-        return view;
+        bindview(view)
+        return view
     }
 
     fun String.isEmailValid(): Boolean {
@@ -78,11 +80,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             showGetImageDialog()
         }
 
-        view.TxtMainSave.setOnClickListener {
-            LinearProfileDetails.isVisible = true
-            LinearProfileDetailsForEdit.isVisible = false
-            callMenuBarHide(LinearProfileDetails.isVisible)
-        }
         view.TxtMainCancel.setOnClickListener {
             LinearProfileDetails.isVisible = true
             LinearProfileDetailsForEdit.isVisible = false
@@ -98,37 +95,43 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             dataManager.setPhoneNumber("")
             dataManager.setFirstName("")
             startActivity(intent)
+            activity?.finish()
 
         }
 
 
-        view.TxtMainSave.throttleClick().subscribe() {
+        view.TxtMainSave.throttleClick().subscribe {
 
             if (view.EditEmail.text.toString().isEmailValid()) {
                 try {
                     Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                            viewModel.getUpdatedvolunteerData(context!!, dataManager.getPhoneNumber(),EditFirstName.text.toString().trim(),
-                                EditAddress.text.toString().trim(),EditEmail.text.toString().trim())
+                            viewModel.getUpdatedvolunteerData(
+                                context!!,
+                                dataManager.getUserId(),
+                                EditFirstName.text.toString().trim(),
+                                EditAddress.text.toString().trim(),
+                                EditEmail.text.toString().trim()
+                            )
                         }
                         .autoDispose(disposables)
                 } catch (e: Exception) {
                     println("TAG -- MyData --> ${e.message}")
                 }
             } else {
-                view.EditEmail.setError("Enter valid email")
+                view.EditEmail.error = "Enter valid email"
             }
+
+
         }.autoDispose(disposables)
 
     }
 
-    fun callMenuBarHide(linearProfileDetails: Boolean) {
+    private fun callMenuBarHide(linearProfileDetails: Boolean) {
         if (linearProfileDetails) {
-            val Import: MenuItem = menuBar!!.findItem(R.id.editprofile)
-            Import.setVisible(true)
+            menuBar!!.findItem(R.id.editprofile).isVisible = true
         } else {
-            val Import: MenuItem = menuBar!!.findItem(R.id.editprofile)
-            Import.setVisible(false)
+            menuBar!!.findItem(R.id.editprofile).isVisible = false
         }
     }
 
@@ -145,11 +148,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 } else {
 
                     ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
-//                    Snackbar.make(
-//                        this.requireView(),
-//                        resources.getString(R.string.permission_denied),
-//                        Snackbar.LENGTH_LONG
-//                    ).show()
+
                 }
             }
         }
@@ -224,9 +223,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
                 dialog!!.dismiss()
             } else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST && data != null) {
-//                EditImageView.setImageBitmap(data.extras?.get("data") as Bitmap)
-
-                var fileq: String = imageto64String(data.extras?.get("data") as Bitmap);
+                var fileq: String = imageto64String(data.extras?.get("data") as Bitmap)
                 createABitmap(fileq)
                 dialog!!.dismiss()
 
@@ -276,17 +273,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         toolBar.title = getString(R.string.menu_profile)
 
         if (dataManager.getFirstname().isEmpty()) {
-            try {
-                Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                        viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
-                    }
-                    .autoDispose(disposables)
-            } catch (e: Exception) {
-                println("TAG -- MyData --> ${e.message}")
-            }
-            observeStates()
-            observePutProfileDataStates()
+            callvolunteerData()
+
         } else {
             TxtName.text = dataManager.getFirstname() + " " + dataManager.getLastname()
             txtAddress.text = dataManager.getAddress()
@@ -294,6 +282,22 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             TxtEmail.text = dataManager.getEmail()
         }
         updateEditField()
+
+        observeStates()
+
+    }
+
+    private fun callvolunteerData() {
+//        viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
+        try {
+            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
+                }
+                .autoDispose(disposables)
+        } catch (e: Exception) {
+            println("TAG -- MyData --> ${e.message}")
+        }
     }
 
     private fun updateEditField() {
@@ -316,8 +320,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     override
     fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menuBar = menu
-        inflater.inflate(R.menu.profile_menu, menu);
+        inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
     }
 
 
@@ -327,7 +332,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 LinearProfileDetails.isVisible = false
                 LinearProfileDetailsForEdit.isVisible = true
                 val Import: MenuItem = menuBar!!.findItem(R.id.editprofile)
-                Import.setVisible(false)
+                Import.isVisible = false
                 updateEditField()
                 true
             }
@@ -356,33 +361,51 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
             when (it) {
-                is NetworkRequestState.NetworkNotAvailable ->
-                    BaseUtility.showAlertMessage(context!!, R.string.alert, R.string.check_internet)
+                is NetworkRequestState.NetworkNotAvailable -> when (it.apiName) {
+                    ApiProvider.Api_volunteer_Data ->
+                        BaseUtility.showAlertMessage(
+                            context!!,
+                            R.string.alert,
+                            R.string.check_internet
+                        )
+                    ApiProvider.Api_volunteer_Data ->
+                        BaseUtility.showAlertMessage(
+                            context!!,
+                            R.string.alert,
+                            R.string.check_internet
+                        )
 
+                }
                 is NetworkRequestState.LoadingData -> {
                     progressDialog.show()
                 }
                 is NetworkRequestState.ErrorResponse -> {
+
                     progressDialog.dismiss()
+
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     progressDialog.dismiss()
 
-                    val volunteerDataResponse = it.data
+                    when (it.apiName) {
+                        ApiProvider.Api_volunteer_Data -> {
+                            getdataFromApi(it)
+                        }
+                        ApiProvider.Api_UPDATEPROFILE -> {
+                            BaseUtility.showAlertMessage(
+                                activity!!,
+                                R.string.success,
+                                R.string.profile_details_saved_successfully,
+                                R.string.thanks_go_back
+                            ) { dialog, _ ->
 
-                    if (volunteerDataResponse is VolunteerDataResponse) {
-                        dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-                        dataManager.setLastname(volunteerDataResponse.volunteer.lastName)
-                        dataManager.setEmail(volunteerDataResponse.volunteer.email)
-                        dataManager.setAddress(volunteerDataResponse.volunteer.address)
-
-                        TxtName.text =
-                            volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
-                        txtAddress.text =
-                            volunteerDataResponse.volunteer.address + " , " + volunteerDataResponse.volunteer.state + " , " + volunteerDataResponse.volunteer.district
-                        TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
-                        TxtEmail.text = volunteerDataResponse.volunteer.email
-
+                                LinearProfileDetails.isVisible = true
+                                LinearProfileDetailsForEdit.isVisible = false
+                                callMenuBarHide(LinearProfileDetails.isVisible)
+                                dialog.dismiss()
+                                callvolunteerData()
+                            }
+                        }
                     }
                 }
             }
@@ -390,41 +413,25 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
 
-    private fun observePutProfileDataStates() {
+    private fun getdataFromApi(it: NetworkRequestState.SuccessResponse<*>) {
 
-        viewModel.getPutDataObserver().removeObservers(viewLifecycleOwner)
-        viewModel.getPutDataObserver().observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is NetworkRequestState.NetworkNotAvailable ->
-                    BaseUtility.showAlertMessage(context!!, R.string.alert, R.string.check_internet)
+        val volunteerDataResponse = it.data
 
-                is NetworkRequestState.LoadingData -> {
-                    progressDialog.show()
-                }
-                is NetworkRequestState.ErrorResponse -> {
-                    progressDialog.dismiss()
-                }
-                is NetworkRequestState.SuccessResponse<*> -> {
-                    progressDialog.dismiss()
+        if (volunteerDataResponse is VolunteerDataResponse) {
+            dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
+            dataManager.setLastname(volunteerDataResponse.volunteer.lastName)
+            dataManager.setEmail(volunteerDataResponse.volunteer.email)
+            dataManager.setAddress(volunteerDataResponse.volunteer.address)
 
-                    val volunteerDataResponse = it.data
+            TxtName.text =
+                volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
+            txtAddress.text =
+                volunteerDataResponse.volunteer.address + " , " + volunteerDataResponse.volunteer.state + " , " + volunteerDataResponse.volunteer.district
+            TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
+            TxtEmail.text = volunteerDataResponse.volunteer.email
 
-                    if (volunteerDataResponse is VolunteerDataResponse) {
-                        dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-//                        dataManager.setLastname(volunteerDataResponse.volunteer.lastName)
-//                        dataManager.setEmail(volunteerDataResponse.volunteer.email)
-//                        dataManager.setAddress(volunteerDataResponse.volunteer.address)
-//
-//                        TxtName.text =
-//                            volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
-//                        txtAddress.text =
-//                            volunteerDataResponse.volunteer.address + " , " + volunteerDataResponse.volunteer.state + " , " + volunteerDataResponse.volunteer.district
-//                        TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
-//                        TxtEmail.text = volunteerDataResponse.volunteer.email
-
-                    }
-                }
-            }
-        })
+        }
     }
+
+
 }
