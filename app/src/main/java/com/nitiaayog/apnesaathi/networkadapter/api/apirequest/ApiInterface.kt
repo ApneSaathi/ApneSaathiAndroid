@@ -20,6 +20,8 @@ interface ApiInterface {
     @POST(ApiProvider.Api_volunteer_Data)
     fun getVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
+    @POST(ApiProvider.Api_UPDATEPROFILE)
+    fun getUpdateVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
     @POST(ApiProvider.ApiLoadDashboard)
     fun getCallDetails(@Body details: JsonObject): Single<HomeRepo>

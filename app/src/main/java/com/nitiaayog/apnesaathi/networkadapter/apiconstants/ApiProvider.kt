@@ -5,7 +5,6 @@ import com.nitiaayog.apnesaathi.BuildConfig
 object ApiProvider {
 
     private const val BASE_URL = BuildConfig.DEV_HOST_URL
-
     private const val GET_LOGIN_USER: String = "Volunteer/LoginVolunteer"
     const val ApiLoginUser: String = BASE_URL + GET_LOGIN_USER
 
@@ -31,4 +30,6 @@ object ApiProvider {
     private const val GET_UPDATE_GRIEVANCE_DETAILS = "Volunteer/updateGreivanceDetails"
     const val ApiUpdateGrievanceDetails = BASE_URL + GET_UPDATE_GRIEVANCE_DETAILS
 
+    private const val GET_SAVINGPROFILE  = "Volunteer/updateProfile"
+    const val Api_UPDATEPROFILE = BASE_URL + GET_SAVINGPROFILE
 }

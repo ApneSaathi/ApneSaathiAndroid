@@ -63,6 +63,10 @@ class AppDataManager private constructor(
         return apiRequest.volunteerData(phoneNumber)
     }
 
+    override fun updatevolunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
+        return apiRequest.updatevolunteerData(phoneNumber)
+    }
+
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
         apiRequest.getCallDetails(details)
 

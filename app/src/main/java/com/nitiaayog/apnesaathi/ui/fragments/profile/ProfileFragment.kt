@@ -100,9 +100,21 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             startActivity(intent)
 
         }
-        view.TxtMainSave.throttleClick().subscribe() {
-            if (view.EditEmail.text.toString().isEmailValid()) {
 
+
+        view.TxtMainSave.throttleClick().subscribe() {
+
+            if (view.EditEmail.text.toString().isEmailValid()) {
+                try {
+                    Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                            viewModel.getUpdatedvolunteerData(context!!, dataManager.getPhoneNumber(),EditFirstName.text.toString().trim(),
+                                EditAddress.text.toString().trim(),EditEmail.text.toString().trim())
+                        }
+                        .autoDispose(disposables)
+                } catch (e: Exception) {
+                    println("TAG -- MyData --> ${e.message}")
+                }
             } else {
                 view.EditEmail.setError("Enter valid email")
             }
@@ -174,7 +186,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                     activity!!,
                     Manifest.permission.CAMERA
                 ) == PackageManager.PERMISSION_DENIED
-            ) { val permission =
+            ) {
+                val permission =
                     arrayOf(Manifest.permission.CAMERA)
                 requestPermissions(permission, PERMISSION_CODE)
             } else {
@@ -273,6 +286,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 println("TAG -- MyData --> ${e.message}")
             }
             observeStates()
+            observePutProfileDataStates()
         } else {
             TxtName.text = dataManager.getFirstname() + " " + dataManager.getLastname()
             txtAddress.text = dataManager.getAddress()
@@ -376,4 +390,41 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
 
+    private fun observePutProfileDataStates() {
+
+        viewModel.getPutDataObserver().removeObservers(viewLifecycleOwner)
+        viewModel.getPutDataObserver().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is NetworkRequestState.NetworkNotAvailable ->
+                    BaseUtility.showAlertMessage(context!!, R.string.alert, R.string.check_internet)
+
+                is NetworkRequestState.LoadingData -> {
+                    progressDialog.show()
+                }
+                is NetworkRequestState.ErrorResponse -> {
+                    progressDialog.dismiss()
+                }
+                is NetworkRequestState.SuccessResponse<*> -> {
+                    progressDialog.dismiss()
+
+                    val volunteerDataResponse = it.data
+
+                    if (volunteerDataResponse is VolunteerDataResponse) {
+                        dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
+//                        dataManager.setLastname(volunteerDataResponse.volunteer.lastName)
+//                        dataManager.setEmail(volunteerDataResponse.volunteer.email)
+//                        dataManager.setAddress(volunteerDataResponse.volunteer.address)
+//
+//                        TxtName.text =
+//                            volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
+//                        txtAddress.text =
+//                            volunteerDataResponse.volunteer.address + " , " + volunteerDataResponse.volunteer.state + " , " + volunteerDataResponse.volunteer.district
+//                        TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
+//                        TxtEmail.text = volunteerDataResponse.volunteer.email
+
+                    }
+                }
+            }
+        })
+    }
 }
