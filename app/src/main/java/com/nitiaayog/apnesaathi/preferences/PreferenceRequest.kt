@@ -35,4 +35,7 @@ interface PreferenceRequest {
 
     fun getAddress(): String
     fun setAddress(address: String)
+
+    fun setLastSelectedId(callId: String)
+    fun getLastSelectedId(): String
 }

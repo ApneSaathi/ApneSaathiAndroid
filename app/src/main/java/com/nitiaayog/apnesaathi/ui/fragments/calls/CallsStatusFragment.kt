@@ -19,6 +19,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.BaseCallsTypeFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_calls_status.*
 
 class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickListener {
@@ -46,8 +47,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
                     lastCallData = callData
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(callData)
+                    viewModel.setLastSelectedUser(callData.callId.toString())
                     addFragment(
-                        R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -68,8 +70,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
                     lastCallData = callData
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(callData)
+                    viewModel.setLastSelectedUser(callData.callId.toString())
                     addFragment(
-                        R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -90,8 +93,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
                     lastCallData = callData
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(callData)
+                    viewModel.setLastSelectedUser(callData.callId.toString())
                     addFragment(
-                        R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -127,8 +131,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
     override fun onMoreInfoClick(position: Int, callData: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
         fragment.setSelectedUser(callData)
+        viewModel.setLastSelectedUser(callData.callId.toString())
         addFragment(
-            R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+            R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
         )
     }
 
