@@ -33,7 +33,8 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun setUserId(userId: String) =
         preferences.putString(PreferenceConstants.UserId, userId)
 
-    override fun setGender(gender: String)  = preferences.putString(PreferenceConstants.Gender, gender)
+    override fun setGender(gender: String) =
+        preferences.putString(PreferenceConstants.Gender, gender)
 
     override fun getGender(): String = preferences.getString(PreferenceConstants.Gender)!!
 
@@ -92,6 +93,14 @@ open class PreferenceManager private constructor(application: Application) : Pre
 
     override fun setAddress(address: String) {
         preferences.putString(PreferenceConstants.Address, address)
+    }
+
+    override fun setLastSelectedId(callId: String) {
+        preferences.putString(PreferenceConstants.LastSelectedId, callId)
+    }
+
+    override fun getLastSelectedId(): String {
+        return preferences.getString(PreferenceConstants.LastSelectedId)!!
     }
 
 

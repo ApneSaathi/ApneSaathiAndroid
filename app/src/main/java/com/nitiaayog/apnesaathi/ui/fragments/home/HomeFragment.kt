@@ -25,6 +25,7 @@ import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -50,8 +51,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
                 override fun onMoreInfoClick(position: Int, callData: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(callData)
+                    viewModel.setLastSelectedUser(callData.callId.toString())
                     addFragment(
-                        R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -67,7 +69,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
 
         try {
             initRecyclerView()
-
+            viewModel.setLastSelectedUser("")
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     getObservableDataStream()
@@ -202,6 +204,15 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
         viewModel.getFollowupCalls().removeObservers(viewLifecycleOwner)
         viewModel.getFollowupCalls().observe(viewLifecycleOwner, Observer {
             manageProgressBarData()
+        })
+        viewModel.getCallsList().removeObservers(viewLifecycleOwner)
+        viewModel.getCallsList().observe(viewLifecycleOwner, Observer { it ->
+            val fragment = fragmentManager?.findFragmentByTag(SR_CITIZEN_DETAIL_FRAGMENT)
+            if(fragment != null && fragment.isResumed){
+                val callData:CallData = it.single { it.callId == dataManager.getLastSelectedId().toInt() }
+                fragment as SeniorCitizenDetailsFragment
+                fragment.reloadFragment(callData)
+            }
         })
 
 //        viewModel.getGrievancesList().removeObservers(viewLifecycleOwner)

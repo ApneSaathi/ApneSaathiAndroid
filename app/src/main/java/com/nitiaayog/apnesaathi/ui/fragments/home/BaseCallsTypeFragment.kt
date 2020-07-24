@@ -11,6 +11,7 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -38,8 +39,9 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
             override fun onMoreInfoClick(position: Int, callData: CallData) {
                 val fragment = SeniorCitizenDetailsFragment()
                 fragment.setSelectedUser(callData)
+                viewModel.setLastSelectedUser(callData.callId.toString())
                 addFragment(
-                    containerId, fragment, getString(R.string.details_fragment)
+                    containerId, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                 )
             }
         })
