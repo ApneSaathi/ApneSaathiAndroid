@@ -5,6 +5,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
@@ -21,7 +22,7 @@ interface ApiInterface {
     fun getVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
     @PUT(ApiProvider.Api_UPDATEPROFILE)
-    fun getUpdateVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>
+    fun getUpdateVolunteerData(@Body phoneNumber: JsonObject): Single<ProfileUpdateResponse>
 
     @POST(ApiProvider.ApiLoadDashboard)
     fun getCallDetails(@Body details: JsonObject): Single<HomeRepo>

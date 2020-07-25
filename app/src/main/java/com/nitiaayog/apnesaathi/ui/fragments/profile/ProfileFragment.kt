@@ -18,12 +18,15 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.util.Base64
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
@@ -102,24 +105,34 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         view.TxtMainSave.throttleClick().subscribe {
 
-            if (view.EditEmail.text.toString().isEmailValid()) {
-                try {
-                    Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
-                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                            viewModel.getUpdatedvolunteerData(
-                                context!!,
-                                dataManager.getUserId(),
-                                EditFirstName.text.toString().trim(),
-                                EditAddress.text.toString().trim(),
-                                EditEmail.text.toString().trim()
-                            )
-                        }
-                        .autoDispose(disposables)
-                } catch (e: Exception) {
-                    println("TAG -- MyData --> ${e.message}")
-                }
+            if (TextUtils.isEmpty(view.EditFirstName.text.toString())) {
+                view.EditFirstName.error = "Enter first name"
             } else {
-                view.EditEmail.error = "Enter valid email"
+                view.EditFirstName.error = null
+                if (TextUtils.isEmpty(EditAddress.text.toString())) {
+                    EditAddress.error = "Enter Address"
+
+                } else {
+                    EditAddress.error = null
+                    if (view.EditEmail.text.toString().isEmailValid()) {
+                        try {
+                            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                                    viewModel.getUpdatedvolunteerData(
+                                        context!!, dataManager.getUserId(),
+                                        EditFirstName.text.toString().trim(),
+                                        EditAddress.text.toString().trim(),
+                                        EditEmail.text.toString().trim()
+                                    )
+                                }
+                                .autoDispose(disposables)
+                        } catch (e: Exception) {
+                            println("TAG -- MyData --> ${e.message}")
+                        }
+                    } else {
+                        view.EditEmail.error = "Enter valid email"
+                    }
+                }
             }
 
 
@@ -128,11 +141,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun callMenuBarHide(linearProfileDetails: Boolean) {
-        if (linearProfileDetails) {
-            menuBar!!.findItem(R.id.editprofile).isVisible = true
-        } else {
-            menuBar!!.findItem(R.id.editprofile).isVisible = false
-        }
+        menuBar!!.findItem(R.id.editprofile).isVisible = linearProfileDetails
     }
 
     override fun onRequestPermissionsResult(
@@ -140,23 +149,18 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        //called when user presses ALLOW or DENY from Permission Request Popup
         when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openCamera()
                 } else {
-
                     ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
-
                 }
             }
         }
     }
 
-    private fun ProfileshowPermissionTextPopup(
-        @StringRes message: Int
-    ) {
+    private fun ProfileshowPermissionTextPopup(@StringRes message: Int) {
         val dialog = AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
             .setTitle(R.string.permission_detail).apply {
                 this.setMessage(message)
@@ -230,7 +234,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             }
         } catch (ex: Exception) {
             ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
-
         }
     }
 
@@ -272,38 +275,50 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         setHasOptionsMenu(true)
         toolBar.title = getString(R.string.menu_profile)
 
-        if (dataManager.getFirstname().isEmpty()) {
-            callvolunteerData()
 
+        if (dataManager.getFirstname().isNullOrEmpty()) {
+            TxtName.text = "-"
         } else {
-            TxtName.text = dataManager.getFirstname() + " " + dataManager.getLastname()
+            TxtName.text = dataManager.getFirstname()
+        }
+
+        if (dataManager.getAddress().isNullOrEmpty()) {
+            txtAddress.text = "-"
+        } else {
             txtAddress.text = dataManager.getAddress()
+        }
+        if (dataManager.getPhoneNumber().isNullOrEmpty()) {
+            TxtContactNumber.text = "-"
+        } else {
             TxtContactNumber.text = dataManager.getPhoneNumber()
+        }
+        if (dataManager.getEmail().isNullOrEmpty()) {
+            TxtEmail.text = "-"
+        } else {
             TxtEmail.text = dataManager.getEmail()
         }
-        updateEditField()
+
 
         observeStates()
+        callvolunteerData()
+        updateEditField()
+
 
     }
 
     private fun callvolunteerData() {
-//        viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
         try {
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
-                }
-                .autoDispose(disposables)
+                }.autoDispose(disposables)
         } catch (e: Exception) {
             println("TAG -- MyData --> ${e.message}")
         }
     }
 
     private fun updateEditField() {
-        EditFirstName.setText(
-            dataManager.getFirstname().toString() + " " + dataManager.getLastname().toString()
-        )
+        EditFirstName.setText(dataManager.getFirstname().toString())
         EditAddress.setText(txtAddress.text.toString())
         EditPhone.setText(TxtContactNumber.text.toString())
         EditEmail.setText(TxtEmail.text.toString())
@@ -326,7 +341,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override
+    fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.editprofile -> {
                 LinearProfileDetails.isVisible = false
@@ -357,7 +373,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun observeStates() {
-
         viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -370,42 +385,47 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                         )
                     ApiProvider.Api_volunteer_Data ->
                         BaseUtility.showAlertMessage(
-                            context!!,
-                            R.string.alert,
-                            R.string.check_internet
+                            context!!, R.string.alert, R.string.check_internet
                         )
-
                 }
                 is NetworkRequestState.LoadingData -> {
-                    progressDialog.show()
+                    when (it.apiName) {
+                        ApiProvider.Api_volunteer_Data ->
+                            progressBarloadData.visibility = VISIBLE
+                        ApiProvider.Api_UPDATEPROFILE ->
+                            progressDialog.show()
+                    }
                 }
                 is NetworkRequestState.ErrorResponse -> {
-
-                    progressDialog.dismiss()
-
+                    when (it.apiName) {
+                        ApiProvider.Api_volunteer_Data ->
+                            progressBarloadData.visibility = GONE
+                        ApiProvider.Api_UPDATEPROFILE ->
+                            progressDialog.dismiss()
+                    }
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
-                    progressDialog.dismiss()
 
                     when (it.apiName) {
                         ApiProvider.Api_volunteer_Data -> {
+                            progressBarloadData.visibility = GONE
                             getdataFromApi(it)
                         }
                         ApiProvider.Api_UPDATEPROFILE -> {
-                            BaseUtility.showAlertMessage(
-                                activity!!,
-                                R.string.success,
+                            progressDialog.dismiss()
+                            var snack = Snackbar.make(
+                                mainRootRelativeLayout,
                                 R.string.profile_details_saved_successfully,
-                                R.string.thanks_go_back
-                            ) { dialog, _ ->
-
-                                LinearProfileDetails.isVisible = true
-                                LinearProfileDetailsForEdit.isVisible = false
-                                callMenuBarHide(LinearProfileDetails.isVisible)
-                                dialog.dismiss()
-                                callvolunteerData()
-                            }
+                                Snackbar.LENGTH_LONG
+                            )
+                            snack.show()
+                            LinearProfileDetails.isVisible = true
+                            LinearProfileDetailsForEdit.isVisible = false
+                            callMenuBarHide(LinearProfileDetails.isVisible)
+                            callvolunteerData()
                         }
+
+
                     }
                 }
             }
@@ -423,13 +443,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             dataManager.setEmail(volunteerDataResponse.volunteer.email)
             dataManager.setAddress(volunteerDataResponse.volunteer.address)
 
-            TxtName.text =
-                volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
+            TxtName.text = volunteerDataResponse.volunteer.firstName
             txtAddress.text =
-                volunteerDataResponse.volunteer.address + " , " + volunteerDataResponse.volunteer.state + " , " + volunteerDataResponse.volunteer.district
+                volunteerDataResponse.volunteer.address
             TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
             TxtEmail.text = volunteerDataResponse.volunteer.email
-
         }
     }
 

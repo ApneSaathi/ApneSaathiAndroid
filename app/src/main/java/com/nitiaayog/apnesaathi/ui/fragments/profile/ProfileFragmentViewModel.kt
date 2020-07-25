@@ -16,31 +16,31 @@ import kotlinx.coroutines.launch
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
 
-    companion object {
-        @Volatile
-        private var instance: ProfileFragmentViewModel? = null
-
-        @Synchronized
-        fun getInstance(dataManager: DataManager): ProfileFragmentViewModel =
-            instance ?: synchronized(this) {
-                instance
-                    ?: ProfileFragmentViewModel(
-                        dataManager
-                    )
-                        .also { instance = it }
-            }
-    }
-//companion object {
+//    companion object {
+//        @Volatile
+//        private var instance: ProfileFragmentViewModel? = null
 //
-//    @Synchronized
-//    fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
-//        ProfileFragmentViewModel(dataManager)
+//        @Synchronized
+//        fun getInstance(dataManager: DataManager): ProfileFragmentViewModel =
+//            instance ?: synchronized(this) {
+//                instance
+//                    ?: ProfileFragmentViewModel(
+//                        dataManager
+//                    )
+//                        .also { instance = it }
+//            }
 //    }
-//}
+
+companion object {
+
+    @Synchronized
+    fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
+        ProfileFragmentViewModel(dataManager)
+    }
+}
 
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
-    fun updateDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getvolunteerData(mContext: Context, volunteerId: String) {
         if (checkNetworkAvailability(mContext, ApiProvider.Api_volunteer_Data)) {
@@ -99,17 +99,14 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
                     NetworkRequestState.LoadingData(ApiProvider.Api_UPDATEPROFILE)
             }.subscribe({
                 try {
-                    if (it.getStatusCode() == "0") {
+                    if (it.statusCode == "0") {
                         loaderObservable.value =
                             NetworkRequestState.SuccessResponse(ApiProvider.Api_UPDATEPROFILE, it)
                         viewModelScope.launch {
                             io {
                             }
                             loaderObservable.value =
-                                NetworkRequestState.SuccessResponse(
-                                    ApiProvider.Api_UPDATEPROFILE,
-                                    it
-                                )
+                                NetworkRequestState.SuccessResponse(ApiProvider.Api_UPDATEPROFILE, it)
 
                         }
                     } else loaderObservable.value =
