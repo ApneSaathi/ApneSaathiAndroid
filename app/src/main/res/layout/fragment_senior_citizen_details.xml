@@ -686,7 +686,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_2"
-                        android:text="@string/not_picked"
+                        android:text="@string/not_attended"
                         android:textColor="@color/color_orange" />
 
                 </LinearLayout>

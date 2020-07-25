@@ -88,7 +88,7 @@ class AppDataManager private constructor(
     // Database Access
     // => Table : call_details
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1","null", "")) //Null and empty should be removed
+        callsDataDao.getAllCallsList(arrayOf("1", "null", "")) //Null and empty should be removed
 
     override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("2", "3", "4", "5", "6"))
@@ -97,7 +97,20 @@ class AppDataManager private constructor(
         callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10","null", ""))  //Null and empty should be removed
+        callsDataDao.getAllCallsList(
+            arrayOf(
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "null",
+                ""
+            )
+        )  //Null and empty should be removed
 
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
@@ -174,7 +187,7 @@ class AppDataManager private constructor(
     override fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getGrievancesWithStatus("RESOLVED")
 
-    override fun clearPreviousTrackingData() =  grievancesTrackingDao.deletePreviousGrievanceData()
+    override fun clearPreviousTrackingData() = grievancesTrackingDao.deletePreviousGrievanceData()
 
     override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
@@ -234,5 +247,7 @@ class AppDataManager private constructor(
     override fun getAddress(): String = preferences.getAddress()
 
     override fun setAddress(address: String) = preferences.setAddress(address)
+    override fun setLastSelectedId(callId: String) = preferences.setLastSelectedId(callId)
 
+    override fun getLastSelectedId(): String = preferences.getLastSelectedId()
 }

@@ -127,39 +127,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         } else {
             txt_medical_history.text = medicalHistory
         }
-        when (callData?.callStatusSubCode) {
-            "1" -> {
-                tv_call_status.text = getString(R.string.no_response_single_line)
-                tv_call_status_new.text = getString(R.string.no_response_single_line)
-            }
-            "2" -> {
-                tv_call_status.text = getString(R.string.not_picked_single_line)
-                tv_call_status_new.text = getString(R.string.not_picked_single_line)
-            }
-            "3" -> {
-                tv_call_status.text = getString(R.string.not_reachable_single_line)
-                tv_call_status_new.text = getString(R.string.not_reachable_single_line)
-            }
-            "4" -> {
-                tv_call_status.text = getString(R.string.dis_connected)
-                tv_call_status_new.text = getString(R.string.dis_connected)
-            }
-            "5" -> {
-                tv_call_status.text = getString(R.string.connected)
-                tv_call_status_new.text = getString(R.string.connected)
-            }
-        }
-        when (callData?.callStatusCode) {
-            "0" -> {
-                txt_status.text = getString(R.string.assigned)
-            }
-            "1" -> {
-                txt_status.text = getString(R.string.pending)
-            }
-            "2" -> {
-                txt_status.text = getString(R.string.completed)
-            }
-        }
+        txt_status.text = getCallStatusFromCode(callData?.callStatusCode)
         txt_call_response.text = callData?.talkedWith
 
         txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout ?: "--"
@@ -224,7 +192,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_escalation.text = getString(R.string.yes)
         }
         if (srCitizenGrievance.lackOfEssentialServices == "Yes") {
-            txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
+            txt_issue_raised_date.text =
+                srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
             txt_grievance.text = getText(R.string.yes)
             var grievanceCategory = ""
             if (srCitizenGrievance.foodShortage != "4") {
@@ -264,11 +233,48 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_grievance.text = getString(R.string.no)
             txt_grievance_category.text = getString(R.string.not_applicable)
             txt_issue_raised.text = getString(R.string.no_issues)
-            txt_issue_raised_date.text ="--"
+            txt_issue_raised_date.text = "--"
         }
         txt_grievance_desc.text = srCitizenGrievance.description
         txt_other_problem.text = srCitizenGrievance.impRemarkInfo ?: "--"
 
+    }
+
+    private fun getCallStatusFromCode(status: String?): String {
+        var callStatus = ""
+        when (status) {
+            "1" -> {
+                callStatus = getString(R.string.pending)
+            }
+            "2" -> {
+                callStatus = getString(R.string.not_picked_single_line)
+            }
+            "3" -> {
+                callStatus = getString(R.string.not_reachable_single_line)
+            }
+            "4" -> {
+                callStatus = getString(R.string.number_busy)
+            }
+            "5" -> {
+                callStatus = getString(R.string.call_later)
+            }
+            "6" -> {
+                callStatus = getString(R.string.call_dropped)
+            }
+            "7" -> {
+                callStatus = getString(R.string.wrong_number)
+            }
+            "8" -> {
+                callStatus = getString(R.string.number_not_existing)
+            }
+            "9" -> {
+                callStatus = getString(R.string.dis_connected)
+            }
+            "10" -> {
+                callStatus = getString(R.string.connected)
+            }
+        }
+        return callStatus
     }
 
     private fun getFormattedDate(date: String): String {
@@ -282,6 +288,12 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         txt_edit.visibility = View.VISIBLE
         cl_uneditable_container.visibility = View.GONE
         ll_status_container.visibility = View.VISIBLE
+        val status = getCallStatusFromCode(callData?.callStatusCode)
+        if (status.isNotEmpty())
+            tv_call_status_new.text = status
+        else {
+            tv_call_status_new.text = "Yet to be called"
+        }
     }
 
     private fun makeGrievanceContainerVisible() {
@@ -380,5 +392,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         callData: CallData
     ) {
         this.callData = callData
+    }
+
+    fun reloadFragment(callData: CallData) {
+        this.callData = callData
+        getGrievanceData()
     }
 }
