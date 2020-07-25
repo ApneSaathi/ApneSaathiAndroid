@@ -298,7 +298,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             TxtEmail.text = dataManager.getEmail()
         }
 
-
         observeStates()
         callvolunteerData()
         updateEditField()
