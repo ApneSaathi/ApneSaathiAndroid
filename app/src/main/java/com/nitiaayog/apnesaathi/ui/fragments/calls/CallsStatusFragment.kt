@@ -20,12 +20,18 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.BaseCallsTypeFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_calls_status.*
 
-class CallsStatusFragment : BaseFragment<HomeViewModel>() {
+class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<CallData> {
 
     private var lastCallPosition: Int = -1
     private var lastCallData: CallData? = null
+
+    /*private var lastFollowupCallPosition: Int = -1
+    private var lastFollowupCallData: CallData? = null
+    private var lastCompletedCallPosition: Int = -1
+    private var lastCompletedCallData: CallData? = null*/
 
     private val pendingAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
@@ -41,8 +47,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>() {
                     lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
-                        R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -63,8 +70,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>() {
                     lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
-                        R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -85,8 +93,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>() {
                     lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
-                        R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -113,19 +122,20 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>() {
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
-    /*override fun onItemClick(position: Int, data: CallData) {
+    override fun onItemClick(position: Int, callData: CallData) {
         this.lastCallPosition = position
-        lastCallData = data
+        lastCallData = callData
         prepareToCallPerson()
-    }*/
+    }
 
-    /*override fun onMoreInfoClick(position: Int, data: CallData) {
+    override fun onMoreInfoClick(position: Int, data: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
         fragment.setSelectedUser(data)
+        viewModel.setLastSelectedUser(data.callId.toString())
         addFragment(
-            R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment)
+            R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
         )
-    }*/
+    }
 
     private fun initRecyclerView() {
         val rvPendingList = (rvPendingList as RecyclerView)

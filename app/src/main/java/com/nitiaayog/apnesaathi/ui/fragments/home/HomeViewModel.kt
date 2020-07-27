@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
+
         @Volatile
         private var instance: HomeViewModel? = null
 
@@ -51,11 +52,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     private val grievancesTrackingList: LiveData<MutableList<GrievanceData>> =
         dataManager.getAllTrackingGrievances()
-
-    override fun onCleared() {
-        instance?.let { instance = null }
-        super.onCleared()
-    }
 
     private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
         val callData = grievance.filter {
@@ -155,5 +151,10 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking, it)
             }).autoDispose(disposables)
         }
+
+    }
+
+    fun setLastSelectedUser(callId: String) {
+        dataManager.setLastSelectedId(callId)
     }
 }
