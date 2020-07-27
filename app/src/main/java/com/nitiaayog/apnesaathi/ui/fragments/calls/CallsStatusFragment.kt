@@ -57,19 +57,19 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     }
     private val invalidAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
-            this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, callData: CallData) {
+            this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+                override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     prepareToCallPerson()
                 }
 
-                override fun onMoreInfoClick(position: Int, callData: CallData) {
+                override fun onMoreInfoClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(callData)
-                    viewModel.setLastSelectedUser(callData.callId.toString())
+                    fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -145,9 +145,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
-    override fun onItemClick(position: Int, callData: CallData) {
+    override fun onItemClick(position: Int, data: CallData) {
         this.lastCallPosition = position
-        lastCallData = callData
+        lastCallData = data
         prepareToCallPerson()
     }
 
