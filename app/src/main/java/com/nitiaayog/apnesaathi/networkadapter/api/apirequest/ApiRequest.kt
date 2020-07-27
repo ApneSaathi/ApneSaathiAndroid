@@ -5,6 +5,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import io.reactivex.Single
 
@@ -16,6 +17,8 @@ interface ApiRequest {
     //    Get Volunteer Data
     fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
+    //    Get Update Volunteer Data
+    fun updatevolunteerData(phoneNumber: JsonObject): Single<ProfileUpdateResponse>
 
     // Get Calls list for Home
     fun getCallDetails(details: JsonObject): Single<HomeRepo>

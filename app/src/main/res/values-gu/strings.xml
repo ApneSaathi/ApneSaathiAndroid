@@ -445,4 +445,8 @@
     <string name="update_the_progress_happen">અપગ્રેડ પ્રગતિ થાય છે</string>
     <string name="update_call_status">ક Callલની સ્થિતિને અપડેટ કરો</string>
     <string name="complaint_on">ફરિયાદ છે</string>
+
+    <string name="otpsendsuccesfully">otp સફળતાપૂર્વક મોકલાઈ ગયું</string>
+    <string name="profile_details_saved_successfully">સ્વયંસેવકની વિગતો સફળતાપૂર્વક સમન્વયિત થઈ છે. અમારી સેવા કરવા બદલ આભાર</string>
+
 </resources>

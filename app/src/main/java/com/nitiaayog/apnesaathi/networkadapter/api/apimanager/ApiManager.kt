@@ -9,6 +9,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import io.reactivex.Single
 
@@ -30,6 +31,10 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
        return apiClient.getVolunteerData(phoneNumber).subscribeAndObserveWithDelaySubscription()
+    }
+
+    override fun updatevolunteerData(phoneNumber: JsonObject): Single<ProfileUpdateResponse> {
+        return apiClient.getUpdateVolunteerData(phoneNumber).subscribeAndObserveWithDelaySubscription()
     }
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =

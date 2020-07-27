@@ -13,95 +13,49 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
+import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login_otpverify.*
+import java.util.concurrent.TimeUnit
 
 
 class OtpActivity : BaseActivity<OtpActivityModel>() {
     var wrongAttempCount: Int = 0
+    lateinit var mContext: Context
     val otpEt = arrayOfNulls<EditText>(4)
 
-
+    private val progressDialog: ProgressDialog.Builder by lazy {
+        ProgressDialog.Builder(mContext!!).setMessage("Please wait.")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        mContext = this
 
         otpEt[0] = findViewById(R.id.edOtp1);
         otpEt[1] = findViewById(R.id.edOtp2);
         otpEt[2] = findViewById(R.id.edOtp3);
         otpEt[3] = findViewById(R.id.edOtp4);
         setOtpEditTextHandler()
-//        edOtp1.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(p0: Editable?) {
-//                if (edOtp1.length() == 1) {
-//                    edOtp2.requestFocus();
-//                }
-//            }
-//
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//        })
-//
-//
-//
-//        edOtp2.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(p0: Editable?) {
-//                if (edOtp2.length() == 1) {
-//                    edOtp3.requestFocus();
-//                } else {
-//                    edOtp1.requestFocus();
-//                }
-//            }
-//
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//        })
-//        edOtp3.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(p0: Editable?) {
-//                if (edOtp3.length() == 1) {
-//                    edOtp4.requestFocus();
-//                } else {
-//                    edOtp2.requestFocus();
-//                }
-//            }
-//
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//        })
-//
-//        edOtp4.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(p0: Editable?) {
-//                if (edOtp4.length() == 0) {
-//                    edOtp3.requestFocus();
-//                } else {
-//
-//                }
-//            }
-//
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//        })
+
+        observeStates()
+
+
 
 
         btnVerify.throttleClick().subscribe() {
@@ -170,40 +124,65 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             }
         }.autoDispose(disposables)
         txttimer.throttleClick().subscribe() {
-            onBackPressed()
+
+            if (txttimer.text == resources.getString(R.string.resendOTP)) {
+                txttimer.isClickable = true
+                txttimer.paintFlags = 0
+                if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
+                    Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                            viewModel.callLogin(
+                                mContext,
+                                intent.getStringExtra("PhoneNo")
+                            )
+                        }.autoDispose(disposables)
+
+                } else {
+                    TxtMobileNumber.setText("1234")
+                }
+            } else {
+                txttimer.isClickable = false
+                txttimer.paintFlags = 0
+            }
+
+
         }.autoDispose(disposables)
 
-        val timer = object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                txttimer.setText(resources.getString(R.string.otpverification) + millisUntilFinished / 1000)
-            }
 
-            override fun onFinish() {
-                txttimer.text = resources.getString(R.string.resendOTP)
-                btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
-                if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
-                } else {
-                    btnVerify.isClickable = false
-                }
-            }
-        }
-        timer.start()
         TxtChangeNumber.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
         TxtChangeNumber.throttleClick().subscribe() {
             onBackPressed()
         }.autoDispose(disposables)
-        txttimer.throttleClick().subscribe() {
-            if (txttimer.text.toString() == resources.getString(R.string.resendOTP)) {
-                onBackPressed()
-            }
-        }.autoDispose(disposables)
 
+        callTimer()
         if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
             TxtMobileNumber.setText(intent.getStringExtra("PhoneNo"))
 
         } else {
             TxtMobileNumber.setText("1234")
         }
+    }
+
+    private fun callTimer() {
+        val timer = object : CountDownTimer(60000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                txttimer.setText(resources.getString(R.string.otpverification) + millisUntilFinished / 1000)
+
+            }
+
+            override fun onFinish() {
+                txttimer.text = resources.getString(R.string.resendOTP)
+                txttimer.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+//                btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
+//                if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
+//                } else {
+//                    btnVerify.isClickable = false
+//                }
+            }
+        }
+        timer.start()
     }
 
     private fun setOtpEditTextHandler() {
@@ -280,5 +259,41 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
+    private fun observeStates() {
+        viewModel.getDataObserver().removeObservers(this)
+        viewModel.getDataObserver().observe(this, Observer {
+            when (it) {
+                is NetworkRequestState.NetworkNotAvailable -> {
+                    BaseUtility.showAlertMessage(
+                        mContext!!,
+                        R.string.alert,
+                        R.string.check_internet
+                    )
+                }
+
+
+                is NetworkRequestState.LoadingData -> {
+                    progressDialog.show()
+                }
+                is NetworkRequestState.ErrorResponse -> {
+                    progressDialog.dismiss()
+                    CallSnackbar(
+                        mainRootRelativeLayout,
+                        ApiConstants.VolunteerNotRegisterErrorMessage
+                    )
+                }
+                is NetworkRequestState.SuccessResponse<*> -> {
+                    progressDialog.dismiss()
+                    CallSnackbar(
+                        mainRootRelativeLayout,
+                        resources.getString(R.string.otpsendsuccesfully)
+                    )
+                    callTimer()
+                }
+
+            }
+        })
     }
 }
