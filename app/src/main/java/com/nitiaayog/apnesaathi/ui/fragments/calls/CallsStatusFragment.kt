@@ -55,6 +55,29 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
             })
         }
     }
+    private val invalidAdapter: CallsAdapter by lazy {
+        CallsAdapter().apply {
+            this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int, callData: CallData) {
+                    lastCallPosition = position
+                    lastCallData = callData
+                    prepareToCallPerson()
+                }
+
+                override fun onMoreInfoClick(position: Int, callData: CallData) {
+                    lastCallPosition = position
+                    lastCallData = callData
+                    val fragment = SeniorCitizenDetailsFragment()
+                    fragment.setSelectedUser(callData)
+                    viewModel.setLastSelectedUser(callData.callId.toString())
+                    addFragment(
+                        R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
+                    )
+                }
+            })
+        }
+    }
+
 
     private val followupAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
@@ -147,6 +170,15 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
         )
         rvPendingList.adapter = pendingAdapter
 
+        val rvInvalidCallsList = (rvInvalidCallList as RecyclerView)
+        rvPendingList.isNestedScrollingEnabled = false
+        rvPendingList.addItemDecoration(
+            DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
+                setDrawable(ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!)
+            }
+        )
+        rvInvalidCallsList.adapter = invalidAdapter
+
         val rvFollowupList = (rvFollowupList as RecyclerView)
         rvFollowupList.isNestedScrollingEnabled = false
         rvFollowupList.addItemDecoration(
@@ -174,6 +206,8 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
                 manageViews(callsCountString, tvFollowup, btnSeeAllFollowup, dataList.size)
             R.string.attended_calls_count ->
                 manageViews(callsCountString, tvAttended, btnSeeAllAttended, dataList.size)
+            R.string.invalid_calls_count ->
+                manageViews(callsCountString, tvInvalidCalls, btnSeeAllInvalid, dataList.size )
             else -> {
             }
         }
@@ -190,6 +224,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
                         R.string.pending_calls_count -> R.string.pending_calls
                         R.string.follow_up_count -> R.string.follow_up
                         R.string.attended_calls_count -> R.string.attended_calls
+                        R.string.invalid_calls_count -> R.string.invalid_calls
                         else -> 0
                     }
                 )
@@ -223,6 +258,13 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
             completedAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             completedAdapter.notifyDataSetChanged()
             manageCalls(it, R.string.attended_calls_count)
+        })
+
+        viewModel.getInvalidCallsList().removeObservers(viewLifecycleOwner)
+        viewModel.getInvalidCallsList().observe(viewLifecycleOwner, Observer {
+            invalidAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
+            invalidAdapter.notifyDataSetChanged()
+            manageCalls(it, R.string.invalid_calls_count)
         })
     }
 }
