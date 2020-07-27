@@ -214,7 +214,7 @@
     <string name="more_details">अधिक जानकारी दिखाएं</string>
 
     <string name="validate_sr_citizen_name">वरिष्ठ नागरिक का नाम प्रदान करें</string>
-    <string name="validate_age">आयु प्रदान करें</string>
+    <string name="validate_age">आयु प्रदान करें(50 – 110 के बीच)</string>
     <string name="validate_gender">जती का चयन करें</string>
     <string name="validate_contact_number">वरिष्ठ नागरिक का संपर्क नंबर प्रदान करें</string>
     <string name="valid_contact_number">मान्य संपर्क नंबर प्रदान करें</string>

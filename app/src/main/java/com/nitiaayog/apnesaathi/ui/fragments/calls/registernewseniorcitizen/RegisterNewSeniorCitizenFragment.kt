@@ -27,8 +27,11 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
     private var selectedGender: String = ""
     private var selectedDistrict: String = ""
     private var selectedState: String = ""
+
     private var selectedStatePos: Int = -1
+
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
+
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_saving_data)
     }
@@ -46,7 +49,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         initTextWatcher()
     }
 
-    fun setNewCitizenRegisterListener(reloadApiRequiredListener: ReloadApiRequiredListener){
+    fun setNewCitizenRegisterListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 
@@ -99,8 +102,6 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
             viewModel.setState(selectedState)
             setDistrictAdapter()
         }
-
-
     }
 
     private fun setDistrictAdapter() {
@@ -133,7 +134,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
 
     private fun initClicks() {
 
-        etContactNumber.setFilters(arrayOf<InputFilter>(InputFilter.LengthFilter(10)))
+        etContactNumber.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
 
         etAge.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -142,14 +143,14 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
                 }
 
                 if (etAge.length() == 2) {
-                    if (etAge.text.toString().trim().toInt() < 60) {
+                    if (etAge.text.toString().trim().toInt() < 50) {
                         tvAgeError.visibility = View.VISIBLE
                     }
                 }
 
                 if (etAge.length() == 3) {
                     when {
-                        etAge.text.toString().trim().toInt() < 60 -> {
+                        etAge.text.toString().trim().toInt() < 50 -> {
                             tvAgeError.visibility = View.VISIBLE
                         }
                         etAge.text.toString().trim().toInt() > 110 -> {
@@ -165,9 +166,6 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-
-
-
 
         actGender.throttleClick().subscribe {
             actGender.showDropDown()
@@ -211,7 +209,7 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         } else if (etAge.text.isEmpty()) {
             tvAgeError.visibility = View.VISIBLE
             return false
-        } else if (etAge.text.toString().toInt() < 60) {
+        } else if (etAge.text.toString().toInt() < 50) {
             tvAgeError.visibility = View.VISIBLE
             return false
         } else if (etAge.text.toString().toInt() > 110) {

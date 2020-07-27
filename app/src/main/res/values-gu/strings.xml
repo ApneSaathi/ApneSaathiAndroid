@@ -215,7 +215,7 @@
     <string name="more_details">વધુ માહિતી બતાવો</string>
 
     <string name="validate_sr_citizen_name">વરિષ્ઠ નાગરિકનું નામ પ્રદાન કરો</string>
-    <string name="validate_age">ઉંમર જણાવો</string>
+    <string name="validate_age">ઉંમર જણાવો(50 – 110 ની વચ્ચે)</string>
     <string name="validate_gender">જાતી પસંદ કરો</string>
     <string name="validate_contact_number">વરિષ્ઠ નાગરિકનો સંપર્ક નંબર પ્રદાન કરો</string>
     <string name="valid_contact_number">માન્ય સંપર્ક નંબર પ્રદાન કરો</string>
