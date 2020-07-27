@@ -50,5 +50,4 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
         apiClient.updateGrievanceDetails(grDetails).subscribeAndObserve()
-
 }

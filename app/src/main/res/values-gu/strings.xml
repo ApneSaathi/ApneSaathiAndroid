@@ -355,11 +355,11 @@
         <item>@string/number_busy</item>
         <item>@string/number_not_existing</item>
     </string-array>
-    <string name="call_dropped">Call dropped</string>
-    <string name="wrong_number">Wrong Number</string>
-    <string name="call_later">Call Later</string>
-    <string name="number_busy">Number Busy</string>
-    <string name="number_not_existing">Number not existing</string>
+    <string name="call_dropped">ક Callલ પડ્યો</string>
+    <string name="wrong_number">ખોટો નંબર</string>
+    <string name="call_later">પછીથી ફોન કરો</string>
+    <string name="number_busy">નંબર વ્યસ્ત</string>
+    <string name="number_not_existing">સંખ્યા અસ્તિત્વમાં નથી</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -414,22 +414,42 @@
     <string name="calls_summary">કોલ્સ સારાંશ</string>
     <string name="total">કુલ:</string>
     <string name="was">હતી</string>
-    <string name="select_a_state">Please select a state</string>
+    <string name="select_a_state">કૃપા કરીને રાજ્ય પસંદ કરો</string>
     <string name="invalidOTP">અમાન્ય OTP</string>
     <string name="limitecros">તમે મહત્તમ પ્રયત્નો પર પહોંચી ગયા છો</string>
     <string name="getnewOTP">નવું ઓટીપી મેળવો</string>
     <string name="chnagenumber"> નંબર બદલો ? </string>
 
-    <string name="update_issue_progress">Update Issue progress</string>
-    <string name="completed_count">"-- Completed: "</string>
-    <string name="need_follow_up_count">"-- Need Followup: "</string>
-    <string name="pending_g_count">"-- Pending: "</string>
-    <string name="update_status">Update Status</string>
-    <string name="reopen">Reopen</string>
-    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
-    <string name="raised_on_remarks">Issue was raised on</string>
-    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
-    <string name="enter_description_warning">Please enter a description</string>
-    <string name="status_warning">Please select a status</string>
-    <string name="provide_remarks">Please provide remarks</string>
+    <string name="pending_count">બાકી(%s)</string>
+    <string name="menu_issues">મુદ્દાઓ</string>
+    <string name="type_remarks">ટીપ્પણી લખો …</string>
+    <string name="remarks">ટીકાઓ</string>
+    <string name="progress_updates">પ્રગતિ અપડેટ્સ:</string>
+    <string name="update_issue_progress">અપડેટ ઇશ્યૂ પ્રગતિ</string>
+    <string name="completed_count">- પૂર્ણ:</string>
+    <string name="need_follow_up_count">- અનુસરવાની જરૂર છે:</string>
+    <string name="pending_g_count">- બાકી:</string>
+    <string name="update_status">અપડેટ સ્થિતિ</string>
+    <string name="reopen">ફરીથી ખોલો</string>
+    <string name="resolvd_remarks">ટીપ્પણી સાથે સમસ્યા હલ થઈ હતી:</string>
+    <string name="raised_on_remarks">પર મુદ્દો ઉઠાવવામાં આવ્યો હતો</string>
+    <string name="in_progress_remarks">ટિપ્પણી સાથે સ્થિતિને પ્રગતિમાં બદલી હતી:</string>
+    <string name="enter_description_warning">કૃપા કરી વર્ણન દાખલ કરો</string>
+    <string name="status_warning">કૃપા કરીને સ્થિતિ પસંદ કરો</string>
+    <string name="provide_remarks">કૃપા કરીને ટીપ્પણી આપો</string>
+    <string name="in_progress">પ્રગતિમાં</string>
+    <string name="issue_id">ઇશ્યુ આઈ.ડી.</string>
+    <string name="created_date">બનાવવાની તારીખ</string>
+    <string name="last_update_on">પર છેલ્લું અપડેટ</string>
+    <string name="resolved_count">ઉકેલી(%s)</string>
+    <string name="inprogress_count">પ્રગતિમાં(%s)</string>
+    <string name="escalation">એસ્કેલેશન:</string>
+    <string name="type_reason">પ્રકાર કારણ…</string>
+    <string name="update_the_progress_happen">અપગ્રેડ પ્રગતિ થાય છે</string>
+    <string name="update_call_status">ક Callલની સ્થિતિને અપડેટ કરો</string>
+    <string name="complaint_on">ફરિયાદ છે</string>
+
+    <string name="otpsendsuccesfully">otp સફળતાપૂર્વક મોકલાઈ ગયું</string>
+    <string name="profile_details_saved_successfully">સ્વયંસેવકની વિગતો સફળતાપૂર્વક સમન્વયિત થઈ છે. અમારી સેવા કરવા બદલ આભાર</string>
+
 </resources>

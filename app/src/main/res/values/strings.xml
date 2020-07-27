@@ -231,7 +231,7 @@
     <string name="gender_others">Others</string>
     <string name="data_not_available">Data not available</string>
     <string name="validate_sr_citizen_name">Provide senior citizen\'s name</string>
-    <string name="validate_age">Provide age between 60-110 </string>
+    <string name="validate_age">Provide age between 60–110 </string>
     <string name="validate_gender">Select gender</string>
     <string name="validate_contact_number">Provide senior citizen\'s contact number</string>
     <string name="valid_contact_number">Provide valid contact number</string>
@@ -450,7 +450,7 @@
     <string name="txttakePhoto">Take Photo</string>
     <string name="txtchoosefromgallry">Choose from Gallery</string>
     <string name="txtcancel">Cancel</string>
-    <string name="wait_profile_data">we are fetching your profile data</string>
+    <string name="wait_profile_data">we are updating your profile data</string>
     <string name="Camera_permission_text">App has feature that Camera and Storage Permission required to this application</string>
     <string name="otpverification">"OTP Verification : "</string>
     <string name="complaint_on">Complaint on</string>
@@ -467,7 +467,7 @@
     <string name="inprogress_count">In Progress(%s)</string>
     <string name="invalidOTP">Invalid OTP</string>
     <string name="escalation">Escalation:</string>
-    <string name="type_reason">Type reason...</string>
+    <string name="type_reason">Type reason…</string>
     <string name="update_issue_progress">Update Issue progress</string>
     <string name="update_the_progress_happen">Update the progress happen</string>
     <string name="completed_count">"-- Completed: "</string>
@@ -484,7 +484,10 @@
     <string name="enter_description_warning">Please enter a description</string>
     <string name="status_warning">Please select a status</string>
     <string name="provide_remarks">Please provide remarks</string>
-    <string name="type_remarks">Type remarks...</string>
+    <string name="type_remarks">Type remarks…</string>
     <string name="remarks">Remarks</string>
+    <string name="progress_updates">Progress updates:</string>
+    <string name="otpsendsuccesfully">Otp sent successfully</string>
+    <string name="profile_details_saved_successfully">Volunteer details is synced up successfully.</string>
 
 </resources>

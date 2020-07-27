@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainRootRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
@@ -68,12 +69,28 @@
                         android:layout_marginTop="@dimen/dimen_15"
                         android:orientation="vertical">
 
-                        <TextView
-                            style="@style/TextAppearance.Title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5"
-                            android:text="@string/personal_details" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                style="@style/TextAppearance.Title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5"
+                                android:text="@string/personal_details" />
+                            <ProgressBar
+                                android:layout_marginRight="@dimen/dimen_10"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/progressBarloadData"
+                                style="?android:attr/progressBarStyleSmall"
+                                android:layout_width="@dimen/dimen_20"
+                                android:layout_height="@dimen/dimen_20"
+                                 android:layout_marginEnd="@dimen/dimen_10"
+                                android:visibility="visible"
+
+                                />
+                        </RelativeLayout>
 
                         <TextView
                             android:id="@+id/TxtName"
@@ -86,7 +103,7 @@
                             android:drawableTint="@color/text_color_3"
                             android:fontFamily="sans-serif"
 
-                            android:text="Amol Ramnath khose"
+                            android:text="XXXXX XXXXX"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
@@ -114,7 +131,7 @@
                             android:drawablePadding="@dimen/dimen_5"
 
                             android:fontFamily="sans-serif"
-                            android:text="9673346489"
+                            android:text="XXXXXXXXX"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
@@ -129,7 +146,7 @@
 
                             android:fontFamily="sans-serif"
 
-                            android:text="amol@gmail.com"
+                            android:text="XXXX@gmail.com"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
@@ -168,6 +185,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/LinearProfileDetailsForEdit"

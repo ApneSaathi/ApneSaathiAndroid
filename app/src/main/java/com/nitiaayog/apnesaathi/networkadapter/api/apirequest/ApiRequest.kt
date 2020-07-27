@@ -16,7 +16,6 @@ interface ApiRequest {
     //    Get Volunteer Data
     fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
-
     // Get Calls list for Home
     fun getCallDetails(details: JsonObject): Single<HomeRepo>
 

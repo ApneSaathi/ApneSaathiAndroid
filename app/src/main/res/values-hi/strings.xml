@@ -355,11 +355,11 @@
         <item>@string/number_busy</item>
         <item>@string/number_not_existing</item>
     </string-array>
-    <string name="call_dropped">Call dropped</string>
-    <string name="wrong_number">Wrong Number</string>
-    <string name="call_later">Call Later</string>
-    <string name="number_busy">Number Busy</string>
-    <string name="number_not_existing">Number not existing</string>
+    <string name="call_dropped">कॉल ड्रॉप हो गई</string>
+    <string name="wrong_number">गलत संख्या</string>
+    <string name="call_later">बाद में कॉल करें</string>
+    <string name="number_busy">नंबर व्यस्त है</string>
+    <string name="number_not_existing">नंबर मौजूदा नहीं है</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -418,22 +418,42 @@
     <string name="calls_summary">सारांश कहता है</string>
     <string name="total">संपूर्ण:</string>
     <string name="was">था</string>
-    <string name="select_a_state">Please select a state</string>
+    <string name="select_a_state">कृपया एक राज्य चुनें</string>
     <string name="invalidOTP">अमान्य ओटीपी</string>
     <string name="limitecros">आप अधिकतम प्रयास तक पहुँच गए हैं.s</string>
     <string name="getnewOTP">नया ओटीपी प्राप्त करें</string>
     <string name="chnagenumber"> अंक बदलो ? </string>
 
-    <string name="update_issue_progress">Update Issue progress</string>
-    <string name="completed_count">"-- Completed: "</string>
-    <string name="need_follow_up_count">"-- Need Followup: "</string>
-    <string name="pending_g_count">"-- Pending: "</string>
-    <string name="update_status">Update Status</string>
-    <string name="reopen">Reopen</string>
-    <string name="resolvd_remarks">Issue was resolved with remarks:</string>
-    <string name="raised_on_remarks">Issue was raised on</string>
-    <string name="in_progress_remarks">Status was changed to In Progress with remarks:</string>
-    <string name="enter_description_warning">Please enter a description</string>
-    <string name="status_warning">Please select a status</string>
-    <string name="provide_remarks">Please provide remarks</string>
+    <string name="type_remarks">टिप्पणी टाइप करें …</string>
+    <string name="menu_issues">मुद्दे</string>
+    <string name="pending_count">विचाराधीन(%s)</string>
+    <string name="remarks">टिप्पणियों</string>
+    <string name="progress_updates">प्रगति अपडेट:</string>
+    <string name="update_issue_progress">अद्यतन समस्या प्रगति</string>
+    <string name="completed_count">-- पूरा कर लिया है:</string>
+    <string name="need_follow_up_count">- फॉलोअप चाहिए:</string>
+    <string name="pending_g_count">- लंबित:</string>
+    <string name="update_status">नवीनतम स्थिति</string>
+    <string name="reopen">फिर से खोलना</string>
+    <string name="resolvd_remarks">समस्या का हल टिप्पणी के साथ किया गया:</string>
+    <string name="raised_on_remarks">मुद्दे को उठाया गया</string>
+    <string name="in_progress_remarks">स्थिति को टिप्पणी के साथ प्रगति में बदल दिया गया था:</string>
+    <string name="enter_description_warning">कृपया विवरण दर्ज करें</string>
+    <string name="status_warning">कृपया एक स्थिति चुनें</string>
+    <string name="provide_remarks">कृपया टिप्पणी प्रदान करें</string>
+    <string name="complaint_on">पर शिकायत</string>
+    <string name="update_call_status">कॉल स्टेटस अपडेट करें</string>
+    <string name="in_progress">चालू</string>
+    <string name="issue_id">इश्यू आई.डी.</string>
+    <string name="created_date">रचना तिथि</string>
+    <string name="last_update_on">पर अंतिम अद्यतन</string>
+    <string name="resolved_count">हल(%s)</string>
+    <string name="inprogress_count">चालू(%s)</string>
+    <string name="escalation">वृद्धि:</string>
+    <string name="type_reason">प्रकार कारण…</string>
+    <string name="update_the_progress_happen">प्रगति को अद्यतन करें</string>
+
+    <string name="otpsendsuccesfully">ओटप को सफलतापूर्वक भेजा गया</string>
+    <string name="profile_details_saved_successfully">हमारी सेवा करने के लिए स्वयंसेवक विवरण सफलतापूर्वक सिंक किया गया है। </string>
+
 </resources>
