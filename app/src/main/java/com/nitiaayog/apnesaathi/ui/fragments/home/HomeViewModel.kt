@@ -24,8 +24,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         private var instance: HomeViewModel? = null
 
         @Synchronized
-        fun getInstance(dataManager: DataManager): HomeViewModel =
-            instance ?: synchronized(this) { HomeViewModel(dataManager).also { instance = it } }
+        fun getInstance(dataManager: DataManager): HomeViewModel = instance ?: synchronized(this) {
+            HomeViewModel(dataManager).also { instance = it }
+        }
     }
 
     private val TAG: String = "TAG -- ${HomeViewModel::class.java.simpleName} -->"
@@ -50,6 +51,11 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     private val grievancesTrackingList: LiveData<MutableList<GrievanceData>> =
         dataManager.getAllTrackingGrievances()
+
+    override fun onCleared() {
+        instance?.run { instance = null }
+        super.onCleared()
+    }
 
     private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
         val callData = grievance.filter {
