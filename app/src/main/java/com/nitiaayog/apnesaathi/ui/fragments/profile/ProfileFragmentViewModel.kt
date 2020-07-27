@@ -15,21 +15,15 @@ import kotlinx.coroutines.launch
 
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
+
     companion object {
-        @Volatile
-        private var instance: ProfileFragmentViewModel? = null
 
         @Synchronized
-        fun getInstance(dataManager: DataManager): ProfileFragmentViewModel =
-            instance
-                ?: synchronized(this) {
-                    instance
-                        ?: ProfileFragmentViewModel(
-                            dataManager
-                        )
-                            .also { instance = it }
-                }
+        fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
+            ProfileFragmentViewModel(dataManager)
+        }
     }
+
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
@@ -69,5 +63,50 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         }
 
 
+    }
+
+    fun getUpdatedvolunteerData(
+        mContext: Context,
+        volunteerId: String,
+        fullname: String,
+        address: String,
+        email: String
+    ) {
+        if (checkNetworkAvailability(mContext, ApiProvider.Api_UPDATEPROFILE)) {
+            val params1 = JsonObject()
+            params1.addProperty(ApiConstants.Profileidvolunteer, volunteerId)
+            params1.addProperty(ApiConstants.ProfileFullName, fullname)
+            params1.addProperty(ApiConstants.ProfileAddress, address)
+            params1.addProperty(ApiConstants.ProfileEmail, email)
+
+            dataManager.updatevolunteerData(params1).doOnSubscribe {
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.Api_UPDATEPROFILE)
+            }.subscribe({
+                try {
+                    if (it.statusCode == "0") {
+                        loaderObservable.value =
+                            NetworkRequestState.SuccessResponse(ApiProvider.Api_UPDATEPROFILE, it)
+                        viewModelScope.launch {
+                            io {
+                            }
+                            loaderObservable.value =
+                                NetworkRequestState.SuccessResponse(
+                                    ApiProvider.Api_UPDATEPROFILE,
+                                    it
+                                )
+
+                        }
+                    } else loaderObservable.value =
+                        NetworkRequestState.ErrorResponse(ApiProvider.Api_UPDATEPROFILE)
+                } catch (e: Exception) {
+                    println(e.printStackTrace())
+                }
+            }, {
+                loaderObservable.value =
+                    NetworkRequestState.ErrorResponse(ApiProvider.Api_UPDATEPROFILE, it)
+
+            }).autoDispose(disposables)
+        }
     }
 }

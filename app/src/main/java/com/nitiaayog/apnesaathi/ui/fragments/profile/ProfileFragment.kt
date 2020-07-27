@@ -9,13 +9,18 @@ import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
+import android.util.Base64
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
@@ -30,6 +36,7 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
@@ -41,16 +48,18 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.get_images_dialog.*
 import kotlinx.android.synthetic.main.include_toolbar.toolBar
+import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 
 class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private val TAKE_GALLARY_PHOTO_REQUEST_CODE: Int = 1101
-    private var image_uri: Uri? = null
     val PERMISSION_CODE: Int = 200
-    val TAKE_PHOTO_REQUEST: Int = 201;
-    var dialog: Dialog? = null;
+    val TAKE_PHOTO_REQUEST: Int = 201
+    var dialog: Dialog? = null
     var menuBar: Menu? = null
+
+
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage(R.string.wait_profile_data)
     }
@@ -62,8 +71,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     ): View? {
 
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
-        bindview(view);
-        return view;
+        bindview(view)
+        return view
     }
 
     fun String.isEmailValid(): Boolean {
@@ -76,11 +85,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             showGetImageDialog()
         }
 
-        view.TxtMainSave.setOnClickListener {
-            LinearProfileDetails.isVisible = true
-            LinearProfileDetailsForEdit.isVisible = false
-            callMenuBarHide(LinearProfileDetails.isVisible)
-        }
         view.TxtMainCancel.setOnClickListener {
             LinearProfileDetails.isVisible = true
             LinearProfileDetailsForEdit.isVisible = false
@@ -96,26 +100,50 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             dataManager.setPhoneNumber("")
             dataManager.setFirstName("")
             startActivity(intent)
+            activity?.finish()
 
         }
-        view.TxtMainSave.throttleClick().subscribe() {
-            if (view.EditEmail.text.toString().isEmailValid()) {
 
+
+        view.TxtMainSave.throttleClick().subscribe {
+
+            if (TextUtils.isEmpty(view.EditFirstName.text.toString())) {
+                view.EditFirstName.error = "Enter first name"
             } else {
-                view.EditEmail.setError("Enter valid email")
+                view.EditFirstName.error = null
+                if (TextUtils.isEmpty(EditAddress.text.toString())) {
+                    EditAddress.error = "Enter Address"
+
+                } else {
+                    EditAddress.error = null
+                    if (view.EditEmail.text.toString().isEmailValid()) {
+                        try {
+                            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                                    viewModel.getUpdatedvolunteerData(
+                                        context!!, dataManager.getUserId(),
+                                        EditFirstName.text.toString().trim(),
+                                        EditAddress.text.toString().trim(),
+                                        EditEmail.text.toString().trim()
+                                    )
+                                }
+                                .autoDispose(disposables)
+                        } catch (e: Exception) {
+                            println("TAG -- MyData --> ${e.message}")
+                        }
+                    } else {
+                        view.EditEmail.error = "Enter valid email"
+                    }
+                }
             }
+
+
         }.autoDispose(disposables)
 
     }
 
-    fun callMenuBarHide(linearProfileDetails: Boolean) {
-        if (linearProfileDetails) {
-            val Import: MenuItem = menuBar!!.findItem(R.id.editprofile)
-            Import.setVisible(true)
-        } else {
-            val Import: MenuItem = menuBar!!.findItem(R.id.editprofile)
-            Import.setVisible(false)
-        }
+    private fun callMenuBarHide(linearProfileDetails: Boolean) {
+        menuBar!!.findItem(R.id.editprofile).isVisible = linearProfileDetails
     }
 
     override fun onRequestPermissionsResult(
@@ -123,27 +151,18 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        //called when user presses ALLOW or DENY from Permission Request Popup
         when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openCamera()
                 } else {
-
                     ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
-//                    Snackbar.make(
-//                        this.requireView(),
-//                        resources.getString(R.string.permission_denied),
-//                        Snackbar.LENGTH_LONG
-//                    ).show()
                 }
             }
         }
     }
 
-    private fun ProfileshowPermissionTextPopup(
-        @StringRes message: Int
-    ) {
+    private fun ProfileshowPermissionTextPopup(@StringRes message: Int) {
         val dialog = AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
             .setTitle(R.string.permission_detail).apply {
                 this.setMessage(message)
@@ -171,14 +190,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             if (checkSelfPermission(
                     activity!!,
                     Manifest.permission.CAMERA
-                ) == PackageManager.PERMISSION_DENIED ||
-                checkSelfPermission(
-                    activity!!,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_DENIED
             ) {
                 val permission =
-                    arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    arrayOf(Manifest.permission.CAMERA)
                 requestPermissions(permission, PERMISSION_CODE)
             } else {
                 openCamera()
@@ -191,17 +206,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private fun openCamera() {
         try {
-            val values = ContentValues()
-            values.put(MediaStore.Images.Media.TITLE, "New Picture")
-            values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-            image_uri =
-                activity!!.contentResolver.insert(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    values
-                )
+
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
             startActivityForResult(cameraIntent, TAKE_PHOTO_REQUEST)
+
         } catch (ex: Exception) {
             ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
         }
@@ -220,15 +228,29 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 ProfileImage.setImageURI(data?.data)
 
                 dialog!!.dismiss()
-            } else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
-                EditImageView.setImageURI(image_uri)
-                ProfileImage.setImageURI(image_uri)
+            } else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST && data != null) {
+                var fileq: String = imageto64String(data.extras?.get("data") as Bitmap)
+                createABitmap(fileq)
                 dialog!!.dismiss()
+
             }
         } catch (ex: Exception) {
             ProfileshowPermissionTextPopup(R.string.Camera_permission_text)
-
         }
+    }
+
+    private fun createABitmap(base64String: String) {
+        val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        EditImageView.setImageBitmap(decodedImage)
+    }
+
+    private fun imageto64String(bitmap: Bitmap): String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+
     }
 
 
@@ -238,8 +260,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         dialog!!.setCancelable(true)
         dialog!!.setContentView(R.layout.get_images_dialog)
         dialog!!.TxtGetFromcamera.setOnClickListener {
-//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
-//            dialog!!.dismiss()
             capturePhoto()
         }
         dialog!!.TxtCancel.setOnClickListener {
@@ -248,8 +268,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         dialog!!.TxtGetFromGallery.setOnClickListener {
             fromGallery()
-//            Toast.makeText(context, "Working progress", Toast.LENGTH_LONG).show()
-//            dialog!!.dismiss()
         }
         dialog!!.show()
     }
@@ -259,33 +277,49 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         setHasOptionsMenu(true)
         toolBar.title = getString(R.string.menu_profile)
 
-        if (dataManager.getFirstName().isEmpty()) {
-            try {
-                Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                        viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
-                    }
-                    .autoDispose(disposables)
-            } catch (e: Exception) {
-                println("TAG -- MyData --> ${e.message}")
-            }
-            observeStates()
+
+        if (dataManager.getFirstName().isNullOrEmpty()) {
+            TxtName.text = "-"
         } else {
-            TxtName.text = dataManager.getFirstName() + " " + dataManager.getLastName()
+            TxtName.text = dataManager.getFirstName()
+        }
+
+        if (dataManager.getAddress().isNullOrEmpty()) {
+            txtAddress.text = "-"
+        } else {
             txtAddress.text = dataManager.getAddress()
+        }
+        if (dataManager.getPhoneNumber().isNullOrEmpty()) {
+            TxtContactNumber.text = "-"
+        } else {
             TxtContactNumber.text = dataManager.getPhoneNumber()
+        }
+        if (dataManager.getEmail().isNullOrEmpty()) {
+            TxtEmail.text = "-"
+        } else {
             TxtEmail.text = dataManager.getEmail()
         }
 
+        observeStates()
+        callvolunteerData()
         updateEditField()
 
 
     }
 
+    private fun callvolunteerData() {
+        try {
+            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    viewModel.getvolunteerData(context!!, dataManager.getPhoneNumber())
+                }.autoDispose(disposables)
+        } catch (e: Exception) {
+            println("TAG -- MyData --> ${e.message}")
+        }
+    }
+
     private fun updateEditField() {
-        EditFirstName.setText(
-            dataManager.getFirstName().toString() + " " + dataManager.getLastName().toString()
-        )
+        EditFirstName.setText(dataManager.getFirstName().toString())
         EditAddress.setText(txtAddress.text.toString())
         EditPhone.setText(TxtContactNumber.text.toString())
         EditEmail.setText(TxtEmail.text.toString())
@@ -302,18 +336,20 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     override
     fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menuBar = menu
-        inflater.inflate(R.menu.profile_menu, menu);
+        inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override
+    fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.editprofile -> {
                 LinearProfileDetails.isVisible = false
                 LinearProfileDetailsForEdit.isVisible = true
                 val Import: MenuItem = menuBar!!.findItem(R.id.editprofile)
-                Import.setVisible(false)
+                Import.isVisible = false
                 updateEditField()
                 true
             }
@@ -338,36 +374,58 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun observeStates() {
-
         viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
             when (it) {
-                is NetworkRequestState.NetworkNotAvailable ->
-                    BaseUtility.showAlertMessage(context!!, R.string.alert, R.string.check_internet)
-
+                is NetworkRequestState.NetworkNotAvailable -> when (it.apiName) {
+                    ApiProvider.Api_volunteer_Data ->
+                        BaseUtility.showAlertMessage(
+                            context!!,
+                            R.string.alert,
+                            R.string.check_internet
+                        )
+                    ApiProvider.Api_volunteer_Data ->
+                        BaseUtility.showAlertMessage(
+                            context!!, R.string.alert, R.string.check_internet
+                        )
+                }
                 is NetworkRequestState.LoadingData -> {
-                    progressDialog.show()
+                    when (it.apiName) {
+                        ApiProvider.Api_volunteer_Data ->
+                            progressBarloadData.visibility = VISIBLE
+                        ApiProvider.Api_UPDATEPROFILE ->
+                            progressDialog.show()
+                    }
                 }
                 is NetworkRequestState.ErrorResponse -> {
-                    progressDialog.dismiss()
+                    when (it.apiName) {
+                        ApiProvider.Api_volunteer_Data ->
+                            progressBarloadData.visibility = GONE
+                        ApiProvider.Api_UPDATEPROFILE ->
+                            progressDialog.dismiss()
+                    }
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
-                    progressDialog.dismiss()
 
-                    val volunteerDataResponse = it.data
+                    when (it.apiName) {
+                        ApiProvider.Api_volunteer_Data -> {
+                            progressBarloadData.visibility = GONE
+                            getdataFromApi(it)
+                        }
+                        ApiProvider.Api_UPDATEPROFILE -> {
+                            progressDialog.dismiss()
+                            var snack = Snackbar.make(
+                                mainRootRelativeLayout,
+                                R.string.profile_details_saved_successfully,
+                                Snackbar.LENGTH_LONG
+                            )
+                            snack.show()
+                            LinearProfileDetails.isVisible = true
+                            LinearProfileDetailsForEdit.isVisible = false
+                            callMenuBarHide(LinearProfileDetails.isVisible)
+                            callvolunteerData()
+                        }
 
-                    if (volunteerDataResponse is VolunteerDataResponse) {
-                        dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-                        dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
-                        dataManager.setEmail(volunteerDataResponse.volunteer.email)
-                        dataManager.setAddress(volunteerDataResponse.volunteer.address)
-
-                        TxtName.text =
-                            volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
-                        txtAddress.text =
-                            volunteerDataResponse.volunteer.address + " , " + volunteerDataResponse.volunteer.state + " , " + volunteerDataResponse.volunteer.district
-                        TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
-                        TxtEmail.text = volunteerDataResponse.volunteer.email
 
                     }
                 }
@@ -376,4 +434,21 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
 
+    private fun getdataFromApi(it: NetworkRequestState.SuccessResponse<*>) {
+
+        val volunteerDataResponse = it.data
+
+        if (volunteerDataResponse is VolunteerDataResponse) {
+            dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
+            dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
+            dataManager.setEmail(volunteerDataResponse.volunteer.email)
+            dataManager.setAddress(volunteerDataResponse.volunteer.address)
+
+            TxtName.text = volunteerDataResponse.volunteer.firstName
+            txtAddress.text =
+                volunteerDataResponse.volunteer.address
+            TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
+            TxtEmail.text = volunteerDataResponse.volunteer.email
+        }
+    }
 }
