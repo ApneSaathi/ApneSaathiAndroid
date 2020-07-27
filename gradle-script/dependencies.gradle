@@ -1,6 +1,7 @@
 ext {
 
-    API_HOST = "http://3.7.39.123:8080/"
+    PROD_HOST = "http://3.7.39.123:8080/"
+    DEV_HOST = "http://15.207.42.209:8080/"
     DATABASE_NAME = "apne_saathi.db"
     DATABASE_VERSION = "1"
 
@@ -44,6 +45,9 @@ ext {
 
     cardViewVersion = '1.0.0'
     cardViewPackage = 'androidx.cardview:cardview'
+
+    pagingVersion = '2.1.2'
+    pagingPackage = 'androidx.paging:paging-runtime'
 
     retrofitVersion = '2.5.0'
     retrofitNetworkCallPackage = 'com.squareup.retrofit2:retrofit'
@@ -108,7 +112,8 @@ ext {
             ktx           : buildDependency(ktxPackage, supportVersion),
             recyclerView  : buildDependency(recyclerViewPackage, supportVersion),
             materialDesign: buildDependency(materialPackage, supportVersion),
-            cardView      : buildDependency(cardViewPackage, cardViewVersion)
+            cardView      : buildDependency(cardViewPackage, cardViewVersion),
+            paging      : buildDependency(pagingPackage, pagingVersion)
     ]
 
     retrofit = [

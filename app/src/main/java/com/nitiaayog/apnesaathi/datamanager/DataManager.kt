@@ -12,13 +12,16 @@ import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 interface DataManager : ApiRequest, PreferenceRequest {
     fun updateUserPreference(loginUser: Login_Response)
 
-    // TODO : Database Methods
+    // TODO : Database Access
     // Table : call_details
     fun getPendingCallsList(): LiveData<MutableList<CallData>>
     fun getFollowupCallsList(): LiveData<MutableList<CallData>>
     fun getCompletedCallsList(): LiveData<MutableList<CallData>>
     fun getAllCallsList(): LiveData<MutableList<CallData>>
+    fun getCalls(requestedItems: Int): List<CallData>
+    fun getCallsAfter(itemKey: Int, requestedItems: Int): List<CallData>
 
+    //fun getMinId(): Int
     fun insertCallData(callData: List<CallData>)
     fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>)
     fun getCallDetailFromId(id: Int): CallData

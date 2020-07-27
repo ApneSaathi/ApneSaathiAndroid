@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
@@ -18,10 +19,8 @@ import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
 
-class GrievancesFragment : BaseFragment<HomeViewModel>(),
-    GrievanceStatusAdapter.OnItemClickListener,
-    PageTitleChangeListener {
-
+class GrievancesFragment : BaseFragment<HomeViewModel>(), PageTitleChangeListener,
+    OnItemClickListener<GrievanceData> {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
 
@@ -40,6 +39,12 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(),
                 }
             }).attach()
     }
+
+    override fun onResume() {
+        super.onResume()
+        println("TAG -- GrievancesFragment --> onResume")
+    }
+
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
@@ -58,7 +63,6 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(),
         resolvedFragment.setPageTitleChangeListener(this)
         inProgressFragment.setPageTitleChangeListener(this)
 
-
         adapter.addFragment(pendingFragment,getString(R.string.pending))
         adapter.addFragment(inProgressFragment, getString(R.string.in_progress))
         adapter.addFragment(resolvedFragment, getString(R.string.resolved))
@@ -76,18 +80,13 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(),
     override fun onCallPermissionDenied() {
     }
 
-    override fun onItemClick(position: Int, grievanceData: GrievanceData) {
-        val fragment = GrievanceDetailFragment(grievanceData)
+    override fun onItemClick(position: Int, data: GrievanceData) {
+        val fragment = GrievanceDetailFragment(data)
         fragment.setReloadApiListener(reloadApiRequiredListener)
-        addFragment(
-            R.id.fl_detailed_container,
-            fragment,
-            GRIEVANCE_DETAIL_FRAGMENT
-        )
+        addFragment(R.id.fl_detailed_container, fragment, GRIEVANCE_DETAIL_FRAGMENT)
     }
 
     override fun onDataLoaded(title: String, pos: Int, size: Int) {
-        tabLayout.getTabAt(pos)?.text =
-            format(title, size.toString())
+        tabLayout.getTabAt(pos)?.text = format(title, size.toString())
     }
 }

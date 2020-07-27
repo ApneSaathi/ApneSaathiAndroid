@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
@@ -27,15 +28,14 @@ import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
-    SeniorCitizenDateAdapter.OnItemClickListener {
+    OnItemClickListener<DateItem> {
 
     private var adapter: SeniorCitizenDateAdapter = SeniorCitizenDateAdapter()
     var callData: CallData? = null
     var grievancesList: MutableList<SrCitizenGrievance> = mutableListOf()
-    override fun provideViewModel(): SeniorCitizenDetailsViewModel =
-        getViewModel {
-            SeniorCitizenDetailsViewModel.getInstance(dataManager)
-        }
+    override fun provideViewModel(): SeniorCitizenDetailsViewModel = getViewModel {
+        SeniorCitizenDetailsViewModel.getInstance(dataManager)
+    }
 
     override fun provideLayoutResource(): Int = R.layout.fragment_senior_citizen_details
 
@@ -224,7 +224,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_escalation.text = getString(R.string.yes)
         }
         if (srCitizenGrievance.lackOfEssentialServices == "Yes") {
-            txt_issue_raised_date.text = srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
+            txt_issue_raised_date.text =
+                srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
             txt_grievance.text = getText(R.string.yes)
             var grievanceCategory = ""
             if (srCitizenGrievance.foodShortage != "4") {
@@ -264,7 +265,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_grievance.text = getString(R.string.no)
             txt_grievance_category.text = getString(R.string.not_applicable)
             txt_issue_raised.text = getString(R.string.no_issues)
-            txt_issue_raised_date.text ="--"
+            txt_issue_raised_date.text = "--"
         }
         txt_grievance_desc.text = srCitizenGrievance.description
         txt_other_problem.text = srCitizenGrievance.impRemarkInfo ?: "--"
@@ -342,7 +343,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
 
-    override fun onItemClick(position: Int, dateItem: DateItem) {
+    override fun onItemClick(position: Int, data: DateItem) {
         adapter.notifyDataSetChanged()
         if (grievancesList.size > 0) {
             bindGrievanceData(grievancesList[position])

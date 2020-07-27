@@ -7,15 +7,18 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
+import com.nitiaayog.apnesaathi.model.FormElements
 import kotlinx.android.synthetic.main.list_date_items.view.*
 
-class SeniorCitizenDateAdapter() :
+class SeniorCitizenDateAdapter :
     RecyclerView.Adapter<SeniorCitizenDateAdapter.SeniorCitizenDateViewHolder>() {
+
     var selectedPos = -1
     private val dataList: MutableList<DateItem> = mutableListOf()
-    private lateinit var itemClickListener: OnItemClickListener
+    private lateinit var itemClickListener: OnItemClickListener<DateItem>
     fun setData(dataList: List<DateItem>) {
         this.dataList.apply {
             this.clear()
@@ -33,22 +36,18 @@ class SeniorCitizenDateAdapter() :
         return SeniorCitizenDateViewHolder(customView)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int, dateItem: DateItem)
-    }
-
     override fun getItemCount(): Int {
-        return dataList?.count() ?: 0
+        return dataList.count()
     }
 
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener<DateItem>) {
         this.itemClickListener = itemClickListener
     }
 
     override fun onBindViewHolder(
         holder: SeniorCitizenDateAdapter.SeniorCitizenDateViewHolder, position: Int
     ) {
-        dataList?.get(position)?.let { holder.bindData(it) }
+        dataList[position].let { holder.bindData(it) }
     }
 
     inner class SeniorCitizenDateViewHolder(itemsView: View) : RecyclerView.ViewHolder(itemsView) {
@@ -61,7 +60,7 @@ class SeniorCitizenDateAdapter() :
             llDateContainer.setOnClickListener {
                 if (::itemClickListener.isInitialized) {
                     selectedPos = adapterPosition
-                    dataList?.get(adapterPosition)?.let { it1 ->
+                    dataList.get(adapterPosition).let { it1 ->
                         itemClickListener.onItemClick(
                             adapterPosition,
                             it1

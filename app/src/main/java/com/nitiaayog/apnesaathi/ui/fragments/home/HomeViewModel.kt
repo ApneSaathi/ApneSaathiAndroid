@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
-import com.nitiaayog.apnesaathi.database.dao.GrievancesDao_Impl
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
@@ -40,9 +39,12 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.getCompletedCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
 
-    private val pendingGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getPendingGrievances()
-    private val inProgressGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getInProgressGrievances()
-    private val resolvedGrievance :LiveData<MutableList<GrievanceData>> = dataManager.getResolvedGrievances()
+    private val pendingGrievance: LiveData<MutableList<GrievanceData>> =
+        dataManager.getPendingGrievances()
+    private val inProgressGrievance: LiveData<MutableList<GrievanceData>> =
+        dataManager.getInProgressGrievances()
+    private val resolvedGrievance: LiveData<MutableList<GrievanceData>> =
+        dataManager.getResolvedGrievances()
 
     private val grievancesList: LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getGrievances()
@@ -80,9 +82,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     fun getCompletedCalls(): LiveData<MutableList<CallData>> = completedCallsList
 
-    fun getPendingGrievances():LiveData<MutableList<GrievanceData>> = pendingGrievance
-    fun getInProgressGrievances():LiveData<MutableList<GrievanceData>> = inProgressGrievance
-    fun getResolvedGrievances():LiveData<MutableList<GrievanceData>> = resolvedGrievance
+    fun getPendingGrievances(): LiveData<MutableList<GrievanceData>> = pendingGrievance
+    fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>> = inProgressGrievance
+    fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>> = resolvedGrievance
 
     fun getGrievancesList(): LiveData<MutableList<SrCitizenGrievance>> = grievancesList
 
@@ -153,6 +155,5 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking, it)
             }).autoDispose(disposables)
         }
-
     }
 }

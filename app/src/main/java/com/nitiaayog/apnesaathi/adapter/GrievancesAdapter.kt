@@ -14,8 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import kotlinx.android.synthetic.main.list_item_grievances.view.*
 import java.util.*
 
@@ -27,21 +27,25 @@ class GrievancesAdapter(private val context: Context) :
         const val GRIEVANCE_UNDER_REVIEW: String = "UNDER REVIEW"
         const val GRIEVANCE_RAISED: String = "RAISED"
     }
-    private lateinit var itemClickListener: GrievancesAdapter.OnItemClickListener
 
-    fun setOnItemClickListener(itemClickListener: GrievancesAdapter.OnItemClickListener) {
+    private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
+
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
-    interface OnItemClickListener {
-        fun onItemClick(position: Int, grievanceData: GrievanceData)
-    }
+
     private val dataList: MutableList<GrievanceData> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GrievancesHolder {
         val customView = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_grievances, parent, false)
         val holder = GrievancesHolder(customView)
-        customView.ll_grievance_container.setOnClickListener { itemClickListener.onItemClick(holder.adapterPosition,dataList[holder.adapterPosition]) }
+        customView.ll_grievance_container.setOnClickListener {
+            itemClickListener.onItemClick(
+                holder.adapterPosition,
+                dataList[holder.adapterPosition]
+            )
+        }
         return holder
     }
 
@@ -80,7 +84,7 @@ class GrievancesAdapter(private val context: Context) :
             spanGrievance.setSpan(
                 StyleSpan(Typeface.BOLD),
                 grievance.srCitizenName!!.length + complaint.length,
-                dataString.length - (was.length + grievance.status?.length!! +1),
+                dataString.length - (was.length + grievance.status?.length!! + 1),
                 0
             )
 
@@ -100,7 +104,7 @@ class GrievancesAdapter(private val context: Context) :
                     spanStatus.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
-            }else{
+            } else {
                 spanStatus.setSpan(
                     ForegroundColorSpan(ContextCompat.getColor(context, R.color.color_grey_txt)),
                     spanStatus.length - grievance.status!!.length,

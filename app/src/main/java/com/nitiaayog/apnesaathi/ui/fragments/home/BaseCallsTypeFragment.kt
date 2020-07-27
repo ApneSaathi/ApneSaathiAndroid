@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
@@ -28,16 +29,16 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
     private var lastSelectedCallData: CallData? = null
 
     private val adapter: CallsAdapter = CallsAdapter().apply {
-        this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int, callData: CallData) {
+        this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+            override fun onItemClick(position: Int, data: CallData) {
                 lastSelectedPosition = position
-                lastSelectedCallData = callData
+                lastSelectedCallData = data
                 prepareToCallPerson()
             }
 
-            override fun onMoreInfoClick(position: Int, callData: CallData) {
+            override fun onMoreInfoClick(position: Int, data: CallData) {
                 val fragment = SeniorCitizenDetailsFragment()
-                fragment.setSelectedUser(callData)
+                fragment.setSelectedUser(data)
                 addFragment(
                     containerId, fragment, getString(R.string.details_fragment)
                 )

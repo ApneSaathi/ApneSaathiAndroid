@@ -259,7 +259,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         setHasOptionsMenu(true)
         toolBar.title = getString(R.string.menu_profile)
 
-        if (dataManager.getFirstname().isEmpty()) {
+        if (dataManager.getFirstName().isEmpty()) {
             try {
                 Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -271,7 +271,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             }
             observeStates()
         } else {
-            TxtName.text = dataManager.getFirstname() + " " + dataManager.getLastname()
+            TxtName.text = dataManager.getFirstName() + " " + dataManager.getLastName()
             txtAddress.text = dataManager.getAddress()
             TxtContactNumber.text = dataManager.getPhoneNumber()
             TxtEmail.text = dataManager.getEmail()
@@ -284,7 +284,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private fun updateEditField() {
         EditFirstName.setText(
-            dataManager.getFirstname().toString() + " " + dataManager.getLastname().toString()
+            dataManager.getFirstName().toString() + " " + dataManager.getLastName().toString()
         )
         EditAddress.setText(txtAddress.text.toString())
         EditPhone.setText(TxtContactNumber.text.toString())
@@ -358,7 +358,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
                     if (volunteerDataResponse is VolunteerDataResponse) {
                         dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-                        dataManager.setLastname(volunteerDataResponse.volunteer.lastName)
+                        dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
                         dataManager.setEmail(volunteerDataResponse.volunteer.email)
                         dataManager.setAddress(volunteerDataResponse.volunteer.address)
 

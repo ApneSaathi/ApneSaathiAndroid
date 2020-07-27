@@ -38,7 +38,7 @@ class AppDataManager private constructor(
         @Synchronized
         fun getDataManager(application: Application): AppDataManager =
             instance ?: synchronized(this) {
-                instance ?: AppDataManager(
+                AppDataManager(
                     ApiManager.getApiRequest(RetrofitClient.createApiClient(application)),
                     PreferenceManager.getPreferenceRequest(application),
                     ApneSathiDatabase.getDatabase(application)
@@ -84,7 +84,7 @@ class AppDataManager private constructor(
     // Database Access
     // => Table : call_details
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1","null", "")) //Null and empty should be removed
+        callsDataDao.getAllCallsList(arrayOf("1", "null", "")) //Null and empty should be removed
 
     override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("2", "3", "4", "5", "6"))
@@ -92,8 +92,19 @@ class AppDataManager private constructor(
     override fun getCompletedCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
+    //Null and empty should be removed
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10","null", ""))  //Null and empty should be removed
+        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", ""))
+
+    //Null and empty should be removed
+    override fun getCalls(requestedItems: Int): List<CallData> = callsDataDao.getCalls(
+        requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", "")
+    )
+
+    override fun getCallsAfter(itemKey: Int, requestedItems: Int): List<CallData> =
+        callsDataDao.getCallsAfter(
+            itemKey, requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", "")
+        )
 
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
@@ -103,7 +114,7 @@ class AppDataManager private constructor(
     override fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>) =
         grievancesTrackingDao.insertAll(grievanceTracking)
 
-    // => Table : grievances
+    //=> Table : grievances
     override fun insertGrievance(grievance: SrCitizenGrievance): Long =
         grievancesDao.insert(grievance)
 
@@ -170,7 +181,7 @@ class AppDataManager private constructor(
     override fun getResolvedGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getGrievancesWithStatus("RESOLVED")
 
-    override fun clearPreviousTrackingData() =  grievancesTrackingDao.deletePreviousGrievanceData()
+    override fun clearPreviousTrackingData() = grievancesTrackingDao.deletePreviousGrievanceData()
 
     override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
         syncGrievancesDao.insertOrUpdate(syncData)
@@ -186,49 +197,35 @@ class AppDataManager private constructor(
 //        setUserName(loginUser.userName)
 //        //setProfileImage(loginUser.userProfileImage)
 //        setPhoneNumber(loginUser.phoneNumber)
-
     }
 
     override fun getUserId(): String = preferences.getUserId()
-
     override fun setUserId(userId: String) = preferences.setUserId(userId)
 
     override fun getUserName(): String = preferences.getUserName()
-
     override fun setUserName(userName: String) = preferences.setUserName(userName)
 
     override fun getGender() = preferences.getGender()
-
     override fun setGender(gender: String) = preferences.setGender(gender)
 
     override fun getProfileImage(): String = preferences.getProfileImage()
-
     override fun setProfileImage(profileImage: String) = preferences.setProfileImage(profileImage)
 
     override fun getPhoneNumber(): String = preferences.getPhoneNumber()
-
     override fun setPhoneNumber(phoneNumber: String) = preferences.setPhoneNumber(phoneNumber)
 
     override fun getSelectedLanguage(): String = preferences.getSelectedLanguage()
-
     override fun setSelectedLanguage(language: String) = preferences.setSelectedLanguage(language)
-    override fun getFirstname(): String = preferences.getFirstname()
 
-    override fun setFirstName(fname: String) = preferences.setFirstName(fname)
+    override fun getFirstName(): String = preferences.getFirstName()
+    override fun setFirstName(firstName: String) = preferences.setFirstName(firstName)
 
-
-    override fun getLastname(): String = preferences.getLastname()
-
-    override fun setLastname(lastname: String) = preferences.setLastname(lastname)
-
+    override fun getLastName(): String = preferences.getLastName()
+    override fun setLastName(lastName: String) = preferences.setLastName(lastName)
 
     override fun getEmail(): String = preferences.getEmail()
-
     override fun setEmail(email: String) = preferences.setEmail(email)
 
-
     override fun getAddress(): String = preferences.getAddress()
-
     override fun setAddress(address: String) = preferences.setAddress(address)
-
 }

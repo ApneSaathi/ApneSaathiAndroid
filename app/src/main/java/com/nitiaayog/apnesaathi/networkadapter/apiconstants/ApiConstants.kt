@@ -20,6 +20,8 @@ object ApiConstants {
     const val GrievanceTracking: String = "greivanceTrackingList"
     const val FirstName: String = "firstName"
     const val Address: String = "address"
+    const val LastId: String = "last_id"
+    const val RequestedData: String = "requested_data"
     const val VolunteerId: String = "idvolunteer"
     const val VolunteerNotRegisterErrorMessage: String = "Invalid User"
 

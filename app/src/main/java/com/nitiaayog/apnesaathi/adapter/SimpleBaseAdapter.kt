@@ -7,12 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import kotlinx.android.synthetic.main.list_item_multi_auto_complete_recyclerview.view.*
 
 class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolder>() {
 
     private val dataList: MutableList<String> = mutableListOf()
-    private lateinit var onIteClickListener: OnItemClickListener
+    private lateinit var onIteClickListener: OnItemClickListener<String>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleViewHolder {
         val customView = LayoutInflater.from(parent.context)
@@ -25,12 +26,7 @@ class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolde
     override fun onBindViewHolder(holder: SimpleViewHolder, position: Int) =
         holder.bindData(dataList[position])
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int, name: String)
-        fun showPopup()
-    }
-
-    fun setOnItemClickListener(onIteClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(onIteClickListener: OnItemClickListener<String>) {
         this.onIteClickListener = onIteClickListener
     }
 
@@ -69,7 +65,8 @@ class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolde
         fun bindData(name: String) {
             tvItemName.text = name
             tvItemName.setOnClickListener {
-                if (::onIteClickListener.isInitialized) onIteClickListener.showPopup()
+                if (::onIteClickListener.isInitialized)
+                    onIteClickListener.onMoreInfoClick(0, "")
             }
             ivClose.setOnClickListener {
                 val position = adapterPosition
