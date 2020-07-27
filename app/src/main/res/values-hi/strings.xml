@@ -257,6 +257,8 @@
     <string name="use_other_number">दूसरे नंबर का इस्तेमाल करें</string>
     <string name="select_mobile_number">मोबाइल नंबर का चयन करें</string>
 
+    <string name="logout_error">कुछ वरिष्ठ नागरिक डेटा अभी भी सिंक करने के लिए शेष हैं जो आपके ऑफ़लाइन रहते हुए संग्रहीत किए गए थे। इसलिए अब आप लॉगआउट नहीं कर पाएंगे, कृपया डेटा समन्वयित करने के बाद प्रयास करें</string>
+
     <string-array name="states_array">
         <item>असम</item>
         <item>बिहार</item>

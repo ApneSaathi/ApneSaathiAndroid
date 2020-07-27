@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,7 +20,6 @@ import android.util.Base64
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -48,6 +46,10 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.get_images_dialog.*
 import kotlinx.android.synthetic.main.include_toolbar.toolBar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 
@@ -96,12 +98,18 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         }
         view.TxtLogout.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
-            dataManager.setPhoneNumber("")
-            dataManager.setFirstName("")
-            startActivity(intent)
-            activity?.finish()
-
+            CoroutineScope(Dispatchers.Main).launch {
+                val data = withContext(Dispatchers.IO) { dataManager.getCount() }
+                if (data > 0)
+                    BaseUtility.showAlertMessage(
+                        requireContext(), R.string.error, R.string.logout_error
+                    )
+                else {
+                    dataManager.clearData()
+                    startActivity(Intent(activity, LoginActivity::class.java))
+                    requireActivity().finishAffinity()
+                }
+            }
         }
 
 
@@ -303,8 +311,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         observeStates()
         callvolunteerData()
         updateEditField()
-
-
     }
 
     private fun callvolunteerData() {
@@ -338,9 +344,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         menuBar = menu
         inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-
     }
-
 
     override
     fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -25,9 +25,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
         @Synchronized
         fun getInstance(dataManager: DataManager): HomeViewModel =
-            instance ?: synchronized(this) {
-                instance ?: HomeViewModel(dataManager).also { instance = it }
-            }
+            instance ?: synchronized(this) { HomeViewModel(dataManager).also { instance = it } }
     }
 
     private val TAG: String = "TAG -- ${HomeViewModel::class.java.simpleName} -->"
