@@ -6,7 +6,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
-import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
@@ -19,8 +18,8 @@ import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
 
-class GrievancesFragment : BaseFragment<HomeViewModel>(), PageTitleChangeListener,
-    OnItemClickListener<GrievanceData> {
+class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData>,
+    PageTitleChangeListener {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
 
@@ -39,12 +38,6 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), PageTitleChangeListene
                 }
             }).attach()
     }
-
-    override fun onResume() {
-        super.onResume()
-        println("TAG -- GrievancesFragment --> onResume")
-    }
-
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
@@ -83,10 +76,15 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), PageTitleChangeListene
     override fun onItemClick(position: Int, data: GrievanceData) {
         val fragment = GrievanceDetailFragment(data)
         fragment.setReloadApiListener(reloadApiRequiredListener)
-        addFragment(R.id.fl_detailed_container, fragment, GRIEVANCE_DETAIL_FRAGMENT)
+        addFragment(
+            R.id.fl_detailed_container,
+            fragment,
+            GRIEVANCE_DETAIL_FRAGMENT
+        )
     }
 
     override fun onDataLoaded(title: String, pos: Int, size: Int) {
-        tabLayout.getTabAt(pos)?.text = format(title, size.toString())
+        tabLayout.getTabAt(pos)?.text =
+            format(title, size.toString())
     }
 }

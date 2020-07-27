@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.include_recyclerview.*
 
 class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
     OnItemClickListener<GrievanceData> {
-
     private lateinit var pageTitleChangeListener: PageTitleChangeListener
     private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
     private val grievanceAdapter = GrievanceStatusAdapter()
@@ -31,7 +30,7 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
         viewModel.getInProgressGrievances().observe(viewLifecycleOwner, Observer {
             grievanceAdapter.setData(it)
             grievanceAdapter.notifyDataSetChanged()
-            pageTitleChangeListener.onDataLoaded(getString(R.string.inprogress_count), 1, it.size)
+            pageTitleChangeListener.onDataLoaded(getString(R.string.inprogress_count),1, it.size)
         })
     }
 
