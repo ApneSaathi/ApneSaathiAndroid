@@ -32,7 +32,8 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
     }
 
     override fun updatevolunteerData(phoneNumber: JsonObject): Single<ProfileUpdateResponse> {
-        return apiClient.getUpdateVolunteerData(phoneNumber).subscribeAndObserveWithDelaySubscription()
+        return apiClient.getUpdateVolunteerData(phoneNumber)
+            .subscribeAndObserveWithDelaySubscription()
     }
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
