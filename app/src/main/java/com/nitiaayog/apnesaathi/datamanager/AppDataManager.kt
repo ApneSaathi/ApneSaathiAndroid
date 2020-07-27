@@ -96,6 +96,11 @@ class AppDataManager private constructor(
         callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
     //Null and empty should be removed
+    override fun getInvalidCallsList(): LiveData<MutableList<CallData>> =
+        callsDataDao.getAllCallsList(
+            arrayOf("7", "8")
+        )
+
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", ""))
 
@@ -231,4 +236,7 @@ class AppDataManager private constructor(
 
     override fun getAddress(): String = preferences.getAddress()
     override fun setAddress(address: String) = preferences.setAddress(address)
+    override fun setLastSelectedId(callId: String) = preferences.setLastSelectedId(callId)
+
+    override fun getLastSelectedId(): String = preferences.getLastSelectedId()
 }

@@ -84,6 +84,7 @@
     <string name="issues_count">Issues(%s)</string>
     <string name="follow_up_count">Follow Up(%s)</string>
     <string name="attended_calls_count">Attended Calls(%s)</string>
+    <string name="invalid_calls_count">Invalid Calls(%s)</string>
     <string name="pending_calls">Pending Calls</string>
     <string name="grievances">Grievances</string>
     <string name="follow_up">Follow Up</string>
@@ -489,5 +490,6 @@
     <string name="progress_updates">Progress updates:</string>
     <string name="otpsendsuccesfully">Otp sent successfully</string>
     <string name="profile_details_saved_successfully">Volunteer details is synced up successfully.</string>
+    <string name="invalid_calls">Invalid Calls</string>
 
 </resources>
