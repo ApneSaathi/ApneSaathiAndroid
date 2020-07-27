@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
@@ -27,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
-    SeniorCitizenDateAdapter.OnItemClickListener {
+    OnItemClickListener<DateItem> {
 
     private var adapter: SeniorCitizenDateAdapter = SeniorCitizenDateAdapter()
     var callData: CallData? = null
@@ -354,7 +355,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
 
-    override fun onItemClick(position: Int, dateItem: DateItem) {
+    override fun onItemClick(position: Int, data: DateItem) {
         adapter.notifyDataSetChanged()
         if (grievancesList.size > 0) {
             bindGrievanceData(grievancesList[position])

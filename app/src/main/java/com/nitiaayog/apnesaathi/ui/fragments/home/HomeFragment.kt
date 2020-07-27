@@ -1,7 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
 import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
@@ -25,7 +25,6 @@ import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
-import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -33,7 +32,7 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
-class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClickListener {
+class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData> {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
     private var lastSelectedPosition: Int = -1
@@ -41,19 +40,18 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
 
     private val pendingAdapter by lazy {
         CallsAdapter().apply {
-            this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, callData: CallData) {
+            this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+                override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedPosition = position
-                    lastSelectedCallData = callData
+                    lastSelectedCallData = data
                     prepareToCallPerson()
                 }
 
-                override fun onMoreInfoClick(position: Int, callData: CallData) {
+                override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(callData)
-                    viewModel.setLastSelectedUser(callData.callId.toString())
+                    fragment.setSelectedUser(data)
                     addFragment(
-                        R.id.fragmentHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
+                        R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
                     )
                 }
             })
@@ -69,7 +67,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
 
         try {
             initRecyclerView()
-            viewModel.setLastSelectedUser("")
+
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     getObservableDataStream()
@@ -155,7 +153,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
             ((followUpCalls.toDouble() / totalCalls.toDouble()) * 100).toInt() + completedPer
         pbCallSummary.progress = completedPer
         pbCallSummary.secondaryProgress = followUpPer
-        tv_completed.text=getString(R.string.completed_count).plus(completedCalls)
+        tv_completed.text = getString(R.string.completed_count).plus(completedCalls)
         tv_need_followup.text = getString(R.string.need_follow_up_count).plus(followUpCalls)
         tv_pending.text = getString(R.string.pending_g_count).plus(pendingCalls)
     }
@@ -205,15 +203,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
         viewModel.getFollowupCalls().observe(viewLifecycleOwner, Observer {
             manageProgressBarData()
         })
-        viewModel.getCallsList().removeObservers(viewLifecycleOwner)
-        viewModel.getCallsList().observe(viewLifecycleOwner, Observer { it ->
-            val fragment = fragmentManager?.findFragmentByTag(SR_CITIZEN_DETAIL_FRAGMENT)
-            if(fragment != null && fragment.isResumed){
-                val callData:CallData = it.single { it.callId == dataManager.getLastSelectedId().toInt() }
-                fragment as SeniorCitizenDetailsFragment
-                fragment.reloadFragment(callData)
-            }
-        })
 
 //        viewModel.getGrievancesList().removeObservers(viewLifecycleOwner)
 //        viewModel.getGrievancesList().observe(viewLifecycleOwner, Observer {
@@ -254,12 +243,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
         })
     }
 
-    override fun onItemClick(position: Int, grievanceData: GrievanceData) {
-        val fragment = GrievanceDetailFragment(grievanceData)
+    override fun onItemClick(position: Int, data: GrievanceData) {
+        val fragment = GrievanceDetailFragment(data)
         fragment.setReloadApiListener(reloadApiRequiredListener)
         addFragment(
             R.id.fragmentHomeContainer,
-            fragment,GRIEVANCE_DETAIL_FRAGMENT
+            fragment, GRIEVANCE_DETAIL_FRAGMENT
         )
     }
 

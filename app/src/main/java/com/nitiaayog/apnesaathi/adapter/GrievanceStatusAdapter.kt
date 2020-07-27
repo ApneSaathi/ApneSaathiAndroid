@@ -11,15 +11,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import kotlinx.android.synthetic.main.list_item_grievance_status.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
-class GrievanceStatusAdapter :
-    RecyclerView.Adapter<GrievanceStatusAdapter.GrievanceViewHolder>() {
+class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.GrievanceViewHolder>() {
 
     private val dataList: MutableList<GrievanceData> = mutableListOf()
-    private lateinit var itemClickListener: OnItemClickListener
+    private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GrievanceViewHolder {
         val customView = LayoutInflater.from(parent.context)
@@ -27,12 +27,8 @@ class GrievanceStatusAdapter :
         return GrievanceViewHolder(customView, parent.context)
     }
 
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
-    }
-
-    interface OnItemClickListener {
-        fun onItemClick(position: Int, grievanceData: GrievanceData)
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -90,5 +86,4 @@ class GrievanceStatusAdapter :
                 itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
         }
     }
-
 }

@@ -10,34 +10,21 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.BaseArrayAdapter
 import com.nitiaayog.apnesaathi.base.ProgressDialog
-import com.nitiaayog.apnesaathi.base.extensions.CallSnackbar
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
-import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_grievance_details.*
-import kotlinx.android.synthetic.main.fragment_grievance_details.toolBar
-import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
-import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.list_item_grievance_status.*
 import kotlinx.android.synthetic.main.updated_progress_layout.view.*
 import org.threeten.bp.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 
 class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
     BaseFragment<GrievanceDetailsViewModel>() {
@@ -109,7 +96,7 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
             tv_volunteer_desc3.text =
                 getString(R.string.resolvd_remarks).plus(" ").plus(grievanceData.resolvedRemarks)
             cgResolved.visibility = View.VISIBLE
-            if(!grievanceData.reviewRemarks.isNullOrEmpty()){
+            if (!grievanceData.reviewRemarks.isNullOrEmpty()) {
                 tv_volunteer_desc2.text = getString(R.string.in_progress_remarks).plus(" ")
                     .plus(grievanceData.reviewRemarks)
                 cgInProgress.visibility = View.VISIBLE
@@ -131,9 +118,9 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
         } else {
             img_gender.background = context?.getDrawable(R.drawable.ic_female_user)
         }
-        tv_volunteer_name.text = dataManager.getFirstname()
-        tv_volunteer_name2.text = dataManager.getFirstname()
-        tv_volunteer_name3.text = dataManager.getFirstname()
+        tv_volunteer_name.text = dataManager.getFirstName()
+        tv_volunteer_name2.text = dataManager.getFirstName()
+        tv_volunteer_name3.text = dataManager.getFirstName()
 
         tv_volunteer_name.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         tv_volunteer_name2.paintFlags = Paint.UNDERLINE_TEXT_FLAG

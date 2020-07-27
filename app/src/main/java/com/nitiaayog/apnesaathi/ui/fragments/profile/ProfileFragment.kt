@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,6 +21,7 @@ import android.util.Base64
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -276,10 +278,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         toolBar.title = getString(R.string.menu_profile)
 
 
-        if (dataManager.getFirstname().isNullOrEmpty()) {
+        if (dataManager.getFirstName().isNullOrEmpty()) {
             TxtName.text = "-"
         } else {
-            TxtName.text = dataManager.getFirstname()
+            TxtName.text = dataManager.getFirstName()
         }
 
         if (dataManager.getAddress().isNullOrEmpty()) {
@@ -317,7 +319,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun updateEditField() {
-        EditFirstName.setText(dataManager.getFirstname().toString())
+        EditFirstName.setText(dataManager.getFirstName().toString())
         EditAddress.setText(txtAddress.text.toString())
         EditPhone.setText(TxtContactNumber.text.toString())
         EditEmail.setText(TxtEmail.text.toString())
@@ -438,7 +440,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         if (volunteerDataResponse is VolunteerDataResponse) {
             dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-            dataManager.setLastname(volunteerDataResponse.volunteer.lastName)
+            dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
             dataManager.setEmail(volunteerDataResponse.volunteer.email)
             dataManager.setAddress(volunteerDataResponse.volunteer.address)
 
@@ -449,6 +451,4 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             TxtEmail.text = volunteerDataResponse.volunteer.email
         }
     }
-
-
 }

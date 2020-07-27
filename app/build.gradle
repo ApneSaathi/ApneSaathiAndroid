@@ -3,8 +3,18 @@ apply plugin: kotlinPlugin
 apply plugin: kotlinAndroidPlugin
 apply plugin: kotlinKaptPlugin
 
-def host = API_HOST
-def devHost = API_DEV_HOST
+//def properties = rootProject.file("keystore.properties")
+//def kProperties = new Properties()
+//kProperties.load(new FileInputStream(properties))
+
+ext {
+    //def host = kProperties["api_host"]
+    //def databaseName = keystoreProperties["DATABASE_NAME"]
+    //def databaseVersion = keystoreProperties["DATABASE_VERSION"]
+}
+
+def devHost = DEV_HOST
+def prodHost = PROD_HOST
 def databaseName = DATABASE_NAME
 def databaseVersion = DATABASE_VERSION
 
@@ -20,17 +30,25 @@ android {
         versionName versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //buildConfigField "String", "HOST_URL", "\"${host}\""
     }
 
     buildTypes {
-        buildTypes.each { it.buildConfigField "String", "HOST_URL", "\"${host}\"" }
-        buildTypes.each { it.buildConfigField "String", "DEV_HOST_URL", "\"${devHost}\"" }
+        buildTypes.each { it.buildConfigField "String", "PROD_HOST", "\"${prodHost}\"" }
+        buildTypes.each { it.buildConfigField "String", "DEV_HOST", "\"${devHost}\"" }
         buildTypes.each { it.buildConfigField "String", "DB_NAME", "\"${databaseName}\"" }
         buildTypes.each { it.buildConfigField "int", "DB_VERSION", "${databaseVersion}" }
         release {
-            minifyEnabled false
+//            debuggable false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        /*debug {
+            debuggable true
+            minifyEnabled true
+            proguardFiles
+        }*/
     }
 
     androidExtensions {
@@ -56,8 +74,7 @@ dependencies {
     implementation androidSupport.recyclerView
     implementation androidSupport.materialDesign
     implementation androidSupport.cardView
-
-    //implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation androidSupport.paging
 
     // RxJava + RxAndroid
     implementation rxJava2
@@ -73,9 +90,6 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation roomDB.ktx
 
-    // optional - RxJava support for Room
-    implementation roomDB.rxjava
-
     // Glide - Image Loader
     implementation glide
 
@@ -88,11 +102,13 @@ dependencies {
     // JSON to Response Class converter
     implementation retrofit.gsonConverter
     implementation retrofit.rxJava
+    
+    implementation viewModelLifecycle
+    implementation kotlinCoroutine
 
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
+    implementation playServicesAuth
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+    implementation threetenAbp
 
     // RxAnimation - Handle Animations Asynchronous
     //implementation 'com.mikhaellopez:rxanimation:1.0.0'

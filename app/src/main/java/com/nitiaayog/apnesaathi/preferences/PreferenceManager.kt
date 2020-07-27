@@ -16,7 +16,7 @@ open class PreferenceManager private constructor(application: Application) : Pre
         @Synchronized
         fun getPreferenceRequest(application: Application): PreferenceManager =
             instance ?: synchronized(this) {
-                instance ?: PreferenceManager(application).also { instance = it }
+                PreferenceManager(application).also { instance = it }
             }
     }
 
@@ -29,7 +29,6 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun isLogin(): Boolean = getPhoneNumber() != ""
 
     override fun getUserId(): String = preferences.getString(PreferenceConstants.UserId)!!
-
     override fun setUserId(userId: String) =
         preferences.putString(PreferenceConstants.UserId, userId)
 
@@ -39,7 +38,6 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun getGender(): String = preferences.getString(PreferenceConstants.Gender)!!
 
     override fun getUserName(): String = preferences.getString(PreferenceConstants.UserName)!!
-
     override fun setUserName(userName: String) =
         preferences.putString(PreferenceConstants.UserName, userName)
 
@@ -49,59 +47,34 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun setProfileImage(profileImage: String) =
         preferences.putString(PreferenceConstants.ProfileImage, profileImage)
 
-    override fun getPhoneNumber(): String =
-        preferences.getString(PreferenceConstants.PhoneNumber)!!
-
+    override fun getPhoneNumber(): String = preferences.getString(PreferenceConstants.PhoneNumber)!!
     override fun setPhoneNumber(phoneNumber: String) =
         preferences.putString(PreferenceConstants.PhoneNumber, phoneNumber)
 
-    override fun getSelectedLanguage(): String {
-        return preferences.getString(PreferenceConstants.SELECTED_LANGUAGE)!!
-    }
+    override fun getSelectedLanguage(): String =
+        preferences.getString(PreferenceConstants.SelectedLanguage)!!
 
-    override fun setSelectedLanguage(language: String) {
-        preferences.putString(PreferenceConstants.SELECTED_LANGUAGE, language)
-    }
+    override fun setSelectedLanguage(language: String) =
+        preferences.putString(PreferenceConstants.SelectedLanguage, language)
 
-    override fun getFirstname(): String {
-        return preferences.getString(PreferenceConstants.FirstName)!!
-    }
+    override fun getFirstName(): String = preferences.getString(PreferenceConstants.FirstName)!!
+    override fun setFirstName(firstName: String) =
+        preferences.putString(PreferenceConstants.FirstName, firstName)
 
-    override fun setFirstName(fname: String) {
-        preferences.putString(PreferenceConstants.FirstName, fname)
-    }
+    override fun getLastName(): String = preferences.getString(PreferenceConstants.LastName)!!
+    override fun setLastName(lastName: String) =
+        preferences.putString(PreferenceConstants.LastName, lastName)
 
-    override fun getLastname(): String {
-        return preferences.getString(PreferenceConstants.LastName)!!
-    }
+    override fun getEmail(): String = preferences.getString(PreferenceConstants.Email)!!
+    override fun setEmail(email: String) = preferences.putString(PreferenceConstants.Email, email)
 
-    override fun setLastname(lastname: String) {
-        preferences.putString(PreferenceConstants.LastName, lastname)
-    }
-
-    override fun getEmail(): String {
-        return preferences.getString(PreferenceConstants.Email)!!
-    }
-
-    override fun setEmail(email: String) {
-        preferences.putString(PreferenceConstants.Email, email)
-    }
-
-    override fun getAddress(): String {
-        return preferences.getString(PreferenceConstants.Address)!!
-    }
-
-    override fun setAddress(address: String) {
+    override fun getAddress(): String = preferences.getString(PreferenceConstants.Address)!!
+    override fun setAddress(address: String) =
         preferences.putString(PreferenceConstants.Address, address)
-    }
 
-    override fun setLastSelectedId(callId: String) {
+    override fun setLastSelectedId(callId: String) =
         preferences.putString(PreferenceConstants.LastSelectedId, callId)
-    }
 
-    override fun getLastSelectedId(): String {
-        return preferences.getString(PreferenceConstants.LastSelectedId)!!
-    }
-
-
+    override fun getLastSelectedId(): String =
+        preferences.getString(PreferenceConstants.LastSelectedId)!!
 }

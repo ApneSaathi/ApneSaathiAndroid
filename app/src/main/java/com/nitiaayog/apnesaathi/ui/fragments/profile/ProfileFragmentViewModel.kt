@@ -16,29 +16,13 @@ import kotlinx.coroutines.launch
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
 
-//    companion object {
-//        @Volatile
-//        private var instance: ProfileFragmentViewModel? = null
-//
-//        @Synchronized
-//        fun getInstance(dataManager: DataManager): ProfileFragmentViewModel =
-//            instance ?: synchronized(this) {
-//                instance
-//                    ?: ProfileFragmentViewModel(
-//                        dataManager
-//                    )
-//                        .also { instance = it }
-//            }
-//    }
+    companion object {
 
-companion object {
-
-    @Synchronized
-    fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
-        ProfileFragmentViewModel(dataManager)
+        @Synchronized
+        fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
+            ProfileFragmentViewModel(dataManager)
+        }
     }
-}
-
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
@@ -106,7 +90,10 @@ companion object {
                             io {
                             }
                             loaderObservable.value =
-                                NetworkRequestState.SuccessResponse(ApiProvider.Api_UPDATEPROFILE, it)
+                                NetworkRequestState.SuccessResponse(
+                                    ApiProvider.Api_UPDATEPROFILE,
+                                    it
+                                )
 
                         }
                     } else loaderObservable.value =
@@ -120,7 +107,5 @@ companion object {
 
             }).autoDispose(disposables)
         }
-
-
     }
 }
