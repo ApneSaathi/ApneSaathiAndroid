@@ -128,7 +128,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         } else {
             txt_medical_history.text = medicalHistory
         }
-        txt_status.text = getCallStatusFromCode(callData?.callStatusCode)
+        txt_status.text = "--"  //todo need to fetch issue status from database
         txt_call_response.text = callData?.talkedWith
 
         txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout ?: "--"

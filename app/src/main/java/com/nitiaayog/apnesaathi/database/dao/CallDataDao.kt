@@ -12,10 +12,10 @@ interface CallDataDao {
     @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallStatus} IN (:status) ORDER BY ${Columns.LoggedDateTime} DESC")
     fun getAllCallsList(status: Array<String>): LiveData<MutableList<CallData>>
 
-    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallStatus} IN (:status) ORDER BY ${Columns.Id} DESC LIMIT :requestedDataCount")
+    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallStatus} IN (:status) ORDER BY ${Columns.LoggedDateTime} DESC LIMIT :requestedDataCount")
     fun getCalls(requestedDataCount: Int, status: Array<String>): MutableList<CallData>
 
-    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallStatus} IN (:status) AND (${Columns.Id} < :itemKey) ORDER BY ${Columns.Id} DESC LIMIT :requestedDataCount")
+    @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} WHERE ${Columns.CallStatus} IN (:status) AND (${Columns.LoggedDateTime} < :itemKey) ORDER BY ${Columns.Id} DESC LIMIT :requestedDataCount")
     fun getCallsAfter(itemKey: Int, requestedDataCount: Int, status: Array<String>):
             MutableList<CallData>
 
