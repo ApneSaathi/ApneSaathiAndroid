@@ -18,6 +18,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
@@ -42,9 +43,7 @@ class AppDataManager private constructor(
                     ApiManager.getApiRequest(RetrofitClient.createApiClient(application)),
                     PreferenceManager.getPreferenceRequest(application),
                     ApneSathiDatabase.getDatabase(application)
-                ).also {
-                    instance = it
-                }
+                ).also { instance = it }
             }
     }
 
@@ -61,6 +60,10 @@ class AppDataManager private constructor(
 
     override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
         return apiRequest.volunteerData(phoneNumber)
+    }
+
+    override fun updatevolunteerData(phoneNumber: JsonObject): Single<ProfileUpdateResponse> {
+        return apiRequest.updatevolunteerData(phoneNumber)
     }
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
@@ -170,7 +173,7 @@ class AppDataManager private constructor(
     override fun clearPreviousData() = grievancesDao.deletePreviousData()
 
     override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
-        grievancesTrackingDao.getAllGrievances()
+        grievancesTrackingDao.getAllGrievances("RESOLVED")
 
     override fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getGrievancesWithStatus("UNDER REVIEW")

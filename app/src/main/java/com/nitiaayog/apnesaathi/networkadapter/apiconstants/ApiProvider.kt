@@ -34,4 +34,6 @@ object ApiProvider {
     private const val GET_UPDATE_GRIEVANCE_DETAILS = "Volunteer/updateGreivanceDetails"
     const val ApiUpdateGrievanceDetails = DEV_HOST + GET_UPDATE_GRIEVANCE_DETAILS
 
+    private const val GET_SAVINGPROFILE  = "Volunteer/updateProfile"
+    const val Api_UPDATEPROFILE = DEV_HOST + GET_SAVINGPROFILE
 }
