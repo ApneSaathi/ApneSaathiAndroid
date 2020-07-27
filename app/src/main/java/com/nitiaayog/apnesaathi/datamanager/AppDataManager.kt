@@ -89,8 +89,9 @@ class AppDataManager private constructor(
 
     // Database Access
     // => Table : call_details
+    //Null and empty should be removed
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "null", "")) //Null and empty should be removed
+        callsDataDao.getAllCallsList(arrayOf("1", "null", ""))
 
     override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("2", "3", "4", "5", "6"))
@@ -103,16 +104,33 @@ class AppDataManager private constructor(
 
     //Null and empty should be removed
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6","7","8", "9", "10", "null", ""))
+        callsDataDao.getAllCallsList(
+            arrayOf(
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "null",
+                ""
+            )
+        )
 
     //Null and empty should be removed
     override fun getCalls(requestedItems: Int): List<CallData> = callsDataDao.getCalls(
-        requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "7","8","9", "10", "null", "")
+        requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "null", "")
     )
 
     override fun getCallsAfter(itemKey: Int, requestedItems: Int): List<CallData> =
         callsDataDao.getCallsAfter(
-            itemKey, requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "7","8","9", "10", "null", "")
+            itemKey,
+            requestedItems,
+            arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "null", "")
         )
 
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
