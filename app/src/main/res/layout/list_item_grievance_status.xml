@@ -4,14 +4,16 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F2F2F2"
+    android:background="@color/bg_color_grey"
     android:paddingBottom="@dimen/dimen_5">
 
     <androidx.cardview.widget.CardView
         android:layout_margin="@dimen/dimen_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/card_background"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardCornerRadius="@dimen/dimen_2"
+        app:cardUseCompatPadding="true"
         app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
             android:padding="@dimen/dimen_10"

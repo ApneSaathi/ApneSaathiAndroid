@@ -26,6 +26,7 @@
 
     <!--<color name="colorPrimaryDark">#3700B3</color>-->
     <color name="btn_bg">#fe4612</color>
+    <color name="color_red">#EF2C28</color>
     <color name="textcolor">#662c2d32</color>
 
     <color name="bg_color_grey">#fbfcff</color>

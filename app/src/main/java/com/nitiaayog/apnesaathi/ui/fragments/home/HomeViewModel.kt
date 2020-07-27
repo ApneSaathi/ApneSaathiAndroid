@@ -14,18 +14,16 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailsViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
 
-        @Volatile
-        private var instance: HomeViewModel? = null
-
         @Synchronized
-        fun getInstance(dataManager: DataManager): HomeViewModel = instance ?: synchronized(this) {
-            HomeViewModel(dataManager).also { instance = it }
+        fun getInstance(dataManager: DataManager): HomeViewModel = synchronized(this) {
+            HomeViewModel(dataManager)
         }
     }
 
@@ -37,6 +35,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.getFollowupCallsList()
     private val completedCallsList: LiveData<MutableList<CallData>> =
         dataManager.getCompletedCallsList()
+    private val invalidCallsList: LiveData<MutableList<CallData>> =
+        dataManager.getInvalidCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
 
     private val pendingGrievance: LiveData<MutableList<GrievanceData>> =
@@ -51,11 +51,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     private val grievancesTrackingList: LiveData<MutableList<GrievanceData>> =
         dataManager.getAllTrackingGrievances()
-
-    override fun onCleared() {
-        instance?.run { instance = null }
-        super.onCleared()
-    }
 
     private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
         val callData = grievance.filter {
@@ -81,6 +76,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList
 
     fun getCompletedCalls(): LiveData<MutableList<CallData>> = completedCallsList
+
+    fun getInvalidCallsList(): LiveData<MutableList<CallData>> = invalidCallsList
 
     fun getPendingGrievances(): LiveData<MutableList<GrievanceData>> = pendingGrievance
     fun getInProgressGrievances(): LiveData<MutableList<GrievanceData>> = inProgressGrievance
