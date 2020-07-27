@@ -18,6 +18,7 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getFollowupCallsList(): LiveData<MutableList<CallData>>
     fun getCompletedCallsList(): LiveData<MutableList<CallData>>
     fun getAllCallsList(): LiveData<MutableList<CallData>>
+    fun getInvalidCallsList(): LiveData<MutableList<CallData>>
 
     fun insertCallData(callData: List<CallData>)
     fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>)

@@ -160,10 +160,10 @@ class HomeFragment : BaseFragment<HomeViewModel>(), GrievancesAdapter.OnItemClic
         tv_pending.text = getString(R.string.pending_g_count).plus(pendingCalls)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        exitProcess(0)
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        exitProcess(0)
+//    }
 
     private fun manageGrievances(dataList: MutableList<GrievanceData>) {
         val size = dataList.size

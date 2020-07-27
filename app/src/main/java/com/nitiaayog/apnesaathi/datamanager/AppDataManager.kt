@@ -97,6 +97,11 @@ class AppDataManager private constructor(
     override fun getCompletedCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
+    override fun getInvalidCallsList(): LiveData<MutableList<CallData>> =
+        callsDataDao.getAllCallsList(
+            arrayOf("7", "8")
+        )
+
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(
             arrayOf(
@@ -106,6 +111,8 @@ class AppDataManager private constructor(
                 "4",
                 "5",
                 "6",
+                "7",
+                "8",
                 "9",
                 "10",
                 "null",
