@@ -24,7 +24,6 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         }
     }
 
-
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getvolunteerData(mContext: Context, volunteerId: String) {
