@@ -217,7 +217,7 @@
     <string name="more_details">अधिक माहिती दर्शवा</string>
 
     <string name="validate_sr_citizen_name">ज्येष्ठ नागरिकाचे नाव द्या</string>
-    <string name="validate_age">वय द्या</string>
+    <string name="validate_age">वय द्या(50 ते 110 दरम्यान)</string>
     <string name="validate_gender">जाती निवडा</string>
     <string name="validate_contact_number">ज्येष्ठ नागरिकाचा संपर्क क्रमांक द्या</string>
     <string name="valid_contact_number">वैध संपर्क क्रमांक द्या</string>
@@ -259,6 +259,8 @@
 
     <string name="use_other_number">दुसरा नंबर वापरा</string>
     <string name="select_mobile_number">मोबाइल नंबर निवडा</string>
+
+    <string name="logout_error">आपण ऑफलाइन असताना संचयित केलेला अद्याप काही ज्येष्ठ नागरिक डेटा शिल्लक आहे. आपण आत्ताच लॉगआउट करू शकणार नाही, कृपया डेटा संकालनानंतर प्रयत्न करा</string>
 
     <string-array name="states_array">
         <item>आसाम</item>

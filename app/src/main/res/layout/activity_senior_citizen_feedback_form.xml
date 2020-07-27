@@ -191,9 +191,9 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
-                    android:text="@string/call_status_1"
-                    android:drawablePadding="@dimen/dimen_5"
                     android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:text="@string/call_status_1"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
                     android:textIsSelectable="false"
@@ -201,6 +201,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/flGrievances"
                     app:layout_goneMarginTop="@dimen/dimen_10" />
+
                 <AutoCompleteTextView
                     android:id="@+id/actCallStatus"
                     android:layout_width="match_parent"
@@ -222,6 +223,7 @@
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvCallStatus" />
+
                 <EditText
                     android:id="@+id/edt_call_status_comment"
                     android:layout_width="match_parent"
@@ -234,7 +236,6 @@
                     android:hint="@string/type_remarks"
                     android:maxLines="5"
                     android:minLines="2"
-                    android:visibility="gone"
                     android:paddingStart="@dimen/dimen_10"
                     android:paddingTop="@dimen/dimen_3"
                     android:paddingEnd="@dimen/dimen_10"
@@ -243,8 +244,10 @@
                     android:textColor="@color/color_dark_grey_txt"
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_12"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/actCallStatus" />
+
                 <LinearLayout
                     android:id="@+id/llCallStatusLayout1"
                     android:layout_width="match_parent"
@@ -252,8 +255,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_2"
                     android:layout_marginEnd="@dimen/dimen_15"
-                    android:visibility="gone"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvCallStatus">
 
@@ -306,10 +309,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_2"
-                    android:visibility="gone"
                     android:layout_marginEnd="@dimen/dimen_15"
                     android:gravity="center"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout1">
 
@@ -337,6 +340,7 @@
                         android:textIsSelectable="false"
                         android:textSize="@dimen/text_12"
                         app:strokeColor="@color/color_dark_grey_txt" />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnWrongNumber"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -351,16 +355,17 @@
                         app:strokeColor="@color/color_dark_grey_txt" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llCallStatusLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_2"
-                    android:visibility="gone"
                     android:layout_marginEnd="@dimen/dimen_15"
                     android:gravity="center"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/llCallStatusLayout2">
 
@@ -388,6 +393,7 @@
                         android:textIsSelectable="false"
                         android:textSize="@dimen/text_12"
                         app:strokeColor="@color/color_dark_grey_txt" />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnNumberNotExist"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -410,10 +416,10 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/whom_did_you_talk_with"
                     android:textAllCaps="false"
-                    android:drawablePadding="@dimen/dimen_5"
-                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:textColor="@color/text_color"
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
@@ -452,8 +458,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
-                    android:drawablePadding="@dimen/dimen_5"
                     android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/any_sr_citizen_in_home"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -546,8 +552,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
-                    android:drawablePadding="@dimen/dimen_5"
                     android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/medical_history_sr_citizen"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -589,8 +595,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
-                    android:drawablePadding="@dimen/dimen_5"
                     android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/info_you_talked_about"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -673,9 +679,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
-                    android:drawablePadding="@dimen/dimen_5"
-                    android:drawableEnd="@drawable/ic_astrix_icon"
                     android:layout_marginEnd="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/behavior_change_practice"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -714,8 +720,8 @@
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
                     android:layout_marginEnd="0dp"
-                    android:drawablePadding="@dimen/dimen_5"
                     android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/other_medical_problems"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -1080,6 +1086,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_15"
                     android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
                     android:text="@string/select_category"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color"
@@ -1254,7 +1262,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="etDescription,tvDescription,flCategory,tvSelectCategory"/>
+                    app:constraint_referenced_ids="etDescription,tvDescription,flCategory,tvSelectCategory" />
+
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/cgMedicalDetails"
                     android:layout_width="wrap_content"

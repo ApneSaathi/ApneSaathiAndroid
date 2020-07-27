@@ -77,4 +77,6 @@ open class PreferenceManager private constructor(application: Application) : Pre
 
     override fun getLastSelectedId(): String =
         preferences.getString(PreferenceConstants.LastSelectedId)!!
+
+    override fun clearPreferences() = preferences.edit().clear().apply()
 }

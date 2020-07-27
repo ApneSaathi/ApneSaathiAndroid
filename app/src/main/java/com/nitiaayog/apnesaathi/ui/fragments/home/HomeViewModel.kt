@@ -14,15 +14,17 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailsViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
 
+        @Volatile
+        private var instance: HomeViewModel? = null
+
         @Synchronized
-        fun getInstance(dataManager: DataManager): HomeViewModel = synchronized(this) {
+        fun getInstance(dataManager: DataManager): HomeViewModel = instance ?: synchronized(this) {
             HomeViewModel(dataManager)
         }
     }
@@ -51,6 +53,11 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     private val grievancesTrackingList: LiveData<MutableList<GrievanceData>> =
         dataManager.getAllTrackingGrievances()
+
+    override fun onCleared() {
+        //instance?.run { instance = null }
+        super.onCleared()
+    }
 
     private fun prepareGrievances(grievance: List<CallData>): List<SrCitizenGrievance> {
         val callData = grievance.filter {
