@@ -275,6 +275,10 @@
     <string name="check_internet">Please check internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
     <string name="not_available">Not Available</string>
+
+    <string name="use_other_number">Use another number</string>
+    <string name="select_mobile_number">Select Mobile Number</string>
+
     <string-array name="grievance_status_array">
         <item>Pending</item>
         <item>In Progress</item>

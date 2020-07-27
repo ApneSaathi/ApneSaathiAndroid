@@ -7,7 +7,7 @@ object PreferenceConstants {
     const val Gender: String = "gender"
     const val ProfileImage: String = "profile_image"
     const val PhoneNumber: String = "phone_number"
-    const val SELECTED_LANGUAGE: String = "selected_lang"
+    const val SelectedLanguage: String = "selected_lang"
 
     const val FirstName: String = "firstName"
     const val LastName: String = "lastName"

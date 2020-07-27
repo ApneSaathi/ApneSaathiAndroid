@@ -26,6 +26,7 @@ import com.nitiaayog.apnesaathi.adapter.BaseArrayAdapter
 import com.nitiaayog.apnesaathi.adapter.PopupAdapter
 import com.nitiaayog.apnesaathi.adapter.SimpleBaseAdapter
 import com.nitiaayog.apnesaathi.base.ProgressDialog
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
@@ -77,14 +78,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private val popupMedicalHistorySrCitizenAdapter: PopupAdapter by lazy {
         PopupAdapter(popupMedicalHistoryList).apply {
             this.setOnItemClickListener(
-                object : PopupAdapter.OnItemClickListener {
-                    override fun onItemClicked(position: Int, element: FormElements) {
-                        if (element.isSelected) {
-                            rvMedicalHistorySrCitizenAdapter.addItem(element.name)
-                            viewModel.addMedicalHistory(element.name)
+                object : OnItemClickListener<FormElements> {
+                    override fun onItemClick(position: Int, data: FormElements) {
+                        if (data.isSelected) {
+                            rvMedicalHistorySrCitizenAdapter.addItem(data.name)
+                            viewModel.addMedicalHistory(data.name)
                         } else {
-                            rvMedicalHistorySrCitizenAdapter.removeItem(element.name)
-                            viewModel.removeMedicalHistory(element.name)
+                            rvMedicalHistorySrCitizenAdapter.removeItem(data.name)
+                            viewModel.removeMedicalHistory(data.name)
                         }
 
                         rvMedicalHistorySrCitizen.visibility =
@@ -96,16 +97,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
     private val rvMedicalHistorySrCitizenAdapter: SimpleBaseAdapter by lazy {
         SimpleBaseAdapter().apply {
-            this.setOnItemClickListener(object : SimpleBaseAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, name: String) {
-                    popupMedicalHistorySrCitizenAdapter.updateItem(name)
-                    viewModel.removeMedicalHistory(name)
+            this.setOnItemClickListener(object : OnItemClickListener<String> {
+                override fun onItemClick(position: Int, data: String) {
+                    popupMedicalHistorySrCitizenAdapter.updateItem(data)
+                    viewModel.removeMedicalHistory(data)
                     rvMedicalHistorySrCitizen.visibility =
                         if (rvMedicalHistorySrCitizenAdapter.itemCount > 0) View.VISIBLE
                         else View.GONE
                 }
 
-                override fun showPopup() = showPopupWindow(llMedicalHistorySrCitizen)
+                override fun onMoreInfoClick(position: Int, data: String) =
+                    showPopupWindow(llMedicalHistorySrCitizen)
             })
         }
     }
@@ -115,14 +117,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private val popupCategoryAdapter: PopupAdapter by lazy {
         PopupAdapter(popupCategoryList).apply {
             this.setOnItemClickListener(
-                object : PopupAdapter.OnItemClickListener {
-                    override fun onItemClicked(position: Int, element: FormElements) {
-                        if (element.isSelected) {
-                            rvCategoryAdapter.addItem(element.name)
-                            viewModel.addComplaint(element.name)
+                object : OnItemClickListener<FormElements> {
+                    override fun onItemClick(position: Int, data: FormElements) {
+                        if (data.isSelected) {
+                            rvCategoryAdapter.addItem(data.name)
+                            viewModel.addComplaint(data.name)
                         } else {
-                            rvCategoryAdapter.removeItem(element.name)
-                            viewModel.removeComplaint(element.name)
+                            rvCategoryAdapter.removeItem(data.name)
+                            viewModel.removeComplaint(data.name)
                         }
 
                         rvCategory.visibility = if (rvCategoryAdapter.itemCount > 0) View.VISIBLE
@@ -133,17 +135,16 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
     private val rvCategoryAdapter: SimpleBaseAdapter by lazy {
         SimpleBaseAdapter().apply {
-            this.setOnItemClickListener(object : SimpleBaseAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, name: String) {
-                    popupCategoryAdapter.updateItem(name)
-                    viewModel.removeComplaint(name)
+            this.setOnItemClickListener(object : OnItemClickListener<String> {
+                override fun onItemClick(position: Int, data: String) {
+                    popupCategoryAdapter.updateItem(data)
+                    viewModel.removeComplaint(data)
                     rvCategory.visibility = if (rvCategoryAdapter.itemCount > 0) View.VISIBLE
                     else View.GONE
                 }
 
-                override fun showPopup() {
+                override fun onMoreInfoClick(position: Int, data: String) =
                     showPopupWindow(flCategory)
-                }
             })
         }
     }

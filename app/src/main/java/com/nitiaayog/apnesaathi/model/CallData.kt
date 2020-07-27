@@ -132,6 +132,7 @@ class CallData {
         set(value) {
             field = value ?: ""
         }
+
     @ColumnInfo(name = Columns.LoggedDateTime, defaultValue = "")
     @SerializedName(ApiConstants.LoggedDateTime)
     var loggedDateTime: String? = ""
@@ -148,4 +149,17 @@ class CallData {
         set(value) {
             field = value ?: mutableListOf()
         }
+
+    override fun equals(other: Any?): Boolean {
+        if ((other != null) && (other is CallData))
+            return ((callId == other.callId) && (volunteerId == other.volunteerId)
+                    && (srCitizenName == other.srCitizenName)
+                    && (contactNumber == other.contactNumber) && (age == other.age)
+                    && (gender == other.gender) && (address == other.address)
+                    && (emailId == other.emailId) && (state == other.state)
+                    && (district == other.district) && (block == other.block)
+                    && (remarks == other.remarks))
+
+        return false
+    }
 }

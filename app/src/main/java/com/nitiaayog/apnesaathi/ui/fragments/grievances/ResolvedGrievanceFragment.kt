@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
+import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.include_recyclerview.*
 
 class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>(),
-    GrievanceStatusAdapter.OnItemClickListener {
+    OnItemClickListener<GrievanceData> {
     private lateinit var pageTitleChangeListener: PageTitleChangeListener
     private val grievanceAdapter = GrievanceStatusAdapter()
-    private lateinit var itemClickListener: GrievanceStatusAdapter.OnItemClickListener
+    private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDataStream()
@@ -33,7 +34,7 @@ class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>(),
         })
     }
 
-    fun setOnItemClickListener(itemClickListener: GrievanceStatusAdapter.OnItemClickListener) {
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
 
@@ -52,7 +53,7 @@ class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>(),
     override fun onCallPermissionDenied() {
     }
 
-    override fun onItemClick(position: Int, grievanceData: GrievanceData) {
-        itemClickListener.onItemClick(position, grievanceData)
+    override fun onItemClick(position: Int, data: GrievanceData) {
+        itemClickListener.onItemClick(position, data)
     }
 }

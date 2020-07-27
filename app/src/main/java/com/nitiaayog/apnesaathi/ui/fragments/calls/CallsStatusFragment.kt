@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
@@ -22,32 +23,31 @@ import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_calls_status.*
 
-class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemClickListener {
+class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<CallData> {
 
     private var lastCallPosition: Int = -1
     private var lastCallData: CallData? = null
 
     /*private var lastFollowupCallPosition: Int = -1
     private var lastFollowupCallData: CallData? = null
-
     private var lastCompletedCallPosition: Int = -1
     private var lastCompletedCallData: CallData? = null*/
 
     private val pendingAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
-            this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, callData: CallData) {
+            this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+                override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     prepareToCallPerson()
                 }
 
-                override fun onMoreInfoClick(position: Int, callData: CallData) {
+                override fun onMoreInfoClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(callData)
-                    viewModel.setLastSelectedUser(callData.callId.toString())
+                    fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -81,19 +81,19 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
 
     private val followupAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
-            this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, callData: CallData) {
+            this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+                override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     prepareToCallPerson()
                 }
 
-                override fun onMoreInfoClick(position: Int, callData: CallData) {
+                override fun onMoreInfoClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(callData)
-                    viewModel.setLastSelectedUser(callData.callId.toString())
+                    fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -104,19 +104,19 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
 
     private val completedAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
-            this.setOnItemClickListener(object : CallsAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, callData: CallData) {
+            this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+                override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     prepareToCallPerson()
                 }
 
-                override fun onMoreInfoClick(position: Int, callData: CallData) {
+                override fun onMoreInfoClick(position: Int, data: CallData) {
                     lastCallPosition = position
-                    lastCallData = callData
+                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(callData)
-                    viewModel.setLastSelectedUser(callData.callId.toString())
+                    fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -151,10 +151,10 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), CallsAdapter.OnItemCl
         prepareToCallPerson()
     }
 
-    override fun onMoreInfoClick(position: Int, callData: CallData) {
+    override fun onMoreInfoClick(position: Int, data: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(callData)
-        viewModel.setLastSelectedUser(callData.callId.toString())
+        fragment.setSelectedUser(data)
+        viewModel.setLastSelectedUser(data.callId.toString())
         addFragment(
             R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
         )

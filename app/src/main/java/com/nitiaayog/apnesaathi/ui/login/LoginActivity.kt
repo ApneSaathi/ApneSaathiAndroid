@@ -27,7 +27,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
 
-
 class LoginActivity : BaseActivity<LoginViewModel>() {
     lateinit var mContext: Context
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,7 +1,7 @@
 ext {
 
-    API_HOST = "http://3.7.39.123:8080/"
-    API_DEV_HOST = "http://15.207.42.209:8080/"
+    PROD_HOST = "http://3.7.39.123:8080/"
+    DEV_HOST = "http://15.207.42.209:8080/"
     DATABASE_NAME = "apne_saathi.db"
     DATABASE_VERSION = "1"
 
@@ -46,6 +46,9 @@ ext {
     cardViewVersion = '1.0.0'
     cardViewPackage = 'androidx.cardview:cardview'
 
+    pagingVersion = '2.1.2'
+    pagingPackage = 'androidx.paging:paging-runtime'
+
     retrofitVersion = '2.5.0'
     retrofitNetworkCallPackage = 'com.squareup.retrofit2:retrofit'
     retrofitGsonConverterPackage = 'com.squareup.retrofit2:converter-gson'
@@ -75,6 +78,18 @@ ext {
     roomKtxPackage = 'androidx.room:room-ktx'
     roomRxjava2Package = 'androidx.room:room-rxjava2'
 
+    coroutineVersion = "1.3.0"
+    coroutinePackage = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
+
+    viewModelVersion = '2.2.0'
+    viewModelPackage = 'androidx.lifecycle:lifecycle-viewmodel-ktx'
+
+    threetenAbpVersion = '1.2.4'
+    threetenAbpPackage = 'com.jakewharton.threetenabp:threetenabp'
+
+    playServicesAuthVersion = '18.1.0'
+    playServicesAuthPackage = 'com.google.android.gms:play-services-auth'
+
     androidGradleSupport = buildDependency(androidSupportPackage, androidGradleVersion)
     kotlinGradleSupport = buildDependency(kotlinSupportPackage, kotlinPluginVersion)
     gmsServiceSupport = buildDependency(gmsSupportPackage, gmsGradleVersion)
@@ -87,12 +102,18 @@ ext {
     rxJava2 = buildDependency(rxJava2Package, rxJava2Version)
     rxAndroid2 = buildDependency(rxAndroid2Package, rxAndroid2Version)
 
+    kotlinCoroutine = buildDependency(coroutinePackage, coroutineVersion)
+    viewModelLifecycle = buildDependency(viewModelPackage, viewModelVersion)
+    threetenAbp = buildDependency(threetenAbpPackage, threetenAbpVersion)
+    playServicesAuth = buildDependency(playServicesAuthPackage, playServicesAuthVersion)
+
     androidSupport = [
             appCompat     : buildDependency(appCompatPackage, supportVersion),
             ktx           : buildDependency(ktxPackage, supportVersion),
             recyclerView  : buildDependency(recyclerViewPackage, supportVersion),
             materialDesign: buildDependency(materialPackage, supportVersion),
-            cardView      : buildDependency(cardViewPackage, cardViewVersion)
+            cardView      : buildDependency(cardViewPackage, cardViewVersion),
+            paging      : buildDependency(pagingPackage, pagingVersion)
     ]
 
     retrofit = [

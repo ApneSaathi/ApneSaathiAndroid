@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
@@ -14,12 +15,7 @@ import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
     private val dataList: MutableList<CallData> = mutableListOf()
-    private lateinit var itemClickListener: OnItemClickListener
-
-    interface OnItemClickListener {
-        fun onItemClick(position: Int, callData: CallData)
-        fun onMoreInfoClick(position: Int, callData: CallData)
-    }
+    private lateinit var itemClickListener: OnItemClickListener<CallData>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodaysCallsViewHolder {
         val customView = LayoutInflater.from(parent.context)
@@ -32,7 +28,7 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
     override fun onBindViewHolder(holder: TodaysCallsViewHolder, position: Int) =
         holder.bindData(dataList[position])
 
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener<CallData>) {
         this.itemClickListener = itemClickListener
     }
 

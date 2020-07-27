@@ -21,20 +21,19 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
         @Synchronized
         fun getApiRequest(apiClient: ApiInterface): ApiManager =
-            instance ?: synchronized(this) {
-                instance ?: ApiManager(apiClient).also { instance = it }
-            }
+            instance ?: synchronized(this) { ApiManager(apiClient).also { instance = it } }
     }
 
     override fun loginUser(phoneNumber: JsonObject): Single<Login_Response> =
         apiClient.loginUser(phoneNumber).subscribeAndObserveWithDelaySubscription()
 
     override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
-       return apiClient.getVolunteerData(phoneNumber).subscribeAndObserveWithDelaySubscription()
+        return apiClient.getVolunteerData(phoneNumber).subscribeAndObserveWithDelaySubscription()
     }
 
     override fun updatevolunteerData(phoneNumber: JsonObject): Single<ProfileUpdateResponse> {
-        return apiClient.getUpdateVolunteerData(phoneNumber).subscribeAndObserveWithDelaySubscription()
+        return apiClient.getUpdateVolunteerData(phoneNumber)
+            .subscribeAndObserveWithDelaySubscription()
     }
 
     override fun getCallDetails(details: JsonObject): Single<HomeRepo> =
@@ -55,5 +54,4 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
         apiClient.updateGrievanceDetails(grDetails).subscribeAndObserve()
-
 }

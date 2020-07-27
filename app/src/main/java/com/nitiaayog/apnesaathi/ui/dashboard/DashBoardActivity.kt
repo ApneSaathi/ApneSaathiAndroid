@@ -9,14 +9,14 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.fragments.calls.CallsFragment
-import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievancesFragment
+import com.nitiaayog.apnesaathi.ui.fragments.home.HomeFragment
 import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
 import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
-class DashBoardActivity : BaseActivity<DashBoardViewModel>(),ReloadApiRequiredListener {
+class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredListener {
 
     private val homeFragment = HomeFragment()
     private val callsFragment = CallsFragment()
@@ -32,8 +32,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(),ReloadApiRequiredLi
         initBottomNavigationView()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onBackPressed() {
+        if (viewPager.currentItem == 0) super.onBackPressed()
+        else viewPager.currentItem = 0
     }
 
     override fun provideViewModel(): DashBoardViewModel =
@@ -86,7 +87,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(),ReloadApiRequiredLi
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE){
+        if (requestCode == REQUEST_CODE) {
             homeFragment.reloadApi()
         }
     }
