@@ -19,9 +19,6 @@ interface CallDataDao {
     fun getCallsAfter(itemKey: Int, requestedDataCount: Int, status: Array<String>):
             MutableList<CallData>
 
-    /*@Query("SELECT MIN(${Columns.Id}) FROM ${Tables.TABLE_CALL_DETAILS}")
-    fun getMinCallId(): Int?*/
-
     @Query("SELECT * FROM ${Tables.TABLE_CALL_DETAILS} LIMIT :dataCount")
     fun getFewCallsList(dataCount: Int = 3): LiveData<MutableList<CallData>>
 

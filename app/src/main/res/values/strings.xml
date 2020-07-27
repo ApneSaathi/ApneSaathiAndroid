@@ -232,7 +232,7 @@
     <string name="gender_others">Others</string>
     <string name="data_not_available">Data not available</string>
     <string name="validate_sr_citizen_name">Provide senior citizen\'s name</string>
-    <string name="validate_age">Provide age between 60–110 </string>
+    <string name="validate_age">Provide age between 50 – 110</string>
     <string name="validate_gender">Select gender</string>
     <string name="validate_contact_number">Provide senior citizen\'s contact number</string>
     <string name="valid_contact_number">Provide valid contact number</string>
@@ -491,5 +491,7 @@
     <string name="otpsendsuccesfully">Otp sent successfully</string>
     <string name="profile_details_saved_successfully">Volunteer details is synced up successfully.</string>
     <string name="invalid_calls">Invalid Calls</string>
+
+    <string name="logout_error">There are some Sr. citizen data still remaining to sync that were stored while you were offline.\n\nSo that you can not logout now, please try after sometime</string>
 
 </resources>

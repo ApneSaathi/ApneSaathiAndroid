@@ -33,8 +33,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
     }
 
     override fun onBackPressed() {
-        if (viewPager.currentItem == 0) super.onBackPressed()
-        else viewPager.currentItem = 0
+        val backStackCount: Int = supportFragmentManager.backStackEntryCount
+        if (backStackCount > 0) supportFragmentManager.popBackStack()
+        else {
+            if (viewPager.currentItem == 0) super.onBackPressed()
+            else viewPager.currentItem = 0
+        }
     }
 
     override fun provideViewModel(): DashBoardViewModel =

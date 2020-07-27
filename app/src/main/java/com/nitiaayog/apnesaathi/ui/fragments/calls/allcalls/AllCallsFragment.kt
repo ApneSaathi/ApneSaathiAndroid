@@ -59,6 +59,18 @@ class AllCallsFragment : BaseFragment<AllCallsViewModel>(), OnItemClickListener<
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
+    override fun onItemClick(position: Int, data: CallData) {
+        lastCallPosition = position
+        lastCallData = data
+        prepareToCallPerson()
+    }
+
+    override fun onMoreInfoClick(position: Int, data: CallData) {
+        val fragment = SeniorCitizenDetailsFragment()
+        fragment.setSelectedUser(data)
+        addFragment(R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment))
+    }
+
     private fun getObservableStream() {
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
@@ -78,17 +90,5 @@ class AllCallsFragment : BaseFragment<AllCallsViewModel>(), OnItemClickListener<
         viewModel.getCallsStream().observe(viewLifecycleOwner, Observer {
             callsAdapter.submitList(it)
         })
-    }
-
-    override fun onItemClick(position: Int, data: CallData) {
-        lastCallPosition = position
-        lastCallData = data
-        prepareToCallPerson()
-    }
-
-    override fun onMoreInfoClick(position: Int, data: CallData) {
-        val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(data)
-        addFragment(R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment))
     }
 }

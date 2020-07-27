@@ -51,4 +51,7 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun delete(syncData: SyncSrCitizenGrievance)
     fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>>
     fun clearPreviousData()
+    suspend fun getCount():Int
+
+    fun clearData()
 }
