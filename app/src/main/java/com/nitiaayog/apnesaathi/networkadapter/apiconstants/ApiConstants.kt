@@ -61,6 +61,11 @@ object ApiConstants {
     const val OtherAilments: String = "other_ailments"
     const val RemarkOnMedicalHistory: String = "remarks_medical_history"
     const val InfoTalkAbout: String = "related_info_talked_about"
+
+    const val IsSrCitizenAwareOfCovid19: String = "is_sr_citizen_aware_of_covid_19"
+    const val IsSymptomsPreventionTaken: String = "is_symptoms_prevention_taken"
+    const val WhichPracticeNotFollowed: String = "practice_not_followed"
+
     const val NoticedBehaviouralChange: String = "behavioural_change_noticed"
     const val HasCovidSymptoms: String = "iscovidsymptoms"
     const val HasCough: String = "hascough"

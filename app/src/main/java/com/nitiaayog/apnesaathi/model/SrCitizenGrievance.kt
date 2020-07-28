@@ -111,6 +111,30 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.IsSrCitizenAwareOfCovid19, defaultValue = "n")
+    @SerializedName(ApiConstants.IsSrCitizenAwareOfCovid19)
+    var isSrCitizenAwareOfCovid19: String? = "y"
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.IsSymptomsPreventionTaken, defaultValue = "n")
+    @SerializedName(ApiConstants.IsSymptomsPreventionTaken)
+    var isSymptomsPreventionTaken: String? = "y"
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.WhichPracticeNotFollowed, defaultValue = "")
+    @SerializedName(ApiConstants.WhichPracticeNotFollowed)
+    var whichPracticesNotFollowed: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
     @ColumnInfo(name = Columns.NoticedBehaviouralChanges, defaultValue = "-1")
     @SerializedName(ApiConstants.NoticedBehaviouralChange)
     var behavioralChangesNoticed: String? = ""
