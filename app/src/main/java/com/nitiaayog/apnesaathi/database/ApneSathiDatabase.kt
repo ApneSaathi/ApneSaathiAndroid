@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nitiaayog.apnesaathi.BuildConfig
-import com.nitiaayog.apnesaathi.database.dao.*
+import com.nitiaayog.apnesaathi.database.dao.CallDataDao
+import com.nitiaayog.apnesaathi.database.dao.GrievanceTrackingDao
+import com.nitiaayog.apnesaathi.database.dao.GrievancesDao
+import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
@@ -30,8 +33,7 @@ abstract class ApneSathiDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ApneSathiDatabase? = null
 
-        @JvmField
-        val MIGRATION = ApneSathiMigration(1, 2)
+        private val migration = ApneSathiMigration(1, 2)
 
         fun getDatabase(context: Context): ApneSathiDatabase {
             // if the INSTANCE is not null, then return it,
@@ -42,9 +44,11 @@ abstract class ApneSathiDatabase : RoomDatabase() {
                 )
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.
-//                    .fallbackToDestructiveMigration()
                     //.addCallback(ApneSathiDatabaseCallback(scope))
-                    .addMigrations(MIGRATION)
+                    //.setQueryExecutor(Executors.newScheduledThreadPool(3))
+                    .fallbackToDestructiveMigration()
+                    .addMigrations(migration)
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 // return instance

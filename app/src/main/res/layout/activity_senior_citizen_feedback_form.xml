@@ -674,6 +674,101 @@
                 </HorizontalScrollView>
 
                 <TextView
+                    android:id="@+id/tvIsCovidSymptomsAware"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_2"
+                    android:text="@string/aware_of_covid_symptoms"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hsvInfoYouTalkedAbout" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIsCovidAwareYes"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvIsCovidSymptomsAware"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIsCovidAwareNo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/no"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:textIsSelectable="false"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toEndOf="@id/btnIsCovidAwareYes"
+                    app:layout_constraintTop_toBottomOf="@id/tvIsCovidSymptomsAware"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <TextView
+                    android:id="@+id/tvIsCovidPreventionTaken"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_2"
+                    android:text="@string/is_prevention_taken_for_symptoms"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnIsCovidAwareYes" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIsCovidPreventionYes"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:visibility="gone"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvIsCovidPreventionTaken"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIsCovidPreventionNo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:text="@string/no"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray_background"
+                    android:textIsSelectable="false"
+                    android:visibility="gone"
+                    app:cornerRadius="@dimen/dimen_3"
+                    app:layout_constraintStart_toEndOf="@id/btnIsCovidPreventionYes"
+                    app:layout_constraintTop_toBottomOf="@id/tvIsCovidPreventionTaken"
+                    app:strokeColor="@color/color_dark_grey_txt" />
+
+                <TextView
                     android:id="@+id/tvBehaviorChangePractical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -688,7 +783,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hsvInfoYouTalkedAbout" />
+                    app:layout_constraintTop_toBottomOf="@id/btnIsCovidPreventionYes" />
 
                 <AutoCompleteTextView
                     android:id="@+id/actBehaviorChange"
@@ -714,6 +809,46 @@
                     app:layout_constraintTop_toBottomOf="@id/tvBehaviorChangePractical" />
 
                 <TextView
+                    android:id="@+id/tvElaboratePracticeFollowed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_astrix_icon"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:text="@string/practices_not_followed"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/actBehaviorChange" />
+
+                <EditText
+                    android:id="@+id/etElaboratePracticeFollowed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginTop="@dimen/dimen_2"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:background="@drawable/bg_rectangle_border_form"
+                    android:hint="@string/type_here"
+                    android:maxLines="10"
+                    android:minLines="2"
+                    android:paddingStart="@dimen/dimen_10"
+                    android:paddingTop="@dimen/dimen_3"
+                    android:paddingEnd="@dimen/dimen_10"
+                    android:paddingBottom="@dimen/dimen_3"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_dark_grey_txt"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/text_12"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvElaboratePracticeFollowed" />
+
+                <TextView
                     android:id="@+id/tvOtherMedicalProblems"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -728,7 +863,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/actBehaviorChange" />
+                    app:layout_constraintTop_toBottomOf="@id/etElaboratePracticeFollowed" />
 
                 <AutoCompleteTextView
                     android:id="@+id/actOtherMedicalProblems"
@@ -1269,7 +1404,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,llMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
+                    app:constraint_referenced_ids="tvMedicalDetails,tvMedicalHistorySrCitizen,llMedicalHistorySrCitizen,tvInfoYouTalkedAbout,hsvInfoYouTalkedAbout,tvIsCovidSymptomsAware,btnIsCovidAwareYes,btnIsCovidAwareNo,tvBehaviorChangePractical,actBehaviorChange,tvOtherMedicalProblems,actOtherMedicalProblems,tvOtherImpInfo,tvOtherDescription,etOtherDescription" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/cgComplaintDetails"

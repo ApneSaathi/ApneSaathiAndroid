@@ -366,7 +366,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     override fun onCallPermissionGranted() {
-        callData?.let { placeCall(it, R.id.fragment_edit_container) }
+        callData?.let { placeCall(it) }// , R.id.fragment_edit_container
     }
 
     override fun onCallPermissionDenied() =

@@ -88,7 +88,7 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
     }
 
     override fun onCallPermissionGranted() {
-        if (containerId != -1) lastSelectedCallData?.let { placeCall(it, containerId) }
+        if (containerId != -1) lastSelectedCallData?.let { placeCall(it) }//, containerId
     }
 
     override fun onCallPermissionDenied() {

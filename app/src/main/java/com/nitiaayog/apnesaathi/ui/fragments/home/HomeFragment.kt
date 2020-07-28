@@ -85,7 +85,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     override fun provideLayoutResource(): Int = R.layout.fragment_home
 
     override fun onCallPermissionGranted() {
-        lastSelectedCallData?.let { placeCall(it, R.id.fragmentHomeContainer) }
+        lastSelectedCallData?.let { placeCall(it) }// , R.id.fragmentHomeContainer
     }
 
     override fun onCallPermissionDenied() =

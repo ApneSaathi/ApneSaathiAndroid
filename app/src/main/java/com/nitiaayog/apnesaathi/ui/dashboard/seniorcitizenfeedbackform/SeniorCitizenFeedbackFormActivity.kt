@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +56,9 @@ import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
 
-    private var selectedCallStatusButton: MaterialButton? = null
+    //private var selectedCallStatusButton: MaterialButton? = null
+    private var selectedSymptomsAwareness: MaterialButton? = null
+    private var selectedKnowledgeOfCovidPrevention: MaterialButton? = null
     private var selectedLackOfEssentialServices: MaterialButton? = null
     private var selectedNeedOfEmergencyServices: MaterialButton? = null
     private var selectedState: String = ""
@@ -235,71 +238,25 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private fun checkData(dataString: String, element: String, compareString: String): Boolean =
         (dataString.toLowerCase(Locale.getDefault()) == "y") && (element == compareString)
 
-    private fun checkComplainData(dataString: String, element: String, compareString: String):
-            Boolean = (dataString == "0") && (element == compareString)
-
     private fun setCallStatus(callStatus: String) = when (callStatus) {
         this.getString(R.string.connected) -> {
             viewModel.setCallStatus("10")
             tvTalkWith.visibility = View.VISIBLE
             actTalkWith.visibility = View.VISIBLE
         }
-        this.getString(R.string.not_picked_single_line) -> {
-            viewModel.setCallStatus("2")
-        }
-        this.getString(R.string.not_reachable_single_line) -> {
-            viewModel.setCallStatus("3")
-        }
-        this.getString(R.string.number_busy) -> {
-            viewModel.setCallStatus("4")
-        }
-        this.getString(R.string.call_later) -> {
-            viewModel.setCallStatus("5")
-        }
-        this.getString(R.string.call_dropped) -> {
-            viewModel.setCallStatus("6")
-        }
-        this.getString(R.string.wrong_number) -> {
-            viewModel.setCallStatus("7")
-        }
-        this.getString(R.string.number_not_existing) -> {
-            viewModel.setCallStatus("8")
-        }
+        this.getString(R.string.not_picked_single_line) -> viewModel.setCallStatus("2")
+        this.getString(R.string.not_reachable_single_line) -> viewModel.setCallStatus("3")
+        this.getString(R.string.number_busy) -> viewModel.setCallStatus("4")
+        this.getString(R.string.call_later) -> viewModel.setCallStatus("5")
+        this.getString(R.string.call_dropped) -> viewModel.setCallStatus("6")
+        this.getString(R.string.wrong_number) -> viewModel.setCallStatus("7")
+        this.getString(R.string.number_not_existing) -> viewModel.setCallStatus("8")
         this.getString(R.string.dis_connected) -> {
             viewModel.setCallStatus("9")
             edt_call_status_comment.visibility = View.VISIBLE
         }
         else -> {
         }
-    }
-
-    private fun setTalkedWith(talkedWith: String, callStatus: String) {
-        if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")) {
-            actTalkWith.setText(R.string.sr_citizen)
-            viewModel.setTalkedWith(getString(R.string.sr_citizen))
-
-            cgMedicalDetails.visibility = View.VISIBLE
-        } else if ((talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
-            (talkedWith.toLowerCase(Locale.getDefault()) == "f")
-        ) {
-            actTalkWith.setText(R.string.family_member_of_sr_citizen)
-            viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
-            cgMedicalDetails.visibility = View.VISIBLE
-        } else if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c")) {
-            actTalkWith.setText(R.string.community_member)
-            viewModel.setTalkedWith(getString(R.string.community_member))
-//            tvAnySrCitizenInHome.visibility = View.VISIBLE
-        }
-
-        if (((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")
-                    || (talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
-                    (talkedWith.toLowerCase(Locale.getDefault()) == "f") ||
-                    (talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c") &&
-                    (callStatus == "10"))
-        ) {
-            tvTalkWith.visibility == View.VISIBLE
-            actTalkWith.visibility == View.VISIBLE
-        } else cgMedicalDetails.visibility = View.GONE
     }
 
     private fun setCheckForMedicalHistoryData(grievance: SrCitizenGrievance) {
@@ -342,6 +299,35 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             rvMedicalHistorySrCitizenAdapter.notifyDataSetChanged()
 //            rvMedicalHistorySrCitizen.visibility = View.VISIBLE
         }
+    }
+
+    /* private fun setTalkedWith(talkedWith: String, callStatus: String) {
+        if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")) {
+            actTalkWith.setText(R.string.sr_citizen)
+            viewModel.setTalkedWith(getString(R.string.sr_citizen))
+
+            cgMedicalDetails.visibility = View.VISIBLE
+        } else if ((talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
+            (talkedWith.toLowerCase(Locale.getDefault()) == "f")
+        ) {
+            actTalkWith.setText(R.string.family_member_of_sr_citizen)
+            viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
+            cgMedicalDetails.visibility = View.VISIBLE
+        } else if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c")) {
+            actTalkWith.setText(R.string.community_member)
+            viewModel.setTalkedWith(getString(R.string.community_member))
+//            tvAnySrCitizenInHome.visibility = View.VISIBLE
+        }
+
+        if (((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")
+                    || (talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
+                    (talkedWith.toLowerCase(Locale.getDefault()) == "f") ||
+                    (talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c") &&
+                    (callStatus == "10"))
+        ) {
+            tvTalkWith.visibility == View.VISIBLE
+            actTalkWith.visibility == View.VISIBLE
+        } else cgMedicalDetails.visibility = View.GONE
     }
 
     private fun setRelatedInfoTalkedAboutData(relatedInfo: String) {
@@ -521,7 +507,46 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             rvCategoryAdapter.notifyDataSetChanged()
             rvCategory.visibility = View.VISIBLE
         }
+
+        private fun resetCallStatus() {
+        viewModel.setCallStatus("")
+        if ((selectedCallStatusButton?.id != R.id.btnNoResponse) && btnNoResponse.isSelected)
+            resetButton(btnNoResponse)
+        if ((selectedCallStatusButton?.id != R.id.btnNotPicked) && btnNotPicked.isSelected)
+            resetButton(btnNotPicked)
+        if ((selectedCallStatusButton?.id != R.id.btnNotReachable) && btnNotReachable.isSelected)
+            resetButton(btnNotReachable)
+        if ((selectedCallStatusButton?.id != R.id.btnDisConnected) && btnDisConnected.isSelected)
+            resetButton(btnDisConnected)
+        if ((selectedCallStatusButton?.id != R.id.btnConnected) && btnConnected.isSelected)
+            resetButton(btnConnected)
     }
+
+    private fun manageResetForm(button: MaterialButton) {
+        changeButtonSelection(button)
+        resetCallStatus()
+        resetForm()
+    }
+
+    private fun checkComplainData(dataString: String, element: String, compareString: String):
+            Boolean = (dataString == "0") && (element == compareString)
+    }
+
+    private fun changeButtonSelection(button: MaterialButton) {
+        if ((selectedCallStatusButton != null) && (selectedCallStatusButton == button)) return
+
+        button.apply {
+            updateButtonState(this)
+        }
+
+        selectedCallStatusButton?.apply {
+            this.isSelected = false
+            this.strokeColor = ColorStateList.valueOf(normalColor)
+            this.setTextColor(normalColor)
+        }
+
+        selectedCallStatusButton = button
+    }*/
 
     private fun initAutoCompleteTextViews() {
         val genderList = resources.getStringArray(R.array.gender_array)
@@ -604,6 +629,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
         actBehaviorChange.setOnItemClickListener { _, _, position, _ ->
             viewModel.setBehaviorChange(behaviorChangesList[position])
+            if ((behaviorChangesList[position] == getString(R.string.no)) ||
+                (behaviorChangesList[position] == getString(R.string.may_be))
+            ) {
+                tvElaboratePracticeFollowed.visibility = View.VISIBLE
+                etElaboratePracticeFollowed.visibility = View.VISIBLE
+            } else {
+                viewModel.setPracticeNotAllowed("")
+                tvElaboratePracticeFollowed.visibility = View.GONE
+                etElaboratePracticeFollowed.visibility = View.GONE
+                etElaboratePracticeFollowed.text.clear()
+            }
         }
 
         val otherMedicalProblemsList = resources.getStringArray(R.array.other_medical_problems_list)
@@ -759,6 +795,29 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         btnDetection.throttleClick().subscribe { changeButtonSelectionWithIcon(btnDetection) }
             .autoDispose(disposables)
 
+        btnIsCovidAwareYes.throttleClick().subscribe {
+            viewModel.setAwareOfCovid19("y")
+            selectedSymptomsAwareness =
+                toggleButtonSelection(btnIsCovidAwareYes, selectedSymptomsAwareness)
+            if (tvIsCovidPreventionTaken.isVisible) updateCovidAwarenessVisibility(View.GONE)
+        }.autoDispose(disposables)
+        btnIsCovidAwareNo.throttleClick().subscribe {
+            viewModel.setAwareOfCovid19("n")
+            selectedSymptomsAwareness =
+                toggleButtonSelection(btnIsCovidAwareNo, selectedSymptomsAwareness)
+            if (!tvIsCovidPreventionTaken.isVisible) updateCovidAwarenessVisibility(View.VISIBLE)
+        }.autoDispose(disposables)
+        btnIsCovidPreventionYes.throttleClick().subscribe {
+            viewModel.setSymptomsPreventionDiscussed("y")
+            selectedKnowledgeOfCovidPrevention =
+                toggleButtonSelection(btnIsCovidPreventionYes, selectedKnowledgeOfCovidPrevention)
+        }.autoDispose(disposables)
+        btnIsCovidPreventionNo.throttleClick().subscribe {
+            viewModel.setSymptomsPreventionDiscussed("n")
+            selectedKnowledgeOfCovidPrevention =
+                toggleButtonSelection(btnIsCovidPreventionNo, selectedKnowledgeOfCovidPrevention)
+        }.autoDispose(disposables)
+
         // Which COVID-19 symptopms Sr. citizen is having
         rlCough.throttleClick().subscribe {
             changeCovidSymptomsSelection(ivCough, tvCough, ivDoneCough)
@@ -777,7 +836,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // Lack of essential services
         btnLackOfEssentialServicesYes.throttleClick().subscribe {
-            viewModel.isLackOfEssential("Yes")
+            viewModel.setLackOfEssential("Yes")
             cg_complaint.visibility = View.VISIBLE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(
@@ -785,7 +844,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 )
         }.autoDispose(disposables)
         btnLackOfEssentialServicesNo.throttleClick().subscribe {
-            viewModel.isLackOfEssential("No")
+            viewModel.setLackOfEssential("No")
             cg_complaint.visibility = View.GONE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(btnLackOfEssentialServicesNo, selectedLackOfEssentialServices)
@@ -836,22 +895,6 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 onNegativeBtnClick = { dialog, _ -> dialog.dismiss() }
             )
         }.autoDispose(disposables)
-    }
-
-    private fun changeButtonSelection(button: MaterialButton) {
-        if ((selectedCallStatusButton != null) && (selectedCallStatusButton == button)) return
-
-        button.apply {
-            updateButtonState(this)
-        }
-
-        selectedCallStatusButton?.apply {
-            this.isSelected = false
-            this.strokeColor = ColorStateList.valueOf(normalColor)
-            this.setTextColor(normalColor)
-        }
-
-        selectedCallStatusButton = button
     }
 
     private fun changeButtonSelectionWithIcon(button: MaterialButton) =
@@ -924,10 +967,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
-    private fun manageResetForm(button: MaterialButton) {
-        changeButtonSelection(button)
-        resetCallStatus()
-        resetForm()
+    private fun updateCovidAwarenessVisibility(visibility: Int) {
+        tvIsCovidPreventionTaken.visibility = visibility
+        btnIsCovidPreventionYes.visibility = visibility
+        btnIsCovidPreventionNo.visibility = visibility
     }
 
     private fun resetAllFormElements() {
@@ -943,6 +986,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         etOtherDescription.clearFocus()
         viewModel.setImpDescription("")
 
+        selectedSymptomsAwareness = null
+        selectedKnowledgeOfCovidPrevention = null
         selectedLackOfEssentialServices = null
         selectedNeedOfEmergencyServices = null
     }
@@ -954,6 +999,22 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
             resetRegisterNewSrCitizenLayout()
             return
+        }
+
+        if (btnIsCovidAwareYes.isSelected) updateButtonState(btnIsCovidAwareYes)
+        if (btnIsCovidAwareNo.isSelected) updateButtonState(btnIsCovidAwareNo)
+
+        if (btnIsCovidPreventionYes.isSelected) updateButtonState(btnIsCovidPreventionYes)
+        updateCovidAwarenessVisibility(View.GONE)
+
+        if (btnIsCovidPreventionNo.isSelected) updateButtonState(btnIsCovidPreventionNo)
+        updateCovidAwarenessVisibility(View.GONE)
+
+        if (viewModel.getPracticeNotAllowed().isNotEmpty()) {
+            viewModel.setPracticeNotAllowed("")
+            tvElaboratePracticeFollowed.visibility = View.GONE
+            etElaboratePracticeFollowed.visibility = View.GONE
+            etElaboratePracticeFollowed.text.clear()
         }
 
         if (viewModel.getOtherMedicalProblem() == getString(R.string.non_covid_symptoms)) {
@@ -1006,20 +1067,6 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (btnPrevention.isSelected) changeButtonSelectionWithIcon(btnPrevention)
         if (btnAccess.isSelected) changeButtonSelectionWithIcon(btnAccess)
         if (btnDetection.isSelected) changeButtonSelectionWithIcon(btnDetection)
-    }
-
-    private fun resetCallStatus() {
-        viewModel.setCallStatus("")
-        if ((selectedCallStatusButton?.id != R.id.btnNoResponse) && btnNoResponse.isSelected)
-            resetButton(btnNoResponse)
-        if ((selectedCallStatusButton?.id != R.id.btnNotPicked) && btnNotPicked.isSelected)
-            resetButton(btnNotPicked)
-        if ((selectedCallStatusButton?.id != R.id.btnNotReachable) && btnNotReachable.isSelected)
-            resetButton(btnNotReachable)
-        if ((selectedCallStatusButton?.id != R.id.btnDisConnected) && btnDisConnected.isSelected)
-            resetButton(btnDisConnected)
-        if ((selectedCallStatusButton?.id != R.id.btnConnected) && btnConnected.isSelected)
-            resetButton(btnConnected)
     }
 
     private fun resetButton(button: MaterialButton) {
@@ -1264,6 +1311,16 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     this, R.string.error, R.string.validate_behavioural_changes
                 )
                 return false
+            } else if (viewModel.isAwareOfCovid19() == "") {
+                BaseUtility.showAlertMessage(
+                    this, R.string.error, R.string.validate_is_aware_of_covid_symptoms
+                )
+                return false
+            } else if ((viewModel.isAwareOfCovid19() == "n") && (viewModel.isSymptomsPreventionDiscussed() == "")) {
+                BaseUtility.showAlertMessage(
+                    this, R.string.error, R.string.validate_shared_knowledge_of_covid_symptoms
+                )
+                return false
             } else if (actOtherMedicalProblems.text.toString().isEmpty()) {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_other_medical_details
@@ -1281,10 +1338,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 )
                 return false
             } else if (!viewModel.isCovideSymptoms() && (viewModel.getComplaints().size == 0) &&
-                (viewModel.getOtherMedicalProblem() == getString(R.string.non_covid_symptoms))
+                (viewModel.getOtherMedicalProblem() == getString(R.string.non_covid_symptoms) &&
+                        viewModel.isLackOfEssential() == "Yes")
             ) {
                 BaseUtility.showAlertMessage(
-                    this, R.string.error, R.string.validate_complaint_category
+                    this, R.string.error, R.string.validate_essential_services
                 )
                 return false
             } else if (!viewModel.isCovideSymptoms() && viewModel.isEmergencyEscalation().isEmpty()
@@ -1373,7 +1431,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
         syncData.volunteerId = dataManager.getUserId()
 
-//        val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
+        //val callStatus = if (viewModel.getCallStatus() == "5") "2" else "1"
         syncData.callStatusSubCode = viewModel.getCallStatus()
         params.addProperty(ApiConstants.SrCitizenCallStatusCode, viewModel.getCallStatus())
 
@@ -1441,9 +1499,26 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         else TextUtils.join(",", viewModel.getTalkedAbout())
         arraySubParams.addProperty(ApiConstants.InfoTalkAbout, syncData.relatedInfoTalkedAbout)
 
+        syncData.hasSrCitizenAwareOfCovid19 = viewModel.isAwareOfCovid19()
+            .toUpperCase(Locale.ENGLISH)
+        arraySubParams.addProperty(
+            ApiConstants.IsSrCitizenAwareOfCovid19, syncData.hasSrCitizenAwareOfCovid19
+        )
+
+        syncData.hasSymptomsPreventionDiscussed = if (syncData.hasSrCitizenAwareOfCovid19 != "Y")
+            viewModel.isSymptomsPreventionDiscussed().toUpperCase(Locale.ENGLISH) else ""
+        arraySubParams.addProperty(
+            ApiConstants.IsSymptomsPreventionDiscussed, syncData.hasSymptomsPreventionDiscussed
+        )
+
         syncData.behavioralChangesNoticed = viewModel.getBehaviorChange()
         arraySubParams.addProperty(
             ApiConstants.NoticedBehaviouralChange, syncData.behavioralChangesNoticed
+        )
+
+        syncData.whichPracticesNotFollowed = viewModel.getPracticeNotAllowed()
+        arraySubParams.addProperty(
+            ApiConstants.WhichPracticeNotFollowed, syncData.whichPracticesNotFollowed
         )
 
         syncData.hasCovidSymptoms = if (viewModel.isCovideSymptoms()) "Y" else "N"

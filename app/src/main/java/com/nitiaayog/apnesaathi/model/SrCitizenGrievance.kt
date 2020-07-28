@@ -15,7 +15,8 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
 /**
  * Use of "is" is restricted so don't use "isActive" or "isSelected" names variable names
- * instead use can "hasActive" etc.
+ * instead use can "hasActive" etc and still you are using "is" then you have to manually
+ * create setters for the variable
  * */
 @Entity(tableName = Tables.TABLE_GRIEVANCES)
 open class SrCitizenGrievance {
@@ -123,9 +124,9 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = Columns.IsSymptomsPreventionTaken, defaultValue = "-1")
-    @SerializedName(ApiConstants.IsSymptomsPreventionTaken)
-    var hasSymptomsPreventionTaken: String? = ""
+    @ColumnInfo(name = Columns.IsSymptomsPreventionDiscussed, defaultValue = "-1")
+    @SerializedName(ApiConstants.IsSymptomsPreventionDiscussed)
+    var hasSymptomsPreventionDiscussed: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""

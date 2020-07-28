@@ -120,7 +120,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
-    protected fun placeCall(selectedCallData: CallData, containerId: Int) {
+    protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
         Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:${selectedCallData.contactNumber}")
             if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
