@@ -13,6 +13,10 @@ import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.database.converters.DateTimeConverter
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
+/**
+ * Use of "is" is restricted so don't use "isActive" or "isSelected" names variable names
+ * instead use can "hasActive" etc.
+ * */
 @Entity(tableName = Tables.TABLE_GRIEVANCES)
 open class SrCitizenGrievance {
 
@@ -113,7 +117,7 @@ open class SrCitizenGrievance {
 
     @ColumnInfo(name = Columns.IsSrCitizenAwareOfCovid19, defaultValue = "-1")
     @SerializedName(ApiConstants.IsSrCitizenAwareOfCovid19)
-    var isSrCitizenAwareOfCovid19: String? = ""
+    var hasSrCitizenAwareOfCovid19: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -121,7 +125,7 @@ open class SrCitizenGrievance {
 
     @ColumnInfo(name = Columns.IsSymptomsPreventionTaken, defaultValue = "-1")
     @SerializedName(ApiConstants.IsSymptomsPreventionTaken)
-    var isSymptomsPreventionTaken: String? = ""
+    var hasSymptomsPreventionTaken: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -304,14 +308,6 @@ open class SrCitizenGrievance {
         }
 
     var status: String = GrievancesAdapter.GRIEVANCE_RAISED
-
-    fun setIsSrCitizenAwareOfCovid19(isSrCitizenAwareOfCovid19: String) {
-        this.isSrCitizenAwareOfCovid19 = isSrCitizenAwareOfCovid19
-    }
-
-    fun setIsSymptomsPreventionTaken(isSymptomsPreventionTaken: String) {
-        this.isSymptomsPreventionTaken = isSymptomsPreventionTaken
-    }
 
     fun createCopy(): SrCitizenGrievance {
         val json = Gson().toJson(this)
