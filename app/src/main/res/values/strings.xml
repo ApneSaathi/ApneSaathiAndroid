@@ -287,6 +287,7 @@
     <string name="validate_is_aware_of_covid_symptoms">Select Y/N that senior citizen is aware of COVID-19 symptoms or not.</string>
     <string name="validate_shared_knowledge_of_covid_symptoms">Select Y/N that whether you shared knowledge of symptoms and measures to be taken for prevention.</string>
     <string name="validate_essential_services">Provide lack of essential services</string>
+    <string name="validate_practices_not_followed">Provide details of what practices are not being followed</string>
 
     <string-array name="grievance_status_array">
         <item>Pending</item>

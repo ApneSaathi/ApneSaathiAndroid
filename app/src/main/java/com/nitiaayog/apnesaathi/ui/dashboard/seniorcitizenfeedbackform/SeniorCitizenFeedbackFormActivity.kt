@@ -6,8 +6,10 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableString
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -787,6 +789,17 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             updateDropDownIndicator(actQuarantineHospitalizationStatus, R.drawable.ic_arrow_up)
         }.autoDispose(disposables)
 
+        etElaboratePracticeFollowed.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) =
+                viewModel.setPracticeNotAllowed(text?.toString() ?: "")
+        })
+
         // Had discussion about Prevention/Access/Detection
         btnPrevention.throttleClick().subscribe { changeButtonSelectionWithIcon(btnPrevention) }
             .autoDispose(disposables)
@@ -1306,11 +1319,6 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             } else if (viewModel.getTalkedAbout().isEmpty()) {
                 BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_talked_about)
                 return false
-            } else if (viewModel.getBehaviorChange().isEmpty()) {
-                BaseUtility.showAlertMessage(
-                    this, R.string.error, R.string.validate_behavioural_changes
-                )
-                return false
             } else if (viewModel.isAwareOfCovid19() == "") {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_is_aware_of_covid_symptoms
@@ -1319,6 +1327,19 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             } else if ((viewModel.isAwareOfCovid19() == "n") && (viewModel.isSymptomsPreventionDiscussed() == "")) {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_shared_knowledge_of_covid_symptoms
+                )
+                return false
+            } else if (viewModel.getBehaviorChange().isEmpty()) {
+                BaseUtility.showAlertMessage(
+                    this, R.string.error, R.string.validate_behavioural_changes
+                )
+                return false
+            } else if (((viewModel.getBehaviorChange() == getString(R.string.no)) ||
+                        (viewModel.getBehaviorChange() == getString(R.string.may_be))) &&
+                viewModel.getPracticeNotAllowed().isEmpty()
+            ) {
+                BaseUtility.showAlertMessage(
+                    this, R.string.error, R.string.validate_practices_not_followed
                 )
                 return false
             } else if (actOtherMedicalProblems.text.toString().isEmpty()) {

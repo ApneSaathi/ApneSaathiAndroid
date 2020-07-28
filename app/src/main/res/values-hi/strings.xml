@@ -458,4 +458,12 @@
     <string name="otpsendsuccesfully">ओटप को सफलतापूर्वक भेजा गया</string>
     <string name="profile_details_saved_successfully">हमारी सेवा करने के लिए स्वयंसेवक विवरण सफलतापूर्वक सिंक किया गया है। </string>
 
+    <string name="aware_of_covid_symptoms">क्या वरिष्ठ नागरिक कोविद के लक्षणों से अवगत हैं ?</string>
+    <string name="is_prevention_taken_for_symptoms">क्या आपने रोकथाम के लिए उठाए जाने वाले लक्षणों और उपायों की जानकारी साझा की है ?</string>
+    <string name="practices_not_followed">विस्तृत करें कि किन प्रथाओं का पालन नहीं किया जा रहा है</string>
+    <string name="validate_is_aware_of_covid_symptoms">हाँ/नहीं का चयन करें कि वरिष्ठ नागरिक कोविद-19 लक्षणों से अवगत है या नहीं ?</string>
+    <string name="validate_shared_knowledge_of_covid_symptoms">हां / नहीं का चयन करें कि क्या आपने लक्षणों और रोकथाम के लिए किए जाने वाले उपायों का ज्ञान साझा किया है ?</string>
+    <string name="validate_essential_services">आवश्यक सेवाओं की कमी का चयन करें</string>
+    <string name="validate_practices_not_followed">किन प्रथाओं का पालन नहीं किया जा रहा है, इसका विवरण दें</string>
+
 </resources>

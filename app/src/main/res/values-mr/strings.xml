@@ -454,6 +454,14 @@
     <string name="type_reason">प्रकार कारण…</string>
     <string name="update_the_progress_happen">अद्ययावत प्रगती घडू</string>
     <string name="otpsendsuccesfully">ओटप यशस्वीरित्या पाठविले</string>
-    <string name="profile_details_saved_successfully">स्वयंसेवक तपशील यशस्वीरित्या संकालित केले गेले आहेत.  आमची सेवा केल्याबद्दल धन्यवाद</string>
+    <string name="profile_details_saved_successfully">स्वयंसेवक तपशील यशस्वीरित्या संकालित केले गेले आहेत.आमची सेवा केल्याबद्दल धन्यवाद</string>
+
+    <string name="aware_of_covid_symptoms">ज्येष्ठ नागरिक कोविडच्या लक्षणांबद्दल जागरूक आहेत काय ?</string>
+    <string name="is_prevention_taken_for_symptoms">आपण लक्षणे आणि प्रतिबंधात्मक उपाययोजनांची माहिती सामायिक केली ?</string>
+    <string name="practices_not_followed">कोणत्या पद्धतींचे अनुसरण केले जात नाही त्याबद्दल तपशीलवारपणे सांगा</string>
+    <string name="validate_is_aware_of_covid_symptoms">होय/नाही निवडा ज्येष्ठ नागरिकास कोविद-19 च्या लक्षणांबद्दल माहिती आहे की नाही.</string>
+    <string name="validate_shared_knowledge_of_covid_symptoms">होय/नाही निवडा की आपण लक्षणे आणि प्रतिबंधासाठी कोणते उपाय केले याबद्दलचे ज्ञान आपण सामायिक केले आहे की नाही ?</string>
+    <string name="validate_essential_services">आवश्यक सेवांचा अभाव निवडा</string>
+    <string name="validate_practices_not_followed">कोणत्या पद्धतींचे अनुसरण केले जात नाही याचा तपशील द्या</string>
 
 </resources>
