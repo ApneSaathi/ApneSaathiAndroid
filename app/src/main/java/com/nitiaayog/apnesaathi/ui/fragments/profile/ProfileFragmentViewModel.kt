@@ -67,14 +67,16 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
     fun getUpdatedvolunteerData(
         mContext: Context,
         volunteerId: String,
-        fullname: String,
+        firstname: String,
+        lastname: String,
         address: String,
         email: String
     ) {
         if (checkNetworkAvailability(mContext, ApiProvider.Api_UPDATEPROFILE)) {
             val params1 = JsonObject()
             params1.addProperty(ApiConstants.Profileidvolunteer, volunteerId)
-            params1.addProperty(ApiConstants.ProfileFullName, fullname)
+            params1.addProperty(ApiConstants.ProfileFirstName, firstname)
+            params1.addProperty(ApiConstants.ProfileLstname, lastname)
             params1.addProperty(ApiConstants.ProfileAddress, address)
             params1.addProperty(ApiConstants.ProfileEmail, email)
 

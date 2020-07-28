@@ -46,12 +46,12 @@
 
                     <com.nitiaayog.apnesaathi.base.CircleImageView
                         android:id="@+id/ProfileImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dime120dp"
+                        android:layout_width="@dimen/dime100dp"
+                        android:layout_height="@dimen/dime100dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="@dimen/dimen_15"
-                        android:src="@drawable/ic_covid_2"
+                         android:src="@drawable/ic_covid_2"
                         app:civ_border_color="@color/gray_background"
                         app:civ_border_width="@dimen/dimen_2" />
                 </RelativeLayout>
@@ -242,34 +242,72 @@
                             android:padding="@dimen/dimen_5"
                             android:text="@string/personal_details" />
 
+                       <LinearLayout
+                           android:weightSum="2"
+                           android:orientation="horizontal"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content">
+                           <LinearLayout
+                               android:layout_weight="1"
+                               android:orientation="vertical"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content">
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:fontFamily="sans-serif"
+                                   android:padding="@dimen/dimen_5"
+                                   android:text="@string/FirstName"
+                                   android:textStyle="bold"
+                                   android:textSize="@dimen/text_14" />
+
+                               <EditText
+                                   android:id="@+id/EditFirstName"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginLeft="@dimen/dimen_5"
+                                   android:layout_marginRight="@dimen/dimen_10"
+                                   android:background="@drawable/bg_rectangle_border_form"
+                                   android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                   android:padding="@dimen/dimen_5"
+                                   android:text=""
+                                   android:textSize="@dimen/text_12" />
+                           </LinearLayout>
+                           <LinearLayout
+                               android:layout_weight="1"
+                               android:orientation="vertical"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content">
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:fontFamily="sans-serif"
+                                   android:textStyle="bold"
+                                   android:padding="@dimen/dimen_5"
+                                   android:text="@string/LastName"
+                                   android:textSize="@dimen/text_14" />
+
+                               <EditText
+                                   android:id="@+id/EditLastName"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginLeft="@dimen/dimen_5"
+                                   android:layout_marginRight="@dimen/dimen_10"
+                                   android:background="@drawable/bg_rectangle_border_form"
+                                   android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                   android:padding="@dimen/dimen_5"
+                                   android:text=""
+                                   android:textSize="@dimen/text_12" />
+                           </LinearLayout>
+                       </LinearLayout>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:padding="@dimen/dimen_5"
-                            android:text="@string/name"
-                            android:textColor="@color/text_color"
-                            android:textSize="@dimen/text_14" />
-
-                        <EditText
-                            android:id="@+id/EditFirstName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_5"
-                            android:layout_marginRight="@dimen/dimen_10"
-                            android:background="@drawable/bg_rectangle_border_form"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                            android:padding="@dimen/dimen_5"
-                            android:text=""
-                            android:textSize="@dimen/text_12" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
+                            android:textStyle="bold"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/Txtaddress"
-                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <EditText
@@ -286,10 +324,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textStyle="bold"
                             android:fontFamily="sans-serif"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/contctNumber"
-                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <EditText
@@ -310,10 +348,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textStyle="bold"
                             android:fontFamily="sans-serif"
                             android:padding="@dimen/dimen_5"
                             android:text="@string/email"
-                            android:textColor="@color/text_color"
                             android:textSize="@dimen/text_14" />
 
                         <EditText
