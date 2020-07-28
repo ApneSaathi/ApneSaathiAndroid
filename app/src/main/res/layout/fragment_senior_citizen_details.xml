@@ -410,7 +410,6 @@
                                 android:id="@+id/tv_awareness"
                                 style="@style/form_default_text"
                                 android:layout_width="wrap_content"
-                                android:text="Yes"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5" />
 
@@ -516,6 +515,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_2" />
                             <TextView
+                                android:id="@+id/tv_reinforce_with_knowledge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_10"
@@ -526,7 +526,6 @@
                                 android:id="@+id/tv_measures_for_prevention"
                                 style="@style/form_default_text"
                                 android:layout_width="wrap_content"
-                                android:text="Yes"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5" />
 
