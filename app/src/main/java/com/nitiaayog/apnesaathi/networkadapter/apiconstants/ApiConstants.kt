@@ -95,7 +95,8 @@ object ApiConstants {
     const val phoneNo: String = "phoneNo"
 
     const val Profileidvolunteer: String = "idvolunteer"
-    const val ProfileFullName: String = "firstName"
+    const val ProfileFirstName: String = "firstName"
+    const val ProfileLstname: String = "lastName"
     const val ProfileAddress: String = "address"
     const val ProfileEmail: String = "email"
 
