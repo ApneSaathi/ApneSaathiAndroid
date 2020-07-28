@@ -455,6 +455,8 @@
     <string name="update_the_progress_happen">अद्ययावत प्रगती घडू</string>
     <string name="otpsendsuccesfully">ओटप यशस्वीरित्या पाठविले</string>
     <string name="profile_details_saved_successfully">स्वयंसेवक तपशील यशस्वीरित्या संकालित केले गेले आहेत.आमची सेवा केल्याबद्दल धन्यवाद</string>
+    <string name="LastName">आडनाव</string>
+    <string name="FirstName">पहिले नाव</string>
 
     <string name="aware_of_covid_symptoms">ज्येष्ठ नागरिक कोविडच्या लक्षणांबद्दल जागरूक आहेत काय ?</string>
     <string name="is_prevention_taken_for_symptoms">आपण लक्षणे आणि प्रतिबंधात्मक उपाययोजनांची माहिती सामायिक केली ?</string>

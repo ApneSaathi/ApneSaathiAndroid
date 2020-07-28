@@ -400,6 +400,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_2" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:text="@string/awareness_about_covid_symptoms"
+                                android:textColor="@color/color_grey_txt" />
+                            <TextView
+                                android:id="@+id/tv_awareness"
+                                style="@style/form_default_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -502,6 +514,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_2" />
+                            <TextView
+                                android:id="@+id/tv_reinforce_with_knowledge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:text="@string/reinforce_knowledge_for_prevention_of_covid_19"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/tv_measures_for_prevention"
+                                style="@style/form_default_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -516,6 +542,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5" />
+                            <TextView
+                                android:id="@+id/tv_title_behavior_change"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:text="@string/behavioral_practices_not_being_followed"
+                                android:textColor="@color/color_grey_txt" />
+
+                            <TextView
+                                android:id="@+id/tv_practices_not_followed"
+                                style="@style/form_default_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5" />
+
                         </LinearLayout>
 
                     </LinearLayout>

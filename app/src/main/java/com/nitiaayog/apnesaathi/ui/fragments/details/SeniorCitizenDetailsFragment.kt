@@ -130,6 +130,29 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
         txt_status.text = "--"  //todo need to fetch issue status from database
         txt_call_response.text = callData?.talkedWith
+        if (srCitizenGrievance.hasSrCitizenAwareOfCovid19 == "Y") {
+            tv_awareness.text = getString(R.string.yes)
+            tv_reinforce_with_knowledge.visibility = View.GONE
+            tv_measures_for_prevention.visibility = View.GONE
+        } else {
+            tv_awareness.text = getString(R.string.no)
+            tv_reinforce_with_knowledge.visibility = View.VISIBLE
+            tv_measures_for_prevention.visibility = View.VISIBLE
+            if (srCitizenGrievance.hasSymptomsPreventionTaken == "Y") {
+                tv_measures_for_prevention.text = getString(R.string.yes)
+            } else {
+                tv_measures_for_prevention.text = getString(R.string.no)
+            }
+        }
+
+        if (srCitizenGrievance.behavioralChangesNoticed == "N") {
+            tv_title_behavior_change.visibility = View.VISIBLE
+            tv_practices_not_followed.visibility = View.VISIBLE
+            tv_practices_not_followed.text = srCitizenGrievance.whichPracticesNotFollowed ?: "--"
+        } else {
+            tv_title_behavior_change.visibility = View.GONE
+            tv_practices_not_followed.visibility = View.GONE
+        }
 
         txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout ?: "--"
 

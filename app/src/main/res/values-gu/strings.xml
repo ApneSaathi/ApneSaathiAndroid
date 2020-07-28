@@ -452,7 +452,9 @@
     <string name="complaint_on">ફરિયાદ છે</string>
 
     <string name="otpsendsuccesfully">otp સફળતાપૂર્વક મોકલાઈ ગયું</string>
-    <string name="profile_details_saved_successfully">સ્વયંસેવકની વિગતો સફળતાપૂર્વક સમન્વયિત થઈ છે. અમારી સેવા કરવા બદલ આભાર</string>
+    <string name="profile_details_saved_successfully">સ્વયંસેવકની વિગતો સફળતાપૂર્વક સમન્વયિત થઈ છે.</string>
+    <string name="LastName">છેલ્લું નામ</string>
+    <string name="FirstName">પ્રથમ નામ</string>
 
     <string name="aware_of_covid_symptoms">શું વરિષ્ઠ નાગરિકો કોવિડના લક્ષણોથી વાકેફ છે ?</string>
     <string name="is_prevention_taken_for_symptoms">શું તમે લક્ષણો અને તેની રોકથામ માટે લેવાના પગલાઓની માહિતી શેર કરી છે ?</string>
