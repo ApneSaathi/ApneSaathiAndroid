@@ -495,5 +495,8 @@
     <string name="FirstName">First Name</string>
 
     <string name="logout_error">There are some Sr. citizen data still remaining to sync that were stored while you were offline.\n\nSo that you can not logout now, please try after sometime</string>
+    <string name="awareness_about_covid_symptoms">Awareness about covid symptoms</string>
+    <string name="behavioral_practices_not_being_followed">Behavioral practices not being followed</string>
+    <string name="reinforce_knowledge_for_prevention_of_covid_19">Reinforce knowledge for prevention of covid 19</string>
 
 </resources>
