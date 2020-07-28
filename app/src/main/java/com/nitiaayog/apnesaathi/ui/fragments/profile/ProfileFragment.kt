@@ -454,7 +454,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         })
     }
 
-
     private fun getdataFromApi(it: NetworkRequestState.SuccessResponse<*>) {
         val volunteerDataResponse = it.data
 
