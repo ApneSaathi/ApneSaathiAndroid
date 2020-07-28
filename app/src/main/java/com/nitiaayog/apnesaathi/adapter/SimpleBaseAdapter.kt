@@ -46,8 +46,8 @@ class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolde
     fun removeItem(name: String) {
         val selectedItems = dataList.filter { it == name }
         if (selectedItems.isNotEmpty()) {
-            val itemName = selectedItems[0]
-            /*var itemIndex = -1
+            /*val itemName = selectedItems[0]
+            var itemIndex = -1
             dataList.forEachIndexed { index, iName -> if (itemName == iName) itemIndex = index }
             if (itemIndex != -1) {*/
             val itemIndex = dataList.indexOf(name)

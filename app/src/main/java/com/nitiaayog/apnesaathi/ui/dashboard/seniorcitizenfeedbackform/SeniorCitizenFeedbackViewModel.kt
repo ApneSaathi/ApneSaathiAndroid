@@ -4,12 +4,10 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
-import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
@@ -19,7 +17,6 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -35,6 +32,9 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     private var callStatus: String = ""
     private var talkedWith: String = ""
     private var behaviorChange: String = ""
+    private var isAwareOfCovid19: String = ""
+    private var whichPracticeNotAllowed: String = ""
+    private var isSymptomsPreventionDiscussed: String = ""
     private var otherMedicalProblem: String = ""
     private var quarantineStatus: String = ""
     private var essentialServices: String = ""
@@ -99,9 +99,9 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         println("TAG -- MyData --> $syncData")
         dataManager.insert(syncData)
         return syncData
-    }*/
+    }
 
-    /*private fun preparePostParams(medicalHistory: Array<String>): JsonObject {
+    private fun preparePostParams(medicalHistory: Array<String>): JsonObject {
         val params = JsonObject()
         params.addProperty(ApiConstants.CallId, callData.callId)
         params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
@@ -150,24 +150,22 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
+    fun getCallStatus(): String = callStatus
     fun setCallStatus(callStatus: String) {
         this.callStatus = callStatus
     }
 
-    fun getCallStatus(): String = callStatus
-
+    fun getTalkedWith(): String = talkedWith
     fun setTalkedWith(talkedWith: String) {
         this.talkedWith = talkedWith
     }
 
-    fun getTalkedWith(): String = talkedWith
-
+    fun getBehaviorChange(): String = behaviorChange
     fun setBehaviorChange(behaviorChange: String) {
         this.behaviorChange = behaviorChange
     }
 
     fun getTalkedAbout(): List<String> = talkedAbout
-
     fun addTalkedAbout(talkedAbout: String) {
         val filterList = this.talkedAbout.filter { it == talkedAbout }
         if (filterList.isEmpty()) this.talkedAbout.add(talkedAbout)
@@ -180,8 +178,24 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 
     fun resetTalkedAbout() = talkedAbout.clear()
 
-    fun isCovideSymptoms(): Boolean = covideSymptoms
+    fun isAwareOfCovid19(): String = isAwareOfCovid19
+    fun setAwareOfCovid19(isAwareOfCovid19: String) {
+        this.isAwareOfCovid19 = isAwareOfCovid19
+        if (isAwareOfCovid19.toLowerCase(Locale.ENGLISH) == "y")
+            setSymptomsPreventionDiscussed("")
+    }
 
+    fun getPracticeNotAllowed(): String = whichPracticeNotAllowed
+    fun setPracticeNotAllowed(whichPracticeNotAllowed: String) {
+        this.whichPracticeNotAllowed = whichPracticeNotAllowed
+    }
+
+    fun isSymptomsPreventionDiscussed(): String = isSymptomsPreventionDiscussed
+    fun setSymptomsPreventionDiscussed(isSymptomsPreventionDiscussed: String) {
+        this.isSymptomsPreventionDiscussed = isSymptomsPreventionDiscussed
+    }
+
+    fun isCovideSymptoms(): Boolean = covideSymptoms
     fun isCovideSymptoms(covideSymptoms: Boolean) {
         this.covideSymptoms = covideSymptoms
         if (!this.covideSymptoms) {
@@ -193,72 +207,59 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     }
 
     fun isCoughSymptoms(): Boolean = symptomsCough
-
     fun isCoughSymptoms(symptomsCough: Boolean) {
         this.symptomsCough = symptomsCough
     }
 
     fun isFeverSymptom(): Boolean = symptomsFever
-
     fun isFeverSymptom(symptomsFever: Boolean) {
         this.symptomsFever = symptomsFever
     }
 
     fun isShortBreathSymptoms(): Boolean = symptomsShortBreath
-
     fun isShortBreathSymptoms(symptomsShortBreath: Boolean) {
         this.symptomsShortBreath = symptomsShortBreath
     }
 
     fun isSoreThroatSymptom(): Boolean = symptomSoreThroat
-
     fun isSoreThroatSymptom(symptomSoreThroat: Boolean) {
         this.symptomSoreThroat = symptomSoreThroat
     }
 
-    fun getBehaviorChange(): String = behaviorChange
-
+    fun getOtherMedicalProblem(): String = otherMedicalProblem
     fun setOtherMedicalProblem(otherMedicalProblem: String) {
         this.otherMedicalProblem = otherMedicalProblem
     }
 
-    fun getOtherMedicalProblem(): String = otherMedicalProblem
-
+    fun getQuarantineStatus(): String = quarantineStatus
     fun setQuarantineStatus(quarantineStatus: String) {
         this.quarantineStatus = quarantineStatus
     }
 
-    fun getQuarantineStatus(): String = quarantineStatus
-
+    /*fun getEssentialServices(): String = essentialServices
     fun setEssentialServices(essentialServices: String) {
         this.essentialServices = essentialServices
-    }
+    }*/
 
-    fun getEssentialServices(): String = essentialServices
-
+    fun getImpDescription(): String = impDescription
     fun setImpDescription(impDescription: String) {
         this.impDescription = impDescription
     }
 
-    fun getImpDescription(): String = impDescription
-
+    fun isSeniorCitizenAtHome(): Boolean = seniorCitizenAtHome
     fun isSeniorCitizenAtHome(seniorCitizenAtHome: Boolean) {
         this.seniorCitizenAtHome = seniorCitizenAtHome
     }
 
-    fun isSeniorCitizenAtHome(): Boolean = seniorCitizenAtHome
-
+    fun isEmergencyEscalation(): String = emergencyEscalation
     fun isEmergencyEscalation(emergencyEscalation: String) {
         this.emergencyEscalation = emergencyEscalation
     }
 
-    fun isLackOfEssential(isLackOfEssential: String) {
+    fun isLackOfEssential(): String = isLackOfEssential
+    fun setLackOfEssential(isLackOfEssential: String) {
         this.isLackOfEssential = isLackOfEssential
     }
-
-    fun isEmergencyEscalation(): String = emergencyEscalation
-
-    fun isLackOfEssential(): String = isLackOfEssential
 
     fun getMedicalHistory() = medicalHistory
 
@@ -329,6 +330,8 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
         quarantineStatus = ""
         essentialServices = ""
         emergencyEscalation = ""
+        isAwareOfCovid19 = ""
+        isSymptomsPreventionDiscussed = ""
 
         seniorCitizenAtHome = false
     }
@@ -380,8 +383,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
 //        }
         viewModelScope.launch {
             io {
-                if (::callData.isInitialized && callData.talkedWith != talkedWith)
-                {
+                if (::callData.isInitialized && callData.talkedWith != talkedWith) {
                     callData.callStatusCode = callStatus
                     callData.talkedWith = syncData.talkedWith
                     dataManager.updateCallData(callData)
@@ -415,10 +417,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                         updateData.deleteAfterSync = 1
                         //dataManager.updateCallStatus(callStatus)
                         dataManager.insertGrievance(updateData)
-                    } else {
-                        dataManager.updateGrievance(updateData)
-                    }
-
+                    } else dataManager.updateGrievance(updateData)
                 } //else
                 //dataManager.updateCallStatus(callStatus)
                 //dataManager.updateCallData(callData)
@@ -434,10 +433,10 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                 println("TAG -- MyData --> ${mSyncData?.size}")
             }
             if (checkNetworkAvailability(context, ApiProvider.ApiSaveSeniorCitizenFeedbackForm)) {
-                /* *
-             * we can add one more field in SeCitizenGrievances class and that will be
-             * our new primary key
-             * */
+                /**
+                 * we can add one more field in SeCitizenGrievances class and that will be
+                 * our new primary key
+                 * */
                 dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
                     loaderObservable.value =
                         NetworkRequestState.LoadingData(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
@@ -458,7 +457,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                                         ) {
                                             dataManager.delete(syncData)
                                             syncData.id = it.grievanceId.toInt()
-                                            syncData.deleteAfterSync =1
+                                            syncData.deleteAfterSync = 1
                                             dataManager.insertGrievance(syncData)
                                         } /*else
                                             dataManager.updateGrievance(syncData)*/
@@ -475,27 +474,24 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                     } else {
                         loaderObservable.value =
                             NetworkRequestState.Error(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
-                        val data = async {
+                        /*val data = async {
                             dataManager.insertSyncGrievance(syncData)
-                        }
+                        }*/
                     }
                 }, {
                     try {
-                        loaderObservable.value =
-                            NetworkRequestState.ErrorResponse(
-                                ApiProvider.ApiSaveSeniorCitizenFeedbackForm
-                            )
-                        val data = async {
+                        loaderObservable.value = NetworkRequestState.ErrorResponse(
+                            ApiProvider.ApiSaveSeniorCitizenFeedbackForm
+                        )
+                        /*val data = async {
                             dataManager.insertSyncGrievance(syncData)
-                        }
+                        }*/
                     } catch (e: Exception) {
                         println("TAG -- MyData --> ${e.message}")
                     }
                 }).autoDispose(disposables)
             } else {
-                CoroutineScope(Dispatchers.IO).launch {
-                    dataManager.insertSyncGrievance(syncData)
-                }
+                CoroutineScope(Dispatchers.IO).launch { dataManager.insertSyncGrievance(syncData) }
             }
         }
     }

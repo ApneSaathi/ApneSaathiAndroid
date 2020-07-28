@@ -138,14 +138,15 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             tv_awareness.text = getString(R.string.no)
             tv_reinforce_with_knowledge.visibility = View.VISIBLE
             tv_measures_for_prevention.visibility = View.VISIBLE
-            if (srCitizenGrievance.hasSymptomsPreventionTaken == "Y") {
+            if (srCitizenGrievance.hasSymptomsPreventionDiscussed == "Y") {
                 tv_measures_for_prevention.text = getString(R.string.yes)
             } else {
                 tv_measures_for_prevention.text = getString(R.string.no)
             }
         }
 
-        if (srCitizenGrievance.behavioralChangesNoticed == "N") {
+        if (srCitizenGrievance.behavioralChangesNoticed == getString(R.string.no)
+            || srCitizenGrievance.behavioralChangesNoticed == getString(R.string.may_be)) {
             tv_title_behavior_change.visibility = View.VISIBLE
             tv_practices_not_followed.visibility = View.VISIBLE
             tv_practices_not_followed.text = srCitizenGrievance.whichPracticesNotFollowed ?: "--"
@@ -389,7 +390,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     override fun onCallPermissionGranted() {
-        callData?.let { placeCall(it, R.id.fragment_edit_container) }
+        callData?.let { placeCall(it) }// , R.id.fragment_edit_container
     }
 
     override fun onCallPermissionDenied() =

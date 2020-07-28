@@ -29,7 +29,7 @@ object Columns {
     const val InfoTalkAbout: String = "info_talked_about"
 
     const val IsSrCitizenAwareOfCovid19: String = "is_sr_citizen_aware_of_covid_19"
-    const val IsSymptomsPreventionTaken: String = "is_symptoms_prevention_taken"
+    const val IsSymptomsPreventionDiscussed: String = "is_symptoms_prevention_discussed"
     const val WhichPracticeNotFollowed: String = "practice_not_followed"
 
     const val NoticedBehaviouralChanges: String = "behavioural_change_noticed"

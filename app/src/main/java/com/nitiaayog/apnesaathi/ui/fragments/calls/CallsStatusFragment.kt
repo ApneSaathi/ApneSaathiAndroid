@@ -139,7 +139,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     override fun provideLayoutResource(): Int = R.layout.fragment_calls_status
 
     override fun onCallPermissionGranted() {
-        lastCallData?.let { placeCall(it, R.id.fragmentCallContainer) }
+        lastCallData?.let { placeCall(it) }//, R.id.fragmentCallContainer
     }
 
     override fun onCallPermissionDenied() =

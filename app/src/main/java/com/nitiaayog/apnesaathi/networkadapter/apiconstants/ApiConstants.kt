@@ -25,14 +25,6 @@ object ApiConstants {
     const val VolunteerId: String = "idvolunteer"
     const val VolunteerNotRegisterErrorMessage: String = "Invalid User"
 
-    const val AssessmentQuestions: String = "assessment_questions"
-    const val QuestionId: String = "q_id"
-    const val QuestionData: String = "q_data"
-    const val OptionId: String = "option_id"
-    const val Option: String = "option"
-    const val IsCorrectOption: String = "is_correct_option"
-    const val AvailableOptions: String = "available_options"
-
     const val MedicalGrievances: String = "medicalandgreivance"
     const val CallId: String = "callid"
     const val SrCitizenName: String = "namesrcitizen"
@@ -62,9 +54,9 @@ object ApiConstants {
     const val RemarkOnMedicalHistory: String = "remarks_medical_history"
     const val InfoTalkAbout: String = "related_info_talked_about"
 
-    const val IsSrCitizenAwareOfCovid19: String = "is_sr_citizen_aware_of_covid_19"
-    const val IsSymptomsPreventionTaken: String = "is_symptoms_prevention_taken"
-    const val WhichPracticeNotFollowed: String = "practice_not_followed"
+    const val IsSrCitizenAwareOfCovid19: String = "isSrCitizenAwareOfCovid_19"
+    const val IsSymptomsPreventionDiscussed: String = "isSymptomsPreventionTaken"
+    const val WhichPracticeNotFollowed: String = "practiceNotAllowed"
 
     const val NoticedBehaviouralChange: String = "behavioural_change_noticed"
     const val HasCovidSymptoms: String = "iscovidsymptoms"
@@ -100,5 +92,5 @@ object ApiConstants {
     const val ProfileAddress: String = "address"
     const val ProfileEmail: String = "email"
 
-    const val GrievanceTrackingId:String ="trackingId"
+    const val GrievanceTrackingId: String = "trackingId"
 }

@@ -267,10 +267,12 @@
     <string name="validate_medical_history">Select medical history of senior citizen</string>
     <string name="validate_talked_about">Provide details what did you talked about i.e. <b>Prevention/Access/Detection</b></string>
     <string name="validate_behavioural_changes">Provide details about behavioural changes of senior citizen</string>
+
+
     <string name="validate_other_medical_details">Provide other medical details like COVID-19 symptoms, etc</string>
     <string name="validate_covid_symptoms">Provide COVID-19 symptoms in Sr. citizen</string>
     <string name="validate_quarantine_status">Provide Sr. citizen\'s quarantine status</string>
-    <string name="validate_complaint_category">Provide complaint category</string>
+
     <string name="validate_emergency_required">Provide details of is any <b>emergency and/or escalation ?</b> </string>
     <string name="check_internet">Please check internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
@@ -278,6 +280,14 @@
 
     <string name="use_other_number">Use another number</string>
     <string name="select_mobile_number">Select Mobile Number</string>
+
+    <string name="aware_of_covid_symptoms">Are senior citizens aware of the COVID symptoms ?</string>
+    <string name="is_prevention_taken_for_symptoms">Did you reinforce the knowledge of symptoms and measures to be taken for prevention ?</string>
+    <string name="practices_not_followed">Elaborate what practices are not being followed ?</string>
+    <string name="validate_is_aware_of_covid_symptoms">Select Y/N that senior citizen is aware of COVID-19 symptoms or not.</string>
+    <string name="validate_shared_knowledge_of_covid_symptoms">Select Y/N that whether you shared knowledge of symptoms and measures to be taken for prevention.</string>
+    <string name="validate_essential_services">Provide lack of essential services</string>
+    <string name="validate_practices_not_followed">Provide details of what practices are not being followed</string>
 
     <string-array name="grievance_status_array">
         <item>Pending</item>

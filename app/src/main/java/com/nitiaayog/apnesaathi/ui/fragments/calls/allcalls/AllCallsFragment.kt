@@ -53,7 +53,7 @@ class AllCallsFragment : BaseFragment<AllCallsViewModel>(), OnItemClickListener<
     override fun provideLayoutResource(): Int = R.layout.fragment_all_calls
 
     override fun onCallPermissionGranted() {
-        lastCallData?.let { placeCall(it, R.id.fragmentCallContainer) }
+        lastCallData?.let { placeCall(it) }// , R.id.fragmentCallContainer
     }
 
     override fun onCallPermissionDenied() =

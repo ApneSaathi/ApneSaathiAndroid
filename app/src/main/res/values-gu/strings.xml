@@ -456,4 +456,12 @@
     <string name="LastName">છેલ્લું નામ</string>
     <string name="FirstName">પ્રથમ નામ</string>
 
+    <string name="aware_of_covid_symptoms">શું વરિષ્ઠ નાગરિકો કોવિડના લક્ષણોથી વાકેફ છે ?</string>
+    <string name="is_prevention_taken_for_symptoms">શું તમે લક્ષણો અને તેની રોકથામ માટે લેવાના પગલાઓની માહિતી શેર કરી છે ?</string>
+    <string name="practices_not_followed">કઇ પ્રથાઓનું પાલન કરવામાં આવી રહ્યું નથી તેનું વિસ્તૃત વર્ણન કરો</string>
+    <string name="validate_is_aware_of_covid_symptoms">હા/ના પસંદ કરો કે વરિષ્ઠ નાગરિક કોવિડ-19 લક્ષણોથી વાકેફ છે કે નહીં ?</string>
+    <string name="validate_shared_knowledge_of_covid_symptoms">હા/ના પસંદ કરો કે શું તમે લક્ષણોની માહિતી અને નિવારણ માટે કયા પગલાં લેવાય છે, વહેંચી છે કે નહીં ?</string>
+    <string name="validate_essential_services">આવશ્યક સેવાઓનો અભાવ પસંદ કરો</string>
+    <string name="validate_practices_not_followed">કઈ પ્રથાઓનું પાલન કરવામાં આવી રહ્યું નથી તેની વિગતો પ્રદાન કરો</string>
+
 </resources>
