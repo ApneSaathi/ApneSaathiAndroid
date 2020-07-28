@@ -24,7 +24,7 @@ ext {
 
     /* TODO : Libraries Gradle ------------------------------------------------------------------ */
 
-    androidGradleVersion = '4.0.0'
+    androidGradleVersion = '4.0.1'
     androidSupportPackage = 'com.android.tools.build:gradle'
 
     kotlinPluginVersion = '1.3.72'

@@ -111,23 +111,23 @@ open class SrCitizenGrievance {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = Columns.IsSrCitizenAwareOfCovid19, defaultValue = "n")
+    @ColumnInfo(name = Columns.IsSrCitizenAwareOfCovid19, defaultValue = "-1")
     @SerializedName(ApiConstants.IsSrCitizenAwareOfCovid19)
-    var isSrCitizenAwareOfCovid19: String? = "y"
+    var isSrCitizenAwareOfCovid19: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = Columns.IsSymptomsPreventionTaken, defaultValue = "n")
+    @ColumnInfo(name = Columns.IsSymptomsPreventionTaken, defaultValue = "-1")
     @SerializedName(ApiConstants.IsSymptomsPreventionTaken)
-    var isSymptomsPreventionTaken: String? = "y"
+    var isSymptomsPreventionTaken: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
         }
 
-    @ColumnInfo(name = Columns.WhichPracticeNotFollowed, defaultValue = "")
+    @ColumnInfo(name = Columns.WhichPracticeNotFollowed, defaultValue = "-1")
     @SerializedName(ApiConstants.WhichPracticeNotFollowed)
     var whichPracticesNotFollowed: String? = ""
         get() = field ?: ""
@@ -304,6 +304,14 @@ open class SrCitizenGrievance {
         }
 
     var status: String = GrievancesAdapter.GRIEVANCE_RAISED
+
+    fun setIsSrCitizenAwareOfCovid19(isSrCitizenAwareOfCovid19: String) {
+        this.isSrCitizenAwareOfCovid19 = isSrCitizenAwareOfCovid19
+    }
+
+    fun setIsSymptomsPreventionTaken(isSymptomsPreventionTaken: String) {
+        this.isSymptomsPreventionTaken = isSymptomsPreventionTaken
+    }
 
     fun createCopy(): SrCitizenGrievance {
         val json = Gson().toJson(this)
