@@ -22,6 +22,9 @@ interface SyncSrCitizenGrievancesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun update(grievances: SyncSrCitizenGrievance)
 
+    @Query("SELECT COUNT(*) FROM ${Tables.TABLE_SYNC_GRIEVANCES}")
+    fun getCount(): Int
+
     @Transaction
     fun insertOrUpdate(grievances: SyncSrCitizenGrievance) {
         val result = insert(grievances)

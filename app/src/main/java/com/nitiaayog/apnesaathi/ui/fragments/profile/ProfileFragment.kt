@@ -80,7 +80,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private fun bindview(view: View) {
         view.EditImageView.setOnClickListener {
-//            showGetImageDialog()
+            showGetImageDialog()
         }
 
         view.TxtMainCancel.setOnClickListener {

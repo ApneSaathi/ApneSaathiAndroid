@@ -214,7 +214,7 @@
     <string name="more_details">अधिक जानकारी दिखाएं</string>
 
     <string name="validate_sr_citizen_name">वरिष्ठ नागरिक का नाम प्रदान करें</string>
-    <string name="validate_age">आयु प्रदान करें</string>
+    <string name="validate_age">आयु प्रदान करें(50 – 110 के बीच)</string>
     <string name="validate_gender">जती का चयन करें</string>
     <string name="validate_contact_number">वरिष्ठ नागरिक का संपर्क नंबर प्रदान करें</string>
     <string name="valid_contact_number">मान्य संपर्क नंबर प्रदान करें</string>
@@ -256,6 +256,8 @@
 
     <string name="use_other_number">दूसरे नंबर का इस्तेमाल करें</string>
     <string name="select_mobile_number">मोबाइल नंबर का चयन करें</string>
+
+    <string name="logout_error">कुछ वरिष्ठ नागरिक डेटा अभी भी सिंक करने के लिए शेष हैं जो आपके ऑफ़लाइन रहते हुए संग्रहीत किए गए थे। इसलिए अब आप लॉगआउट नहीं कर पाएंगे, कृपया डेटा समन्वयित करने के बाद प्रयास करें</string>
 
     <string-array name="states_array">
         <item>असम</item>

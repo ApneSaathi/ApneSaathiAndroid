@@ -1,27 +1,26 @@
 package com.nitiaayog.apnesaathi.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nitiaayog.apnesaathi.BuildConfig
 import com.nitiaayog.apnesaathi.database.dao.*
-import com.nitiaayog.apnesaathi.model.*
+import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.GrievanceData
+import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
+import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.utility.Converter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [SeniorCitizen::class, CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class, GrievanceData::class],
+    entities = [CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class, GrievanceData::class],
     version = BuildConfig.DB_VERSION
 )
 @TypeConverters(Converter::class)
 abstract class ApneSathiDatabase : RoomDatabase() {
 
-    abstract fun apneSathiDao(): ApneSathiDao
     abstract fun provideCallDataDao(): CallDataDao
     abstract fun provideGrievancesDao(): GrievancesDao
     abstract fun provideGrievancesTrackingDao(): GrievanceTrackingDao
@@ -35,7 +34,6 @@ abstract class ApneSathiDatabase : RoomDatabase() {
         val MIGRATION = ApneSathiMigration(1, 2)
 
         fun getDatabase(context: Context): ApneSathiDatabase {
-            //, scope: CoroutineScope
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
@@ -72,4 +70,7 @@ abstract class ApneSathiDatabase : RoomDatabase() {
             }
         }
     }
+
+    @Transaction
+    fun clearDatabase() = clearAllTables()
 }

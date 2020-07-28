@@ -13,6 +13,10 @@ import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.database.converters.DateTimeConverter
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
+/**
+ * Use of "is" is restricted so don't use "isActive" or "isSelected" names variable names
+ * instead use can "hasActive" etc.
+ * */
 @Entity(tableName = Tables.TABLE_GRIEVANCES)
 open class SrCitizenGrievance {
 
@@ -106,6 +110,30 @@ open class SrCitizenGrievance {
     @ColumnInfo(name = Columns.InfoTalkAbout, defaultValue = "-1")
     @SerializedName(ApiConstants.InfoTalkAbout)
     var relatedInfoTalkedAbout: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.IsSrCitizenAwareOfCovid19, defaultValue = "-1")
+    @SerializedName(ApiConstants.IsSrCitizenAwareOfCovid19)
+    var hasSrCitizenAwareOfCovid19: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.IsSymptomsPreventionTaken, defaultValue = "-1")
+    @SerializedName(ApiConstants.IsSymptomsPreventionTaken)
+    var hasSymptomsPreventionTaken: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.WhichPracticeNotFollowed, defaultValue = "-1")
+    @SerializedName(ApiConstants.WhichPracticeNotFollowed)
+    var whichPracticesNotFollowed: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""

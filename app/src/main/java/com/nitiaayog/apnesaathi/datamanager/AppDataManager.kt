@@ -25,6 +25,9 @@ import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import io.reactivex.Single
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class AppDataManager private constructor(
@@ -86,8 +89,9 @@ class AppDataManager private constructor(
 
     // Database Access
     // => Table : call_details
+    //Null and empty should be removed
     override fun getPendingCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "null", "")) //Null and empty should be removed
+        callsDataDao.getAllCallsList(arrayOf("1", "null", ""))
 
     override fun getFollowupCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("2", "3", "4", "5", "6"))
@@ -95,32 +99,44 @@ class AppDataManager private constructor(
     override fun getCompletedCallsList(): LiveData<MutableList<CallData>> =
         callsDataDao.getAllCallsList(arrayOf("10", "9"))
 
-    //Null and empty should be removed
     override fun getInvalidCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(
-            arrayOf("7", "8")
-        )
+        callsDataDao.getAllCallsList(arrayOf("7", "8"))
 
+    //Null and empty should be removed
     override fun getAllCallsList(): LiveData<MutableList<CallData>> =
-        callsDataDao.getAllCallsList(arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", ""))
+        callsDataDao.getAllCallsList(
+            arrayOf(
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "null",
+                ""
+            )
+        )
 
     //Null and empty should be removed
     override fun getCalls(requestedItems: Int): List<CallData> = callsDataDao.getCalls(
-        requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", "")
+        requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "null", "")
     )
 
     override fun getCallsAfter(itemKey: Int, requestedItems: Int): List<CallData> =
         callsDataDao.getCallsAfter(
-            itemKey, requestedItems, arrayOf("1", "2", "3", "4", "5", "6", "9", "10", "null", "")
+            itemKey,
+            requestedItems,
+            arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "null", "")
         )
 
     override fun insertCallData(callData: List<CallData>) = callsDataDao.insertOrUpdate(callData)
     override fun getCallDetailFromId(id: Int): CallData = callsDataDao.getCallDetailFromId(id)
     override fun updateCallStatus(callStatus: String) = callsDataDao.update(callStatus)
     override fun updateCallData(callData: CallData): Long = callsDataDao.update(callData)
-
-    override fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>) =
-        grievancesTrackingDao.insertAll(grievanceTracking)
 
     //=> Table : grievances
     override fun insertGrievance(grievance: SrCitizenGrievance): Long =
@@ -168,14 +184,26 @@ class AppDataManager private constructor(
             grievance.emergencyServiceRequired!!, grievance.impRemarkInfo!!
         )
 
-    // => Table : sync_grievances_data
-    override fun getGrievancesToSync(): List<SyncSrCitizenGrievance>? =
-        syncGrievancesDao.getGrievances()
-
     override fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>> =
         grievancesDao.getAllUniqueGrievances(callId)
 
     override fun clearPreviousData() = grievancesDao.deletePreviousData()
+
+    // => Table : sync_grievances_data
+    override fun getGrievancesToSync(): List<SyncSrCitizenGrievance>? =
+        syncGrievancesDao.getGrievances()
+
+    override suspend fun getCount(): Int = syncGrievancesDao.getCount()
+
+    override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
+        syncGrievancesDao.insertOrUpdate(syncData)
+
+    override fun delete(syncData: SyncSrCitizenGrievance) =
+        syncGrievancesDao.delete(syncData.id!!, syncData.callId!!, syncData.volunteerId!!)
+
+    //=>grievance_tracking
+    override fun insertGrievanceTrackingList(grievanceTracking: List<GrievanceData>) =
+        grievancesTrackingDao.insertAll(grievanceTracking)
 
     override fun getAllTrackingGrievances(): LiveData<MutableList<GrievanceData>> =
         grievancesTrackingDao.getAllGrievances("RESOLVED")
@@ -191,11 +219,13 @@ class AppDataManager private constructor(
 
     override fun clearPreviousTrackingData() = grievancesTrackingDao.deletePreviousGrievanceData()
 
-    override suspend fun insertSyncGrievance(syncData: SyncSrCitizenGrievance) =
-        syncGrievancesDao.insertOrUpdate(syncData)
-
-    override fun delete(syncData: SyncSrCitizenGrievance) =
-        syncGrievancesDao.delete(syncData.id!!, syncData.callId!!, syncData.volunteerId!!)
+    //logout and clear data
+    override fun clearData() {
+        val language = preferences.getSelectedLanguage()
+        clearPreferences()
+        setSelectedLanguage(language)
+        CoroutineScope(Dispatchers.IO).launch { syncGrievancesDao.getCount() }
+    }
 
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()
@@ -236,7 +266,9 @@ class AppDataManager private constructor(
 
     override fun getAddress(): String = preferences.getAddress()
     override fun setAddress(address: String) = preferences.setAddress(address)
-    override fun setLastSelectedId(callId: String) = preferences.setLastSelectedId(callId)
 
+    override fun setLastSelectedId(callId: String) = preferences.setLastSelectedId(callId)
     override fun getLastSelectedId(): String = preferences.getLastSelectedId()
+
+    override fun clearPreferences() = preferences.clearPreferences()
 }

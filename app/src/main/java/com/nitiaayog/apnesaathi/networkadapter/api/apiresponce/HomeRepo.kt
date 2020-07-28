@@ -11,7 +11,5 @@ class HomeRepo(
 
 ) : ApiStatus() {
 
-    fun getData(): CallDetails {
-        return volunteerDetails ?: CallDetails()
-    }
+    fun getData(): CallDetails = volunteerDetails ?: CallDetails()
 }
