@@ -466,4 +466,5 @@
     <string name="validate_essential_services">आवश्यक सेवांचा अभाव निवडा</string>
     <string name="validate_practices_not_followed">कोणत्या पद्धतींचे अनुसरण केले जात नाही याचा तपशील द्या</string>
 
+    <string name="invalid_calls">अवैध कॉल</string>
 </resources>
