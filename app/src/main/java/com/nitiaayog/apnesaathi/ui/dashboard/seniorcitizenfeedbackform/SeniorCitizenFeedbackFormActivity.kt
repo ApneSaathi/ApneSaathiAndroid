@@ -1358,9 +1358,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     this, R.string.error, R.string.validate_quarantine_status
                 )
                 return false
-            } else if (!viewModel.isCovideSymptoms() && (viewModel.getComplaints().size == 0) &&
-                (viewModel.getOtherMedicalProblem() == getString(R.string.non_covid_symptoms) &&
-                        viewModel.isLackOfEssential() == "Yes")
+            } else if ((viewModel.getComplaints().size == 0) &&
+                (viewModel.isLackOfEssential() == "Yes")
             ) {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_essential_services
