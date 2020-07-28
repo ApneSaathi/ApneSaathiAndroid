@@ -455,5 +455,7 @@
 
     <string name="otpsendsuccesfully">ओटप को सफलतापूर्वक भेजा गया</string>
     <string name="profile_details_saved_successfully">हमारी सेवा करने के लिए स्वयंसेवक विवरण सफलतापूर्वक सिंक किया गया है। </string>
+    <string name="LastName">अंतिम नाम</string>
+    <string name="FirstName">पहला नाम</string>
 
 </resources>
