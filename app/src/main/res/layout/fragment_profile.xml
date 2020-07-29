@@ -203,6 +203,7 @@
 
                     <com.nitiaayog.apnesaathi.base.CircleImageView
                         android:id="@+id/EditImageView"
+                        android:clickable="false"
                         android:layout_width="110dp"
                         android:layout_height="@dimen/dime90dp"
                         android:layout_centerHorizontal="true"
