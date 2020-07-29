@@ -211,6 +211,7 @@
                         android:src="@drawable/ic_covid_2" />
 
                     <ImageView
+                        android:visibility="invisible"
                         android:layout_width="@dimen/view_size_50"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
