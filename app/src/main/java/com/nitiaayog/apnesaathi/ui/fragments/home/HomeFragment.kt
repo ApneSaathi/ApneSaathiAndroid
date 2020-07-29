@@ -189,6 +189,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
             pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
+            pendingAdapter.hideDate(true)
             pendingAdapter.notifyDataSetChanged()
             managePendingCalls(it)
             manageProgressBarData()
