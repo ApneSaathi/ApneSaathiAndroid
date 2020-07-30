@@ -467,4 +467,10 @@
     <string name="validate_practices_not_followed">कोणत्या पद्धतींचे अनुसरण केले जात नाही याचा तपशील द्या</string>
 
     <string name="invalid_calls">अवैध कॉल</string>
+
+    <string name="awareness_about_covid_symptoms">कोविड लक्षणांबद्दल जागरूकता</string>
+    <string name="behavioral_practices_not_being_followed">वर्तणूक पद्धतींचे पालन केले जात नाही</string>
+    <string name="reinforce_knowledge_for_prevention_of_covid_19">कोविड-19 प्रतिबंध करण्यासाठी ज्ञान मजबुतीकरण 19</string>
+    <string name="invalid_calls_count">अवैध कॉल(%s)</string>
+
 </resources>
