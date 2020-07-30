@@ -242,6 +242,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
             pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
+            pendingAdapter.hideDate(true)
             pendingAdapter.notifyDataSetChanged()
             manageCalls(it, R.string.pending_calls_count)
         })

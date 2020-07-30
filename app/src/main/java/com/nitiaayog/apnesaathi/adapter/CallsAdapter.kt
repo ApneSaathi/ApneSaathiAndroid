@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 
 class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
+    private var isHideDateIsRequired: Boolean = false
     private val dataList: MutableList<CallData> = mutableListOf()
     private lateinit var itemClickListener: OnItemClickListener<CallData>
 
@@ -40,6 +41,10 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
         notifyDataSetChanged()
     }
 
+    fun hideDate(isHideDateIsRequired: Boolean = false) {
+        this.isHideDateIsRequired = isHideDateIsRequired
+    }
+
     inner class TodaysCallsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         private val civGender: CircleImageView = itemView.civGender
@@ -62,7 +67,12 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
             civGender.setImageResource(
                 if (callData.gender == "M") R.drawable.ic_male_user else R.drawable.ic_female_user
             )
-            tvDate.text = BaseUtility.getFormattedDate(callData.loggedDateTime?:"")
+            if(isHideDateIsRequired){
+                tvDate.visibility = View.GONE
+            }else{
+                tvDate.visibility = View.VISIBLE
+                tvDate.text = BaseUtility.getFormattedDate(callData.loggedDateTime ?: "")
+            }
         }
 
         override fun onClick(view: View) {
