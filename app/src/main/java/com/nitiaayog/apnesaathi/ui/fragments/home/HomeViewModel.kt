@@ -159,7 +159,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking, it)
             }).autoDispose(disposables)
         }
-
     }
 
     fun setLastSelectedUser(callId: String) {
