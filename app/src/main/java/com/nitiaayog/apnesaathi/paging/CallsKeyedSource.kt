@@ -37,13 +37,16 @@ class CallsKeyedSource(private val context: Context, private val viewModel: AllC
         viewModel.viewModelScope.launch(Dispatchers.IO) {
             val dataList: List<CallData> =
                 dataManager.getCallsAfter(params.key, params.requestedLoadSize)
-            if (dataList.isNotEmpty()) callback.onResult(dataList)
-            else viewModel.getCallDetails(context, callback)
+            if (dataList.isNotEmpty()) {
+                println("$TAG last_key -- loadAfter --> ${dataList[dataList.size - 1].callId} : ${dataList[dataList.size - 1].loggedDateTime}")
+                callback.onResult(dataList)
+            } else viewModel.getCallDetails(context, callback)
         }
     }
 
     override fun getKey(item: CallData): Int {
         lastItemKey = item.callId!!
+        println("$TAG last_key : $lastItemKey")
         return lastItemKey
     }
 
@@ -51,5 +54,5 @@ class CallsKeyedSource(private val context: Context, private val viewModel: AllC
 
     }
 
-    fun getLastKey() :Int = lastItemKey
+    fun getLastKey(): Int = lastItemKey
 }

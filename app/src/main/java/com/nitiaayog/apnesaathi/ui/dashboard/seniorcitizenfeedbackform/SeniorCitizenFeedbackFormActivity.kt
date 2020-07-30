@@ -1358,7 +1358,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     this, R.string.error, R.string.validate_quarantine_status
                 )
                 return false
-            } else if ((viewModel.getComplaints().size == 0) &&
+            } else if ((viewModel.getComplaints().isEmpty()) &&
                 (viewModel.isLackOfEssential() == "Yes")
             ) {
                 BaseUtility.showAlertMessage(

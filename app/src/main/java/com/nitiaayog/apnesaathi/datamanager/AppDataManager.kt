@@ -128,8 +128,7 @@ class AppDataManager private constructor(
 
     override fun getCallsAfter(itemKey: Int, requestedItems: Int): List<CallData> =
         callsDataDao.getCallsAfter(
-            itemKey,
-            requestedItems,
+            itemKey, requestedItems,
             arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "null", "")
         )
 

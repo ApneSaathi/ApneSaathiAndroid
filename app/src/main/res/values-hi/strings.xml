@@ -469,9 +469,10 @@
     <string name="validate_practices_not_followed">किन प्रथाओं का पालन नहीं किया जा रहा है, इसका विवरण दें</string>
 
     <string name="invalid_calls">अमान्य कॉल</string>
+
     <string name="awareness_about_covid_symptoms">कोविद लक्षणों के बारे में जागरूकता</string>
     <string name="behavioral_practices_not_being_followed">व्यवहार प्रथाओं का पालन नहीं किया जा रहा है</string>
-    <string name="reinforce_knowledge_for_prevention_of_covid_19">कोविद 19 की रोकथाम के लिए ज्ञान का सुदृढ़ीकरण</string>
+    <string name="reinforce_knowledge_for_prevention_of_covid_19">कोविद-19 की रोकथाम के लिए ज्ञान का सुदृढ़ीकरण</string>
     <string name="invalid_calls_count">अमान्य कॉल(%s)</string>
 
 </resources>
