@@ -509,4 +509,8 @@
     <string name="behavioral_practices_not_being_followed">Behavioral practices not being followed</string>
     <string name="reinforce_knowledge_for_prevention_of_covid_19">Reinforce knowledge for prevention of covid 19</string>
 
+    <string name="password_text">Once you provide a password, you are all set to get into the app.</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="validate_password">Please enter valid password</string>
+
 </resources>

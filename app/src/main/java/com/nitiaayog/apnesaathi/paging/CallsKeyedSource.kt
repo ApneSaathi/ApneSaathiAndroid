@@ -38,7 +38,7 @@ class CallsKeyedSource(private val context: Context, private val viewModel: AllC
             val dataList: List<CallData> =
                 dataManager.getCallsAfter(params.key, params.requestedLoadSize)
             if (dataList.isNotEmpty()) {
-                println("$TAG last_key -- loadAfter --> ${dataList[dataList.size - 1].callId} : ${dataList[dataList.size - 1].loggedDateTime}")
+                //println("$TAG last_key -- loadAfter --> ${dataList[dataList.size - 1].callId} : ${dataList[dataList.size - 1].loggedDateTime}")
                 callback.onResult(dataList)
             } else viewModel.getCallDetails(context, callback)
         }

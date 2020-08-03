@@ -17,7 +17,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
@@ -58,8 +58,12 @@ class AppDataManager private constructor(
     }
 
     // ApiRequests
-    override fun loginUser(phoneNumber: JsonObject): Single<Login_Response> =
+    override fun loginUser(phoneNumber: JsonObject): Single<LoginResponse> =
         apiRequest.loginUser(phoneNumber)
+
+    override suspend fun verifyPassword(params: JsonObject): Single<BaseRepo> {
+        return apiRequest.verifyPassword(params)
+    }
 
     override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
         return apiRequest.volunteerData(phoneNumber)
@@ -229,7 +233,7 @@ class AppDataManager private constructor(
     // PreferenceRequests
     override fun isLogin(): Boolean = preferences.isLogin()
 
-    override fun updateUserPreference(loginUser: Login_Response) {
+    override fun updateUserPreference(loginUser: LoginResponse) {
         setUserId(loginUser.getVolunteerId()!!)
 //        setUserName(loginUser.userName)
 //        //setProfileImage(loginUser.userProfileImage)
@@ -268,6 +272,9 @@ class AppDataManager private constructor(
 
     override fun setLastSelectedId(callId: String) = preferences.setLastSelectedId(callId)
     override fun getLastSelectedId(): String = preferences.getLastSelectedId()
+
+    override fun setRole(role: String) = preferences.setRole(role)
+    override fun getRole(): String = preferences.getRole()
 
     override fun clearPreferences() = preferences.clearPreferences()
 }

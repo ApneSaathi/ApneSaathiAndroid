@@ -16,7 +16,7 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.otp.OtpActivity
@@ -84,19 +84,21 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
                     EditMobileNumber.isFocusableInTouchMode = true
-                    if (loginres is Login_Response)
+                    if (loginres is LoginResponse)
                         dataManager.updateUserPreference(loginres)
                     progressBarlogin.visibility = GONE
-                    val targetIntent = getTargetIntent(OtpActivity::class.java)
-                    targetIntent.putExtra("PhoneNo", EditMobileNumber.text.toString())
-                    startActivity(targetIntent)
+
+                    val loginResponse = it.data as LoginResponse
+
+                    val intent = getTargetIntent(OtpActivity::class.java)
+                    intent.putExtra("PhoneNo", EditMobileNumber.text.toString())
+                    intent.putExtra(ApiConstants.Role, loginResponse.getRole())
+                    startActivity(intent)
                     EditMobileNumber.text.clear()
                 }
-
             }
         })
     }
-
 
     override fun provideViewModel(): LoginViewModel = getViewModel {
         LoginViewModel.getInstance(dataManager)
@@ -107,9 +109,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
-
     }
-
 
     fun AppCompatActivity.hideKeyboard() {
         val view = this.currentFocus

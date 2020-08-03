@@ -21,8 +21,11 @@ import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.datamanager.role.RoleImpl
+import com.nitiaayog.apnesaathi.datamanager.role.RoleType
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.password.PasswordActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -32,14 +35,24 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login_otpverify.*
 import java.util.concurrent.TimeUnit
 
-
 class OtpActivity : BaseActivity<OtpActivityModel>() {
     var wrongAttempCount: Int = 0
     lateinit var mContext: Context
     val otpEt = arrayOfNulls<EditText>(4)
 
+    private val roleType: RoleType by lazy { RoleImpl() }
+    private val role: String by lazy {
+        val isRole: Boolean = intent?.hasExtra(ApiConstants.Role) ?: false
+        if (isRole) intent.getStringExtra(ApiConstants.Role) else ""
+    }
+
+    private val phoneNumber: String by lazy {
+        val isPhoneNo: Boolean = intent?.hasExtra("PhoneNo") ?: false
+        if (isPhoneNo) intent.getStringExtra("PhoneNo") else ""
+    }
+
     private val progressDialog: ProgressDialog.Builder by lazy {
-        ProgressDialog.Builder(mContext!!).setMessage("Please wait.")
+        ProgressDialog.Builder(mContext).setMessage("Please wait.")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,18 +60,15 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         mContext = this
 
-        otpEt[0] = findViewById(R.id.edOtp1);
-        otpEt[1] = findViewById(R.id.edOtp2);
-        otpEt[2] = findViewById(R.id.edOtp3);
-        otpEt[3] = findViewById(R.id.edOtp4);
+        otpEt[0] = findViewById(R.id.edOtp1)
+        otpEt[1] = findViewById(R.id.edOtp2)
+        otpEt[2] = findViewById(R.id.edOtp3)
+        otpEt[3] = findViewById(R.id.edOtp4)
         setOtpEditTextHandler()
 
         observeStates()
 
-
-
-
-        btnVerify.throttleClick().subscribe() {
+        btnVerify.throttleClick().subscribe {
             hideKeyboard()
             if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
                 onBackPressed()
@@ -66,11 +76,11 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                 if (TextUtils.isEmpty(edOtp1.text.toString().trim())) {
                     CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
                 } else {
-                    edOtp1.setError(null)
+                    edOtp1.error = null
                     if (TextUtils.isEmpty(edOtp2.text.toString().trim())) {
                         CallSnackbar(mainRootRelativeLayout, resources.getString(R.string.enterOtp))
                     } else {
-                        edOtp2.setError(null)
+                        edOtp2.error = null
                         if (TextUtils.isEmpty(edOtp3.text.toString().trim())) {
                             CallSnackbar(
                                 mainRootRelativeLayout,
@@ -78,21 +88,21 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                             )
 
                         } else {
-                            edOtp4.setError(null)
+                            edOtp4.error = null
                             if (TextUtils.isEmpty(edOtp4.text.toString().trim())) {
                                 CallSnackbar(
                                     mainRootRelativeLayout,
                                     resources.getString(R.string.enterOtp)
                                 )
                             } else {
-                                edOtp4.setError(null)
+                                edOtp4.error = null
                                 if (edOtp1.text.toString()
                                         .trim() + edOtp2.text.toString()
                                         .trim() + edOtp3.text.toString()
                                         .trim() + edOtp4.text.toString().trim() == "1122"
                                 ) {
                                     if (wrongAttempCount <= 3) {
-                                        callnextActivity();
+                                        callnextActivity()
                                     } else {
                                         CallSnackbar(
                                             mainRootRelativeLayout,
@@ -123,22 +133,22 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                 }
             }
         }.autoDispose(disposables)
-        txttimer.throttleClick().subscribe() {
+        txttimer.throttleClick().subscribe {
 
             if (txttimer.text == resources.getString(R.string.resendOTP)) {
                 txttimer.isClickable = true
                 txttimer.paintFlags = 0
-                if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
+                if (phoneNumber.isNotEmpty()) {//!intent.getStringExtra("PhoneNo").isNullOrEmpty()
                     Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
                             viewModel.callLogin(
                                 mContext,
-                                intent.getStringExtra("PhoneNo")
+                                phoneNumber//intent.getStringExtra("PhoneNo")
                             )
                         }.autoDispose(disposables)
 
                 } else {
-                    TxtMobileNumber.setText("1234")
+                    TxtMobileNumber.text = "1234"
                 }
             } else {
                 txttimer.isClickable = false
@@ -151,35 +161,30 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         TxtChangeNumber.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
-        TxtChangeNumber.throttleClick().subscribe() {
+        TxtChangeNumber.throttleClick().subscribe {
             onBackPressed()
         }.autoDispose(disposables)
 
         callTimer()
-        if (!intent.getStringExtra("PhoneNo").isNullOrEmpty()) {
-            TxtMobileNumber.setText(intent.getStringExtra("PhoneNo"))
+        if (phoneNumber.isNotEmpty()) {//!intent.getStringExtra("PhoneNo").isNullOrEmpty()
+            TxtMobileNumber.text = phoneNumber //intent.getStringExtra("PhoneNo")
 
         } else {
-            TxtMobileNumber.setText("1234")
+            TxtMobileNumber.text = "1234"
         }
     }
 
     private fun callTimer() {
         val timer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                txttimer.setText(resources.getString(R.string.otpverification) + millisUntilFinished / 1000)
+                txttimer.text =
+                    resources.getString(R.string.otpverification) + millisUntilFinished / 1000
 
             }
 
             override fun onFinish() {
                 txttimer.text = resources.getString(R.string.resendOTP)
                 txttimer.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-
-//                btnVerify.setBackgroundColor(resources.getColor(R.color.color_dark_grey_txt))
-//                if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
-//                } else {
-//                    btnVerify.isClickable = false
-//                }
             }
         }
         timer.start()
@@ -238,12 +243,23 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
     }
 
     private fun callnextActivity() {
-
-        val targetIntent = getTargetIntent(DashBoardActivity::class.java)
-        startActivity(targetIntent)
-        dataManager.setPhoneNumber(intent.getStringExtra("PhoneNo"))
-        finishAffinity()
-
+        val targetNavigation = when (roleType.getRoleType(role)) {
+            RoleImpl.RoleStaffMember, RoleImpl.RoleMasterAdmin, RoleImpl.RoleNormalAdmin -> PasswordActivity::class.java
+            RoleImpl.RoleVolunteer -> {
+                dataManager.setRole(role)
+                DashBoardActivity::class.java
+            }
+            else -> null
+        }
+        targetNavigation?.run {
+            dataManager.setPhoneNumber(phoneNumber)//intent.getStringExtra("PhoneNo")
+            val intent = getTargetIntent(this)
+            startActivity(intent)
+            when (roleType.getRoleType(role)) {
+                RoleImpl.RoleVolunteer -> finishAffinity()
+                else -> finish()
+            }
+        }
     }
 
     override fun provideViewModel(): OtpActivityModel = getViewModel {
@@ -267,7 +283,7 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable -> {
                     BaseUtility.showAlertMessage(
-                        mContext!!,
+                        mContext,
                         R.string.alert,
                         R.string.check_internet
                     )
@@ -292,7 +308,6 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                     )
                     callTimer()
                 }
-
             }
         })
     }

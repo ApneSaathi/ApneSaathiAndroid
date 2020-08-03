@@ -14,4 +14,6 @@ object PreferenceConstants {
     const val Email: String = "email"
     const val Address: String = "Address"
     const val LastSelectedId: String = "LastSelectedId"
+
+    const val Role: String = "role"
 }

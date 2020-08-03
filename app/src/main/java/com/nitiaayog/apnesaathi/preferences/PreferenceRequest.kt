@@ -37,5 +37,8 @@ interface PreferenceRequest {
     fun setLastSelectedId(callId: String)
     fun getLastSelectedId(): String
 
+    fun setRole(role: String)
+    fun getRole(): String
+
     fun clearPreferences()
 }

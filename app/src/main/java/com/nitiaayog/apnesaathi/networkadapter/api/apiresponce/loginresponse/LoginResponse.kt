@@ -2,8 +2,10 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 
-class Login_Response {
+class LoginResponse {
+
     @SerializedName("statusCode")
     @Expose
     private var statusCode: String? = null
@@ -31,6 +33,9 @@ class Login_Response {
     @SerializedName("loginOTP")
     @Expose
     private var loginOTP: Any? = null
+
+    @SerializedName(ApiConstants.Role)
+    private var role: String? = ""
 
     fun getStatusCode(): String? {
         return statusCode
@@ -86,5 +91,11 @@ class Login_Response {
 
     fun setLoginOTP(loginOTP: Any?) {
         this.loginOTP = loginOTP
+    }
+
+    fun getRole(): String = role ?: ""
+
+    fun setRole(role: String) {
+        this.role = role
     }
 }

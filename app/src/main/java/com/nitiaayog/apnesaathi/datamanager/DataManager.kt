@@ -6,11 +6,11 @@ import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 
 interface DataManager : ApiRequest, PreferenceRequest {
-    fun updateUserPreference(loginUser: Login_Response)
+    fun updateUserPreference(loginUser: LoginResponse)
 
     // TODO : Database Access
     // Table : call_details

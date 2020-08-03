@@ -15,6 +15,7 @@ object ApiConstants {
     const val Gender: String = "gender"
     const val Age: String = "age"
     const val UserInfo: String = "user_info"
+    const val Role: String = "role"
 
     const val Volunteer: String = "volunteer"
     const val GrievanceTracking: String = "greivanceTrackingList"
@@ -93,4 +94,7 @@ object ApiConstants {
     const val ProfileEmail: String = "email"
 
     const val GrievanceTrackingId: String = "trackingId"
+
+    const val AdminId: String = "adminId"
+    const val Password: String = "password"
 }
