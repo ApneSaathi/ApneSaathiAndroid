@@ -464,11 +464,11 @@
     <string name="validate_essential_services">આવશ્યક સેવાઓનો અભાવ પસંદ કરો</string>
     <string name="validate_practices_not_followed">કઈ પ્રથાઓનું પાલન કરવામાં આવી રહ્યું નથી તેની વિગતો પ્રદાન કરો</string>
 
-    <string name="invalid_calls">અમાન્ય કallsલ્સ</string>
+    <string name="invalid_calls">અમાન્ય કોલ્સ</string>
 
     <string name="awareness_about_covid_symptoms">કોવિડ લક્ષણો વિશે જાગૃતિ</string>
     <string name="behavioral_practices_not_being_followed">વર્તન વ્યવહારનું પાલન થતું નથી</string>
-    <string name="reinforce_knowledge_for_prevention_of_covid_19">19 ની કોવિડ નિવારણ માટે જ્ Reાનને મજબુત બનાવવું</string>
-    <string name="invalid_calls_count">અમાન્ય કallsલ્સ(%s)</string>
+    <string name="reinforce_knowledge_for_prevention_of_covid_19">કોવિડ-19 ની  નિવારણ માટે જ્ Reાનને મજબુત બનાવવું</string>
+    <string name="invalid_calls_count">અમાન્ય કોલ્સ(%s)</string>
 
 </resources>
