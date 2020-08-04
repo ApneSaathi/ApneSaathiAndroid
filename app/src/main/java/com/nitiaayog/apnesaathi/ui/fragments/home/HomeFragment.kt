@@ -30,7 +30,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
-import kotlin.system.exitProcess
 
 class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData> {
 
@@ -205,15 +204,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
             manageProgressBarData()
         })
 
-//        viewModel.getGrievancesList().removeObservers(viewLifecycleOwner)
-//        viewModel.getGrievancesList().observe(viewLifecycleOwner, Observer {
-//            grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
-//            grievancesAdapter.notifyDataSetChanged()
-//            manageGrievances(it)
-//        })
         viewModel.getGrievancesTrackingList().removeObservers(viewLifecycleOwner)
         viewModel.getGrievancesTrackingList().observe(viewLifecycleOwner, Observer { it ->
-
             grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             grievancesAdapter.notifyDataSetChanged()
             manageGrievances(it)
@@ -247,10 +239,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     override fun onItemClick(position: Int, data: GrievanceData) {
         val fragment = GrievanceDetailFragment(data)
         fragment.setReloadApiListener(reloadApiRequiredListener)
-        addFragment(
-            R.id.fragmentHomeContainer,
-            fragment, GRIEVANCE_DETAIL_FRAGMENT
-        )
+        addFragment(R.id.fragmentHomeContainer, fragment, GRIEVANCE_DETAIL_FRAGMENT)
     }
 
     fun reloadApi() {

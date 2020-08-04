@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
@@ -30,6 +31,10 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
 
     override suspend fun verifyPassword(params: JsonObject): Single<BaseRepo> {
         return apiClient.verifyPassword(params).subscribeAndObserveWithDelaySubscription()
+    }
+
+    override suspend fun getVolunteers(params: JsonObject): Single<VolunteerRepo> {
+        return apiClient.getVolunteers(params).subscribeAndObserveWithDelaySubscription()
     }
 
     override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {

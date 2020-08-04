@@ -9,11 +9,14 @@ object ApiProvider {
 
     //private val DEV_HOST = if(BuildConfig.DEBUG) DEV_HOST else PROD_HOST
 
-    private const val GET_LOGIN_USER: String = "Volunteer/LoginVolunteer"
+    private const val GET_LOGIN_USER: String = "Volunteer/loginVolunteerOrAdmin"
     const val ApiLoginUser: String = BASE_URL + GET_LOGIN_USER
 
     private const val VERIFY_PASSWORD: String = "Volunteer/verifyPassword"
     const val ApiVerifyPassword: String = BASE_URL + VERIFY_PASSWORD
+
+    private const val GET_VOLUNTEERS: String = "Volunteer/volunteersList"
+    const val ApiGetVolunteers: String = BASE_URL + GET_VOLUNTEERS
 
     private const val GET_VOLUNTEER_DATA: String = "Volunteer/VolunteerData"
     const val Api_volunteer_Data: String = BASE_URL + GET_VOLUNTEER_DATA
@@ -37,6 +40,6 @@ object ApiProvider {
     private const val GET_UPDATE_GRIEVANCE_DETAILS = "Volunteer/updateGreivanceDetails"
     const val ApiUpdateGrievanceDetails = BASE_URL + GET_UPDATE_GRIEVANCE_DETAILS
 
-    private const val GET_SAVINGPROFILE  = "Volunteer/updateProfile"
+    private const val GET_SAVINGPROFILE = "Volunteer/updateProfile"
     const val Api_UPDATEPROFILE = BASE_URL + GET_SAVINGPROFILE
 }

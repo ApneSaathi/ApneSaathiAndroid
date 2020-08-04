@@ -45,9 +45,9 @@ class OtpActivityModel private constructor(dataManager: DataManager) : BaseViewM
                                 NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
                             dataManager.setUserId(
                                 when {
-                                    it.getVolunteerId() == null -> "1001"
-                                    it.getVolunteerId()!!.isEmpty() -> "1001"
-                                    else -> it.getVolunteerId()!!
+                                    it.getId() == null -> "1001"
+                                    it.getId()!!.isEmpty() -> "1001"
+                                    else -> it.getId()!!
                                 }
                             )
                         }

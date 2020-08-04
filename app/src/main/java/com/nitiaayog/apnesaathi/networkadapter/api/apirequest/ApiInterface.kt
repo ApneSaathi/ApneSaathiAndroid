@@ -3,12 +3,14 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -20,6 +22,9 @@ interface ApiInterface {
 
     @POST(ApiProvider.ApiVerifyPassword)
     suspend fun verifyPassword(@Body params: JsonObject): Single<BaseRepo>
+
+    @POST(ApiProvider.ApiGetVolunteers)
+    suspend fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
 
     @POST(ApiProvider.Api_volunteer_Data)
     fun getVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>

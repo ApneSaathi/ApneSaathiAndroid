@@ -16,6 +16,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
@@ -27,6 +28,8 @@ import com.nitiaayog.apnesaathi.utility.BaseUtility
 import io.reactivex.Single
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -63,6 +66,10 @@ class AppDataManager private constructor(
 
     override suspend fun verifyPassword(params: JsonObject): Single<BaseRepo> {
         return apiRequest.verifyPassword(params)
+    }
+
+    override suspend fun getVolunteers(params: JsonObject): Single<VolunteerRepo>{
+        return apiRequest.getVolunteers(params)
     }
 
     override fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse> {
@@ -234,7 +241,7 @@ class AppDataManager private constructor(
     override fun isLogin(): Boolean = preferences.isLogin()
 
     override fun updateUserPreference(loginUser: LoginResponse) {
-        setUserId(loginUser.getVolunteerId()!!)
+        setUserId(loginUser.getId()!!)
 //        setUserName(loginUser.userName)
 //        //setProfileImage(loginUser.userProfileImage)
 //        setPhoneNumber(loginUser.phoneNumber)

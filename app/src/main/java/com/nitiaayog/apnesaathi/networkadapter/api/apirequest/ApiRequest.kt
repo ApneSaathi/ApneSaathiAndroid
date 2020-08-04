@@ -3,24 +3,29 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.Body
 
 interface ApiRequest {
 
     // Get Login User Data
     fun loginUser(phoneNumber: JsonObject): Single<LoginResponse>
 
-    suspend fun verifyPassword(params: JsonObject):Single<BaseRepo>
+    suspend fun verifyPassword(params: JsonObject): Single<BaseRepo>
 
-    //    Get Volunteer Data
+    // will provide list of volunteers
+    suspend fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
+
+    // Get Volunteer Data
     fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
-    //    Get Update Volunteer Data
+    // Get Update Volunteer Data
     fun updatevolunteerData(phoneNumber: JsonObject): Single<ProfileUpdateResponse>
 
     // Get Calls list for Home
