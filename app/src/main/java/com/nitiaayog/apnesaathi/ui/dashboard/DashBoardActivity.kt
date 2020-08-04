@@ -41,8 +41,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         }
     }
 
-    override fun provideViewModel(): DashBoardViewModel =
-        getViewModel { DashBoardViewModel.getInstance(dataManager) }
+    override fun provideViewModel(): DashBoardViewModel = getViewModel {
+        DashBoardViewModel.getInstance()
+    }
 
     override fun provideLayoutResource(): Int = R.layout.activity_dashboard
 

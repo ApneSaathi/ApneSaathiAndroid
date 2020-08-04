@@ -3,20 +3,29 @@ package com.nitiaayog.apnesaathi.ui.adminandstaffmember.password
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.base.ProgressDialog
+import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.onTextChanges
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard.DashboardActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.activity_password.*
 
 class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
+    private val progressDialog: ProgressDialog.Builder by lazy {
+        ProgressDialog.Builder(this).setTitle(R.string.verification)
+            .setMessage(R.string.check_details)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getObservableStreams()
+        getDataStreams()
 
         ivBack.throttleClick().subscribe { finish() }.autoDispose(disposables)
 
@@ -43,19 +52,30 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
         return true
     }
 
-    private fun getObservableStreams() =
-        viewModel.getNetworkStateObservable().observe(this, Observer {
-            when (it) {
-                is NetworkRequestState.NetworkNotAvailable -> {
-                }
-                is NetworkRequestState.LoadingData -> {
-                }
-                is NetworkRequestState.ErrorResponse -> {
-                }
-                is NetworkRequestState.Error -> {
-                }
-                is NetworkRequestState.SuccessResponse<*> -> {
-                }
+    private fun getDataStreams() = viewModel.getNetworkStateObservable().observe(this, Observer {
+        when (it) {
+            is NetworkRequestState.NetworkNotAvailable ->
+                BaseUtility.showAlertMessage(this, R.string.error, R.string.check_internet)
+            is NetworkRequestState.LoadingData -> progressDialog.show()
+            is NetworkRequestState.ErrorResponse -> {
+                progressDialog.dismiss()
+                BaseUtility.showAlertMessage(
+                    this, getString(R.string.error), it.throwable?.message
+                        ?: getString(R.string.cannt_connect_to_server_try_later),
+                    getString(R.string.okay)
+                )
             }
-        })
+            is NetworkRequestState.Error -> {
+                progressDialog.dismiss()
+                BaseUtility.showAlertMessage(
+                    this, R.string.error, R.string.something_went_wrong
+                )
+            }
+            is NetworkRequestState.SuccessResponse<*> -> {
+                progressDialog.dismiss()
+                startActivity(getTargetIntent(DashboardActivity::class.java))
+                finishAffinity()
+            }
+        }
+    })
 }

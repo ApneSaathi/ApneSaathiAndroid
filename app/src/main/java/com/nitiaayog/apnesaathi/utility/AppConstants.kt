@@ -1,5 +1,10 @@
 package com.nitiaayog.apnesaathi.utility
 
+const val ROLE_VOLUNTEER: String = "1"
+const val ROLE_STAFF_MEMBER: String = "2"
+const val ROLE_DISTRICT_ADMIN: String = "3"
+const val ROLE_MASTER_ADMIN: String = "4"
+
 const val LOAD_ELEMENTS_WITH_DELAY: Long = 500L
 
 const val CALL_ID: String = "call_id"

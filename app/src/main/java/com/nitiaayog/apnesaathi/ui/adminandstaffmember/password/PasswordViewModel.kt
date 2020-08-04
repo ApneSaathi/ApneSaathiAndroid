@@ -1,6 +1,8 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.password
 
 import android.content.Context
+import androidx.annotation.UiThread
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
@@ -29,8 +31,14 @@ class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() 
         }
     }
 
+    @UiThread
+    private fun updateNetworkState(state: NetworkRequestState) {
+        loaderObservable.postValue(state)
+    }
+
     fun getNetworkStateObservable(): LiveData<NetworkRequestState> = loaderObservable
 
+    @WorkerThread
     fun validatePassword(context: Context, password: String) {
         if (checkNetworkAvailability(context, ApiProvider.ApiVerifyPassword)) {
             val params = JsonObject()
@@ -38,17 +46,15 @@ class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() 
             params.addProperty(ApiConstants.Password, password)
             viewModelScope.launch(Dispatchers.IO) {
                 dataManager.verifyPassword(params).doOnSubscribe {
-                    loaderObservable.postValue(NetworkRequestState.NetworkNotAvailable(ApiProvider.ApiVerifyPassword))
+                    updateNetworkState(NetworkRequestState.NetworkNotAvailable(ApiProvider.ApiVerifyPassword))
                 }.subscribe({
                     if (it.status == "0")
-                        loaderObservable.postValue(
+                        updateNetworkState(
                             NetworkRequestState.SuccessResponse(ApiProvider.ApiVerifyPassword, "")
                         )
-                    else loaderObservable.postValue(
-                        NetworkRequestState.Error(ApiProvider.ApiVerifyPassword)
-                    )
+                    else updateNetworkState(NetworkRequestState.Error(ApiProvider.ApiVerifyPassword))
                 }, {
-                    loaderObservable.postValue(
+                    updateNetworkState(
                         NetworkRequestState.ErrorResponse(ApiProvider.ApiVerifyPassword, it)
                     )
                 }).autoDispose(disposables)

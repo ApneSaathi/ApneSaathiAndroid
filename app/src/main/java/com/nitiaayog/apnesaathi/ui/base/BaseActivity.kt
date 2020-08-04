@@ -14,8 +14,6 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
     protected val dataManager: DataManager by lazy { ApneSaathiApplication.getApiClient() }
 
-    //protected val database: AppDatabaseManager by lazy { AppDatabaseManager.getDatabase(this) }
-
     protected val viewModel: VM by lazy { provideViewModel() }
 
     protected val disposables: CompositeDisposable by lazy { CompositeDisposable() }
@@ -46,6 +44,6 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
-        LanguageUtils.changeLanguage(dataManager,applicationContext,resources)
+        LanguageUtils.changeLanguage(dataManager, applicationContext, resources)
     }
 }

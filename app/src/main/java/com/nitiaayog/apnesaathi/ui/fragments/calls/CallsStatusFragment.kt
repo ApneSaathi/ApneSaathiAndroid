@@ -78,7 +78,6 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         }
     }
 
-
     private val followupAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
@@ -207,7 +206,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
             R.string.attended_calls_count ->
                 manageViews(callsCountString, tvAttended, btnSeeAllAttended, dataList.size)
             R.string.invalid_calls_count ->
-                manageViews(callsCountString, tvInvalidCalls, btnSeeAllInvalid, dataList.size )
+                manageViews(callsCountString, tvInvalidCalls, btnSeeAllInvalid, dataList.size)
             else -> {
             }
         }

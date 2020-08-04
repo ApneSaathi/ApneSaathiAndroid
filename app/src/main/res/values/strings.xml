@@ -274,7 +274,7 @@
     <string name="validate_quarantine_status">Provide Sr. citizen\'s quarantine status</string>
 
     <string name="validate_emergency_required">Provide details of is any <b>emergency and/or escalation ?</b> </string>
-    <string name="check_internet">Please check internet connection</string>
+    <string name="check_internet">Please check your internet connection</string>
     <string name="sr_citizen_registered_successfully">Senior citizen registered successfully.</string>
     <string name="not_available">Not Available</string>
 
@@ -512,5 +512,9 @@
     <string name="password_text">Once you provide a password, you are all set to get into the app.</string>
     <string name="enter_password">Enter Password</string>
     <string name="validate_password">Please enter valid password</string>
+    <string name="verification">Verification</string>
+    <string name="something_went_wrong">Something went wrong while connecting server.</string>
+    <string name="cannt_connect_to_server_try_later">We are not able to connect to the server, please try again later</string>
+    <string name="check_details">Please wait we are checking the details…</string>
 
 </resources>

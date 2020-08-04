@@ -26,7 +26,7 @@ open class PreferenceManager private constructor(application: Application) : Pre
         )
     }
 
-    override fun isLogin(): Boolean = getPhoneNumber() != ""
+    override fun isLogin(): Boolean = ((getPhoneNumber() != "") && (getRole() != ""))
 
     override fun getUserId(): String = preferences.getString(PreferenceConstants.UserId)!!
     override fun setUserId(userId: String) =

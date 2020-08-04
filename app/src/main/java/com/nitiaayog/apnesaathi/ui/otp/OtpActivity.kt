@@ -21,38 +21,44 @@ import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
-import com.nitiaayog.apnesaathi.datamanager.role.RoleImpl
-import com.nitiaayog.apnesaathi.datamanager.role.RoleType
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.password.PasswordActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
-import com.nitiaayog.apnesaathi.utility.BaseUtility
-import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login_otpverify.*
+import kotlinx.android.synthetic.main.activity_login_otpverify.ivBack
+import kotlinx.android.synthetic.main.activity_password.*
 import java.util.concurrent.TimeUnit
 
 class OtpActivity : BaseActivity<OtpActivityModel>() {
+
+    /**
+     * Roles Details,
+     * ROLE_VOLUNTEER = "1",
+     * ROLE_STAFF_MEMBER = "2",
+     * ROLE_DISTRICT_ADMIN = "3",
+     * ROLE_MASTER_ADMIN = "4",
+     * */
+
     var wrongAttempCount: Int = 0
     lateinit var mContext: Context
     val otpEt = arrayOfNulls<EditText>(4)
 
-    private val roleType: RoleType by lazy { RoleImpl() }
+    private val progressDialog: ProgressDialog.Builder by lazy {
+        ProgressDialog.Builder(mContext).setMessage("Please wait.")
+    }
+
     private val role: String by lazy {
         val isRole: Boolean = intent?.hasExtra(ApiConstants.Role) ?: false
         if (isRole) intent.getStringExtra(ApiConstants.Role) else ""
     }
-
     private val phoneNumber: String by lazy {
         val isPhoneNo: Boolean = intent?.hasExtra("PhoneNo") ?: false
         if (isPhoneNo) intent.getStringExtra("PhoneNo") else ""
-    }
-
-    private val progressDialog: ProgressDialog.Builder by lazy {
-        ProgressDialog.Builder(mContext).setMessage("Please wait.")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +74,7 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         observeStates()
 
+        ivBack.throttleClick().subscribe { finish() }.autoDispose(disposables)
         btnVerify.throttleClick().subscribe {
             hideKeyboard()
             if (btnVerify.text.toString() == resources.getString(R.string.getnewOTP)) {
@@ -123,10 +130,8 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                                             resources.getString(R.string.invalidOTP)
                                         )
                                     }
-                                    wrongAttempCount = wrongAttempCount + 1
+                                    wrongAttempCount += 1
                                 }
-
-
                             }
                         }
                     }
@@ -158,17 +163,13 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         }.autoDispose(disposables)
 
-
         TxtChangeNumber.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
-        TxtChangeNumber.throttleClick().subscribe {
-            onBackPressed()
-        }.autoDispose(disposables)
+        TxtChangeNumber.throttleClick().subscribe { onBackPressed() }.autoDispose(disposables)
 
         callTimer()
         if (phoneNumber.isNotEmpty()) {//!intent.getStringExtra("PhoneNo").isNullOrEmpty()
             TxtMobileNumber.text = phoneNumber //intent.getStringExtra("PhoneNo")
-
         } else {
             TxtMobileNumber.text = "1234"
         }
@@ -179,7 +180,6 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             override fun onTick(millisUntilFinished: Long) {
                 txttimer.text =
                     resources.getString(R.string.otpverification) + millisUntilFinished / 1000
-
             }
 
             override fun onFinish() {
@@ -243,20 +243,18 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
     }
 
     private fun callnextActivity() {
-        val targetNavigation = when (roleType.getRoleType(role)) {
-            RoleImpl.RoleStaffMember, RoleImpl.RoleMasterAdmin, RoleImpl.RoleNormalAdmin -> PasswordActivity::class.java
-            RoleImpl.RoleVolunteer -> {
-                dataManager.setRole(role)
-                DashBoardActivity::class.java
-            }
+        val targetNavigation = when (role) {
+            ROLE_STAFF_MEMBER, ROLE_DISTRICT_ADMIN, ROLE_MASTER_ADMIN -> PasswordActivity::class.java
+            ROLE_VOLUNTEER -> DashBoardActivity::class.java
             else -> null
         }
         targetNavigation?.run {
-            dataManager.setPhoneNumber(phoneNumber)//intent.getStringExtra("PhoneNo")
-            val intent = getTargetIntent(this)
-            startActivity(intent)
-            when (roleType.getRoleType(role)) {
-                RoleImpl.RoleVolunteer -> finishAffinity()
+            viewModel.setData(phoneNumber, role)
+            /*dataManager.setPhoneNumber(phoneNumber) //intent.getStringExtra("PhoneNo")
+            dataManager.setRole(role)*/
+            startActivity(getTargetIntent(this))
+            when (role) {
+                ROLE_VOLUNTEER -> finishAffinity()
                 else -> finish()
             }
         }
