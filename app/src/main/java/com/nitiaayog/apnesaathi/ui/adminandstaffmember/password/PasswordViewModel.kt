@@ -1,7 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.password
 
 import android.content.Context
-import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -29,11 +28,6 @@ class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() 
             }
             return instanceFactory!!
         }
-    }
-
-    @UiThread
-    private fun updateNetworkState(state: NetworkRequestState) {
-        loaderObservable.postValue(state)
     }
 
     fun getNetworkStateObservable(): LiveData<NetworkRequestState> = loaderObservable

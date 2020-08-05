@@ -41,9 +41,7 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
                 val fragment = SeniorCitizenDetailsFragment()
                 fragment.setSelectedUser(data)
                 viewModel.setLastSelectedUser(data.callId.toString())
-                addFragment(
-                    containerId, fragment, SR_CITIZEN_DETAIL_FRAGMENT
-                )
+                addFragment(containerId, fragment, SR_CITIZEN_DETAIL_FRAGMENT)
             }
         })
     }

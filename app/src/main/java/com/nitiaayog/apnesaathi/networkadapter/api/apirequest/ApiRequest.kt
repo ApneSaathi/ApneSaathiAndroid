@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 
+import androidx.annotation.WorkerThread
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
@@ -20,6 +21,7 @@ interface ApiRequest {
     suspend fun verifyPassword(params: JsonObject): Single<BaseRepo>
 
     // will provide list of volunteers
+    @WorkerThread
     suspend fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
 
     // Get Volunteer Data
@@ -32,6 +34,7 @@ interface ApiRequest {
     fun getCallDetails(details: JsonObject): Single<HomeRepo>
 
     // Get grievance tracking details
+    @WorkerThread
     fun getGrievanceTrackingDetails(details: JsonObject): Single<GrievanceRespData>
 
     // Save Sr citizen feedback over a call

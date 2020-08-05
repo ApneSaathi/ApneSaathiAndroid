@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayoutHome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_grey"
+    android:fitsSystemWindows="true"
+    android:paddingTop="0dp"
+    android:paddingBottom="@dimen/view_size_66">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/include_appbar_layout_with_toolbar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="none"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <HorizontalScrollView
+                    android:id="@+id/hsvSupportCounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:padding="@dimen/dimen_10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardSupportedSrCitizens"
+                            android:layout_width="@dimen/view_size_120"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@android:color/background_light"
+                            app:cardCornerRadius="@dimen/dimen_3"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:gravity="center"
+                                    android:text="@string/total_sr_supported"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/text_color"
+                                    android:textSize="@dimen/text_13" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/view_size_78"
+                                    android:layout_height="@dimen/view_size_78"
+                                    android:contentDescription="@string/total_sr_supported"
+                                    android:padding="@dimen/dimen_7"
+                                    android:src="@drawable/ic_male_user" />
+
+                                <TextView
+                                    android:id="@+id/tvSupportedSrCitizensCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dimen_2"
+                                    android:fontFamily="sans-serif"
+                                    android:gravity="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/btn_bg"
+                                    android:textSize="@dimen/text_16"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardVolunteersJoined"
+                            android:layout_width="@dimen/view_size_120"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            app:cardBackgroundColor="@android:color/background_light"
+                            app:cardCornerRadius="@dimen/dimen_3"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintStart_toEndOf="@id/cardSupportedSrCitizens"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:gravity="center"
+                                    android:text="@string/total_volunteers_joined"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/text_color"
+                                    android:textSize="@dimen/text_13" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/view_size_78"
+                                    android:layout_height="@dimen/view_size_78"
+                                    android:contentDescription="@string/total_sr_supported"
+                                    android:padding="@dimen/dimen_7"
+                                    android:src="@drawable/ic_male_user" />
+
+                                <TextView
+                                    android:id="@+id/tvJoinedVolunteersCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dimen_2"
+                                    android:fontFamily="sans-serif"
+                                    android:gravity="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/btn_bg"
+                                    android:textSize="@dimen/text_16"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardGrievancesRaised"
+                            android:layout_width="@dimen/view_size_120"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            app:cardBackgroundColor="@android:color/background_light"
+                            app:cardCornerRadius="@dimen/dimen_3"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintStart_toEndOf="@id/cardVolunteersJoined"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:gravity="center"
+                                    android:text="@string/total_grievances_raised"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/text_color"
+                                    android:textSize="@dimen/text_13" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/view_size_78"
+                                    android:layout_height="@dimen/view_size_78"
+                                    android:contentDescription="@string/total_sr_supported"
+                                    android:padding="@dimen/dimen_7"
+                                    android:src="@drawable/ic_male_user" />
+
+                                <TextView
+                                    android:id="@+id/tvGrievancesRaisedCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dimen_2"
+                                    android:fontFamily="sans-serif"
+                                    android:gravity="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/btn_bg"
+                                    android:textSize="@dimen/text_16"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </HorizontalScrollView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPendingCalls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    app:cardBackgroundColor="@color/card_background"
+                    app:cardCornerRadius="@dimen/dimen_2"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hsvSupportCounts">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvVolunteers"
+                            style="@style/TextAppearance.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/dimen_15"
+                            android:paddingTop="@dimen/dimen_10"
+                            android:paddingEnd="0dp"
+                            android:paddingBottom="@dimen/dimen_5"
+                            android:text="@string/pending_calls"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBarVolunteers"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimen_10"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/tvVolunteers"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvVolunteers" />
+
+                        <include
+                            android:id="@+id/rvVolunteers"
+                            layout="@layout/include_recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvVolunteers" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSeeAllVolunteers"
+                            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/see_all"
+                            android:textAllCaps="false"
+                            android:textColor="@color/title_text_color"
+                            android:textSize="@dimen/text_15"
+                            android:visibility="gone"
+                            app:backgroundTint="@android:color/background_light"
+                            app:icon="@drawable/ic_arrow_down"
+                            app:iconGravity="textEnd"
+                            app:iconTint="@color/title_text_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rvVolunteers" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardGrievances"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    app:cardBackgroundColor="@color/card_background"
+                    app:cardCornerRadius="@dimen/dimen_2"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardPendingCalls">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvGrievances"
+                            style="@style/TextAppearance.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/dimen_15"
+                            android:paddingTop="@dimen/dimen_10"
+                            android:paddingEnd="0dp"
+                            android:paddingBottom="@dimen/dimen_5"
+                            android:text="@string/menu_issues"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvDistrict"
+                            style="@style/TextAppearance.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/dimen_10"
+                            android:paddingTop="@dimen/dimen_5"
+                            android:paddingEnd="@dimen/dimen_10"
+                            android:paddingBottom="@dimen/dimen_5"
+                            android:text="@string/select_district"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/tvGrievances"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvGrievances" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBarGrievances"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimen_10"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/tvGrievances"
+                            app:layout_constraintEnd_toStartOf="@id/tvDistrict"
+                            app:layout_constraintTop_toTopOf="@id/tvGrievances" />
+
+                        <include
+                            android:id="@+id/rvGrievancesList"
+                            layout="@layout/include_recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvGrievances" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSeeAllGrievances"
+                            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/see_all"
+                            android:textAllCaps="false"
+                            android:textColor="@color/title_text_color"
+                            android:textSize="@dimen/text_15"
+                            android:visibility="gone"
+                            app:backgroundTint="@android:color/background_light"
+                            app:icon="@drawable/ic_arrow_down"
+                            app:iconGravity="textEnd"
+                            app:iconTint="@color/title_text_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rvGrievancesList" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <include
+                    layout="@layout/fragment_calls_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardGrievances" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <FrameLayout
+        android:id="@+id/fragmentAdminStaffHomeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 
+import androidx.annotation.WorkerThread
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
@@ -10,7 +11,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.Pro
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -23,6 +23,7 @@ interface ApiInterface {
     @POST(ApiProvider.ApiVerifyPassword)
     suspend fun verifyPassword(@Body params: JsonObject): Single<BaseRepo>
 
+    @WorkerThread
     @POST(ApiProvider.ApiGetVolunteers)
     suspend fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
 
@@ -35,6 +36,7 @@ interface ApiInterface {
     @POST(ApiProvider.ApiLoadDashboard)
     fun getCallDetails(@Body details: JsonObject): Single<HomeRepo>
 
+    @WorkerThread
     @POST(ApiProvider.ApiGrievanceTracking)
     fun getGrievanceTrackingDetails(@Body details: JsonObject): Single<GrievanceRespData>
 

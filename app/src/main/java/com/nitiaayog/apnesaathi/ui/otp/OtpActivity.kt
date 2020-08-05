@@ -30,8 +30,6 @@ import com.nitiaayog.apnesaathi.utility.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login_otpverify.*
-import kotlinx.android.synthetic.main.activity_login_otpverify.ivBack
-import kotlinx.android.synthetic.main.activity_password.*
 import java.util.concurrent.TimeUnit
 
 class OtpActivity : BaseActivity<OtpActivityModel>() {

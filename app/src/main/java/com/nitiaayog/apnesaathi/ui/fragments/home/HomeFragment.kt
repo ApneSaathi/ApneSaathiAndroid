@@ -14,6 +14,7 @@ import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
@@ -62,7 +63,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolBar.title = getString(R.string.menu_home)
+        toolBar.title = getString(R.string.dashboard)
 
         try {
             initRecyclerView()
@@ -88,7 +89,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     }
 
     override fun onCallPermissionDenied() =
-        Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
     private fun initRecyclerView() {
         val rvPendingList = (rvPendingList as RecyclerView)
@@ -166,15 +167,13 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         val size = dataList.size
         tvGrievances.text = getString(R.string.issues_count, size.toString())
         btnSeeAllGrievances.visibility = if (size > 3) {
-            btnSeeAllGrievances.setOnClickListener {
+            btnSeeAllGrievances.throttleClick().subscribe {
                 viewModel.getGrievancesTrackingList().value?.let { it1 ->
-                    grievancesAdapter.setData(
-                        it1
-                    )
+                    grievancesAdapter.setData(it1)
                 }
                 grievancesAdapter.notifyDataSetChanged()
                 btnSeeAllGrievances.visibility = View.GONE
-            }
+            }.autoDispose(disposables)
             View.VISIBLE
         } else View.GONE
     }

@@ -25,19 +25,20 @@
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="@dimen/dimen_24"
+        android:fontFamily="sans-serif"
         android:gravity="center_vertical"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
         android:textAllCaps="false"
         android:textColor="@color/text_color"
         android:textSize="@dimen/text_14"
-        android:fontFamily="sans-serif"
         app:layout_constraintEnd_toStartOf="@id/tvDate"
-        app:layout_constraintStart_toEndOf="@id/civGender"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_weight="6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tvDate"
-        app:layout_constraintHorizontal_weight="6"/>
+        app:layout_constraintStart_toEndOf="@id/civGender"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
@@ -45,13 +46,14 @@
         android:fontFamily="sans-serif"
         android:gravity="center_vertical"
         android:textAllCaps="false"
-        app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/text_color_1"
         android:textSize="@dimen/text_10"
         app:layout_constraintEnd_toStartOf="@id/ivCall"
+        app:layout_constraintHorizontal_weight="4"
         app:layout_constraintLeft_toRightOf="@id/tvName"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_weight="4" />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="0dp"
@@ -76,8 +78,8 @@
         android:padding="@dimen/dimen_5"
         android:src="@drawable/ic_call"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ivMoreInfo"
         app:layout_constraintEnd_toEndOf="@id/ivMoreInfo"
+        app:layout_constraintEnd_toStartOf="@id/ivMoreInfo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -92,72 +94,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<TextView
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/view_size_32"
-        android:paddingStart="0dp"
-        android:paddingEnd="@dimen/dimen_2"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_15"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/tvAge"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minHeight="@dimen/view_size_32"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvPhoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/view_size_32"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_12"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName" />
-
-    <TextView
-        android:id="@+id/tvPlace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/view_size_32"
-        android:paddingStart="@dimen/dimen_4"
-        android:paddingEnd="0dp"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_12"
-        app:layout_constraintStart_toEndOf="@id/tvPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@id/tvName" />
-
-    <TextView
-        android:id="@+id/tvIssues"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:lineSpacingMultiplier="1.3"
-        android:minHeight="@dimen/view_size_32"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/text_12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

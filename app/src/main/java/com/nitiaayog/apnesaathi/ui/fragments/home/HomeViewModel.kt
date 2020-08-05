@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
@@ -15,7 +14,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import com.nitiaayog.apnesaathi.utility.REQUEST_DATA_COUNT
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -81,11 +79,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getCallsList(): LiveData<MutableList<CallData>> = callsList
 
     fun getPendingCalls(): LiveData<MutableList<CallData>> = pendingCallsList
-
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList
-
     fun getCompletedCalls(): LiveData<MutableList<CallData>> = completedCallsList
-
     fun getInvalidCallsList(): LiveData<MutableList<CallData>> = invalidCallsList
 
     fun getPendingGrievances(): LiveData<MutableList<GrievanceData>> = pendingGrievance
@@ -98,17 +93,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     fun setLastSelectedUser(callId: String) {
         dataManager.setLastSelectedId(callId)
-    }
-
-    @WorkerThread
-    fun getVolunteers(context: Context){
-        if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
-            val params = JsonObject()
-            params.addProperty(ApiConstants.UserId, dataManager.getUserId().toInt())
-            params.addProperty(ApiConstants.LastId, 0)
-            params.addProperty(ApiConstants.RequestedData, REQUEST_DATA_COUNT)
-
-        }
     }
 
     fun getCallDetails(context: Context) {

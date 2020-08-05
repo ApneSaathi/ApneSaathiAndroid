@@ -6,7 +6,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 class VolunteersFragment : BaseFragment<HomeViewModel>() {
 
     override fun provideViewModel(): HomeViewModel {
-        return HomeViewModel.getInstance(dataManager)
+        return HomeViewModel.getInstance(requireContext(), dataManager)
     }
 
     override fun provideLayoutResource(): Int {

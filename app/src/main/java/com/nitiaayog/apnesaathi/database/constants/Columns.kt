@@ -61,4 +61,7 @@ object Columns {
     const val ReviewRemarks: String = "review_remarks"
     const val ResolvedRemarks: String = "resolved_remarks"
     const val IsSynced: String = "is_synced"
+
+    const val FirstName: String = "first_name"
+    const val LastName: String = "last_name"
 }
