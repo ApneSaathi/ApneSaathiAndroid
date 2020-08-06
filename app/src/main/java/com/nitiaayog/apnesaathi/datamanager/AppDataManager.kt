@@ -222,12 +222,16 @@ class AppDataManager private constructor(
         grievancesTrackingDao.getGrievancesWithStatus("RESOLVED")
 
     //=> Table : volunteers
-    override fun insertVolunteers(volunteers: List<Volunteer>) {
+    override suspend fun insertVolunteers(volunteers: List<Volunteer>) {
         return volunteerDao.insert(volunteers)
     }
 
     override fun getVolunteers(): LiveData<MutableList<Volunteer>> {
         return volunteerDao.getVolunteers()
+    }
+
+    override fun getVolunteersList(): MutableList<Volunteer> {
+        return volunteerDao.getVolunteersList()
     }
 
     override fun getVolunteer(id: Int): Volunteer? {
