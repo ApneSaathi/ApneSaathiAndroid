@@ -230,10 +230,6 @@ class AppDataManager private constructor(
         return volunteerDao.getVolunteers()
     }
 
-    override fun getVolunteersList(): MutableList<Volunteer> {
-        return volunteerDao.getVolunteersList()
-    }
-
     override fun getVolunteer(id: Int): Volunteer? {
         return volunteerDao.getVolunteer(id)
     }

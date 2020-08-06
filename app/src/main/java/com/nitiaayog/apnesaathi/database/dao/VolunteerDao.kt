@@ -15,11 +15,8 @@ interface VolunteerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(volunteers: List<Volunteer>)
 
-    @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS}")
+    @Query("SELECT ${Columns.FirstName},${Columns.LastName},${Columns.Gender},${Columns.ContactNumber},${Columns.Block},${Columns.District},${Columns.State} FROM ${Tables.TABLE_VOLUNTEERS}")
     fun getVolunteers(): LiveData<MutableList<Volunteer>>
-
-    @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS}")
-    fun getVolunteersList(): MutableList<Volunteer>
 
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}=:id")
     fun getVolunteer(id: Int): Volunteer?
