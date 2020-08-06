@@ -64,4 +64,7 @@ object Columns {
 
     const val FirstName: String = "first_name"
     const val LastName: String = "last_name"
+    const val ProfilePic: String = "profile_pic"
+    const val Role: String = "role"
+    const val Village: String = "village"
 }

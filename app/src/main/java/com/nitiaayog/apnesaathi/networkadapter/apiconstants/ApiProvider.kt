@@ -7,7 +7,8 @@ object ApiProvider {
     private const val BASE_URL: String = BuildConfig.DEV_HOST
     //private const val PROD_HOST: String = BuildConfig.PROD_HOST
 
-    //private val DEV_HOST = if(BuildConfig.DEBUG) DEV_HOST else PROD_HOST
+    //private const val DEV_HOST1 = if (BuildConfig.DEBUG) BuildConfig.DEV_HOST
+    //else BuildConfig.PROD_HOST
 
     private const val GET_LOGIN_USER: String = "Volunteer/loginVolunteerOrAdmin"
     const val ApiLoginUser: String = BASE_URL + GET_LOGIN_USER

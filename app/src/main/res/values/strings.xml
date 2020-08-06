@@ -79,7 +79,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_calls">Calls</string>
-    <string name="menu_notification">Notification</string>
+    <string name="menu_volunteers">Volunteers</string>
     <string name="menu_issues">Issues</string>
     <string name="menu_profile">Profile</string>
     <string name="pending_calls_count">Pending Calls(%s)</string>

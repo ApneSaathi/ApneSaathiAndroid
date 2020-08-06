@@ -22,7 +22,7 @@ interface ApiRequest {
 
     // will provide list of volunteers
     @WorkerThread
-    suspend fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
+    suspend fun getVolunteers(params: JsonObject): Single<VolunteerRepo>
 
     // Get Volunteer Data
     fun volunteerData(phoneNumber: JsonObject): Single<VolunteerDataResponse>

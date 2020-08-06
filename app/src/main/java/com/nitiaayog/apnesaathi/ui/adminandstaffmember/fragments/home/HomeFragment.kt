@@ -293,7 +293,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun showAllVolunteers() {
         val data = Bundle().apply {
-            putString(BaseCallsTypeFragment.TYPE_OF_DATA, getString(R.string.volunteers))
+            putString(BaseCallsTypeFragment.TYPE_OF_DATA, getString(R.string.menu_volunteers))
             putInt(BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentAdminStaffHomeContainer)
         }
         val fragment = BaseCallsTypeFragment()

@@ -223,7 +223,7 @@
                             android:paddingTop="@dimen/dimen_10"
                             android:paddingEnd="0dp"
                             android:paddingBottom="@dimen/dimen_5"
-                            android:text="@string/volunteers"
+                            android:text="@string/menu_volunteers"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

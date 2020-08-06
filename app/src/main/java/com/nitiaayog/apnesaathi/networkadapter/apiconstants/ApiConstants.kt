@@ -92,9 +92,13 @@ object ApiConstants {
     const val ProfileLstname: String = "lastName"
     const val ProfileAddress: String = "address"
     const val ProfileEmail: String = "email"
+    const val ProfilePic: String = "pic"
 
     const val GrievanceTrackingId: String = "trackingId"
 
     const val AdminId: String = "adminId"
     const val Password: String = "password"
+
+    const val Volunteers: String = "volunteers"
+    const val Village: String = "village"
 }
