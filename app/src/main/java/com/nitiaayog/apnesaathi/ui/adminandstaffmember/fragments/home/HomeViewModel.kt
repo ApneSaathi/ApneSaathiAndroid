@@ -119,13 +119,12 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                 viewModelScope.launch {
                     if (it.status == "0") {
                         io {
-                            /*if (factory.getKey() == 0)
-                                dataManager.deleteVolunteers()*/
-                            dataManager.insertVolunteers(it.volunteerList)
+                            dataManager.deleteVolunteers()
+                            dataManager.insertVolunteers(it.getVolunteers())
                         }
                         updateNetworkState(
                             NetworkRequestState.SuccessResponse(
-                                ApiProvider.ApiGetVolunteers, it.volunteerList
+                                ApiProvider.ApiGetVolunteers, it.getVolunteers()
                             )
                         )
                     } else updateNetworkState(

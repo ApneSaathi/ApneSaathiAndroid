@@ -7,7 +7,10 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 class VolunteerRepo : ApiStatus() {
 
     @SerializedName(ApiConstants.Volunteers)
-    private var _volunteerList: MutableList<Volunteer>? = mutableListOf()
+    private var volunteerList: MutableList<Volunteer>? = mutableListOf()
 
-    val volunteerList: MutableList<Volunteer> = _volunteerList ?: mutableListOf()
+    fun getVolunteers(): MutableList<Volunteer> {
+        return if (volunteerList.isNullOrEmpty()) mutableListOf()
+        else volunteerList!!
+    }
 }

@@ -51,8 +51,9 @@ interface DataManager : ApiRequest, PreferenceRequest {
     suspend fun getCount(): Int
 
     // Table : volunteers
-    fun insertVolunteers(volunteers: List<Volunteer>)
+    suspend fun insertVolunteers(volunteers: List<Volunteer>)
     fun getVolunteers(): LiveData<MutableList<Volunteer>>
+    fun getVolunteersList(): MutableList<Volunteer>
     fun getVolunteer(id:Int): Volunteer?
     fun deleteVolunteers()
 
