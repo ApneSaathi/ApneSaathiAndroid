@@ -31,8 +31,6 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
         if (checkNetworkAvailability(mContext, ApiProvider.ApiLoginUser)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.phoneNo, phone)
-
-
             dataManager.loginUser(params).doOnSubscribe {
                 loaderObservable.value = NetworkRequestState.LoadingData(ApiProvider.ApiLoginUser)
             }.subscribe({
@@ -43,9 +41,9 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
                                 NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
                             dataManager.setUserId(
                                 when {
-                                    it.getVolunteerId() == null -> "1001"
-                                    it.getVolunteerId()!!.isEmpty() -> "1001"
-                                    else -> it.getVolunteerId()!!
+                                    it.getId() == null -> "1001"
+                                    it.getId()!!.isEmpty() -> "1001"
+                                    else -> it.getId()!!
                                 }
                             )
 

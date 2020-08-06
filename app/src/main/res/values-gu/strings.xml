@@ -1,38 +1,12 @@
 <resources>
     <string name="app_name">અપના સાથી</string>
     <string name="splashbottomtagline">દ્વારા એક સહયોગી ઝુંબેશ </string>
-    <string name="total_calls_vs_connected">વી.એસ. કનેક્ટેડ કુલ કોલ્સ</string>
-    <string name="total_sr_citizens_supported">કુલ નં. વરિષ્ઠ નાગરિકો આધારભૂત છે</string>
-    <string name="calls_connected_yesterday">ગઈકાલે કallsલ કરેલા છે</string>
-    <string name="average_connected_called_per_day">દિવસ દીઠ સરેરાશ કનેક્ટેડ કૉલ</string>
-    <string name="calls_connected_today">કallsલ્સ આજે જોડાયેલા છે</string>
-    <string name="sr_citizens_supported_today">વરિષ્ઠ નાગરિકોએ આજે ​​ટેકો આપ્યો</string>
-    <string name="Sr_citizen_calls_pending">સિનિયર નાગરિકની સંખ્યા બાકી છે</string>
-    <string name="sr_citizens_grievances_vs_resolved">વરિષ્ઠ નાગરિકોની ફરિયાદો અંગે વી.એસ</string>
-    <string name="on_call_sr_citizen_feedback_form">એક કૉલ પર સિનિયર સિટીઝન પ્રતિસાદ</string>
-    <string name="wrong_detail_warning">તમારા દ્વારા આપવામાં આવેલી વિગતો જિલ્લા કક્ષાના સ્ટાફ સભ્ય દ્વારા ચકાસવામાં આવશે અને ખોટી વિગતો તમારી વિરુદ્ધ કાનૂની કાર્યવાહી કરી શકે છે</string>
 
     <string name="select_language">ભાષા પસંદ કરો</string>
     <string name="english_text">અંગ્રેજી</string>
     <string name="hindi_text">હિન્દી</string>
 
-    <string name="volunteer_name">સ્વયંસેવકનું નામ *</string>
-    <string name="volunteer_phone_number">સ્વયંસેવકનો ફોન નંબર *</string>
-    <string name="person_name_whom_you_were_calling">તમે જેને ક callingલ કરો છો તે વ્યક્તિનું નામ? *</string>
-    <string name="person_phone_no_whom_you_were_calling">તમે જેને ક Phoneલ કરો છો તે વ્યક્તિનો ફોન નંબર? *</string>
-    <string name="state_of_person">તમે સંપર્ક કર્યો હોય તે વ્યક્તિનું રાજ્ય *</string>
-    <string name="district_of_person">વ્યક્તિનો જિલ્લા પસંદ કરો *</string>
-    <string name="block_name">બ્લોક નામ *</string>
-    <string name="is_call_connected">શું તમારો કૉલ સફળતાપૂર્વક કનેક્ટ થયો? *</string>
     <string name="submit">સબમિટ કરો</string>
-    <string name="validate_volunteer_name">સ્વયંસેવકનું નામ પ્રદાન કરો</string>
-    <string name="validate_volunteer_phone_number">સ્વયંસેવક ફોન નંબર પ્રદાન કરો</string>
-    <string name="validate_person_name">તમે જેને ક calledલ કર્યો છે તે વ્યક્તિનું નામ પ્રદાન કરો</string>
-    <string name="validate_person_phone">તમે ક calledલ કર્યો હોય તે વ્યક્તિને ફોન નંબર આપો</string>
-    <string name="validate_person_state">વ્યક્તિની સ્થિતિ પ્રદાન કરો</string>
-    <string name="validate_person_district">વ્યક્તિનો જીલ્લા પ્રદાન કરો</string>
-    <string name="validate_block_name">બ્લોક નામ પ્રદાન કરો</string>
-    <string name="validate_call_connection">કૉલની સ્થિતિ પ્રદાન કરો</string>
 
     <string name="permission_detail">પરવાનગી વિગત</string>
     <string name="permission_text">એપ્લિકેશનમાં લક્ષણ છે કે સિનિયર સિટીઝન વિગતો પર માત્ર એક જ ક્લિકથી તમે દૈનિક ધોરણે નિયમિત કૉલ શરૂ કરી શકો છો. તેના માટે અમને ક Cલની પરવાનગીની જરૂર રહેશે.</string>
@@ -49,7 +23,6 @@
     <string name="txtmobileNumber">મોબાઇલ નંબર</string>
     <string name="verificationcode">ચકાસણી કોડ દાખલ કરો</string>
     <string name="wehavesendverificaiton_code">અમે ચાલુ કરી છે 4 અંકનો ચકાસણી કોડ</string>
-    <string name="senderNumber">+91 9673346489</string>
     <string name="verify">ચકાસો</string>
     <string name="donthave_receive_resend">શું કોઈ કોડ પ્રાપ્ત થયો નથી? ફરીથી મોકલો</string>
     <string name="enterOtp">ઓટીપી દાખલ કરો</string>
@@ -470,5 +443,20 @@
     <string name="behavioral_practices_not_being_followed">વર્તન વ્યવહારનું પાલન થતું નથી</string>
     <string name="reinforce_knowledge_for_prevention_of_covid_19">કોવિડ-19 ની  નિવારણ માટે જ્ Reાનને મજબુત બનાવવું</string>
     <string name="invalid_calls_count">અમાન્ય કોલ્સ(%s)</string>
+
+    <string name="password_text">એકવાર તમે પાસવર્ડ પ્રદાન કરો, પછી તમે એપ્લિકેશનનો ઉપયોગ કરવા માટે તૈયાર છો.</string>
+    <string name="enter_password">પાસવર્ડ આપો</string>
+    <string name="validate_password">કૃપા કરી માન્ય પાસવર્ડ દાખલ કરો</string>
+    <string name="verification">ચકાસણી</string>
+    <string name="something_went_wrong">આપણે સર્વરને કનેક્ટ કરવામાં સમર્થ નથી</string>
+    <string name="cannt_connect_to_server_try_later">અમે સર્વર સાથે કનેક્ટ કરવામાં સમર્થ નથી, કૃપા કરીને પછીથી ફરી પ્રયાસ કરો</string>
+    <string name="check_details">કૃપા કરી પ્રતીક્ષા કરો અમે વિગતો ચકાસી રહ્યા છીએ…</string>
+    <string name="total_sr_supported">કુલ વરિષ્ઠ નાગરિકોને\nમદદ કરી</string>
+    <string name="total_volunteers_joined">કુલ સ્વયંસેવકો\nજોડાયા</string>
+    <string name="total_grievances_raised">કુલ ફરિયાદો\nબનાવી</string>
+    <string name="select_district">જીલ્લો પસંદ કરો</string>
+    <string name="dashboard">ડેશબોર્ડ</string>
+    <string name="volunteers_count">સ્વયંસેવકો(%s)</string>
+    <string name="volunteers">સ્વયંસેવકો</string>
 
 </resources>

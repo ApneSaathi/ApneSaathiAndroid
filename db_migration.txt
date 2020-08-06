@@ -1,0 +1,2 @@
+/* Migration from 1 to 2 i.e. Previous DB Version : 1 and Latest DB Version : 2 */
+1). Added Volunteer table. // by Omi

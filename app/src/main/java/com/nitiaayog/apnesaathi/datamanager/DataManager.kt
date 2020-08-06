@@ -1,16 +1,13 @@
 package com.nitiaayog.apnesaathi.datamanager
 
 import androidx.lifecycle.LiveData
-import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.GrievanceData
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
-import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
+import com.nitiaayog.apnesaathi.model.*
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
-import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Login_Response
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 
 interface DataManager : ApiRequest, PreferenceRequest {
-    fun updateUserPreference(loginUser: Login_Response)
+    fun updateUserPreference(loginUser: LoginResponse)
 
     // TODO : Database Access
     // Table : call_details
@@ -51,7 +48,13 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun delete(syncData: SyncSrCitizenGrievance)
     fun getAllUniqueGrievances(callId: Int): LiveData<MutableList<SrCitizenGrievance>>
     fun clearPreviousData()
-    suspend fun getCount():Int
+    suspend fun getCount(): Int
+
+    // Table : volunteers
+    fun insertVolunteers(volunteers: List<Volunteer>)
+    fun getVolunteers(): LiveData<MutableList<Volunteer>>
+    fun getVolunteer(id:Int): Volunteer?
+    fun deleteVolunteers()
 
     fun clearData()
 }

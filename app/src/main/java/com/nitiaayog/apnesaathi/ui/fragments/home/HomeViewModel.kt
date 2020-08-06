@@ -1,11 +1,11 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Context
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
@@ -55,7 +55,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.getAllTrackingGrievances()
 
     override fun onCleared() {
-        //instance?.run { instance = null }
+        instance?.run { instance = null }
         super.onCleared()
     }
 
@@ -79,11 +79,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getCallsList(): LiveData<MutableList<CallData>> = callsList
 
     fun getPendingCalls(): LiveData<MutableList<CallData>> = pendingCallsList
-
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList
-
     fun getCompletedCalls(): LiveData<MutableList<CallData>> = completedCallsList
-
     fun getInvalidCallsList(): LiveData<MutableList<CallData>> = invalidCallsList
 
     fun getPendingGrievances(): LiveData<MutableList<GrievanceData>> = pendingGrievance
@@ -93,6 +90,10 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getGrievancesList(): LiveData<MutableList<SrCitizenGrievance>> = grievancesList
 
     fun getGrievancesTrackingList(): LiveData<MutableList<GrievanceData>> = grievancesTrackingList
+
+    fun setLastSelectedUser(callId: String) {
+        dataManager.setLastSelectedId(callId)
+    }
 
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
@@ -134,6 +135,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+            //params.addProperty(ApiConstants.Role, dataManager.getRole())
+            //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list
+            //params.addProperty(ApiConstants.RequestedData, 0)// Count - No of data we need in oone page
             dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiGrievanceTracking)
@@ -159,9 +163,5 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking, it)
             }).autoDispose(disposables)
         }
-    }
-
-    fun setLastSelectedUser(callId: String) {
-        dataManager.setLastSelectedId(callId)
     }
 }

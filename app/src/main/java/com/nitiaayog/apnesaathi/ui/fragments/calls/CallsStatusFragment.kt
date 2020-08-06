@@ -78,7 +78,6 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         }
     }
 
-
     private val followupAdapter: CallsAdapter by lazy {
         CallsAdapter().apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
@@ -171,8 +170,8 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         rvPendingList.adapter = pendingAdapter
 
         val rvInvalidCallsList = (rvInvalidCallList as RecyclerView)
-        rvPendingList.isNestedScrollingEnabled = false
-        rvPendingList.addItemDecoration(
+        rvInvalidCallsList.isNestedScrollingEnabled = false
+        rvInvalidCallsList.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
                 setDrawable(ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!)
             }
@@ -207,7 +206,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
             R.string.attended_calls_count ->
                 manageViews(callsCountString, tvAttended, btnSeeAllAttended, dataList.size)
             R.string.invalid_calls_count ->
-                manageViews(callsCountString, tvInvalidCalls, btnSeeAllInvalid, dataList.size )
+                manageViews(callsCountString, tvInvalidCalls, btnSeeAllInvalid, dataList.size)
             else -> {
             }
         }
@@ -232,7 +231,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
                 data.putInt(BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentCallContainer)
                 val fragment = BaseCallsTypeFragment()
                 fragment.arguments = data
-                addFragment(R.id.fragmentCallContainer, fragment, type)
+                addFragment(R.id.fragmentAdminStaffHomeContainer, fragment, type)
             }
             View.VISIBLE
         } else View.GONE
