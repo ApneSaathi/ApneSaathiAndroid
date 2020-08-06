@@ -12,6 +12,25 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 @Entity(tableName = Tables.TABLE_VOLUNTEERS)
 open class Volunteer {
 
+    /*{
+            "idvolunteer": 1001,
+            "phoneNo": "56895",
+            "adminId": 1,
+            "firstName": "RAM",
+            "lastName": "P",
+            "email": "rs@dfg.com",
+            "gender": "M",
+            "address": "ADDRESS10",
+            "assignedtoFellow": "Ashish",
+            "assignedtoFellowContact": "56565656",
+            "pic": null,
+            "role": 1,
+            "block": "BLOCK10",
+            "district": "DISTRICT10",
+            "village": "VILLAGE2",
+            "state": "ANDHRA PRADESH"
+        }*/
+
     @PrimaryKey
     @ColumnInfo(name = Columns.Id, defaultValue = "0")
     @SerializedName(ApiConstants.VolunteerId)

@@ -57,21 +57,22 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 getObservableStreams()
                 lifecycleScope.launch(Dispatchers.IO) {
-                    viewModel.getVolunteers(requireContext())
-                    viewModel.getCallDetails(requireContext())
                     viewModel.getGrievanceTrackingList(requireContext())
+                    if (dataManager.getRole() != "3")
+                        viewModel.getCallDetails(requireContext())
                 }
             }
             .autoDispose(disposables)
 
-        setupVolunteersList()
-        if ((dataManager.getRole() != "4") || (dataManager.getRole() != "2")) {
+        if (dataManager.getRole() != "3") {
+            setupVolunteersList()
             setupPendingCalls()
             setupFollowupCalls()
             setupCompletedCalls()
             setupInvalidCalls()
-            setupGrievances()
         }
+
+        setupGrievances()
     }
 
     override fun provideViewModel(): HomeViewModel {
@@ -346,7 +347,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     private fun handleNetwork(state: NetworkRequestState) {
         when (state) {
             is NetworkRequestState.NetworkNotAvailable -> {
-                if (state.apiName == ApiProvider.ApiGetVolunteers)
+                if (state.apiName == ApiProvider.ApiGrievanceTracking)
                     BaseUtility.showAlertMessage(
                         requireContext(), R.string.error, R.string.check_internet
                     )
@@ -384,10 +385,17 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         viewModel.getNetworkStream().observe(viewLifecycleOwner, Observer { handleNetwork(it) })
     }
 
+    private fun observeGrievancesStream() {
+        viewModel.getGrievancesStream().removeObservers(viewLifecycleOwner)
+        viewModel.getGrievancesStream().observe(viewLifecycleOwner, Observer {
+
+        })
+    }
+
     private fun observeVolunteersStream() {
         viewModel.getVolunteersStream().removeObservers(viewLifecycleOwner)
         viewModel.getVolunteersStream().observe(viewLifecycleOwner, Observer {
-            volunteerAdapter.submitList(it)
+            volunteerAdapter.setData(it)
             manageVolunteersList(it.size)
         })
     }
@@ -432,9 +440,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     private fun getObservableStreams() {
         lifecycleScope.launch {
             observeNetwork()
-            if (dataManager.getRole() == "4")
+            observeGrievancesStream()
+            if (dataManager.getRole() != "3") {
                 observeVolunteersStream()
-            else {
                 observePendingCalls()
                 observeFollowupCalls()
                 observeCompletedCalls()

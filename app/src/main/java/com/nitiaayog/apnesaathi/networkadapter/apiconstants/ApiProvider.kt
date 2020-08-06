@@ -15,7 +15,7 @@ object ApiProvider {
     private const val VERIFY_PASSWORD: String = "Volunteer/verifyPassword"
     const val ApiVerifyPassword: String = BASE_URL + VERIFY_PASSWORD
 
-    private const val GET_VOLUNTEERS: String = "Volunteer/volunteersList"
+    private const val GET_VOLUNTEERS: String = "Volunteer/getVolunteerList"
     const val ApiGetVolunteers: String = BASE_URL + GET_VOLUNTEERS
 
     private const val GET_VOLUNTEER_DATA: String = "Volunteer/VolunteerData"

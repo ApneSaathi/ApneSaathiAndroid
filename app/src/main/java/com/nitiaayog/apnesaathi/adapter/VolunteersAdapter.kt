@@ -1,13 +1,9 @@
 package com.nitiaayog.apnesaathi.adapter
 
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.AsyncDifferConfig
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
@@ -15,7 +11,7 @@ import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.Volunteer
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 
-private val diffCallback: DiffUtil.ItemCallback<Volunteer> =
+/*private val diffCallback: DiffUtil.ItemCallback<Volunteer> =
     object : DiffUtil.ItemCallback<Volunteer>() {
         override fun areItemsTheSame(oldItem: Volunteer, newItem: Volunteer): Boolean =
             TextUtils.equals(oldItem.id.toString(), newItem.id.toString())
@@ -24,13 +20,15 @@ private val diffCallback: DiffUtil.ItemCallback<Volunteer> =
             oldItem == newItem
     }
 
-private val config = AsyncDifferConfig.Builder<Volunteer>(diffCallback).build()
+private val config = AsyncDifferConfig.Builder<Volunteer>(diffCallback).build()*/
 
-class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.VolunteerHolder>(config) {
+class VolunteersAdapter : RecyclerView.Adapter<VolunteersAdapter.VolunteerHolder>() {
 
     companion object {
         private val TAG: String = "TAG -- ${VolunteersAdapter::class.java.simpleName} -->"
     }
+
+    private val volunteers: MutableList<Volunteer> = mutableListOf()
 
     private lateinit var itemClickListener: OnItemClickListener<Volunteer>
 
@@ -40,11 +38,26 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
         return VolunteerHolder(customView)
     }
 
-    override fun onBindViewHolder(holder: VolunteerHolder, position: Int) =
+    override fun onBindViewHolder(holder: VolunteerHolder, position: Int) {
         holder.bindData(getItem(position))
+    }
+
+    override fun getItemCount(): Int {
+        return volunteers.size
+    }
+
+    private fun getItem(position: Int): Volunteer {
+        return volunteers[position]
+    }
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<Volunteer>) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun setData(volunteers: MutableList<Volunteer>) {
+        if (this.volunteers.isNotEmpty()) this.volunteers.clear()
+        this.volunteers.addAll(volunteers)
+        notifyDataSetChanged()
     }
 
     inner class VolunteerHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -64,19 +77,15 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
         }
 
         override fun onClick(view: View) {
-            val data: Volunteer? = currentList?.get(adapterPosition)
+            val data: Volunteer = volunteers[adapterPosition]
             when (view.id) {
                 R.id.ivCall -> {
-                    data?.let {
-                        if (::itemClickListener.isInitialized)
-                            itemClickListener.onItemClick(adapterPosition, it)
-                    }
+                    if (::itemClickListener.isInitialized)
+                        itemClickListener.onItemClick(adapterPosition, data)
                 }
                 R.id.ivMoreInfo -> {
-                    data?.let {
-                        if (::itemClickListener.isInitialized)
-                            itemClickListener.onMoreInfoClick(adapterPosition, it)
-                    }
+                    if (::itemClickListener.isInitialized)
+                        itemClickListener.onMoreInfoClick(adapterPosition, data)
                 }
                 R.id.constraintLayout -> {
                 }

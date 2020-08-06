@@ -12,6 +12,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.Vol
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import io.reactivex.Single
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 
@@ -24,7 +25,7 @@ interface ApiInterface {
     fun verifyPassword(@Body params: JsonObject): Single<BaseRepo>
 
     @WorkerThread
-    @POST(ApiProvider.ApiGetVolunteers)
+    @GET(ApiProvider.ApiGetVolunteers)
     fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
 
     @POST(ApiProvider.Api_volunteer_Data)

@@ -3,8 +3,6 @@ package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.home
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
@@ -14,7 +12,6 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -47,9 +44,10 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val grievancesTrackingList: LiveData<MutableList<GrievanceData>> =
         dataManager.getAllTrackingGrievances()
 
-    private val volunteerData: LiveData<PagedList<Volunteer>> by lazy {
+    /*private val volunteerData: LiveData<PagedList<Volunteer>> by lazy {
         LivePagedListBuilder(factory, config).build()
-    }
+    }*/
+    private val volunteers: LiveData<MutableList<Volunteer>> = dataManager.getVolunteers()
 
     override fun onCleared() {
         factory.invalidateSource()
@@ -84,8 +82,12 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         return loaderObservable
     }
 
-    fun getVolunteersStream(): LiveData<PagedList<Volunteer>> {
-        return volunteerData
+    fun getGrievancesStream(): LiveData<MutableList<GrievanceData>> {
+        return grievancesTrackingList
+    }
+
+    fun getVolunteersStream(): LiveData<MutableList<Volunteer>> {
+        return volunteers
     }
 
     fun getPendingCalls(): LiveData<MutableList<CallData>> {
@@ -104,42 +106,42 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         return invalidCalls
     }
 
-    fun getVolunteers(context: Context) {
-        viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
-            if (checkNetworkAvailability(context, ApiProvider.ApiGetVolunteers)) {
-                val params = JsonObject()
-                params.addProperty(ApiConstants.UserId, dataManager.getUserId().toInt())
-                params.addProperty(ApiConstants.LastId, factory.getKey())
-                params.addProperty(ApiConstants.RequestedData, config.pageSize)
-                dataManager.getVolunteers(params).doOnSubscribe {
-                    updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiGetVolunteers))
-                }.subscribe({
-                    viewModelScope.launch {
-                        if (it.status == "0") {
-                            io {
-                                if (factory.getKey() == 0)
-                                    dataManager.deleteVolunteers()
-                                dataManager.insertVolunteers(it.volunteerList)
-                            }
-                            updateNetworkState(
-                                NetworkRequestState.SuccessResponse(
-                                    ApiProvider.ApiGetVolunteers, it.volunteerList
-                                )
+    suspend fun getVolunteers(context: Context) {
+        //viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiGetVolunteers)) {
+            val params = JsonObject()
+            params.addProperty(ApiConstants.AdminId, dataManager.getUserId().toInt())
+            //params.addProperty(ApiConstants.LastId, factory.getKey())
+            //params.addProperty(ApiConstants.RequestedData, config.pageSize)
+            dataManager.getVolunteers(params).doOnSubscribe {
+                updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiGetVolunteers))
+            }.subscribe({
+                viewModelScope.launch {
+                    if (it.status == "0") {
+                        io {
+                            /*if (factory.getKey() == 0)
+                                dataManager.deleteVolunteers()*/
+                            dataManager.insertVolunteers(it.volunteerList)
+                        }
+                        updateNetworkState(
+                            NetworkRequestState.SuccessResponse(
+                                ApiProvider.ApiGetVolunteers, it.volunteerList
                             )
-                        } else updateNetworkState(
-                            NetworkRequestState.Error(ApiProvider.ApiGetVolunteers)
                         )
-                    }
-                }, {
-                    updateNetworkState(
-                        NetworkRequestState.ErrorResponse(ApiProvider.ApiGetVolunteers, it)
+                    } else updateNetworkState(
+                        NetworkRequestState.Error(ApiProvider.ApiGetVolunteers)
                     )
-                })
-            }
+                }
+            }, {
+                updateNetworkState(
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiGetVolunteers, it)
+                )
+            }).autoDispose(disposables)
         }
+        //}
     }
 
-    fun getCallDetails(context: Context) {
+    suspend fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
@@ -171,7 +173,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         }
     }
 
-    fun getGrievanceTrackingList(context: Context) {
+    suspend fun getGrievanceTrackingList(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
