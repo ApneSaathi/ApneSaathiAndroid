@@ -21,11 +21,11 @@ interface ApiInterface {
     fun loginUser(@Body phoneNumber: JsonObject): Single<LoginResponse>
 
     @POST(ApiProvider.ApiVerifyPassword)
-    suspend fun verifyPassword(@Body params: JsonObject): Single<BaseRepo>
+    fun verifyPassword(@Body params: JsonObject): Single<BaseRepo>
 
     @WorkerThread
     @POST(ApiProvider.ApiGetVolunteers)
-    suspend fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
+    fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
 
     @POST(ApiProvider.Api_volunteer_Data)
     fun getVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>

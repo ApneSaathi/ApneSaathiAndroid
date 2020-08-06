@@ -445,4 +445,19 @@
     <string name="reinforce_knowledge_for_prevention_of_covid_19">कोविड-19 प्रतिबंध करण्यासाठी ज्ञान मजबुतीकरण 19</string>
     <string name="invalid_calls_count">अवैध कॉल(%s)</string>
 
+    <string name="password_text">एकदा आपण संकेतशब्द प्रदान केल्यास, आपण अनुप्रयोग वापरण्यास तयार आहात</string>
+    <string name="enter_password">पासवर्ड द्या</string>
+    <string name="validate_password">कृपया वैध संकेतशब्द प्रविष्ट करा</string>
+    <string name="verification">पडताळणी</string>
+    <string name="something_went_wrong">आम्ही सर्व्हरशी कनेक्ट करण्यात सक्षम नाही.</string>
+    <string name="cannt_connect_to_server_try_later">आम्ही सर्व्हरशी कनेक्ट करण्यात सक्षम नाही, कृपया नंतर पुन्हा प्रयत्न करा</string>
+    <string name="check_details">कृपया प्रतीक्षा करा आम्ही तपशील तपासत आहोत…</string>
+    <string name="total_sr_supported">समर्थित ज्येष्ठ\nनागरिक</string>
+    <string name="total_volunteers_joined">एकूण स्वयंसेवक\nसामील झाले</string>
+    <string name="total_grievances_raised">एकूण तक्रारी\nवाढवल्या</string>
+    <string name="select_district">जिल्हा निवडा</string>
+    <string name="dashboard">डॅशबोर्ड</string>
+    <string name="volunteers_count">स्वयंसेवक(%s)</string>
+    <string name="volunteers">स्वयंसेवक</string>
+
 </resources>

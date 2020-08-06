@@ -40,7 +40,7 @@ class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() 
             params.addProperty(ApiConstants.Password, password)
             viewModelScope.launch(Dispatchers.IO) {
                 dataManager.verifyPassword(params).doOnSubscribe {
-                    updateNetworkState(NetworkRequestState.NetworkNotAvailable(ApiProvider.ApiVerifyPassword))
+                    updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiVerifyPassword))
                 }.subscribe({
                     if (it.status == "0")
                         updateNetworkState(

@@ -444,4 +444,19 @@
     <string name="reinforce_knowledge_for_prevention_of_covid_19">કોવિડ-19 ની  નિવારણ માટે જ્ Reાનને મજબુત બનાવવું</string>
     <string name="invalid_calls_count">અમાન્ય કોલ્સ(%s)</string>
 
+    <string name="password_text">એકવાર તમે પાસવર્ડ પ્રદાન કરો, પછી તમે એપ્લિકેશનનો ઉપયોગ કરવા માટે તૈયાર છો.</string>
+    <string name="enter_password">પાસવર્ડ આપો</string>
+    <string name="validate_password">કૃપા કરી માન્ય પાસવર્ડ દાખલ કરો</string>
+    <string name="verification">ચકાસણી</string>
+    <string name="something_went_wrong">આપણે સર્વરને કનેક્ટ કરવામાં સમર્થ નથી</string>
+    <string name="cannt_connect_to_server_try_later">અમે સર્વર સાથે કનેક્ટ કરવામાં સમર્થ નથી, કૃપા કરીને પછીથી ફરી પ્રયાસ કરો</string>
+    <string name="check_details">કૃપા કરી પ્રતીક્ષા કરો અમે વિગતો ચકાસી રહ્યા છીએ…</string>
+    <string name="total_sr_supported">કુલ વરિષ્ઠ નાગરિકોને\nમદદ કરી</string>
+    <string name="total_volunteers_joined">કુલ સ્વયંસેવકો\nજોડાયા</string>
+    <string name="total_grievances_raised">કુલ ફરિયાદો\nબનાવી</string>
+    <string name="select_district">જીલ્લો પસંદ કરો</string>
+    <string name="dashboard">ડેશબોર્ડ</string>
+    <string name="volunteers_count">સ્વયંસેવકો(%s)</string>
+    <string name="volunteers">સ્વયંસેવકો</string>
+
 </resources>

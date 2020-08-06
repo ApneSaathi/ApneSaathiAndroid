@@ -284,8 +284,6 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                         R.string.check_internet
                     )
                 }
-
-
                 is NetworkRequestState.LoadingData -> {
                     progressDialog.show()
                 }

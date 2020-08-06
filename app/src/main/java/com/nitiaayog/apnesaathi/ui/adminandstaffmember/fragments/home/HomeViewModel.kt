@@ -30,7 +30,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
         @Synchronized
         fun getInstance(context: Context, dataManager: DataManager): HomeViewModel {
-            if (instance == null) synchronized(this) { HomeViewModel(dataManager) }
+            if (instance == null) synchronized(this) {
+                HomeViewModel(dataManager).also { instance = it }
+            }
             factory = VolunteerSourceFactory(context, instance!!)
             return instance!!
         }

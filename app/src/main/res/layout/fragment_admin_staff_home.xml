@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color_grey"
-    android:fitsSystemWindows="true"
-    android:paddingTop="0dp"
-    android:paddingBottom="@dimen/view_size_66">
+    android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -33,6 +31,7 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:padding="@dimen/dimen_10"
+                    android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -43,7 +42,7 @@
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardSupportedSrCitizens"
-                            android:layout_width="@dimen/view_size_120"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:cardBackgroundColor="@android:color/background_light"
                             app:cardCornerRadius="@dimen/dimen_3"
@@ -52,20 +51,21 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif"
                                     android:gravity="center"
+                                    android:padding="@dimen/dimen_7"
                                     android:text="@string/total_sr_supported"
                                     android:textAllCaps="false"
                                     android:textColor="@color/text_color"
-                                    android:textSize="@dimen/text_13" />
+                                    android:textSize="@dimen/text_14" />
 
                                 <ImageView
                                     android:layout_width="@dimen/view_size_78"
@@ -92,7 +92,7 @@
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardVolunteersJoined"
-                            android:layout_width="@dimen/view_size_120"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dimen_10"
                             app:cardBackgroundColor="@android:color/background_light"
@@ -102,20 +102,21 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif"
                                     android:gravity="center"
+                                    android:padding="@dimen/dimen_7"
                                     android:text="@string/total_volunteers_joined"
                                     android:textAllCaps="false"
                                     android:textColor="@color/text_color"
-                                    android:textSize="@dimen/text_13" />
+                                    android:textSize="@dimen/text_14" />
 
                                 <ImageView
                                     android:layout_width="@dimen/view_size_78"
@@ -142,7 +143,7 @@
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardGrievancesRaised"
-                            android:layout_width="@dimen/view_size_120"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dimen_10"
                             app:cardBackgroundColor="@android:color/background_light"
@@ -152,20 +153,21 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif"
                                     android:gravity="center"
+                                    android:padding="@dimen/dimen_7"
                                     android:text="@string/total_grievances_raised"
                                     android:textAllCaps="false"
                                     android:textColor="@color/text_color"
-                                    android:textSize="@dimen/text_13" />
+                                    android:textSize="@dimen/text_14" />
 
                                 <ImageView
                                     android:layout_width="@dimen/view_size_78"
@@ -221,7 +223,7 @@
                             android:paddingTop="@dimen/dimen_10"
                             android:paddingEnd="0dp"
                             android:paddingBottom="@dimen/dimen_5"
-                            android:text="@string/pending_calls"
+                            android:text="@string/volunteers"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

@@ -31,8 +31,6 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
         if (checkNetworkAvailability(mContext, ApiProvider.ApiLoginUser)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.phoneNo, phone)
-
-
             dataManager.loginUser(params).doOnSubscribe {
                 loaderObservable.value = NetworkRequestState.LoadingData(ApiProvider.ApiLoginUser)
             }.subscribe({

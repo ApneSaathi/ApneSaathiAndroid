@@ -520,8 +520,8 @@
     <string name="cannt_connect_to_server_try_later">We are not able to connect to the server, please try again later</string>
     <string name="check_details">Please wait we are checking the details…</string>
     <string name="total_sr_supported">Total Sr. Citizens\nSupported</string>
-    <string name="total_volunteers_joined">Total Volunteers Joined</string>
-    <string name="total_grievances_raised">Total Grievances Raised</string>
+    <string name="total_volunteers_joined">Total Volunteers\nJoined</string>
+    <string name="total_grievances_raised">Total Grievances\nRaised</string>
     <string name="select_district">Select District</string>
     <string name="dashboard">Dashboard</string>
     <string name="volunteers_count">Volunteers(%s)</string>
