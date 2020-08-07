@@ -18,6 +18,10 @@ interface VolunteerDao {
     @Query("SELECT ${Columns.FirstName},${Columns.LastName},${Columns.Gender},${Columns.ContactNumber},${Columns.Block},${Columns.District},${Columns.State} FROM ${Tables.TABLE_VOLUNTEERS}")
     fun getVolunteers(): LiveData<MutableList<Volunteer>>
 
+    /*This Query will return 5(count) data after id afterId*/
+    @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}>:afterId ORDER BY ${Columns.Id} ASC LIMIT :count")
+    fun getVolunteers(afterId: Int, count: Int = 5): MutableList<Volunteer>
+
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}=:id")
     fun getVolunteer(id: Int): Volunteer?
 

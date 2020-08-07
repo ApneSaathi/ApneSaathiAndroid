@@ -60,9 +60,8 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
             is NetworkRequestState.ErrorResponse -> {
                 progressDialog.dismiss()
                 BaseUtility.showAlertMessage(
-                    this, getString(R.string.error), it.throwable?.message
-                        ?: getString(R.string.cannt_connect_to_server_try_later),
-                    getString(R.string.okay)
+                    this, getString(R.string.error),
+                    getString(R.string.cannt_connect_to_server_try_later), getString(R.string.okay)
                 )
             }
             is NetworkRequestState.Error -> {

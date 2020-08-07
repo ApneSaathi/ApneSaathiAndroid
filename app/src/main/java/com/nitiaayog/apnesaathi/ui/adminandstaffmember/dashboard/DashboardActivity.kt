@@ -33,7 +33,7 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>() {
 
     private fun initViewPager() {
         val adapter = FragmentViewPagerAdapter(this)
-        adapter.addFragment(homeFragment, getString(R.string.menu_home))
+        adapter.addFragment(homeFragment, getString(R.string.dashboard))
         adapter.addFragment(volunteersFragment, getString(R.string.menu_calls))
         //adapter.addFragment(grievancesFragment, getString(R.string.menu_issues))
         //adapter.addFragment(profileFragment, getString(R.string.menu_profile))

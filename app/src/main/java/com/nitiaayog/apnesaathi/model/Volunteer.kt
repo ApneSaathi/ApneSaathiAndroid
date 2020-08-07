@@ -117,15 +117,14 @@ open class Volunteer {
             field = value ?: ""
         }
 
-    /*override fun equals(other: Any?): Boolean {
+    override fun equals(other: Any?): Boolean {
         if ((other != null) && (other is Volunteer))
             return ((id == other.id) && (firstName == other.firstName)
-                    && (lastName == other.lastName)
-                    && (phoneNumber == other.phoneNumber) && (gender == other.gender)
-                    && (gender == other.gender) && (address == other.address))
+                    && (lastName == other.lastName) && (phoneNumber == other.phoneNumber)
+                    && (gender == other.gender) && (address == other.address)
                     && (emailId == other.emailId) && (district == other.district)
                     && (state == other.state))
 
         return false
-    }*/
+    }
 }

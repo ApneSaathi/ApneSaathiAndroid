@@ -528,5 +528,10 @@
     <string name="volunteers">Volunteers</string>
 
     <string name="volunteers_not_assigned">Please check that volunteers are assigned to you</string>
+    <string name="volunteer_details">Volunteer Details</string>
+    <string name="about">About</string>
+    <string name="reviews">Reviews</string>
+    <string name="senior_citizen_list_count">Senior Citizen List(%s)</string>
+    <string name="senior_citizen_list">Senior Citizen List</string>
 
 </resources>

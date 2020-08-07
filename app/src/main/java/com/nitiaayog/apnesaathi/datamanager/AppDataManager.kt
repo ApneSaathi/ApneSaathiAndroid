@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.datamanager
 
 import android.app.Application
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
@@ -230,7 +231,15 @@ class AppDataManager private constructor(
         return volunteerDao.getVolunteers()
     }
 
-    override fun getVolunteer(id: Int): Volunteer? {
+    /**
+     * If(afterId == 0) then 1st time this method is called else load more is working good
+     * */
+    @WorkerThread
+    override fun getVolunteers(afterId: Int, count: Int): List<Volunteer> {
+        return volunteerDao.getVolunteers(afterId, count)
+    }
+
+    override suspend fun getVolunteer(id: Int): Volunteer? {
         return volunteerDao.getVolunteer(id)
     }
 

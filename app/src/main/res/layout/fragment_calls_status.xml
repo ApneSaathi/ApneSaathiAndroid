@@ -16,7 +16,7 @@
         android:padding="@dimen/dimen_10">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewPendingCalls"
+            android:id="@+id/cardPendingCalls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/card_background"
@@ -76,7 +76,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewFollowup"
+            android:id="@+id/cardFollowup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_10"
@@ -85,7 +85,7 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewPendingCalls">
+            app:layout_constraintTop_toBottomOf="@id/cardPendingCalls">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewInvalidCalls"
+            android:id="@+id/cardInvalidCalls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_10"
@@ -147,7 +147,7 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewFollowup">
+            app:layout_constraintTop_toBottomOf="@id/cardFollowup">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -208,7 +208,7 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewInvalidCalls">
+            app:layout_constraintTop_toBottomOf="@id/cardInvalidCalls">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
