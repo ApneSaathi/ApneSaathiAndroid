@@ -30,7 +30,7 @@ open class Volunteer {
         }
 
     @ColumnInfo(name = Columns.LastName, defaultValue = "")
-    @SerializedName(ApiConstants.UserName)
+    @SerializedName(ApiConstants.LastName)
     var lastName: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
@@ -55,7 +55,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.Gender, defaultValue = "")
     @SerializedName(ApiConstants.Gender)
-    var gender: String? = null
+    var gender: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -63,7 +63,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.Address, defaultValue = "")
     @SerializedName(ApiConstants.Address)
-    var address: String? = null
+    var address: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -71,7 +71,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.ProfilePic, defaultValue = "")
     @SerializedName(ApiConstants.ProfilePic)
-    var profilePic: String? = null
+    var profilePic: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -79,7 +79,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.Role, defaultValue = "")
     @SerializedName(ApiConstants.Role)
-    var role: String? = null
+    var role: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -87,7 +87,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.Block, defaultValue = "")
     @SerializedName(ApiConstants.Block)
-    var block: String? = null
+    var block: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -95,7 +95,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.Village, defaultValue = "")
     @SerializedName(ApiConstants.Village)
-    var village: String? = null
+    var village: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -103,7 +103,7 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.District, defaultValue = "")
     @SerializedName(ApiConstants.District)
-    var district: String? = null
+    var district: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""
@@ -111,7 +111,23 @@ open class Volunteer {
 
     @ColumnInfo(name = Columns.State, defaultValue = "")
     @SerializedName(ApiConstants.State)
-    var state: String? = null
+    var state: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.AssessmentScore, defaultValue = "")
+    @SerializedName(ApiConstants.AssessmentScore)
+    var assessmentScore: String? = ""
+        get() = field ?: ""
+        set(@NonNull value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.JoiningDate, defaultValue = "")
+    @SerializedName(ApiConstants.JoiningDate)
+    var joiningDate: String? = ""
         get() = field ?: ""
         set(@NonNull value) {
             field = value ?: ""

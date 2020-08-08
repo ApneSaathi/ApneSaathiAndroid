@@ -49,7 +49,7 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
 
     private suspend fun insertVolunteers(volunteers: MutableList<Volunteer>) {
         try {
-            //dataManager.deleteVolunteers()
+            dataManager.deleteVolunteers()
             dataManager.insertVolunteers(volunteers)
         } catch (e: Exception) {
             println("$TAG ${e.message}")

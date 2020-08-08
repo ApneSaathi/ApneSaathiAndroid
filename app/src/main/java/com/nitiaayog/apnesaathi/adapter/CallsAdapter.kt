@@ -11,8 +11,10 @@ import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
+import java.util.*
 
-class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
+class CallsAdapter(private val role: String) :
+    RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
     private var isHideDateIsRequired: Boolean = false
     private val dataList: MutableList<CallData> = mutableListOf()
@@ -56,7 +58,9 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
             tvAddress.isSelected = true
 
 //            itemView.constraintLayout.setOnClickListener(this)
-            itemView.ivCall.setOnClickListener(this)
+            if (role == "1") itemView.ivCall.setOnClickListener(this)
+            else itemView.ivCall.visibility == View.GONE
+
             itemView.ivMoreInfo.setOnClickListener(this)
         }
 
@@ -65,7 +69,8 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
             tvAddress.text = callData.block.plus(", ").plus(callData.district).plus(", ")
                 .plus(callData.state)
             civGender.setImageResource(
-                if (callData.gender == "M") R.drawable.ic_male_user else R.drawable.ic_female_user
+                if (callData.gender!!.toLowerCase(Locale.ENGLISH) == "m") R.drawable.ic_male_user
+                else R.drawable.ic_female_user
             )
             if (isHideDateIsRequired) {
                 tvDate.visibility = View.GONE

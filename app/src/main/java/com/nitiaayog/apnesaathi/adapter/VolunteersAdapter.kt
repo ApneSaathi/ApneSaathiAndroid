@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.setPadding
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
@@ -47,19 +46,9 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
         holder.bindData(getItem(position))
     }
 
-    /*override fun getItemCount(): Int {
-        return volunteers.size
-    }*/
-
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<Volunteer>) {
         this.itemClickListener = itemClickListener
     }
-
-    /*fun setData(volunteers: MutableList<Volunteer>) {
-        if (this.volunteers.isNotEmpty()) this.volunteers.clear()
-        this.volunteers.addAll(volunteers)
-        notifyDataSetChanged()
-    }*/
 
     inner class VolunteerHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -76,7 +65,7 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
             itemView.ivCall.setOnClickListener(this)
             itemView.ivMoreInfo.setOnClickListener(this)
 
-            val padding:Int = itemView.context.resources.getDimensionPixelOffset(R.dimen.dimen_4)
+            val padding: Int = itemView.context.resources.getDimensionPixelOffset(R.dimen.dimen_4)
             itemView.setPadding(padding, 0, padding, 0)
         }
 

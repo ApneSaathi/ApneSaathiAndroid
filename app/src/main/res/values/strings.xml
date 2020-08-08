@@ -533,5 +533,7 @@
     <string name="reviews">Reviews</string>
     <string name="senior_citizen_list_count">Senior Citizen List(%s)</string>
     <string name="senior_citizen_list">Senior Citizen List</string>
+    <string name="joining_date">Joining Data</string>
+    <string name="invalid_count">"-- Invalid: "</string>
 
 </resources>

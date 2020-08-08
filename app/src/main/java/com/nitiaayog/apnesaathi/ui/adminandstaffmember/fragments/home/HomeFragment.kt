@@ -95,7 +95,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupPendingCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = position
@@ -128,7 +128,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupFollowupCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = data.callId!!
@@ -161,7 +161,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupCompletedCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = data.callId!!
@@ -194,7 +194,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupInvalidCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = data.callId!!

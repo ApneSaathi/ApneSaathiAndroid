@@ -76,8 +76,8 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>() {
 
     private fun updateToolbarTittle() {
         when (viewPager.currentItem) {
-            0 -> toolBar.setTitle(R.string.menu_home)
-            1 -> toolBar.setTitle(R.string.menu_calls)
+            0 -> toolBar.setTitle(R.string.dashboard)
+            1 -> toolBar.setTitle(R.string.volunteers)
             2 -> toolBar.setTitle(R.string.menu_issues)
             3 -> toolBar.setTitle(R.string.menu_profile)
         }

@@ -67,4 +67,7 @@ object Columns {
     const val ProfilePic: String = "profile_pic"
     const val Role: String = "role"
     const val Village: String = "village"
+
+    const val JoiningDate: String = "joining_date"
+    const val AssessmentScore: String = "assessment_score"
 }

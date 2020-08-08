@@ -10,11 +10,15 @@ import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.VolunteersAdapter
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails.VolunteerDetailsFragment
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.ID
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -53,7 +57,7 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
     }
 
     override fun provideLayoutResource(): Int {
-        return R.layout.fragment_base_calls_type
+        return R.layout.fragment_admin_staff_volunteers
     }
 
     override fun onCallPermissionGranted() {
@@ -83,6 +87,27 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         }
     }
 
+    private fun navigateToDetails(volunteer: Volunteer) {
+        val fragment = VolunteerDetailsFragment()
+        fragment.arguments = Bundle().apply {
+            putInt(ID, volunteer.id!!)
+            putString(ApiConstants.FirstName, volunteer.firstName!!)
+            putString(ApiConstants.LastName, volunteer.lastName!!)
+            putString(ApiConstants.PhoneNumber, volunteer.phoneNumber!!)
+            putString(ApiConstants.Gender, volunteer.gender!!)
+            putString(ApiConstants.AssessmentScore, volunteer.assessmentScore!!)
+            putString(
+                ApiConstants.Address, volunteer.address!!.plus(",").plus(volunteer.block).plus(",")
+                    .plus(volunteer.district).plus(",").plus(volunteer.state)
+            )
+            putString(ApiConstants.JoiningDate, volunteer.joiningDate!!)
+        }
+        addFragment(
+            R.id.fragmentAdminStaffVolunteerContainer, fragment,
+            getString(R.string.volunteer_details)
+        )
+    }
+
     private fun setupVolunteersAdapter(): VolunteersAdapter {
         return VolunteersAdapter().apply {
             setOnItemClickListener(object : OnItemClickListener<Volunteer> {
@@ -92,7 +117,8 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
                 }
 
                 override fun onMoreInfoClick(position: Int, data: Volunteer) {
-
+                    lastSelectedItemId = data.id!!
+                    navigateToDetails(data)
                 }
             })
         }
