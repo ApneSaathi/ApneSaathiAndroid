@@ -8,14 +8,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class VolunteerSourceFactory(dataManager: DataManager) :
-    DataSource.Factory<Int, Volunteer>() {
+class VolunteerSourceFactory(dataManager: DataManager) : DataSource.Factory<Int, Volunteer>() {
 
-    private val volunteerSource = MutableLiveData<VolunteersKeyedSource>()
     private val itemKeyedSource = VolunteersKeyedSource(dataManager)
 
     override fun create(): DataSource<Int, Volunteer> {
-        CoroutineScope(Dispatchers.Main).launch { volunteerSource.postValue(itemKeyedSource) }
+        CoroutineScope(Dispatchers.Main).launch {
+            val volunteerSource = MutableLiveData<VolunteersKeyedSource>()
+            volunteerSource.postValue(itemKeyedSource)
+        }
         return itemKeyedSource
     }
 

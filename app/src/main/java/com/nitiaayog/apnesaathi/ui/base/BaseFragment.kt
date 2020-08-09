@@ -39,7 +39,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         const val CONST_PERMISSION_FROM_SETTINGS: Int = 1101
     }
 
-    protected val dataManager: DataManager by lazy { ApneSaathiApplication.getApiClient() }
+    protected val dataManager: DataManager by lazy { ApneSaathiApplication.getDataClient() }
 
     protected val viewModel: VM by lazy { provideViewModel() }
 

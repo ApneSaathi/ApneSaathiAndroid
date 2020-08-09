@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
-    protected val dataManager: DataManager by lazy { ApneSaathiApplication.getApiClient() }
+    protected val dataManager: DataManager by lazy { ApneSaathiApplication.getDataClient() }
 
     protected val viewModel: VM by lazy { provideViewModel() }
 

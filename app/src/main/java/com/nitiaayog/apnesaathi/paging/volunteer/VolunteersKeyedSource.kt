@@ -16,7 +16,7 @@ class VolunteersKeyedSource(private val dataManager: DataManager) :
     ) {
         println("$TAG loadInitial called")
         println("$TAG loadInitial --> Key = ${params.requestedInitialKey}, RequestedSize = ${params.requestedLoadSize}")
-        val dataList: List<Volunteer> = dataManager.getVolunteers(0, params.requestedLoadSize)
+        val dataList: List<Volunteer> = dataManager.getVolunteers(0, 2)
         callback.onResult(dataList, 0, dataList.size)
     }
 
@@ -24,7 +24,7 @@ class VolunteersKeyedSource(private val dataManager: DataManager) :
         println("$TAG loadAfter called")
         println("$TAG loadAfter --> Key = ${params.key}, RequestedSize = ${params.requestedLoadSize}")
         val dataList: List<Volunteer> =
-            dataManager.getVolunteers(params.key, params.requestedLoadSize)
+            dataManager.getVolunteers(params.key, 20)
         callback.onResult(dataList)
     }
 

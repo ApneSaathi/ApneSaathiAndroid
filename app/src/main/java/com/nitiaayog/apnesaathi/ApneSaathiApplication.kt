@@ -17,12 +17,14 @@ class ApneSaathiApplication : Application() {
         val screenSize = intArrayOf(0, 0)
 
         private lateinit var instance: ApneSaathiApplication
-        fun getApiClient(): DataManager = instance.dataManager
+        fun getDataClient(): DataManager = instance.dataManager
     }
 
     override fun onCreate() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
+
+        //println("TAG -- ApiHost --> ${BuildConfig.ApiHost}")
 
         AndroidThreeTen.init(this)
         getScreenSize(this)

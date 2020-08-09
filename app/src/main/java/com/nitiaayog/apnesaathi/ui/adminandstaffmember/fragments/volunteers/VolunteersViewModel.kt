@@ -33,16 +33,14 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         }
     }
 
-    private val factory: VolunteerSourceFactory by lazy { VolunteerSourceFactory(dataManager) }
+    //private var factory: VolunteerSourceFactory = VolunteerSourceFactory(dataManager)
 
     private val volunteers: LiveData<PagedList<Volunteer>> by lazy {
-        LivePagedListBuilder(factory, config).build()
+        LivePagedListBuilder(/*factory*/dataManager.getVolunteersList(), config).build()
     }
 
-    //private val volunteers: LiveData<MutableList<Volunteer>> = dataManager.getVolunteers()
-
     override fun onCleared() {
-        factory.invalidateSource()
+        //factory.invalidateSource()
         instance?.let { instance = null }
         super.onCleared()
     }
@@ -66,6 +64,7 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
                 if (it.status == "0") {
                     io {
                         insertVolunteers(it.getVolunteers())
+                        volunteers.value!!.dataSource.invalidate()
                     }
                     updateNetworkState(
                         NetworkRequestState.SuccessResponse(

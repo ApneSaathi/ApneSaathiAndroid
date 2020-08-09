@@ -45,7 +45,9 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
 
         Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                lifecycleScope.launch(Dispatchers.IO) { viewModel.getVolunteersList(requireContext()) }
+                lifecycleScope.launch(Dispatchers.IO) {
+                    viewModel.getVolunteersList(requireContext())
+                }
             }
             .autoDispose(disposables)
 
@@ -134,7 +136,9 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
                     requireContext(), R.string.error, R.string.volunteers_not_assigned
                 )
             }
-            is NetworkRequestState.SuccessResponse<*> -> progressBar.visibility = View.GONE
+            is NetworkRequestState.SuccessResponse<*> -> {
+                progressBar.visibility = View.GONE
+            }
         }
     }
 

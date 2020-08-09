@@ -25,10 +25,10 @@ interface ApiInterface {
     @POST(ApiProvider.ApiGetVolunteers)
     fun getVolunteers(@Body params: JsonObject): Single<VolunteerRepo>
 
-    @POST(ApiProvider.Api_volunteer_Data)
+    @POST(ApiProvider.ApiGetVolunteerData)
     fun getVolunteerData(@Body phoneNumber: JsonObject): Single<VolunteerDataResponse>
 
-    @PUT(ApiProvider.Api_UPDATEPROFILE)
+    @PUT(ApiProvider.ApiUpdateProfile)
     fun getUpdateVolunteerData(@Body phoneNumber: JsonObject): Single<ProfileUpdateResponse>
 
     @POST(ApiProvider.ApiLoadDashboard)

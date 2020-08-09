@@ -28,7 +28,7 @@ object RetrofitClient {
         if (httpClient == null) setupOkHttpWithCache(application)
 
         if (apiInterface == null) {
-            apiInterface = Retrofit.Builder().baseUrl(BuildConfig.DEV_HOST)
+            apiInterface = Retrofit.Builder().baseUrl(BuildConfig.ApiHost)
                 .client(httpClient!!)
                 .addConverterFactory(
                     GsonConverterFactory.create(GsonBuilder().setLenient().create())
