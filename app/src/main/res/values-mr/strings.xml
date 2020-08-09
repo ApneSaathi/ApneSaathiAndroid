@@ -460,4 +460,15 @@
     <string name="volunteers_count">स्वयंसेवक(%s)</string>
     <string name="volunteers">स्वयंसेवक</string>
 
+    <string name="volunteers_not_assigned">कृपया स्वयंसेवक आपल्याला नियुक्त केले आहेत हे तपासा</string>
+    <string name="volunteer_details">स्वयंसेवकांचा तपशील</string>
+    <string name="about">तपशील</string>
+    <string name="reviews">पुनरावलोकने</string>
+    <string name="senior_citizen_list_count">ज्येष्ठ नागरिकांची यादी(%s)</string>
+    <string name="senior_citizen_list">ज्येष्ठ नागरिकांची यादी</string>
+    <string name="joining_date">सामील होण्याची तारीख</string>
+    <string name="invalid_count">"-- अवैध: "</string>
+    <string name="progress_summery">प्रगतीचा सारांश</string>
+    <string name="total_calls">एकूण कॉल: </string>
+
 </resources>

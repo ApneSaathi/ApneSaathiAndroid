@@ -69,9 +69,9 @@
             android:id="@+id/ivCall"
             android:layout_width="@dimen/view_size_36"
             android:layout_height="@dimen/view_size_36"
+            android:layout_marginEnd="@dimen/dimen_15"
             android:background="?android:actionBarItemBackground"
             android:contentDescription="@string/menu_calls"
-            android:layout_marginEnd="@dimen/dimen_15"
             android:src="@drawable/ic_call"
             app:layout_constraintBottom_toBottomOf="@id/civGender"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/dimen_10"
                 android:paddingBottom="@dimen/dimen_5"
-                android:text="@string/calls_summary"
+                android:text="@string/progress_summery"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5"
-                android:text="Total:"
+                android:text="@string/total_calls"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCallSummary">
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="-- Completed"
+                    android:text="@string/completed_count"
                     android:textColor="@color/color_orange"
                     android:textSize="@dimen/text_10" />
 
@@ -196,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="-- Need Followup"
+                    android:text="@string/need_follow_up_count"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/text_10" />
 
@@ -206,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="-- Pending"
+                    android:text="@string/pending_g_count"
                     android:textColor="@color/color_grey_txt"
                     android:textSize="@dimen/text_10" />
 
@@ -218,12 +218,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="-- Invalid"
-                app:layout_constraintTop_toBottomOf="@id/llDescription"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/invalid_count"
                 android:textColor="@color/color_red"
-                android:textSize="@dimen/text_10" />
+                android:textSize="@dimen/text_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

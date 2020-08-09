@@ -147,7 +147,7 @@ class AboutVolunteerFragment : BaseFragment<AboutVolunteerViewModel>() {
         val completedCalls = viewModel.getCompletedCalls().size
         val invalidCalls = viewModel.getInvalidCalls().size
         val totalCalls: Int = pendingCalls + followUpCalls + completedCalls + invalidCalls
-        tvTotal.text = getString(R.string.total).plus(" ").plus(totalCalls)
+        tvTotal.text = getString(R.string.total_calls).plus(" ").plus(totalCalls)
 
         val completedPer: Int = ((completedCalls.toDouble() / totalCalls.toDouble()) * 100).toInt()
         val followUpPer: Int =
