@@ -130,10 +130,10 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-                dataManager.setUserName(selectedCallData.srCitizenName?:"")
-                dataManager.setGender(selectedCallData.gender?:"")
+                dataManager.setUserName(selectedCallData.srCitizenName ?: "")
+                dataManager.setGender(selectedCallData.gender ?: "")
                 intent.putExtra(CALL_ID, selectedCallData.callId)
-                activity!!.startActivityForResult(intent,REQUEST_CODE)
+                activity!!.startActivityForResult(intent, REQUEST_CODE)
             }.autoDispose(disposables)
 
         /*val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
@@ -146,7 +146,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     @LayoutRes
     abstract fun provideLayoutResource(): Int
 
-     abstract fun onCallPermissionGranted()
+    abstract fun onCallPermissionGranted()
 
     abstract fun onCallPermissionDenied()
 }

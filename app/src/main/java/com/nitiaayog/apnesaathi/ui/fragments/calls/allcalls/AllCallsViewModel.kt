@@ -17,9 +17,8 @@ import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
-import com.nitiaayog.apnesaathi.paging.CallsDataSourceFactory
+import com.nitiaayog.apnesaathi.paging.allcalls.CallsDataSourceFactory
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AllCallsViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -27,8 +26,6 @@ class AllCallsViewModel(private val dataManager: DataManager) : BaseViewModel() 
     companion object {
 
         private val TAG: String = "TAG -- ${AllCallsViewModel::class.java.simpleName} -->"
-
-        private const val REQUESTED_PAGE_SIZE: Int = 20
 
         @Volatile
         private var instance: AllCallsViewModel? = null
@@ -46,12 +43,6 @@ class AllCallsViewModel(private val dataManager: DataManager) : BaseViewModel() 
     }
 
     private var isAllDataLoaded: Boolean = false
-
-    private val config: PagedList.Config = PagedList.Config.Builder().apply {
-        setEnablePlaceholders(false)
-        setInitialLoadSizeHint(REQUESTED_PAGE_SIZE)
-        setPageSize(REQUESTED_PAGE_SIZE)
-    }.build()
 
     private val callsData: LiveData<PagedList<CallData>> by lazy {
         LivePagedListBuilder(factory, config).build()
@@ -84,11 +75,6 @@ class AllCallsViewModel(private val dataManager: DataManager) : BaseViewModel() 
             grievances.addAll(data.medicalGrievance!!)
         }
         return grievances
-    }
-
-    @UiThread
-    private fun updateNetworkState(state: NetworkRequestState) = viewModelScope.launch {
-        loaderObservable.value = state
     }
 
     fun getDataManager(): DataManager = dataManager

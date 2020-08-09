@@ -26,7 +26,8 @@ open class PreferenceManager private constructor(application: Application) : Pre
         )
     }
 
-    override fun isLogin(): Boolean = getPhoneNumber() != ""
+    override fun isLogin(): Boolean =
+        ((getUserId() != "") && (getPhoneNumber() != "") && (getRole() != ""))
 
     override fun getUserId(): String = preferences.getString(PreferenceConstants.UserId)!!
     override fun setUserId(userId: String) =
@@ -77,6 +78,9 @@ open class PreferenceManager private constructor(application: Application) : Pre
 
     override fun getLastSelectedId(): String =
         preferences.getString(PreferenceConstants.LastSelectedId)!!
+
+    override fun setRole(role: String) = preferences.putString(PreferenceConstants.Role, role)
+    override fun getRole(): String = preferences.getString(PreferenceConstants.Role)!!
 
     override fun clearPreferences() = preferences.edit().clear().apply()
 }

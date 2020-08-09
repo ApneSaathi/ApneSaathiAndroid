@@ -67,9 +67,9 @@ class CallsAdapter : RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() 
             civGender.setImageResource(
                 if (callData.gender == "M") R.drawable.ic_male_user else R.drawable.ic_female_user
             )
-            if(isHideDateIsRequired){
+            if (isHideDateIsRequired) {
                 tvDate.visibility = View.GONE
-            }else{
+            } else {
                 tvDate.visibility = View.VISIBLE
                 tvDate.text = BaseUtility.getFormattedDate(callData.loggedDateTime ?: "")
             }

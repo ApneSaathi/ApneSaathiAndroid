@@ -11,8 +11,19 @@
         android:layout_height="match_parent"
         android:layout_gravity="center">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/dimen_5"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:background="?android:actionBarItemBackground"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/dimen_10"
+            android:src="@drawable/ic_back" />
 
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

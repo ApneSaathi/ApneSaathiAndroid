@@ -76,6 +76,8 @@ dependencies {
     implementation androidSupport.cardView
     implementation androidSupport.paging
 
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+
     // RxJava + RxAndroid
     implementation rxJava2
     implementation rxAndroid2

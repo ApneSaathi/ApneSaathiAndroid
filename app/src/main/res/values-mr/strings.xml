@@ -1,17 +1,6 @@
 <resources>
     <string name="app_name">अपना साथि</string>
     <string name="splashbottomtagline">द्वारा एक सहयोगात्मक मोहीम </string>
-    <string name="total_calls_vs_connected">व्हीएस कनेक्ट केलेले एकूण कॉल</string>
-    <string name="total_sr_citizens_supported">एकूण क्र. ज्येष्ठ नागरिक समर्थित</string>
-    <string name="calls_connected_yesterday">काल कॉल केलेले</string>
-    <string name="average_connected_called_per_day">दररोज सरासरी कनेक्ट केलेला कॉल</string>
-    <string name="calls_connected_today">आज कॉल केलेले</string>
-    <string name="sr_citizens_supported_today">वरिष्ठ नागरिकांनी आज पाठिंबा दर्शविला</string>
-    <string name="Sr_citizen_calls_pending">वरिष्ठ नागरिकांची संख्या प्रलंबित</string>
-    <string name="sr_citizens_grievances_vs_resolved">वरिष्ठ नागरिकांच्या तक्रारींनी व्ही.एस. निराकरण केल्याची नोंद केली</string>
-    <string name="on_call_sr_citizen_feedback_form">एका कॉलवर ज्येष्ठ नागरिकाचा अभिप्राय</string>
-    <string name="wrong_detail_warning">आपण प्रदान केलेला तपशील जिल्हास्तरीय कर्मचारी सदस्याद्वारे सत्यापित केला जाईल आणि चुकीचे तपशील आपल्याविरूद्ध कायदेशीर कारवाई करू शकतात</string>
-
 
     <string name="select_language">भाषा निवडा</string>
     <string name="english_text">इंग्रजी</string>
@@ -20,23 +9,7 @@
     <string name="gujrati_text">गुजराती</string>
     <string name="aasammi_text">आसामी</string>
 
-    <string name="volunteer_name">स्वयंसेवकाचे नाव *</string>
-    <string name="volunteer_phone_number">स्वयंसेवकाचा फोन नंबर *</string>
-    <string name="person_name_whom_you_were_calling">ज्याला आपण कॉल करीत होता त्याचे नाव? *</string>
-    <string name="person_phone_no_whom_you_were_calling">ज्याला आपण कॉल करीत होता त्याचा फोन नंबर? *</string>
-    <string name="state_of_person">आपण संपर्क साधलेल्या व्यक्तीचे राज्य *</string>
-    <string name="district_of_person">व्यक्तीचा जिल्हा निवडा *</string>
-    <string name="block_name">ब्लॉक नाव *</string>
-    <string name="is_call_connected">आपला कॉल यशस्वीरित्या कनेक्ट झाला? *</string>
     <string name="submit">प्रस्तुत करणे</string>
-    <string name="validate_volunteer_name">स्वयंसेवक नाव द्या</string>
-    <string name="validate_volunteer_phone_number">स्वयंसेवक फोन नंबर प्रदान करा</string>
-    <string name="validate_person_name">आपण ज्यांना कॉल केले त्या व्यक्तीचे नाव प्रदान करा</string>
-    <string name="validate_person_phone">आपण कॉल केलेला व्यक्ती फोन नंबर प्रदान करा</string>
-    <string name="validate_person_state">व्यक्तीची स्थिती प्रदान करा</string>
-    <string name="validate_person_district">व्यक्तीचा जिल्हा प्रदान करा</string>
-    <string name="validate_block_name">ब्लॉक नाव द्या</string>
-    <string name="validate_call_connection">कॉलची स्थिती द्या</string>
 
     <string name="permission_detail">परवानगी तपशील</string>
     <string name="permission_text">अ‍ॅपमध्ये असे वैशिष्ट्य आहे की ज्येष्ठ नागरिकांच्या तपशीलांवर फक्त एका क्लिकवरुन आपण दररोज नियमित कॉल सुरू करू शकता. त्यासाठी आम्हाला कॉल करण्याची परवानगी आवश्यक असेल.</string>
@@ -49,7 +22,6 @@
     <string name="txtmobileNumber">मोबाइल नंबर</string>
     <string name="verificationcode">सत्यापन कोड प्रविष्ट करा</string>
     <string name="wehavesendverificaiton_code">आम्ही 4 अंकी सत्यापन कोड पाठविला आहे</string>
-    <string name="senderNumber">+91 9673346489</string>
     <string name="verify">सत्यापित करा</string>
     <string name="donthave_receive_resend">कोणताही कोड प्राप्त झाला नाही? पुन्हा पाठवा</string>
     <string name="enterOtp">ओटीपी प्रविष्ट करा</string>
@@ -472,5 +444,20 @@
     <string name="behavioral_practices_not_being_followed">वर्तणूक पद्धतींचे पालन केले जात नाही</string>
     <string name="reinforce_knowledge_for_prevention_of_covid_19">कोविड-19 प्रतिबंध करण्यासाठी ज्ञान मजबुतीकरण 19</string>
     <string name="invalid_calls_count">अवैध कॉल(%s)</string>
+
+    <string name="password_text">एकदा आपण संकेतशब्द प्रदान केल्यास, आपण अनुप्रयोग वापरण्यास तयार आहात</string>
+    <string name="enter_password">पासवर्ड द्या</string>
+    <string name="validate_password">कृपया वैध संकेतशब्द प्रविष्ट करा</string>
+    <string name="verification">पडताळणी</string>
+    <string name="something_went_wrong">आम्ही सर्व्हरशी कनेक्ट करण्यात सक्षम नाही.</string>
+    <string name="cannt_connect_to_server_try_later">आम्ही सर्व्हरशी कनेक्ट करण्यात सक्षम नाही, कृपया नंतर पुन्हा प्रयत्न करा</string>
+    <string name="check_details">कृपया प्रतीक्षा करा आम्ही तपशील तपासत आहोत…</string>
+    <string name="total_sr_supported">समर्थित ज्येष्ठ\nनागरिक</string>
+    <string name="total_volunteers_joined">एकूण स्वयंसेवक\nसामील झाले</string>
+    <string name="total_grievances_raised">एकूण तक्रारी\nवाढवल्या</string>
+    <string name="select_district">जिल्हा निवडा</string>
+    <string name="dashboard">डॅशबोर्ड</string>
+    <string name="volunteers_count">स्वयंसेवक(%s)</string>
+    <string name="volunteers">स्वयंसेवक</string>
 
 </resources>

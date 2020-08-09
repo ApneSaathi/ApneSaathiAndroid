@@ -1,16 +1,6 @@
 <resources>
     <string name="app_name">अपना साथि</string>
     <string name="splashbottomtagline">द्वारा एक सहयोगात्मक अभियान </string>
-    <string name="total_calls_vs_connected">कुल कॉल किए गए VS कनेक्टेड</string>
-    <string name="total_sr_citizens_supported">कुल नं। वरिष्ठ नागरिकों का समर्थन किया</string>
-    <string name="calls_connected_yesterday">कल जुड़े कॉल</string>
-    <string name="average_connected_called_per_day">प्रति दिन औसत कनेक्टेड कॉल</string>
-    <string name="calls_connected_today">आज जुड़े कॉल</string>
-    <string name="sr_citizens_supported_today">सीनियर सिटीजन ने आज समर्थन किया</string>
-    <string name="Sr_citizen_calls_pending">वरिष्ठ नागरिकों की संख्या लंबित है</string>
-    <string name="sr_citizens_grievances_vs_resolved">सीनियर सिटीजन शिकायतों की रिपोर्ट वीएस ने हल की</string>
-    <string name="on_call_sr_citizen_feedback_form">एक कॉल पर वरिष्ठ नागरिक प्रतिक्रिया</string>
-    <string name="wrong_detail_warning">आपके द्वारा प्रदान किए गए विवरण को जिला स्तरीय स्टाफ सदस्य द्वारा सत्यापित किया जाएगा और गलत विवरण आपके खिलाफ कानूनी कार्रवाई का नेतृत्व कर सकता है</string>
 
     <string name="select_language">भाषा का चयन करें</string>
     <string name="english_text">अंग्रेज़ी</string>
@@ -19,23 +9,6 @@
     <string name="marathi_text">मराठी</string>
     <string name="gujrati_text">गुजराती</string>
     <string name="aasammi_text">आसामी</string>
-
-    <string name="volunteer_name">स्वयंसेवक का नाम </string>
-    <string name="volunteer_phone_number">स्वयंसेवक का फोन नंबर *</string>
-    <string name="person_name_whom_you_were_calling">उस व्यक्ति का नाम, जिसे आप बुला रहे थे? *</string>
-    <string name="person_phone_no_whom_you_were_calling">उस व्यक्ति का फ़ोन नंबर जिसे आप कॉल कर रहे थे? *</string>
-    <string name="state_of_person">जिस व्यक्ति से आपने संपर्क किया है, उसकी स्थिति*</string>
-    <string name="district_of_person">व्यक्ति का जिला चुनें *</string>
-    <string name="block_name">ब्लॉक का नाम *</string>
-    <string name="is_call_connected">क्या आपका कॉल सफलतापूर्वक कनेक्ट हुआ? *</string>
-    <string name="validate_volunteer_name">स्वयंसेवक नाम प्रदान करें</string>
-    <string name="validate_volunteer_phone_number">स्वयंसेवक फोन नंबर प्रदान करें</string>
-    <string name="validate_person_name">जिस व्यक्ति को आपने बुलाया है उसे नाम दें</string>
-    <string name="validate_person_phone">उस व्यक्ति को फोन करें जिसे आपने फोन किया है</string>
-    <string name="validate_person_state">व्यक्ति की राज्य प्रदान करें</string>
-    <string name="validate_person_district">्यक्ति का जिला चुनें </string>
-    <string name="validate_block_name">ब्लॉक नाम प्रदान करें</string>
-    <string name="validate_call_connection">कॉल की स्थिति प्रदान करें</string>
 
     <string name="permission_detail">अनुमति विस्तार</string>
     <string name="permission_text">ऐप में यह सुविधा है कि वरिष्ठ नागरिक विवरण पर केवल एक क्लिक से आप दैनिक आधार पर एक नियमित कॉल शुरू कर सकते हैं। इसके लिए हमें कॉल अनुमति की आवश्यकता होगी.</string>
@@ -474,5 +447,20 @@
     <string name="behavioral_practices_not_being_followed">व्यवहार प्रथाओं का पालन नहीं किया जा रहा है</string>
     <string name="reinforce_knowledge_for_prevention_of_covid_19">कोविद-19 की रोकथाम के लिए ज्ञान का सुदृढ़ीकरण</string>
     <string name="invalid_calls_count">अमान्य कॉल(%s)</string>
+
+    <string name="password_text">एक बार आप पासवर्ड प्रदान करते हैं, तो आप एप्लिकेशन का उपयोग करने के लिए तैयार हैं</string>
+    <string name="enter_password">पासवर्ड प्रदान करें</string>
+    <string name="validate_password">कृपया मान्य पासवर्ड दर्ज करें</string>
+    <string name="verification">सत्यापन</string>
+    <string name="something_went_wrong">हम सर्वर से कनेक्ट करने में सक्षम नहीं हैं.</string>
+    <string name="cannt_connect_to_server_try_later">हम सर्वर से कनेक्ट नहीं कर पा रहे हैं, कृपया बाद में पुनः प्रयास करें</string>
+    <string name="check_details">कृपया प्रतीक्षा करें हम विवरण जाँच रहे हैं…</string>
+    <string name="total_sr_supported">कुल वरिष्ठ नागरिकों\nकी मदद की</string>
+    <string name="total_volunteers_joined">कुल स्वयंसेवक\nशामिल हुए</string>
+    <string name="total_grievances_raised">कुल शिकायतों को\nउठाया</string>
+    <string name="select_district">जिले का चयन करें</string>
+    <string name="dashboard">डैशबोर्ड</string>
+    <string name="volunteers_count">स्वयंसेवक(%s)</string>
+    <string name="volunteers">स्वयंसेवक</string>
 
 </resources>

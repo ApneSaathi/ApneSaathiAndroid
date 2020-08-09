@@ -3,7 +3,8 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Login_Response {
+class LoginResponse {
+
     @SerializedName("statusCode")
     @Expose
     private var statusCode: String? = null
@@ -12,9 +13,7 @@ class Login_Response {
     @Expose
     private var message: String? = null
 
-    @SerializedName("volunteerId")
-    @Expose
-    private var volunteerId: String? = null
+    private var id: String? = null
 
     @SerializedName("volunteer")
     @Expose
@@ -32,6 +31,8 @@ class Login_Response {
     @Expose
     private var loginOTP: Any? = null
 
+    private var role: String? = ""
+
     fun getStatusCode(): String? {
         return statusCode
     }
@@ -48,12 +49,12 @@ class Login_Response {
         this.message = message
     }
 
-    fun getVolunteerId(): String? {
-        return volunteerId
+    fun getId(): String? {
+        return id
     }
 
-    fun setVolunteerId(volunteerId: String?) {
-        this.volunteerId = volunteerId
+    fun setId(id: String?) {
+        this.id = id
     }
 
     fun getVolunteer(): Any? {
@@ -86,5 +87,11 @@ class Login_Response {
 
     fun setLoginOTP(loginOTP: Any?) {
         this.loginOTP = loginOTP
+    }
+
+    fun getRole(): String = role ?: ""
+
+    fun setRole(role: String) {
+        this.role = role
     }
 }

@@ -4,21 +4,16 @@ import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nitiaayog.apnesaathi.BuildConfig
-import com.nitiaayog.apnesaathi.database.dao.CallDataDao
-import com.nitiaayog.apnesaathi.database.dao.GrievanceTrackingDao
-import com.nitiaayog.apnesaathi.database.dao.GrievancesDao
-import com.nitiaayog.apnesaathi.database.dao.SyncSrCitizenGrievancesDao
-import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.GrievanceData
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
-import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
+import com.nitiaayog.apnesaathi.database.dao.*
+import com.nitiaayog.apnesaathi.model.*
 import com.nitiaayog.apnesaathi.utility.Converter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class, GrievanceData::class],
+    entities = [CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class,
+        GrievanceData::class, Volunteer::class],
     version = BuildConfig.DB_VERSION
 )
 @TypeConverters(Converter::class)
@@ -28,6 +23,8 @@ abstract class ApneSathiDatabase : RoomDatabase() {
     abstract fun provideGrievancesDao(): GrievancesDao
     abstract fun provideGrievancesTrackingDao(): GrievanceTrackingDao
     abstract fun provideSrCitizenGrievancesDao(): SyncSrCitizenGrievancesDao
+
+    abstract fun provideVolunteerDao(): VolunteerDao
 
     companion object {
         @Volatile

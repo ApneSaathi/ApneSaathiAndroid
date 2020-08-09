@@ -2,18 +2,14 @@ package com.nitiaayog.apnesaathi.ui.dashboard
 
 import android.app.job.JobScheduler
 import android.content.Context
-import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.service.SyncDataService
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
-class DashBoardViewModel(private val dataManager: DataManager) : BaseViewModel() {
+class DashBoardViewModel : BaseViewModel() {
 
     companion object {
-
         @Synchronized
-        fun getInstance(dataManager: DataManager): DashBoardViewModel = synchronized(this) {
-            DashBoardViewModel(dataManager)
-        }
+        fun getInstance(): DashBoardViewModel = synchronized(this) { DashBoardViewModel() }
     }
 
     fun startSyncingData(context: Context) {
