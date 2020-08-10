@@ -21,6 +21,7 @@
     <dimen name="dime120dp">122dp</dimen>
     <dimen name="dime100dp">102dp</dimen>
     <dimen name="dime90dp">92dp</dimen>
+    <dimen name="dime155dp">157dp</dimen>
 
     <dimen name="view_size_32">34dp</dimen>
     <dimen name="view_size_36">38dp</dimen>
