@@ -47,7 +47,7 @@ class PasswordViewModel(
                 }.subscribe({
                     if (it.status == "0") {
                         dataManager.setPhoneNumber(phoneNo)
-                        dataManager.setRole("3")
+                        dataManager.setRole(role)
                         updateNetworkState(
                             NetworkRequestState.SuccessResponse(ApiProvider.ApiVerifyPassword, "")
                         )
