@@ -27,36 +27,36 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getvolunteerData(mContext: Context, volunteerId: String) {
-        if (checkNetworkAvailability(mContext, ApiProvider.Api_volunteer_Data)) {
+        if (checkNetworkAvailability(mContext, ApiProvider.ApiGetVolunteerData)) {
             val params = JsonObject()
             params.addProperty(ApiConstants.phoneNo, volunteerId)
 
             dataManager.volunteerData(params).doOnSubscribe {
                 loaderObservable.value =
-                    NetworkRequestState.LoadingData(ApiProvider.Api_volunteer_Data)
+                    NetworkRequestState.LoadingData(ApiProvider.ApiGetVolunteerData)
             }.subscribe({
                 try {
                     if (it.getStatusCode() == "0") {
                         loaderObservable.value =
-                            NetworkRequestState.SuccessResponse(ApiProvider.Api_volunteer_Data, it)
+                            NetworkRequestState.SuccessResponse(ApiProvider.ApiGetVolunteerData, it)
                         viewModelScope.launch {
                             io {
                             }
                             loaderObservable.value =
                                 NetworkRequestState.SuccessResponse(
-                                    ApiProvider.Api_volunteer_Data,
+                                    ApiProvider.ApiGetVolunteerData,
                                     it
                                 )
 
                         }
                     } else loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiProvider.Api_volunteer_Data)
+                        NetworkRequestState.ErrorResponse(ApiProvider.ApiGetVolunteerData)
                 } catch (e: Exception) {
                     println(e.printStackTrace())
                 }
             }, {
                 loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiProvider.Api_volunteer_Data, it)
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiGetVolunteerData, it)
 
             }).autoDispose(disposables)
         }
@@ -72,7 +72,7 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         address: String,
         email: String
     ) {
-        if (checkNetworkAvailability(mContext, ApiProvider.Api_UPDATEPROFILE)) {
+        if (checkNetworkAvailability(mContext, ApiProvider.ApiUpdateProfile)) {
             val params1 = JsonObject()
             params1.addProperty(ApiConstants.Profileidvolunteer, volunteerId)
             params1.addProperty(ApiConstants.ProfileFirstName, firstname)
@@ -82,30 +82,30 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
 
             dataManager.updatevolunteerData(params1).doOnSubscribe {
                 loaderObservable.value =
-                    NetworkRequestState.LoadingData(ApiProvider.Api_UPDATEPROFILE)
+                    NetworkRequestState.LoadingData(ApiProvider.ApiUpdateProfile)
             }.subscribe({
                 try {
                     if (it.statusCode == "0") {
                         loaderObservable.value =
-                            NetworkRequestState.SuccessResponse(ApiProvider.Api_UPDATEPROFILE, it)
+                            NetworkRequestState.SuccessResponse(ApiProvider.ApiUpdateProfile, it)
                         viewModelScope.launch {
                             io {
                             }
                             loaderObservable.value =
                                 NetworkRequestState.SuccessResponse(
-                                    ApiProvider.Api_UPDATEPROFILE,
+                                    ApiProvider.ApiUpdateProfile,
                                     it
                                 )
 
                         }
                     } else loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiProvider.Api_UPDATEPROFILE)
+                        NetworkRequestState.ErrorResponse(ApiProvider.ApiUpdateProfile)
                 } catch (e: Exception) {
                     println(e.printStackTrace())
                 }
             }, {
                 loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiProvider.Api_UPDATEPROFILE, it)
+                    NetworkRequestState.ErrorResponse(ApiProvider.ApiUpdateProfile, it)
 
             }).autoDispose(disposables)
         }

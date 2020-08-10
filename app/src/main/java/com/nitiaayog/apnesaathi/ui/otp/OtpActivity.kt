@@ -38,7 +38,7 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
      * Roles Details,
      * ROLE_VOLUNTEER = "1",
      * ROLE_STAFF_MEMBER = "2",
-     * ROLE_DISTRICT_ADMIN = "3",
+     * ROLE_DISTRICT_ADMIN = "3" [Access to Features : Only See Grievances of only it's own assigned district],
      * ROLE_MASTER_ADMIN = "4",
      * */
 
@@ -55,8 +55,8 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         if (isRole) intent.getStringExtra(ApiConstants.Role) else ""
     }
     private val phoneNumber: String by lazy {
-        val isPhoneNo: Boolean = intent?.hasExtra("PhoneNo") ?: false
-        if (isPhoneNo) intent.getStringExtra("PhoneNo") else ""
+        val isPhoneNo: Boolean = intent?.hasExtra(ApiConstants.PhoneNumber) ?: false
+        if (isPhoneNo) intent.getStringExtra(ApiConstants.PhoneNumber) else ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -247,14 +247,21 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
             else -> null
         }
         targetNavigation?.run {
-            viewModel.setData(phoneNumber, role)
             /*dataManager.setPhoneNumber(phoneNumber) //intent.getStringExtra("PhoneNo")
             dataManager.setRole(role)*/
-            startActivity(getTargetIntent(this))
+            val intent = getTargetIntent(this)
             when (role) {
-                ROLE_VOLUNTEER -> finishAffinity()
-                else -> finish()
+                ROLE_VOLUNTEER -> {
+                    viewModel.setData(phoneNumber, role)
+                    finishAffinity()
+                }
+                else -> {
+                    intent.putExtra(ApiConstants.PhoneNumber, phoneNumber)
+                    intent.putExtra(ApiConstants.Role, role)
+                    finish()
+                }
             }
+            startActivity(intent)
         }
     }
 

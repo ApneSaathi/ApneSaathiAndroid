@@ -1,9 +1,11 @@
 package com.nitiaayog.apnesaathi.datamanager
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.nitiaayog.apnesaathi.model.*
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
+import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 
 interface DataManager : ApiRequest, PreferenceRequest {
@@ -53,8 +55,11 @@ interface DataManager : ApiRequest, PreferenceRequest {
     // Table : volunteers
     suspend fun insertVolunteers(volunteers: List<Volunteer>)
     fun getVolunteers(): LiveData<MutableList<Volunteer>>
-    fun getVolunteer(id:Int): Volunteer?
+    fun getVolunteers(afterId: Int, count: Int): List<Volunteer>
+    suspend fun getVolunteer(id: Int): Volunteer?
     fun deleteVolunteers()
+
+    fun getVolunteersList(): DataSource.Factory<Int, Volunteer>
 
     fun clearData()
 }

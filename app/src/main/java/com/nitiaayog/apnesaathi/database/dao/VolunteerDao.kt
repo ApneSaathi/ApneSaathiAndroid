@@ -1,6 +1,7 @@
 package com.nitiaayog.apnesaathi.database.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -8,6 +9,7 @@ import androidx.room.Query
 import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.model.Volunteer
+import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 
 @Dao
 interface VolunteerDao {
@@ -17,6 +19,13 @@ interface VolunteerDao {
 
     @Query("SELECT ${Columns.FirstName},${Columns.LastName},${Columns.Gender},${Columns.ContactNumber},${Columns.Block},${Columns.District},${Columns.State} FROM ${Tables.TABLE_VOLUNTEERS}")
     fun getVolunteers(): LiveData<MutableList<Volunteer>>
+
+    /*This Query will return (count) data after id afterId*/
+    @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}>:afterId ORDER BY ${Columns.Id} ASC LIMIT :count")
+    fun getVolunteers(afterId: Int, count: Int = 5): MutableList<Volunteer>
+
+    @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS}")
+    fun getVolunteersList(): DataSource.Factory<Int, Volunteer>
 
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}=:id")
     fun getVolunteer(id: Int): Volunteer?

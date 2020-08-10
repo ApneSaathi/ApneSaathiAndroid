@@ -39,7 +39,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         const val CONST_PERMISSION_FROM_SETTINGS: Int = 1101
     }
 
-    protected val dataManager: DataManager by lazy { ApneSaathiApplication.getApiClient() }
+    protected val dataManager: DataManager by lazy { ApneSaathiApplication.getDataClient() }
 
     protected val viewModel: VM by lazy { provideViewModel() }
 
@@ -120,12 +120,21 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
-    protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
+    protected fun initiateCall(phoneNumber: String) {
         Intent(Intent.ACTION_CALL).apply {
-            data = Uri.parse("tel:${selectedCallData.contactNumber}")
+            data = Uri.parse("tel:$phoneNumber")
             if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
             else onCallPermissionDenied()
         }
+    }
+
+    protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
+        initiateCall(selectedCallData.contactNumber!!)
+        /*Intent(Intent.ACTION_CALL).apply {
+            data = Uri.parse("tel:${selectedCallData.contactNumber}")
+            if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
+            else onCallPermissionDenied()
+        }*/
 
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {

@@ -3,20 +3,27 @@ apply plugin: kotlinPlugin
 apply plugin: kotlinAndroidPlugin
 apply plugin: kotlinKaptPlugin
 
-//def properties = rootProject.file("keystore.properties")
-//def kProperties = new Properties()
-//kProperties.load(new FileInputStream(properties))
+def properties = rootProject.file("application.properties") // or file('../application.properties')
+def appProperties = new Properties()
+appProperties.load(new FileInputStream(properties))
 
 ext {
-    //def host = kProperties["api_host"]
-    //def databaseName = keystoreProperties["DATABASE_NAME"]
-    //def databaseVersion = keystoreProperties["DATABASE_VERSION"]
+    devHost = appProperties['dev_host']
+    prodHost = appProperties['prod_host']
+    databaseName = appProperties['database_name']
+    databaseVersion = appProperties['database_version']
+    getLoginUser = appProperties['get_login_user']
+    verifyPassword = appProperties['verify_password']
+    getVolunteers = appProperties['get_volunteers']
+    getVolunteerData = appProperties['get_volunteer_data']
+    loadDashboard = appProperties['load_dashboard']
+    getGrievanceTracking = appProperties['get_grievance_tracking']
+    saveSrCitizenFeedbackForm = appProperties['save_sr_citizen_feedback_form']
+    registerSrCitizen = appProperties['register_sr_citizen']
+    getSrCitizenDetails = appProperties['get_sr_citizen_details']
+    updateGrievanceDetails = appProperties['update_grievance_details']
+    updateProfile = appProperties['update_profile']
 }
-
-def devHost = DEV_HOST
-def prodHost = PROD_HOST
-def databaseName = DATABASE_NAME
-def databaseVersion = DATABASE_VERSION
 
 android {
     compileSdkVersion targetVersion
@@ -26,29 +33,45 @@ android {
         applicationId appId
         minSdkVersion minVersion
         targetSdkVersion targetVersion
-        versionCode versionCode
-        versionName versionName
+        versionCode appVersionCode
+        versionName appVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        //buildConfigField "String", "HOST_URL", "\"${host}\""
     }
 
     buildTypes {
-        buildTypes.each { it.buildConfigField "String", "PROD_HOST", "\"${prodHost}\"" }
-        buildTypes.each { it.buildConfigField "String", "DEV_HOST", "\"${devHost}\"" }
-        buildTypes.each { it.buildConfigField "String", "DB_NAME", "\"${databaseName}\"" }
-        buildTypes.each { it.buildConfigField "int", "DB_VERSION", "${databaseVersion}" }
+
+        buildTypes.each { it.buildConfigField "int", "DatabaseVersion", "${databaseVersion}" }
+        buildTypes.each { it.buildConfigField "String", "DatabaseName", "${databaseName}" }
+        buildTypes.each { it.buildConfigField "String", "GetLoginUser", "${getLoginUser}" }
+        buildTypes.each { it.buildConfigField "String", "VerifyPassword", "${verifyPassword}" }
+        buildTypes.each { it.buildConfigField "String", "GetVolunteers", "${getVolunteers}" }
+        buildTypes.each { it.buildConfigField "String", "GetVolunteerData", "${getVolunteerData}" }
+        buildTypes.each { it.buildConfigField "String", "LoadDashboard", "${loadDashboard}" }
+        buildTypes.each { it.buildConfigField "String", "GetGrievanceTracking", "${getGrievanceTracking}" }
+        buildTypes.each { it.buildConfigField "String", "SaveSrCitizenFeedbackForm", "${saveSrCitizenFeedbackForm}" }
+        buildTypes.each { it.buildConfigField "String", "RegisterSrCitizen", "${registerSrCitizen}" }
+        buildTypes.each { it.buildConfigField "String", "GetSrCitizenDetails", "${getSrCitizenDetails}" }
+        buildTypes.each { it.buildConfigField "String", "UpdateGrievanceDetails", "${updateGrievanceDetails}" }
+        buildTypes.each { it.buildConfigField "String", "UpdateProfile", "${updateProfile}" }
+
         release {
-//            debuggable false
+
+            buildTypes.each { it.buildConfigField "String", "ApiHost", "${prodHost}" }
+
+            shrinkResources true
+            debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        /*debug {
-            debuggable true
-            minifyEnabled true
-            proguardFiles
-        }*/
+        debug {
+
+            buildTypes.each { it.buildConfigField "String", "ApiHost", "${devHost}" }
+
+            /*debuggable true
+            minifyEnabled true*/
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 
     androidExtensions {
@@ -76,7 +99,8 @@ dependencies {
     implementation androidSupport.cardView
     implementation androidSupport.paging
 
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    // Lifecycle at Runtime for threading
+    implementation lifecycleSupport
 
     // RxJava + RxAndroid
     implementation rxJava2
@@ -106,16 +130,16 @@ dependencies {
     // JSON to Response Class converter
     implementation retrofit.gsonConverter
     implementation retrofit.rxJava
-    
-    implementation viewModelLifecycle
-    implementation kotlinCoroutine
 
-    implementation playServicesAuth
+    // ViewModel Lifecycle
+    implementation viewModelLifecycle
+
+    // Coroutine Scopes
+    implementation kotlinCoroutine
 
     implementation threetenAbp
 
-    // RxAnimation - Handle Animations Asynchronous
-    //implementation 'com.mikhaellopez:rxanimation:1.0.0'
+    //implementation playServicesAuth
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

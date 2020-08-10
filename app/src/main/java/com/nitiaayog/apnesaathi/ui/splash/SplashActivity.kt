@@ -31,7 +31,6 @@ class SplashActivity : AppCompatActivity() {
             .subscribe { navigateToNextActivity() }
     }
 
-
     override fun onDestroy() {
         disposable?.run {
             if (!this.isDisposed) this.dispose()
@@ -40,7 +39,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextActivity() {
-        val dataManager = ApneSaathiApplication.getApiClient()
+        val dataManager = ApneSaathiApplication.getDataClient()
         val targetIntent = getTargetIntent(
             if (dataManager.getSelectedLanguage().isEmpty()) LanguageSelectionActivity::class.java
             else if (!dataManager.isLogin()) LoginActivity::class.java

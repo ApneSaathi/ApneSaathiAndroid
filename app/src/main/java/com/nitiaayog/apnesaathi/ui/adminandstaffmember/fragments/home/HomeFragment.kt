@@ -17,15 +17,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.CallsAdapter
-import com.nitiaayog.apnesaathi.adapter.GrievancesAdapter
-import com.nitiaayog.apnesaathi.adapter.VolunteersAdapter
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.GrievanceData
-import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
@@ -34,7 +29,6 @@ import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_admin_staff_home.*
 import kotlinx.android.synthetic.main.fragment_calls_status.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -47,12 +41,10 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private var lastSelectedItemId: Int = 0
 
-    private val volunteerAdapter: VolunteersAdapter by lazy { setupVolunteersAdapter() }
     private val pendingAdapter: CallsAdapter by lazy { setupPendingCallsAdapter() }
     private val followupAdapter: CallsAdapter by lazy { setupFollowupCallsAdapter() }
     private val completedAdapter: CallsAdapter by lazy { setupCompletedCallsAdapter() }
     private val invalidAdapter: CallsAdapter by lazy { setupInvalidCallsAdapter() }
-    private val grievancesAdapter: GrievancesAdapter by lazy { setGrievanceAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,22 +55,21 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 getObservableStreams()
                 lifecycleScope.launch(Dispatchers.IO) {
-                    viewModel.getGrievanceTrackingList(requireContext())
-                    if (dataManager.getRole() != "3")
-                        viewModel.getCallDetails(requireContext())
+                    //viewModel.getGrievanceTrackingList(requireContext())
+                    //if (dataManager.getRole() != "3")
+                    viewModel.getCallDetails(requireContext())
                 }
             }
             .autoDispose(disposables)
 
         if (dataManager.getRole() != "3") {
-            setupVolunteersList()
             setupPendingCalls()
             setupFollowupCalls()
             setupCompletedCalls()
             setupInvalidCalls()
         }
 
-        setupGrievances()
+        //setupGrievances()
     }
 
     override fun provideViewModel(): HomeViewModel {
@@ -98,35 +89,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
     }
 
-    private fun setupVolunteersList() {
-        val rvVolunteers = (rvVolunteers as RecyclerView)
-        rvVolunteers.apply {
-            this.isNestedScrollingEnabled = false
-            this.addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-                    setDrawable(
-                        ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!
-                    )
-                }
-            )
-            this.adapter = volunteerAdapter
-        }
-    }
-
-    private fun setupVolunteersAdapter(): VolunteersAdapter {
-        return VolunteersAdapter().apply {
-            setOnItemClickListener(object : OnItemClickListener<Volunteer> {
-                override fun onItemClick(position: Int, data: Volunteer) {
-                    lastSelectedItemId = data.id!!
-                }
-
-                override fun onMoreInfoClick(position: Int, data: Volunteer) {
-
-                }
-            })
-        }
-    }
-
     private fun setupPendingCalls() {
         val rvPendingList = (rvPendingList as RecyclerView)
         rvPendingList.isNestedScrollingEnabled = false
@@ -139,7 +101,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupPendingCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = position
@@ -172,7 +134,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupFollowupCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = data.callId!!
@@ -205,7 +167,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupCompletedCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = data.callId!!
@@ -238,7 +200,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupInvalidCallsAdapter(): CallsAdapter {
-        return CallsAdapter().apply {
+        return CallsAdapter(dataManager.getRole()).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemId = data.callId!!
@@ -259,7 +221,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
-    private fun setupGrievances() {
+    /*private fun setupGrievances() {
         val rvGrievancesList = (rvGrievancesList as RecyclerView)
         rvGrievancesList.apply {
             isNestedScrollingEnabled = false
@@ -307,7 +269,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         addFragment(
             R.id.fragmentAdminStaffHomeContainer, fragment, getString(R.string.pending_calls)
         )
-    }
+    }*/
 
     private fun manageCalls(itemCount: Int, @StringRes callsCountString: Int) {
         when (callsCountString) {
@@ -391,20 +353,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         viewModel.getNetworkStream().observe(viewLifecycleOwner, Observer { handleNetwork(it) })
     }
 
-    private fun observeGrievancesStream() {
+    /*private fun observeGrievancesStream() {
         viewModel.getGrievancesStream().removeObservers(viewLifecycleOwner)
         viewModel.getGrievancesStream().observe(viewLifecycleOwner, Observer {
 
         })
-    }
-
-    private fun observeVolunteersStream() {
-        viewModel.getVolunteersStream().removeObservers(viewLifecycleOwner)
-        viewModel.getVolunteersStream().observe(viewLifecycleOwner, Observer {
-            volunteerAdapter.setData(it)
-            manageVolunteersList(it.size)
-        })
-    }
+    }*/
 
     private fun observePendingCalls() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
@@ -446,9 +400,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     private fun getObservableStreams() {
         lifecycleScope.launch {
             observeNetwork()
-            observeGrievancesStream()
+            //observeGrievancesStream()
             if (dataManager.getRole() != "3") {
-                observeVolunteersStream()
+                //observeVolunteersStream()
                 observePendingCalls()
                 observeFollowupCalls()
                 observeCompletedCalls()

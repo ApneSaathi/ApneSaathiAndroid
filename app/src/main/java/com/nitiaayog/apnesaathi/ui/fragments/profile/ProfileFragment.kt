@@ -393,26 +393,26 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable -> when (it.apiName) {
-                    ApiProvider.Api_volunteer_Data ->
+                    ApiProvider.ApiGetVolunteerData ->
                         BaseUtility.showAlertMessage(
                             context!!,
                             R.string.alert,
                             R.string.check_internet
                         )
-                    ApiProvider.Api_volunteer_Data ->
+                    ApiProvider.ApiGetVolunteerData ->
                         BaseUtility.showAlertMessage(
                             context!!, R.string.alert, R.string.check_internet
                         )
                 }
                 is NetworkRequestState.LoadingData -> {
                     when (it.apiName) {
-                        ApiProvider.Api_volunteer_Data ->{
+                        ApiProvider.ApiGetVolunteerData ->{
                             progressBarloadData.visibility = VISIBLE
 //                            BaseUtility.showAlertMessage(
 //                                activity!!, R.string.alert, R.string.can_not_connect_to_server
 //                            )
                         }
-                        ApiProvider.Api_UPDATEPROFILE ->{
+                        ApiProvider.ApiUpdateProfile ->{
                             progressDialog.show()
 //                            BaseUtility.showAlertMessage(
 //                                activity!!, R.string.alert, R.string.can_not_connect_to_server
@@ -423,20 +423,20 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 }
                 is NetworkRequestState.ErrorResponse -> {
                     when (it.apiName) {
-                        ApiProvider.Api_volunteer_Data ->
+                        ApiProvider.ApiGetVolunteerData ->
                             progressBarloadData.visibility = GONE
-                        ApiProvider.Api_UPDATEPROFILE ->
+                        ApiProvider.ApiUpdateProfile ->
                             progressDialog.dismiss()
                     }
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
 
                     when (it.apiName) {
-                        ApiProvider.Api_volunteer_Data -> {
+                        ApiProvider.ApiGetVolunteerData -> {
                             progressBarloadData.visibility = GONE
                             getdataFromApi(it)
                         }
-                        ApiProvider.Api_UPDATEPROFILE -> {
+                        ApiProvider.ApiUpdateProfile -> {
                             progressDialog.dismiss()
                             var snack = Snackbar.make(
                                 mainRootRelativeLayout,

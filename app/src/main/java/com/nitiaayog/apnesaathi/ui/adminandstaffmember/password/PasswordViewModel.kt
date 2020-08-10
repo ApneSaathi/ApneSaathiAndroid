@@ -14,7 +14,9 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() {
+class PasswordViewModel(
+    private val dataManager: DataManager, private val phoneNo: String, private val role: String
+) : BaseViewModel() {
 
     companion object {
 
@@ -22,9 +24,10 @@ class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() 
         private var instanceFactory: PasswordViewModel? = null
 
         @Synchronized
-        fun getInstance(dataManager: DataManager): PasswordViewModel {
+        fun getInstance(dataManager: DataManager, phoneNo: String, role: String):
+                PasswordViewModel {
             if (instanceFactory == null) synchronized(this) {
-                PasswordViewModel(dataManager).also { instanceFactory = it }
+                PasswordViewModel(dataManager, phoneNo, role).also { instanceFactory = it }
             }
             return instanceFactory!!
         }
@@ -42,11 +45,13 @@ class PasswordViewModel(private val dataManager: DataManager) : BaseViewModel() 
                 dataManager.verifyPassword(params).doOnSubscribe {
                     updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiVerifyPassword))
                 }.subscribe({
-                    if (it.status == "0")
+                    if (it.status == "0") {
+                        dataManager.setPhoneNumber(phoneNo)
+                        dataManager.setRole("3")
                         updateNetworkState(
                             NetworkRequestState.SuccessResponse(ApiProvider.ApiVerifyPassword, "")
                         )
-                    else updateNetworkState(NetworkRequestState.Error(ApiProvider.ApiVerifyPassword))
+                    } else updateNetworkState(NetworkRequestState.Error(ApiProvider.ApiVerifyPassword))
                 }, {
                     updateNetworkState(
                         NetworkRequestState.ErrorResponse(ApiProvider.ApiVerifyPassword, it)

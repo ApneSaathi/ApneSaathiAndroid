@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 @Database(
     entities = [CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class,
         GrievanceData::class, Volunteer::class],
-    version = BuildConfig.DB_VERSION
+    version = BuildConfig.DatabaseVersion
 )
 @TypeConverters(Converter::class)
 abstract class ApneSathiDatabase : RoomDatabase() {
@@ -37,7 +37,7 @@ abstract class ApneSathiDatabase : RoomDatabase() {
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext, ApneSathiDatabase::class.java, BuildConfig.DB_NAME
+                    context.applicationContext, ApneSathiDatabase::class.java, BuildConfig.DatabaseName
                 )
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.

@@ -48,17 +48,13 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                                 EditMobileNumber.text.toString()
                             )
                         }.autoDispose(disposables)
-
                 } catch (e: Exception) {
                     println("TAG -- MyData --> ${e.message}")
                 }
                 EditMobileNumber.isFocusable = false
-
             }
         }.autoDispose(disposables)
-
     }
-
 
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(this)
@@ -71,8 +67,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                         R.string.check_internet
                     )
                 }
-
-
                 is NetworkRequestState.LoadingData -> {
                     progressBarlogin.visibility = VISIBLE
                 }
@@ -91,7 +85,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     val loginResponse = it.data as LoginResponse
 
                     val intent = getTargetIntent(OtpActivity::class.java)
-                    intent.putExtra("PhoneNo", EditMobileNumber.text.toString())
+                    intent.putExtra(ApiConstants.PhoneNumber, EditMobileNumber.text.toString())
                     intent.putExtra(ApiConstants.Role, loginResponse.getRole())
                     startActivity(intent)
                     EditMobileNumber.text.clear()

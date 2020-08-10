@@ -6,6 +6,8 @@ const val ROLE_DISTRICT_ADMIN: String = "3"
 const val ROLE_MASTER_ADMIN: String = "4"
 
 const val CALL_ID: String = "call_id"
+const val ID: String = "id"
+const val NAME: String = "name"
 const val GRIEVANCE_DETAIL_FRAGMENT: String = "GrievanceDetailFragment"
 const val SR_CITIZEN_DETAIL_FRAGMENT: String = "SrCitizenDetailFragment"
 

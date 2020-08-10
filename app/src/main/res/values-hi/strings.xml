@@ -463,4 +463,17 @@
     <string name="volunteers_count">स्वयंसेवक(%s)</string>
     <string name="volunteers">स्वयंसेवक</string>
 
+    <string name="volunteers_not_assigned">कृपया जांचें कि स्वयंसेवक आपको सौंपा गया है</string>
+    <string name="volunteer_details">स्वयंसेवक का विवरण</string>
+    <string name="about">विवरण</string>
+    <string name="reviews">समीक्षा</string>
+    <string name="senior_citizen_list_count">वरिष्ठ नागरिकों की सूची(%s)</string>
+    <string name="senior_citizen_list">वरिष्ठ नागरिकों की सूची</string>
+    <string name="joining_date">कार्यग्रहण तिथि</string>
+    <string name="invalid_count">"-- अमान्य: "</string>
+    <string name="progress_summery">प्रगति की समर</string>
+    <string name="total_calls">कुल कॉल: </string>
+
+    <string name="emergency_contact">आपातकालीन संपर्क</string>
+
 </resources>

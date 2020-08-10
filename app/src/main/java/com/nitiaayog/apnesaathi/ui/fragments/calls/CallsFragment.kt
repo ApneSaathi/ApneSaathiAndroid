@@ -65,5 +65,4 @@ class CallsFragment : BaseFragment<HomeViewModel>() {
     fun setNewCitizenRegisterListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
-
 }

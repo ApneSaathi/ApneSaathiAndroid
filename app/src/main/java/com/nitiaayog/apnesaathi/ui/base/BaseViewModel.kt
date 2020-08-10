@@ -19,6 +19,7 @@ abstract class BaseViewModel : ViewModel() {
     protected val config: PagedList.Config by lazy {
         PagedList.Config.Builder().apply {
             setEnablePlaceholders(false)
+            setPrefetchDistance(2)
             setInitialLoadSizeHint(REQUEST_DATA_COUNT)
             setPageSize(REQUEST_DATA_COUNT)
         }.build()

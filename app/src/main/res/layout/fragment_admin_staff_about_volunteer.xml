@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_background"
+    android:clipToPadding="false"
+    android:scrollbars="none"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:paddingTop="@dimen/dimen_15"
+        android:paddingBottom="@dimen/dimen_15">
+
+        <com.nitiaayog.apnesaathi.base.CircleImageView
+            android:id="@+id/civGender"
+            android:layout_width="@dimen/view_size_66"
+            android:layout_height="@dimen/view_size_66"
+            android:layout_marginStart="@dimen/dimen_15"
+            android:padding="@dimen/dimen_3"
+            android:src="@drawable/ic_male_user"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvVolunteerName"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_28"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:minHeight="@dimen/dimen_28"
+            android:paddingStart="@dimen/dimen_3"
+            android:paddingEnd="0dp"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_15"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/ivCall"
+            app:layout_constraintStart_toEndOf="@id/civGender"
+            app:layout_constraintTop_toTopOf="@id/civGender" />
+
+        <TextView
+            android:id="@+id/tvVolunteerPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_28"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dimen_3"
+            android:paddingEnd="0dp"
+            android:textAllCaps="false"
+            android:textColor="@color/color_dark_grey_txt"
+            android:textSize="@dimen/text_12"
+            app:layout_constraintBottom_toBottomOf="@id/civGender"
+            app:layout_constraintEnd_toStartOf="@id/ivCall"
+            app:layout_constraintStart_toEndOf="@id/civGender"
+            app:layout_constraintTop_toBottomOf="@id/tvVolunteerName" />
+
+        <ImageView
+            android:id="@+id/ivCall"
+            android:layout_width="@dimen/view_size_36"
+            android:layout_height="@dimen/view_size_36"
+            android:layout_marginEnd="@dimen/dimen_15"
+            android:background="?android:actionBarItemBackground"
+            android:contentDescription="@string/menu_calls"
+            android:src="@drawable/ic_call"
+            app:layout_constraintBottom_toBottomOf="@id/civGender"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/civGender" />
+
+        <TextView
+            android:id="@+id/tvVolunteerAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginEnd="@dimen/dimen_15"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/civGender" />
+
+        <TextView
+            android:id="@+id/tvAssignmentScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginEnd="@dimen/dimen_15"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvVolunteerAddress" />
+
+        <View
+            android:id="@+id/itemDivider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:layout_marginBottom="@dimen/dimen_5"
+            android:background="@drawable/list_item_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAssignmentScore" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progressTracker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:paddingStart="@dimen/dimen_15"
+            android:paddingEnd="@dimen/dimen_15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDivider">
+
+            <TextView
+                android:id="@+id/tvCallSummary"
+                style="@style/TextAppearance.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dimen_10"
+                android:paddingBottom="@dimen/dimen_5"
+                android:text="@string/progress_summery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5"
+                android:text="@string/total_calls"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallSummary">
+
+            </TextView>
+
+            <ProgressBar
+                android:id="@+id/progressSummery"
+                style="@style/Horizontal.Progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotal" />
+
+            <LinearLayout
+                android:id="@+id/llDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_30"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:layout_marginRight="@dimen/dimen_30"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressSummery">
+
+                <TextView
+                    android:id="@+id/tv_completed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/completed_count"
+                    android:textColor="@color/color_orange"
+                    android:textSize="@dimen/text_10" />
+
+                <TextView
+                    android:id="@+id/tv_need_followup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/need_follow_up_count"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/text_10" />
+
+                <TextView
+                    android:id="@+id/tv_pending"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/pending_g_count"
+                    android:textColor="@color/color_grey_txt"
+                    android:textSize="@dimen/text_10" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvInvalidCalls"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/invalid_count"
+                android:textColor="@color/color_red"
+                android:textSize="@dimen/text_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15"
+            app:cardBackgroundColor="@color/card_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressTracker">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvSrCitizens"
+                    style="@style/TextAppearance.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:paddingTop="@dimen/dimen_10"
+                    android:paddingBottom="@dimen/dimen_5"
+                    android:text="@string/senior_citizen_list"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarSrCitizens"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_15"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/tvSrCitizens"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvSrCitizens" />
+
+                <include
+                    layout="@layout/include_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dimen_5"
+                    android:paddingEnd="@dimen/dimen_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSrCitizens" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

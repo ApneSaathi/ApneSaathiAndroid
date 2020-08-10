@@ -1,7 +1,9 @@
 package com.nitiaayog.apnesaathi.datamanager
 
 import android.app.Application
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
 import com.nitiaayog.apnesaathi.database.dao.*
@@ -16,6 +18,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Log
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
+import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -230,7 +233,15 @@ class AppDataManager private constructor(
         return volunteerDao.getVolunteers()
     }
 
-    override fun getVolunteer(id: Int): Volunteer? {
+    /**
+     * If(afterId == 0) then 1st time this method is called else load more is working good
+     * */
+    @WorkerThread
+    override fun getVolunteers(afterId: Int, count: Int): List<Volunteer> {
+        return volunteerDao.getVolunteers(afterId, count)
+    }
+
+    override suspend fun getVolunteer(id: Int): Volunteer? {
         return volunteerDao.getVolunteer(id)
     }
 
@@ -295,4 +306,8 @@ class AppDataManager private constructor(
     override fun getRole(): String = preferences.getRole()
 
     override fun clearPreferences() = preferences.clearPreferences()
+
+    override fun getVolunteersList(): DataSource.Factory<Int, Volunteer>{
+        return volunteerDao.getVolunteersList()
+    }
 }

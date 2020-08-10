@@ -459,4 +459,17 @@
     <string name="volunteers_count">સ્વયંસેવકો(%s)</string>
     <string name="volunteers">સ્વયંસેવકો</string>
 
+    <string name="volunteers_not_assigned">કૃપા કરીને તપાસો કે સ્વયંસેવકો તમને સોંપેલ છે</string>
+    <string name="volunteer_details">સ્વયંસેવકની વિગતો</string>
+    <string name="about">વિગતો</string>
+    <string name="reviews">સમીક્ષાઓ</string>
+    <string name="senior_citizen_list_count">વરિષ્ઠ નાગરિકોની સૂચિ(%s)</string>
+    <string name="senior_citizen_list">વરિષ્ઠ નાગરિકોની સૂચિ</string>
+    <string name="joining_date">જોડાવાની તારીખ</string>
+    <string name="invalid_count">"-- અમાન્ય: "</string>
+    <string name="progress_summery">પ્રગતિનો સારાંશ</string>
+    <string name="total_calls">કુલ કોલ્સ: </string>
+
+    <string name="emergency_contact">કટોકટી સંપર્કો</string>
+
 </resources>

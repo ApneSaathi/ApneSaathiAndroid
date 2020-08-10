@@ -1,19 +1,13 @@
 ext {
 
-    PROD_HOST = "http://3.7.39.123:8080/"
-    DEV_HOST = "http://15.207.42.209:8080/"
-    DATABASE_NAME = "apne_saathi.db"
-    DATABASE_VERSION = "1"
-    //DATABASE_VERSION = "2"
-
     /* TODO : AppDetails ------------------------------------------------------------------------ */
 
     appId = "com.nitiaayog.apnesaathi"
     minVersion = 21
     buildVersion = "29.0.3"
     targetVersion = 29
-    versionCode = 1
-    versionName = "1.0"
+    appVersionCode = 1
+    appVersionName = "1.0"
 
     /* TODO : Plugins --------------------------------------------------------------------------- */
 
@@ -84,6 +78,7 @@ ext {
 
     viewModelVersion = '2.2.0'
     viewModelPackage = 'androidx.lifecycle:lifecycle-viewmodel-ktx'
+    lifecyclePackage = 'androidx.lifecycle:lifecycle-runtime-ktx'
 
     threetenAbpVersion = '1.2.4'
     threetenAbpPackage = 'com.jakewharton.threetenabp:threetenabp'
@@ -95,6 +90,7 @@ ext {
     kotlinGradleSupport = buildDependency(kotlinSupportPackage, kotlinPluginVersion)
     gmsServiceSupport = buildDependency(gmsSupportPackage, gmsGradleVersion)
     kotlinSupport = buildDependency(kotlinPackage, kotlinPluginVersion)
+    lifecycleSupport = buildDependency(lifecyclePackage, viewModelVersion)
     constraintLayout = buildDependency(constraintLayoutPackage, constraintLayoutVersion)
     okHttpInterceptor = buildDependency(okhttpPackage, okhttpVersion)
     glide = buildDependency(glidePackage, glideVersion)
