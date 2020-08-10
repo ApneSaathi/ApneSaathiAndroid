@@ -65,10 +65,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         }
         val grievances: MutableList<SrCitizenGrievance> = mutableListOf()
         callData.forEach { data ->
-            data.medicalGrievance?.forEach {
-                it.srCitizenName = data.srCitizenName
-                it.gender = data.gender
-            }
             grievances.addAll(data.medicalGrievance!!)
         }
         return grievances
