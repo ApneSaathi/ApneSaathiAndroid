@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.WithActivityTransition"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".ui.emergency_contact.Emergency_Contact_Activity"></activity>
+        <activity android:name=".ui.emergency_contact.hospital.HospitalsActivity"/>
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,38 +28,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.localization.LanguageSelectionActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
         <activity
             android:name=".ui.otp.OtpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-
         <activity
             android:name=".ui.adminandstaffmember.password.PasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
         <activity
             android:name=".ui.dashboard.DashBoardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".ui.adminandstaffmember.dashboard.DashboardActivity"
             android:launchMode="singleInstance"
@@ -68,7 +62,6 @@
         <service
             android:name=".service.SyncDataService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
     </application>
 
 </manifest>

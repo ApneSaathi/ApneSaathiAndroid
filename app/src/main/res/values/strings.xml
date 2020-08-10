@@ -21,7 +21,7 @@
 
     <string name="submit">Submit</string>
 
-   <!-- <string name="volunteer_name">Name of Volunteer *</string>
+    <!-- <string name="volunteer_name">Name of Volunteer *</string>
     <string name="volunteer_phone_number">Phone Number of Volunteer *</string>
     <string name="person_name_whom_you_were_calling">Name of the person whom you were calling? *</string>
     <string name="person_phone_no_whom_you_were_calling">Phone number of the person whom you were calling? *</string>
@@ -528,5 +528,6 @@
     <string name="volunteers">Volunteers</string>
 
     <string name="volunteers_not_assigned">Please check that volunteers are assigned to you</string>
+    <string name="emergency_contact">Emergency Contact</string>
 
 </resources>
