@@ -91,7 +91,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     val loginResponse = it.data as LoginResponse
 
                     val intent = getTargetIntent(OtpActivity::class.java)
-                    intent.putExtra("PhoneNo", EditMobileNumber.text.toString())
+                    intent.putExtra(ApiConstants.PhoneNumber, EditMobileNumber.text.toString())
                     intent.putExtra(ApiConstants.Role, loginResponse.getRole())
                     startActivity(intent)
                     EditMobileNumber.text.clear()

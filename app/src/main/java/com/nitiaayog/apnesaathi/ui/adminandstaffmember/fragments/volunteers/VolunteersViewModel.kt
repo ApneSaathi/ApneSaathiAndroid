@@ -12,7 +12,6 @@ import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
-import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
