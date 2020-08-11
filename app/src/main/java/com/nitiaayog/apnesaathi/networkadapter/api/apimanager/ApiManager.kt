@@ -72,4 +72,8 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
     override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> {
         return apiClient.updateGrievanceDetails(grDetails).subscribeAndObserve()
     }
+
+    override fun updateVolunteerRatings(params: JsonObject): Single<BaseRepo> {
+        return apiClient.updateVolunteerRatings(params).subscribeAndObserveWithDelaySubscription()
+    }
 }

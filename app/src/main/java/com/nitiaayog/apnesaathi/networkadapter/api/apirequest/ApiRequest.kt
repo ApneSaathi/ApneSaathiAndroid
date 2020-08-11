@@ -45,4 +45,7 @@ interface ApiRequest {
     fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo>
 
     fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo>
+
+    @WorkerThread
+    fun updateVolunteerRatings(params: JsonObject): Single<BaseRepo>
 }

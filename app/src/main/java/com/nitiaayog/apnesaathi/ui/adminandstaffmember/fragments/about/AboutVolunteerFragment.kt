@@ -19,6 +19,7 @@ import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails.VolunteerDetailsViewModel
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
@@ -31,7 +32,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class AboutVolunteerFragment : BaseFragment<AboutVolunteerViewModel>() {
+class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
     companion object {
         fun getInstance(volunteer: Volunteer): AboutVolunteerFragment {
@@ -60,8 +61,8 @@ class AboutVolunteerFragment : BaseFragment<AboutVolunteerViewModel>() {
         }
     }
 
-    override fun provideViewModel(): AboutVolunteerViewModel {
-        return AboutVolunteerViewModel.getInstance(dataManager, volunteer!!.id!!)
+    override fun provideViewModel(): VolunteerDetailsViewModel {
+        return VolunteerDetailsViewModel.getInstance(dataManager, volunteer!!.id!!)
     }
 
     override fun provideLayoutResource(): Int {

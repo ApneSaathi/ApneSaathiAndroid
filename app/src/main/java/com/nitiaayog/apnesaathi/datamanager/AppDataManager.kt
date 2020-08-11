@@ -18,7 +18,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Log
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
-import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -94,6 +93,10 @@ class AppDataManager private constructor(
 
     override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
         apiRequest.updateGrievanceDetails(grDetails)
+
+    override fun updateVolunteerRatings(params: JsonObject): Single<BaseRepo> {
+        return apiRequest.updateVolunteerRatings(params)
+    }
 
     // Database Access
     //=> Table : call_details
@@ -307,7 +310,7 @@ class AppDataManager private constructor(
 
     override fun clearPreferences() = preferences.clearPreferences()
 
-    override fun getVolunteersList(): DataSource.Factory<Int, Volunteer>{
+    override fun getVolunteersList(): DataSource.Factory<Int, Volunteer> {
         return volunteerDao.getVolunteersList()
     }
 }
