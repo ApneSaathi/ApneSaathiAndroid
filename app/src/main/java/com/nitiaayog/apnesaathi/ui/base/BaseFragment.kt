@@ -140,7 +140,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
                 dataManager.setUserName(selectedCallData.srCitizenName ?: "")
-                dataManager.setGender(selectedCallData.gender ?: "")
+                dataManager.setSrCitizenGender(selectedCallData.gender ?: "")
                 intent.putExtra(CALL_ID, selectedCallData.callId)
                 activity!!.startActivityForResult(intent, REQUEST_CODE)
             }.autoDispose(disposables)

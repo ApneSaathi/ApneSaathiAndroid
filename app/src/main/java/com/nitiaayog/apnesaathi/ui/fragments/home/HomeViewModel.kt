@@ -1,7 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Context
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
@@ -130,7 +129,14 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getGrievanceTrackingList(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+            var filterId = -1
+            if (dataManager.getRole() == "1") {
+                filterId = 1
+            } else if (dataManager.getRole() == "2" || dataManager.getRole() == "3" || dataManager.getRole() == "4") {
+                filterId = 2
+            }
+            params.addProperty(ApiConstants.Id, dataManager.getUserId())
+            params.addProperty(ApiConstants.FilterBy, filterId)
             //params.addProperty(ApiConstants.Role, dataManager.getRole())
             //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list
             //params.addProperty(ApiConstants.RequestedData, 0)// Count - No of data we need in oone page

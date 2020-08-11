@@ -18,7 +18,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.Log
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
-import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.preferences.PreferenceManager
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -277,6 +276,9 @@ class AppDataManager private constructor(
 
     override fun getGender() = preferences.getGender()
     override fun setGender(gender: String) = preferences.setGender(gender)
+
+    override fun getSrCitizenGender() = preferences.getGender()
+    override fun setSrCitizenGender(gender: String) = preferences.setGender(gender)
 
     override fun getProfileImage(): String = preferences.getProfileImage()
     override fun setProfileImage(profileImage: String) = preferences.setProfileImage(profileImage)

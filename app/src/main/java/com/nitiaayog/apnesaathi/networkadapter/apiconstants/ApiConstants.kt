@@ -24,6 +24,8 @@ object ApiConstants {
     const val LastId: String = "last_id"
     const val RequestedData: String = "requested_data"
     const val VolunteerId: String = "idvolunteer"
+    const val FilterBy: String = "filterBy"
+    const val Id: String = "id"
     const val VolunteerNotRegisterErrorMessage: String = "Invalid User"
 
     const val MedicalGrievances: String = "medicalandgreivance"

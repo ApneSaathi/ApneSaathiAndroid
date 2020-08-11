@@ -365,7 +365,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         txt_edit.setOnClickListener {
             val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
             dataManager.setUserName(callData?.srCitizenName ?: "")
-            dataManager.setGender(callData?.gender ?: "")
+            dataManager.setSrCitizenGender(callData?.gender ?: "")
             intent.putExtra(CALL_ID, callData?.callId)
             activity!!.startActivityForResult(intent, REQUEST_CODE)
         }
@@ -395,23 +395,6 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
-
-    private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
-        when (it) {
-            is NetworkRequestState.NetworkNotAvailable -> {
-
-            }
-            is NetworkRequestState.LoadingData -> {
-
-            }
-            is NetworkRequestState.ErrorResponse -> {
-
-            }
-            is NetworkRequestState.SuccessResponse<*> -> {
-
-            }
-        }
-    })
 
     fun setSelectedUser(
         callData: CallData
