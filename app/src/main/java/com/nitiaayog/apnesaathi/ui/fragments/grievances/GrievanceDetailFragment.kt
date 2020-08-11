@@ -118,6 +118,15 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
         } else {
             img_gender.background = context?.getDrawable(R.drawable.ic_female_user)
         }
+        if (dataManager.getGender() == "M") {
+            img_user_icon.background = context?.getDrawable(R.drawable.ic_volunteer_male)
+            img_user_icon2.background = context?.getDrawable(R.drawable.ic_volunteer_male)
+            img_user_icon3.background = context?.getDrawable(R.drawable.ic_volunteer_male)
+        } else {
+            img_user_icon.background = context?.getDrawable(R.drawable.ic_volunteer_female)
+            img_user_icon2.background = context?.getDrawable(R.drawable.ic_volunteer_female)
+            img_user_icon3.background = context?.getDrawable(R.drawable.ic_volunteer_female)
+        }
         tv_volunteer_name.text = dataManager.getFirstName()
         tv_volunteer_name2.text = dataManager.getFirstName()
         tv_volunteer_name3.text = dataManager.getFirstName()

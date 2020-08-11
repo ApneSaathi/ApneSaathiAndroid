@@ -2,13 +2,10 @@ package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -29,16 +26,14 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.emergency_contact.Emergency_Contact_Activity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
-import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import kotlinx.android.synthetic.main.include_toolbar.toolBar
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData> {
@@ -60,7 +55,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
                     addFragment(
-                        R.id.fragmentHomeContainer, fragment, getString(R.string.details_fragment)
+                        R.id.fragmentHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
                 }
             })
@@ -170,11 +165,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         tv_pending.text = getString(R.string.pending_g_count).plus(pendingCalls)
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        exitProcess(0)
-//    }
-
     private fun manageGrievances(dataList: MutableList<GrievanceData>) {
         val size = dataList.size
         tvGrievances.text = getString(R.string.issues_count, size.toString())
@@ -221,7 +211,16 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
             grievancesAdapter.notifyDataSetChanged()
             manageGrievances(it)
         })
-
+        viewModel.getCallsList().removeObservers(viewLifecycleOwner)
+        viewModel.getCallsList().observe(viewLifecycleOwner, Observer { it ->
+            val fragment = fragmentManager?.findFragmentByTag(SR_CITIZEN_DETAIL_FRAGMENT)
+            if (fragment != null && fragment.isResumed) {
+                val callData: CallData =
+                    it.single { it.callId == dataManager.getLastSelectedId().toInt() }
+                fragment as SeniorCitizenDetailsFragment
+                fragment.reloadFragment(callData)
+            }
+        })
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
             when (it) {

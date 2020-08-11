@@ -1461,8 +1461,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         params.addProperty(ApiConstants.SrCitizenName, dataManager.getUserName())
         syncData.srCitizenName = dataManager.getUserName()
 
-        params.addProperty(ApiConstants.SrCitizenGender, dataManager.getGender())
-        syncData.gender = dataManager.getGender()
+        params.addProperty(ApiConstants.SrCitizenGender, dataManager.getSrCitizenGender())
+        syncData.gender = dataManager.getSrCitizenGender()
 
         if (viewModel.getCallStatus() == "9") {
             syncData.impRemarkInfo = edt_call_status_comment.text.toString()
