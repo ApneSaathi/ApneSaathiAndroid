@@ -38,6 +38,11 @@ open class PreferenceManager private constructor(application: Application) : Pre
 
     override fun getGender(): String = preferences.getString(PreferenceConstants.Gender)!!
 
+    override fun setSrCitizenGender(gender: String) =
+        preferences.putString(PreferenceConstants.SrCitizenGender, gender)
+
+    override fun getSrCitizenGender(): String = preferences.getString(PreferenceConstants.SrCitizenGender)!!
+
     override fun getUserName(): String = preferences.getString(PreferenceConstants.UserName)!!
     override fun setUserName(userName: String) =
         preferences.putString(PreferenceConstants.UserName, userName)

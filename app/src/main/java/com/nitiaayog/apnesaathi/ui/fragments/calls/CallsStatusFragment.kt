@@ -231,7 +231,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
                 data.putInt(BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentCallContainer)
                 val fragment = BaseCallsTypeFragment()
                 fragment.arguments = data
-                addFragment(R.id.fragmentAdminStaffHomeContainer, fragment, type)
+                addFragment(R.id.fragmentCallContainer, fragment, type)
             }
             View.VISIBLE
         } else View.GONE
