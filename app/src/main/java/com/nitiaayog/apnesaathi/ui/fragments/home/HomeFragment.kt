@@ -2,13 +2,10 @@ package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -26,18 +23,15 @@ import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.emergency_contact.Emergency_Contact_Activity
+import com.nitiaayog.apnesaathi.ui.emergency_contact.MainEmergency_Contact_Activity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
-import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.include_toolbar.*
 import kotlinx.android.synthetic.main.include_toolbar.toolBar
 import java.util.concurrent.TimeUnit
 
@@ -275,7 +269,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.emergency_contact -> {
-                val intent = Intent(activity, Emergency_Contact_Activity::class.java)
+                val intent = Intent(activity, MainEmergency_Contact_Activity::class.java)
                 startActivity(intent)
                 true
             }
