@@ -2,18 +2,24 @@ package com.nitiaayog.apnesaathi.ui.fragments.grievances
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
+import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
+import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
+import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
+import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
+import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
 import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
@@ -22,11 +28,15 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
     PageTitleChangeListener {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
+    private val progressDialog: ProgressDialog.Builder by lazy {
+        ProgressDialog.Builder(context!!).setMessage("Please wait, fetching data..")
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolBar.title = getString(R.string.menu_issues)
-
+        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN)
+            getDataStream()
         setUpViewPager()
 
         TabLayoutMediator(
@@ -38,6 +48,34 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
                 }
             }).attach()
     }
+
+    private fun getDataStream() {
+        viewModel.getGrievanceTrackingList(this.context!!)
+        viewModel.getDataStream().removeObservers(viewLifecycleOwner)
+        viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is NetworkRequestState.NetworkNotAvailable ->
+                    BaseUtility.showAlertMessage(
+                        context!!, R.string.error, R.string.api_connection_error
+                    )
+                is NetworkRequestState.LoadingData -> {
+                    if (it.apiName == ApiProvider.ApiLoadDashboard) {
+                        progressDialog.show()
+                    }
+                }
+                is NetworkRequestState.ErrorResponse -> {
+                    progressDialog.dismiss()
+                    if (it.apiName == ApiProvider.ApiLoadDashboard) {
+                        BaseUtility.showAlertMessage(
+                            context!!, R.string.error, R.string.api_connection_error
+                        )
+                    }
+                }
+                is NetworkRequestState.SuccessResponse<*> -> progressDialog.dismiss()
+            }
+        })
+    }
+
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
@@ -56,7 +94,7 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         resolvedFragment.setPageTitleChangeListener(this)
         inProgressFragment.setPageTitleChangeListener(this)
 
-        adapter.addFragment(pendingFragment,getString(R.string.pending))
+        adapter.addFragment(pendingFragment, getString(R.string.pending))
         adapter.addFragment(inProgressFragment, getString(R.string.in_progress))
         adapter.addFragment(resolvedFragment, getString(R.string.resolved))
         viewPager.adapter = adapter
@@ -86,5 +124,9 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
     override fun onDataLoaded(title: String, pos: Int, size: Int) {
         tabLayout.getTabAt(pos)?.text =
             format(title, size.toString())
+    }
+
+    fun reloadApi() {
+        viewModel.getGrievanceTrackingList(this.context!!)
     }
 }
