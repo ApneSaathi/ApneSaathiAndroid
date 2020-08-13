@@ -13,7 +13,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
@@ -137,7 +136,11 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
                 params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             } else {
-                params.addProperty(ApiConstants.DistrictId, 1) //Todo change it to take value from data manager currently only 1 is valid.
+                var id = 1 //todo replace with assigned district
+                if (dataManager.getSelectedDistrictId().isNotEmpty()) {
+                    id = dataManager.getSelectedDistrictId().toInt()
+                }
+                params.addProperty(ApiConstants.DistrictId, id)
             }
             //params.addProperty(ApiConstants.Role, dataManager.getRole())
             //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list

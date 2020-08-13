@@ -17,7 +17,7 @@ object RetrofitClient {
 
     private val TAG: String = RetrofitClient::class.java.simpleName
 
-    private const val REQUEST_TIMEOUT:Long = 10
+    private const val REQUEST_TIMEOUT: Long = 10
 
     private var apiInterface: ApiInterface? = null
     private var httpClient: OkHttpClient? = null
@@ -92,6 +92,7 @@ object RetrofitClient {
             val original = chain.request()
             val request = original.newBuilder()
                 .addHeader("Content-Type", "application/json")
+                .addHeader("Connection", "close")
                 /*.addHeader("Accept", "application/json")
                 .addHeader("Request-Type", "Android")
                 .addHeader("User-Agent", "Android")*/

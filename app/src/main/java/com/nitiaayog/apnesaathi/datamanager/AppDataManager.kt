@@ -280,6 +280,9 @@ class AppDataManager private constructor(
     override fun getSrCitizenGender() = preferences.getGender()
     override fun setSrCitizenGender(gender: String) = preferences.setGender(gender)
 
+    override fun getSelectedDistrictId() = preferences.getSelectedDistrictId()
+    override fun setSelectedDistrictId(id: String)  = preferences.setSelectedDistrictId(id)
+
     override fun getProfileImage(): String = preferences.getProfileImage()
     override fun setProfileImage(profileImage: String) = preferences.setProfileImage(profileImage)
 
@@ -309,7 +312,7 @@ class AppDataManager private constructor(
 
     override fun clearPreferences() = preferences.clearPreferences()
 
-    override fun getVolunteersList(): DataSource.Factory<Int, Volunteer>{
+    override fun getVolunteersList(): DataSource.Factory<Int, Volunteer> {
         return volunteerDao.getVolunteersList()
     }
 }

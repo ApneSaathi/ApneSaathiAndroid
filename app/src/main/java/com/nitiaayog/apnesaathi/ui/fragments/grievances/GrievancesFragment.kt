@@ -1,7 +1,11 @@
 package com.nitiaayog.apnesaathi.ui.fragments.grievances
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
@@ -20,7 +24,9 @@ import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
 import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
-import kotlinx.android.synthetic.main.fragment_calls.*
+import kotlinx.android.synthetic.main.fragment_calls.tabLayout
+import kotlinx.android.synthetic.main.fragment_calls.viewPager
+import kotlinx.android.synthetic.main.fragment_grievances.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
 
@@ -32,11 +38,26 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         ProgressDialog.Builder(context!!).setMessage("Please wait, fetching data..")
     }
 
+    var selectedPos = -1
+
+    val menu: PopupMenu by lazy {
+        PopupMenu(context!!, anchor_menu)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolBar.title = getString(R.string.menu_issues)
-        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN)
+        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN) {
+            toolBar.inflateMenu(R.menu.menu_filter_district)
+            val district = context!!.resources.getStringArray(R.array.district0)
+            for ((i, districtItem) in district.withIndex()) {
+                menu.menu.add(Menu.NONE, i, i, districtItem)
+            }
+            toolBar.setOnMenuItemClickListener {
+                onOptionsItemSelected(it)
+            }
             getDataStream()
+        }
         setUpViewPager()
 
         TabLayoutMediator(
@@ -128,5 +149,22 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
 
     fun reloadApi() {
         viewModel.getGrievanceTrackingList(this.context!!)
+    }
+
+    override
+    fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return (when (item.itemId) {
+            R.id.district_filter -> {
+                menu.show()
+                menu.setOnMenuItemClickListener { selectedDistrict ->
+                    dataManager.setSelectedDistrictId("1")
+                    reloadApi()
+                    true
+                }
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        })
     }
 }
