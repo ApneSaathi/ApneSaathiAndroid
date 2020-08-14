@@ -38,10 +38,17 @@ open class PreferenceManager private constructor(application: Application) : Pre
 
     override fun getGender(): String = preferences.getString(PreferenceConstants.Gender)!!
 
+    override fun setSelectedDistrictId(id: String) =
+        preferences.putString(PreferenceConstants.DistrictId, id)
+
+    override fun getSelectedDistrictId(): String =
+        preferences.getString(PreferenceConstants.DistrictId)!!
+
     override fun setSrCitizenGender(gender: String) =
         preferences.putString(PreferenceConstants.SrCitizenGender, gender)
 
-    override fun getSrCitizenGender(): String = preferences.getString(PreferenceConstants.SrCitizenGender)!!
+    override fun getSrCitizenGender(): String =
+        preferences.getString(PreferenceConstants.SrCitizenGender)!!
 
     override fun getUserName(): String = preferences.getString(PreferenceConstants.UserName)!!
     override fun setUserName(userName: String) =

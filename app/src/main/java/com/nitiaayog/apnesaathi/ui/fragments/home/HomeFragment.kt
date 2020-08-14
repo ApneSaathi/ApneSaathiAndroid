@@ -26,10 +26,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.emergency_contact.MainEmergency_Contact_Activity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
-import com.nitiaayog.apnesaathi.utility.BaseUtility
-import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
-import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
-import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
+import com.nitiaayog.apnesaathi.utility.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*

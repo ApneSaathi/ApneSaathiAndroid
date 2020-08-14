@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.model.AdminCallDetails
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
@@ -13,6 +14,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -66,6 +68,16 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.insertGrievances(grievances)
     }
 
+    private fun manageAdminData(data: AdminCallDetails) {
+        dataManager.clearPreviousData()
+        dataManager.insertCallData(data.adminCallsList)
+
+        dataManager.insertDistrictData(data.adminDistrictList)
+
+        val grievances: List<SrCitizenGrievance> = prepareGrievances(data.adminCallsList)
+        dataManager.insertGrievances(grievances)
+    }
+
     fun getNetworkStream(): LiveData<NetworkRequestState> {
         return loaderObservable
     }
@@ -89,7 +101,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     suspend fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.Id, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             dataManager.getCallDetails(params).doOnSubscribe {
                 updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard))
             }.subscribe({
@@ -97,8 +110,14 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.status == "0") {
                         viewModelScope.launch {
                             io {
-                                val data = it.getData()
-                                manageCallsData(data)
+
+                                if (dataManager.getRole() == ROLE_VOLUNTEER) {
+                                    val data = it.getData()
+                                    manageCallsData(data)
+                                } else {
+                                    val data = it.getAdminData()
+                                    manageAdminData(data)
+                                }
                             }
                             updateNetworkState(
                                 NetworkRequestState.SuccessResponse(

@@ -268,59 +268,59 @@
     </string-array>
 
     <string-array name="states_array">
-        <item>Assam</item>
-        <item>Bihar</item>
-        <item>Madhya Pradesh</item>
-        <item>Uttar Pradesh</item>
-        <item>Rajasthan</item>
-        <item>Maharashtra</item>
-        <item>Gujarat</item>
-        <item>Jharkhand</item>
+        <item>ASSAM</item>
+        <item>BIHAR</item>
+        <item>MADHYA PRADESH</item>
+        <item>UTTAR PRADESH</item>
+        <item>RAJASTHAN</item>
+        <item>MAHARASHTRA</item>
+        <item>GUJARAT</item>
+        <item>JHARKHAND</item>
     </string-array>
     <string-array name="district0">
-        <item>Baksa</item>
-        <item>Barpeta</item>
-        <item>Darrang</item>
-        <item>Dhubri</item>
-        <item>Goalpara</item>
-        <item>Hailakandi</item>
+        <item>BAKSA</item>
+        <item>BARPETA</item>
+        <item>DARRANG</item>
+        <item>DHUBRI</item>
+        <item>GOALPARA</item>
+        <item>HAILAKANDI</item>
     </string-array>
     <string-array name="district1">
-        <item>Araria</item>
-        <item>Begusarai</item>
-        <item>Sitamarhi</item>
-        <item>Katihar</item>
-        <item>Sheikhpura</item>
+        <item>ARARIA</item>
+        <item>BEGUSARAI</item>
+        <item>SITAMARHI</item>
+        <item>KATIHAR</item>
+        <item>SHEIKHPURA</item>
     </string-array>
     <string-array name="district2">
-        <item>Barwani</item>
-        <item>Damoh</item>
-        <item>Khandwa</item>
-        <item>Singrauli</item>
-        <item>Vidisha</item>
+        <item>BARWANI</item>
+        <item>DAMOH</item>
+        <item>KHANDWA</item>
+        <item>SINGRAULI</item>
+        <item>VIDISHA</item>
     </string-array>
     <string-array name="district3">
-        <item>Balrampur</item>
-        <item>Behraich</item>
-        <item>Chitrakoot</item>
-        <item>Shrawasti</item>
-        <item>Sonbhadra</item>
+        <item>BALRAMPUR</item>
+        <item>BEHRAICH</item>
+        <item>CHITRAKOOT</item>
+        <item>SHRAWASTI</item>
+        <item>SONBHADRA</item>
     </string-array>
     <string-array name="district4">
-        <item>Baran</item>
-        <item>Jaisalmer</item>
+        <item>BARAN</item>
+        <item>JAISALMER</item>
     </string-array>
     <string-array name="district5">
-        <item>Amravati</item>
-        <item>Gadchiroli</item>
-        <item>Nandurbar</item>
+        <item>AMRAVATI</item>
+        <item>GADCHIROLI</item>
+        <item>NANDURBAR</item>
     </string-array>
     <string-array name="district6">
-        <item>Narmada</item>
+        <item>NARMADA</item>
     </string-array>
     <string-array name="district7">
-        <item>Pakur</item>
-        <item>Sahibganj</item>
+        <item>PAKUR</item>
+        <item>SAHIBGANJ</item>
     </string-array>
     <string-array name="medical_problems">
         <item>@string/no_problems</item>
@@ -361,36 +361,36 @@
         <item>@string/no_problems</item>
     </string-array>
     <string-array name="districts_array">
-        <item>Barpeta</item>
-        <item>Baska</item>
-        <item>Darrang</item>
-        <item>Goalpara</item>
-        <item>Dhubri</item>
-        <item>Halakandi</item>
-        <item>Araria</item>
-        <item>Sitamarhi</item>
-        <item>Begusarai</item>
-        <item>Katihar</item>
-        <item>Sheikhpura</item>
-        <item>Damoh</item>
-        <item>Barwani</item>
-        <item>Khandwa</item>
-        <item>Singrauli</item>
-        <item>Vidisha</item>
-        <item>Behraich</item>
-        <item>Balrampur</item>
-        <item>Shrawasti</item>
-        <item>Chitrakoot</item>
-        <item>Sonbhadra</item>
-        <item>Baran</item>
-        <item>Jaiselmer</item>
-        <item>Nandurbar</item>
-        <item>Amravati</item>
-        <item>Gadchiroli</item>
-        <item>Narmada</item>
-        <item>Pakur</item>
-        <item>Sahibganj</item>
-        <item>SurendraNagar</item>
+        <item>BARPETA</item>
+        <item>BASKA</item>
+        <item>DARRANG</item>
+        <item>GOALPARA</item>
+        <item>DHUBRI</item>
+        <item>HALAKANDI</item>
+        <item>ARARIA</item>
+        <item>SITAMARHI</item>
+        <item>BEGUSARAI</item>
+        <item>KATIHAR</item>
+        <item>SHEIKHPURA</item>
+        <item>DAMOH</item>
+        <item>BARWANI</item>
+        <item>KHANDWA</item>
+        <item>SINGRAULI</item>
+        <item>VIDISHA</item>
+        <item>BEHRAICH</item>
+        <item>BALRAMPUR</item>
+        <item>SHRAWASTI</item>
+        <item>CHITRAKOOT</item>
+        <item>SONBHADRA</item>
+        <item>BARAN</item>
+        <item>JAISELMER</item>
+        <item>NANDURBAR</item>
+        <item>AMRAVATI</item>
+        <item>GADCHIROLI</item>
+        <item>NARMADA</item>
+        <item>PAKUR</item>
+        <item>SAHIBGANJ</item>
+        <item>SURENDRANAGAR</item>
     </string-array>
     <string-array name="call_status">
         <item>@string/connected</item>

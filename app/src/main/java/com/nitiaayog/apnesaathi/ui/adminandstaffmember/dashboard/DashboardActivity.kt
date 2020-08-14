@@ -6,16 +6,18 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
+import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.home.HomeFragment
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteers.VolunteersFragment
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardViewModel
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievancesFragment
 import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
+import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
-class DashboardActivity : BaseActivity<DashBoardViewModel>() {
+class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredListener {
 
     private val homeFragment = HomeFragment()
     private val volunteersFragment = VolunteersFragment()
@@ -51,7 +53,7 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>() {
 
         //callsFragment.setNewCitizenRegisterListener(this)
         //homeFragment.setReloadApiListener(this)
-        //grievancesFragment.setReloadApiListener(this)
+        grievancesFragment.setReloadApiListener(this)
 
         setupViewPager(offscreenPageLimit, adapter)
 
@@ -174,5 +176,10 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>() {
                 else -> R.id.menuHome
             }
         }
+    }
+
+    override fun onReloadRequired() {
+        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN)
+            grievancesFragment.reloadApi()
     }
 }

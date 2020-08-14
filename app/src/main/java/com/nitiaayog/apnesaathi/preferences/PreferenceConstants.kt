@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.preferences
 object PreferenceConstants {
 
     const val UserId: String = "user_id"
+    const val DistrictId: String = "district_id"
     const val UserName: String = "user_name"
     const val Gender: String = "gender"
     const val SrCitizenGender: String = "sr_gender"

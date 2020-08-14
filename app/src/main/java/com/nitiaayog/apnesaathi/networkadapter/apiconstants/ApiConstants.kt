@@ -18,6 +18,8 @@ object ApiConstants {
     const val Role: String = "role"
 
     const val Volunteer: String = "volunteer"
+    const val Admin: String = "adminDomain"
+    const val DistrictName: String = "districtName"
     const val GrievanceTracking: String = "greivanceTrackingList"
     const val FirstName: String = "firstName"
     const val Address: String = "address"
@@ -25,6 +27,7 @@ object ApiConstants {
     const val RequestedData: String = "requested_data"
     const val VolunteerId: String = "idvolunteer"
     const val FilterBy: String = "filterBy"
+    const val DistrictId: String = "districtId"
     const val Id: String = "id"
     const val VolunteerNotRegisterErrorMessage: String = "Invalid User"
 

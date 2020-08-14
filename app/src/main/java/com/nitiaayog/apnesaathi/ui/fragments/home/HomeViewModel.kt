@@ -2,17 +2,21 @@ package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.DistrictDetails
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -39,6 +43,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val invalidCallsList: LiveData<MutableList<CallData>> =
         dataManager.getInvalidCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
+    private val districtList: LiveData<MutableList<DistrictDetails>> = dataManager.getDistrictList()
 
     private val pendingGrievance: LiveData<MutableList<GrievanceData>> =
         dataManager.getPendingGrievances()
@@ -72,6 +77,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getCallsList(): LiveData<MutableList<CallData>> = callsList
+    fun getDistrictList() : LiveData<MutableList<DistrictDetails>> = districtList
 
     fun getPendingCalls(): LiveData<MutableList<CallData>> = pendingCallsList
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList
@@ -93,7 +99,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.Id, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             dataManager.getCallDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard)
@@ -129,14 +136,16 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getGrievanceTrackingList(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()
-            var filterId = -1
-            if (dataManager.getRole() == "1") {
-                filterId = 1
-            } else if (dataManager.getRole() == "2" || dataManager.getRole() == "3" || dataManager.getRole() == "4") {
-                filterId = 2
+            params.addProperty(ApiConstants.Id, dataManager.getUserId().toInt())
+            if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
+                params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
+            } else {
+                var id = 1 //todo replace with assigned district
+                if (dataManager.getSelectedDistrictId().isNotEmpty()) {
+                    id = dataManager.getSelectedDistrictId().toInt()
+                }
+                params.addProperty(ApiConstants.DistrictId, id)
             }
-            params.addProperty(ApiConstants.Id, dataManager.getUserId())
-            params.addProperty(ApiConstants.FilterBy, filterId)
             //params.addProperty(ApiConstants.Role, dataManager.getRole())
             //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list
             //params.addProperty(ApiConstants.RequestedData, 0)// Count - No of data we need in oone page
