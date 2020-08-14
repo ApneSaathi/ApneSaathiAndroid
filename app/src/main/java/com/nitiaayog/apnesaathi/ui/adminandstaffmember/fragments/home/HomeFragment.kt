@@ -58,6 +58,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                     //viewModel.getGrievanceTrackingList(requireContext())
                     //if (dataManager.getRole() != "3")
                     viewModel.getCallDetails(requireContext())
+                    viewModel.getGrievanceTrackingList(requireContext())
                 }
             }
             .autoDispose(disposables)
