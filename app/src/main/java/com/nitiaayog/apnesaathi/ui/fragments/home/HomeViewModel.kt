@@ -14,6 +14,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
@@ -140,8 +141,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
                 params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             } else {
-                var id = 3 //todo replace with assigned district
-                if (dataManager.getSelectedDistrictId().isNotEmpty()) {
+                var id = 1 //todo replace with assigned district
+                if (dataManager.getSelectedDistrictId().isNotEmpty() && dataManager.getRole() == ROLE_MASTER_ADMIN) {
                     id = dataManager.getSelectedDistrictId().toInt()
                 }
                 params.addProperty(ApiConstants.DistrictId, id)

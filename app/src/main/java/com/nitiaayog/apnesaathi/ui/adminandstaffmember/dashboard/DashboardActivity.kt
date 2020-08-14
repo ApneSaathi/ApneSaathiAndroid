@@ -31,6 +31,17 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         initBottomNavigationView()
         if (viewPager.adapter!!.itemCount == 2)
             manageBottomNavigationViewForRoles()
+        else
+            hideNavigationViewWithRoles()
+    }
+
+    private fun hideNavigationViewWithRoles() {
+        val menu = bottomNavigationView.menu
+        val menuItem = menu.findItem(R.id.menuCalls)
+        val menuItem1 = menu.findItem(R.id.menuVolunteers)
+        menuItem.isVisible = false
+        menuItem1.isVisible = true
+
     }
 
     override fun provideViewModel(): DashBoardViewModel {
@@ -151,7 +162,7 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         } else {
             when (itemId) {
                 R.id.menuHome -> viewPager.currentItem = 0
-                R.id.menuCalls -> viewPager.currentItem = 1
+                R.id.menuVolunteers -> viewPager.currentItem = 1
                 R.id.menuGrievances -> viewPager.currentItem = 2
                 R.id.menuProfile -> viewPager.currentItem = 3
                 else -> viewPager.currentItem = 0
@@ -170,7 +181,7 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         } else {
             when (position) {
                 0 -> R.id.menuHome
-                1 -> R.id.menuCalls
+                1 -> R.id.menuVolunteers
                 2 -> R.id.menuGrievances
                 3 -> R.id.menuProfile
                 else -> R.id.menuHome
