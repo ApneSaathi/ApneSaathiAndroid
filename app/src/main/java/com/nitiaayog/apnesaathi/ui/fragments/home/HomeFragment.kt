@@ -75,9 +75,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     getObservableDataStream()
-                    if (dataManager.getRole() != ROLE_DISTRICT_ADMIN) {
-                        viewModel.getCallDetails(context!!)
-                    }
+                    viewModel.getCallDetails(context!!)
                     viewModel.getGrievanceTrackingList(context!!)
                 }.autoDispose(disposables)
         } catch (e: Exception) {
@@ -256,9 +254,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     getObservableDataStream()
-                    if (dataManager.getRole() != ROLE_DISTRICT_ADMIN) {
-                        viewModel.getCallDetails(context!!)
-                    }
+                    viewModel.getCallDetails(context!!)
                     viewModel.getGrievanceTrackingList(context!!)
                 }.autoDispose(disposables)
         } catch (ex: Exception) {

@@ -2,11 +2,13 @@ package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.model.DistrictDetails
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
@@ -41,6 +43,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     private val invalidCallsList: LiveData<MutableList<CallData>> =
         dataManager.getInvalidCallsList()
     private val callsList: LiveData<MutableList<CallData>> = dataManager.getAllCallsList()
+    private val districtList: LiveData<MutableList<DistrictDetails>> = dataManager.getDistrictList()
 
     private val pendingGrievance: LiveData<MutableList<GrievanceData>> =
         dataManager.getPendingGrievances()
@@ -74,6 +77,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getCallsList(): LiveData<MutableList<CallData>> = callsList
+    fun getDistrictList() : LiveData<MutableList<DistrictDetails>> = districtList
 
     fun getPendingCalls(): LiveData<MutableList<CallData>> = pendingCallsList
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList

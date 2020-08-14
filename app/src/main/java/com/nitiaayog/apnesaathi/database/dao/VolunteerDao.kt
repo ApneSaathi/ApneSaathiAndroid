@@ -9,7 +9,6 @@ import androidx.room.Query
 import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.model.Volunteer
-import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 
 @Dao
 interface VolunteerDao {

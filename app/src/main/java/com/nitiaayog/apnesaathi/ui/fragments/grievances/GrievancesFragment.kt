@@ -2,7 +2,6 @@ package com.nitiaayog.apnesaathi.ui.fragments.grievances
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
@@ -16,6 +15,7 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
+import com.nitiaayog.apnesaathi.model.DistrictDetails
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
@@ -23,7 +23,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
-import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
+import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import kotlinx.android.synthetic.main.fragment_calls.tabLayout
 import kotlinx.android.synthetic.main.fragment_calls.viewPager
 import kotlinx.android.synthetic.main.fragment_grievances.*
@@ -38,7 +38,7 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         ProgressDialog.Builder(context!!).setMessage("Please wait, fetching data..")
     }
 
-    var selectedPos = -1
+    var districtList: MutableList<DistrictDetails> = mutableListOf()
 
     val menu: PopupMenu by lazy {
         PopupMenu(context!!, anchor_menu)
@@ -47,15 +47,8 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolBar.title = getString(R.string.menu_issues)
-        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN) {
+        if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
             toolBar.inflateMenu(R.menu.menu_filter_district)
-            val district = context!!.resources.getStringArray(R.array.district0)
-            for ((i, districtItem) in district.withIndex()) {
-                menu.menu.add(Menu.NONE, i, i, districtItem)
-            }
-            toolBar.setOnMenuItemClickListener {
-                onOptionsItemSelected(it)
-            }
             getDataStream()
         }
         setUpViewPager()
@@ -71,6 +64,17 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
     }
 
     private fun getDataStream() {
+        viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
+        viewModel.getDistrictList().observe(viewLifecycleOwner, Observer {
+            districtList = it
+            for ((i, item) in it.withIndex()) {
+                menu.menu.add(Menu.NONE, i, i, item.districtName)
+            }
+        })
+
+        toolBar.setOnMenuItemClickListener {
+            onOptionsItemSelected(it)
+        }
         viewModel.getGrievanceTrackingList(this.context!!)
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
@@ -157,7 +161,7 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             R.id.district_filter -> {
                 menu.show()
                 menu.setOnMenuItemClickListener { selectedDistrict ->
-                    dataManager.setSelectedDistrictId("1")
+                    dataManager.setSelectedDistrictId(districtList[selectedDistrict.itemId].districtId.toString())
                     reloadApi()
                     true
                 }

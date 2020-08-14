@@ -7,9 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
-import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.GrievanceData
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 
 @Dao
 interface GrievanceTrackingDao {

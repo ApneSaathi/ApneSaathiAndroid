@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.datamanager
 import android.app.Application
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.database.ApneSathiDatabase
@@ -47,6 +48,7 @@ class AppDataManager private constructor(
             }
     }
 
+    private var districtList: LiveData<MutableList<DistrictDetails>> = MutableLiveData()
     private val callsDataDao: CallDataDao by lazy { dbManager.provideCallDataDao() }
     private val grievancesDao: GrievancesDao by lazy { dbManager.provideGrievancesDao() }
     private val grievancesTrackingDao: GrievanceTrackingDao by lazy { dbManager.provideGrievancesTrackingDao() }
@@ -55,6 +57,8 @@ class AppDataManager private constructor(
     }
 
     private val volunteerDao: VolunteerDao by lazy { dbManager.provideVolunteerDao() }
+
+    private val districtDataDao: DistrictDataDao by lazy { dbManager.provideDistrictDao() }
 
     // ApiRequests
     override fun loginUser(phoneNumber: JsonObject): Single<LoginResponse> =
@@ -232,6 +236,12 @@ class AppDataManager private constructor(
         return volunteerDao.getVolunteers()
     }
 
+    override fun getDistrictList() = districtDataDao.getDistrictList()
+
+    override fun insertDistrictData(districtData: List<DistrictDetails>) {
+        districtDataDao.insertAll(districtData)
+    }
+
     /**
      * If(afterId == 0) then 1st time this method is called else load more is working good
      * */
@@ -281,7 +291,7 @@ class AppDataManager private constructor(
     override fun setSrCitizenGender(gender: String) = preferences.setGender(gender)
 
     override fun getSelectedDistrictId() = preferences.getSelectedDistrictId()
-    override fun setSelectedDistrictId(id: String)  = preferences.setSelectedDistrictId(id)
+    override fun setSelectedDistrictId(id: String) = preferences.setSelectedDistrictId(id)
 
     override fun getProfileImage(): String = preferences.getProfileImage()
     override fun setProfileImage(profileImage: String) = preferences.setProfileImage(profileImage)
@@ -315,4 +325,5 @@ class AppDataManager private constructor(
     override fun getVolunteersList(): DataSource.Factory<Int, Volunteer> {
         return volunteerDao.getVolunteersList()
     }
+
 }

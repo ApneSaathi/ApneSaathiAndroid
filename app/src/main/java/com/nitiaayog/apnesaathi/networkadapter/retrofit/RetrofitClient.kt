@@ -92,7 +92,6 @@ object RetrofitClient {
             val original = chain.request()
             val request = original.newBuilder()
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Connection", "close")
                 /*.addHeader("Accept", "application/json")
                 .addHeader("Request-Type", "Android")
                 .addHeader("User-Agent", "Android")*/

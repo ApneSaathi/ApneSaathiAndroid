@@ -18,6 +18,8 @@ object ApiConstants {
     const val Role: String = "role"
 
     const val Volunteer: String = "volunteer"
+    const val Admin: String = "adminDomain"
+    const val DistrictName: String = "districtName"
     const val GrievanceTracking: String = "greivanceTrackingList"
     const val FirstName: String = "firstName"
     const val Address: String = "address"
