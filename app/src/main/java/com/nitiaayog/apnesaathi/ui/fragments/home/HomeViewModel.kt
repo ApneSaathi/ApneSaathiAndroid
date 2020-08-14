@@ -141,8 +141,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
                 params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             } else {
-                var id = 1 //todo replace with assigned district
-                if (dataManager.getSelectedDistrictId().isNotEmpty() && dataManager.getRole() == ROLE_MASTER_ADMIN) {
+                var id = -1
+                if (dataManager.getSelectedDistrictId().isNotEmpty()) {
                     id = dataManager.getSelectedDistrictId().toInt()
                 }
                 params.addProperty(ApiConstants.DistrictId, id)
@@ -151,6 +151,11 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list
             //params.addProperty(ApiConstants.RequestedData, 0)// Count - No of data we need in oone page
             dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+                if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
+                    viewModelScope.launch {
+                        io { dataManager.clearPreviousTrackingData() }
+                    }
+                }
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiGrievanceTracking)
             }.subscribe({
@@ -158,7 +163,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.getStatus() == "0") {
                         viewModelScope.launch {
                             io {
-                                dataManager.clearPreviousTrackingData()
                                 dataManager.insertGrievanceTrackingList(it.getTrackingList())
                             }
                             loaderObservable.value = NetworkRequestState.SuccessResponse(

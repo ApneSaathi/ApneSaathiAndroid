@@ -66,7 +66,7 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
     fun registerNewSeniorCitizen(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId().toInt())
+            params.addProperty(ApiConstants.Id, dataManager.getUserId().toInt())
             params.addProperty(ApiConstants.SrCitizenName, name)
             params.addProperty(ApiConstants.SrCitizenAge, age.toInt())
             params.addProperty(ApiConstants.SrCitizenGender, gender)
@@ -74,6 +74,8 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
             params.addProperty(ApiConstants.SrCitizenDistrict, district)
             params.addProperty(ApiConstants.SrCitizenState, state)
             params.addProperty(ApiConstants.SrCitizenBlock, address)
+            params.addProperty(ApiConstants.Role, dataManager.getRole())
+            params.addProperty(ApiConstants.SrCitizenCallStatusCode, 1)
             dataManager.registerSeniorCitizen(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiRegisterSeniorCitizen)

@@ -6,6 +6,7 @@ import com.nitiaayog.apnesaathi.BuildConfig
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -17,7 +18,7 @@ object RetrofitClient {
 
     private val TAG: String = RetrofitClient::class.java.simpleName
 
-    private const val REQUEST_TIMEOUT: Long = 10
+    private const val REQUEST_TIMEOUT: Long = 15
 
     private var apiInterface: ApiInterface? = null
     private var httpClient: OkHttpClient? = null
@@ -51,6 +52,7 @@ object RetrofitClient {
             .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+            .protocols(listOf(Protocol.HTTP_1_1))
             //.setupNetworkSecurity(context)
             .cache(cache)
 

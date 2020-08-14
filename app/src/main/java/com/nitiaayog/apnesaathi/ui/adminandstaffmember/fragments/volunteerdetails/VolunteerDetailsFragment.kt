@@ -27,7 +27,7 @@ class VolunteerDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolBar.title = getString(R.string.volunteer_details)
+        toolBar.title = getString(R.string.volunteer_details) 
         toolBar.setNavigationIcon(R.drawable.ic_back)
         toolBar.setNavigationOnClickListener { fragmentManager?.popBackStack() }
 

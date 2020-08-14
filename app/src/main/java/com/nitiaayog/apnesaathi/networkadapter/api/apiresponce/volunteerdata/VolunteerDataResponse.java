@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.admindata.Admin;
 
 public class VolunteerDataResponse {
 
@@ -21,6 +22,9 @@ public class VolunteerDataResponse {
     @SerializedName("volunteer")
     @Expose
     private Volunteer volunteer;
+    @SerializedName("admin")
+    @Expose
+    private Admin admin;
     @SerializedName("volunteerassignment")
     @Expose
     private Object volunteerassignment;
@@ -65,6 +69,10 @@ public class VolunteerDataResponse {
 
     public Volunteer getVolunteer() {
         return volunteer;
+    }
+
+    public Admin getAdmin() {
+        return admin;
     }
 
     public void setVolunteer(Volunteer volunteer) {
