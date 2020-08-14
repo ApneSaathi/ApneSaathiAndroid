@@ -18,7 +18,6 @@ import com.nitiaayog.apnesaathi.interfaces.ReloadApiRequiredListener
 import com.nitiaayog.apnesaathi.model.DistrictDetails
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -84,16 +83,22 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
                         context!!, R.string.error, R.string.api_connection_error
                     )
                 is NetworkRequestState.LoadingData -> {
-                    if (it.apiName == ApiProvider.ApiLoadDashboard) {
+                    if (this.isResumed)
                         progressDialog.show()
-                    }
+
                 }
                 is NetworkRequestState.ErrorResponse -> {
                     progressDialog.dismiss()
-                    if (it.apiName == ApiProvider.ApiLoadDashboard) {
-                        BaseUtility.showAlertMessage(
-                            context!!, R.string.error, R.string.api_connection_error
-                        )
+                    if (this.isResumed) {
+                        if (it.errorCode != -1 && it.errorCode == 409) {
+                            BaseUtility.showAlertMessage(
+                                context!!, R.string.error, R.string.no_issues_available
+                            )
+                        } else {
+                            BaseUtility.showAlertMessage(
+                                context!!, R.string.error, R.string.api_connection_error
+                            )
+                        }
                     }
                 }
                 is NetworkRequestState.SuccessResponse<*> -> progressDialog.dismiss()

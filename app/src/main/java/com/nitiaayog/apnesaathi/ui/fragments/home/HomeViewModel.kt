@@ -2,7 +2,6 @@ package com.nitiaayog.apnesaathi.ui.fragments.home
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
@@ -18,6 +17,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
@@ -77,7 +77,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getCallsList(): LiveData<MutableList<CallData>> = callsList
-    fun getDistrictList() : LiveData<MutableList<DistrictDetails>> = districtList
+    fun getDistrictList(): LiveData<MutableList<DistrictDetails>> = districtList
 
     fun getPendingCalls(): LiveData<MutableList<CallData>> = pendingCallsList
     fun getFollowupCalls(): LiveData<MutableList<CallData>> = followUpCallsList
@@ -140,7 +140,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
                 params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             } else {
-                var id = 1 //todo replace with assigned district
+                var id = 3 //todo replace with assigned district
                 if (dataManager.getSelectedDistrictId().isNotEmpty()) {
                     id = dataManager.getSelectedDistrictId().toInt()
                 }
@@ -170,8 +170,16 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     println("$TAG ${e.message}")
                 }
             }, {
+                var errorCode = -1
+                if (it is HttpException) {
+                    errorCode = it.code()
+                }
                 loaderObservable.value =
-                    NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking, it)
+                    NetworkRequestState.ErrorResponse(
+                        ApiProvider.ApiGrievanceTracking,
+                        it,
+                        errorCode = errorCode
+                    )
             }).autoDispose(disposables)
         }
     }

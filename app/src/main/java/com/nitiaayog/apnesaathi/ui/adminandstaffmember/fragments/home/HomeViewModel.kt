@@ -14,8 +14,10 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
@@ -132,6 +134,55 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             }, {
                 updateNetworkState(
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiLoadDashboard, it)
+                )
+            }).autoDispose(disposables)
+        }
+    }
+
+    suspend fun getGrievanceTrackingList(context: Context) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
+            val params = JsonObject()
+            params.addProperty(ApiConstants.Id, dataManager.getUserId().toInt())
+            if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
+                params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
+            } else {
+                var id = 3 //todo replace with assigned district
+                if (dataManager.getSelectedDistrictId().isNotEmpty()) {
+                    id = dataManager.getSelectedDistrictId().toInt()
+                }
+                params.addProperty(ApiConstants.DistrictId, id)
+            }
+            //params.addProperty(ApiConstants.Role, dataManager.getRole())
+            //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list
+            //params.addProperty(ApiConstants.RequestedData, 0)// Count - No of data we need in oone page
+            dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+                updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiGrievanceTracking))
+            }.subscribe({
+                try {
+                    if (it.getStatus() == "0") {
+                        viewModelScope.launch {
+                            io {
+                                dataManager.clearPreviousTrackingData()
+                                dataManager.insertGrievanceTrackingList(it.getTrackingList())
+                            }
+                            loaderObservable.value = NetworkRequestState.SuccessResponse(
+                                ApiProvider.ApiGrievanceTracking, it
+                            )
+                        }
+                    } else updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking))
+                } catch (e: Exception) {
+                    println("$TAG ${e.message}")
+                }
+            }, {
+                var errorCode = -1
+                if (it is HttpException) {
+                    errorCode = it.code()
+                }
+                updateNetworkState(
+                    NetworkRequestState.ErrorResponse(
+                        ApiProvider.ApiGrievanceTracking,
+                        it, errorCode = errorCode
+                    )
                 )
             }).autoDispose(disposables)
         }

@@ -58,6 +58,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                     //viewModel.getGrievanceTrackingList(requireContext())
                     //if (dataManager.getRole() != "3")
                     viewModel.getCallDetails(requireContext())
+                    viewModel.getGrievanceTrackingList(requireContext())
                 }
             }
             .autoDispose(disposables)
@@ -330,6 +331,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             }
             is NetworkRequestState.ErrorResponse -> {
                 //progressBarVolunteers.visibility = View.GONE
+                if(state.apiName == ApiProvider.ApiLoadDashboard)
                 BaseUtility.showAlertMessage(
                     requireContext(), getString(R.string.error), state.throwable?.message
                         ?: getString(R.string.cannt_connect_to_server_try_later),

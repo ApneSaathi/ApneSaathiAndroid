@@ -273,6 +273,7 @@ class AppDataManager private constructor(
 
     override fun updateUserPreference(loginUser: LoginResponse) {
         setUserId(loginUser.getId()!!)
+        setRole(loginUser.getRole())
 //        setUserName(loginUser.userName)
 //        //setProfileImage(loginUser.userProfileImage)
 //        setPhoneNumber(loginUser.phoneNumber)
