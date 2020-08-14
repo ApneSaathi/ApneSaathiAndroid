@@ -14,6 +14,7 @@ class LoginResponse {
     private var message: String? = null
 
     private var id: String? = null
+    private var districtId: String? = null
 
     @SerializedName("volunteer")
     @Expose
@@ -51,6 +52,10 @@ class LoginResponse {
 
     fun getId(): String? {
         return id
+    }
+
+    fun getDistrictId(): String? {
+        return districtId
     }
 
     fun setId(id: String?) {

@@ -14,6 +14,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
@@ -140,7 +141,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
                 params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             } else {
-                var id = 3 //todo replace with assigned district
+                var id = -1
                 if (dataManager.getSelectedDistrictId().isNotEmpty()) {
                     id = dataManager.getSelectedDistrictId().toInt()
                 }
@@ -150,6 +151,11 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             //params.addProperty(ApiConstants.LastId, 0)// id - last id we got in list
             //params.addProperty(ApiConstants.RequestedData, 0)// Count - No of data we need in oone page
             dataManager.getGrievanceTrackingDetails(params).doOnSubscribe {
+                if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
+                    viewModelScope.launch {
+                        io { dataManager.clearPreviousTrackingData() }
+                    }
+                }
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiGrievanceTracking)
             }.subscribe({
@@ -157,7 +163,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.getStatus() == "0") {
                         viewModelScope.launch {
                             io {
-                                dataManager.clearPreviousTrackingData()
                                 dataManager.insertGrievanceTrackingList(it.getTrackingList())
                             }
                             loaderObservable.value = NetworkRequestState.SuccessResponse(

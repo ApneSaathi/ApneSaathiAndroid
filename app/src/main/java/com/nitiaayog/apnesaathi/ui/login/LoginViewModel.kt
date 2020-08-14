@@ -10,6 +10,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
 import kotlinx.coroutines.launch
 
 class LoginViewModel private constructor(dataManager: DataManager) : BaseViewModel() {
@@ -46,6 +47,8 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
                                     else -> it.getId()!!
                                 }
                             )
+                            if (it.getRole() == ROLE_DISTRICT_ADMIN)
+                                dataManager.setSelectedDistrictId(it.getDistrictId().toString())
 
                         }
 

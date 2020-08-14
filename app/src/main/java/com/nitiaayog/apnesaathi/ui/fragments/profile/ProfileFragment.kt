@@ -40,6 +40,7 @@ import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -79,7 +80,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
     private fun bindview(view: View) {
-        view.EditImageView.isClickable=false
+        view.EditImageView.isClickable = false
         view.EditImageView.setOnClickListener {
 //            showGetImageDialog()
         }
@@ -406,13 +407,13 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 }
                 is NetworkRequestState.LoadingData -> {
                     when (it.apiName) {
-                        ApiProvider.ApiGetVolunteerData ->{
+                        ApiProvider.ApiGetVolunteerData -> {
                             progressBarloadData.visibility = VISIBLE
 //                            BaseUtility.showAlertMessage(
 //                                activity!!, R.string.alert, R.string.can_not_connect_to_server
 //                            )
                         }
-                        ApiProvider.ApiUpdateProfile ->{
+                        ApiProvider.ApiUpdateProfile -> {
                             progressDialog.show()
 //                            BaseUtility.showAlertMessage(
 //                                activity!!, R.string.alert, R.string.can_not_connect_to_server
@@ -459,18 +460,34 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         val volunteerDataResponse = it.data
 
         if (volunteerDataResponse is VolunteerDataResponse) {
-            dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-            dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
-            dataManager.setEmail(volunteerDataResponse.volunteer.email)
-            dataManager.setAddress(volunteerDataResponse.volunteer.address)
-            dataManager.setGender(volunteerDataResponse.volunteer.gender)
+            if (dataManager.getRole() == ROLE_VOLUNTEER) {
+                dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
+                dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
+                dataManager.setEmail(volunteerDataResponse.volunteer.email)
+                dataManager.setAddress(volunteerDataResponse.volunteer.address)
+                dataManager.setGender(volunteerDataResponse.volunteer.gender)
 
-            TxtName.text = volunteerDataResponse.volunteer.firstName + " "  +volunteerDataResponse.volunteer.lastName
+                TxtName.text =
+                    volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
 
-            txtAddress.text =
-                volunteerDataResponse.volunteer.address
-            TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
-            TxtEmail.text = volunteerDataResponse.volunteer.email
+                txtAddress.text =
+                    volunteerDataResponse.volunteer.address
+                TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
+                TxtEmail.text = volunteerDataResponse.volunteer.email
+            } else {
+                dataManager.setFirstName(volunteerDataResponse.admin.firstName ?: "")
+                dataManager.setLastName(volunteerDataResponse.admin.lastName ?: "")
+                dataManager.setEmail(volunteerDataResponse.admin.email ?: "")
+//                dataManager.setGender(volunteerDataResponse.admin.ge)
+
+                TxtName.text =
+                    volunteerDataResponse.admin.firstName.plus(" ")
+                        .plus(volunteerDataResponse.admin.lastName)
+
+                txtAddress.text =" "
+                TxtContactNumber.text = volunteerDataResponse.admin.phoneNo
+                TxtEmail.text = volunteerDataResponse.admin.email
+            }
 
             if (dataManager.getGender().equals("F")) {
                 ProfileImage.setImageResource(R.drawable.ic_volunteer_female)
