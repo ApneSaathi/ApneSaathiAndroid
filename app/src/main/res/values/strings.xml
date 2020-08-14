@@ -508,5 +508,6 @@
     <string name="total_calls">Total Calls: </string>
 
     <string name="emergency_contact">Emergency Contact</string>
+    <string name="no_issues_available">No issues available</string>
 
 </resources>

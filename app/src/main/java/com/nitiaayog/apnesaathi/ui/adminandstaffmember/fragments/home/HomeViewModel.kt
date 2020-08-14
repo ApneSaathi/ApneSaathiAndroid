@@ -17,6 +17,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.utility.ROLE_STAFF_MEMBER
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
@@ -145,7 +146,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
             if (dataManager.getRole() == ROLE_VOLUNTEER || dataManager.getRole() == ROLE_STAFF_MEMBER) {
                 params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
             } else {
-                var id = 4 //todo replace with assigned district
+                var id = 3 //todo replace with assigned district
                 if (dataManager.getSelectedDistrictId().isNotEmpty()) {
                     id = dataManager.getSelectedDistrictId().toInt()
                 }
@@ -168,15 +169,19 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                                 ApiProvider.ApiGrievanceTracking, it
                             )
                         }
-                    } else updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking,responseCode = it.getStatus()))
+                    } else updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiGrievanceTracking))
                 } catch (e: Exception) {
                     println("$TAG ${e.message}")
                 }
             }, {
+                var errorCode = -1
+                if (it is HttpException) {
+                    errorCode = it.code()
+                }
                 updateNetworkState(
                     NetworkRequestState.ErrorResponse(
                         ApiProvider.ApiGrievanceTracking,
-                        it
+                        it, errorCode = errorCode
                     )
                 )
             }).autoDispose(disposables)
