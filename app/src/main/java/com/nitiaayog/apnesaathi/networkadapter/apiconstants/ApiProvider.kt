@@ -3,7 +3,6 @@ package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 import com.nitiaayog.apnesaathi.BuildConfig
 
 object ApiProvider {
-
     const val ApiLoginUser: String = BuildConfig.ApiHost + BuildConfig.GetLoginUser
     const val ApiVerifyPassword: String = BuildConfig.ApiHost + BuildConfig.VerifyPassword
     const val ApiGetVolunteers: String = BuildConfig.ApiHost + BuildConfig.GetVolunteers
@@ -16,4 +15,5 @@ object ApiProvider {
     const val ApiSeniorCitizenDetails = BuildConfig.ApiHost + BuildConfig.GetSrCitizenDetails
     const val ApiUpdateGrievanceDetails = BuildConfig.ApiHost + BuildConfig.UpdateGrievanceDetails
     const val ApiUpdateProfile = BuildConfig.ApiHost + BuildConfig.UpdateProfile
+    const val ApiUpdateVolunteerRatings = BuildConfig.ApiHost + BuildConfig.UpdateVolunteerRatings
 }

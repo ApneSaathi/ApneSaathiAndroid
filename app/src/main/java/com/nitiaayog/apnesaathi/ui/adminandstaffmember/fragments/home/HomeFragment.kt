@@ -1,16 +1,12 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.home
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -30,9 +26,7 @@ import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_calls_status.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import kotlinx.android.synthetic.main.include_toolbar.toolBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -55,8 +49,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 getObservableStreams()
                 lifecycleScope.launch(Dispatchers.IO) {
-                    //viewModel.getGrievanceTrackingList(requireContext())
-                    //if (dataManager.getRole() != "3")
                     viewModel.getCallDetails(requireContext())
                     viewModel.getGrievanceTrackingList(requireContext())
                 }
@@ -69,8 +61,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             setupCompletedCalls()
             setupInvalidCalls()
         }
-
-        //setupGrievances()
     }
 
     override fun provideViewModel(): HomeViewModel {
@@ -222,56 +212,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
-    /*private fun setupGrievances() {
-        val rvGrievancesList = (rvGrievancesList as RecyclerView)
-        rvGrievancesList.apply {
-            isNestedScrollingEnabled = false
-            addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-                    setDrawable(
-                        ContextCompat.getDrawable(context!!, R.drawable.list_item_divider)!!
-                    )
-                }
-            )
-            adapter = grievancesAdapter
-        }
-    }
-
-    private fun setGrievanceAdapter(): GrievancesAdapter {
-        return GrievancesAdapter(context!!).apply {
-            setOnItemClickListener(object : OnItemClickListener<GrievanceData> {
-                override fun onItemClick(position: Int, data: GrievanceData) {
-                }
-
-                override fun onMoreInfoClick(position: Int, data: GrievanceData) {
-                }
-            })
-        }
-    }
-
-    private fun manageVolunteersList(size: Int) {
-        lifecycleScope.launch {
-            tvVolunteers.text = getString(R.string.volunteers_count, size.toString())
-            btnSeeAllVolunteers.visibility = if (size > 3) {
-                btnSeeAllVolunteers.throttleClick().subscribe { showAllVolunteers() }
-                    .autoDispose(disposables)
-                View.VISIBLE
-            } else View.GONE
-        }
-    }
-
-    private fun showAllVolunteers() {
-        val data = Bundle().apply {
-            putString(BaseCallsTypeFragment.TYPE_OF_DATA, getString(R.string.menu_volunteers))
-            putInt(BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentAdminStaffHomeContainer)
-        }
-        val fragment = BaseCallsTypeFragment()
-        fragment.arguments = data
-        addFragment(
-            R.id.fragmentAdminStaffHomeContainer, fragment, getString(R.string.pending_calls)
-        )
-    }*/
-
     private fun manageCalls(itemCount: Int, @StringRes callsCountString: Int) {
         when (callsCountString) {
             R.string.pending_calls_count ->
@@ -304,10 +244,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                     }
                 )
                 data.putString(BaseCallsTypeFragment.TYPE_OF_DATA, type)
-                data.putInt(BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentCallContainer)
+                data.putInt(
+                    BaseCallsTypeFragment.CONTAINER_ID, R.id.fragmentAdminStaffHomeContainer
+                )
                 val fragment = BaseCallsTypeFragment()
                 fragment.arguments = data
-                addFragment(R.id.fragmentCallContainer, fragment, type)
+                addFragment(R.id.fragmentAdminStaffHomeContainer, fragment, type)
             }
             View.VISIBLE
         } else View.GONE
@@ -355,13 +297,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         viewModel.getNetworkStream().observe(viewLifecycleOwner, Observer { handleNetwork(it) })
     }
 
-    /*private fun observeGrievancesStream() {
-        viewModel.getGrievancesStream().removeObservers(viewLifecycleOwner)
-        viewModel.getGrievancesStream().observe(viewLifecycleOwner, Observer {
-
-        })
-    }*/
-
     private fun observePendingCalls() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
@@ -402,9 +337,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     private fun getObservableStreams() {
         lifecycleScope.launch {
             observeNetwork()
-            //observeGrievancesStream()
             if (dataManager.getRole() != "3") {
-                //observeVolunteersStream()
                 observePendingCalls()
                 observeFollowupCalls()
                 observeCompletedCalls()
@@ -412,6 +345,4 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             }
         }
     }
-
-
 }

@@ -4,7 +4,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/card_background"
+    android:background="@color/bg_color_grey"
     android:clipToPadding="false"
     android:scrollbars="none"
     app:layout_constraintStart_toStartOf="parent"

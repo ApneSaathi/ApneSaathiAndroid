@@ -11,7 +11,7 @@ import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about.AboutVolunteerFragment
-import com.nitiaayog.apnesaathi.ui.fragments.calls.allcalls.AllCallsFragment
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.reviewrating.FragmentRatingReviews
 import com.nitiaayog.apnesaathi.utility.ID
 import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -68,11 +68,17 @@ class VolunteerDetailsFragment : Fragment() {
     }
 
     private fun setUpViewPager() {
+        val volunteer = getData()
+
         val adapter = FragmentViewPagerAdapter(requireActivity())
         adapter.addFragment(
-            AboutVolunteerFragment.getInstance(getData()), getString(R.string.about)
+            AboutVolunteerFragment.getInstance(volunteer), getString(R.string.about)
         )
-        adapter.addFragment(AllCallsFragment(), getString(R.string.reviews))
+        adapter.addFragment(
+            FragmentRatingReviews.getInstance(
+                volunteer.id!!, volunteer.firstName!!.plus(" ").plus(volunteer.lastName!!)
+            ), getString(R.string.reviews)
+        )
         viewPager.adapter = adapter
     }
 }
