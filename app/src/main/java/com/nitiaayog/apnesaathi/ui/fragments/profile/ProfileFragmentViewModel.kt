@@ -36,7 +36,7 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
                     NetworkRequestState.LoadingData(ApiProvider.ApiGetVolunteerData)
             }.subscribe({
                 try {
-                    if (it.getStatusCode() == "0") {
+                    if (it.statusCode == "0") {
                         loaderObservable.value =
                             NetworkRequestState.SuccessResponse(ApiProvider.ApiGetVolunteerData, it)
                         viewModelScope.launch {

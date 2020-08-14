@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.WithActivityTransition"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.emergency_contact.Emergency_Contact_Activity"></activity>
+        <activity android:name=".ui.emergency_contact.MainEmergency_Contact_Activity"></activity>
         <activity android:name=".ui.emergency_contact.hospital.HospitalsActivity"/>
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>

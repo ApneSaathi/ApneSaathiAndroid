@@ -10,6 +10,12 @@ interface PreferenceRequest {
     fun setGender(gender: String)
     fun getGender(): String
 
+    fun setSelectedDistrictId(id: String)
+    fun getSelectedDistrictId(): String
+
+    fun setSrCitizenGender(gender: String)
+    fun getSrCitizenGender(): String
+
     fun getUserName(): String
     fun setUserName(userName: String)
 

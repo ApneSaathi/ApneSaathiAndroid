@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class,
+    entities = [CallData::class, SrCitizenGrievance::class, SyncSrCitizenGrievance::class, DistrictDetails::class,
         GrievanceData::class, Volunteer::class],
     version = BuildConfig.DatabaseVersion
 )
@@ -23,8 +23,8 @@ abstract class ApneSathiDatabase : RoomDatabase() {
     abstract fun provideGrievancesDao(): GrievancesDao
     abstract fun provideGrievancesTrackingDao(): GrievanceTrackingDao
     abstract fun provideSrCitizenGrievancesDao(): SyncSrCitizenGrievancesDao
-
     abstract fun provideVolunteerDao(): VolunteerDao
+    abstract fun provideDistrictDao(): DistrictDataDao
 
     companion object {
         @Volatile
@@ -37,7 +37,9 @@ abstract class ApneSathiDatabase : RoomDatabase() {
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext, ApneSathiDatabase::class.java, BuildConfig.DatabaseName
+                    context.applicationContext,
+                    ApneSathiDatabase::class.java,
+                    BuildConfig.DatabaseName
                 )
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.

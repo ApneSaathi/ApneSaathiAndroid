@@ -16,6 +16,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.include_recyclerview.*
@@ -68,7 +69,7 @@ class AllCallsFragment : BaseFragment<AllCallsViewModel>(), OnItemClickListener<
     override fun onMoreInfoClick(position: Int, data: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
         fragment.setSelectedUser(data)
-        addFragment(R.id.fragmentCallContainer, fragment, getString(R.string.details_fragment))
+        addFragment(R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT)
     }
 
     private fun getObservableStream() {

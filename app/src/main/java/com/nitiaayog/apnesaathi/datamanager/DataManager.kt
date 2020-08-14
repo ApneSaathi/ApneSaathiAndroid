@@ -5,7 +5,6 @@ import androidx.paging.DataSource
 import com.nitiaayog.apnesaathi.model.*
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
-import com.nitiaayog.apnesaathi.paging.volunteer.VolunteerSourceFactory
 import com.nitiaayog.apnesaathi.preferences.PreferenceRequest
 
 interface DataManager : ApiRequest, PreferenceRequest {
@@ -58,8 +57,10 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getVolunteers(afterId: Int, count: Int): List<Volunteer>
     suspend fun getVolunteer(id: Int): Volunteer?
     fun deleteVolunteers()
-
     fun getVolunteersList(): DataSource.Factory<Int, Volunteer>
-
     fun clearData()
+
+    //Table District
+    fun getDistrictList(): LiveData<MutableList<DistrictDetails>>
+    fun insertDistrictData(districtData: List<DistrictDetails>)
 }

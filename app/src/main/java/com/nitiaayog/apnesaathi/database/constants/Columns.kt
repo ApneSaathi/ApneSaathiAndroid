@@ -70,4 +70,5 @@ object Columns {
 
     const val JoiningDate: String = "joining_date"
     const val AssessmentScore: String = "assessment_score"
+    const val AdminId: String = "adminId"
 }
