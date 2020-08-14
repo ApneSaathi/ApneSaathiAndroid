@@ -98,6 +98,10 @@ class AppDataManager private constructor(
     override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
         apiRequest.updateGrievanceDetails(grDetails)
 
+    override fun updateVolunteerRatings(params: JsonObject): Single<BaseRepo> {
+        return apiRequest.updateVolunteerRatings(params)
+    }
+
     // Database Access
     //=> Table : call_details
     //Null and empty should be removed

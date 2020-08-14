@@ -23,6 +23,7 @@ ext {
     getSrCitizenDetails = appProperties['get_sr_citizen_details']
     updateGrievanceDetails = appProperties['update_grievance_details']
     updateProfile = appProperties['update_profile']
+    updateVolunteerRatings = appProperties['update_volunteer_ratings']
 }
 
 android {
@@ -54,6 +55,7 @@ android {
         buildTypes.each { it.buildConfigField "String", "GetSrCitizenDetails", "${getSrCitizenDetails}" }
         buildTypes.each { it.buildConfigField "String", "UpdateGrievanceDetails", "${updateGrievanceDetails}" }
         buildTypes.each { it.buildConfigField "String", "UpdateProfile", "${updateProfile}" }
+        buildTypes.each { it.buildConfigField "String", "UpdateVolunteerRatings", "${updateVolunteerRatings}" }
 
         release {
 

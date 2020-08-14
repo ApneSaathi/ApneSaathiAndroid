@@ -56,25 +56,6 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         grievancesFragment.setReloadApiListener(this)
 
         setupViewPager(offscreenPageLimit, adapter)
-
-        /*viewPager.isUserInputEnabled = false
-        viewPager.adapter = adapter
-        viewPager.offscreenPageLimit = offscreenPageLimit
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                bottomNavigationView.selectedItemId =
-                    getNavigationSelectedItem(offscreenPageLimit, position)
-                *//*bottomNavigationView.selectedItemId = when (position) {
-                    0 -> R.id.menuHome
-                    1 -> R.id.menuCalls
-                    2 -> R.id.menuGrievances
-                    3 -> R.id.menuProfile
-                    else -> R.id.menuHome
-                }*//*
-                updateToolbarTittle()
-            }
-        })*/
     }
 
     private fun setupViewPager(offscreenPageLimit: Int, adapter: FragmentStateAdapter) {
@@ -86,13 +67,6 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
                 super.onPageSelected(position)
                 bottomNavigationView.selectedItemId =
                     getNavigationSelectedItem(offscreenPageLimit, position)
-                /*bottomNavigationView.selectedItemId = when (position) {
-                    0 -> R.id.menuHome
-                    1 -> R.id.menuCalls
-                    2 -> R.id.menuGrievances
-                    3 -> R.id.menuProfile
-                    else -> R.id.menuHome
-                }*/
                 updateToolbarTittle()
             }
         })
@@ -101,12 +75,6 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
     private fun initBottomNavigationView() {
         bottomNavigationView.itemIconTintList = null
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            /*when (it.itemId) {
-                R.id.menuHome -> viewPager.currentItem = 0
-                R.id.menuCalls -> viewPager.currentItem = 1
-                R.id.menuGrievances -> viewPager.currentItem = 2
-                R.id.menuProfile -> viewPager.currentItem = 3
-            }*/
             getPagerSelectedItem(it.itemId)
             updateToolbarTittle()
             true
