@@ -81,7 +81,7 @@ class VolunteerDetailsViewModel(
         val params = JsonObject()
         params.addProperty(ApiConstants.VolunteerId, volunteerId)
         params.addProperty(ApiConstants.LoggedDateTime, date)
-        //println("$TAG $params")
+        println("$TAG $params")
         dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
             updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard))
         }.subscribe({

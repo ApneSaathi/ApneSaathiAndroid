@@ -177,7 +177,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         return when (date) {
             today -> "Today"
             yesterday -> "Yesterday"
-            else -> BaseUtility.format(date, DATE_FORMAT, "dd/MM/yyyy")
+            else -> BaseUtility.format(date, DATE_FORMAT, "dd-MM-yyyy")
         }
     }
 
@@ -188,14 +188,13 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
             requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 val strDate = "$year-${month + 1}-$dayOfMonth"
                 date = BaseUtility.dateTimeFormatConversion(strDate, DATE_FORMAT)
-                btnDate.text = getDateText(BaseUtility.format(date, DATE_FORMAT))
                 getSeniorCitizens()
             },
             calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         calendar.timeInMillis = System.currentTimeMillis()
-        calendar.add(Calendar.MONTH, -1)
+        calendar.add(Calendar.MONTH, -2)
         picker.datePicker.minDate = calendar.timeInMillis
         picker.datePicker.maxDate = System.currentTimeMillis()
         picker.show()
@@ -230,9 +229,10 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
     }
 
     private fun getSeniorCitizens() {
+        val mDate = BaseUtility.format(date, DATE_FORMAT)
+        //println("$TAG $mDate")
+        btnDate.text = getDateText(mDate)
         CoroutineScope(Dispatchers.IO).launch {
-            val mDate = BaseUtility.format(date, DATE_FORMAT)
-            println("$TAG $mDate")
             viewModel.getVolunteerDetails(requireContext(), mDate)
         }
     }
