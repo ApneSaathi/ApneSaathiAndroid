@@ -25,53 +25,76 @@ class VolunteerDetailsViewModel(
 
         @Synchronized
         fun getInstance(dataManager: DataManager, volunteerId: Int): VolunteerDetailsViewModel {
-            return instance ?: synchronized(this) {
+            return if (instance != null) {
+                return if (instance!!.volunteerId == volunteerId) instance!! else synchronized(this) {
+                    VolunteerDetailsViewModel(dataManager, volunteerId).also { instance = it }
+                }
+            } else synchronized(this) {
                 VolunteerDetailsViewModel(dataManager, volunteerId).also { instance = it }
             }
         }
     }
 
+    private val allCalls: MutableList<CallData> = mutableListOf()
     private val pendingCalls: MutableList<CallData> = mutableListOf()
     private val followupCalls: MutableList<CallData> = mutableListOf()
     private val completedCalls: MutableList<CallData> = mutableListOf()
     private val invalidCalls: MutableList<CallData> = mutableListOf()
 
-    private fun differentiateCalls(data: MutableList<CallData>) {
-        val pndngCalls: List<CallData> = data.filter {
+    override fun onCleared() {
+        instance?.let { instance = null }
+        super.onCleared()
+    }
+
+    private fun addCallsTo(calls: MutableList<CallData>, callsToAdded: List<CallData>) {
+        calls.apply {
+            clear()
+            addAll(callsToAdded)
+        }
+    }
+
+    private fun differentiateCalls() {
+        val pndngCalls: List<CallData> = allCalls.filter {
             ((it.callStatusCode == "1") || (it.callStatusCode == "null") || (it.callStatusCode == ""))
         }
-        pendingCalls.addAll(pndngCalls)
+        addCallsTo(pendingCalls, pndngCalls)
 
-        val flupCalls: List<CallData> = data.filter {
+        val flupCalls: List<CallData> = allCalls.filter {
             ((it.callStatusCode == "2") || (it.callStatusCode == "3") || (it.callStatusCode == "4")
                     || (it.callStatusCode == "5") || (it.callStatusCode == "6"))
         }
-        followupCalls.addAll(flupCalls)
+        addCallsTo(followupCalls, flupCalls)
 
-        val cmpltCalls: List<CallData> = data.filter {
+        val cmpltCalls: List<CallData> = allCalls.filter {
             ((it.callStatusCode == "9") || (it.callStatusCode == "10"))
         }
-        completedCalls.addAll(cmpltCalls)
+        addCallsTo(completedCalls, cmpltCalls)
 
-        val invldCalls: List<CallData> = data.filter {
+        val invldCalls: List<CallData> = allCalls.filter {
             ((it.callStatusCode == "7") || (it.callStatusCode == "8"))
         }
-        invalidCalls.addAll(invldCalls)
+        addCallsTo(invalidCalls, invldCalls)
     }
 
     @WorkerThread
-    private suspend fun getCallDetails() {
+    private suspend fun getCallDetails(date: String) {// date in format "yyyy-MM-dd"
         val params = JsonObject()
         params.addProperty(ApiConstants.VolunteerId, volunteerId)
-        dataManager.getCallDetails(params).doOnSubscribe {
+        params.addProperty(ApiConstants.LoggedDateTime, date)
+        println("$TAG $params")
+        dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
             updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard))
         }.subscribe({
             try {
                 if (it.status == "0") {
                     viewModelScope.launch {
                         io {
-                            val data = it.getData()
-                            differentiateCalls(data.callsList)
+                            val data = it.getSeniorCitizens()
+                            allCalls.apply {
+                                clear()
+                                addAll(data)
+                            }
+                            differentiateCalls()
                             updateNetworkState(
                                 NetworkRequestState.SuccessResponse(
                                     ApiProvider.ApiLoadDashboard, data
@@ -139,17 +162,12 @@ class VolunteerDetailsViewModel(
     }
 
     fun getCalls(): List<CallData> {
-        val calls: MutableList<CallData> = mutableListOf()
-        calls.addAll(pendingCalls)
-        calls.addAll(followupCalls)
-        calls.addAll(completedCalls)
-        calls.addAll(invalidCalls)
-        return calls
+        return allCalls
     }
 
-    suspend fun getVolunteerDetails(context: Context) {
+    suspend fun getVolunteerDetails(context: Context, date: String) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
-            io { getCallDetails() }
+            io { getCallDetails(date) }
         }
     }
 

@@ -12,7 +12,7 @@ object ApiProvider {
     const val ApiSaveSeniorCitizenFeedbackForm: String =
         BuildConfig.ApiHost + BuildConfig.SaveSrCitizenFeedbackForm
     const val ApiRegisterSeniorCitizen: String = BuildConfig.ApiHost + BuildConfig.RegisterSrCitizen
-    const val ApiSeniorCitizenDetails = BuildConfig.ApiHost + BuildConfig.GetSrCitizenDetails
+    const val ApiSeniorCitizenDetails = BuildConfig.ApiHost + BuildConfig.GetSeniorCitizensDetails
     const val ApiUpdateGrievanceDetails = BuildConfig.ApiHost + BuildConfig.UpdateGrievanceDetails
     const val ApiUpdateProfile = BuildConfig.ApiHost + BuildConfig.UpdateProfile
     const val ApiUpdateVolunteerRatings = BuildConfig.ApiHost + BuildConfig.UpdateVolunteerRatings

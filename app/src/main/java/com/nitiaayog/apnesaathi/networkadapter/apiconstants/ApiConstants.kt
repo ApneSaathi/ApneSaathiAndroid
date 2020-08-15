@@ -115,4 +115,6 @@ object ApiConstants {
     const val AssessmentScore: String = "assessment_score"
     const val LastName: String = "lastName"
     const val Ratings: String = "ratings"
+
+    const val SeniorCitizensList: String = "srCitizenList"
 }

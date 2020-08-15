@@ -35,7 +35,7 @@ class CallsAdapter(private val role: String) :
         this.itemClickListener = itemClickListener
     }
 
-    fun setData(dataList: MutableList<CallData>) {
+    fun setData(dataList: List<CallData>) {
         this.dataList.apply {
             this.clear()
             this.addAll(dataList)
@@ -59,7 +59,7 @@ class CallsAdapter(private val role: String) :
 
 //            itemView.constraintLayout.setOnClickListener(this)
             if (role == "1") itemView.ivCall.setOnClickListener(this)
-            else itemView.ivCall.visibility == View.GONE
+            else itemView.ivCall.visibility = View.GONE
 
             itemView.ivMoreInfo.setOnClickListener(this)
         }

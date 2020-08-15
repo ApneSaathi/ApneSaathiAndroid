@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about
 
+import android.app.DatePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -16,7 +17,6 @@ import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails.VolunteerDetailsViewModel
@@ -28,13 +28,25 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.fragment_admin_staff_about_volunteer.*
 import kotlinx.android.synthetic.main.include_recyclerview.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
+    // 1. Login as Volunteer
+    // 2. Logout and Login as Admin/Staff Mem.
+    // 3. Close app and clear from recent
+    // 4. Login screen appearing
+
     companion object {
+
+        private val TAG: String = "TAG -- ${AboutVolunteerFragment::class.java.simpleName} -->"
+
+        private const val DATE_FORMAT: String = "yyyy-MM-dd"
+
         fun getInstance(volunteer: Volunteer): AboutVolunteerFragment {
             val fragment = AboutVolunteerFragment()
             fragment.setVolunteer(volunteer)
@@ -46,6 +58,24 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
     private val srCitizensAdapter: CallsAdapter by lazy { setAdapter() }
 
+    private var date: Date = Date(System.currentTimeMillis())
+
+    private val today: String by lazy {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        val today: String = "${calendar.get(Calendar.YEAR)}-${(calendar.get(Calendar.MONTH) + 1)}" +
+                "-${calendar.get(Calendar.DAY_OF_MONTH)}"
+        BaseUtility.format(today, DATE_FORMAT, DATE_FORMAT)
+    }
+    private val yesterday: String by lazy {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.add(Calendar.DAY_OF_MONTH, -1)
+        val yesterday: String = "${calendar.get(Calendar.YEAR)}-" +
+                "${(calendar.get(Calendar.MONTH) + 1)}-${calendar.get(Calendar.DAY_OF_MONTH)}"
+        BaseUtility.format(yesterday, DATE_FORMAT, DATE_FORMAT)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,6 +85,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
                 .autoDispose(disposables)
 
             ivCall.throttleClick().subscribe { prepareToCallPerson() }.autoDispose(disposables)
+            btnDate.throttleClick().subscribe { showDatePicker() }.autoDispose(disposables)
 
             setupRecyclerView()
             setVolunteerData()
@@ -142,6 +173,33 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         }
     }
 
+    private fun getDateText(date: String): String {
+        return when (date) {
+            today -> "Today"
+            yesterday -> "Yesterday"
+            else -> BaseUtility.format(date, DATE_FORMAT, "dd-MM-yyyy")
+        }
+    }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        val picker = DatePickerDialog(
+            requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                val strDate = "$year-${month + 1}-$dayOfMonth"
+                date = BaseUtility.dateTimeFormatConversion(strDate, DATE_FORMAT)
+                getSeniorCitizens()
+            },
+            calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.add(Calendar.MONTH, -2)
+        picker.datePicker.minDate = calendar.timeInMillis
+        picker.datePicker.maxDate = System.currentTimeMillis()
+        picker.show()
+    }
+
     private fun manageProgressBarData() {
         val pendingCalls = viewModel.getPendingCalls().size
         val followUpCalls = viewModel.getFollowupCalls().size
@@ -166,7 +224,16 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
     private fun manageDataStream() {
         lifecycleScope.launch {
             getObservableDataStream()
-            viewModel.getVolunteerDetails(requireContext())
+            getSeniorCitizens()
+        }
+    }
+
+    private fun getSeniorCitizens() {
+        val mDate = BaseUtility.format(date, DATE_FORMAT)
+        //println("$TAG $mDate")
+        btnDate.text = getDateText(mDate)
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.getVolunteerDetails(requireContext(), mDate)
         }
     }
 
@@ -191,12 +258,13 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
             }
             is NetworkRequestState.SuccessResponse<*> -> {
                 progressBarSrCitizens.visibility = View.GONE
-                if (state.data is CallDetails) {
+                if (state.data is MutableList<*>) {
                     manageProgressBarData()
+                    val data = viewModel.getCalls()
                     tvSrCitizens.text = getString(
-                        R.string.senior_citizen_list_count, viewModel.getCalls().size.toString()
+                        R.string.senior_citizen_list_count, data.size.toString()
                     )
-                    srCitizensAdapter.setData(state.data.callsList)
+                    srCitizensAdapter.setData(data)
                 }
             }
         }
