@@ -7,6 +7,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.SeniorCitizenRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
@@ -64,7 +65,7 @@ class ApiManager private constructor(private val apiClient: ApiInterface) : ApiR
         return apiClient.registerSeniorCitizen(srDetails).subscribeAndObserveWithDelaySubscription()
     }
 
-    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> {
+    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<SeniorCitizenRepo> {
         return apiClient.getSeniorCitizenDetails(srDetails)
             .subscribeAndObserveWithDelaySubscription()
     }

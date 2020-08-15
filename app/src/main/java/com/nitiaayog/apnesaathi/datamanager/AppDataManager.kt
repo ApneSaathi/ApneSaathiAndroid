@@ -13,6 +13,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apimanager.ApiManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiRequest
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.SeniorCitizenRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
@@ -92,8 +93,8 @@ class AppDataManager private constructor(
     override fun saveSrCitizenFeedback(srCitizenFeedback: JsonObject): Single<BaseRepo> =
         apiRequest.saveSrCitizenFeedback(srCitizenFeedback)
 
-    override fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo> =
-        apiRequest.getSeniorCitizenDetails(srDetails)
+    override fun getSeniorCitizenDetails(params: JsonObject): Single<SeniorCitizenRepo> =
+        apiRequest.getSeniorCitizenDetails(params)
 
     override fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo> =
         apiRequest.updateGrievanceDetails(grDetails)
@@ -330,5 +331,4 @@ class AppDataManager private constructor(
     override fun getVolunteersList(): DataSource.Factory<Int, Volunteer> {
         return volunteerDao.getVolunteersList()
     }
-
 }

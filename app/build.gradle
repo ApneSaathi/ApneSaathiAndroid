@@ -20,7 +20,8 @@ ext {
     getGrievanceTracking = appProperties['get_grievance_tracking']
     saveSrCitizenFeedbackForm = appProperties['save_sr_citizen_feedback_form']
     registerSrCitizen = appProperties['register_sr_citizen']
-    getSrCitizenDetails = appProperties['get_sr_citizen_details']
+    //getSrCitizenDetails = appProperties['get_sr_citizen_details']
+    getSeniorCitizensDetails = appProperties['get_senior_citizens_details']
     updateGrievanceDetails = appProperties['update_grievance_details']
     updateProfile = appProperties['update_profile']
     updateVolunteerRatings = appProperties['update_volunteer_ratings']
@@ -52,7 +53,8 @@ android {
         buildTypes.each { it.buildConfigField "String", "GetGrievanceTracking", "${getGrievanceTracking}" }
         buildTypes.each { it.buildConfigField "String", "SaveSrCitizenFeedbackForm", "${saveSrCitizenFeedbackForm}" }
         buildTypes.each { it.buildConfigField "String", "RegisterSrCitizen", "${registerSrCitizen}" }
-        buildTypes.each { it.buildConfigField "String", "GetSrCitizenDetails", "${getSrCitizenDetails}" }
+        //buildTypes.each { it.buildConfigField "String", "GetSrCitizenDetails", "${getSrCitizenDetails}" }
+        buildTypes.each { it.buildConfigField "String", "GetSeniorCitizensDetails", "${getSeniorCitizensDetails}" }
         buildTypes.each { it.buildConfigField "String", "UpdateGrievanceDetails", "${updateGrievanceDetails}" }
         buildTypes.each { it.buildConfigField "String", "UpdateProfile", "${updateProfile}" }
         buildTypes.each { it.buildConfigField "String", "UpdateVolunteerRatings", "${updateVolunteerRatings}" }

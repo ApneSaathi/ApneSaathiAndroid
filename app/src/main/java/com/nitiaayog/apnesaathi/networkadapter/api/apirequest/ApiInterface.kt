@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.networkadapter.api.apirequest
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.SeniorCitizenRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
@@ -44,7 +45,7 @@ interface ApiInterface {
     fun registerSeniorCitizen(@Body srDetails: JsonObject): Single<BaseRepo>
 
     @POST(ApiProvider.ApiSeniorCitizenDetails)
-    fun getSeniorCitizenDetails(@Body srDetails: JsonObject): Single<BaseRepo>
+    fun getSeniorCitizenDetails(@Body params: JsonObject): Single<SeniorCitizenRepo>
 
     @PUT(ApiProvider.ApiUpdateGrievanceDetails)
     fun updateGrievanceDetails(@Body srDetails: JsonObject): Single<BaseRepo>

@@ -4,6 +4,7 @@ import androidx.annotation.WorkerThread
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.SeniorCitizenRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
@@ -41,8 +42,8 @@ interface ApiRequest {
     // Register new Sr. Citizen
     fun registerSeniorCitizen(srDetails: JsonObject): Single<BaseRepo>
 
-    // Get senior citizen details
-    fun getSeniorCitizenDetails(srDetails: JsonObject): Single<BaseRepo>
+    // Get senior citizen List(Used when admin/staff member logs ub)
+    fun getSeniorCitizenDetails(params: JsonObject): Single<SeniorCitizenRepo>
 
     fun updateGrievanceDetails(grDetails: JsonObject): Single<BaseRepo>
 

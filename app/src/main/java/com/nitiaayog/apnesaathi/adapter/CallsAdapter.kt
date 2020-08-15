@@ -35,7 +35,7 @@ class CallsAdapter(private val role: String) :
         this.itemClickListener = itemClickListener
     }
 
-    fun setData(dataList: MutableList<CallData>) {
+    fun setData(dataList: List<CallData>) {
         this.dataList.apply {
             this.clear()
             this.addAll(dataList)

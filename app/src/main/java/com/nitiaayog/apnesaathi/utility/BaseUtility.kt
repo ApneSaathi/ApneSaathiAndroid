@@ -15,6 +15,8 @@ import java.util.*
 
 object BaseUtility {
 
+    private val TAG: String = "TAG -- ${BaseUtility::class.java.simpleName} -->"
+
     const val FORMAT_SERVER_DATE_TIME: String = "yyyy-MM-dd'T'HH:mm:ss"
     const val FORMAT_LOCAL_DATE_TIME: String = "yyyy-MM-dd HH:mm:ss"
 
@@ -29,20 +31,22 @@ object BaseUtility {
         context.startActivity(Intent(Intent.ACTION_VIEW).apply {
             this.data = Uri.parse(url)
         })
+
     fun getFormattedDate(date: String): String {
-        if(date.isEmpty()) return ""
+        if (date.isEmpty()) return ""
         val input = DateTimeFormatter.ofPattern(FORMAT_SERVER_DATE_TIME)
         val output = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
         val fa = input.parse(date)
         return output.format(fa)
     }
+
     fun dateTimeFormatConversion(date: String, inputFormat: String): Date {
         try {
             val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
             val outputDate: Date? = inputFormatter.parse(date)
             return outputDate!!
         } catch (e: Exception) {
-            println("TAG -- MyData -- ServerToLocal --> ${e.message}")
+            println("$TAG ServerToLocal --> ${e.message}")
         }
         return Date(System.currentTimeMillis())
     }
@@ -52,11 +56,21 @@ object BaseUtility {
         try {
             val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
             val outputDate: Date? = inputFormatter.parse(date)
-            return outFormatter.format(outputDate)
+            return outFormatter.format(outputDate!!)
         } catch (e: Exception) {
-            println("TAG -- MyData -- ServerToLocal --> ${e.message}")
+            println("$TAG ServerToLocal --> ${e.message}")
         }
         return outFormatter.format(Date(System.currentTimeMillis()))
+    }
+
+    fun format(date: Date, outputFormat: String): String {
+        try {
+            val outFormatter: DateFormat = SimpleDateFormat(outputFormat, Locale.ENGLISH)
+            return outFormatter.format(date)
+        } catch (e: Exception) {
+            println("$TAG ServerToLocal --> ${e.message}")
+        }
+        return ""
     }
 
     fun getRandomNumber(numberLength: Int): String {
@@ -99,7 +113,8 @@ object BaseUtility {
         context: Context, @StringRes title: Int, @StringRes message: Int,
         @StringRes positiveTitle: Int = R.string.okay,
         onPositiveBtnClick: (dialog: DialogInterface, which: Int) -> Unit
-    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title).setCancelable(false)
+    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
+        .setCancelable(false)
         .setMessage(message).setPositiveButton(positiveTitle, onPositiveBtnClick).show()
 
     fun showAlertMessage(
@@ -128,7 +143,8 @@ object BaseUtility {
         @StringRes positiveTitle: Int = R.string.yes, @StringRes negativeTitle: Int = R.string.no,
         onPositiveBtnClick: (dialog: DialogInterface, which: Int) -> Unit,
         onNegativeBtnClick: (dialog: DialogInterface, which: Int) -> Unit
-    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title).setCancelable(false)
+    ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
+        .setCancelable(false)
         .setMessage(message)
         .setPositiveButton(positiveTitle, onPositiveBtnClick)
         .setNegativeButton(negativeTitle, onNegativeBtnClick)
