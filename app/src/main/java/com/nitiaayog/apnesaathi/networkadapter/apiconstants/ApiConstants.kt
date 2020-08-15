@@ -88,9 +88,13 @@ object ApiConstants {
     const val LastUpdateOn: String = "lastUpdatedOn"
     const val UnderReviewDate: String = "underReviewDate"
     const val ResolvedDate: String = "resolvedDate"
+    const val ReviewedBy: String = "reviewedby"
+    const val RaisedBy: String = "raisedBy"
+    const val ResolvedBy: String = "resolvedby"
     const val ReviewRemarks: String = "underReviewRemarks"
     const val ResolvedRemarks: String = "resolvedRemarks"
     const val phoneNo: String = "phoneNo"
+    const val MobileNo: String = "mobileNo"
 
     const val Profileidvolunteer: String = "idvolunteer"
     const val ProfileFirstName: String = "firstName"

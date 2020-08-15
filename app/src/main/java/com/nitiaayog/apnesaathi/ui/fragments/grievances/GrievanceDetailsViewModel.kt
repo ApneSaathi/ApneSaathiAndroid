@@ -30,17 +30,27 @@ class GrievanceDetailsViewModel(private val dataManager: DataManager) : BaseView
     ) {
         if (checkNetworkAvailability(context, ApiProvider.ApiUpdateGrievanceDetails)) {
             val params = JsonObject()
+            var updatedByParam = ""
             var statusGrievance = status
-            if(status == "In Progress"){
+            if (status == "In Progress") {
                 statusGrievance = "UNDER REVIEW"
+                updatedByParam = ApiConstants.ReviewedBy
             }
-            if(status=="Pending"){
+            if (status == "Pending") {
                 statusGrievance = "RAISED"
+                updatedByParam = ApiConstants.RaisedBy
+            }
+            if (status == "Resolved") {
+                updatedByParam = ApiConstants.ResolvedBy
             }
             params.addProperty(ApiConstants.GrievanceTrackingId, trackingId)
-            params.addProperty(ApiConstants.GrievanceStatus, statusGrievance.toUpperCase(Locale.ROOT))
+            params.addProperty(
+                ApiConstants.GrievanceStatus,
+                statusGrievance.toUpperCase(Locale.ROOT)
+            )
             params.addProperty(ApiConstants.Description, description)
             params.addProperty(ApiConstants.GrievanceType, grievanceType)
+            params.addProperty(updatedByParam, dataManager.getFirstName())
             dataManager.updateGrievanceDetails(params).doOnSubscribe {
                 loaderObservable.value =
                     NetworkRequestState.LoadingData(ApiProvider.ApiUpdateGrievanceDetails)
@@ -57,5 +67,6 @@ class GrievanceDetailsViewModel(private val dataManager: DataManager) : BaseView
             }).autoDispose(disposables)
         }
     }
+
     fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
 }

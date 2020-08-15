@@ -13,6 +13,13 @@
         android:icon="@drawable/menu_calls_selector"
         android:title="@string/menu_calls"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuVolunteers"
+        android:enabled="true"
+        android:visible="false"
+        android:icon="@drawable/menu_calls_selector"
+        android:title="@string/volunteers"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuGrievances"

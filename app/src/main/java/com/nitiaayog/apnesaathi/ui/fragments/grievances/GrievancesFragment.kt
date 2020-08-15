@@ -22,6 +22,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.GRIEVANCE_DETAIL_FRAGMENT
+import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
 import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import kotlinx.android.synthetic.main.fragment_calls.tabLayout
 import kotlinx.android.synthetic.main.fragment_calls.viewPager
@@ -48,8 +49,8 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         toolBar.title = getString(R.string.menu_issues)
         if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
             toolBar.inflateMenu(R.menu.menu_filter_district)
-            getDataStream()
         }
+        getDataStream()
         setUpViewPager()
 
         TabLayoutMediator(
@@ -63,18 +64,21 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
     }
 
     private fun getDataStream() {
-        viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
-        viewModel.getDistrictList().observe(viewLifecycleOwner, Observer {
-            districtList = it
-            for ((i, item) in it.withIndex()) {
-                menu.menu.add(Menu.NONE, i, i, item.districtName)
-            }
-        })
+        if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
+            viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
+            viewModel.getDistrictList().observe(viewLifecycleOwner, Observer {
+                districtList = it
+                for ((i, item) in it.withIndex()) {
+                    menu.menu.add(Menu.NONE, i, i, item.districtName)
+                }
+            })
 
-        toolBar.setOnMenuItemClickListener {
-            onOptionsItemSelected(it)
+            toolBar.setOnMenuItemClickListener {
+                onOptionsItemSelected(it)
+            }
         }
-        viewModel.getGrievanceTrackingList(this.context!!)
+        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN)
+            viewModel.getGrievanceTrackingList(this.context!!)
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
             when (it) {
