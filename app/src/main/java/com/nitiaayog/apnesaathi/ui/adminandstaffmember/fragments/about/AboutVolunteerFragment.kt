@@ -233,7 +233,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         //println("$TAG $mDate")
         btnDate.text = getDateText(mDate)
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getVolunteerDetails(requireContext(), mDate)
+            viewModel.getSeniorCitizens(requireContext(), mDate)
         }
     }
 

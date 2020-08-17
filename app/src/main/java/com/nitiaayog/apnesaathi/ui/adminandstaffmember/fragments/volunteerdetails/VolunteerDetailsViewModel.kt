@@ -77,7 +77,7 @@ class VolunteerDetailsViewModel(
     }
 
     @WorkerThread
-    private suspend fun getCallDetails(date: String) {// date in format "yyyy-MM-dd"
+    private suspend fun getAssignedSrCitizens(date: String) {// date in format "yyyy-MM-dd"
         val params = JsonObject()
         params.addProperty(ApiConstants.VolunteerId, volunteerId)
         params.addProperty(ApiConstants.LoggedDateTime, date)
@@ -165,9 +165,9 @@ class VolunteerDetailsViewModel(
         return allCalls
     }
 
-    suspend fun getVolunteerDetails(context: Context, date: String) {
+    suspend fun getSeniorCitizens(context: Context, date: String) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
-            io { getCallDetails(date) }
+            io { getAssignedSrCitizens(date) }
         }
     }
 

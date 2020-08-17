@@ -12,6 +12,7 @@ import com.nitiaayog.apnesaathi.adapter.VolunteersAdapter
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
@@ -23,7 +24,7 @@ import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.fragment_base_calls_type.*
+import kotlinx.android.synthetic.main.fragment_admin_staff_volunteers.*
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,10 @@ import java.util.concurrent.TimeUnit
 
 class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
 
+    companion object {
+        private val TAG: String = "TAG -- ${VolunteersFragment::class.java.simpleName} -->"
+    }
+
     private var lastSelectedItemId: Int = -1
 
     private val volunteersAdapter: VolunteersAdapter by lazy { setupVolunteersAdapter() }
@@ -39,7 +44,7 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolBar.title = getString(R.string.volunteers)
+        initToolbar()
 
         getObservableStreams()
 
@@ -74,6 +79,8 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
     }
 
     private fun initViews() {
+        //initSearch()
+
         val paddingBottom = resources.getDimensionPixelOffset(R.dimen.view_size_66)
         val paddingTop = resources.getDimensionPixelOffset(R.dimen.dimen_10)
         rvList.apply {
@@ -87,6 +94,39 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
             )
             adapter = volunteersAdapter
         }
+    }
+
+    private fun initToolbar() {
+        toolBar.title = getString(R.string.volunteers)
+        /*toolBar.inflateMenu(R.menu.menu_volunteers)
+        toolBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menuSearch -> {
+                    //etSearch.tag = "1" // Start Searching
+                    llSearch.visibility = View.VISIBLE
+                    true
+                }
+                else -> false
+            }
+        }*/
+    }
+
+    private fun initSearch() {
+        ivBack.throttleClick().subscribe { llSearch.visibility = View.GONE }
+            .autoDispose(disposables)
+
+        ivClose.throttleClick().subscribe {
+            /*llSearch.visibility = if (llSearch.visibility == View.VISIBLE) {
+                etSearch.tag = "0" // Stop Searching
+                View.GONE
+            } else {
+                etSearch.tag = "1" // Start Searching
+                View.VISIBLE
+            }*/
+            etSearch.tag = "0" // Stop Searching
+            llSearch.visibility = View.GONE
+            etSearch.text.clear()
+        }.autoDispose(disposables)
     }
 
     private fun navigateToDetails(volunteer: Volunteer) {

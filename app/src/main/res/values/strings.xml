@@ -520,4 +520,7 @@
     <string name="wait_we_update_ratings">Please wait we are updating ratings</string>
     <string name="update_ratings_successful">You have successfully updated Rating of %s</string>
 
+    <string name="menu_search">Search</string>
+    <string name="search_volunteers">Type name, gender, mobile no</string>
+
 </resources>
