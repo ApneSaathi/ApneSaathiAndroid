@@ -259,6 +259,10 @@ class AppDataManager private constructor(
         return volunteerDao.getVolunteer(id)
     }
 
+    override fun fetchVolunteers(): List<Volunteer> {
+        return volunteerDao.fetchVolunteers()
+    }
+
     override fun deleteVolunteers() {
         return volunteerDao.deleteAll()
     }

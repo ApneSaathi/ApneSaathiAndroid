@@ -23,6 +23,9 @@ interface VolunteerDao {
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}>:afterId ORDER BY ${Columns.Id} ASC LIMIT :count")
     fun getVolunteers(afterId: Int, count: Int = 5): MutableList<Volunteer>
 
+    @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} ORDER BY ${Columns.Id} DESC")
+    fun fetchVolunteers(): MutableList<Volunteer>
+
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS}")
     fun getVolunteersList(): DataSource.Factory<Int, Volunteer>
 

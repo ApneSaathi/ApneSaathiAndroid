@@ -32,8 +32,6 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         }
     }
 
-    //private var factory: VolunteerSourceFactory = VolunteerSourceFactory(dataManager)
-
     private val volunteers: LiveData<PagedList<Volunteer>> by lazy {
         LivePagedListBuilder(/*factory*/dataManager.getVolunteersList(), config).build()
     }
@@ -62,7 +60,8 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
             viewModelScope.launch {
                 if (it.status == "0") {
                     io {
-                        insertVolunteers(it.getVolunteers())
+                        val volunteersList = it.getVolunteers()
+                        insertVolunteers(volunteersList)
                         volunteers.value!!.dataSource.invalidate()
                     }
                     updateNetworkState(
