@@ -26,7 +26,8 @@ class OtpActivityModel private constructor(dataManager: DataManager) : BaseViewM
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
-    fun setData(phoneNumber:String, role: String) {
+    fun setData(userId:String, phoneNumber:String, role: String) {
+        dataManager.setUserId(userId)
         dataManager.setRole(role)
         dataManager.setPhoneNumber(phoneNumber)
     }
@@ -43,13 +44,13 @@ class OtpActivityModel private constructor(dataManager: DataManager) : BaseViewM
                         viewModelScope.launch {
                             loaderObservable.value =
                                 NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
-                            dataManager.setUserId(
+                            /*dataManager.setUserId(
                                 when {
                                     it.getId() == null -> "1001"
                                     it.getId()!!.isEmpty() -> "1001"
                                     else -> it.getId()!!
                                 }
-                            )
+                            )*/
                         }
                     } else loaderObservable.value =
                         NetworkRequestState.ErrorResponse(ApiProvider.ApiLoginUser)

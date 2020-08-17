@@ -81,13 +81,14 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data
                     EditMobileNumber.isFocusableInTouchMode = true
-                    if (loginres is LoginResponse)
-                        dataManager.updateUserPreference(loginres)
+                    /*if (loginres is LoginResponse)
+                        dataManager.updateUserPreference(loginres)*/
                     progressBarlogin.visibility = GONE
 
                     val loginResponse = it.data as LoginResponse
 
                     val intent = getTargetIntent(OtpActivity::class.java)
+                    intent.putExtra(ApiConstants.UserId, loginResponse.getId().toString())
                     intent.putExtra(ApiConstants.PhoneNumber, EditMobileNumber.text.toString())
                     intent.putExtra(ApiConstants.Role, loginResponse.getRole())
                     startActivity(intent)

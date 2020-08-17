@@ -1,13 +1,14 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.password
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.extensions.rx.onTextChanges
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
@@ -23,6 +24,10 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
             .setMessage(R.string.check_details)
     }
 
+    private val userId: String by lazy {
+        val isUserId: Boolean = intent?.hasExtra(ApiConstants.UserId) ?: false
+        if (isUserId) intent.getStringExtra(ApiConstants.UserId) else ""
+    }
     private val role: String by lazy {
         val isRole: Boolean = intent?.hasExtra(ApiConstants.Role) ?: false
         if (isRole) intent.getStringExtra(ApiConstants.Role) else ""
@@ -39,9 +44,19 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
         ivBack.throttleClick().subscribe { finish() }.autoDispose(disposables)
 
-        tietPassword.onTextChanges {
-            if (it.isNotEmpty()) tilPassword.error = ""
-        }
+        tietPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(
+                text: CharSequence?, start: Int, count: Int, after: Int
+            ) {
+                if (text!!.isNotEmpty()) tilPassword.error = ""
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
 
         btnLogin.throttleClick().subscribe {
             if (validateFields()) viewModel.validatePassword(this, tietPassword.text.toString())
@@ -49,7 +64,7 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
     }
 
     override fun provideViewModel(): PasswordViewModel = getViewModel {
-        PasswordViewModel.getInstance(dataManager, phoneNumber, role)
+        PasswordViewModel.getInstance(dataManager, userId, phoneNumber, role)
     }
 
     override fun provideLayoutResource(): Int = R.layout.activity_password

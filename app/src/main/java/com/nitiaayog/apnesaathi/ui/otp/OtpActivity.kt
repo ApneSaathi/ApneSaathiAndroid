@@ -50,6 +50,10 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         ProgressDialog.Builder(mContext).setMessage("Please wait.")
     }
 
+    private val userId: String by lazy {
+        val isUserId: Boolean = intent?.hasExtra(ApiConstants.UserId) ?: false
+        if (isUserId) intent.getStringExtra(ApiConstants.UserId) else ""
+    }
     private val role: String by lazy {
         val isRole: Boolean = intent?.hasExtra(ApiConstants.Role) ?: false
         if (isRole) intent.getStringExtra(ApiConstants.Role) else ""
@@ -242,26 +246,31 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
     private fun callnextActivity() {
         val targetNavigation = when (role) {
-            ROLE_STAFF_MEMBER, ROLE_DISTRICT_ADMIN, ROLE_MASTER_ADMIN -> PasswordActivity::class.java
-            ROLE_VOLUNTEER -> DashBoardActivity::class.java
+            ROLE_STAFF_MEMBER, ROLE_DISTRICT_ADMIN, ROLE_MASTER_ADMIN -> {
+                PasswordActivity::class.java
+            }
+            ROLE_VOLUNTEER -> {
+                DashBoardActivity::class.java
+            }
             else -> null
         }
         targetNavigation?.run {
             /*dataManager.setPhoneNumber(phoneNumber) //intent.getStringExtra("PhoneNo")
             dataManager.setRole(role)*/
-            val intent = getTargetIntent(this)
+            val navigationIntent = getTargetIntent(this)
             when (role) {
                 ROLE_VOLUNTEER -> {
-                    viewModel.setData(phoneNumber, role)
+                    viewModel.setData(userId, phoneNumber, role)
                     finishAffinity()
                 }
                 else -> {
-                    intent.putExtra(ApiConstants.PhoneNumber, phoneNumber)
-                    intent.putExtra(ApiConstants.Role, role)
+                    navigationIntent.putExtra(ApiConstants.UserId, userId)
+                    navigationIntent.putExtra(ApiConstants.PhoneNumber, phoneNumber)
+                    navigationIntent.putExtra(ApiConstants.Role, role)
                     finish()
                 }
             }
-            startActivity(intent)
+            startActivity(navigationIntent)
         }
     }
 
