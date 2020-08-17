@@ -276,7 +276,7 @@ class AppDataManager private constructor(
         val language = preferences.getSelectedLanguage()
         clearPreferences()
         setSelectedLanguage(language)
-        CoroutineScope(Dispatchers.IO).launch { syncGrievancesDao.getCount() }
+        CoroutineScope(Dispatchers.IO).launch { dbManager.clearDatabase() }
     }
 
     // PreferenceRequests

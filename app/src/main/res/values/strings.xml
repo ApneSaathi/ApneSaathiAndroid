@@ -475,7 +475,7 @@
     <string name="LastName">Last Name</string>
     <string name="FirstName">First Name</string>
     <string name="validate_complaint_category">Provide a complaint category</string>
-    <string name="logout_error">There are some Sr. citizen data still remaining to sync that were stored while you were offline.\n\nSo that you can not logout now, please try after sometime</string>
+    <string name="logout_error_message">There are some Sr. citizen data still remaining to sync that were stored while you were offline.\n\nHence you are requested to not logout now, we will auto-sync them once network will available.\n\nStill want to logout ?</string>
     <string name="invalid_calls">Invalid Calls</string>
     <string name="awareness_about_covid_symptoms">Awareness about covid symptoms</string>
     <string name="behavioral_practices_not_being_followed">Behavioral practices not being followed</string>
@@ -520,7 +520,6 @@
     <string name="wait_we_update_ratings">Please wait we are updating ratings</string>
     <string name="update_ratings_successful">You have successfully updated Rating of %s</string>
 
-    <string name="menu_search">Search</string>
-    <string name="search_volunteers">Type name, gender, mobile no</string>
+    <string name="logout_message">Are you sure, you want to logout ?</string>
 
 </resources>

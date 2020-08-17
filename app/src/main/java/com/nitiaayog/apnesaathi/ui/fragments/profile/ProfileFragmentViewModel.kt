@@ -24,6 +24,14 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         }
     }
 
+    suspend fun getCountOfDataRemainingToSync(): Int {
+        return dataManager.getCount()
+    }
+
+    fun clearData() {
+        dataManager.clearData()
+    }
+
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
     fun getvolunteerData(mContext: Context, volunteerId: String) {

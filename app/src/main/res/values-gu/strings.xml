@@ -230,7 +230,7 @@
     <string name="use_other_number">બીજો નંબર વાપરો</string>
     <string name="select_mobile_number">મોબાઇલ નંબર પસંદ કરો</string>
 
-    <string name="logout_error">હજી કેટલાક વરિષ્ઠ નાગરિકનો ડેટા સિંક કરવા માટે બાકી છે જે ઇન્ટરનેટ ઉપલબ્ધ ન હતું ત્યારે સંગ્રહિત હતા.તેથી તમે હમણાં લૉગ આઉટ કરી શકશો નહીં, કૃપા કરીને ડેટા સમન્વયિત કર્યા પછી પ્રયાસ કરો</string>
+    <string name="logout_error_message">હજી કેટલાક વરિષ્ઠ નાગરિકનો ડેટા સિંક કરવા માટે બાકી છે જે ઇન્ટરનેટ ઉપલબ્ધ ન હતું ત્યારે સંગ્રહિત હતા.તેથી તમે હમણાં લૉગ આઉટ કરી શકશો નહીં, કૃપા કરીને ડેટા સમન્વયિત કર્યા પછી પ્રયાસ કરો</string>
 
     <string-array name="states_array">
         <item>આસામ</item>
@@ -480,6 +480,6 @@
     <string name="very_good">Very Good</string>
     <string name="excellent">Excellent</string>
 
-    <string name="search_volunteers">નામ, લિંગ, મોબાઇલ નંબર લખો</string>
+    <string name="logout_message">શું તમને ખાતરી છે કે, તમે લૉગ આઉટ કરવા માંગો છો ?</string>
 
 </resources>
