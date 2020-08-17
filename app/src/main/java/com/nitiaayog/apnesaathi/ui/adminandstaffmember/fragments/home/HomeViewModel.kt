@@ -70,9 +70,11 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     }
 
     private fun manageAdminData(data: AdminCallDetails) {
-        dataManager.clearPreviousData()
-        dataManager.insertCallData(data.adminCallsList)
 
+        dataManager.clearDistricts()
+        dataManager.clearPreviousData()
+
+        dataManager.insertCallData(data.adminCallsList)
         dataManager.insertDistrictData(data.adminDistrictList)
 
         val grievances: List<SrCitizenGrievance> = prepareGrievances(data.adminCallsList)

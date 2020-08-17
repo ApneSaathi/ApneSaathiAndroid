@@ -16,4 +16,7 @@ interface DistrictDataDao {
     @Query("SELECT * FROM ${Tables.TABLE_DISTRICT}")
     fun getDistrictList(): LiveData<MutableList<DistrictDetails>>
 
+    @Query("DELETE FROM ${Tables.TABLE_DISTRICT}")
+    fun clearDistricts()
+
 }

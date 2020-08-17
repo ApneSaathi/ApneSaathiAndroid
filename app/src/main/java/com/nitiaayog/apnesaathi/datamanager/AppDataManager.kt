@@ -247,6 +247,8 @@ class AppDataManager private constructor(
         districtDataDao.insertAll(districtData)
     }
 
+    override fun clearDistricts() = districtDataDao.clearDistricts()
+
     /**
      * If(afterId == 0) then 1st time this method is called else load more is working good
      * */

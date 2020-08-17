@@ -45,7 +45,18 @@ class Admin {
         set(value) {
             field = value ?: ""
         }
-
+    @SerializedName(ApiConstants.Gender)
+    var gender: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+    @SerializedName(ApiConstants.Address)
+    var address: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
     @SerializedName(ApiConstants.District)
     var district: String? = ""
         get() = field ?: ""

@@ -16,6 +16,8 @@ class MainEmergency_Contact_Activity : BaseActivity<EmergencyContact_ViewModel>(
     private val titlePoliceStation="Police Station's"
     private val titleApneSathiConsulatant="Apne Sathi Consulatant's"
     private val titleCustomContact="Custom Contact's"
+    private val title108Ambulance="108 Ambulance"
+    private val titlecovidcontrolroom="Covid-Control-Room"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         toolBar.setNavigationIcon(R.drawable.ic_back)
@@ -27,26 +29,36 @@ class MainEmergency_Contact_Activity : BaseActivity<EmergencyContact_ViewModel>(
     }
 
     private fun bindviews() {
-//        card_hospitls.throttleClick().subscribe() {
-//            val intent = Intent(this, HospitalsActivity::class.java)
-//            intent.putExtra("title", titleHospital)
-//            startActivity(intent)
-//        }.autoDispose(disposables)
-//        card_police_stations.throttleClick().subscribe() {
-//            val intent = Intent(this, HospitalsActivity::class.java)
-//            intent.putExtra("title", titlePoliceStation)
-//            startActivity(intent)
-//        }.autoDispose(disposables)
-//        card_apneSathi_counsultant.throttleClick().subscribe() {
-//            val intent = Intent(this, HospitalsActivity::class.java)
-//            intent.putExtra("title", titleApneSathiConsulatant)
-//            startActivity(intent)
-//        }.autoDispose(disposables)
-//        card_customeContact.throttleClick ().subscribe() {
-//            val intent = Intent(this, HospitalsActivity::class.java)
-//            intent.putExtra("title", titleCustomContact)
-//            startActivity(intent)
-//        }.autoDispose(disposables)
+        card_hospitls.throttleClick().subscribe() {
+            val intent = Intent(this, HospitalsActivity::class.java)
+            intent.putExtra("title", titleHospital)
+            startActivity(intent)
+        }.autoDispose(disposables)
+        card_police_stations.throttleClick().subscribe() {
+            val intent = Intent(this, HospitalsActivity::class.java)
+            intent.putExtra("title", titlePoliceStation)
+            startActivity(intent)
+        }.autoDispose(disposables)
+        card_apneSathi_counsultant.throttleClick().subscribe() {
+            val intent = Intent(this, HospitalsActivity::class.java)
+            intent.putExtra("title", titleApneSathiConsulatant)
+            startActivity(intent)
+        }.autoDispose(disposables)
+        card_customeContact.throttleClick ().subscribe() {
+            val intent = Intent(this, HospitalsActivity::class.java)
+            intent.putExtra("title", titleCustomContact)
+            startActivity(intent)
+        }.autoDispose(disposables)
+        card_ambulance.throttleClick ().subscribe() {
+            val intent = Intent(this, HospitalsActivity::class.java)
+            intent.putExtra("title", title108Ambulance)
+            startActivity(intent)
+        }.autoDispose(disposables)
+        card_covidcontrol_room.throttleClick ().subscribe() {
+            val intent = Intent(this, HospitalsActivity::class.java)
+            intent.putExtra("title", titlecovidcontrolroom)
+            startActivity(intent)
+        }.autoDispose(disposables)
 
     }
 
