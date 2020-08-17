@@ -232,7 +232,7 @@
     <string name="use_other_number">दुसरा नंबर वापरा</string>
     <string name="select_mobile_number">मोबाइल नंबर निवडा</string>
 
-    <string name="logout_error">आपण ऑफलाइन असताना संचयित केलेला अद्याप काही ज्येष्ठ नागरिक डेटा शिल्लक आहे. आपण आत्ताच लॉगआउट करू शकणार नाही, कृपया डेटा संकालनानंतर प्रयत्न करा</string>
+    <string name="logout_error_message">आपण ऑफलाइन असताना संचयित केलेला अद्याप काही ज्येष्ठ नागरिक डेटा शिल्लक आहे. आपण आत्ताच लॉगआउट करू शकणार नाही, कृपया डेटा संकालनानंतर प्रयत्न करा</string>
 
     <string-array name="states_array">
         <item>आसाम</item>
@@ -481,6 +481,6 @@
     <string name="very_good">Very Good</string>
     <string name="excellent">Excellent</string>
 
-    <string name="search_volunteers">नाव, लिंग, मोबाइल नंबर टाइप करा</string>
+    <string name="logout_message">आपली खात्री आहे की आपण लॉगआउट करू इच्छिता ?</string>
 
 </resources>

@@ -94,5 +94,7 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun setRole(role: String) = preferences.putString(PreferenceConstants.Role, role)
     override fun getRole(): String = preferences.getString(PreferenceConstants.Role)!!
 
-    override fun clearPreferences() = preferences.edit().clear().apply()
+    override fun clearPreferences() {
+        preferences.edit().clear().apply()
+    }
 }
