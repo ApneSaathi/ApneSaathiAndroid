@@ -88,7 +88,6 @@
                 android:inputType="number"
                 android:maxLength="10"
                 android:padding="@dimen/dimen_13"
-                android:text="9611571555"
                 android:textSize="@dimen/text_16" />
         </LinearLayout>
 

@@ -28,6 +28,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : BaseActivity<LoginViewModel>() {
+
+    // 9611571555  ----  A@x@ffrt6781
+
     lateinit var mContext: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
