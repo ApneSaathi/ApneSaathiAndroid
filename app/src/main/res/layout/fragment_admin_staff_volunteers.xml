@@ -1,89 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/background_light"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <FrameLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
-            <include layout="@layout/include_toolbar" />
-
-            <!--<LinearLayout
-                android:id="@+id/llSearch"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/background_light"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/dimen_5"
-                android:paddingEnd="@dimen/dimen_5"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ivBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:contentDescription="@string/app_name"
-                    android:padding="@dimen/dimen_5"
-                    android:src="@drawable/ic_back" />
+                <include layout="@layout/include_toolbar" />
 
-                <EditText
-                    android:id="@+id/etSearch"
-                    style="@style/TextAppearance.Title"
-                    android:layout_width="0dp"
+                <!--<LinearLayout
+                    android:id="@+id/llSearch"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/search_volunteers"
-                    android:inputType="textPersonName|text|textAutoComplete|textAutoCorrect|textFilter"
-                    android:paddingStart="@dimen/dimen_3"
-                    android:paddingEnd="@dimen/dimen_3"
-                    android:textSize="@dimen/text_14" />
+                    android:background="@android:color/background_light"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/dimen_5"
+                    android:paddingEnd="@dimen/dimen_5"
+                    android:visibility="gone">
 
-                <ImageView
-                    android:id="@+id/ivClose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:contentDescription="@string/app_name"
-                    android:padding="@dimen/dimen_5"
-                    android:src="@drawable/ic_close" />
+                    <ImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/dimen_5"
+                        android:src="@drawable/ic_back" />
 
-            </LinearLayout>-->
+                    <EditText
+                        android:id="@+id/etSearch"
+                        style="@style/TextAppearance.Title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/search_volunteers"
+                        android:inputType="textPersonName|text|textAutoComplete|textAutoCorrect|textFilter"
+                        android:paddingStart="@dimen/dimen_3"
+                        android:paddingEnd="@dimen/dimen_3"
+                        android:textSize="@dimen/text_14" />
 
-        </FrameLayout>
+                    <ImageView
+                        android:id="@+id/ivClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/dimen_5"
+                        android:src="@drawable/ic_close" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+                </LinearLayout>-->
 
-    <include layout="@layout/include_recyclerview" />
+            </FrameLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <include layout="@layout/include_recyclerview" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <FrameLayout
         android:id="@+id/fragmentAdminStaffVolunteerContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!--<include layout="@layout/fragment_base_calls_type" />-->
+</FrameLayout><!--<include layout="@layout/fragment_base_calls_type" />-->
 
     <!--<FrameLayout
         android:id="@+id/fragmentAdminStaffVolunteerContainer"
