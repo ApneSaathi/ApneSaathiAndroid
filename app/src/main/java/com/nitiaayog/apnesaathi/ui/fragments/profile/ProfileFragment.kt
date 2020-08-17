@@ -506,13 +506,14 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                 dataManager.setFirstName(volunteerDataResponse.admin.firstName ?: "")
                 dataManager.setLastName(volunteerDataResponse.admin.lastName ?: "")
                 dataManager.setEmail(volunteerDataResponse.admin.email ?: "")
-//                dataManager.setGender(volunteerDataResponse.admin.ge)
+                dataManager.setAddress(volunteerDataResponse.admin.address ?: "")
+                dataManager.setGender(volunteerDataResponse.admin.gender ?: "")
 
                 TxtName.text =
                     volunteerDataResponse.admin.firstName.plus(" ")
                         .plus(volunteerDataResponse.admin.lastName)
 
-                txtAddress.text = " "
+                txtAddress.text = volunteerDataResponse.admin.address
                 TxtContactNumber.text = volunteerDataResponse.admin.phoneNo
                 TxtEmail.text = volunteerDataResponse.admin.email
             }

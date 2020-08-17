@@ -20,9 +20,11 @@ import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.BaseCallsTypeFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_calls_status.*
@@ -100,14 +102,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 }
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
-                    /*lastCallPosition = position
-                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
-                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
-                    )*/
+                    )
                 }
             })
         }
@@ -133,14 +132,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 }
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
-                    /*lastCallPosition = position
-                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
-                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
-                    )*/
+                    )
                 }
             })
         }
@@ -166,14 +162,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 }
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
-                    /*lastCallPosition = position
-                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
-                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
-                    )*/
+                    )
                 }
             })
         }
@@ -199,14 +192,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 }
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
-                    /*lastCallPosition = position
-                    lastCallData = data
                     val fragment = SeniorCitizenDetailsFragment()
                     fragment.setSelectedUser(data)
-                    viewModel.setLastSelectedUser(data.callId.toString())
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
-                    )*/
+                    )
                 }
             })
         }

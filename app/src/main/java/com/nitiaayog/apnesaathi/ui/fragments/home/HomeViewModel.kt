@@ -163,6 +163,8 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.getStatus() == "0") {
                         viewModelScope.launch {
                             io {
+                                if (dataManager.getRole() != ROLE_MASTER_ADMIN)
+                                    dataManager.clearPreviousTrackingData()
                                 dataManager.insertGrievanceTrackingList(it.getTrackingList())
                             }
                             loaderObservable.value = NetworkRequestState.SuccessResponse(

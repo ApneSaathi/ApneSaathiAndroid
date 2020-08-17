@@ -64,4 +64,5 @@ interface DataManager : ApiRequest, PreferenceRequest {
     //Table District
     fun getDistrictList(): LiveData<MutableList<DistrictDetails>>
     fun insertDistrictData(districtData: List<DistrictDetails>)
+    fun clearDistricts()
 }
