@@ -111,23 +111,23 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         }*/
     }
 
-    private fun initSearch() {
+    /*private fun initSearch() {
         ivBack.throttleClick().subscribe { llSearch.visibility = View.GONE }
             .autoDispose(disposables)
 
         ivClose.throttleClick().subscribe {
-            /*llSearch.visibility = if (llSearch.visibility == View.VISIBLE) {
+            *//*llSearch.visibility = if (llSearch.visibility == View.VISIBLE) {
                 etSearch.tag = "0" // Stop Searching
                 View.GONE
             } else {
                 etSearch.tag = "1" // Start Searching
                 View.VISIBLE
-            }*/
+            }*//*
             etSearch.tag = "0" // Stop Searching
             llSearch.visibility = View.GONE
             etSearch.text.clear()
         }.autoDispose(disposables)
-    }
+    }*/
 
     private fun navigateToDetails(volunteer: Volunteer) {
         val fragment = VolunteerDetailsFragment()
