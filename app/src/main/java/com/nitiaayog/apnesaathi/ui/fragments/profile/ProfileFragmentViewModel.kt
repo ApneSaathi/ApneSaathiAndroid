@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
 
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
@@ -74,7 +74,10 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
     ) {
         if (checkNetworkAvailability(mContext, ApiProvider.ApiUpdateProfile)) {
             val params1 = JsonObject()
-            params1.addProperty(ApiConstants.Profileidvolunteer, volunteerId)
+            if (dataManager.getRole() == ROLE_VOLUNTEER)
+                params1.addProperty(ApiConstants.Profileidvolunteer, volunteerId)
+            else
+                params1.addProperty(ApiConstants.AdminId, volunteerId)
             params1.addProperty(ApiConstants.ProfileFirstName, firstname)
             params1.addProperty(ApiConstants.ProfileLstname, lastname)
             params1.addProperty(ApiConstants.ProfileAddress, address)

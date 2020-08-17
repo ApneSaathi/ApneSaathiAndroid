@@ -16,6 +16,7 @@ import com.nitiaayog.apnesaathi.adapter.CallsAdapter
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.interfaces.MoreButtonClickedListener
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
@@ -54,6 +55,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         }
     }
 
+    private lateinit var moreButtonClickListener: MoreButtonClickedListener
     private var volunteer: Volunteer? = null
 
     private val srCitizensAdapter: CallsAdapter by lazy { setAdapter() }
@@ -167,7 +169,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
                 }
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
-
+                    moreButtonClickListener.onMoreButtonClick(data)
                 }
             })
         }
@@ -279,5 +281,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
     private fun setVolunteer(volunteer: Volunteer) {
         this.volunteer = volunteer
+    }
+
+    fun setOnMoreItemClickListener(moreButtonClickListener: MoreButtonClickedListener) {
+        this.moreButtonClickListener = moreButtonClickListener
     }
 }

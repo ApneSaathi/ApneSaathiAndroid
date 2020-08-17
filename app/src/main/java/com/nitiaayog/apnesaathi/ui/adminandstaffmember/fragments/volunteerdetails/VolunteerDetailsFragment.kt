@@ -8,15 +8,20 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
+import com.nitiaayog.apnesaathi.base.extensions.addFragment
+import com.nitiaayog.apnesaathi.interfaces.MoreButtonClickedListener
+import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about.AboutVolunteerFragment
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.reviewrating.FragmentRatingReviews
+import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.utility.ID
+import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
-class VolunteerDetailsFragment : Fragment() {
+class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -27,7 +32,7 @@ class VolunteerDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolBar.title = getString(R.string.volunteer_details) 
+        toolBar.title = getString(R.string.volunteer_details)
         toolBar.setNavigationIcon(R.drawable.ic_back)
         toolBar.setNavigationOnClickListener { fragmentManager?.popBackStack() }
 
@@ -71,8 +76,10 @@ class VolunteerDetailsFragment : Fragment() {
         val volunteer = getData()
 
         val adapter = FragmentViewPagerAdapter(requireActivity())
+        val aboutFragment = AboutVolunteerFragment.getInstance(volunteer)
+        aboutFragment.setOnMoreItemClickListener(this)
         adapter.addFragment(
-            AboutVolunteerFragment.getInstance(volunteer), getString(R.string.about)
+            aboutFragment, getString(R.string.about)
         )
         adapter.addFragment(
             FragmentRatingReviews.getInstance(
@@ -80,5 +87,13 @@ class VolunteerDetailsFragment : Fragment() {
             ), getString(R.string.reviews)
         )
         viewPager.adapter = adapter
+    }
+
+    override fun onMoreButtonClick(callData: CallData) {
+        val fragment = SeniorCitizenDetailsFragment()
+        fragment.setSelectedUser(callData)
+        addFragment(
+            R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
+        )
     }
 }

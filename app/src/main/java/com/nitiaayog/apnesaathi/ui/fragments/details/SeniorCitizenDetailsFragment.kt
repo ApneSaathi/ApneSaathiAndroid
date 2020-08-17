@@ -19,11 +19,11 @@ import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.DateItem
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
-import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
 import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -44,6 +44,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         super.onViewCreated(view, savedInstanceState)
 
         toolBar.setNavigationIcon(R.drawable.ic_back)
+        toolBar.title = getString(R.string.app_bar_title)
         toolBar.setNavigationOnClickListener { activity?.onBackPressed() }
 
         getGrievanceData()
@@ -90,6 +91,11 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             adapter.setOnItemClickListener(this)
             rcl_call_dates.layoutManager?.scrollToPosition(adapter.selectedPos)
         })
+        if (dataManager.getRole() == ROLE_VOLUNTEER) {
+            img_call_button.visibility = View.VISIBLE
+        } else {
+            img_call_button.visibility = View.GONE
+        }
         if (grievancesList.size > 0) {
             viewModel.prepareData(grievancesList)
             makeGrievanceContainerVisible()
@@ -146,7 +152,8 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
 
         if (srCitizenGrievance.behavioralChangesNoticed == getString(R.string.no)
-            || srCitizenGrievance.behavioralChangesNoticed == getString(R.string.may_be)) {
+            || srCitizenGrievance.behavioralChangesNoticed == getString(R.string.may_be)
+        ) {
             tv_title_behavior_change.visibility = View.VISIBLE
             tv_practices_not_followed.visibility = View.VISIBLE
             tv_practices_not_followed.text = srCitizenGrievance.whichPracticesNotFollowed ?: "--"
@@ -310,7 +317,11 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun makeGrievanceContainerInvisible() {
-        txt_edit.visibility = View.VISIBLE
+        if (dataManager.getRole() == ROLE_VOLUNTEER)
+            txt_edit.visibility = View.VISIBLE
+        else
+            txt_edit.visibility = View.GONE
+
         cl_uneditable_container.visibility = View.GONE
         ll_status_container.visibility = View.VISIBLE
         val status = getCallStatusFromCode(callData?.callStatusCode)

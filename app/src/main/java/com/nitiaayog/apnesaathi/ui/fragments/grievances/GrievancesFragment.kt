@@ -68,6 +68,9 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
             viewModel.getDistrictList().observe(viewLifecycleOwner, Observer {
                 districtList = it
+                if (menu.menu.size() > 0){
+                    menu.menu.clear()
+                }
                 for ((i, item) in it.withIndex()) {
                     menu.menu.add(Menu.NONE, i, i, item.districtName)
                 }
