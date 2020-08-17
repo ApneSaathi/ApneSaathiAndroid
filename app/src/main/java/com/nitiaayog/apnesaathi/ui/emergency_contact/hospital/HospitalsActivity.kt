@@ -84,7 +84,6 @@ class HospitalsActivity : BaseActivity<HospitalViewModel>() {
         return contactList
     }
 
-
     override fun provideLayoutResource(): Int = R.layout.hospital_list_activity
 }
 
