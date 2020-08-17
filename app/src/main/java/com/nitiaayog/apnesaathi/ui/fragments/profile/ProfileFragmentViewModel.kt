@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
@@ -22,6 +21,14 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         fun getInstance(dataManager: DataManager): ProfileFragmentViewModel = synchronized(this) {
             ProfileFragmentViewModel(dataManager)
         }
+    }
+
+    suspend fun getCountOfDataRemainingToSync(): Int {
+        return dataManager.getCount()
+    }
+
+    fun clearData() {
+        dataManager.clearData()
     }
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable

@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
@@ -47,6 +48,9 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.get_images_dialog.*
 import kotlinx.android.synthetic.main.include_toolbar.toolBar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 
@@ -96,13 +100,26 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         }
         view.TxtLogout.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
-            dataManager.setPhoneNumber("")
-            dataManager.setFirstName("")
-            startActivity(intent)
-            activity?.finish()
+            lifecycleScope.launch(Dispatchers.Main) {
+                val count = withContext(Dispatchers.IO) {
+                    viewModel.getCountOfDataRemainingToSync()
+                }
+                if (count <= 0) BaseUtility.showAlertMessage(
+                    requireContext(), getString(R.string.alert), getString(R.string.logout_message),
+                    getString(R.string.logout)
+                ) { dialog, _ ->
+                    dialog.dismiss()
+                    prepareToLogout()
+                }
+                else BaseUtility.showAlertMessage(
+                    requireContext(), R.string.alert, R.string.logout_error_message,
+                    R.string.logout, R.string.no, { dialog, _ ->
+                        dialog.dismiss()
+                        prepareToLogout()
+                    }, { dialog, _ -> dialog.dismiss() }
+                )
+            }
         }
-
 
         view.TxtMainSave.throttleClick().subscribe {
             if (TextUtils.isEmpty(view.EditFirstName.text.toString())) {
@@ -389,6 +406,17 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     override fun onCallPermissionDenied() {
     }
 
+    private fun prepareToLogout() {
+        viewModel.clearData()
+        proceedToLogout()
+    }
+
+    private fun proceedToLogout() {
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
+        requireActivity().finishAffinity()
+    }
+
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
@@ -484,7 +512,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
                     volunteerDataResponse.admin.firstName.plus(" ")
                         .plus(volunteerDataResponse.admin.lastName)
 
-                txtAddress.text =" "
+                txtAddress.text = " "
                 TxtContactNumber.text = volunteerDataResponse.admin.phoneNo
                 TxtEmail.text = volunteerDataResponse.admin.email
             }
