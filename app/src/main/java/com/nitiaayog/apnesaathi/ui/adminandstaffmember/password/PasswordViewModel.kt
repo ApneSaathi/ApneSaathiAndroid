@@ -15,21 +15,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PasswordViewModel(
-    private val dataManager: DataManager, private val phoneNo: String, private val role: String
+    private val dataManager: DataManager, private val userId: String, private val phoneNo: String,
+    private val role: String
 ) : BaseViewModel() {
 
     companion object {
 
-        @Volatile
-        private var instanceFactory: PasswordViewModel? = null
-
         @Synchronized
-        fun getInstance(dataManager: DataManager, phoneNo: String, role: String):
+        fun getInstance(dataManager: DataManager, userId: String, phoneNo: String, role: String):
                 PasswordViewModel {
-            if (instanceFactory == null) synchronized(this) {
-                PasswordViewModel(dataManager, phoneNo, role).also { instanceFactory = it }
-            }
-            return instanceFactory!!
+            return synchronized(this) { PasswordViewModel(dataManager, userId, phoneNo, role) }
         }
     }
 
@@ -39,13 +34,14 @@ class PasswordViewModel(
     fun validatePassword(context: Context, password: String) {
         if (checkNetworkAvailability(context, ApiProvider.ApiVerifyPassword)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.AdminId, dataManager.getUserId())
+            params.addProperty(ApiConstants.AdminId, userId)
             params.addProperty(ApiConstants.Password, password)
             viewModelScope.launch(Dispatchers.IO) {
                 dataManager.verifyPassword(params).doOnSubscribe {
                     updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiVerifyPassword))
                 }.subscribe({
                     if (it.status == "0") {
+                        dataManager.setUserId(userId)
                         dataManager.setPhoneNumber(phoneNo)
                         dataManager.setRole(role)
                         updateNetworkState(
