@@ -18,7 +18,7 @@
 
             <include layout="@layout/include_toolbar" />
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/llSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -60,7 +60,7 @@
                     android:padding="@dimen/dimen_5"
                     android:src="@drawable/ic_close" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </FrameLayout>
 
