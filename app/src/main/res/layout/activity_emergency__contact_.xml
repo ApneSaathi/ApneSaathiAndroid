@@ -188,7 +188,7 @@
                          android:layout_height="@dimen/view_size_50"
                          android:layout_centerHorizontal="true"
                          android:layout_marginTop="@dimen/dimen_5"
-                         android:src="@drawable/ic_consultant" />
+                         android:src="@drawable/ic_covid_control" />
 
 
                      <TextView
