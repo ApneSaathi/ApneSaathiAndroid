@@ -114,8 +114,6 @@ dependencies {
 
     // Room Database RxRoom
     implementation roomDB.runtime
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     kapt roomDB.compiler
 
     // optional - Kotlin Extensions and Coroutines support for Room

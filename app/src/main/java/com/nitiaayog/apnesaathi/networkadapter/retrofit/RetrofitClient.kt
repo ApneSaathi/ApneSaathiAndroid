@@ -57,24 +57,6 @@ object RetrofitClient {
         initOkHttp(httpBuilder)
 
         httpClient = httpBuilder.build()
-
-        /*if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
-            httpBuilder.addInterceptor(loggingInterceptor)
-                .addInterceptor { chain ->
-                    val original = chain.request()
-                    val request = original.newBuilder()
-                        .addHeader("Accept", "application/json")
-                        .addHeader("Request-Type", "Android")
-                        .addHeader("Content-Type", "application/json")
-                        .addHeader("User-Agent", "Android")
-                        .build()
-                    chain.proceed(request)
-                }
-        }
-        httpClient = httpBuilder.build()*/
     }
 
     private fun initOkHttp(httpBuilder: OkHttpClient.Builder) {
@@ -88,12 +70,14 @@ object RetrofitClient {
             httpBuilder.addInterceptor(interceptor)
         }
 
-        httpBuilder.addInterceptor { chain ->
-            val original = chain.request()
-            val request = original.newBuilder()
-                .addHeader("Content-Type", "application/json")
-                .build()
-            chain.proceed(request)
-        }
+        httpBuilder.addInterceptor(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val original = chain.request()
+                val request = original.newBuilder()
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                return chain.proceed(request)
+            }
+        })
     }
 }
