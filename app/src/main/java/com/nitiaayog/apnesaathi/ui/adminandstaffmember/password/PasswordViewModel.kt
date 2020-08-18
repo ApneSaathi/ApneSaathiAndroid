@@ -20,7 +20,6 @@ class PasswordViewModel(
 ) : BaseViewModel() {
 
     companion object {
-
         @Synchronized
         fun getInstance(dataManager: DataManager, userId: String, phoneNo: String, role: String):
                 PasswordViewModel {

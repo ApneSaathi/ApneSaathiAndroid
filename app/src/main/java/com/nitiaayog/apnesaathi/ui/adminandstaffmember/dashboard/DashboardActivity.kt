@@ -36,12 +36,13 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         }
     }
 
-    private fun hideNavigationViewWithRoles() {
-        val menu = bottomNavigationView.menu
-        val menuItem = menu.findItem(R.id.menuCalls)
-        val menuItem1 = menu.findItem(R.id.menuVolunteers)
-        menuItem.isVisible = false
-        menuItem1.isVisible = true
+    override fun onBackPressed() {
+        val backStackCount: Int = supportFragmentManager.backStackEntryCount
+        if (backStackCount > 0) supportFragmentManager.popBackStack()
+        else {
+            if (viewPager.currentItem == 0) super.onBackPressed()
+            else viewPager.currentItem = 0
+        }
     }
 
     override fun provideViewModel(): DashBoardViewModel {
@@ -90,6 +91,14 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
             updateToolbarTittle()
             true
         }
+    }
+
+    private fun hideNavigationViewWithRoles() {
+        val menu = bottomNavigationView.menu
+        val menuItem = menu.findItem(R.id.menuCalls)
+        val menuItem1 = menu.findItem(R.id.menuVolunteers)
+        menuItem.isVisible = false
+        menuItem1.isVisible = true
     }
 
     private fun updateToolbarTittle() {
