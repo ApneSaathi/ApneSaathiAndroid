@@ -53,14 +53,19 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun getGrievanceData() {
-        callData?.callId?.let {
-            viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner)
-        }
-        callData?.callId?.let { it ->
-            viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
-                grievancesList = it
-                bindData()
-            })
+        if (dataManager.getRole() == ROLE_VOLUNTEER) {
+            callData?.callId?.let {
+                viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner)
+            }
+            callData?.callId?.let { it ->
+                viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
+                    grievancesList = it
+                    bindData()
+                })
+            }
+        } else {
+            grievancesList = callData?.medicalGrievance ?: mutableListOf()
+            bindData()
         }
     }
 
