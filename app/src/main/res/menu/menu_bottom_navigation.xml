@@ -13,12 +13,13 @@
         android:icon="@drawable/menu_calls_selector"
         android:title="@string/menu_calls"
         app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/menuVolunteers"
         android:enabled="true"
-        android:visible="false"
-        android:icon="@drawable/menu_calls_selector"
+        android:icon="@drawable/menu_volunteers_selector"
         android:title="@string/volunteers"
+        android:visible="false"
         app:showAsAction="ifRoom" />
 
     <item

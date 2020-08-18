@@ -38,13 +38,16 @@ ext {
     recyclerViewPackage = 'androidx.recyclerview:recyclerview'
     materialPackage = 'com.google.android.material:material'
 
+    ktxVersion = '1.2.0'
+    ktxPackage = 'androidx.core:core-ktx'
+
     cardViewVersion = '1.0.0'
     cardViewPackage = 'androidx.cardview:cardview'
 
     pagingVersion = '2.1.2'
     pagingPackage = 'androidx.paging:paging-runtime'
 
-    retrofitVersion = '2.5.0'
+    retrofitVersion = '2.7.1'
     retrofitNetworkCallPackage = 'com.squareup.retrofit2:retrofit'
     retrofitGsonConverterPackage = 'com.squareup.retrofit2:converter-gson'
     retrofitRxjavaAdapterPackage = 'com.squareup.retrofit2:adapter-rxjava2'
