@@ -30,8 +30,9 @@ import java.util.concurrent.TimeUnit
 class LoginActivity : BaseActivity<LoginViewModel>() {
 
     // Staff Mem      : 9611571555  ----  A@x@ffrt6781
-    // Master Admin   : 9611571555  ----  A@x@ffrt6781
-    // District Admin : 9611571555  ----  A@x@ffrt6781
+    // Staff Mem      : 9246920600  ----  pwd@123
+    // Master Admin   : 9248602051  ----  pwd@988
+    // District Admin : 9247299503  ----  pwd@485
     // Volunteer      : 44444
 
     lateinit var mContext: Context

@@ -4,9 +4,7 @@ import android.app.Application
 import com.google.gson.GsonBuilder
 import com.nitiaayog.apnesaathi.BuildConfig
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
-import okhttp3.Cache
-import okhttp3.OkHttpClient
-import okhttp3.Protocol
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -94,9 +92,6 @@ object RetrofitClient {
             val original = chain.request()
             val request = original.newBuilder()
                 .addHeader("Content-Type", "application/json")
-                /*.addHeader("Accept", "application/json")
-                .addHeader("Request-Type", "Android")
-                .addHeader("User-Agent", "Android")*/
                 .build()
             chain.proceed(request)
         }

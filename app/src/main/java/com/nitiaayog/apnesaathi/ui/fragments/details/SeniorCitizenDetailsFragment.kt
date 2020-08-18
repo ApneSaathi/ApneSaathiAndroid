@@ -340,7 +340,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     private fun initClicks() {
         txt_more_details.setOnClickListener {
-            if (cg_more_details_group.isVisible) {
+            if (cg_more_details_group.visibility == View.VISIBLE) {
                 cg_more_details_group.visibility = View.GONE
                 txt_more_details.text = getString(R.string.more_details)
                 txt_more_details.setCompoundDrawablesWithIntrinsicBounds(
