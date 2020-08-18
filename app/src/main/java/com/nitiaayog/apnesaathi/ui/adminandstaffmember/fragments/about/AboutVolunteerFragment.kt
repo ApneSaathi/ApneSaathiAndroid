@@ -162,17 +162,18 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
     }
 
     private fun setAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole()).apply {
-            setOnItemClickListener(object : OnItemClickListener<CallData> {
-                override fun onItemClick(position: Int, data: CallData) {
+        return CallsAdapter(dataManager.getRole(), AboutVolunteerFragment::class.java.simpleName)
+            .apply {
+                setOnItemClickListener(object : OnItemClickListener<CallData> {
+                    override fun onItemClick(position: Int, data: CallData) {
 
-                }
+                    }
 
-                override fun onMoreInfoClick(position: Int, data: CallData) {
-                    moreButtonClickListener.onMoreButtonClick(data)
-                }
-            })
-        }
+                    override fun onMoreInfoClick(position: Int, data: CallData) {
+                        moreButtonClickListener.onMoreButtonClick(data)
+                    }
+                })
+            }
     }
 
     private fun getDateText(date: String): String {

@@ -29,22 +29,23 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
     private var lastSelectedPosition: Int = -1
     private var lastSelectedCallData: CallData? = null
 
-    private val adapter: CallsAdapter = CallsAdapter(dataManager.getRole()).apply {
-        this.setOnItemClickListener(object : OnItemClickListener<CallData> {
-            override fun onItemClick(position: Int, data: CallData) {
-                lastSelectedPosition = position
-                lastSelectedCallData = data
-                prepareToCallPerson()
-            }
+    private val adapter: CallsAdapter =
+        CallsAdapter(dataManager.getRole(), BaseCallsTypeFragment::class.java.simpleName).apply {
+            this.setOnItemClickListener(object : OnItemClickListener<CallData> {
+                override fun onItemClick(position: Int, data: CallData) {
+                    lastSelectedPosition = position
+                    lastSelectedCallData = data
+                    prepareToCallPerson()
+                }
 
-            override fun onMoreInfoClick(position: Int, data: CallData) {
-                val fragment = SeniorCitizenDetailsFragment()
-                fragment.setSelectedUser(data)
-                viewModel.setLastSelectedUser(data.callId.toString())
-                addFragment(containerId, fragment, SR_CITIZEN_DETAIL_FRAGMENT)
-            }
-        })
-    }
+                override fun onMoreInfoClick(position: Int, data: CallData) {
+                    val fragment = SeniorCitizenDetailsFragment()
+                    fragment.setSelectedUser(data)
+                    viewModel.setLastSelectedUser(data.callId.toString())
+                    addFragment(containerId, fragment, SR_CITIZEN_DETAIL_FRAGMENT)
+                }
+            })
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

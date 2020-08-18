@@ -22,7 +22,7 @@ ext {
     androidGradleVersion = '4.0.1'
     androidSupportPackage = 'com.android.tools.build:gradle'
 
-    kotlinPluginVersion = '1.3.72'
+    kotlinPluginVersion = '1.4.0'
     kotlinSupportPackage = "org.jetbrains.kotlin:kotlin-gradle-plugin"
     kotlinPackage = 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
@@ -34,7 +34,6 @@ ext {
 
     supportVersion = '1.1.0'
     appCompatPackage = 'androidx.appcompat:appcompat'
-    ktxPackage = 'androidx.core:core-ktx'
     recyclerViewPackage = 'androidx.recyclerview:recyclerview'
     materialPackage = 'com.google.android.material:material'
 
@@ -52,7 +51,7 @@ ext {
     retrofitGsonConverterPackage = 'com.squareup.retrofit2:converter-gson'
     retrofitRxjavaAdapterPackage = 'com.squareup.retrofit2:adapter-rxjava2'
 
-    okhttpVersion = '3.12.0'
+    okhttpVersion = '4.2.2' //4.2.2
     okhttpPackage = 'com.squareup.okhttp3:logging-interceptor'
 
     glideVersion = '4.10.0'
@@ -64,7 +63,7 @@ ext {
     rxBindingVersion = '3.1.0'
     rxBindingPackage = 'com.jakewharton.rxbinding3:rxbinding'
 
-    rxJava2Version = '2.2.2'
+    rxJava2Version = '2.2.10'
     rxJava2Package = 'io.reactivex.rxjava2:rxjava'
 
     rxAndroid2Version = '2.1.1'
@@ -108,7 +107,7 @@ ext {
     playServicesAuth = buildDependency(playServicesAuthPackage, playServicesAuthVersion)
 
     androidSupport = [
-            appCompat     : buildDependency(appCompatPackage, supportVersion),
+            appCompat     : buildDependency(appCompatPackage, ktxVersion),
             ktx           : buildDependency(ktxPackage, supportVersion),
             recyclerView  : buildDependency(recyclerViewPackage, supportVersion),
             materialDesign: buildDependency(materialPackage, supportVersion),
