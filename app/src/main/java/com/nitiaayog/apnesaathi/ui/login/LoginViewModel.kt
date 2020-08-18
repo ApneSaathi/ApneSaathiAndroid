@@ -40,7 +40,7 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
                         viewModelScope.launch {
                             loaderObservable.value =
                                 NetworkRequestState.SuccessResponse(ApiProvider.ApiLoginUser, it)
-                            dataManager.setUserId(
+                            /*dataManager.setUserId(
                                 when {
                                     it.getId() == null -> "1001"
                                     it.getId()!!.isEmpty() -> "1001"
@@ -48,7 +48,7 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
                                 }
                             )
                             if (it.getRole() == ROLE_DISTRICT_ADMIN)
-                                dataManager.setSelectedDistrictId(it.getDistrictId().toString())
+                                dataManager.setSelectedDistrictId(it.getDistrictId().toString())*/
 
                         }
 
