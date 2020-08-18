@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/emergency_contact"
-        android:icon="@drawable/vector_editprofile"
+        android:icon="@drawable/ic_emergency_cont"
         android:title="contact"
         app:showAsAction="always" />
 </menu>
