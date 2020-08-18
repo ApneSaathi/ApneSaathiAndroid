@@ -35,7 +35,8 @@ import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
-    private var lastSelectedItemId: Int = 0
+    private var lastSelectedItemPosition: Int = 0
+    private var lastSelectedItem: CallData? = null
 
     private val pendingAdapter: CallsAdapter by lazy { setupPendingCallsAdapter() }
     private val followupAdapter: CallsAdapter by lazy { setupFollowupCallsAdapter() }
@@ -74,7 +75,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     override fun onCallPermissionGranted() {
-        //if (lastItemId > 0){ // Place call to Volunteer}
+        lastSelectedItem?.run {
+            placeCall(this)
+        }
     }
 
     override fun onCallPermissionDenied() {
@@ -94,10 +97,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupPendingCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole()).apply {
+        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
-                    lastSelectedItemId = position
+                    lastSelectedItemPosition = position
+                    lastSelectedItem = data
                     prepareToCallPerson()
                 }
 
@@ -124,10 +128,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupFollowupCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole()).apply {
+        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
-                    lastSelectedItemId = data.callId!!
+                    //lastSelectedItemId = data.callId!!
+                    lastSelectedItemPosition = position
+                    lastSelectedItem = data
                     prepareToCallPerson()
                 }
 
@@ -154,10 +160,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupCompletedCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole()).apply {
+        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
-                    lastSelectedItemId = data.callId!!
+                   // lastSelectedItemId = data.callId!!
+                    lastSelectedItemPosition = position
+                    lastSelectedItem = data
                     prepareToCallPerson()
                 }
 
@@ -184,10 +192,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupInvalidCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole()).apply {
+        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
-                    lastSelectedItemId = data.callId!!
+                    //lastSelectedItemId = data.callId!!
+                    lastSelectedItemPosition = position
+                    lastSelectedItem = data
                     prepareToCallPerson()
                 }
 
@@ -263,12 +273,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             }
             is NetworkRequestState.ErrorResponse -> {
                 //progressBarVolunteers.visibility = View.GONE
-                if(state.apiName == ApiProvider.ApiLoadDashboard)
-                BaseUtility.showAlertMessage(
-                    requireContext(), getString(R.string.error), state.throwable?.message
-                        ?: getString(R.string.cannt_connect_to_server_try_later),
-                    getString(R.string.okay)
-                )
+                if (state.apiName == ApiProvider.ApiLoadDashboard)
+                    BaseUtility.showAlertMessage(
+                        requireContext(), getString(R.string.error), state.throwable?.message
+                            ?: getString(R.string.cannt_connect_to_server_try_later),
+                        getString(R.string.okay)
+                    )
             }
             is NetworkRequestState.Error -> {
                 //progressBarVolunteers.visibility = View.GONE

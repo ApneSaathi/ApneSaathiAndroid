@@ -9,11 +9,12 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.CircleImageView
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.model.CallData
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about.AboutVolunteerFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 import java.util.*
 
-class CallsAdapter(private val role: String) :
+class CallsAdapter(private val role: String, private val reference: String) :
     RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
     private var isHideDateIsRequired: Boolean = false
@@ -49,6 +50,7 @@ class CallsAdapter(private val role: String) :
 
     inner class TodaysCallsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
+
         private val civGender: CircleImageView = itemView.civGender
         private val tvName: TextView = itemView.tvName
         private val tvAddress: TextView = itemView.tvAddress
@@ -58,7 +60,8 @@ class CallsAdapter(private val role: String) :
             tvAddress.isSelected = true
 
 //            itemView.constraintLayout.setOnClickListener(this)
-            if (role == "1") itemView.ivCall.setOnClickListener(this)
+            if ((reference != AboutVolunteerFragment::class.java.simpleName) && (role != "3"))
+                itemView.ivCall.setOnClickListener(this)
             else itemView.ivCall.visibility = View.GONE
 
             itemView.ivMoreInfo.setOnClickListener(this)
