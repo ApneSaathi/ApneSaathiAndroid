@@ -97,7 +97,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupPendingCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
+        return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedItemPosition = position
@@ -128,7 +128,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupFollowupCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
+        return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     //lastSelectedItemId = data.callId!!
@@ -160,10 +160,10 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupCompletedCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
+        return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
-                   // lastSelectedItemId = data.callId!!
+                    // lastSelectedItemId = data.callId!!
                     lastSelectedItemPosition = position
                     lastSelectedItem = data
                     prepareToCallPerson()
@@ -192,7 +192,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     private fun setupInvalidCallsAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
+        return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     //lastSelectedItemId = data.callId!!
