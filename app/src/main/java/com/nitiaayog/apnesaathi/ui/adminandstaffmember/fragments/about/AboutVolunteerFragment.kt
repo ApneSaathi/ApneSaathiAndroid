@@ -162,7 +162,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
     }
 
     private fun setAdapter(): CallsAdapter {
-        return CallsAdapter(dataManager.getRole(), AboutVolunteerFragment::class.java.simpleName)
+        return CallsAdapter(false)
             .apply {
                 setOnItemClickListener(object : OnItemClickListener<CallData> {
                     override fun onItemClick(position: Int, data: CallData) {
