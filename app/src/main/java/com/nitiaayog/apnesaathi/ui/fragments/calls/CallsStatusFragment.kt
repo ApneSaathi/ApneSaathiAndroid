@@ -34,7 +34,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     private var lastCompletedCallData: CallData? = null*/
 
     private val pendingAdapter: CallsAdapter by lazy {
-        CallsAdapter(dataManager.getRole(), CallsStatusFragment::class.java.simpleName).apply {
+        CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
@@ -56,7 +56,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         }
     }
     private val invalidAdapter: CallsAdapter by lazy {
-        CallsAdapter(dataManager.getRole(), CallsStatusFragment::class.java.simpleName).apply {
+        CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
@@ -79,7 +79,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     }
 
     private val followupAdapter: CallsAdapter by lazy {
-        CallsAdapter(dataManager.getRole(), CallsStatusFragment::class.java.simpleName).apply {
+        CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position
@@ -102,7 +102,7 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     }
 
     private val completedAdapter: CallsAdapter by lazy {
-        CallsAdapter(dataManager.getRole(), CallsStatusFragment::class.java.simpleName).apply {
+        CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastCallPosition = position

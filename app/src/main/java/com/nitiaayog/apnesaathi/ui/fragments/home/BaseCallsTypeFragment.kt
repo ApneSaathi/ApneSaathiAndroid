@@ -30,7 +30,7 @@ class BaseCallsTypeFragment : BaseFragment<HomeViewModel>() {
     private var lastSelectedCallData: CallData? = null
 
     private val adapter: CallsAdapter =
-        CallsAdapter(dataManager.getRole(), BaseCallsTypeFragment::class.java.simpleName).apply {
+        CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedPosition = position

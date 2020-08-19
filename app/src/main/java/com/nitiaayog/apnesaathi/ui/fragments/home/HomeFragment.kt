@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     private var lastSelectedCallData: CallData? = null
 
     private val pendingAdapter by lazy {
-        CallsAdapter(dataManager.getRole(), HomeFragment::class.java.simpleName).apply {
+        CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
                 override fun onItemClick(position: Int, data: CallData) {
                     lastSelectedPosition = position

@@ -14,7 +14,7 @@ import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.list_item_connected_calls.view.*
 import java.util.*
 
-class CallsAdapter(private val role: String, private val reference: String) :
+class CallsAdapter(private val isCalling: Boolean) :
     RecyclerView.Adapter<CallsAdapter.TodaysCallsViewHolder>() {
 
     private var isHideDateIsRequired: Boolean = false
@@ -59,9 +59,7 @@ class CallsAdapter(private val role: String, private val reference: String) :
         init {
             tvAddress.isSelected = true
 
-//            itemView.constraintLayout.setOnClickListener(this)
-            if ((reference != AboutVolunteerFragment::class.java.simpleName) && (role != "3"))
-                itemView.ivCall.setOnClickListener(this)
+            if (isCalling) itemView.ivCall.setOnClickListener(this)
             else itemView.ivCall.visibility = View.GONE
 
             itemView.ivMoreInfo.setOnClickListener(this)
