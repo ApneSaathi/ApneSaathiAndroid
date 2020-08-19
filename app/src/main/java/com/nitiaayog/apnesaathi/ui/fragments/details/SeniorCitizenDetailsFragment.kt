@@ -30,6 +30,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     OnItemClickListener<DateItem> {
 
+    private var isFromHomeFragment: Boolean = false
     private var adapter: SeniorCitizenDateAdapter = SeniorCitizenDateAdapter()
     var callData: CallData? = null
     var grievancesList: MutableList<SrCitizenGrievance> = mutableListOf()
@@ -53,7 +54,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun getGrievanceData() {
-        if (dataManager.getRole() == ROLE_VOLUNTEER) {
+        if (isFromHomeFragment) {
             callData?.callId?.let {
                 viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner)
             }
@@ -96,7 +97,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             adapter.setOnItemClickListener(this)
             rcl_call_dates.layoutManager?.scrollToPosition(adapter.selectedPos)
         })
-        if (dataManager.getRole() == ROLE_VOLUNTEER) {
+        if (isFromHomeFragment) {
             img_call_button.visibility = View.VISIBLE
         } else {
             img_call_button.visibility = View.GONE
@@ -322,7 +323,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun makeGrievanceContainerInvisible() {
-        if (dataManager.getRole() == ROLE_VOLUNTEER)
+        if (isFromHomeFragment)
             txt_edit.visibility = View.VISIBLE
         else
             txt_edit.visibility = View.GONE
@@ -413,9 +414,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
     fun setSelectedUser(
-        callData: CallData
+        callData: CallData, isFromHomeFragment: Boolean = false
     ) {
         this.callData = callData
+        this.isFromHomeFragment = isFromHomeFragment
     }
 
     fun reloadFragment(callData: CallData) {

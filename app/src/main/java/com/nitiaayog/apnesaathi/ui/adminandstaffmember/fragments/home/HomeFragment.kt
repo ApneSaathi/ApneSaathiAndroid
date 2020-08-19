@@ -107,7 +107,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data)
+                    fragment.setSelectedUser(data,true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -139,7 +139,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data)
+                    fragment.setSelectedUser(data,true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -171,7 +171,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data)
+                    fragment.setSelectedUser(data,true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -203,7 +203,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data)
+                    fragment.setSelectedUser(data,true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
