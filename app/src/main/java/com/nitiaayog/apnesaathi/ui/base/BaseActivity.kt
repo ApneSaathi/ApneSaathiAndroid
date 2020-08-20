@@ -37,11 +37,21 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
             window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
     }*/
 
+    /**
+     * Every fragment/activity will have view model.Using this method we can dynamically create
+     * ViewModel instance only for Activity
+     * */
     abstract fun provideViewModel(): VM
 
+    /**
+     * Ui file from layout folder only to load the user interface of Activity
+     **/
     @LayoutRes
     abstract fun provideLayoutResource(): Int
 
+    /**
+     * Through this method we will load Ui in selected language
+     **/
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
         LanguageUtils.changeLanguage(dataManager, applicationContext, resources)

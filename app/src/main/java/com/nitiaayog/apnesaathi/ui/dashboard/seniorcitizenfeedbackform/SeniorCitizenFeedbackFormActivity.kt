@@ -58,7 +58,6 @@ import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
 
-    //private var selectedCallStatusButton: MaterialButton? = null
     private var selectedSymptomsAwareness: MaterialButton? = null
     private var selectedKnowledgeOfCovidPrevention: MaterialButton? = null
     private var selectedLackOfEssentialServices: MaterialButton? = null
@@ -886,11 +885,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }.autoDispose(disposables)
     }
 
-    private fun changeButtonSelectionWithIcon(button: MaterialButton) =
-        button.apply {
-            updateButtonState(this, true)
-            checkTalkedAbout()
-        }
+    private fun changeButtonSelectionWithIcon(button: MaterialButton) = button.apply {
+        updateButtonState(this, true)
+        checkTalkedAbout()
+    }
 
     private fun changeCovidSymptomsSelection(
         imageView: ImageView, textView: TextView, ivDone: ImageView

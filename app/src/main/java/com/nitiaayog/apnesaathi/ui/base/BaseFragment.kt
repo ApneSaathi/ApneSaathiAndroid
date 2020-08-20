@@ -165,10 +165,14 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             }.autoDispose(disposables)
     }
 
+    /**
+     * Every fragment/activity will have view model.Using this method we can dynamically create
+     * ViewModel instance only for Fragment
+     * */
     abstract fun provideViewModel(): VM
 
     /**
-     * Ui file from layout folder only to load the user interface of fragment
+     * Ui file from layout folder only to load the user interface of Fragment
      **/
     @LayoutRes
     abstract fun provideLayoutResource(): Int

@@ -38,13 +38,17 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     /**
-     * Update Network state as per api status
+     * Update Network state as per api status always on UI thread else it will throw exception
      * */
     @UiThread
     protected fun updateNetworkState(state: NetworkRequestState) {
         loaderObservable.postValue(state)
     }
 
+    /**
+     * Before calling api just check whether internet is available or not and update Ui
+     * accordingly
+     * */
     protected fun checkNetworkAvailability(context: Context, apiName: String): Boolean {
         if (!NetworkProvider.isConnected(context)) {
             updateNetworkState(NetworkRequestState.NetworkNotAvailable(apiName))
