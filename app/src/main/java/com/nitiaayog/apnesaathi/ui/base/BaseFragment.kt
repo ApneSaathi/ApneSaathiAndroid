@@ -49,6 +49,9 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? = inflater.inflate(provideLayoutResource(), container, false)
 
+    /**
+     * Requested permissions status callback
+     * */
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -83,19 +86,31 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         super.onDestroy()
     }
 
+    /**
+     * Dynamically check the permission i.e. Granted/Denied
+     * */
     private fun checkPermission(permission: String): Boolean {
         val callPermission = ContextCompat.checkSelfPermission(context!!, permission)
         return (callPermission == PackageManager.PERMISSION_GRANTED)
     }
 
+    /**
+     * Request the permission
+     * */
     private fun requestPermission(vararg permissions: String) =
         requestPermissions(permissions, CONST_PERMISSION_CALL_PHONE)
 
+    /**
+     * Check for the CALL permission and provide appropriate callback
+     * */
     protected fun prepareToCallPerson() {
         if (checkPermission(PERMISSION_CALL_PHONE)) onCallPermissionGranted()
         else requestPermission(PERMISSION_CALL_PHONE)
     }
 
+    /**
+     * Show the details of requested permission that why this permission is important for app.
+     * */
     private fun showPermissionTextPopup(
         @StringRes message: Int, navigateToSetting: Boolean, permission: String
     ) {
@@ -120,6 +135,9 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
+    /**
+     * Just initiate call to provided phone number
+     * */
     protected fun initiateCall(phoneNumber: String) {
         Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:$phoneNumber")
@@ -128,6 +146,12 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         }
     }
 
+    /**
+     * This method this initiate a call and after that it will navigate to Feedback for page
+     * so that logged in person can store the Senior Citizen's feedback and if any issues are
+     * raised by Sr. Citizen that would also be logged and volunteers/staff members can start
+     * resolving it.
+     * */
     protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
         initiateCall(selectedCallData.contactNumber!!)
 
@@ -156,7 +180,8 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     abstract fun onCallPermissionGranted()
 
     /**
-     *
+     * If call permission denied then calling fragment can get the call back and initiate
+     * appropriate actions or show message
      * */
     abstract fun onCallPermissionDenied()
 }
