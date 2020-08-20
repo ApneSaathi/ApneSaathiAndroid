@@ -248,16 +248,16 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
             is NetworkRequestState.LoadingData -> progressBarSrCitizens.visibility = View.VISIBLE
             is NetworkRequestState.Error -> {
                 progressBarSrCitizens.visibility = View.GONE
-                BaseUtility.showAlertMessage(
+                /*BaseUtility.showAlertMessage(
                     requireContext(), R.string.error, R.string.something_went_wrong
-                )
+                )*/
             }
             is NetworkRequestState.ErrorResponse -> {
                 progressBarSrCitizens.visibility = View.GONE
-                BaseUtility.showAlertMessage(
+                /*BaseUtility.showAlertMessage(
                     requireContext(), getString(R.string.error),
                     getString(R.string.cannt_connect_to_server_try_later), getString(R.string.okay)
-                )
+                )*/
             }
             is NetworkRequestState.SuccessResponse<*> -> {
                 progressBarSrCitizens.visibility = View.GONE

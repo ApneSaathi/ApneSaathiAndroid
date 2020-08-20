@@ -21,17 +21,9 @@ class VolunteerDetailsViewModel(
     companion object {
         private val TAG: String = "TAG -- ${VolunteerDetailsViewModel::class.java.simpleName} -->"
 
-        private var instance: VolunteerDetailsViewModel? = null
-
         @Synchronized
         fun getInstance(dataManager: DataManager, volunteerId: Int): VolunteerDetailsViewModel {
-            return if (instance != null) {
-                return if (instance!!.volunteerId == volunteerId) instance!! else synchronized(this) {
-                    VolunteerDetailsViewModel(dataManager, volunteerId).also { instance = it }
-                }
-            } else synchronized(this) {
-                VolunteerDetailsViewModel(dataManager, volunteerId).also { instance = it }
-            }
+            return synchronized(this) { VolunteerDetailsViewModel(dataManager, volunteerId) }
         }
     }
 
@@ -40,11 +32,6 @@ class VolunteerDetailsViewModel(
     private val followupCalls: MutableList<CallData> = mutableListOf()
     private val completedCalls: MutableList<CallData> = mutableListOf()
     private val invalidCalls: MutableList<CallData> = mutableListOf()
-
-    override fun onCleared() {
-        instance?.let { instance = null }
-        super.onCleared()
-    }
 
     private fun addCallsTo(calls: MutableList<CallData>, callsToAdded: List<CallData>) {
         calls.apply {
@@ -83,31 +70,39 @@ class VolunteerDetailsViewModel(
         params.addProperty(ApiConstants.LoggedDateTime, date)
         println("$TAG $params")
         dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
-            updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiLoadDashboard))
+            updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiSeniorCitizenDetails))
         }.subscribe({
             try {
                 if (it.status == "0") {
                     viewModelScope.launch {
                         io {
                             val data = it.getSeniorCitizens()
-                            allCalls.apply {
-                                clear()
-                                addAll(data)
+                            if (data.isNotEmpty()) {
+                                allCalls.apply {
+                                    clear()
+                                    addAll(data)
+                                }
+                                differentiateCalls()
                             }
-                            differentiateCalls()
                             updateNetworkState(
                                 NetworkRequestState.SuccessResponse(
-                                    ApiProvider.ApiLoadDashboard, data
+                                    ApiProvider.ApiSeniorCitizenDetails, data
                                 )
                             )
                         }
                     }
-                } else updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiLoadDashboard))
+                } else updateNetworkState(
+                    NetworkRequestState.SuccessResponse(
+                        ApiProvider.ApiSeniorCitizenDetails, mutableListOf<CallData>()
+                    )
+                )
             } catch (e: Exception) {
                 println("$TAG ${e.message}")
             }
         }, {
-            updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiLoadDashboard, it))
+            updateNetworkState(
+                NetworkRequestState.ErrorResponse(ApiProvider.ApiSeniorCitizenDetails, it)
+            )
         }).autoDispose(disposables)
     }
 
