@@ -6,6 +6,7 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard.DashboardActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
@@ -59,7 +60,10 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
             val targetIntent = getTargetIntent(
                 if (dataManager.isLogin() == false)
                     LoginActivity::class.java
-                else DashBoardActivity::class.java
+                else {
+                    if (dataManager.getRole() != "1") DashboardActivity::class.java
+                    else DashBoardActivity::class.java
+                }
             )
             startActivity(targetIntent)
             finish()
@@ -73,6 +77,6 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
 
 
     override fun onBackPressed() {
-       super.onBackPressed()
+        super.onBackPressed()
     }
 }

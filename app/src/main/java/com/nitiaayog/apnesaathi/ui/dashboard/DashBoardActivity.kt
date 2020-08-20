@@ -47,6 +47,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
 
     override fun provideLayoutResource(): Int = R.layout.activity_dashboard
 
+    /**
+     * Initialize view pager and adapter with Page Change callback and update Ui accordingly
+     **/
     private fun initViewPager() {
         val adapter = FragmentViewPagerAdapter(this)
         adapter.addFragment(homeFragment, getString(R.string.menu_home))
@@ -76,6 +79,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         })
     }
 
+    /**
+     * Initialize Bottom Navigation View with menu item click listener and update Ui accordingly
+     **/
     private fun initBottomNavigationView() {
         bottomNavigationView.itemIconTintList = null
         bottomNavigationView.setOnNavigationItemSelectedListener {

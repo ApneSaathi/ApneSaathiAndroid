@@ -29,12 +29,7 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         initViewPager()
         initBottomNavigationView()
         if (viewPager.adapter!!.itemCount == 2) manageBottomNavigationViewForRoles()
-        else {
-            hideNavigationViewWithRoles()
-            /*val itemVolunteers = bottomNavigationView.menu.findItem(R.id.menuCalls)
-            itemVolunteers.setTitle(R.string.menu_volunteers)
-            itemVolunteers.setIcon(R.drawable.menu_volunteers_selector)*/
-        }
+        else hideNavigationViewWithRoles()
     }
 
     override fun onBackPressed() {

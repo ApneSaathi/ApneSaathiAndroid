@@ -86,6 +86,25 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         }
     }
 
+    override fun onItemClick(position: Int, data: GrievanceData) {
+        val fragment = GrievanceDetailFragment(data)
+        fragment.setReloadApiListener(reloadApiRequiredListener)
+        addFragment(R.id.fragmentHomeContainer, fragment, GRIEVANCE_DETAIL_FRAGMENT)
+    }
+
+    override
+    fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return (when (item.itemId) {
+            R.id.emergency_contact -> {
+                val intent = Intent(activity, MainEmergency_Contact_Activity::class.java)
+                startActivity(intent)
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        })
+    }
+
     override fun provideViewModel(): HomeViewModel =
         getViewModel { HomeViewModel.getInstance(dataManager) }
 
@@ -246,12 +265,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         })
     }
 
-    override fun onItemClick(position: Int, data: GrievanceData) {
-        val fragment = GrievanceDetailFragment(data)
-        fragment.setReloadApiListener(reloadApiRequiredListener)
-        addFragment(R.id.fragmentHomeContainer, fragment, GRIEVANCE_DETAIL_FRAGMENT)
-    }
-
     fun reloadApi() {
         try {
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
@@ -267,19 +280,5 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
 
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
-    }
-
-
-    override
-    fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return (when (item.itemId) {
-            R.id.emergency_contact -> {
-                val intent = Intent(activity, MainEmergency_Contact_Activity::class.java)
-                startActivity(intent)
-                true
-            }
-            else ->
-                super.onOptionsItemSelected(item)
-        })
     }
 }

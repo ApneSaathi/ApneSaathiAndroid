@@ -4,10 +4,8 @@ import android.content.Context
 import android.widget.ArrayAdapter
 import android.widget.Filter
 
-class BaseArrayAdapter : ArrayAdapter<String?> {
-
-    constructor(context: Context, resource: Int, objects: Array<String?>) :
-            super(context, resource, objects)
+class BaseArrayAdapter(context: Context, resource: Int, objects: Array<String?>) :
+    ArrayAdapter<String?>(context, resource, objects) {
 
     override fun getFilter(): Filter {
         return object : Filter() {

@@ -18,5 +18,4 @@ interface DistrictDataDao {
 
     @Query("DELETE FROM ${Tables.TABLE_DISTRICT}")
     fun clearDistricts()
-
 }

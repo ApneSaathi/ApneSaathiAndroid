@@ -58,7 +58,6 @@ import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
 
-    //private var selectedCallStatusButton: MaterialButton? = null
     private var selectedSymptomsAwareness: MaterialButton? = null
     private var selectedKnowledgeOfCovidPrevention: MaterialButton? = null
     private var selectedLackOfEssentialServices: MaterialButton? = null
@@ -701,30 +700,6 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     private fun initClicks() {
-        // Call Status Button Clicks
-//        btnNoResponse.throttleClick().subscribe {
-//            manageResetForm(btnNoResponse)
-//            viewModel.setCallStatus("1")
-//        }.autoDispose(disposables)
-//        btnNotPicked.throttleClick().subscribe {
-//            manageResetForm(btnNotPicked)
-//            viewModel.setCallStatus("2")
-//        }.autoDispose(disposables)
-//        btnNotReachable.throttleClick().subscribe {
-//            manageResetForm(btnNotReachable)
-//            viewModel.setCallStatus("3")
-//        }.autoDispose(disposables)
-//        btnDisConnected.throttleClick().subscribe {
-//            manageResetForm(btnDisConnected)
-//            viewModel.setCallStatus("4")
-//        }.autoDispose(disposables)
-//        btnConnected.throttleClick().subscribe {
-//            changeButtonSelection(btnConnected)
-//            viewModel.setCallStatus("5")
-//            tvTalkWith.visibility = View.VISIBLE
-//            actTalkWith.visibility = View.VISIBLE
-//        }.autoDispose(disposables)
-
         // Is Sr citizen at home
         btnAnySrCitizenInHomeYes.throttleClick().subscribe {
             viewModel.isSeniorCitizenAtHome(true)
@@ -910,11 +885,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }.autoDispose(disposables)
     }
 
-    private fun changeButtonSelectionWithIcon(button: MaterialButton) =
-        button.apply {
-            updateButtonState(this, true)
-            checkTalkedAbout()
-        }
+    private fun changeButtonSelectionWithIcon(button: MaterialButton) = button.apply {
+        updateButtonState(this, true)
+        checkTalkedAbout()
+    }
 
     private fun changeCovidSymptomsSelection(
         imageView: ImageView, textView: TextView, ivDone: ImageView

@@ -338,48 +338,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
     fun saveSrCitizenFeedback(
         context: Context, params: JsonObject, syncData: SyncSrCitizenGrievance
     ) {
-//        val grievanceList: MutableList<GrievanceData> = mutableListOf()
-//        val grievanceEssential = GrievanceData()
-//        if (syncData.lackOfEssentialServices == "Yes") {
-//            grievanceEssential.callId = syncData.callId
-//            grievanceEssential.gender = syncData.gender
-//            grievanceEssential.grievanceId = syncData.id
-//            grievanceEssential.srCitizenName = syncData.srCitizenName
-//            grievanceEssential.status = "RAISED"
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_food) }) {
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_food)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_medicine) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_medicine)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_banking_service) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_banking_service)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_utilities) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_utilities)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_hygine) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_hygine)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_safety) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_safety)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.lack_of_access_emergency) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.lack_of_access_emergency)
-//                grievanceList.add(grievanceEssential)
-//            }
-//            if (getComplaints().any { it == context.getString(R.string.phone_and_service) }){
-//                grievanceEssential.grievanceType = context.getString(R.string.phone_and_service)
-//                grievanceList.add(grievanceEssential)
-//            }
-
-//        }
         viewModelScope.launch {
             io {
                 if (::callData.isInitialized && callData.talkedWith != talkedWith) {
@@ -388,14 +346,6 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                     dataManager.updateCallData(callData)
                 }
                 if (callStatus == "10") {
-                    /*if (callStatus == "5") {
-                        dataManager.insert(syncData)
-
-                        val updateData: SrCitizenGrievance = syncData
-                        dataManager.update(updateData)
-                    } else
-                        dataManager.updateCallStatus(callStatus)*/
-
                     val updateData: SrCitizenGrievance = syncData
                     if (syncData.id == -1) {
                         val calendar = Calendar.getInstance()
@@ -417,9 +367,7 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                         //dataManager.updateCallStatus(callStatus)
                         dataManager.insertGrievance(updateData)
                     } else dataManager.updateGrievance(updateData)
-                } //else
-                //dataManager.updateCallStatus(callStatus)
-                //dataManager.updateCallData(callData)
+                }
 
                 val data = dataManager.getGrievance(callData.callId!!)
                 data?.run {
@@ -433,9 +381,9 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
             }
             if (checkNetworkAvailability(context, ApiProvider.ApiSaveSeniorCitizenFeedbackForm)) {
                 /**
-                 * we can add one more field in SeCitizenGrievances class and that will be
-                 * our new primary key
+                 * This api will save and create new issue.
                  * */
+                params.addProperty(ApiConstants.Role, dataManager.getRole())
                 dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
                     loaderObservable.value =
                         NetworkRequestState.LoadingData(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
@@ -473,18 +421,18 @@ class SeniorCitizenFeedbackViewModel(private val dataManager: DataManager) : Bas
                     } else {
                         loaderObservable.value =
                             NetworkRequestState.Error(ApiProvider.ApiSaveSeniorCitizenFeedbackForm)
-                        /*val data = async {
+                        CoroutineScope(Dispatchers.IO).launch {
                             dataManager.insertSyncGrievance(syncData)
-                        }*/
+                        }
                     }
                 }, {
                     try {
                         loaderObservable.value = NetworkRequestState.ErrorResponse(
                             ApiProvider.ApiSaveSeniorCitizenFeedbackForm
                         )
-                        /*val data = async {
+                        CoroutineScope(Dispatchers.IO).launch {
                             dataManager.insertSyncGrievance(syncData)
-                        }*/
+                        }
                     } catch (e: Exception) {
                         println("TAG -- MyData --> ${e.message}")
                     }

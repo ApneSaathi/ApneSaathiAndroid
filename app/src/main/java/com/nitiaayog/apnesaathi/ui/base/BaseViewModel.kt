@@ -16,6 +16,9 @@ import kotlinx.coroutines.withContext
 
 abstract class BaseViewModel : ViewModel() {
 
+    /**
+     * Configurations for the pagination
+     * */
     protected val config: PagedList.Config by lazy {
         PagedList.Config.Builder().apply {
             setEnablePlaceholders(false)
@@ -27,15 +30,25 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val disposables: CompositeDisposable by lazy { CompositeDisposable() }
 
+    /**
+     * Network state observable for api calls
+     * */
     protected val loaderObservable: MutableLiveData<NetworkRequestState> by lazy {
         MutableLiveData<NetworkRequestState>()
     }
 
+    /**
+     * Update Network state as per api status always on UI thread else it will throw exception
+     * */
     @UiThread
     protected fun updateNetworkState(state: NetworkRequestState) {
         loaderObservable.postValue(state)
     }
 
+    /**
+     * Before calling api just check whether internet is available or not and update Ui
+     * accordingly
+     * */
     protected fun checkNetworkAvailability(context: Context, apiName: String): Boolean {
         if (!NetworkProvider.isConnected(context)) {
             updateNetworkState(NetworkRequestState.NetworkNotAvailable(apiName))
@@ -44,9 +57,17 @@ abstract class BaseViewModel : ViewModel() {
         return true
     }
 
+    /**
+     * Perform task on IO thread but while executing io block view is getting destroyed then
+     * task will be cancelled/discarded
+     **/
     protected suspend fun io(block: suspend CoroutineScope.() -> Unit) =
         withContext(viewModelScope.coroutineContext + Dispatchers.IO) { block.invoke(this) }
 
+    /**
+     * Perform task on Main(Ui) thread but while executing io block view is getting destroyed then
+     * task will be cancelled/discarded
+     **/
     protected suspend fun ui(block: suspend CoroutineScope.() -> Unit) =
         withContext(viewModelScope.coroutineContext + Dispatchers.Main) { block.invoke(this) }
 
