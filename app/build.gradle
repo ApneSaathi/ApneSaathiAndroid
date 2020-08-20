@@ -2,6 +2,7 @@ apply plugin: applicationPlugin
 apply plugin: kotlinPlugin
 apply plugin: kotlinAndroidPlugin
 apply plugin: kotlinKaptPlugin
+apply plugin: kotlinDokkaPlugin
 
 def properties = rootProject.file("application.properties") // or file('../application.properties')
 def appProperties = new Properties()
@@ -39,6 +40,9 @@ android {
         versionName appVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    dokkaHtml {
+        outputDirectory = "$buildDir/dokka"
     }
 
     buildTypes {

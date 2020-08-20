@@ -145,6 +145,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                 if (dataManager.getSelectedDistrictId().isNotEmpty()) {
                     id = dataManager.getSelectedDistrictId().toInt()
                 }
+                if (id == -1) {
+                    params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
+                }
                 params.addProperty(ApiConstants.DistrictId, id)
             }
             //params.addProperty(ApiConstants.Role, dataManager.getRole())

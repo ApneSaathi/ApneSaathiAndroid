@@ -13,7 +13,6 @@ import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardViewModel
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievancesFragment
 import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
-import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -169,7 +168,6 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
     }
 
     override fun onReloadRequired() {
-        if (dataManager.getRole() == ROLE_DISTRICT_ADMIN)
-            grievancesFragment.reloadApi()
+        grievancesFragment.reloadApi()
     }
 }
