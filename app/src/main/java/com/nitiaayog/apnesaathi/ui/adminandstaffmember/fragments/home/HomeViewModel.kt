@@ -113,7 +113,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.status == "0") {
                         viewModelScope.launch {
                             io {
-
                                 if (dataManager.getRole() == ROLE_VOLUNTEER) {
                                     val data = it.getData()
                                     manageCallsData(data)
