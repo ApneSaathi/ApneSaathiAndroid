@@ -90,7 +90,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     progressBarlogin.visibility = GONE
 
                     val loginResponse = it.data as LoginResponse
-
+                    dataManager.setSelectedDistrictId(loginResponse.getDistrictId() ?: "-1")
                     val intent = getTargetIntent(OtpActivity::class.java)
                     intent.putExtra(ApiConstants.UserId, loginResponse.getId().toString())
                     intent.putExtra(ApiConstants.PhoneNumber, EditMobileNumber.text.toString())

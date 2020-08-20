@@ -112,7 +112,6 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
 
     }
-
     private fun makeViewVisible(view: View) {
         view.visibility = View.VISIBLE
     }

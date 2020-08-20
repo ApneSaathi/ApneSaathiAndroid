@@ -15,6 +15,7 @@ ext {
     kotlinPlugin = 'kotlin-android'
     kotlinAndroidPlugin = 'kotlin-android-extensions'
     kotlinKaptPlugin = 'kotlin-kapt'
+    kotlinDokkaPlugin = 'org.jetbrains.dokka'
     gmsServicePlugin = 'com.google.gms.google-services'
 
     /* TODO : Libraries Gradle ------------------------------------------------------------------ */
@@ -25,6 +26,9 @@ ext {
     kotlinPluginVersion = '1.4.0'
     kotlinSupportPackage = "org.jetbrains.kotlin:kotlin-gradle-plugin"
     kotlinPackage = 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    kotlinDokkaVersion = "1.4.0-rc"
+    kotlinDokkaPackage = "org.jetbrains.dokka:dokka-gradle-plugin"
 
     gmsGradleVersion = '4.3.0'
     gmsSupportPackage = 'com.google.gms:google-services'
@@ -90,6 +94,7 @@ ext {
 
     androidGradleSupport = buildDependency(androidSupportPackage, androidGradleVersion)
     kotlinGradleSupport = buildDependency(kotlinSupportPackage, kotlinPluginVersion)
+    kotlinDokkaSupport = buildDependency(kotlinDokkaPackage, kotlinDokkaVersion)
     gmsServiceSupport = buildDependency(gmsSupportPackage, gmsGradleVersion)
     kotlinSupport = buildDependency(kotlinPackage, kotlinPluginVersion)
     lifecycleSupport = buildDependency(lifecyclePackage, viewModelVersion)
