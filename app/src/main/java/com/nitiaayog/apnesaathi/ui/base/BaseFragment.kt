@@ -130,11 +130,6 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
 
     protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
         initiateCall(selectedCallData.contactNumber!!)
-        /*Intent(Intent.ACTION_CALL).apply {
-            data = Uri.parse("tel:${selectedCallData.contactNumber}")
-            if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
-            else onCallPermissionDenied()
-        }*/
 
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -144,18 +139,24 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
                 intent.putExtra(CALL_ID, selectedCallData.callId)
                 activity!!.startActivityForResult(intent, REQUEST_CODE)
             }.autoDispose(disposables)
-
-        /*val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-        intent.putExtra(CALL_ID, selectedCallData.callId)
-        startActivity(intent)*/
     }
 
     abstract fun provideViewModel(): VM
 
+    /**
+     * Ui file from layout folder only to load the user interface of fragment
+     **/
     @LayoutRes
     abstract fun provideLayoutResource(): Int
 
+    /**
+     * Once call permission is Granted the calling fragment will get the call back and initiate
+     * appropriate actions
+     **/
     abstract fun onCallPermissionGranted()
 
+    /**
+     *
+     * */
     abstract fun onCallPermissionDenied()
 }
