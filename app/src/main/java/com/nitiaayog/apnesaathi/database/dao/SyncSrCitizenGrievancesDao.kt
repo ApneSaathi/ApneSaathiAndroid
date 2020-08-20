@@ -5,6 +5,12 @@ import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
 
+/**
+ * This interface is only used for syncing data when they are collected when user was offline
+ * and data is updated.
+ *
+ * Only Sr. Citizen data will be captured offline for syncing
+ * */
 @Dao
 interface SyncSrCitizenGrievancesDao {
 

@@ -26,6 +26,9 @@ abstract class ApneSathiDatabase : RoomDatabase() {
     abstract fun provideVolunteerDao(): VolunteerDao
     abstract fun provideDistrictDao(): DistrictDataDao
 
+    @Transaction
+    fun clearDatabase() = clearAllTables()
+
     companion object {
         @Volatile
         private var INSTANCE: ApneSathiDatabase? = null
@@ -73,7 +76,4 @@ abstract class ApneSathiDatabase : RoomDatabase() {
             }
         }
     }
-
-    @Transaction
-    fun clearDatabase() = clearAllTables()
 }

@@ -147,10 +147,9 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     }
 
     /**
-     * This method this initiate a call and after that it will navigate to Feedback for page
-     * so that logged in person can store the Senior Citizen's feedback and if any issues are
-     * raised by Sr. Citizen that would also be logged and volunteers/staff members can start
-     * resolving it.
+     * Initiate a call and after that it will navigate to Feedback for page so that logged
+     * in person can store the Senior Citizen's feedback and if any issues are raised by
+     * Sr. Citizen that would also be logged and volunteers/staff members can start resolving it.
      * */
     protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
         initiateCall(selectedCallData.contactNumber!!)
