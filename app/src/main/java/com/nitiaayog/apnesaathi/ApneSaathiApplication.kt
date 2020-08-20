@@ -24,8 +24,6 @@ class ApneSaathiApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate()
 
-        //println("TAG -- ApiHost --> ${BuildConfig.ApiHost}")
-
         AndroidThreeTen.init(this)
         getScreenSize(this)
 

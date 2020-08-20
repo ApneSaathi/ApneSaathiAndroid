@@ -26,7 +26,6 @@
     <string name="txtmobileNumber">मोबाइल नंबर</string>
     <string name="verificationcode">सत्यापन कोड दर्ज करें</string>
     <string name="wehavesendverificaiton_code">हमने 4 अंकों का सत्यापन कोड भेजा है</string>
-    <string name="senderNumber">+91 9673346489</string>
     <string name="verify">सत्यापित करें</string>
     <string name="donthave_receive_resend">क्या किसी भी कोड को पुनः प्राप्त नहीं किया? पुन: भेजें</string>
     <string name="enterOtp">ओटीपी दर्ज करें</string>
@@ -72,7 +71,7 @@
     <string name="address_bold">पता: </string>
     <string name="unattended">पहुंच से बाहर का</string>
     <string name="edit">संपादित करें</string>
-    <string name="app_bar_title">Sr. Citizen details</string>
+    <string name="app_bar_title">वरिष्ठ नागरिक विवरण</string>
     <string name="txtSubmit">प्रस्तुत</string>
     <string name="call_status_1">कॉल की स्थिति</string>
     <string name="all_calls">सभी कालेँ</string>
@@ -93,9 +92,8 @@
     <string name="menu_notification">अधिसूचना</string>
     <string name="menu_profile">प्रोफ़ाइल</string>
     <string name="grievances_count">शिकायत(%s)</string>
-    <string name="issues_count">Issues(%s)</string>
+    <string name="issues_count">मुद्दे(%s)</string>
 
-    <string name="details_fragment">seniorCitizen detail fragment</string>
     <string name="select_a_category">एक वर्ग का चयन करें</string>
     <string name="description">विवरण</string>
     <string name="priority">प्राथमिकता</string>
@@ -207,7 +205,7 @@
 
     <string name="govt_quarantine">सरकारी संगरोध</string>
     <string name="no_internet_save_data_in_app">आपका इंटरनेट कनेक्शन धीमा / खराब है, लेकिन हम जानकारी को ऐप में संग्रहीत करेंगे और बाद में जब इंटरनेट उपलब्ध होगा तब हम सर्वर के साथ सिंक करेंगे।.</string>
-    <string name="thanks_go_back">આભાર, પાછા જાઓ</string>
+    <string name="thanks_go_back">धन्यवाद, पिछले पृष्ठ पर वापस</string>
     <string name="details_saved_successfully">वरिष्ठ नागरिक विवरण को सफलतापूर्वक समन्वयित किया जाता है।\n\nहमारी मदद करने के लिए, धन्यवाद</string>
     <string name="great">बहुत अच्छा</string>
     <string name="can_not_connect_to_server">सर्वर से कनेक्ट नहीं कर सकते।\n\nहमने डेटा को ऐप में सेव कर लिया है और सर्वर से कनेक्ट होते ही हम सिंक कर देंगे</string>

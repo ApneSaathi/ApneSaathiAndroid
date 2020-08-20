@@ -49,6 +49,9 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? = inflater.inflate(provideLayoutResource(), container, false)
 
+    /**
+     * Requested permissions status callback
+     * */
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -83,19 +86,31 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         super.onDestroy()
     }
 
+    /**
+     * Dynamically check the permission i.e. Granted/Denied
+     * */
     private fun checkPermission(permission: String): Boolean {
         val callPermission = ContextCompat.checkSelfPermission(context!!, permission)
         return (callPermission == PackageManager.PERMISSION_GRANTED)
     }
 
+    /**
+     * Request the permission
+     * */
     private fun requestPermission(vararg permissions: String) =
         requestPermissions(permissions, CONST_PERMISSION_CALL_PHONE)
 
+    /**
+     * Check for the CALL permission and provide appropriate callback
+     * */
     protected fun prepareToCallPerson() {
         if (checkPermission(PERMISSION_CALL_PHONE)) onCallPermissionGranted()
         else requestPermission(PERMISSION_CALL_PHONE)
     }
 
+    /**
+     * Show the details of requested permission that why this permission is important for app.
+     * */
     private fun showPermissionTextPopup(
         @StringRes message: Int, navigateToSetting: Boolean, permission: String
     ) {
@@ -120,6 +135,9 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
             .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
+    /**
+     * Just initiate call to provided phone number
+     * */
     protected fun initiateCall(phoneNumber: String) {
         Intent(Intent.ACTION_CALL).apply {
             data = Uri.parse("tel:$phoneNumber")
@@ -128,13 +146,13 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
         }
     }
 
+    /**
+     * Initiate a call and after that it will navigate to Feedback for page so that logged
+     * in person can store the Senior Citizen's feedback and if any issues are raised by
+     * Sr. Citizen that would also be logged and volunteers/staff members can start resolving it.
+     * */
     protected fun placeCall(selectedCallData: CallData) {//, containerId: Int
         initiateCall(selectedCallData.contactNumber!!)
-        /*Intent(Intent.ACTION_CALL).apply {
-            data = Uri.parse("tel:${selectedCallData.contactNumber}")
-            if (this.resolveActivity(activity!!.packageManager) != null) startActivity(this)
-            else onCallPermissionDenied()
-        }*/
 
         Observable.timer(NAVIGATION_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -144,18 +162,29 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
                 intent.putExtra(CALL_ID, selectedCallData.callId)
                 activity!!.startActivityForResult(intent, REQUEST_CODE)
             }.autoDispose(disposables)
-
-        /*val intent = Intent(activity, SeniorCitizenFeedbackFormActivity::class.java)
-        intent.putExtra(CALL_ID, selectedCallData.callId)
-        startActivity(intent)*/
     }
 
+    /**
+     * Every fragment/activity will have view model.Using this method we can dynamically create
+     * ViewModel instance only for Fragment
+     * */
     abstract fun provideViewModel(): VM
 
+    /**
+     * Ui file from layout folder only to load the user interface of Fragment
+     **/
     @LayoutRes
     abstract fun provideLayoutResource(): Int
 
+    /**
+     * Once call permission is Granted the calling fragment will get the call back and initiate
+     * appropriate actions
+     **/
     abstract fun onCallPermissionGranted()
 
+    /**
+     * If call permission denied then calling fragment can get the call back and initiate
+     * appropriate actions or show message
+     * */
     abstract fun onCallPermissionDenied()
 }

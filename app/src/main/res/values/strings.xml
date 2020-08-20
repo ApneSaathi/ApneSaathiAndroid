@@ -358,7 +358,7 @@
         <item>@string/lack_of_safety</item>
         <item>@string/lack_of_access_emergency</item>
         <item>@string/phone_and_service</item>
-        <item>@string/no_problems</item>
+        <!--<item>@string/no_problems</item>-->
     </string-array>
     <string-array name="districts_array">
         <item>BARPETA</item>
