@@ -58,6 +58,22 @@ import java.util.concurrent.TimeUnit
 
 class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackViewModel>() {
 
+    companion object {
+        private const val YES: String = "1"
+        private const val NO: String = "2"
+
+        private const val TalkedWithSrCitizen: String = "1"
+        private const val TalkedWithFamilyMember: String = "2"
+        private const val TalkedWithCommunityMember: String = "3"
+
+        private const val TalkedAboutPrevention: String = "1"
+        private const val TalkedAboutAccess: String = "2"
+        private const val TalkedAboutDetection: String = "3"
+
+        private const val BehaviorChangeMayBe: String = "3"
+        private const val BehaviorChangeNotApplicable: String = "4"
+    }
+
     private var selectedSymptomsAwareness: MaterialButton? = null
     private var selectedKnowledgeOfCovidPrevention: MaterialButton? = null
     private var selectedLackOfEssentialServices: MaterialButton? = null
@@ -302,253 +318,6 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
-    /* private fun setTalkedWith(talkedWith: String, callStatus: String) {
-        if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")) {
-            actTalkWith.setText(R.string.sr_citizen)
-            viewModel.setTalkedWith(getString(R.string.sr_citizen))
-
-            cgMedicalDetails.visibility = View.VISIBLE
-        } else if ((talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
-            (talkedWith.toLowerCase(Locale.getDefault()) == "f")
-        ) {
-            actTalkWith.setText(R.string.family_member_of_sr_citizen)
-            viewModel.setTalkedWith(getString(R.string.family_member_of_sr_citizen))
-            cgMedicalDetails.visibility = View.VISIBLE
-        } else if ((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c")) {
-            actTalkWith.setText(R.string.community_member)
-            viewModel.setTalkedWith(getString(R.string.community_member))
-//            tvAnySrCitizenInHome.visibility = View.VISIBLE
-        }
-
-        if (((talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "s")
-                    || (talkedWith == getString(R.string.family_member_of_sr_citizen)) ||
-                    (talkedWith.toLowerCase(Locale.getDefault()) == "f") ||
-                    (talkedWith == getString(R.string.sr_citizen)) || (talkedWith.toLowerCase(Locale.getDefault()) == "c") &&
-                    (callStatus == "10"))
-        ) {
-            tvTalkWith.visibility == View.VISIBLE
-            actTalkWith.visibility == View.VISIBLE
-        } else cgMedicalDetails.visibility = View.GONE
-    }
-
-    private fun setRelatedInfoTalkedAboutData(relatedInfo: String) {
-        if (relatedInfo.toLowerCase(Locale.getDefault())
-                .contains(getString(R.string.prevention).toLowerCase(Locale.getDefault()))
-        ) changeButtonSelectionWithIcon(btnPrevention)
-
-        if (relatedInfo.toLowerCase(Locale.getDefault())
-                .contains(getString(R.string.access).toLowerCase(Locale.getDefault()))
-        ) changeButtonSelectionWithIcon(btnAccess)
-
-        if (relatedInfo.toLowerCase(Locale.getDefault())
-                .contains(getString(R.string.detection).toLowerCase(Locale.getDefault()))
-        ) changeButtonSelectionWithIcon(btnDetection)
-
-        checkTalkedAbout()
-        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
-    }
-
-    private fun setBehavioralChangesData(behavioralChange: String) {
-        viewModel.setBehaviorChange(
-            when (behavioralChange.toLowerCase(Locale.getDefault())) {
-                getString(R.string.yes).toLowerCase(Locale.getDefault()), "y" ->
-                    getString(R.string.yes)
-                getString(R.string.no).toLowerCase(Locale.getDefault()), "n" ->
-                    getString(R.string.no)
-                getString(R.string.may_be).toLowerCase(Locale.getDefault()), "m" ->
-                    getString(R.string.may_be)
-                else -> getString(R.string.not_applicable)
-            }
-        )
-        actBehaviorChange.setText(viewModel.getBehaviorChange())
-        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
-    }
-
-    private fun setCovidData(grievance: SrCitizenGrievance) {
-        if (grievance.hasCough!!.toLowerCase(Locale.getDefault()) == "y") {
-            changeCovidSymptomsSelection(ivCough, tvCough, ivDoneCough)
-            viewModel.isCoughSymptoms(true)
-        }
-        if (grievance.hasFever!!.toLowerCase(Locale.getDefault()) == "y") {
-            changeCovidSymptomsSelection(ivFever, tvFever, ivDoneFever)
-            viewModel.isFeverSymptom(true)
-        }
-        if (grievance.hasShortnessOfBreath!!.toLowerCase(Locale.getDefault()) == "y") {
-            changeCovidSymptomsSelection(
-                ivShortnessOfBreath, tvShortnessOfBreath, ivDoneShortnessOfBreath
-            )
-            viewModel.isShortBreathSymptoms(true)
-        }
-        if (grievance.hasSoreThroat!!.toLowerCase(Locale.getDefault()) == "y") {
-            changeCovidSymptomsSelection(ivSoreThroat, tvSoreThroat, ivDoneSoreThroat)
-            viewModel.isSoreThroatSymptom(true)
-        }
-
-        if ((grievance.hasCough!!.toLowerCase(Locale.getDefault()) == "y") ||
-            (grievance.hasFever!!.toLowerCase(Locale.getDefault()) == "y") ||
-            (grievance.hasShortnessOfBreath!!.toLowerCase(Locale.getDefault()) == "y") ||
-            (grievance.hasSoreThroat!!.toLowerCase(Locale.getDefault()) == "y")
-        ) {
-            viewModel.setOtherMedicalProblem(getString(R.string.covid_19_symptoms))
-            viewModel.isCovideSymptoms(true)
-
-            actOtherMedicalProblems.listSelection = 0
-            actOtherMedicalProblems.setText(viewModel.getOtherMedicalProblem())
-            actOtherMedicalProblems.visibility = View.VISIBLE
-
-            tvCovidSymptoms.visibility = View.VISIBLE
-            hsvCovidSymptoms.visibility = View.VISIBLE
-
-            viewModel.setQuarantineStatus(grievance.quarantineStatus!!)
-            actQuarantineHospitalizationStatus.setText(
-                when (viewModel.getQuarantineStatus()) {
-                    "1" -> R.string.home_quarantine
-                    "2" -> R.string.government_quarantine
-                    "3" -> R.string.hospitalized
-                    "0" -> R.string.not_quarantined
-                    else -> R.string.status
-                }
-            )
-        }
-        //if (cgMedicalDetails.visibility == View.GONE) cgMedicalDetails.visibility = View.VISIBLE
-    }
-
-    private fun setComplaintData(grievance: SrCitizenGrievance) {
-        selectedLackOfEssentialServices =
-            if (grievance.emergencyServiceRequired!!.toLowerCase(Locale.getDefault()) == "y") {
-                toggleButtonSelection(
-                    btnLackOfEssentialServicesYes, selectedLackOfEssentialServices
-                )
-            } else toggleButtonSelection(
-                btnLackOfEssentialServicesNo, selectedLackOfEssentialServices
-            )
-        viewModel.isEmergencyEscalation(grievance.emergencyServiceRequired!!.toUpperCase(Locale.getDefault()))
-
-        popupCategoryList.forEach {
-            if (checkComplainData(
-                    grievance.foodShortage!!, it.name, getString(R.string.lack_of_food)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.medicineShortage!!, it.name, getString(R.string.lack_of_medicine)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.accessToBankingIssue!!, it.name,
-                    getString(R.string.lack_of_banking_service)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.utilitySupplyIssue!!, it.name, getString(R.string.lack_of_utilities)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.hygieneIssue!!, it.name, getString(R.string.lack_of_hygine)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.safetyIssue!!, it.name, getString(R.string.lack_of_safety)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.emergencyServiceIssue!!, it.name,
-                    getString(R.string.lack_of_access_emergency)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-            if (checkComplainData(
-                    grievance.phoneAndInternetIssue!!, it.name,
-                    getString(R.string.phone_and_service)
-                )
-            ) {
-                it.isSelected = true
-                rvCategoryAdapter.addItem(it.name)
-            }
-        }
-
-        selectedNeedOfEmergencyServices = if (grievance.emergencyServiceRequired == "Y") {
-            toggleButtonSelection(btnEmergencyEscalationYes, selectedNeedOfEmergencyServices)
-        } else toggleButtonSelection(btnEmergencyEscalationNo, selectedNeedOfEmergencyServices)
-        viewModel.isEmergencyEscalation(grievance.emergencyServiceRequired!!)
-
-        val selectedItems = popupCategoryList.filter { it.isSelected }.map {
-            viewModel.addComplaint(it.name)
-        }
-        if (selectedItems.isNotEmpty() || (grievance.emergencyServiceIssue!! == "0") ||
-            (grievance.emergencyServiceRequired!! == "Y")
-        ) {
-            actOtherMedicalProblems.setText(getString(R.string.non_covid_symptoms))
-            viewModel.setOtherMedicalProblem(getString(R.string.non_covid_symptoms))
-            viewModel.isCovideSymptoms(false)
-
-            cgMedicalDetails.visibility = View.VISIBLE
-
-            if (cgComplaintDetails.visibility == View.GONE)
-                cgComplaintDetails.visibility = View.VISIBLE
-            rvCategoryAdapter.notifyDataSetChanged()
-            rvCategory.visibility = View.VISIBLE
-        }
-
-        private fun resetCallStatus() {
-        viewModel.setCallStatus("")
-        if ((selectedCallStatusButton?.id != R.id.btnNoResponse) && btnNoResponse.isSelected)
-            resetButton(btnNoResponse)
-        if ((selectedCallStatusButton?.id != R.id.btnNotPicked) && btnNotPicked.isSelected)
-            resetButton(btnNotPicked)
-        if ((selectedCallStatusButton?.id != R.id.btnNotReachable) && btnNotReachable.isSelected)
-            resetButton(btnNotReachable)
-        if ((selectedCallStatusButton?.id != R.id.btnDisConnected) && btnDisConnected.isSelected)
-            resetButton(btnDisConnected)
-        if ((selectedCallStatusButton?.id != R.id.btnConnected) && btnConnected.isSelected)
-            resetButton(btnConnected)
-    }
-
-    private fun manageResetForm(button: MaterialButton) {
-        changeButtonSelection(button)
-        resetCallStatus()
-        resetForm()
-    }
-
-    private fun checkComplainData(dataString: String, element: String, compareString: String):
-            Boolean = (dataString == "0") && (element == compareString)
-    }
-
-    private fun changeButtonSelection(button: MaterialButton) {
-        if ((selectedCallStatusButton != null) && (selectedCallStatusButton == button)) return
-
-        button.apply {
-            updateButtonState(this)
-        }
-
-        selectedCallStatusButton?.apply {
-            this.isSelected = false
-            this.strokeColor = ColorStateList.valueOf(normalColor)
-            this.setTextColor(normalColor)
-        }
-
-        selectedCallStatusButton = button
-    }*/
-
     private fun initAutoCompleteTextViews() {
         val genderList = resources.getStringArray(R.array.gender_array)
         val gendersAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, genderList)
@@ -610,12 +379,26 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actTalkWith.setOnDismissListener {
             updateDropDownIndicator(actTalkWith, R.drawable.ic_arrow_down)
         }
+        /**
+         * This values should be passed in Api Parameters and while retrieving from api we will get
+         * same values as below
+         * SeniorCitizen = "1";
+         * FamilyMemberOfSrCitizen = "2";
+         * CommunityMember = "3";
+         **/
         actTalkWith.setOnItemClickListener { _, _, position, _ ->
-            if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
+            if (viewModel.getTalkedWith() == TalkedWithCommunityMember) {
                 resetRegisterNewSrCitizenLayout()
                 resetAllFormElements()
             }
-            viewModel.setTalkedWith(talkedWithList[position])
+            viewModel.setTalkedWith(
+                when (talkedWithList[position]) {
+                    getString(R.string.sr_citizen) -> TalkedWithSrCitizen
+                    getString(R.string.family_member_of_sr_citizen) -> TalkedWithFamilyMember
+                    getString(R.string.community_member) -> TalkedWithCommunityMember
+                    else -> ""
+                }
+            )
             manageViewVisibility()
         }
 
@@ -628,8 +411,24 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         actBehaviorChange.setOnDismissListener {
             updateDropDownIndicator(actBehaviorChange, R.drawable.ic_arrow_down)
         }
+        /**
+         * This values should be passed in Api Parameters and while retrieving from api we will get
+         * same values as below
+         * Yes = "1",
+         * No = "2",
+         * May Be = "3",
+         * Not Applicable = "4"
+         **/
         actBehaviorChange.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setBehaviorChange(behaviorChangesList[position])
+            viewModel.setBehaviorChange(
+                when (behaviorChangesList[position]) {
+                    getString(R.string.yes) -> YES
+                    getString(R.string.no) -> NO
+                    getString(R.string.may_be) -> BehaviorChangeMayBe
+                    getString(R.string.not_applicable) -> BehaviorChangeNotApplicable
+                    else -> ""
+                }
+            )
             if ((behaviorChangesList[position] == getString(R.string.no)) ||
                 (behaviorChangesList[position] == getString(R.string.may_be))
             ) {
@@ -784,24 +583,27 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             .autoDispose(disposables)
 
         btnIsCovidAwareYes.throttleClick().subscribe {
-            viewModel.setAwareOfCovid19("y")
+            //viewModel.setAwareOfCovid19("y")
+            viewModel.setAwareOfCovid19(YES)
             selectedSymptomsAwareness =
                 toggleButtonSelection(btnIsCovidAwareYes, selectedSymptomsAwareness)
             if (tvIsCovidPreventionTaken.isVisible) updateCovidAwarenessVisibility(View.GONE)
         }.autoDispose(disposables)
         btnIsCovidAwareNo.throttleClick().subscribe {
-            viewModel.setAwareOfCovid19("n")
+            //viewModel.setAwareOfCovid19("n")
+            viewModel.setAwareOfCovid19(NO)
             selectedSymptomsAwareness =
                 toggleButtonSelection(btnIsCovidAwareNo, selectedSymptomsAwareness)
             if (!tvIsCovidPreventionTaken.isVisible) updateCovidAwarenessVisibility(View.VISIBLE)
         }.autoDispose(disposables)
         btnIsCovidPreventionYes.throttleClick().subscribe {
-            viewModel.setSymptomsPreventionDiscussed("y")
+            //viewModel.setSymptomsPreventionDiscussed("y")
+            viewModel.setSymptomsPreventionDiscussed(YES)
             selectedKnowledgeOfCovidPrevention =
                 toggleButtonSelection(btnIsCovidPreventionYes, selectedKnowledgeOfCovidPrevention)
         }.autoDispose(disposables)
         btnIsCovidPreventionNo.throttleClick().subscribe {
-            viewModel.setSymptomsPreventionDiscussed("n")
+            viewModel.setSymptomsPreventionDiscussed(NO)
             selectedKnowledgeOfCovidPrevention =
                 toggleButtonSelection(btnIsCovidPreventionNo, selectedKnowledgeOfCovidPrevention)
         }.autoDispose(disposables)
@@ -824,7 +626,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // Lack of essential services
         btnLackOfEssentialServicesYes.throttleClick().subscribe {
-            viewModel.setLackOfEssential("Yes")
+            viewModel.setLackOfEssential(YES)
             cg_complaint.visibility = View.VISIBLE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(
@@ -832,7 +634,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 )
         }.autoDispose(disposables)
         btnLackOfEssentialServicesNo.throttleClick().subscribe {
-            viewModel.setLackOfEssential("No")
+            viewModel.setLackOfEssential(NO)
             cg_complaint.visibility = View.GONE
             selectedLackOfEssentialServices =
                 toggleButtonSelection(btnLackOfEssentialServicesNo, selectedLackOfEssentialServices)
@@ -840,12 +642,14 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // is Sr. citizen is in any Emergency ?
         btnEmergencyEscalationYes.throttleClick().subscribe {
-            viewModel.isEmergencyEscalation("Y")
+            //viewModel.isEmergencyEscalation("Y")
+            viewModel.isEmergencyEscalation(YES)
             selectedNeedOfEmergencyServices =
                 toggleButtonSelection(btnEmergencyEscalationYes, selectedNeedOfEmergencyServices)
         }.autoDispose(disposables)
         btnEmergencyEscalationNo.throttleClick().subscribe {
-            viewModel.isEmergencyEscalation("N")
+            //viewModel.isEmergencyEscalation("N")
+            viewModel.isEmergencyEscalation(NO)
             selectedNeedOfEmergencyServices =
                 toggleButtonSelection(btnEmergencyEscalationNo, selectedNeedOfEmergencyServices)
         }.autoDispose(disposables)
@@ -867,11 +671,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         // Button to save the data or go back
         btnSave.throttleClick().subscribe {
-            if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
+            if (viewModel.getTalkedWith() == TalkedWithCommunityMember) {
                 if (validateSrCitizenRegistrationForm()) viewModel.registerNewSeniorCitizen(this)
             } else {
-                if (validateFields())
-                    viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
+                if (validateFields()) {
+                    preparePostParams()
+                    // viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
+                }
             }
         }.autoDispose(disposables)
         btnCancelMe.throttleClick().subscribe {
@@ -960,6 +766,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         btnIsCovidPreventionNo.visibility = visibility
     }
 
+    /**
+     * Reset layout when user selects @see{TalkedWithCommunityMember} also when resetting the whole
+     * layout
+     * */
     private fun resetAllFormElements() {
         viewModel.clearData()
 
@@ -983,7 +793,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         tvTalkWith.visibility = View.GONE
         actTalkWith.visibility = View.GONE
 
-        if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
+        if (viewModel.getTalkedWith() == TalkedWithCommunityMember) {
             resetRegisterNewSrCitizenLayout()
             return
         }
@@ -1152,7 +962,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     private fun manageViewVisibility() {
-        if (viewModel.getTalkedWith() == getString(R.string.community_member)) {
+        if (viewModel.getTalkedWith() == TalkedWithCommunityMember) {
             if (cgMedicalDetails.visibility == View.VISIBLE) {
                 resetCovidSymptomsViews()
                 cgMedicalDetails.visibility = View.GONE
@@ -1177,9 +987,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     private fun checkTalkedAbout() {
-        updateOnTalkedAbout(btnPrevention, getString(R.string.prevention))
-        updateOnTalkedAbout(btnAccess, getString(R.string.access))
-        updateOnTalkedAbout(btnDetection, getString(R.string.detection))
+        updateOnTalkedAbout(btnPrevention, TalkedAboutPrevention) // getString(R.string.prevention)
+        updateOnTalkedAbout(btnAccess, TalkedAboutAccess) // getString(R.string.access)
+        updateOnTalkedAbout(btnDetection, TalkedAboutDetection) // getString(R.string.detection)
     }
 
     private fun updateOnTalkedAbout(button: MaterialButton, tag: String) {
@@ -1298,7 +1108,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     this, R.string.error, R.string.validate_is_aware_of_covid_symptoms
                 )
                 return false
-            } else if ((viewModel.isAwareOfCovid19() == "n") && (viewModel.isSymptomsPreventionDiscussed() == "")) {
+            } else if ((viewModel.isAwareOfCovid19() == NO) && (viewModel.isSymptomsPreventionDiscussed() == "")) {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_shared_knowledge_of_covid_symptoms
                 )
@@ -1308,8 +1118,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                     this, R.string.error, R.string.validate_behavioural_changes
                 )
                 return false
-            } else if (((viewModel.getBehaviorChange() == getString(R.string.no)) ||
-                        (viewModel.getBehaviorChange() == getString(R.string.may_be))) &&
+            } else if (((viewModel.getBehaviorChange() == NO) ||
+                        (viewModel.getBehaviorChange() == BehaviorChangeMayBe)) &&
                 viewModel.getPracticeNotAllowed().isEmpty()
             ) {
                 BaseUtility.showAlertMessage(
@@ -1333,7 +1143,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 )
                 return false
             } else if ((viewModel.getComplaints().isEmpty()) &&
-                (viewModel.isLackOfEssential() == "Yes")
+                (viewModel.isLackOfEssential() == YES)
             ) {
                 BaseUtility.showAlertMessage(
                     this, R.string.error, R.string.validate_essential_services
@@ -1452,39 +1262,39 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
         var dataList = viewModel.getMedicalHistory()
         if (dataList.any { it == getString(R.string.no_problems) }) {
-            arraySubParams.addProperty(ApiConstants.IsDiabetic, "N")
-            syncData.hasDiabetic = "N"
+            arraySubParams.addProperty(ApiConstants.IsDiabetic, NO)
+            syncData.hasDiabetic = NO
 
-            arraySubParams.addProperty(ApiConstants.IsBloodPressure, "N")
-            syncData.hasBloodPressure = "N"
+            arraySubParams.addProperty(ApiConstants.IsBloodPressure, NO)
+            syncData.hasBloodPressure = NO
 
-            arraySubParams.addProperty(ApiConstants.LungAilment, "N")
-            syncData.hasLungAilment = "N"
+            arraySubParams.addProperty(ApiConstants.LungAilment, NO)
+            syncData.hasLungAilment = NO
 
-            arraySubParams.addProperty(ApiConstants.CancerOrMajorSurgery, "N")
-            syncData.cancerOrMajorSurgery = "N"
+            arraySubParams.addProperty(ApiConstants.CancerOrMajorSurgery, NO)
+            syncData.cancerOrMajorSurgery = NO
         } else {
-            syncData.hasDiabetic = if (dataList.any { it == getString(R.string.diabetes) }) "Y"
-            else "N"
+            syncData.hasDiabetic = if (dataList.any { it == getString(R.string.diabetes) }) YES
+            else NO
             arraySubParams.addProperty(ApiConstants.IsDiabetic, syncData.hasDiabetic)
 
             syncData.hasBloodPressure =
-                if (dataList.any { it == getString(R.string.blood_pressure) }) "Y" else "N"
+                if (dataList.any { it == getString(R.string.blood_pressure) }) YES else NO
             arraySubParams.addProperty(ApiConstants.IsBloodPressure, syncData.hasBloodPressure)
 
             syncData.hasLungAilment =
-                if (dataList.any { it == getString(R.string.lung_ailment) }) "Y" else "N"
+                if (dataList.any { it == getString(R.string.lung_ailment) }) YES else NO
             arraySubParams.addProperty(ApiConstants.LungAilment, syncData.hasLungAilment)
 
             syncData.cancerOrMajorSurgery =
-                if (dataList.any { it == getString(R.string.cancer_major_surgery) }) "Y" else "N"
+                if (dataList.any { it == getString(R.string.cancer_major_surgery) }) YES else NO
             arraySubParams.addProperty(
                 ApiConstants.CancerOrMajorSurgery, syncData.cancerOrMajorSurgery
             )
         }
 
-        arraySubParams.addProperty(ApiConstants.OtherAilments, "N")
-        syncData.otherAilments = "N"
+        arraySubParams.addProperty(ApiConstants.OtherAilments, NO)
+        syncData.otherAilments = NO
 
         arraySubParams.addProperty(ApiConstants.RemarkOnMedicalHistory, "")
         syncData.remarksMedicalHistory = ""
@@ -1499,8 +1309,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             ApiConstants.IsSrCitizenAwareOfCovid19, syncData.hasSrCitizenAwareOfCovid19
         )
 
-        syncData.hasSymptomsPreventionDiscussed = if (syncData.hasSrCitizenAwareOfCovid19 != "Y")
+        /*syncData.hasSymptomsPreventionDiscussed = if (syncData.hasSrCitizenAwareOfCovid19 != YES)
             viewModel.isSymptomsPreventionDiscussed().toUpperCase(Locale.ENGLISH) else ""
+        arraySubParams.addProperty(
+            ApiConstants.IsSymptomsPreventionDiscussed, syncData.hasSymptomsPreventionDiscussed
+        )*/
+        syncData.hasSymptomsPreventionDiscussed = if (syncData.hasSrCitizenAwareOfCovid19 != YES)
+            viewModel.isSymptomsPreventionDiscussed() else ""
         arraySubParams.addProperty(
             ApiConstants.IsSymptomsPreventionDiscussed, syncData.hasSymptomsPreventionDiscussed
         )
@@ -1515,26 +1330,26 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             ApiConstants.WhichPracticeNotFollowed, syncData.whichPracticesNotFollowed
         )
 
-        syncData.hasCovidSymptoms = if (viewModel.isCovideSymptoms()) "Y" else "N"
+        syncData.hasCovidSymptoms = if (viewModel.isCovideSymptoms()) YES else NO
         arraySubParams.addProperty(ApiConstants.HasCovidSymptoms, syncData.hasCovidSymptoms)
 
-        syncData.hasCough = if (viewModel.isCoughSymptoms()) "Y" else "N"
+        syncData.hasCough = if (viewModel.isCoughSymptoms()) YES else NO
         arraySubParams.addProperty(ApiConstants.HasCough, syncData.hasCough)
 
-        syncData.hasFever = if (viewModel.isFeverSymptom()) "Y" else "N"
+        syncData.hasFever = if (viewModel.isFeverSymptom()) YES else NO
         arraySubParams.addProperty(ApiConstants.HasFever, syncData.hasFever)
 
-        syncData.hasShortnessOfBreath = if (viewModel.isShortBreathSymptoms()) "Y" else "N"
+        syncData.hasShortnessOfBreath = if (viewModel.isShortBreathSymptoms()) YES else NO
         arraySubParams.addProperty(ApiConstants.HasShortnessOfBreath, syncData.hasShortnessOfBreath)
 
-        syncData.hasSoreThroat = if (viewModel.isSoreThroatSymptom()) "Y" else "N"
+        syncData.hasSoreThroat = if (viewModel.isSoreThroatSymptom()) YES else NO
         arraySubParams.addProperty(ApiConstants.HasSoreThroat, syncData.hasSoreThroat)
 
         syncData.quarantineStatus = viewModel.getQuarantineStatus()
         arraySubParams.addProperty(ApiConstants.QuarantineStatus, syncData.quarantineStatus!!)
 
         dataList = viewModel.getComplaints()
-        if (dataList.any { it == getString(R.string.no_problems) }) {
+        /*if (dataList.any { it == getString(R.string.no_problems) }) {
             syncData.foodShortage = "4"
             arraySubParams.addProperty(ApiConstants.FoodShortage, 4)
 
@@ -1555,55 +1370,51 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
             syncData.phoneAndInternetIssue = "4"
             arraySubParams.addProperty(ApiConstants.PhoneInternetIssue, 4)
-        } else {
-            syncData.foodShortage = if (dataList.any { it == getString(R.string.lack_of_food) }) "1"
-            else "4"
-            arraySubParams.addProperty(ApiConstants.FoodShortage, syncData.foodShortage!!.toInt())
+        } else {*/
+        syncData.foodShortage =
+            if (dataList.any { it == getString(R.string.lack_of_food) }) "1" else "4"
+        arraySubParams.addProperty(ApiConstants.FoodShortage, syncData.foodShortage!!.toInt())
 
-            syncData.medicineShortage =
-                if (dataList.any { it == getString(R.string.lack_of_medicine) }) "1" else "4"
-            arraySubParams.addProperty(
-                ApiConstants.MedicineShortage, syncData.medicineShortage!!.toInt()
-            )
+        syncData.medicineShortage =
+            if (dataList.any { it == getString(R.string.lack_of_medicine) }) "1" else "4"
+        arraySubParams.addProperty(
+            ApiConstants.MedicineShortage, syncData.medicineShortage!!.toInt()
+        )
 
-            syncData.accessToBankingIssue =
-                if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "1" else "4"
-            arraySubParams.addProperty(
-                ApiConstants.AccessToBankingIssue, syncData.accessToBankingIssue!!.toInt()
-            )
+        syncData.accessToBankingIssue =
+            if (dataList.any { it == getString(R.string.lack_of_banking_service) }) "1" else "4"
+        arraySubParams.addProperty(
+            ApiConstants.AccessToBankingIssue, syncData.accessToBankingIssue!!.toInt()
+        )
 
-            syncData.utilitySupplyIssue =
-                if (dataList.any { it == getString(R.string.lack_of_utilities) }) "1" else "4"
-            arraySubParams.addProperty(
-                ApiConstants.UtilityIssue, syncData.utilitySupplyIssue!!.toInt()
-            )
+        syncData.utilitySupplyIssue =
+            if (dataList.any { it == getString(R.string.lack_of_utilities) }) "1" else "4"
+        arraySubParams.addProperty(ApiConstants.UtilityIssue, syncData.utilitySupplyIssue!!.toInt())
 
-            syncData.hygieneIssue =
-                if (dataList.any { it == getString(R.string.lack_of_hygine) }) "1" else "4"
-            arraySubParams.addProperty(
-                ApiConstants.HygieneIssue, syncData.hygieneIssue!!.toInt()
-            )
+        syncData.hygieneIssue =
+            if (dataList.any { it == getString(R.string.lack_of_hygine) }) "1" else "4"
+        arraySubParams.addProperty(ApiConstants.HygieneIssue, syncData.hygieneIssue!!.toInt())
 
-            syncData.safetyIssue =
-                if (dataList.any { it == getString(R.string.lack_of_safety) }) "1" else "4"
-            arraySubParams.addProperty(ApiConstants.SafetyIssue, syncData.safetyIssue!!.toInt())
+        syncData.safetyIssue =
+            if (dataList.any { it == getString(R.string.lack_of_safety) }) "1" else "4"
+        arraySubParams.addProperty(ApiConstants.SafetyIssue, syncData.safetyIssue!!.toInt())
 
-            syncData.emergencyServiceIssue =
-                if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "1" else "4"
-            arraySubParams.addProperty(
-                ApiConstants.EmergencyServiceIssue, syncData.emergencyServiceIssue!!.toInt()
-            )
+        syncData.emergencyServiceIssue =
+            if (dataList.any { it == getString(R.string.lack_of_access_emergency) }) "1" else "4"
+        arraySubParams.addProperty(
+            ApiConstants.EmergencyServiceIssue, syncData.emergencyServiceIssue!!.toInt()
+        )
 
-            syncData.phoneAndInternetIssue =
-                if (dataList.any { it == getString(R.string.phone_and_service) }) "1" else "4"
-            arraySubParams.addProperty(
-                ApiConstants.PhoneInternetIssue, syncData.phoneAndInternetIssue!!.toInt()
-            )
-            syncData.description = etDescription.text.toString()
-            arraySubParams.addProperty(
-                ApiConstants.Description, syncData.description
-            )
-        }
+        syncData.phoneAndInternetIssue =
+            if (dataList.any { it == getString(R.string.phone_and_service) }) "1" else "4"
+        arraySubParams.addProperty(
+            ApiConstants.PhoneInternetIssue, syncData.phoneAndInternetIssue!!.toInt()
+        )
+
+        syncData.description = etDescription.text.toString()
+        arraySubParams.addProperty(ApiConstants.Description, syncData.description)
+        //}
+
         syncData.emergencyServiceRequired = viewModel.isEmergencyEscalation()
         arraySubParams.addProperty(
             ApiConstants.IsEmergencyServicesRequired, syncData.emergencyServiceRequired
