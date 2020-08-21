@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.MenuRes
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -13,6 +14,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardViewModel
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievancesFragment
 import com.nitiaayog.apnesaathi.ui.fragments.profile.ProfileFragment
+import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -47,6 +49,13 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
 
     override fun provideLayoutResource(): Int {
         return R.layout.activity_dashboard
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            grievancesFragment.reloadApi()
+        }
     }
 
     private fun initViewPager() {

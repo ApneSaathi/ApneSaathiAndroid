@@ -521,5 +521,6 @@
     <string name="update_ratings_successful">You have successfully updated Rating of %s</string>
 
     <string name="logout_message">Are you sure, you want to logout ?</string>
+    <string name="raised_by_me">RAISED BY ME</string>
 
 </resources>

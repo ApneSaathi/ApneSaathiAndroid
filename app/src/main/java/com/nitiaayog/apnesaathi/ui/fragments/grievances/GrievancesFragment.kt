@@ -68,11 +68,12 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
             viewModel.getDistrictList().observe(viewLifecycleOwner, Observer {
                 districtList = it
-                if (menu.menu.size() > 0){
+                if (menu.menu.size() > 0) {
                     menu.menu.clear()
                 }
+                menu.menu.add(Menu.NONE, 0, 0, getString(R.string.raised_by_me))
                 for ((i, item) in it.withIndex()) {
-                    menu.menu.add(Menu.NONE, i, i, item.districtName)
+                    menu.menu.add(Menu.NONE, i + 1, i + 1, item.districtName)
                 }
             })
 
@@ -173,7 +174,13 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             R.id.district_filter -> {
                 menu.show()
                 menu.setOnMenuItemClickListener { selectedDistrict ->
-                    dataManager.setSelectedDistrictId(districtList[selectedDistrict.itemId].districtId.toString())
+                    val selectedDistrictId: Int = if (selectedDistrict.itemId == 0) {
+                        -1
+                    } else {
+                        districtList[selectedDistrict.itemId - 1].districtId ?: -1
+                    }
+
+                    dataManager.setSelectedDistrictId(selectedDistrictId.toString())
                     reloadApi()
                     true
                 }
