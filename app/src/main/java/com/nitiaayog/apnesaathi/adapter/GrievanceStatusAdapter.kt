@@ -66,9 +66,11 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
             itemView.tv_name.text = grievanceData.srCitizenName
             itemView.tv_name.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             if (grievanceData.gender == "M") {
-                itemView.img_gender.background = context.getDrawable(R.drawable.ic_male_user)
+                itemView.img_gender.background =
+                    ContextCompat.getDrawable(context, R.drawable.ic_male_user)
             } else {
-                itemView.img_gender.background = context.getDrawable(R.drawable.ic_female_user)
+                itemView.img_gender.background =
+                    ContextCompat.getDrawable(context, R.drawable.ic_female_user)
             }
             itemView.constraintLayout.setOnClickListener(this)
         }
