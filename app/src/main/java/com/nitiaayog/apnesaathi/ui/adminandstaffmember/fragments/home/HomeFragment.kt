@@ -107,7 +107,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data,true)
+                    fragment.setSelectedUser(data, true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -139,7 +139,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data,true)
+                    fragment.setSelectedUser(data, true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -171,7 +171,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data,true)
+                    fragment.setSelectedUser(data, true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -203,7 +203,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
                 override fun onMoreInfoClick(position: Int, data: CallData) {
                     val fragment = SeniorCitizenDetailsFragment()
-                    fragment.setSelectedUser(data,true)
+                    fragment.setSelectedUser(data, true)
                     addFragment(
                         R.id.fragmentAdminStaffHomeContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
                     )
@@ -294,12 +294,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun observeNetwork() {
         viewModel.getNetworkStream().removeObservers(viewLifecycleOwner)
-        viewModel.getNetworkStream().observe(viewLifecycleOwner, Observer { handleNetwork(it) })
+        viewModel.getNetworkStream().observe(viewLifecycleOwner, { handleNetwork(it) })
     }
 
     private fun observePendingCalls() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
+        viewModel.getPendingCalls().observe(viewLifecycleOwner, {
             pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             pendingAdapter.hideDate(true)
             pendingAdapter.notifyDataSetChanged()
@@ -309,7 +309,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun observeFollowupCalls() {
         viewModel.getFollowupCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getFollowupCalls().observe(viewLifecycleOwner, Observer {
+        viewModel.getFollowupCalls().observe(viewLifecycleOwner, {
             followupAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             followupAdapter.notifyDataSetChanged()
             manageCalls(it.size, R.string.follow_up_count)
@@ -327,7 +327,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun observeInvalidCalls() {
         viewModel.getInvalidCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getInvalidCalls().observe(viewLifecycleOwner, Observer {
+        viewModel.getInvalidCalls().observe(viewLifecycleOwner, {
             invalidAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             invalidAdapter.notifyDataSetChanged()
             manageCalls(it.size, R.string.invalid_calls_count)
