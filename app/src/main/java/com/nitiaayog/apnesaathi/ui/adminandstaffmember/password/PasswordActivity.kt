@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.ui.adminandstaffmember.password
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ScrollView
 import androidx.lifecycle.Observer
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
@@ -15,7 +16,11 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard.DashboardActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.SEARCH_ELEMENT_DELAY
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_password.*
+import java.util.concurrent.TimeUnit
 
 class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
@@ -42,7 +47,14 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
         getDataStreams()
 
-        ivBack.throttleClick().subscribe { finish() }.autoDispose(disposables)
+        ivBackToLogin.throttleClick().subscribe { finish() }.autoDispose(disposables)
+
+        tietPassword.throttleClick().subscribe {
+            Observable.timer(SEARCH_ELEMENT_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+                }.autoDispose(disposables)
+        }.autoDispose(disposables)
 
         tietPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

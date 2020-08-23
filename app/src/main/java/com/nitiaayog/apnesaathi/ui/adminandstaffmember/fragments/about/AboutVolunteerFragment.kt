@@ -7,7 +7,6 @@ import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
@@ -275,9 +274,7 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
     private fun getObservableDataStream() {
         viewModel.getNetworkStream().removeObservers(viewLifecycleOwner)
-        viewModel.getNetworkStream().observe(viewLifecycleOwner, Observer {
-            manageNetworkState(it)
-        })
+        viewModel.getNetworkStream().observe(viewLifecycleOwner, { manageNetworkState(it) })
     }
 
     private fun setVolunteer(volunteer: Volunteer) {

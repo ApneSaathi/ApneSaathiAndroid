@@ -40,13 +40,18 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
 
         setUpViewPager()
 
-        TabLayoutMediator(
-            tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                when (position) {
-                    0 -> tab.text = getString(R.string.about)
-                    1 -> tab.text = getString(R.string.reviews)
-                }
-            }).attach()
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.about)
+                1 -> tab.text = getString(R.string.reviews)
+            }
+        }.attach()
+    }
+
+    override fun onMoreButtonClick(callData: CallData) {
+        val fragment = SeniorCitizenDetailsFragment()
+        fragment.setSelectedUser(callData)
+        addFragment(R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT)
     }
 
     private fun getData(): Volunteer {
@@ -78,22 +83,12 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
         val adapter = FragmentViewPagerAdapter(requireActivity())
         val aboutFragment = AboutVolunteerFragment.getInstance(volunteer)
         aboutFragment.setOnMoreItemClickListener(this)
-        adapter.addFragment(
-            aboutFragment, getString(R.string.about)
-        )
+        adapter.addFragment(aboutFragment, getString(R.string.about))
         adapter.addFragment(
             FragmentRatingReviews.getInstance(
                 volunteer.id!!, volunteer.firstName!!.plus(" ").plus(volunteer.lastName!!)
             ), getString(R.string.reviews)
         )
         viewPager.adapter = adapter
-    }
-
-    override fun onMoreButtonClick(callData: CallData) {
-        val fragment = SeniorCitizenDetailsFragment()
-        fragment.setSelectedUser(callData)
-        addFragment(
-            R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT
-        )
     }
 }
