@@ -93,26 +93,30 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     private val syncData by lazy { SyncSrCitizenGrievance() }
 
-    // List Medical History
+    /**
+     * popupMedicalHistoryList, popupMedicalHistorySrCitizenAdapter, rvMedicalHistorySrCitizenAdapter are attached with
+     * @see(rvMedicalHistorySrCitizen) i.e. when popup (@see showPopupWindow(anchorView: View))
+     * is shown for rvMedicalHistorySrCitizen then popupMedicalHistorySrCitizenAdapter and
+     * popupMedicalHistoryList are used as Adapter to the popup view.
+     * */
     private val popupMedicalHistoryList: MutableList<FormElements> = mutableListOf()
     private val popupMedicalHistorySrCitizenAdapter: PopupAdapter by lazy {
         PopupAdapter(popupMedicalHistoryList).apply {
-            this.setOnItemClickListener(
-                object : OnItemClickListener<FormElements> {
-                    override fun onItemClick(position: Int, data: FormElements) {
-                        if (data.isSelected) {
-                            rvMedicalHistorySrCitizenAdapter.addItem(data.name)
-                            viewModel.addMedicalHistory(data.name)
-                        } else {
-                            rvMedicalHistorySrCitizenAdapter.removeItem(data.name)
-                            viewModel.removeMedicalHistory(data.name)
-                        }
-
-                        rvMedicalHistorySrCitizen.visibility =
-                            if (rvMedicalHistorySrCitizenAdapter.itemCount > 0) View.VISIBLE
-                            else View.GONE
+            this.setOnItemClickListener(object : OnItemClickListener<FormElements> {
+                override fun onItemClick(position: Int, data: FormElements) {
+                    if (data.isSelected) {
+                        rvMedicalHistorySrCitizenAdapter.addItem(data.name)
+                        viewModel.addMedicalHistory(data.name)
+                    } else {
+                        rvMedicalHistorySrCitizenAdapter.removeItem(data.name)
+                        viewModel.removeMedicalHistory(data.name)
                     }
-                })
+
+                    rvMedicalHistorySrCitizen.visibility =
+                        if (rvMedicalHistorySrCitizenAdapter.itemCount > 0) View.VISIBLE
+                        else View.GONE
+                }
+            })
         }
     }
     private val rvMedicalHistorySrCitizenAdapter: SimpleBaseAdapter by lazy {
@@ -132,7 +136,12 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
-    // List Category
+    /**
+     * popupCategoryList, popupCategoryAdapter, rvCategoryAdapter are attached with
+     * @see(rvCategory) i.e. when popup
+     * @see(showPopupWindow(anchorView: View)) is shown for rvCategory then popupCategoryAdapter
+     * and popupCategoryList are used as Adapter to the popup view.
+     * */
     private val popupCategoryList: MutableList<FormElements> = mutableListOf()
     private val popupCategoryAdapter: PopupAdapter by lazy {
         PopupAdapter(popupCategoryList).apply {
@@ -184,15 +193,20 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         tvCancel.visibility = View.GONE
         tvRegister.visibility = View.GONE
 
+        /** Converting array to list*/
         resources.getStringArray(R.array.medical_problems).forEach {
             popupMedicalHistoryList.add(FormElements(it))
         }
+
+        /** Converting array to list*/
         resources.getStringArray(R.array.grievance_array).forEach {
             popupCategoryList.add(FormElements(it))
         }
 
         observeData()
-
+        /**
+         * Once UI is loaded we will set the data, hence delay required.
+         * */
         Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 setData()
@@ -206,6 +220,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
 
     override fun provideLayoutResource(): Int = R.layout.activity_senior_citizen_feedback_form
 
+    /**
+     * Retrieve data provided via intent
+     **/
     private fun setData() {
         intent?.let { intent ->
             val callId: Int = intent.getIntExtra(CALL_ID, -1)
@@ -253,8 +270,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     private fun checkData(dataString: String, element: String, compareString: String): Boolean =
-        (dataString.toLowerCase(Locale.getDefault()) == "y") && (element == compareString)
+        (dataString.toLowerCase(Locale.getDefault()) == YES) && (element == compareString)
 
+    /** set the call status and hide/show Ui accordingly */
     private fun setCallStatus(callStatus: String) = when (callStatus) {
         this.getString(R.string.connected) -> {
             viewModel.setCallStatus("10")
@@ -675,8 +693,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 if (validateSrCitizenRegistrationForm()) viewModel.registerNewSeniorCitizen(this)
             } else {
                 if (validateFields()) {
-                    preparePostParams()
-                    // viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
+                    //preparePostParams()
+                    viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
                 }
             }
         }.autoDispose(disposables)
@@ -1254,6 +1272,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
 
         if (viewModel.getCallStatus() != "10") return params
+
         syncData.impRemarkInfo = etOtherDescription.text.toString()
         params.addProperty(ApiConstants.ImpRemarkInfo, etOtherDescription.text.toString())
         val arraySubParams = JsonObject()

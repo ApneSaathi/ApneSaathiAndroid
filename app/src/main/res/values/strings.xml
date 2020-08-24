@@ -522,5 +522,6 @@
 
     <string name="logout_message">Are you sure, you want to logout ?</string>
     <string name="raised_by_me">RAISED BY ME</string>
+    <string name="yet_to_be_called">Yet to be called</string>
 
 </resources>
