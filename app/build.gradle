@@ -43,6 +43,14 @@ android {
     }
     dokkaHtml {
         outputDirectory = "$buildDir/dokka"
+        dokkaSourceSets {
+            configureEach {
+                // Use to include or exclude non public members
+                includeNonPublic = true
+                // Do not create index pages for empty packages
+                skipEmptyPackages = true
+            }
+        }
     }
 
     buildTypes {
