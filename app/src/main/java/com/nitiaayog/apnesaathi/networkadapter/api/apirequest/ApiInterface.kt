@@ -35,7 +35,6 @@ interface ApiInterface {
     @POST(ApiProvider.ApiLoadDashboard)
     fun getCallDetails(@Body details: JsonObject): Single<HomeRepo>
 
-
     @POST(ApiProvider.ApiGrievanceTracking)
     fun getGrievanceTrackingDetails(@Body details: JsonObject): Single<GrievanceRespData>
 
