@@ -693,8 +693,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 if (validateSrCitizenRegistrationForm()) viewModel.registerNewSeniorCitizen(this)
             } else {
                 if (validateFields()) {
-                    //preparePostParams()
-                    viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
+                    preparePostParams()
+                    //viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
                 }
             }
         }.autoDispose(disposables)
@@ -785,8 +785,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     /**
-     * Reset layout when user selects @see{TalkedWithCommunityMember} also when resetting the whole
-     * layout
+     * Reset layout when user selects
+     * @see TalkedWithCommunityMember also when resetting the whole layout
      * */
     private fun resetAllFormElements() {
         viewModel.clearData()
@@ -807,6 +807,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         selectedNeedOfEmergencyServices = null
     }
 
+    /** Reset the all the views of layout and the all values in ViewModel */
     private fun resetForm() {
         tvTalkWith.visibility = View.GONE
         actTalkWith.visibility = View.GONE
@@ -856,6 +857,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             toggleSelectionForSrCitizenAtHome(btnAnySrCitizenInHomeNo, btnAnySrCitizenInHomeYes)
     }
 
+    /**
+     * Reset complaints layout with related values in ViewModel
+     * @see rvCategory view
+     * */
     private fun resetComplaintsLayout() {
         if (btnLackOfEssentialServicesYes.isSelected)
             toggleButtonSelection(btnLackOfEssentialServicesYes, null)
@@ -877,6 +882,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             toggleButtonSelection(btnEmergencyEscalationNo, null)
     }
 
+    /**
+     * Reset Talked About Layout
+     * @see hsvInfoYouTalkedAbout view with related values in ViewModel
+     * */
     private fun resetTalkedRelatedToTopic() {
         viewModel.resetTalkedAbout()
         if (btnPrevention.isSelected) changeButtonSelectionWithIcon(btnPrevention)
@@ -884,6 +893,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         if (btnDetection.isSelected) changeButtonSelectionWithIcon(btnDetection)
     }
 
+    /** Reset Given Button*/
     private fun resetButton(button: MaterialButton) {
         button.isSelected = false
         button.setTextColor(normalColor)
@@ -891,6 +901,13 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         button.icon = null
     }
 
+    /** Reset
+     * @see popupMedicalHistorySrCitizenAdapter,
+     * @see rvCategoryAdapter
+     * @see rvCategoryAdapter
+     * @see rvMedicalHistorySrCitizenAdapter
+     * all the adapters with related values in ViewModel
+     * */
     private fun resetAdapters() {
         viewModel.resetMedicalHistory()
         popupMedicalHistorySrCitizenAdapter.resetAdapter()
@@ -901,6 +918,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         rvCategoryAdapter.resetAdapter()
     }
 
+    /**
+     * Reset Register New Senior Citizen layout
+     * @see registerNewSrCitizen view with related values in ViewModel
+     * */
     private fun resetRegisterNewSrCitizenLayout() {
         tvAnySrCitizenInHome.visibility = View.GONE
         btnAnySrCitizenInHomeYes.visibility = View.GONE
@@ -936,6 +957,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         viewModel.setAddress("")
     }
 
+    /** Reset
+     * @see hsvCovidSymptoms view with related values in ViewModel
+     * */
     private fun resetCovidSymptomsViews() {
         if (hsvCovidSymptoms.visibility == View.VISIBLE) {
             tvCovidSymptoms.visibility = View.GONE
@@ -956,6 +980,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =
         autoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
 
+    /**
+     * Reset all the AutoCompleteTextViewes useed in Layout with related values in ViewModel
+     * */
     private fun resetAutoCompleteTextView() {
         actGender.setText("")
         viewModel.setGender("")
@@ -979,6 +1006,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         updateDropDownIndicator(actQuarantineHospitalizationStatus, R.drawable.ic_arrow_down)
     }
 
+    /**
+     * Manage visibility of
+     * @see cgMedicalDetails view with the data including resetting views and Data of Talked With
+     * */
     private fun manageViewVisibility() {
         if (viewModel.getTalkedWith() == TalkedWithCommunityMember) {
             if (cgMedicalDetails.visibility == View.VISIBLE) {
@@ -1015,6 +1046,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         else viewModel.removeTalkedAbout(tag)
     }
 
+    /**
+     * Manage visibility of
+     * @see cgComplaintDetails view with the data including resetting views with related values
+     * in ViewModel
+     * */
     private fun manageOtherMedicalRelatedViews() {
         when (viewModel.getOtherMedicalProblem()) {
             getString(R.string.covid_19_symptoms) -> {
@@ -1038,6 +1074,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    /**
+     * Show popup when user taps on
+     * @see rvMedicalHistorySrCitizen,
+     * @see rvCategory to provide selection of items
+     * */
     private fun showPopupWindow(anchorView: View) {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.include_recyclerview, null)
@@ -1058,6 +1099,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    /** Observe change in data and initiate appropriate action*/
     private fun observeData() = viewModel.getDataObserver().observe(this, Observer {
         when (it) {
             is NetworkRequestState.NetworkNotAvailable -> when (it.apiName) {
@@ -1100,6 +1142,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     })
 
+    /**
+     * If talked with is Sr. Citizen/Family Member then we will first validate all the fields
+     * just to verify and pass proper values
+     **/
     private fun validateFields(): Boolean {
         if (viewModel.getCallStatus().isEmpty()) {
             BaseUtility.showAlertMessage(this, R.string.error, R.string.validate_call_status)
@@ -1179,6 +1225,11 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         return true
     }
 
+    /**
+     * If talked with is Community Member then from here it self user can register new Sr. Citizen
+     * and before calling api here we you validate all the fields so that we can pass valid values
+     * in API
+     **/
     private fun validateSrCitizenRegistrationForm(): Boolean = when {
         etName.text.toString().isEmpty() -> {
             tvNameError.visibility = View.VISIBLE
@@ -1245,6 +1296,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    /** Prepare Parameters to be passed in API to save the details*/
     private fun preparePostParams(): JsonObject {
         val params = JsonObject()
         params.addProperty(ApiConstants.CallId, callId.toInt())
