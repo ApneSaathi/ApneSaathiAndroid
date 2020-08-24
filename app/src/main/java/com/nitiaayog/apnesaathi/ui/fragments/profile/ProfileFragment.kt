@@ -489,28 +489,28 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
         if (volunteerDataResponse is VolunteerDataResponse) {
             if (dataManager.getRole() == ROLE_VOLUNTEER) {
-                dataManager.setFirstName(volunteerDataResponse.volunteer.firstName)
-                dataManager.setLastName(volunteerDataResponse.volunteer.lastName)
-                dataManager.setEmail(volunteerDataResponse.volunteer.email)
-                dataManager.setAddress(volunteerDataResponse.volunteer.address)
-                dataManager.setGender(volunteerDataResponse.volunteer.gender)
+                dataManager.setFirstName(volunteerDataResponse.volunteer!!.firstName!!)
+                dataManager.setLastName(volunteerDataResponse.volunteer!!.lastName!!)
+                dataManager.setEmail(volunteerDataResponse.volunteer!!.email!!)
+                dataManager.setAddress(volunteerDataResponse.volunteer!!.address!!)
+                dataManager.setGender(volunteerDataResponse.volunteer!!.gender!!)
 
                 TxtName.text =
-                    volunteerDataResponse.volunteer.firstName + " " + volunteerDataResponse.volunteer.lastName
+                    volunteerDataResponse.volunteer!!.firstName + " " + volunteerDataResponse.volunteer!!.lastName
 
                 txtAddress.text =
-                    volunteerDataResponse.volunteer.address
-                TxtContactNumber.text = volunteerDataResponse.volunteer.phoneNo
-                TxtEmail.text = volunteerDataResponse.volunteer.email
+                    volunteerDataResponse.volunteer!!.address
+                TxtContactNumber.text = volunteerDataResponse.volunteer!!.phoneNo
+                TxtEmail.text = volunteerDataResponse.volunteer!!.email
             } else {
-                dataManager.setFirstName(volunteerDataResponse.admin.firstName ?: "")
+                dataManager.setFirstName(volunteerDataResponse.admin!!.firstName ?: "")
                 dataManager.setLastName(volunteerDataResponse.admin.lastName ?: "")
                 dataManager.setEmail(volunteerDataResponse.admin.email ?: "")
                 dataManager.setAddress(volunteerDataResponse.admin.address ?: "")
                 dataManager.setGender(volunteerDataResponse.admin.gender ?: "")
 
                 TxtName.text =
-                    volunteerDataResponse.admin.firstName.plus(" ")
+                    volunteerDataResponse.admin!!.firstName.plus(" ")
                         .plus(volunteerDataResponse.admin.lastName)
 
                 txtAddress.text = volunteerDataResponse.admin.address
