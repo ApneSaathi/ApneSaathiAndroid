@@ -785,8 +785,8 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
     }
 
     /**
-     * Reset layout when user selects @see{TalkedWithCommunityMember} also when resetting the whole
-     * layout
+     * Reset layout when user selects
+     * @see TalkedWithCommunityMember also when resetting the whole layout
      * */
     private fun resetAllFormElements() {
         viewModel.clearData()
@@ -807,6 +807,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         selectedNeedOfEmergencyServices = null
     }
 
+    /** Reset the all the views of layout and the all values in ViewModel */
     private fun resetForm() {
         tvTalkWith.visibility = View.GONE
         actTalkWith.visibility = View.GONE
@@ -856,6 +857,10 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
             toggleSelectionForSrCitizenAtHome(btnAnySrCitizenInHomeNo, btnAnySrCitizenInHomeYes)
     }
 
+    /**
+     * Reset complaints layout with related values in ViewModel
+     * @see rvCategory view
+     * */
     private fun resetComplaintsLayout() {
         if (btnLackOfEssentialServicesYes.isSelected)
             toggleButtonSelection(btnLackOfEssentialServicesYes, null)
