@@ -23,6 +23,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
 import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -53,7 +54,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun getGrievanceData() {
-        if (isFromHomeFragment) {
+        if (isFromHomeFragment || dataManager.getRole() == ROLE_VOLUNTEER) {
             callData?.callId?.let {
                 viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner)
             }
@@ -96,7 +97,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             adapter.setOnItemClickListener(this)
             rcl_call_dates.layoutManager?.scrollToPosition(adapter.selectedPos)
         })
-        if (isFromHomeFragment) {
+        if (isFromHomeFragment || dataManager.getRole() == ROLE_VOLUNTEER) {
             img_call_button.visibility = View.VISIBLE
         } else {
             img_call_button.visibility = View.GONE
@@ -140,7 +141,19 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_medical_history.text = medicalHistory
         }
         txt_status.text = "--"  //todo need to fetch issue status from database
-        txt_call_response.text = callData?.talkedWith
+        callData?.talkedWith.let {
+            when (it) {
+                "1" -> {
+                    txt_call_response.text = getString(R.string.sr_citizen)
+                }
+                "2" -> {
+                    txt_call_response.text = getString(R.string.family_member_of_sr_citizen)
+                }
+                "3" -> {
+                    txt_call_response.text = getString(R.string.community_member)
+                }
+            }
+        }
         if (srCitizenGrievance.hasSrCitizenAwareOfCovid19 == "1") {
             tv_awareness.text = getString(R.string.yes)
             tv_reinforce_with_knowledge.visibility = View.GONE
@@ -339,7 +352,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     }
 
     private fun makeGrievanceContainerInvisible() {
-        if (isFromHomeFragment)
+        if (isFromHomeFragment || dataManager.getRole() == ROLE_VOLUNTEER)
             txt_edit.visibility = View.VISIBLE
         else
             txt_edit.visibility = View.GONE
