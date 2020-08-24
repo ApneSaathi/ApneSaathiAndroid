@@ -336,6 +336,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    /** Initialize AutoCompleteTextView of the layout */
     private fun initAutoCompleteTextViews() {
         val genderList = resources.getStringArray(R.array.gender_array)
         val gendersAdapter = BaseArrayAdapter(this, R.layout.item_layout_dropdown_menu, genderList)
@@ -516,6 +517,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    /**
+     * Initialize AutoCompleteTextView, Buttons and EditText
+     * */
     private fun initClicks() {
         // Is Sr citizen at home
         btnAnySrCitizenInHomeYes.throttleClick().subscribe {
@@ -764,6 +768,9 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
         }
     }
 
+    /**
+     * This will update buttons state provided in arguments
+     * */
     private fun updateButtonState(button: MaterialButton, isShowIcon: Boolean = false) {
         button.isSelected = !button.isSelected
         if (button.isSelected) {
