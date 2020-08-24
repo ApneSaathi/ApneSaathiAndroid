@@ -23,7 +23,6 @@ import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
 import com.nitiaayog.apnesaathi.utility.CALL_ID
 import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
-import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -112,6 +111,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
 
     }
+
     private fun makeViewVisible(view: View) {
         view.visibility = View.VISIBLE
     }
@@ -122,16 +122,16 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     private fun bindGrievanceData(srCitizenGrievance: SrCitizenGrievance) {
         var medicalHistory = ""
-        if (srCitizenGrievance.hasDiabetic == "Y") {
+        if (srCitizenGrievance.hasDiabetic == "1") {
             medicalHistory = getString(R.string.diabetes).plus(", ")
         }
-        if (srCitizenGrievance.hasBloodPressure == "Y") {
+        if (srCitizenGrievance.hasBloodPressure == "1") {
             medicalHistory = getString(R.string.blood_pressure).plus(", ")
         }
-        if (srCitizenGrievance.hasLungAilment == "Y") {
+        if (srCitizenGrievance.hasLungAilment == "1") {
             medicalHistory = getString(R.string.lung_ailment).plus(", ")
         }
-        if (srCitizenGrievance.cancerOrMajorSurgery == "Y") {
+        if (srCitizenGrievance.cancerOrMajorSurgery == "1") {
             medicalHistory = getString(R.string.cancer_major_surgery).plus(", ")
         }
         if (medicalHistory.isEmpty()) {
@@ -141,7 +141,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
         txt_status.text = "--"  //todo need to fetch issue status from database
         txt_call_response.text = callData?.talkedWith
-        if (srCitizenGrievance.hasSrCitizenAwareOfCovid19 == "Y") {
+        if (srCitizenGrievance.hasSrCitizenAwareOfCovid19 == "1") {
             tv_awareness.text = getString(R.string.yes)
             tv_reinforce_with_knowledge.visibility = View.GONE
             tv_measures_for_prevention.visibility = View.GONE
@@ -149,7 +149,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             tv_awareness.text = getString(R.string.no)
             tv_reinforce_with_knowledge.visibility = View.VISIBLE
             tv_measures_for_prevention.visibility = View.VISIBLE
-            if (srCitizenGrievance.hasSymptomsPreventionDiscussed == "Y") {
+            if (srCitizenGrievance.hasSymptomsPreventionDiscussed == "1") {
                 tv_measures_for_prevention.text = getString(R.string.yes)
             } else {
                 tv_measures_for_prevention.text = getString(R.string.no)
@@ -166,29 +166,46 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             tv_title_behavior_change.visibility = View.GONE
             tv_practices_not_followed.visibility = View.GONE
         }
+        var talkedAboutText = ""
+        if (srCitizenGrievance.relatedInfoTalkedAbout != null) {
+            val result =
+                srCitizenGrievance.relatedInfoTalkedAbout!!.split(",").map { it.trim() }
+            result.forEach {
+                when (it) {
+                    "1" -> {
+                        talkedAboutText += getString(R.string.prevention).plus(",")
+                    }
+                    "2" -> {
+                        talkedAboutText += getString(R.string.access).plus(",")
+                    }
+                    "3" -> {
+                        talkedAboutText += getString(R.string.detection).plus(",")
+                    }
+                }
+            }
+        }
+        txt_related_info.text = talkedAboutText
 
-        txt_related_info.text = srCitizenGrievance.relatedInfoTalkedAbout ?: "--"
-
-        if (srCitizenGrievance.hasCovidSymptoms == "Y") {
+        if (srCitizenGrievance.hasCovidSymptoms == "1") {
             txt_covid_symptoms.text = getString(R.string.yes)
             txt_covid.visibility = View.GONE
             cl_covid_symptoms.visibility = View.VISIBLE
-            if (srCitizenGrievance.hasCough == "Y") {
+            if (srCitizenGrievance.hasCough == "1") {
                 makeViewVisible(txt_cough)
             } else {
                 makeViewInvisible(txt_cough)
             }
-            if (srCitizenGrievance.hasFever == "Y") {
+            if (srCitizenGrievance.hasFever == "1") {
                 makeViewVisible(txt_fever)
             } else {
                 makeViewInvisible(txt_fever)
             }
-            if (srCitizenGrievance.hasShortnessOfBreath == "Y") {
+            if (srCitizenGrievance.hasShortnessOfBreath == "1") {
                 makeViewVisible(txt_shortness)
             } else {
                 makeViewInvisible(txt_shortness)
             }
-            if (srCitizenGrievance.hasSoreThroat == "Y") {
+            if (srCitizenGrievance.hasSoreThroat == "1") {
                 makeViewVisible(txt_sore_throat)
             } else {
                 makeViewInvisible(txt_sore_throat)
@@ -198,7 +215,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             cl_covid_symptoms.visibility = View.GONE
             txt_covid.visibility = View.VISIBLE
         }
-        if (srCitizenGrievance.otherAilments == "Y") {
+        if (srCitizenGrievance.otherAilments == "1") {
             txt_other_medical_problems.text = getString(R.string.yes)
         } else {
             txt_other_medical_problems.text = getString(R.string.no)
@@ -221,14 +238,14 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             }
         }
 
-        if (srCitizenGrievance.emergencyServiceRequired == "N") {
+        if (srCitizenGrievance.emergencyServiceRequired == "2") {
             txt_grievance_priority.text = getString(R.string.no)
             txt_escalation.text = "--"
         } else {
             txt_grievance_priority.text = getString(R.string.yes)
             txt_escalation.text = getString(R.string.yes)
         }
-        if (srCitizenGrievance.lackOfEssentialServices == "Yes") {
+        if (srCitizenGrievance.lackOfEssentialServices == "1") {
             txt_issue_raised_date.text =
                 srCitizenGrievance.createdDate?.let { getFormattedDate(it) }
             txt_grievance.text = getText(R.string.yes)
@@ -333,7 +350,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         if (status.isNotEmpty())
             tv_call_status_new.text = status
         else {
-            tv_call_status_new.text = "Yet to be called"
+            tv_call_status_new.text = getString(R.string.yet_to_be_called)
         }
     }
 
