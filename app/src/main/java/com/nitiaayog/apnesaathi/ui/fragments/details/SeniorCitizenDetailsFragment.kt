@@ -192,7 +192,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
                         talkedAboutText += getString(R.string.access).plus(",")
                     }
                     "3" -> {
-                        talkedAboutText += getString(R.string.detection).plus(",")
+                        talkedAboutText += getString(R.string.detection)
                     }
                 }
             }
