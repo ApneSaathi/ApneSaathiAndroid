@@ -693,7 +693,7 @@ class SeniorCitizenFeedbackFormActivity : BaseActivity<SeniorCitizenFeedbackView
                 if (validateSrCitizenRegistrationForm()) viewModel.registerNewSeniorCitizen(this)
             } else {
                 if (validateFields()) {
-                    preparePostParams()
+                    //preparePostParams()
                     viewModel.saveSrCitizenFeedback(this, preparePostParams(), syncData)
                 }
             }
