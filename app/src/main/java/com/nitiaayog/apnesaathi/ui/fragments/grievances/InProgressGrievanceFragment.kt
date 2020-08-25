@@ -17,6 +17,7 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
     OnItemClickListener<GrievanceData> {
     private lateinit var pageTitleChangeListener: PageTitleChangeListener
     private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
+    private lateinit var callButtonClickListener: GrievanceStatusAdapter.CallButtonClickListener
     private val grievanceAdapter = GrievanceStatusAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +27,7 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
 
     private fun getDataStream() {
         grievanceAdapter.setOnItemClickListener(this)
+        grievanceAdapter.setOnCallButtonClickListener(callButtonClickListener)
         viewModel.getInProgressGrievances().removeObservers(viewLifecycleOwner)
         viewModel.getInProgressGrievances().observe(viewLifecycleOwner, Observer {
             grievanceAdapter.setData(it)
@@ -36,6 +38,10 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun setOnCallButtonListener(callButtonClickListener: GrievanceStatusAdapter.CallButtonClickListener) {
+        this.callButtonClickListener = callButtonClickListener
     }
 
     fun setPageTitleChangeListener(pageTitleChangeListener: PageTitleChangeListener) {
@@ -56,4 +62,5 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
     override fun onItemClick(position: Int, data: GrievanceData) {
         itemClickListener.onItemClick(position, data)
     }
+
 }

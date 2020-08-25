@@ -18,4 +18,5 @@ class FragmentViewPagerAdapter(fragmentActivity: FragmentActivity) :
         fragmentsList.add(fragment)
         fragmentsTitleList.add(pageTitle)
     }
+
 }

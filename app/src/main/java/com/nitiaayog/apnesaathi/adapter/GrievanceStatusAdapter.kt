@@ -20,6 +20,7 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
 
     private val dataList: MutableList<GrievanceData> = mutableListOf()
     private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
+    private lateinit var callButtonClickListener: CallButtonClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GrievanceViewHolder {
         val customView = LayoutInflater.from(parent.context)
@@ -29,6 +30,10 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun setOnCallButtonClickListener(callButtonClickListener: CallButtonClickListener) {
+        this.callButtonClickListener = callButtonClickListener
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -73,6 +78,7 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
                     ContextCompat.getDrawable(context, R.drawable.ic_female_user)
             }
             itemView.constraintLayout.setOnClickListener(this)
+            itemView.img_call_button.setOnClickListener(this)
         }
 
         private fun getFormattedDate(date: String?): String {
@@ -84,8 +90,21 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
         }
 
         override fun onClick(view: View) {
-            if (::itemClickListener.isInitialized)
-                itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
+            when (view.id) {
+                R.id.constraintLayout -> {
+                    if (::itemClickListener.isInitialized)
+                        itemClickListener.onItemClick(adapterPosition, dataList[adapterPosition])
+                }
+                R.id.img_call_button -> {
+                    if (::callButtonClickListener.isInitialized) {
+                        callButtonClickListener.onCallButtonClicked(dataList[adapterPosition])
+                    }
+                }
+            }
         }
+    }
+
+    interface CallButtonClickListener {
+        fun onCallButtonClicked(grievanceData: GrievanceData)
     }
 }
