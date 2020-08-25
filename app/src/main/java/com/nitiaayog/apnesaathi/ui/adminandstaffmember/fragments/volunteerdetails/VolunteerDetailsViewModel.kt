@@ -107,7 +107,7 @@ class VolunteerDetailsViewModel(
     }
 
     @WorkerThread
-    private fun rateVolunteer(rating: String, volunteerName: String) {
+    private fun rateVolunteer(rating: Float, volunteerName: String) {
         val params = JsonObject()
         params.addProperty(ApiConstants.Ratings, rating)
         params.addProperty(ApiConstants.VolunteerId, volunteerId)
@@ -171,7 +171,7 @@ class VolunteerDetailsViewModel(
 
     suspend fun rateVolunteer(context: Context, ratings: Float, volunteerName: String) {
         if (checkNetworkAvailability(context, ApiProvider.ApiRateVolunteer)) {
-            io { rateVolunteer(ratings.toString(), volunteerName) }
+            io { rateVolunteer(ratings, volunteerName) }
         }
     }
 }

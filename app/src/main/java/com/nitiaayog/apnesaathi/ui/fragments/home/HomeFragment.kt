@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
@@ -206,32 +205,28 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
 
     private fun getObservableDataStream() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
+        viewModel.getPendingCalls().observe(viewLifecycleOwner) {
             pendingAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             pendingAdapter.hideDate(true)
             pendingAdapter.notifyDataSetChanged()
             managePendingCalls(it)
             manageProgressBarData()
-        })
+        }
 
         viewModel.getCompletedCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getCompletedCalls().observe(viewLifecycleOwner, Observer {
-            manageProgressBarData()
-        })
+        viewModel.getCompletedCalls().observe(viewLifecycleOwner) { manageProgressBarData() }
 
         viewModel.getFollowupCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getFollowupCalls().observe(viewLifecycleOwner, Observer {
-            manageProgressBarData()
-        })
+        viewModel.getFollowupCalls().observe(viewLifecycleOwner) { manageProgressBarData() }
 
         viewModel.getGrievancesTrackingList().removeObservers(viewLifecycleOwner)
-        viewModel.getGrievancesTrackingList().observe(viewLifecycleOwner, Observer { it ->
+        viewModel.getGrievancesTrackingList().observe(viewLifecycleOwner, { it ->
             grievancesAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             grievancesAdapter.notifyDataSetChanged()
             manageGrievances(it)
         })
         viewModel.getCallsList().removeObservers(viewLifecycleOwner)
-        viewModel.getCallsList().observe(viewLifecycleOwner, Observer { it ->
+        viewModel.getCallsList().observe(viewLifecycleOwner) { it ->
             val fragment = fragmentManager?.findFragmentByTag(SR_CITIZEN_DETAIL_FRAGMENT)
             if (fragment != null && fragment.isResumed) {
                 val callData: CallData =
@@ -239,9 +234,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
                 fragment as SeniorCitizenDetailsFragment
                 fragment.reloadFragment(callData)
             }
-        })
+        }
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
-        viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
+        viewModel.getDataStream().observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable ->
                     BaseUtility.showAlertMessage(
@@ -262,7 +257,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
                 }
                 is NetworkRequestState.SuccessResponse<*> -> manageProgressBar(View.GONE)
             }
-        })
+        }
     }
 
     fun reloadApi() {

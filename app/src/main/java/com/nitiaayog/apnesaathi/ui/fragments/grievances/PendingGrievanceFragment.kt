@@ -11,9 +11,7 @@ import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
-import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_recyclerview.*
-import java.lang.String
 
 class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData> {
     private lateinit var pageTitleChangeListener: PageTitleChangeListener
