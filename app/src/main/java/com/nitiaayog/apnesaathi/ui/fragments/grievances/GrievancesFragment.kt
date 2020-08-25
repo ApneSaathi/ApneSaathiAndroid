@@ -53,14 +53,13 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         getDataStream()
         setUpViewPager()
 
-        TabLayoutMediator(
-            tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                when (position) {
-                    0 -> tab.text = getString(R.string.pending)
-                    1 -> tab.text = getString(R.string.in_progress)
-                    2 -> tab.text = getString(R.string.resolved)
-                }
-            }).attach()
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.pending)
+                1 -> tab.text = getString(R.string.in_progress)
+                2 -> tab.text = getString(R.string.resolved)
+            }
+        }.attach()
     }
 
     private fun getDataStream() {
@@ -83,6 +82,23 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         }
         if (dataManager.getRole() == ROLE_DISTRICT_ADMIN)
             viewModel.getGrievanceTrackingList(this.context!!)
+
+        viewModel.getPendingGrievances().removeObservers(viewLifecycleOwner)
+        viewModel.getPendingGrievances().observe(viewLifecycleOwner) {
+            tabLayout.getTabAt(0)!!.text =
+                format(getString(R.string.pending_count), it.size.toString())
+        }
+        viewModel.getInProgressGrievances().removeObservers(viewLifecycleOwner)
+        viewModel.getInProgressGrievances().observe(viewLifecycleOwner) {
+            tabLayout.getTabAt(1)!!.text =
+                format(getString(R.string.inprogress_count), it.size.toString())
+        }
+        viewModel.getResolvedGrievances().removeObservers(viewLifecycleOwner)
+        viewModel.getResolvedGrievances().observe(viewLifecycleOwner) {
+            tabLayout.getTabAt(2)!!.text =
+                format(getString(R.string.resolved_count), it.size.toString())
+        }
+
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
             when (it) {
