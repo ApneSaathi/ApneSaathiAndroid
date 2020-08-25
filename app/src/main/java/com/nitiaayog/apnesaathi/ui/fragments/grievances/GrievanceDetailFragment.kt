@@ -83,6 +83,7 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
             spanPriority.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+        img_call_button.setOnClickListener { prepareToCallPerson() }
         tv_priority.text = spanPriority
         if (grievanceData.status == "UNDER REVIEW") {
             tv_volunteer_desc2.text = getString(R.string.in_progress_remarks).plus(" ")
@@ -213,9 +214,11 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
     override fun provideLayoutResource(): Int = R.layout.fragment_grievance_details
 
     override fun onCallPermissionGranted() {
+        grievanceData.srPhoneNumber?.let { initiateCall(it) }
     }
 
     override fun onCallPermissionDenied() {
+        Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
     }
 
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {

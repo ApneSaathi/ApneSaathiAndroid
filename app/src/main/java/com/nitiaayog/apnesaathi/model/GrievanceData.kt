@@ -48,6 +48,13 @@ class GrievanceData {
         set(value) {
             field = value ?: ""
         }
+    @ColumnInfo(name = Columns.ContactNumber, defaultValue = "")
+    @SerializedName(ApiConstants.PhoneNumber)
+    var srPhoneNumber: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
 
     @ColumnInfo(name = Columns.Gender, defaultValue = "")
     @SerializedName(ApiConstants.SrCitizenGender)

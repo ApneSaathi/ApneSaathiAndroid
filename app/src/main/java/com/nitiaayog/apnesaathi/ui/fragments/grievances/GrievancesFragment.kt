@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
+import com.nitiaayog.apnesaathi.adapter.GrievanceStatusAdapter
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
@@ -31,9 +33,10 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
 
 class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData>,
-    PageTitleChangeListener {
+    PageTitleChangeListener, GrievanceStatusAdapter.CallButtonClickListener {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
+    private var phoneNumber = ""
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(context!!).setMessage("Please wait, fetching data..")
     }
@@ -61,6 +64,7 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             }
         }.attach()
     }
+
 
     private fun getDataStream() {
         if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
@@ -144,6 +148,10 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         resolvedFragment.setOnItemClickListener(this)
         inProgressFragment.setOnItemClickListener(this)
 
+        pendingFragment.setOnCallButtonListener(this)
+        inProgressFragment.setOnCallButtonListener(this)
+        resolvedFragment.setOnCallButtonListener(this)
+
         pendingFragment.setPageTitleChangeListener(this)
         resolvedFragment.setPageTitleChangeListener(this)
         inProgressFragment.setPageTitleChangeListener(this)
@@ -160,9 +168,12 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
     override fun provideLayoutResource(): Int = R.layout.fragment_grievances
 
     override fun onCallPermissionGranted() {
+        if (phoneNumber.isNotEmpty())
+            initiateCall(phoneNumber)
     }
 
     override fun onCallPermissionDenied() {
+        Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
     }
 
     override fun onItemClick(position: Int, data: GrievanceData) {
@@ -205,5 +216,10 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             else ->
                 super.onOptionsItemSelected(item)
         })
+    }
+
+    override fun onCallButtonClicked(grievanceData: GrievanceData) {
+        phoneNumber = grievanceData.srPhoneNumber ?: ""
+        prepareToCallPerson()
     }
 }

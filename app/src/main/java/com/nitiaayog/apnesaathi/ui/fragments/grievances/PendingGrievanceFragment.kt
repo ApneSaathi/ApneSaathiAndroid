@@ -18,6 +18,7 @@ import java.lang.String
 class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData> {
     private lateinit var pageTitleChangeListener: PageTitleChangeListener
     private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
+    private lateinit var callButtonClickListener: GrievanceStatusAdapter.CallButtonClickListener
     private val grievanceAdapter = GrievanceStatusAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +28,7 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
 
     private fun getDataStream() {
         grievanceAdapter.setOnItemClickListener(this)
+        grievanceAdapter.setOnCallButtonClickListener(callButtonClickListener)
         viewModel.getPendingGrievances().removeObservers(viewLifecycleOwner)
         viewModel.getPendingGrievances().observe(viewLifecycleOwner, Observer {
             grievanceAdapter.setData(it)
@@ -37,6 +39,9 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
+    }
+    fun setOnCallButtonListener(callButtonClickListener: GrievanceStatusAdapter.CallButtonClickListener) {
+        this.callButtonClickListener = callButtonClickListener
     }
 
     fun setPageTitleChangeListener(pageTitleChangeListener: PageTitleChangeListener) {
