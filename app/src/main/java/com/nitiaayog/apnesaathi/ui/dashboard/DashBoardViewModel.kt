@@ -25,13 +25,13 @@ class DashBoardViewModel : BaseViewModel() {
      *      - Can See/Update Grievances status.
      *
      * 2). District Admin :-
-     *      - Can see Grievances and status of only district assigned to it(Mostly 1 district).
+     *      - Can See/Update Grievances and status of only district assigned to
+     *      it(Mostly 1 district only).
      *
      * 3). Volunteers :-
      *      - Can See Sr. Citizens list assigned to it,
      *      - Call Sr. Citizens and get feedback from them about problems they are facing,
      *      - Can See/Update Grievances status.
-     *
      * */
     fun getOffScreenPageLimit(dataManager: DataManager): Int {
         return if (dataManager.getRole() == "3") 2 else 4
