@@ -472,13 +472,15 @@
 
     <string name="emergency_contact">કટોકટી સંપર્કો</string>
 
-    <string name="rate_quality_of_service">Rate the quality of service provided by %s</string>
-    <string name="update_rating">Update Rating</string>
-    <string name="poor">Poor</string>
-    <string name="bad">Bad</string>
-    <string name="good">Good</string>
-    <string name="very_good">Very Good</string>
-    <string name="excellent">Excellent</string>
+    <string name="rate_quality_of_service"><b>%s</b> દ્વારા પ્રદાન થયેલ સેવાની ગુણવત્તાને રેટ કરો</string>
+    <string name="rate_volunteer">%s ને રેટિંગ આપો</string>
+    <string name="poor">ખૂબ જ ખરાબ</string>
+    <string name="bad">ખરાબ</string>
+    <string name="good">સારું</string>
+    <string name="very_good">ખૂબ જ સારું</string>
+    <string name="excellent">ખૂબ જ ઉત્તમ</string>
+    <string name="wait_we_update_ratings">કૃપા કરી પ્રતીક્ષા કરો અમે રેટિંગ્સને અપડેટ કરી રહ્યાં છીએ</string>
+    <string name="update_ratings_successful">તમે <b>%s</b> ની રેટિંગ સફળતાપૂર્વક અપડેટ કરી છે</string>
 
     <string name="logout_message">શું તમને ખાતરી છે કે, તમે લૉગ આઉટ કરવા માંગો છો ?</string>
 

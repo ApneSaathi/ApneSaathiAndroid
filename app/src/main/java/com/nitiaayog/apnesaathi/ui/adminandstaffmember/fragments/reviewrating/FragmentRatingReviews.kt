@@ -2,6 +2,8 @@ package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.reviewrating
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
@@ -17,17 +19,21 @@ import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_admin_staff_reviews_rating.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
 
     companion object {
         private val TAG: String by lazy { "TAG -- ${FragmentRatingReviews::class.java.simpleName} -->" }
-        fun getInstance(volunteerId: Int, volunteerName: String): FragmentRatingReviews {
+        fun getInstance(volunteerId: Int, volunteerFirstName: String, volunteerLastName: String):
+                Fragment {
             return FragmentRatingReviews().apply {
                 arguments = Bundle().apply {
                     putInt(ID, volunteerId)
-                    putString(ApiConstants.UserName, volunteerName)
+                    putString(ApiConstants.FirstName, volunteerFirstName)
+                    putString(ApiConstants.LastName, volunteerLastName)
                 }
             }
         }
@@ -39,11 +45,22 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
             else 0
         } else 0
     }
+
+    private val firstName: String by lazy {
+        if (arguments != null) {
+            if (arguments!!.containsKey(ApiConstants.FirstName))
+                arguments!!.getString(ApiConstants.FirstName, "")
+            else ""
+        } else ""
+    }
+
     private val volunteerName: String by lazy {
         if (arguments != null) {
-            if (arguments!!.containsKey(ApiConstants.UserName))
-                arguments!!.getString(ApiConstants.UserName, "")
+            val lastName: String = if (arguments!!.containsKey(ApiConstants.LastName))
+                arguments!!.getString(ApiConstants.LastName, "")
             else ""
+
+            firstName.plus(" ").plus(lastName)
         } else ""
     }
 
@@ -81,21 +98,18 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
         tvRatingText.text = getString(R.string.rate_quality_of_service, volunteerName)
 
         rating.setOnRatingBarChangeListener { _, rating, _ -> updateRatings(rating) }
+        rating.rating = 2.5f
 
-        btnUpdateRatings.throttleClick().subscribe {
-            BaseUtility.showAlertMessage(
-                requireContext(), getString(R.string.alert),
-                getString(R.string.update_ratings_successful, volunteerName),
-                getString(R.string.okay)
-            )
-            /*lifecycleScope.launch(Dispatchers.IO) {
-                viewModel.updateRatings(requireContext(), rating.rating)
-            }*/
+        btnRateVolunteer.text = getString(R.string.rate_volunteer, volunteerName)
+        btnRateVolunteer.throttleClick().subscribe {
+            lifecycleScope.launch(Dispatchers.IO) {
+                viewModel.rateVolunteer(requireContext(), rating.rating, firstName)
+            }
         }.autoDispose(disposables)
     }
 
     private fun updateRatings(rating: Float) {
-        println("$TAG $rating")
+        //println("$TAG $rating")
         if (rating >= 4.0) tvRating.setText(R.string.excellent)
         else if ((rating >= 3.0) && (rating <= 3.9)) tvRating.setText(R.string.very_good)
         else if ((rating >= 2.0) && (rating <= 2.9)) tvRating.setText(R.string.good)
@@ -104,10 +118,8 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
     }
 
     private fun observeNetworkStream() {
-        //viewModel.getNetworkStream().removeObservers(viewLifecycleOwner)
-        //viewModel.getNetworkStream().observe(viewLifecycleOwner, Observer {
-        //manageNetworkState(it)
-        //})
+        viewModel.getNetworkStream().removeObservers(viewLifecycleOwner)
+        viewModel.getNetworkStream().observe(viewLifecycleOwner) { manageNetworkState(it) }
     }
 
     private fun manageNetworkState(state: NetworkRequestState) {
@@ -130,11 +142,10 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
                 )
             }
             is NetworkRequestState.SuccessResponse<*> -> {
-                rating.isEnabled = false
                 progressDialog.dismiss()
-                btnUpdateRatings.visibility = View.GONE
+                btnRateVolunteer.visibility = View.GONE
                 BaseUtility.showAlertMessage(
-                    requireContext(), getString(R.string.alert),
+                    requireContext(), getString(R.string.success),
                     getString(R.string.update_ratings_successful, volunteerName),
                     getString(R.string.okay)
                 )

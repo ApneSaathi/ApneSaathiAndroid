@@ -473,13 +473,15 @@
 
     <string name="emergency_contact">आणीबाणी संपर्क</string>
 
-    <string name="rate_quality_of_service">Rate the quality of service provided by %s</string>
-    <string name="update_rating">Update Rating</string>
-    <string name="poor">Poor</string>
-    <string name="bad">Bad</string>
-    <string name="good">Good</string>
-    <string name="very_good">Very Good</string>
-    <string name="excellent">Excellent</string>
+    <string name="rate_quality_of_service"><b>%s</b> द्वारा प्रदान केलेल्या सेवा गुणवत्तेचे मूल्यांकन करा</string>
+    <string name="rate_volunteer">%s चे मुल्यांकन करा</string>
+    <string name="poor">अतिशय वाईट</string>
+    <string name="bad">वाईट</string>
+    <string name="good">चांगले</string>
+    <string name="very_good">खूप चांगले</string>
+    <string name="excellent">खूप उत्कृष्ट</string>
+    <string name="wait_we_update_ratings">कृपया प्रतीक्षा करा आम्ही रेटिंग अद्यतनित करीत आहोत</string>
+    <string name="update_ratings_successful">आपण <b>%s</b> रेटिंग यशस्वीरित्या अद्यतनित केले आहे</string>
 
     <string name="logout_message">आपली खात्री आहे की आपण लॉगआउट करू इच्छिता ?</string>
 

@@ -15,6 +15,23 @@ class DashBoardViewModel : BaseViewModel() {
 
     /**
      * This method is used only when admin/staff member will be logged in.
+     * Role wise Access to Features :-
+     *
+     * 1). Staff Members and Master Admin :-
+     *      - Can See Sr. Citizens list assigned to it,
+     *      - Call Sr. Citizens and get feedback from them about problems they are facing,
+     *      - Calling to Volunteers,
+     *      - Can see Volunteers and their details,
+     *      - Can See/Update Grievances status.
+     *
+     * 2). District Admin :-
+     *      - Can See/Update Grievances and status of only district assigned to
+     *      it(Mostly 1 district only).
+     *
+     * 3). Volunteers :-
+     *      - Can See Sr. Citizens list assigned to it,
+     *      - Call Sr. Citizens and get feedback from them about problems they are facing,
+     *      - Can See/Update Grievances status.
      * */
     fun getOffScreenPageLimit(dataManager: DataManager): Int {
         return if (dataManager.getRole() == "3") 2 else 4
@@ -29,13 +46,13 @@ class DashBoardViewModel : BaseViewModel() {
      *
      * Process is very simple that when user will tap on call icon call will place and after 6/7
      * seconds
-     * @see{com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity}
+     * @see com.nitiaayog.apnesaathi.ui.dashboard.seniorcitizenfeedbackform.SeniorCitizenFeedbackFormActivity
      * will be launched to provide the status of call and to update the issues of Senior Citizens.
      *
      * Hence, in parallel with a call user can save data to server as per provided by Sr. Citizen
      * it may possible cellular data may not be available. So that will be saved in local database
      * and later on when cellular data will available, data will be synced with server using
-     * @see{com.nitiaayog.apnesaathi.service.SyncDataService} service.
+     * @see com.nitiaayog.apnesaathi.service.SyncDataService service.
      *
      * Important : This method will check that service is working in background or not.If not then
      * this method will inform system about the service that will only execute when

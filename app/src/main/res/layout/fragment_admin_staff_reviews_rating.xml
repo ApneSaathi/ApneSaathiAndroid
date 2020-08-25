@@ -49,13 +49,13 @@
         app:layout_constraintTop_toBottomOf="@id/rating" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnUpdateRatings"
+        android:id="@+id/btnRateVolunteer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_15"
         android:layout_marginTop="@dimen/dimen_20"
         android:layout_marginEnd="@dimen/dimen_15"
-        android:text="@string/update_rating"
+        android:text="@string/rate_volunteer"
         android:textAllCaps="false"
         android:textSize="@dimen/text_15"
         app:backgroundTint="@color/btn_bg"

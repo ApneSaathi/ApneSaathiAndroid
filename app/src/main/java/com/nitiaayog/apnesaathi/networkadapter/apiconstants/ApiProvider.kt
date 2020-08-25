@@ -15,5 +15,5 @@ object ApiProvider {
     const val ApiSeniorCitizenDetails = BuildConfig.ApiHost + BuildConfig.GetSeniorCitizensDetails
     const val ApiUpdateGrievanceDetails = BuildConfig.ApiHost + BuildConfig.UpdateGrievanceDetails
     const val ApiUpdateProfile = BuildConfig.ApiHost + BuildConfig.UpdateProfile
-    const val ApiUpdateVolunteerRatings = BuildConfig.ApiHost + BuildConfig.UpdateVolunteerRatings
+    const val ApiRateVolunteer = BuildConfig.ApiHost + BuildConfig.RateVolunteer
 }

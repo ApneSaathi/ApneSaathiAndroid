@@ -23,6 +23,27 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 
 class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
 
+    companion object {
+        fun getInstance(volunteer: Volunteer): Fragment {
+            return VolunteerDetailsFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ID, volunteer.id!!)
+                    putString(ApiConstants.FirstName, volunteer.firstName!!)
+                    putString(ApiConstants.LastName, volunteer.lastName!!)
+                    putString(ApiConstants.PhoneNumber, volunteer.phoneNumber!!)
+                    putString(ApiConstants.Gender, volunteer.gender!!)
+                    putString(ApiConstants.AssessmentScore, volunteer.assessmentScore!!)
+                    putString(
+                        ApiConstants.Address, volunteer.address!!.plus(",")
+                            .plus(volunteer.block).plus(",").plus(volunteer.district).plus(",")
+                            .plus(volunteer.state)
+                    )
+                    putString(ApiConstants.JoiningDate, volunteer.joiningDate!!)
+                }
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -78,15 +99,14 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
     }
 
     private fun setUpViewPager() {
-        val volunteer = getData()
-
         val adapter = FragmentViewPagerAdapter(requireActivity())
+        val volunteer = getData()
         val aboutFragment = AboutVolunteerFragment.getInstance(volunteer)
         aboutFragment.setOnMoreItemClickListener(this)
         adapter.addFragment(aboutFragment, getString(R.string.about))
         adapter.addFragment(
             FragmentRatingReviews.getInstance(
-                volunteer.id!!, volunteer.firstName!!.plus(" ").plus(volunteer.lastName!!)
+                volunteer.id!!, volunteer.firstName!!, volunteer.lastName!!
             ), getString(R.string.reviews)
         )
         viewPager.adapter = adapter

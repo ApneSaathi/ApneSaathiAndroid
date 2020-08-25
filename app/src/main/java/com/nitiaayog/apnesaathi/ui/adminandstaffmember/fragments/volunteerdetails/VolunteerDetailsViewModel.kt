@@ -107,31 +107,34 @@ class VolunteerDetailsViewModel(
     }
 
     @WorkerThread
-    private suspend fun updateRatings(rating: String) {
+    private fun rateVolunteer(rating: String, volunteerName: String) {
         val params = JsonObject()
         params.addProperty(ApiConstants.Ratings, rating)
         params.addProperty(ApiConstants.VolunteerId, volunteerId)
+        params.addProperty(ApiConstants.VolunteerName, volunteerName)
         params.addProperty(ApiConstants.AdminId, dataManager.getUserId().toInt())
+        params.addProperty(ApiConstants.AdminName, dataManager.getFirstName())
+
+        println("$TAG $params")
+
         dataManager.updateVolunteerRatings(params).doOnSubscribe {
-            updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiUpdateVolunteerRatings))
+            updateNetworkState(NetworkRequestState.LoadingData(ApiProvider.ApiRateVolunteer))
         }.subscribe({
             try {
                 viewModelScope.launch {
                     if (it.status == "0")
                         updateNetworkState(
-                            NetworkRequestState.SuccessResponse(
-                                ApiProvider.ApiUpdateVolunteerRatings, ""
-                            )
+                            NetworkRequestState.SuccessResponse(ApiProvider.ApiRateVolunteer, "")
                         )
                     else
-                        updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiUpdateVolunteerRatings))
+                        updateNetworkState(NetworkRequestState.ErrorResponse(ApiProvider.ApiRateVolunteer))
                 }
             } catch (e: Exception) {
                 println("$TAG ${e.message}")
             }
         }, {
             updateNetworkState(
-                NetworkRequestState.ErrorResponse(ApiProvider.ApiUpdateVolunteerRatings, it)
+                NetworkRequestState.ErrorResponse(ApiProvider.ApiRateVolunteer, it)
             )
         }).autoDispose(disposables)
     }
@@ -166,9 +169,9 @@ class VolunteerDetailsViewModel(
         }
     }
 
-    suspend fun updateRatings(context: Context, ratings: Float) {
-        if (checkNetworkAvailability(context, ApiProvider.ApiUpdateVolunteerRatings)) {
-            io { updateRatings(ratings.toString()) }
+    suspend fun rateVolunteer(context: Context, ratings: Float, volunteerName: String) {
+        if (checkNetworkAvailability(context, ApiProvider.ApiRateVolunteer)) {
+            io { rateVolunteer(ratings.toString(), volunteerName) }
         }
     }
 }
