@@ -33,8 +33,6 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
             grievanceAdapter.setData(it)
             grievanceAdapter.notifyDataSetChanged()
             //pageTitleChangeListener.onDataLoaded(getString(R.string.inprogress_count),1, it.size)
-            /*tabLayout.getTabAt(1)!!.text =
-                String.format(getString(R.string.inprogress_count), it.size.toString())*/
         })
     }
 

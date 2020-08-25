@@ -33,8 +33,6 @@ class ResolvedGrievanceFragment : BaseFragment<HomeViewModel>(),
             grievanceAdapter.setData(it)
             grievanceAdapter.notifyDataSetChanged()
             //pageTitleChangeListener.onDataLoaded(getString(R.string.resolved_count), 2, it.size)
-            /*tabLayout.getTabAt(2)!!.text =
-                String.format(getString(R.string.resolved_count), it.size.toString())*/
         })
     }
 

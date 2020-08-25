@@ -32,8 +32,6 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
             grievanceAdapter.setData(it)
             grievanceAdapter.notifyDataSetChanged()
             //pageTitleChangeListener.onDataLoaded(getString(R.string.pending_count), 0, it.size)
-            /*tabLayout.getTabAt(0)!!.text =
-                String.format(getString(R.string.pending_count), it.size.toString())*/
         })
     }
 
