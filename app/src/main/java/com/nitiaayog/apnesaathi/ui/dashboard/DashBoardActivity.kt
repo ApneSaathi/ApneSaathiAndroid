@@ -103,6 +103,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         }
     }
 
+    /**
+     * Update toolbar title when user changes tabs and manage back-stack entries.
+     * */
     private fun updateToolbarTittle() {
         when (viewPager.currentItem) {
             0 -> toolBar.setTitle(R.string.menu_home)

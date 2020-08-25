@@ -11,7 +11,9 @@ import com.nitiaayog.apnesaathi.interfaces.PageTitleChangeListener
 import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_recyclerview.*
+import java.lang.String
 
 class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
     OnItemClickListener<GrievanceData> {
@@ -32,7 +34,7 @@ class InProgressGrievanceFragment : BaseFragment<HomeViewModel>(),
         viewModel.getInProgressGrievances().observe(viewLifecycleOwner, Observer {
             grievanceAdapter.setData(it)
             grievanceAdapter.notifyDataSetChanged()
-            pageTitleChangeListener.onDataLoaded(getString(R.string.inprogress_count), 1, it.size)
+            //pageTitleChangeListener.onDataLoaded(getString(R.string.inprogress_count),1, it.size)
         })
     }
 

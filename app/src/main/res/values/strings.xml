@@ -510,15 +510,15 @@
     <string name="emergency_contact">Emergency Contact</string>
     <string name="no_issues_available">No issues available</string>
 
-    <string name="rate_quality_of_service">Rate the quality of service provided by %s</string>
-    <string name="update_rating">Update Rating</string>
+    <string name="rate_quality_of_service">Rate the quality of service provided by <b>%s</b></string>
+    <string name="rate_volunteer">Rate %s</string>
     <string name="poor">Poor</string>
     <string name="bad">Bad</string>
     <string name="good">Good</string>
     <string name="very_good">Very Good</string>
     <string name="excellent">Excellent</string>
     <string name="wait_we_update_ratings">Please wait we are updating ratings</string>
-    <string name="update_ratings_successful">You have successfully updated Rating of %s</string>
+    <string name="update_ratings_successful">You have successfully updated Rating of <b>%s</b></string>
 
     <string name="logout_message">Are you sure, you want to logout ?</string>
     <string name="raised_by_me">RAISED BY ME</string>

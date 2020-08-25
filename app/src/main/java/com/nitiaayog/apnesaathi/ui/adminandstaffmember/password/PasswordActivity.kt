@@ -49,6 +49,9 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
         ivBackToLogin.throttleClick().subscribe { finish() }.autoDispose(disposables)
 
+        /**
+         * When keyboard pops up scroll to bottom to show login button above the keyboard.
+         * */
         tietPassword.throttleClick().subscribe {
             Observable.timer(SEARCH_ELEMENT_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -81,6 +84,9 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
     override fun provideLayoutResource(): Int = R.layout.activity_password
 
+    /**
+     * Validation check before calling API
+     * */
     private fun validateFields(): Boolean {
         if (tietPassword.text.toString().isEmpty()) {
             tilPassword.error = getString(R.string.validate_password)
@@ -89,6 +95,9 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
         return true
     }
 
+    /**
+     * Observe API response and initiate proper action.
+     * */
     private fun getDataStreams() = viewModel.getNetworkStateObservable().observe(this, Observer {
         when (it) {
             is NetworkRequestState.NetworkNotAvailable ->

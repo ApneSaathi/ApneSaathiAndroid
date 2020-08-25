@@ -50,6 +50,6 @@ interface ApiInterface {
     @PUT(ApiProvider.ApiUpdateGrievanceDetails)
     fun updateGrievanceDetails(@Body srDetails: JsonObject): Single<BaseRepo>
 
-    @POST(ApiProvider.ApiUpdateVolunteerRatings)
+    @POST(ApiProvider.ApiRateVolunteer)
     fun updateVolunteerRatings(@Body params: JsonObject): Single<BaseRepo>
 }
