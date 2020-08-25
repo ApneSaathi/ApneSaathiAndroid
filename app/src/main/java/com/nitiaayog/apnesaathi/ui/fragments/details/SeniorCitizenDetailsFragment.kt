@@ -89,7 +89,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
             txt_user_name.text = it.srCitizenName.plus("(").plus(it.age).plus(" Yrs)")
             txt_user_phone_number.text = it.contactNumber
-
+            txt_status.text = "--"
             txt_address.text = spanAddress
         }
         viewModel.getDataList().observe(viewLifecycleOwner, Observer {
@@ -140,7 +140,6 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         } else {
             txt_medical_history.text = medicalHistory
         }
-        txt_status.text = "--"  //todo need to fetch issue status from database
         callData?.talkedWith.let {
             when (it) {
                 "1" -> {
@@ -254,9 +253,11 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         if (srCitizenGrievance.emergencyServiceRequired == "2") {
             txt_grievance_priority.text = getString(R.string.no)
             txt_escalation.text = "--"
+            txt_status.text = getString(R.string.regular)
         } else {
             txt_grievance_priority.text = getString(R.string.yes)
             txt_escalation.text = getString(R.string.yes)
+            txt_status.text = getString(R.string.emergency)
         }
         if (srCitizenGrievance.lackOfEssentialServices == "1") {
             txt_issue_raised_date.text =
