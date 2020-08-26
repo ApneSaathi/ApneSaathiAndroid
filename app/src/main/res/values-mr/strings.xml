@@ -18,10 +18,10 @@
 
     <string name="txtenterMobilenumbe">मोबाइल नंबर प्रविष्ट करा</string>
     <string name="txtValidmobilenumber">वैध भ्रमणध्वनी क्रमांक टाका</string>
-    <string name="txtlogin">लॉगिन</string>
+    <string name="txtlogin">लॉगिनकडे जा</string>
     <string name="txtmobileNumber">मोबाइल नंबर</string>
     <string name="verificationcode">सत्यापन कोड प्रविष्ट करा</string>
-    <string name="wehavesendverificaiton_code">आम्ही 4 अंकी सत्यापन कोड पाठविला आहे</string>
+    <string name="wehavesendverificaiton_code">आम्ही आपल्या मोबाइल नंबर %s वर ओटीपी पाठविला आहे, कृपया ते प्रमाणीकरणासाठी प्रदान करा</string>
     <string name="verify">सत्यापित करा</string>
     <string name="donthave_receive_resend">कोणताही कोड प्राप्त झाला नाही? पुन्हा पाठवा</string>
     <string name="enterOtp">ओटीपी प्रविष्ट करा</string>
@@ -119,7 +119,6 @@
     <string name="parkinson">पार्किन्सन रोग</string>
     <string name="cataracts">मोतीबिंदू</string>
     <string name="no_response">प्रतिसाद\nनाही</string>
-    <string name="no_response_single_line">प्रतिसाद\nनाही</string>
     <string name="phone_not_picked">फोन उचलला नाही</string>
     <string name="phone_not_reachable">फोन पोहोचण्यायोग्य नाही</string>
     <string name="call_disconnected">कॉल डिस्कनेक्ट झाला</string>
@@ -140,16 +139,13 @@
     <string name="high">उंच</string>
     <string name="low">कमी</string>
 
-    <string name="not_picked">निवडलेले\nनाही</string>
     <string name="not_picked_single_line">निवडलेले नाही</string>
-    <string name="not_reachable">पोहोचण्यायोग्य\nनाही</string>
     <string name="not_reachable_single_line">पोहोचण्यायोग्य नाही</string>
     <string name="dis_connected">डिस्कनेक्ट केलेले</string>
     <string name="connected">जोडलेले</string>
     <string name="talked_with">कोणाशी बोललो</string>
     <string name="medical_history">वैद्यकीय इतिहास</string>
     <string name="medical_problems">वैद्यकीय समस्या</string>
-    <string name="whom_did_you_talk_with">कोणाशी बोललो</string>
     <string name="medical_history_sr_citizen">ज्येष्ठ नागरिकांचा वैद्यकीय इतिहास</string>
     <string name="behavior_change_practice">ज्येष्ठ नागरिकाने त्यांच्यासह सामायिक वर्तन बदलण्याच्या पद्धती स्वीकारल्या ?</string>
     <string name="info_you_talked_about">आपण कोणत्या संबंधित माहिती बद्दल बोललो</string>
@@ -395,11 +391,11 @@
     <string name="invalidOTP">अवैध ओटीपी</string>
     <string name="limitecros">आपण जास्तीत जास्त प्रयत्नांवर पोहोचला आहात</string>
     <string name="getnewOTP">नवीन ओटीपी मिळवा</string>
-    <string name="chnagenumber"> नंबर बदलायचा ? </string>
+    <string name="chnagenumber"> मोबाइल नंबर बदलायचा ? </string>
 
     <string name="update_issue_progress">अद्यतन प्रगती</string>
     <string name="pending_count">प्रलंबित(%s)</string>
-    <string name="menu_issues">मुद्दे</string>
+    <string name="menu_issues">समस्या</string>
     <string name="completed_count">- पूर्णः</string>
     <string name="need_follow_up_count">- पाठपुरावा आवश्यक आहे:</string>
     <string name="pending_g_count">प्रलंबित:</string>
@@ -485,4 +481,5 @@
 
     <string name="logout_message">आपली खात्री आहे की आपण लॉगआउट करू इच्छिता ?</string>
 
+    <string name="validate_movbile_number">वैध मोबाइल नंबर द्या आणि मोबाइल नंबर आमच्याकडे नोंदणीकृत असल्याचे तपासा</string>
 </resources>

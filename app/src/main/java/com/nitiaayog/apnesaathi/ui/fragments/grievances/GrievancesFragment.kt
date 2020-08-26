@@ -162,8 +162,9 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         viewPager.adapter = adapter
     }
 
-    override fun provideViewModel(): HomeViewModel =
-        getViewModel { HomeViewModel.getInstance(dataManager) }
+    override fun provideViewModel(): HomeViewModel = getViewModel {
+        HomeViewModel.getInstance(dataManager)
+    }
 
     override fun provideLayoutResource(): Int = R.layout.fragment_grievances
 

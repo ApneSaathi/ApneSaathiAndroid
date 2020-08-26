@@ -60,13 +60,16 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
         }.autoDispose(disposables)
 
         tietPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(editable: Editable?) {
+                editable?.run {
+                    if (this.toString().isNotEmpty() && tilPassword.isErrorEnabled)
+                        tilPassword.isErrorEnabled = false
+                }
             }
 
             override fun beforeTextChanged(
                 text: CharSequence?, start: Int, count: Int, after: Int
             ) {
-                if (text!!.isNotEmpty()) tilPassword.error = ""
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -111,10 +114,9 @@ class PasswordActivity : BaseActivity<PasswordViewModel>() {
                 )
             }
             is NetworkRequestState.Error -> {
+                tilPassword.error = getString(R.string.validate_password)
+                tilPassword.isErrorEnabled = true
                 progressDialog.dismiss()
-                BaseUtility.showAlertMessage(
-                    this, R.string.error, R.string.something_went_wrong
-                )
             }
             is NetworkRequestState.SuccessResponse<*> -> {
                 progressDialog.dismiss()

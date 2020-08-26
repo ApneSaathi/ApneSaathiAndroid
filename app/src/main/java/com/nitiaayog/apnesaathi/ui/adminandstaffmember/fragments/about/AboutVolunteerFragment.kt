@@ -36,11 +36,6 @@ import java.util.concurrent.TimeUnit
 
 class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
-    // 1. Login as Volunteer
-    // 2. Logout and Login as Admin/Staff Mem.
-    // 3. Close app and clear from recent
-    // 4. Login screen appearing
-
     companion object {
 
         private val TAG: String = "TAG -- ${AboutVolunteerFragment::class.java.simpleName} -->"

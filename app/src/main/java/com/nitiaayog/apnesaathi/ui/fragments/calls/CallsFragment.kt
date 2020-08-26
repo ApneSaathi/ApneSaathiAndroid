@@ -27,13 +27,12 @@ class CallsFragment : BaseFragment<HomeViewModel>() {
 
         setUpViewPager()
 
-        TabLayoutMediator(
-            tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                when (position) {
-                    0 -> tab.text = getString(R.string.call_status_1)
-                    1 -> tab.text = getString(R.string.all_calls)
-                }
-            }).attach()
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.call_status_1)
+                1 -> tab.text = getString(R.string.all_calls)
+            }
+        }.attach()
 
         fabRegisterNewSrCitizen.throttleClick().subscribe {
             val fragment = RegisterNewSeniorCitizenFragment()

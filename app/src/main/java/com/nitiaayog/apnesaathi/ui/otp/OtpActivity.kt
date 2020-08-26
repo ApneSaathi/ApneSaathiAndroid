@@ -76,6 +76,8 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
         observeStates()
 
+        tvOtpMessage.text = getString(R.string.wehavesendverificaiton_code, phoneNumber)
+
         ivBack.throttleClick().subscribe { finish() }.autoDispose(disposables)
         btnVerify.throttleClick().subscribe {
             hideKeyboard()
@@ -154,9 +156,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                             )
                         }.autoDispose(disposables)
 
-                } else {
+                } /*else {
                     TxtMobileNumber.text = "1234"
-                }
+                }*/
             } else {
                 txttimer.isClickable = false
                 txttimer.paintFlags = 0
@@ -170,11 +172,11 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         TxtChangeNumber.throttleClick().subscribe { onBackPressed() }.autoDispose(disposables)
 
         callTimer()
-        if (phoneNumber.isNotEmpty()) {//!intent.getStringExtra("PhoneNo").isNullOrEmpty()
+        /*if (phoneNumber.isNotEmpty()) {//!intent.getStringExtra("PhoneNo").isNullOrEmpty()
             TxtMobileNumber.text = phoneNumber //intent.getStringExtra("PhoneNo")
         } else {
             TxtMobileNumber.text = "1234"
-        }
+        }*/
     }
 
     private fun callTimer() {

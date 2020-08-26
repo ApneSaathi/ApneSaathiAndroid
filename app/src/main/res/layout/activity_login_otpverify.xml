@@ -38,10 +38,8 @@
 
             </ImageView>
 
-
             <TextView
-                android:id="@+id/txt1"
-
+                android:id="@+id/tvOtpMessage"
                 style="@style/TextAppearance.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,30 +47,13 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dimen_20"
                 android:gravity="center"
-                android:text="@string/wehavesendverificaiton_code">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/TxtMobileNumber"
-                style="@style/TextAppearance.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt1"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dimen_3"
-                android:gravity="center"
-
-                android:text="+91 9673346489">
-
-            </TextView>
+                android:text="@string/wehavesendverificaiton_code" />
 
             <LinearLayout
                 android:id="@+id/LinearDigitLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:layout_below="@id/TxtMobileNumber"
+                android:layout_below="@id/tvOtpMessage"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
