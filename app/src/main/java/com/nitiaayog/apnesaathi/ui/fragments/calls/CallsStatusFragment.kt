@@ -28,11 +28,6 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
     private var lastCallPosition: Int = -1
     private var lastCallData: CallData? = null
 
-    /*private var lastFollowupCallPosition: Int = -1
-    private var lastFollowupCallData: CallData? = null
-    private var lastCompletedCallPosition: Int = -1
-    private var lastCompletedCallData: CallData? = null*/
-
     private val pendingAdapter: CallsAdapter by lazy {
         CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
