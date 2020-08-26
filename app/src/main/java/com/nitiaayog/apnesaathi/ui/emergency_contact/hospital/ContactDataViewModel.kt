@@ -1,11 +1,13 @@
 package com.nitiaayog.apnesaathi.ui.emergency_contact.hospital
 
+import androidx.lifecycle.LiveData
 import com.nitiaayog.apnesaathi.datamanager.DataManager
+import com.nitiaayog.apnesaathi.model.DistrictDetails
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
-class ContactDataViewModel private constructor(dataManager: DataManager) : BaseViewModel() {
+class ContactDataViewModel private constructor(val dataManager: DataManager) : BaseViewModel() {
 
-    val dataManager: DataManager = dataManager
+    private val districtList: LiveData<MutableList<DistrictDetails>> = dataManager.getDistrictList()
 
     companion object {
 
@@ -15,5 +17,6 @@ class ContactDataViewModel private constructor(dataManager: DataManager) : BaseV
         }
     }
 
+    fun getDistrictList(): LiveData<MutableList<DistrictDetails>> = districtList
 
 }

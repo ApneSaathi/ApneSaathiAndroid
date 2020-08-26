@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.ArrayAdapter
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
@@ -20,7 +22,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
 
     lateinit var contactList: ArrayList<ContactDummyData>
     override fun provideViewModel(): ContactDataViewModel {
-        TODO("Not yet implemented")
+        return ContactDataViewModel.getInstance(dataManager)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,15 +41,21 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         prepareDummyData()
 
         if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
-            relDistrictLayout.visibility=VISIBLE
-            dataManager.getDistrictList()
+            relDistrictLayout.visibility = VISIBLE
+            viewModel.getDistrictList().removeObservers(this)
+            viewModel.getDistrictList().observe(this, Observer {
+                val districtNames = mutableListOf<String>()
+                for (districtItem in it) {
+                    districtItem.districtName?.let { it1 -> districtNames.add(it1) }
+                }
+                val adapter = ArrayAdapter(this, R.layout.spinner_item, districtNames)
+                actDistrict.adapter = adapter
+            })
 
-//            val adapter = ArrayAdapter( this,R.layout.spinner_item, resources.getStringArray(R.array.states_array))
-//            actDistrict.adapter = adapter // static state list
+            // static state list
         } else {
-            relDistrictLayout.visibility=GONE
+            relDistrictLayout.visibility = GONE
         }
-
 
 
         val rvList = findViewById(R.id.rvList) as RecyclerView
@@ -61,7 +69,6 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
 
 
     }
-
 
 
     private fun prepareDummyData(): List<ContactDummyData> {
