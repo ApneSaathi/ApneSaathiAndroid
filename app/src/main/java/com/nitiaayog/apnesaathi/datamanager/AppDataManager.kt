@@ -15,6 +15,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.SeniorCitizenRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.emergencycontact.EmergencyContactResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
@@ -101,6 +102,10 @@ class AppDataManager private constructor(
 
     override fun updateVolunteerRatings(params: JsonObject): Single<BaseRepo> {
         return apiRequest.updateVolunteerRatings(params)
+    }
+
+    override fun getEmergencyContact(params: JsonObject): Single<EmergencyContactResponse> {
+        return apiRequest.getEmergencyContact(params)
     }
 
     // Database Access

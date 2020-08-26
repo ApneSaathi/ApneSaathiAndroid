@@ -525,5 +525,6 @@
     <string name="yet_to_be_called">Yet to be called</string>
     <string name="emergency">Emergency</string>
     <string name="regular">Regular</string>
+    <string name="wait_for_emergency_data">We are updating emergency contact data</string>
 
 </resources>

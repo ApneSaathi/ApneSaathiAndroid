@@ -484,5 +484,6 @@
     <string name="update_ratings_successful">आपण <b>%s</b> रेटिंग यशस्वीरित्या अद्यतनित केले आहे</string>
 
     <string name="logout_message">आपली खात्री आहे की आपण लॉगआउट करू इच्छिता ?</string>
+    <string name="wait_for_emergency_data">आम्ही आपत्कालीन संपर्क डेटा अद्ययावत करत आहोत</string>
 
 </resources>

@@ -43,4 +43,7 @@ class DistrictDetails {
         set(value) {
             field = value ?: -1
         }
+
+
+
 }
