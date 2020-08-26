@@ -7,47 +7,56 @@
 
     <include layout="@layout/include_appbar_layout_with_toolbar" />
 
-
-    <TextView
-        style="@style/TextAppearance.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/view_size_40"
-        android:layout_marginStart="@dimen/dimen_10"
-        android:layout_marginTop="@dimen/dimen_2"
-        android:layout_marginEnd="@dimen/dimen_10"
-        android:drawableEnd="@drawable/ic_astrix_icon"
-        android:drawablePadding="@dimen/dimen_5"
-        android:text="Select district"
-        android:textAllCaps="false"
-        android:textColor="@color/text_color"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/text_13" />
-
     <RelativeLayout
+        android:id="@+id/relDistrictLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/view_size_40"
-        android:layout_marginStart="@dimen/dimen_10"
-        android:layout_marginTop="@dimen/dimen_2"
-        android:layout_marginEnd="@dimen/dimen_10"
-        android:background="@drawable/bg_rectangle_border_form">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
-        <Spinner
-            android:id="@+id/actDistrict"
+        <TextView
+            android:id="@+id/TxtDistrict"
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/view_size_40"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:drawableEnd="@drawable/ic_astrix_icon"
+            android:drawablePadding="@dimen/dimen_5"
+            android:text="Select district"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_13" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_size_40"
-            android:cursorVisible="false"
-            android:focusable="false"
-             android:textColor="@color/color_dark_grey_txt"
-             android:textSize="@dimen/text_14" />
+            android:layout_below="@+id/TxtDistrict"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:background="@drawable/bg_rectangle_border_form">
+
+            <Spinner
+                android:id="@+id/actDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_40"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:textColor="@color/color_dark_grey_txt"
+                android:textSize="@dimen/text_14" />
 
 
+        </RelativeLayout>
     </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvList"
-        android:layout_marginTop="@dimen/dimen_10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_10"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />

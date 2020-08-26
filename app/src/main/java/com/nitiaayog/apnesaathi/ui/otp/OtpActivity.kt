@@ -214,11 +214,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
                 override fun afterTextChanged(s: Editable) {
                     if (i == 3 && otpEt[i]!!.text.toString().isNotEmpty()) {
-//                        otpEt[i]!!
-//                            .clearFocus() //Clears focus when you have entered the last digit of the OTP.
                     } else if (otpEt[i]!!.text.toString().isNotEmpty()) {
                         otpEt.get(i + 1)!!
-                            .requestFocus() //focuses on the next edittext after a digit is entered.
+                            .requestFocus()
                     }
                 }
             })
@@ -230,13 +228,11 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
                 ): Boolean {
                     if (event.action != KeyEvent.ACTION_DOWN) {
                         return false
-                        //Dont get confused by this, it is because onKeyListener is called twice and this condition is to avoid it.
                     }
                     if (keyCode == KeyEvent.KEYCODE_DEL && otpEt[i]!!.text.toString()
                             .isEmpty() && i != 0
                     ) {
-//                        otpEt.get(i - 1)!!.setText("") //Deletes the digit of OTP
-                        otpEt.get(i - 1)!!.requestFocus() //and sets the focus on previous digit
+             otpEt.get(i - 1)!!.requestFocus() //and sets the focus on previous digit
                     }
                     return false
                 }

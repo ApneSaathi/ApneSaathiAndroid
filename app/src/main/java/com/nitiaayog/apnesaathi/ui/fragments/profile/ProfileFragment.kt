@@ -295,7 +295,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         setHasOptionsMenu(true)
         toolBar.title = getString(R.string.menu_profile)
 
-
         if (dataManager.getFirstName().isNullOrEmpty()) {
             TxtName.text = "-"
         } else {
