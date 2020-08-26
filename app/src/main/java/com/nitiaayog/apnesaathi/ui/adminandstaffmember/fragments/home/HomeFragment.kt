@@ -1,6 +1,8 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -20,6 +22,7 @@ import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.emergency_contact.MainEmergency_Contact_Activity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.BaseCallsTypeFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -47,7 +50,10 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         toolBar.title = getString(R.string.dashboard)
-
+        toolBar.inflateMenu(R.menu.emergency_contact_menu)
+        toolBar.setOnMenuItemClickListener {
+            onOptionsItemSelected(it)
+        }
         Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 getObservableStreams()
@@ -344,5 +350,17 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
                 observeInvalidCalls()
             }
         }
+    }
+    override
+    fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return (when (item.itemId) {
+            R.id.emergency_contact -> {
+                val intent = Intent(activity, MainEmergency_Contact_Activity::class.java)
+                startActivity(intent)
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        })
     }
 }

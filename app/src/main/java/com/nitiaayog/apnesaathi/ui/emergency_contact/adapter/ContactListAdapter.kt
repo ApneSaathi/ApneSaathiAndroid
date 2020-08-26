@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact.hospital
+package com.nitiaayog.apnesaathi.ui.emergency_contact.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import kotlinx.android.synthetic.main.contact_data_adapter.view.*
 
-open class ContactListAdapter(var mContext: Context, var list: List<ContactData>) :
+open class ContactListAdapter(var mContext: Context, var list: List<ContactDummyData>) :
     RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         var title: TextView = itemView.TxtTitle
         var TxtNumber: TextView = itemView.TxtNumber
         var ic_callImage: ImageView = itemView.ic_callImage
 
-        fun bindContact_Data(data: ContactData) {
+        fun bindContact_Data(data: ContactDummyData) {
             title.setText(data.title)
             TxtNumber.setText(data.contactnumber)
             ic_callImage.setOnClickListener(object : View.OnClickListener {

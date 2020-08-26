@@ -88,20 +88,20 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             viewModel.getGrievanceTrackingList(this.context!!)
 
         viewModel.getPendingGrievances().removeObservers(viewLifecycleOwner)
-        viewModel.getPendingGrievances().observe(viewLifecycleOwner) {
+        viewModel.getPendingGrievances().observe(viewLifecycleOwner, Observer {
             tabLayout.getTabAt(0)!!.text =
                 format(getString(R.string.pending_count), it.size.toString())
-        }
+        })
         viewModel.getInProgressGrievances().removeObservers(viewLifecycleOwner)
-        viewModel.getInProgressGrievances().observe(viewLifecycleOwner) {
+        viewModel.getInProgressGrievances().observe(viewLifecycleOwner, Observer {
             tabLayout.getTabAt(1)!!.text =
                 format(getString(R.string.inprogress_count), it.size.toString())
-        }
+        })
         viewModel.getResolvedGrievances().removeObservers(viewLifecycleOwner)
-        viewModel.getResolvedGrievances().observe(viewLifecycleOwner) {
+        viewModel.getResolvedGrievances().observe(viewLifecycleOwner, Observer {
             tabLayout.getTabAt(2)!!.text =
                 format(getString(R.string.resolved_count), it.size.toString())
-        }
+        })
 
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
