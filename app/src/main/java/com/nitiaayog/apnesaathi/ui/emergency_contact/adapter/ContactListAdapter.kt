@@ -8,7 +8,6 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.contact_data_adapter.view.*
 open class ContactListAdapter(
     var mContext: Context,
     var list: List<ContactDummyData>,
-    pageTitle: String?,var itemClickListener: ItemClickListener
+    pageTitle: String?, var itemClickListener: ItemClickListener
 ) :
     RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     interface ItemClickListener {

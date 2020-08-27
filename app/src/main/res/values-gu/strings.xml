@@ -484,5 +484,6 @@
 
     <string name="logout_message">શું તમને ખાતરી છે કે, તમે લૉગ આઉટ કરવા માંગો છો ?</string>
     <string name="wait_for_emergency_data">અમે ઇમરજન્સી સંપર્ક માહિતીને અપડેટ કરી રહ્યા છીએ</string>
+    <string name="phoneCallpermission_text">એપ્લિકેશન પાસે સુવિધા ઇમરજન્સી સંપર્ક છે જેના માટે અમને કોલ પરવાનગીઆધારની જરૂર પડશે</string>
 
 </resources>

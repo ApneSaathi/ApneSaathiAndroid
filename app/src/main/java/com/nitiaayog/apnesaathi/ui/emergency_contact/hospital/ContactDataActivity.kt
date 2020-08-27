@@ -27,7 +27,6 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.emergencycontact.EmergencyContactResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactDummyData
@@ -37,9 +36,7 @@ import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.hospital_list_activity.*
-import kotlinx.android.synthetic.main.include_toolbar.*
 import kotlinx.android.synthetic.main.include_toolbar.toolBar
 import java.util.concurrent.TimeUnit
 
@@ -93,14 +90,12 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                     position: Int,
                     id: Long
                 ) {
-
-
                     try {
                         Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
                             .observeOn(AndroidSchedulers.mainThread()).subscribe {
                                 viewModel.callEmergencyDataApi(
                                     mContext,
-                                    "7"
+                                    "2"
                                 )
                             }.autoDispose(disposables)
                     } catch (e: Exception) {

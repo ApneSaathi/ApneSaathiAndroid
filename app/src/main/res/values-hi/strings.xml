@@ -486,5 +486,6 @@
 
     <string name="logout_message">क्या आप लॉग आउट करना चाहते हैं ?</string>
     <string name="wait_for_emergency_data">हम आपातकालीन संपर्क डेटा अपडेट कर रहे हैं</string>
+    <string name="phoneCallpermission_text">ऐप में आपातकालीन संपर्क की सुविधा है जिसके लिए हमें कॉल अनुमति के आधार की आवश्यकता होगी</string>
 
 </resources>
