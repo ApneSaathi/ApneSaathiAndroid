@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/color_white"
-            app:title="Issue details"
+            app:title="@string/issue_details"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:titleTextColor="@color/color_black" />
 
