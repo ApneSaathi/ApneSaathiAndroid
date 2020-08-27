@@ -75,7 +75,7 @@
     <string name="txtSubmit">प्रस्तुत</string>
     <string name="call_status_1">कॉल की स्थिति</string>
     <string name="all_calls">सभी कालेँ</string>
-    <string name="resolved">हल</string>
+    <string name="resolved">हल हो चुके</string>
     <string name="pending">विचाराधीन</string>
 
     <string name="pending_calls">लंबित कॉल</string>
@@ -86,9 +86,9 @@
     <string name="menu_home">मुख्यपृष्ठ</string>
     <string name="pending_calls_count">लंबित कॉल(%s)</string>
     <string name="follow_up_count">वापस कॉल करें(%s)</string>
-    <string name="follow_up">वापस कॉल करें</string>
-    <string name="attended_calls_count">उपस्थित कॉल(%s)</string>
-    <string name="attended_calls">उपस्थित कॉल</string>
+    <string name="follow_up">दोबारा कॉल करें</string>
+    <string name="attended_calls_count">समाप्त कॉल(%s)</string>
+    <string name="attended_calls">समाप्त कॉल</string>
     <string name="menu_notification">अधिसूचना</string>
     <string name="menu_profile">प्रोफ़ाइल</string>
     <string name="grievances_count">शिकायत(%s)</string>
@@ -157,7 +157,7 @@
     <string name="sr_citizen_report_lack_of_essintial_services">क्या वरिष्ठ नागरिक आवश्यक सेवाओंकी कमी की रिपोर्ट करता है ?</string>
     <string name="need_emergency_escalation">क्या इमरजेंसी और एस्केलेशन की जरूरत है ?</string>
     <string name="any_sr_citizen_in_home">क्या आपके घर में कोई वरिष्ठ नागरिक है ?</string>
-    <string name="new_sr_citizen_personal_details">न्यू वरिष्ठ नागरिक डिटेल्स</string>
+    <string name="new_sr_citizen_personal_details">नए वरिष्ठ नागरिक डिटेल्स</string>
     <string name="contact_number">संपर्क संख्या</string>
     <string name="address">पता</string>
     <string name="register">रजिस्टर करें</string>
@@ -366,13 +366,11 @@
     <string name="raised_on">बढ़ोतरी:</string>
     <string name="emergency_escalation">आपातकालीन बढ़ाव</string>
 
-
     <string name="changelanguage">भाषा बदलो</string>
     <string name="logout">लॉग आउट</string>
     <string name="contctNumber">संपर्क संख्या</string>
     <string name="email">ईमेल</string>
     <string name="Txtaddress">पता</string>
-
 
     <string name="permission_denied">अनुमति नहीं मिली</string>
     <string name="assigned">निरुपित</string>
@@ -405,7 +403,7 @@
     <string name="update_status">नवीनतम स्थिति</string>
     <string name="reopen">फिर से खोलना</string>
     <string name="resolvd_remarks">समस्या का हल टिप्पणी के साथ किया गया:</string>
-    <string name="raised_on_remarks">मुद्दे को उठाया गया</string>
+    <string name="raised_on_remarks">समस्या दर्ज की गई</string>
     <string name="in_progress_remarks">स्थिति को टिप्पणी के साथ प्रगति में बदल दिया गया था:</string>
     <string name="enter_description_warning">कृपया विवरण दर्ज करें</string>
     <string name="status_warning">कृपया एक स्थिति चुनें</string>
@@ -415,7 +413,7 @@
     <string name="in_progress">चालू</string>
     <string name="issue_id">इश्यू आई.डी.</string>
     <string name="created_date">रचना तिथि</string>
-    <string name="last_update_on">पर अंतिम अद्यतन</string>
+    <string name="last_update_on">नवीनीकरण तिथि</string>
     <string name="resolved_count">हल(%s)</string>
     <string name="inprogress_count">चालू(%s)</string>
     <string name="escalation">वृद्धि:</string>
