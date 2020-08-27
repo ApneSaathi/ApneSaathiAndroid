@@ -164,7 +164,7 @@
     <string name="talked_with">Talked with</string>
     <string name="medical_history">Medical history</string>
     <string name="medical_problems">Medical Problems</string>
-    <string name="whom_did_you_talk_with">Whom did you talk with ?</string>
+    <string name="whom_did_you_talk_with" translatable="false">Whom did you talk with ?</string>
     <string name="medical_history_sr_citizen">Medical history of Sr. Citizen</string>
     <string name="behavior_change_practice">Did the respondent take up the behavior change practices shared with them ?</string>
     <string name="info_you_talked_about">Related info you talked about</string>

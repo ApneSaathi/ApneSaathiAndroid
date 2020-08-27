@@ -26,7 +26,8 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
 
     private fun getDataStream() {
         grievanceAdapter.setOnItemClickListener(this)
-        grievanceAdapter.setOnCallButtonClickListener(callButtonClickListener)
+        if (::callButtonClickListener.isInitialized)
+            grievanceAdapter.setOnCallButtonClickListener(callButtonClickListener)
         viewModel.getPendingGrievances().removeObservers(viewLifecycleOwner)
         viewModel.getPendingGrievances().observe(viewLifecycleOwner, Observer {
             grievanceAdapter.setData(it)
@@ -38,6 +39,7 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
+
     fun setOnCallButtonListener(callButtonClickListener: GrievanceStatusAdapter.CallButtonClickListener) {
         this.callButtonClickListener = callButtonClickListener
     }

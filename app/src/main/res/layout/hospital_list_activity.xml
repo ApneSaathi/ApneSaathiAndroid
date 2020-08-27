@@ -10,7 +10,6 @@
         layout="@layout/include_appbar_layout_with_toolbar" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/TxtNodata"
         style="@style/TextAppearance.Title"
         android:layout_width="wrap_content"
@@ -21,14 +20,52 @@
         android:textAllCaps="false"
         android:textColor="@color/text_color"
         android:textIsSelectable="false"
-        android:textSize="@dimen/text_13" />
+        android:textSize="@dimen/text_13"
+        android:visibility="gone" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relDistrictLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbarlayout"
-        android:visibility="gone">
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/TxtState"
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/view_size_40"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:drawablePadding="@dimen/dimen_5"
+            android:text="@string/select_a_state"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_13"
+            app:drawableEndCompat="@drawable/ic_astrix_icon" />
+
+        <AutoCompleteTextView
+            android:id="@+id/actState"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_size_48"
+            android:layout_marginStart="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_2"
+            android:layout_marginEnd="@dimen/dimen_15"
+            android:background="@drawable/bg_rectangle_border_form"
+            android:completionThreshold="0"
+            android:cursorVisible="false"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:focusable="false"
+            android:hint="@string/state"
+            android:inputType="none|textNoSuggestions"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textColor="@color/color_dark_grey_txt"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_14" />
 
         <TextView
             android:id="@+id/TxtDistrict"
@@ -38,35 +75,34 @@
             android:layout_marginStart="@dimen/dimen_10"
             android:layout_marginTop="@dimen/dimen_2"
             android:layout_marginEnd="@dimen/dimen_10"
-            android:drawableEnd="@drawable/ic_astrix_icon"
             android:drawablePadding="@dimen/dimen_5"
-            android:text="Select district"
+            android:text="@string/select_district"
             android:textAllCaps="false"
             android:textColor="@color/text_color"
             android:textIsSelectable="false"
-            android:textSize="@dimen/text_13" />
+            android:textSize="@dimen/text_13"
+            app:drawableEndCompat="@drawable/ic_astrix_icon" />
 
-        <RelativeLayout
+        <AutoCompleteTextView
+            android:id="@+id/actDistrict"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/view_size_40"
-            android:layout_below="@+id/TxtDistrict"
-            android:layout_marginStart="@dimen/dimen_10"
+            android:layout_height="@dimen/view_size_48"
+            android:layout_marginStart="@dimen/dimen_15"
             android:layout_marginTop="@dimen/dimen_2"
-            android:layout_marginEnd="@dimen/dimen_10"
-            android:background="@drawable/bg_rectangle_border_form">
-
-            <Spinner
-                android:id="@+id/actDistrict"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_40"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:textColor="@color/color_dark_grey_txt"
-                android:textSize="@dimen/text_14" />
-
-
-        </RelativeLayout>
-    </RelativeLayout>
+            android:layout_marginEnd="@dimen/dimen_15"
+            android:background="@drawable/bg_rectangle_border_form"
+            android:completionThreshold="0"
+            android:cursorVisible="false"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:focusable="false"
+            android:hint="@string/district"
+            android:inputType="none|textNoSuggestions"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:textColor="@color/color_dark_grey_txt"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
