@@ -68,7 +68,6 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     override fun provideViewModel(): ContactDataViewModel {
         return ContactDataViewModel.getInstance(dataManager)
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         toolBar.setNavigationIcon(R.drawable.ic_back)
