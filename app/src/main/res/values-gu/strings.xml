@@ -482,4 +482,20 @@
     <string name="phoneCallpermission_text">એપ્લિકેશન પાસે સુવિધા ઇમરજન્સી સંપર્ક છે જેના માટે અમને કોલ પરવાનગીઆધારની જરૂર પડશે</string>
 
     <string name="validate_movbile_number">માન્ય મોબાઇલ નંબર પ્રદાન કરો અને તપાસો કે મોબાઇલ નંબર અમારી સાથે નોંધાયેલ છે</string>
+    <string name="emergency_contact_not_available">આ જિલ્લા માટે ઇમરજન્સી સંપર્કો અસ્તિત્વધરાવતા નથી</string>
+    <string name="Hospital">હોસ્પિટલ</string>
+    <string name="nearhospitals">સરકારી હોસ્પિટલ નજીક</string>
+    <string name="police">Police</string>
+    <string name="nearpolicestation">પોલીસ સ્ટેશન નજીક</string>
+    <string name="ambulance">108 એમ્બ્યુલન્સ</string>
+    <string name="covidcontrolroom">કોવિડ-કન્ટ્રોલ રૂમ</string>
+    <string name="apnesathiconsaltant">Apne Sathi Consaultant</string>
+    <string name="customcontact">વૈવિધ્યપૂર્ણ સંપર્ક</string>
+    <string name="issue_details">વિગતો જારી કરો</string>
+
+    <string name="hospitalcontact">હોસ્પિટલોનો સંપર્ક</string>
+    <string name="police_contact">પોલીસ સ્ટેશનના સંપર્કો</string>
+    <string name="apnesatthiConsulatant">અપને સાથી કોન્સલેન્ટ્સ</string>
+    <string name="customecontact">Custom Contact\'s</string>
+
 </resources>

@@ -483,4 +483,19 @@
 
     <string name="validate_movbile_number">वैध मोबाइल नंबर दें और जाँच ले कि मोबाइल नंबर हमारे पास पंजीकृत है
 </string>
+    <string name="emergency_contact_not_available">आपातकालीन संपर्क इस जिले के लिए मौजूद नहीं है</string>
+    <string name="Hospital">अस्पताल</string>
+    <string name="nearhospitals">नजदिक के सरकारी अस्पताल</string>
+    <string name="police">पुलिस</string>
+    <string name="nearpolicestation">नजदिक के पुलिस स्टेशन </string>
+    <string name="ambulance">108 एम्बुलेंस</string>
+    <string name="covidcontrolroom">कोविड-कंट्रोल रूम</string>
+    <string name="apnesathiconsaltant">एपने साठी कॉन्सॉल्टेंट</string>
+    <string name="customcontact">कस्टम संपर्क</string>
+    <string name="issue_details">विवरण जारी करें</string>
+
+    <string name="hospitalcontact">अस्पतालों से संपर्क करें</string>
+    <string name="police_contact">पुलिस स्टेशन के संपर्क</string>
+    <string name="apnesatthiConsulatant">एपने साठी कांसुलेंट्स</string>
+
 </resources>

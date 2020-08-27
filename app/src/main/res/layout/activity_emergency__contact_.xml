@@ -56,7 +56,7 @@
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
                          android:paddingTop="@dimen/dimen_3"
-                         android:text="Hospital"
+                         android:text="@string/Hospital"
                          android:textSize="@dimen/text_13"
                          android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                          android:layout_gravity="center"
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
-                         android:text="Near By Government Hospital"
+                         android:text="@string/nearhospitals"
                          android:textSize="@dimen/text_11" />
 
                  </LinearLayout>
@@ -103,7 +103,7 @@
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
                          android:paddingTop="@dimen/dimen_3"
-                         android:text="Police"
+                         android:text="@string/police"
                          android:textSize="@dimen/text_13"
                          android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                          android:layout_gravity="center"
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
-                         android:text="Near by police station"
+                         android:text="@string/nearpolicestation"
                          android:textSize="@dimen/text_11" />
 
                  </LinearLayout>
@@ -159,7 +159,7 @@
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
                          android:padding="@dimen/dimen_5"
-                         android:text="108 Ambulance"
+                         android:text="@string/ambulance"
                          android:textSize="@dimen/text_11" />
 
 
@@ -200,7 +200,7 @@
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
                          android:padding="@dimen/dimen_5"
-                         android:text="Covid-Control Room"
+                         android:text="@string/covidcontrolroom"
                          android:textSize="@dimen/text_11" />
 
                  </LinearLayout>
@@ -242,7 +242,7 @@
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
                          android:padding="@dimen/dimen_5"
-                         android:text="Apne Sathi Consaultant"
+                         android:text="@string/apnesathiconsaltant"
                          android:textSize="@dimen/text_11" />
 
 
@@ -281,7 +281,7 @@
                          android:layout_marginTop="@dimen/dimen_5"
                          android:gravity="center"
                          android:padding="@dimen/dimen_5"
-                         android:text="Custom Contact"
+                         android:text="@string/customcontact"
                          android:textSize="@dimen/text_11" />
 
                  </LinearLayout>

@@ -91,7 +91,7 @@
     <string name="pending">Pending</string>
     <string name="pending_count">Pending(%s)</string>
 
-    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="details_fragment">senior Citizen detail fragment</string>
     <string name="select_a_category">Select a category</string>
     <string name="description">Description</string>
     <string name="priority">Priority</string>
@@ -526,5 +526,19 @@
 
 
     <string name="validate_movbile_number">Provide valid mobile number and confirm mobile number is registered with us</string>
+    <string name="emergency_contact_not_available">Emergency Contacts doesn\'t exist for this district</string>
+    <string name="Hospital">Hospital</string>
+    <string name="nearhospitals">Near By Government Hospital</string>
+    <string name="police">Police</string>
+    <string name="nearpolicestation">Near by police station</string>
+      <string name="apnesathiconsaltant">Apne Sathi Consaultant</string>
+    <string name="customcontact">Custom Contact</string>
+    <string name="issue_details">Issue details</string>
+    <string name="hospitalcontact">Hospital\'s Contact</string>
+    <string name="police_contact">Police Station\'s</string>
+    <string name="apnesatthiConsulatant">Apne Sathi Consulatant\'s</string>
+    <string name="ambulance">108 Ambulance</string>
+    <string name="covidcontrolroom">Covid-Control Room</string>
+
 
 </resources>

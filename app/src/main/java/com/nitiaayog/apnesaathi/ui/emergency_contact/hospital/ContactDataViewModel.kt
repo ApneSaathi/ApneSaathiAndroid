@@ -2,16 +2,13 @@ package com.nitiaayog.apnesaathi.ui.emergency_contact.hospital
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.model.DistrictDetails
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import kotlinx.coroutines.launch
 
 class ContactDataViewModel private constructor(val dataManager: DataManager) : BaseViewModel() {
 
@@ -36,24 +33,20 @@ class ContactDataViewModel private constructor(val dataManager: DataManager) : B
             }.subscribe({
                 try {
                     if (it.statusCode == "0") {
-                        viewModelScope.launch {
-                            loaderObservable.value =
-                                NetworkRequestState.SuccessResponse(
-                                    ApiProvider.ApiEmergencyContact,
-                                    it
-                                )
-
-                        }
-
-                    } else loaderObservable.value =
-                        NetworkRequestState.ErrorResponse(ApiProvider.ApiEmergencyContact)
+                        updateNetworkState(
+                            NetworkRequestState.SuccessResponse(
+                                ApiProvider.ApiEmergencyContact,
+                                it
+                            )
+                        )
+                    } else updateNetworkState(NetworkRequestState.Error(ApiProvider.ApiEmergencyContact))
                 } catch (e: Exception) {
                     println(e.printStackTrace())
                 }
             }, {
-                loaderObservable.value =
+                updateNetworkState(
                     NetworkRequestState.ErrorResponse(ApiProvider.ApiEmergencyContact, it)
-
+                )
             }).autoDispose(disposables)
         }
 

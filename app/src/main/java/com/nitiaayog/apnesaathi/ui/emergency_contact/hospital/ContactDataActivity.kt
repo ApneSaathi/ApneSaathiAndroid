@@ -69,11 +69,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     override fun provideViewModel(): ContactDataViewModel {
         return ContactDataViewModel.getInstance(dataManager)
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         toolBar.setNavigationIcon(R.drawable.ic_back)
-        toolBar.title = intent.getStringExtra("title")
+        toolBar.title = intent.getStringExtra("Toolbar_title")
         toolBar.setNavigationOnClickListener {
             finish()
         }
@@ -178,16 +177,22 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                         R.string.check_internet
                     )
                 }
+                is NetworkRequestState.ErrorResponse -> {
+                    progressDialog.dismiss()
+                    BaseUtility.showAlertMessage(
+                        this, getString(R.string.error),
+                        getString(R.string.cannt_connect_to_server_try_later), getString(R.string.okay)
+                    )
+                }
                 is NetworkRequestState.LoadingData -> {
                     progressDialog.show()
                 }
-                is NetworkRequestState.ErrorResponse -> {
+                is NetworkRequestState.Error -> {
                     progressDialog.dismiss()
-
                     BaseUtility.showAlertMessage(
                         this,
                         getString(R.string.error),
-                        getString(R.string.cannt_connect_to_server_try_later),
+                        getString(R.string.emergency_contact_not_available),
                         getString(R.string.okay)
                     )
                 }
