@@ -71,7 +71,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
-            android:name=".ui.emergency_contact.hospital.ContactDataActivity"
+            android:name=".ui.emergency_contact.contact_data.ContactDataActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
 

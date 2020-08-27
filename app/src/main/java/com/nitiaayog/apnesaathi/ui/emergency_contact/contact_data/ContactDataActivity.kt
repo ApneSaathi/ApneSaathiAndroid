@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact.hospital
+package com.nitiaayog.apnesaathi.ui.emergency_contact.contact_data
 
 import android.Manifest
 import android.app.AlertDialog
@@ -35,7 +35,7 @@ import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.hospital_list_activity.*
+import kotlinx.android.synthetic.main.contact_data_activity.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
 
@@ -300,6 +300,6 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
             .setTextColor(ContextCompat.getColor(this, R.color.color_orange))
     }
 
-    override fun provideLayoutResource(): Int = R.layout.hospital_list_activity
+    override fun provideLayoutResource(): Int = R.layout.contact_data_activity
 }
 
