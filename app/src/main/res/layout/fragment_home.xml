@@ -63,9 +63,7 @@
                             android:layout_marginRight="@dimen/dimen_30"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvCallSummary">
-
-                        </TextView>
+                            app:layout_constraintTop_toBottomOf="@id/tvCallSummary"/>
 
                         <ProgressBar
                             android:id="@+id/pbCallSummary"
@@ -77,9 +75,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             style="@style/Horizontal.Progressbar"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvTotal">
+                            app:layout_constraintTop_toBottomOf="@id/tvTotal"/>
 
-                        </ProgressBar>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:orientation="horizontal"

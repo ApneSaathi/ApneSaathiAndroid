@@ -94,7 +94,6 @@
     <string name="attended_calls">उपस्थित कॉल</string>
     <string name="menu_notification">सूचना</string>
     <string name="menu_profile">प्रोफाइल</string>
-    <string name="grievances_count">तक्रारी(%s)</string>
     <string name="issues_count">मुद्दे(%s)</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
