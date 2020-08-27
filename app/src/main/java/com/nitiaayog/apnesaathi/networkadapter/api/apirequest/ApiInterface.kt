@@ -5,6 +5,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.BaseRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.HomeRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.SeniorCitizenRepo
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.VolunteerRepo
+import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.emergencycontact.EmergencyContactResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.grievancedata.GrievanceRespData
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.loginresponse.LoginResponse
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.ProfileUpdateResponse
@@ -52,4 +53,7 @@ interface ApiInterface {
 
     @POST(ApiProvider.ApiRateVolunteer)
     fun updateVolunteerRatings(@Body params: JsonObject): Single<BaseRepo>
+
+    @POST(ApiProvider.ApiEmergencyContact)
+    fun getEmergencyContact(@Body params: JsonObject): Single<EmergencyContactResponse>
 }
