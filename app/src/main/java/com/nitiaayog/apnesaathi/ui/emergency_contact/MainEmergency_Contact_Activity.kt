@@ -31,7 +31,7 @@ class MainEmergency_Contact_Activity : BaseActivity<MainEmergencyContact_ViewMod
         }.autoDispose(disposables)
         card_police_stations.throttleClick().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
-            intent.putExtra("title", ApiConstants.titleHospital)
+            intent.putExtra("title", ApiConstants.titlePoliceStation)
             startActivity(intent)
         }.autoDispose(disposables)
         card_apneSathi_counsultant.throttleClick().subscribe() {

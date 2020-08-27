@@ -526,5 +526,7 @@
     <string name="emergency">Emergency</string>
     <string name="regular">Regular</string>
     <string name="wait_for_emergency_data">We are updating emergency contact data</string>
+    <string name="phoneCallpermission_text">App has feature call to emergency contact For that we will require CALL permission basis..</string>
+
 
 </resources>

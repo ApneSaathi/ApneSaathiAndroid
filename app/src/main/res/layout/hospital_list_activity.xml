@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_appbar_layout_with_toolbar" />
+    <include
+        android:id="@+id/toolbarlayout"
+        layout="@layout/include_appbar_layout_with_toolbar" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/TxtNodata"
+        style="@style/TextAppearance.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/view_size_40"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No Data Found"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_13" />
 
     <RelativeLayout
         android:id="@+id/relDistrictLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarlayout"
         android:visibility="gone">
 
         <TextView
@@ -56,9 +73,10 @@
         android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/relDistrictLayout"
         android:layout_marginTop="@dimen/dimen_10"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
-</LinearLayout>
+</RelativeLayout>
