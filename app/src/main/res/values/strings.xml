@@ -163,7 +163,7 @@
     <string name="talked_with">Talked with</string>
     <string name="medical_history">Medical history</string>
     <string name="medical_problems">Medical Problems</string>
-    <string name="whom_did_you_talk_with">Whom did you talk with ?</string>
+    <string name="whom_did_you_talk_with" translatable="false">Whom did you talk with ?</string>
     <string name="medical_history_sr_citizen">Medical history of Sr. Citizen</string>
     <string name="behavior_change_practice">Did the respondent take up the behavior change practices shared with them ?</string>
     <string name="info_you_talked_about">Related info you talked about</string>
@@ -521,6 +521,9 @@
     <string name="yet_to_be_called">Yet to be called</string>
     <string name="emergency">Emergency</string>
     <string name="regular">Regular</string>
+    <string name="wait_for_emergency_data">We are updating emergency contact data</string>
+    <string name="phoneCallpermission_text">App has feature emergency contact For that we will require CALL permission basis..</string>
+
 
     <string name="validate_movbile_number">Provide valid mobile number and confirm mobile number is registered with us</string>
 

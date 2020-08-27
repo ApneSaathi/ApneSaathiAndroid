@@ -85,6 +85,16 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun setAddress(address: String) =
         preferences.putString(PreferenceConstants.Address, address)
 
+    override fun getDistrict(): String = preferences.getString(PreferenceConstants.District)!!
+
+    override fun setDistrict(district: String) =
+        preferences.putString(PreferenceConstants.District, district)
+
+    override fun getState(): String = preferences.getString(PreferenceConstants.State)!!
+
+    override fun setState(state: String) =
+        preferences.putString(PreferenceConstants.State, state)
+
     override fun setLastSelectedId(callId: String) =
         preferences.putString(PreferenceConstants.LastSelectedId, callId)
 

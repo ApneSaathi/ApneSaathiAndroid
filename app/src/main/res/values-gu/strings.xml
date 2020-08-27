@@ -227,61 +227,61 @@
 
     <string name="logout_error_message">હજી કેટલાક વરિષ્ઠ નાગરિકનો ડેટા સિંક કરવા માટે બાકી છે જે ઇન્ટરનેટ ઉપલબ્ધ ન હતું ત્યારે સંગ્રહિત હતા.તેથી તમે હમણાં લૉગ આઉટ કરી શકશો નહીં, કૃપા કરીને ડેટા સમન્વયિત કર્યા પછી પ્રયાસ કરો</string>
 
-    <string-array name="states_array">
-        <item>આસામ</item>
-        <item>બિહાર</item>
-        <item>મધ્યપ્રદેશ</item>
-        <item>ઉત્તરપ્રદેશ</item>
-        <item>રાજસ્થાન</item>
-        <item>મહારાષ્ટ્ર</item>
-        <item>ગુજરાત</item>
-        <item>ઝારખંડ</item>
-    </string-array>
-    <string-array name="district0">
-        <item>બકસા</item>
-        <item>બાર્પેટા</item>
-        <item>દારંગ</item>
-        <item>ધુબરી</item>
-        <item>ગોલપરા</item>
-        <item>હીલાકાંડી</item>
-    </string-array>
-    <string-array name="district1">
-        <item>અરરિયા</item>
-        <item>બેગુસરાય</item>
-        <item>સીતામારી</item>
-        <item>કતિહાર</item>
-        <item>શેઠપુરા</item>
-    </string-array>
-    <string-array name="district2">
-        <item>બરવાની</item>
-        <item>દામોહ</item>
-        <item>ખંડવા</item>
-        <item>સિંગરૌલી</item>
-        <item>વિદિશા</item>
-    </string-array>
-    <string-array name="district3">
-        <item>બલરામપુર</item>
-        <item>બેહરિચ</item>
-        <item>ચિત્રકૂટ</item>
-        <item>શ્રાવસ્તિ</item>
-        <item>સોનભદ્ર</item>
-    </string-array>
-    <string-array name="district4">
-        <item>બરાન</item>
-        <item>જેસલમેર</item>
-    </string-array>
-    <string-array name="district5">
-        <item>અમરાવતી</item>
-        <item>ગડચિરોલી</item>
-        <item>નંદુરબાર</item>
-    </string-array>
-    <string-array name="district6">
-        <item>નર્મદા</item>
-    </string-array>
-    <string-array name="district7">
-        <item>પાકુર</item>
-        <item>સાહિબગંજ</item>
-    </string-array>
+<!--    <string-array name="states_array">-->
+<!--        <item>આસામ</item>-->
+<!--        <item>બિહાર</item>-->
+<!--        <item>મધ્યપ્રદેશ</item>-->
+<!--        <item>ઉત્તરપ્રદેશ</item>-->
+<!--        <item>રાજસ્થાન</item>-->
+<!--        <item>મહારાષ્ટ્ર</item>-->
+<!--        <item>ગુજરાત</item>-->
+<!--        <item>ઝારખંડ</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district0">-->
+<!--        <item>બકસા</item>-->
+<!--        <item>બાર્પેટા</item>-->
+<!--        <item>દારંગ</item>-->
+<!--        <item>ધુબરી</item>-->
+<!--        <item>ગોલપરા</item>-->
+<!--        <item>હીલાકાંડી</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district1">-->
+<!--        <item>અરરિયા</item>-->
+<!--        <item>બેગુસરાય</item>-->
+<!--        <item>સીતામારી</item>-->
+<!--        <item>કતિહાર</item>-->
+<!--        <item>શેઠપુરા</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district2">-->
+<!--        <item>બરવાની</item>-->
+<!--        <item>દામોહ</item>-->
+<!--        <item>ખંડવા</item>-->
+<!--        <item>સિંગરૌલી</item>-->
+<!--        <item>વિદિશા</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district3">-->
+<!--        <item>બલરામપુર</item>-->
+<!--        <item>બેહરિચ</item>-->
+<!--        <item>ચિત્રકૂટ</item>-->
+<!--        <item>શ્રાવસ્તિ</item>-->
+<!--        <item>સોનભદ્ર</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district4">-->
+<!--        <item>બરાન</item>-->
+<!--        <item>જેસલમેર</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district5">-->
+<!--        <item>અમરાવતી</item>-->
+<!--        <item>ગડચિરોલી</item>-->
+<!--        <item>નંદુરબાર</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district6">-->
+<!--        <item>નર્મદા</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district7">-->
+<!--        <item>પાકુર</item>-->
+<!--        <item>સાહિબગંજ</item>-->
+<!--    </string-array>-->
     <string-array name="districts_array">
         <item>બાર્પેટા</item>
         <item>બાસ્કા</item>
@@ -478,6 +478,8 @@
     <string name="update_ratings_successful">તમે <b>%s</b> ની રેટિંગ સફળતાપૂર્વક અપડેટ કરી છે</string>
 
     <string name="logout_message">શું તમને ખાતરી છે કે, તમે લૉગ આઉટ કરવા માંગો છો ?</string>
+    <string name="wait_for_emergency_data">અમે ઇમરજન્સી સંપર્ક માહિતીને અપડેટ કરી રહ્યા છીએ</string>
+    <string name="phoneCallpermission_text">એપ્લિકેશન પાસે સુવિધા ઇમરજન્સી સંપર્ક છે જેના માટે અમને કોલ પરવાનગીઆધારની જરૂર પડશે</string>
 
     <string name="validate_movbile_number">માન્ય મોબાઇલ નંબર પ્રદાન કરો અને તપાસો કે મોબાઇલ નંબર અમારી સાથે નોંધાયેલ છે</string>
 </resources>

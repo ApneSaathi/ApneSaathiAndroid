@@ -95,6 +95,7 @@ object ApiConstants {
     const val ResolvedRemarks: String = "resolvedRemarks"
     const val phoneNo: String = "phoneNo"
     const val MobileNo: String = "mobileNo"
+    const val districtIdForEmergency: String = "districtId"
 
     const val Profileidvolunteer: String = "idvolunteer"
     const val ProfileFirstName: String = "firstName"
@@ -119,4 +120,12 @@ object ApiConstants {
     const val AdminName: String = "adminName"
 
     const val SeniorCitizensList: String = "srCitizenList"
+
+    //   for Emergency contact screen
+    const val titleHospital = "Hospital's Contact"
+    const val titlePoliceStation = "Police Station's"
+    const val titleApneSathiConsulatant = "Apne Sathi Consulatant's"
+    const val titleCustomContact = "Custom Contact's"
+    const val title108Ambulance = "108 Ambulance"
+    const val titlecovidcontrolroom = "Covid-Control-Room"
 }

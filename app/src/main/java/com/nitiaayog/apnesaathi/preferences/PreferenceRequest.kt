@@ -40,6 +40,12 @@ interface PreferenceRequest {
     fun getAddress(): String
     fun setAddress(address: String)
 
+    fun getDistrict(): String
+    fun setDistrict(district: String)
+
+    fun getState(): String
+    fun setState(state: String)
+
     fun setLastSelectedId(callId: String)
     fun getLastSelectedId(): String
 
