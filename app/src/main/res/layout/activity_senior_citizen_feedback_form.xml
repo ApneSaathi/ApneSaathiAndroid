@@ -1282,7 +1282,7 @@
             android:backgroundTint="@color/text_color_2"
             android:elevation="1dp"
             android:fontFamily="sans-serif"
-            android:text="@android:string/cancel"
+            android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
             android:textSize="@dimen/text_16"

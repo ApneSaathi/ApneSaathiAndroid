@@ -27,31 +27,37 @@ class MainEmergency_Contact_Activity : BaseActivity<MainEmergencyContact_ViewMod
         card_hospitls.throttleClick().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
             intent.putExtra("title", ApiConstants.titleHospital)
+            intent.putExtra("Toolbar_title", getString(R.string.hospitalcontact))
             startActivity(intent)
         }.autoDispose(disposables)
         card_police_stations.throttleClick().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
             intent.putExtra("title", ApiConstants.titlePoliceStation)
+            intent.putExtra("Toolbar_title", getString(R.string.police_contact))
             startActivity(intent)
         }.autoDispose(disposables)
         card_apneSathi_counsultant.throttleClick().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
             intent.putExtra("title", ApiConstants.titleApneSathiConsulatant)
+            intent.putExtra("Toolbar_title", getString(R.string.apnesatthiConsulatant))
             startActivity(intent)
         }.autoDispose(disposables)
         card_customeContact.throttleClick ().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
             intent.putExtra("title", ApiConstants.titleCustomContact)
+            intent.putExtra("Toolbar_title", getString(R.string.customcontact))
             startActivity(intent)
         }.autoDispose(disposables)
         card_ambulance.throttleClick ().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
             intent.putExtra("title", ApiConstants.title108Ambulance)
+            intent.putExtra("Toolbar_title", getString(R.string.ambulance))
             startActivity(intent)
         }.autoDispose(disposables)
         card_covidcontrol_room.throttleClick ().subscribe() {
             val intent = Intent(this, ContactDataActivity::class.java)
             intent.putExtra("title", ApiConstants.titlecovidcontrolroom)
+            intent.putExtra("Toolbar_title", getString(R.string.covidcontrolroom))
             startActivity(intent)
         }.autoDispose(disposables)
 
