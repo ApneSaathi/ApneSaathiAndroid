@@ -489,13 +489,13 @@
     <string name="nearpolicestation">પોલીસ સ્ટેશન નજીક</string>
     <string name="ambulance">108 એમ્બ્યુલન્સ</string>
     <string name="covidcontrolroom">કોવિડ-કન્ટ્રોલ રૂમ</string>
-    <string name="apnesathiconsaltant">Apne Sathi Consaultant</string>
+    <string name="apnesathiconsaltant">અપના સાથી સલાહકાર</string>
     <string name="customcontact">વૈવિધ્યપૂર્ણ સંપર્ક</string>
     <string name="issue_details">વિગતો જારી કરો</string>
 
     <string name="hospitalcontact">હોસ્પિટલોનો સંપર્ક</string>
     <string name="police_contact">પોલીસ સ્ટેશનના સંપર્કો</string>
     <string name="apnesatthiConsulatant">અપને સાથી કોન્સલેન્ટ્સ</string>
-    <string name="customecontact">Custom Contact\'s</string>
+    <string name="customecontact">કસ્ટમ સંપર્ક</string>
 
 </resources>
