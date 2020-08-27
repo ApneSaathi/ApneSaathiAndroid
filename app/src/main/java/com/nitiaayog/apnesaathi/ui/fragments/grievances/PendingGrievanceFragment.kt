@@ -24,6 +24,7 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
         rvList.adapter = grievanceAdapter
     }
 
+    //Method for fetching the data stream
     private fun getDataStream() {
         grievanceAdapter.setOnItemClickListener(this)
         if (::callButtonClickListener.isInitialized)
@@ -36,10 +37,12 @@ class PendingGrievanceFragment : BaseFragment<HomeViewModel>(), OnItemClickListe
         })
     }
 
+    //Method for setting the item click call back
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
 
+    //Method for setting call button call back
     fun setOnCallButtonListener(callButtonClickListener: GrievanceStatusAdapter.CallButtonClickListener) {
         this.callButtonClickListener = callButtonClickListener
     }

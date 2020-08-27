@@ -28,10 +28,12 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
         return GrievanceViewHolder(customView, parent.context)
     }
 
+    //Method for setting item click call back
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
 
+    //Method for setting call button click call back.
     fun setOnCallButtonClickListener(callButtonClickListener: CallButtonClickListener) {
         this.callButtonClickListener = callButtonClickListener
     }
@@ -42,6 +44,7 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
         holder.bindData(dataList[position])
     }
 
+    //Method for setting the data
     fun setData(data: MutableList<GrievanceData>) {
         dataList.clear()
         dataList.addAll(data)
@@ -50,6 +53,7 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
     inner class GrievanceViewHolder(itemView: View, private val context: Context) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+        //Method for binding the data
         fun bindData(grievanceData: GrievanceData) {
             itemView.tv_grievance_type.text = grievanceData.grievanceType
             val priorityText = grievanceData.priority
@@ -81,6 +85,7 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
             itemView.img_call_button.setOnClickListener(this)
         }
 
+        //Method for getting the formatted date
         private fun getFormattedDate(date: String?): String {
             if (date.isNullOrEmpty()) return ""
             val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")

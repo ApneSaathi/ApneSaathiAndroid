@@ -324,7 +324,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private fun observeCompletedCalls() {
         viewModel.getCompletedCalls().removeObservers(viewLifecycleOwner)
-        viewModel.getCompletedCalls().observe(viewLifecycleOwner, Observer {
+        viewModel.getCompletedCalls().observe(viewLifecycleOwner, {
             completedAdapter.setData(if (it.size > 3) it.subList(0, 3) else it)
             completedAdapter.notifyDataSetChanged()
             manageCalls(it.size, R.string.attended_calls_count)
