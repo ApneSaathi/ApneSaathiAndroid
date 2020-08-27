@@ -87,7 +87,6 @@
     <string name="menu_calls">કોલ્સ</string>
     <string name="menu_home">મુખ્યપૃષ્ઠ</string>
     <string name="pending_calls_count">બાકી કોલ્સ(%s)</string>
-    <string name="grievances_count">ફરિયાદો(%s)</string>
     <string name="issues_count">સમસ્યાઓ(%s)</string>
     <string name="follow_up_count">પાછા કૉલ કરો(%s)</string>
     <string name="follow_up">પાછા કૉલ કરો</string>

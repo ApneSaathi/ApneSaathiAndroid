@@ -52,7 +52,6 @@
     <string name="menu_issues">Issues</string>
     <string name="menu_profile">Profile</string>
     <string name="pending_calls_count">Pending Calls(%s)</string>
-    <string name="grievances_count">Grievances(%s)</string>
     <string name="issues_count">Issues(%s)</string>
     <string name="follow_up_count">Follow Up(%s)</string>
     <string name="attended_calls_count">Attended Calls(%s)</string>
