@@ -13,6 +13,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
@@ -83,8 +84,12 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
 
     private fun initClicks() {
         actDistrict.throttleClick().subscribe {
-            actDistrict.showDropDown()
-            updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
+            if (actState.text.toString().isEmpty()) {
+                Toast.makeText(this, getString(R.string.select_a_state), Toast.LENGTH_SHORT).show()
+            } else {
+                actDistrict.showDropDown()
+                updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
+            }
         }.autoDispose(disposables)
 
         actState.throttleClick().subscribe {

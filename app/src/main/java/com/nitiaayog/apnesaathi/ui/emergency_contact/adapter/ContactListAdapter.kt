@@ -14,7 +14,7 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import kotlinx.android.synthetic.main.contact_data_adapter.view.*
 import java.util.*
 
-open class ContactListAdapter(private val context: Context) :
+class ContactListAdapter(private val context: Context) :
     RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     private lateinit var itemClickListener: ItemClickListener
 
