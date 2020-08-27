@@ -478,7 +478,7 @@
     <string name="update_ratings_successful">તમે <b>%s</b> ની રેટિંગ સફળતાપૂર્વક અપડેટ કરી છે</string>
 
     <string name="logout_message">શું તમને ખાતરી છે કે, તમે લૉગ આઉટ કરવા માંગો છો ?</string>
-    <string name="wait_for_emergency_data">અમે ઇમરજન્સી સંપર્ક માહિતીને અપડેટ કરી રહ્યા છીએ</string>
+    <string name="wait_for_emergency_data">મહેરબાની કરીને રાહ જુઓ કે અમે ઇમરજન્સી સંપર્કો લાવી રહ્યા છીએ</string>
     <string name="phoneCallpermission_text">એપ્લિકેશન પાસે સુવિધા ઇમરજન્સી સંપર્ક છે જેના માટે અમને કોલ પરવાનગીઆધારની જરૂર પડશે</string>
 
     <string name="validate_movbile_number">માન્ય મોબાઇલ નંબર પ્રદાન કરો અને તપાસો કે મોબાઇલ નંબર અમારી સાથે નોંધાયેલ છે</string>
@@ -496,6 +496,5 @@
     <string name="hospitalcontact">હોસ્પિટલોનો સંપર્ક</string>
     <string name="police_contact">પોલીસ સ્ટેશનના સંપર્કો</string>
     <string name="apnesatthiConsulatant">અપને સાથી કોન્સલેન્ટ્સ</string>
-    <string name="customecontact">Custom Contact\'s</string>
 
 </resources>
