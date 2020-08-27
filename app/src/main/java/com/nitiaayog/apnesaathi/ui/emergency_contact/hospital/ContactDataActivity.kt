@@ -29,7 +29,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.emergencycontact.
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactDummyData
+import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactRealData
 import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactListAdapter
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
@@ -46,7 +46,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     lateinit var mContext: Context
     lateinit var contact_listadapter: ContactListAdapter
     var districtNames = mutableListOf<String>()
-    lateinit var contactList: ArrayList<ContactDummyData>
+    lateinit var contactList: ArrayList<ContactRealData>
     override fun provideViewModel(): ContactDataViewModel {
         return ContactDataViewModel.getInstance(dataManager)
     }
@@ -152,16 +152,16 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                             when {
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titlePoliceStation) -> {
-                                    contactList.add(ContactDummyData("", item.police!!))
+                                    contactList.add(ContactRealData("", item.police!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleHospital) -> {
-                                    contactList.add(ContactDummyData("", item.hospital!!))
+                                    contactList.add(ContactRealData("", item.hospital!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleApneSathiConsulatant) -> {
                                     contactList.add(
-                                        ContactDummyData(
+                                        ContactRealData(
                                             item.consultantName!!,
                                             item.hospital!!
                                         )
@@ -169,15 +169,15 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleCustomContact) -> {
-                                    contactList.add(ContactDummyData("", item.customeContact!!))
+                                    contactList.add(ContactRealData("", item.customeContact!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.title108Ambulance) -> {
-                                    contactList.add(ContactDummyData("", item.ambulance!!))
+                                    contactList.add(ContactRealData("", item.ambulance!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titlecovidcontrolroom) -> {
-                                    contactList.add(ContactDummyData("", item.covidCtrlRoom!!))
+                                    contactList.add(ContactRealData("", item.covidCtrlRoom!!))
                                 }
 
                             }
@@ -204,7 +204,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         })
     }
 
-    private fun setadapter(contactList: ArrayList<ContactDummyData>) {
+    private fun setadapter(contactList: ArrayList<ContactRealData>) {
         contact_listadapter =
             ContactListAdapter(
                 mContext,
@@ -212,7 +212,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                 intent.getStringExtra("title"),
                 object :
                     ContactListAdapter.ItemClickListener {
-                    override fun itemClick(data: ContactDummyData) {
+                    override fun itemClick(data: ContactRealData) {
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (PermissionChecker.checkSelfPermission(
@@ -239,7 +239,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         rvList.adapter = contact_listadapter
     }
 
-    private fun initiateCall(data: ContactDummyData) {
+    private fun initiateCall(data: ContactRealData) {
         val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + data.contactnumber))
         startActivity(intent)
     }

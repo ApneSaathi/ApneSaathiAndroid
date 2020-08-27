@@ -15,12 +15,12 @@ import kotlinx.android.synthetic.main.contact_data_adapter.view.*
 
 open class ContactListAdapter(
     var mContext: Context,
-    var list: List<ContactDummyData>,
+    var list: List<ContactRealData>,
     pageTitle: String?, var itemClickListener: ItemClickListener
 ) :
     RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     interface ItemClickListener {
-        fun itemClick(data: ContactDummyData)
+        fun itemClick(data: ContactRealData)
     }
     var titlenew=pageTitle
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
@@ -28,7 +28,7 @@ open class ContactListAdapter(
         var TxtNumber: TextView = itemView.TxtNumber
         var ic_callImage: ImageView = itemView.ic_callImage
 
-        fun bindContact_Data(data: ContactDummyData) {
+        fun bindContact_Data(data: ContactRealData) {
 
             if (titlenew.equals(ApiConstants.titleApneSathiConsulatant)) {
                 title.visibility = VISIBLE
