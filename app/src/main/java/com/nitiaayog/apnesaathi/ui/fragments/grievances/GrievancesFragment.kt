@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
-import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
@@ -41,7 +40,7 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         ProgressDialog.Builder(context!!).setMessage("Please wait, fetching data..")
     }
 
-    var districtList: MutableList<DistrictDetails> = mutableListOf()
+    private var districtList: MutableList<DistrictDetails> = mutableListOf()
 
     val menu: PopupMenu by lazy {
         PopupMenu(context!!, anchor_menu)
@@ -65,11 +64,11 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         }.attach()
     }
 
-
+    //Method for fetching the data stream
     private fun getDataStream() {
         if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
             viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
-            viewModel.getDistrictList().observe(viewLifecycleOwner, Observer {
+            viewModel.getDistrictList().observe(viewLifecycleOwner, {
                 districtList = it
                 if (menu.menu.size() > 0) {
                     menu.menu.clear()
@@ -88,23 +87,23 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             viewModel.getGrievanceTrackingList(this.context!!)
 
         viewModel.getPendingGrievances().removeObservers(viewLifecycleOwner)
-        viewModel.getPendingGrievances().observe(viewLifecycleOwner, Observer {
+        viewModel.getPendingGrievances().observe(viewLifecycleOwner, {
             tabLayout.getTabAt(0)!!.text =
                 format(getString(R.string.pending_count), it.size.toString())
         })
         viewModel.getInProgressGrievances().removeObservers(viewLifecycleOwner)
-        viewModel.getInProgressGrievances().observe(viewLifecycleOwner, Observer {
+        viewModel.getInProgressGrievances().observe(viewLifecycleOwner, {
             tabLayout.getTabAt(1)!!.text =
                 format(getString(R.string.inprogress_count), it.size.toString())
         })
         viewModel.getResolvedGrievances().removeObservers(viewLifecycleOwner)
-        viewModel.getResolvedGrievances().observe(viewLifecycleOwner, Observer {
+        viewModel.getResolvedGrievances().observe(viewLifecycleOwner, {
             tabLayout.getTabAt(2)!!.text =
                 format(getString(R.string.resolved_count), it.size.toString())
         })
 
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
-        viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
+        viewModel.getDataStream().observe(viewLifecycleOwner, {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable ->
                     BaseUtility.showAlertMessage(
@@ -134,10 +133,12 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         })
     }
 
+    //Method for setting if api reload is required
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 
+    //Method for setting up the viewpager
     private fun setUpViewPager() {
         val adapter = FragmentViewPagerAdapter(activity!!)
         val pendingFragment = PendingGrievanceFragment()
@@ -192,12 +193,12 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             format(title, size.toString())
     }
 
+    //Method for reloading the API
     fun reloadApi() {
         viewModel.getGrievanceTrackingList(this.context!!)
     }
 
-    override
-    fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.district_filter -> {
                 menu.show()
