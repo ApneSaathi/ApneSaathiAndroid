@@ -76,7 +76,7 @@
     <string name="call_status_1">कॉल की स्थिति</string>
     <string name="all_calls">सभी कालेँ</string>
     <string name="resolved">हल हो चुके</string>
-    <string name="pending">विचाराधीन</string>
+    <string name="pending">अपूर्ण</string>
 
     <string name="pending_calls">लंबित कॉल</string>
     <string name="grievances">शिकायत</string>
@@ -85,14 +85,13 @@
     <string name="menu_calls">कॉल</string>
     <string name="menu_home">मुख्यपृष्ठ</string>
     <string name="pending_calls_count">लंबित कॉल(%s)</string>
-    <string name="follow_up_count">वापस कॉल करें(%s)</string>
+    <string name="follow_up_count">दोबारा कॉल करें(%s)</string>
     <string name="follow_up">दोबारा कॉल करें</string>
     <string name="attended_calls_count">समाप्त कॉल(%s)</string>
     <string name="attended_calls">समाप्त कॉल</string>
     <string name="menu_notification">अधिसूचना</string>
     <string name="menu_profile">प्रोफ़ाइल</string>
-    <string name="grievances_count">शिकायत(%s)</string>
-    <string name="issues_count">मुद्दे(%s)</string>
+    <string name="issues_count">शिकायत(%s)</string>
 
     <string name="select_a_category">एक वर्ग का चयन करें</string>
     <string name="description">विवरण</string>
@@ -410,7 +409,7 @@
     <string name="provide_remarks">कृपया टिप्पणी प्रदान करें</string>
     <string name="complaint_on">पर शिकायत</string>
     <string name="update_call_status">कॉल स्टेटस अपडेट करें</string>
-    <string name="in_progress">चालू</string>
+    <string name="in_progress">काम जारी हैं</string>
     <string name="issue_id">इश्यू आई.डी.</string>
     <string name="created_date">रचना तिथि</string>
     <string name="last_update_on">नवीनीकरण तिथि</string>
