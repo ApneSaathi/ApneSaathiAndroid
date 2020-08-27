@@ -341,7 +341,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/whom_did_you_talk_with"
+                                android:text="@string/talked_with"
                                 android:textColor="@color/color_grey_txt" />
 
                             <TextView

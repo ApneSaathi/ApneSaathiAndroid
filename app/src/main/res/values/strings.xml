@@ -15,10 +15,10 @@
     <string name="not_now">Not now</string>
     <string name="txtenterMobilenumbe">Enter mobile number</string>
     <string name="txtValidmobilenumber">Enter valid mobile number</string>
-    <string name="txtlogin">Login</string>
+    <string name="txtlogin">Proceed to Login</string>
     <string name="txtmobileNumber">Mobile Number</string>
     <string name="verificationcode">Enter Verification Code</string>
-    <string name="wehavesendverificaiton_code">We have send a 4 digit verification code on</string>
+    <string name="wehavesendverificaiton_code">We have sent an OTP to your mobile number %s,\nplease provide it for verification</string>
     <string name="donthave_receive_resend">Did\t recive any code ? Re-send</string>
     <string name="enterOtp">Enter OTP</string>
 
@@ -113,7 +113,6 @@
     <string name="parkinson">Parkinson\'s disease</string>
     <string name="cataracts">Cataracts</string>
     <string name="no_response">No\nResponse</string>
-    <string name="no_response_single_line">No Response</string>
     <string name="phone_not_picked">Phone not picked</string>
     <string name="phone_not_reachable">Phone not reachable</string>
     <string name="call_disconnected">Call disconnected</string>
@@ -158,9 +157,7 @@
 
     <string name="personal_details">Personal Details</string>
     <string name="sr_citizen_follow_up">Sr. Citizen Follow up</string>
-    <string name="not_picked">Not\nPicked</string>
     <string name="not_picked_single_line">Not Picked</string>
-    <string name="not_reachable">Not\nReachable</string>
     <string name="not_reachable_single_line">Not Reachable</string>
     <string name="dis_connected">Disconnected</string>
     <string name="connected">Connected</string>
@@ -528,5 +525,7 @@
     <string name="wait_for_emergency_data">We are updating emergency contact data</string>
     <string name="phoneCallpermission_text">App has feature emergency contact For that we will require CALL permission basis..</string>
 
+
+    <string name="validate_movbile_number">Provide valid mobile number and confirm mobile number is registered with us</string>
 
 </resources>

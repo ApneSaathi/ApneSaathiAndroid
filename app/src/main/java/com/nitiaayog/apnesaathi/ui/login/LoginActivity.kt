@@ -77,10 +77,10 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.LoadingData -> {
                     progressBarlogin.visibility = VISIBLE
                 }
-                is NetworkRequestState.ErrorResponse -> {
+                is NetworkRequestState.Error, is NetworkRequestState.ErrorResponse -> {
                     progressBarlogin.visibility = GONE
                     EditMobileNumber.isFocusableInTouchMode = true
-                    CallSnackbar(rootRelativeLayout, ApiConstants.VolunteerNotRegisterErrorMessage)
+                    CallSnackbar(rootRelativeLayout, getString(R.string.validate_movbile_number))
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
                     val loginres = it.data

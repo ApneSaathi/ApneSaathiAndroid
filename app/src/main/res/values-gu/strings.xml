@@ -9,7 +9,7 @@
     <string name="submit">સબમિટ કરો</string>
 
     <string name="permission_detail">પરવાનગી વિગત</string>
-    <string name="permission_text">એપ્લિકેશનમાં લક્ષણ છે કે સિનિયર સિટીઝન વિગતો પર માત્ર એક જ ક્લિકથી તમે દૈનિક ધોરણે નિયમિત કૉલ શરૂ કરી શકો છો. તેના માટે અમને ક Cલની પરવાનગીની જરૂર રહેશે.</string>
+    <string name="permission_text">એપ્લિકેશનમાં વિશેષતા છે કે સિનિયર સિટીઝનની વિગતો પર માત્ર એક જ ક્લિકથી તમે દૈનિક ધોરણે નિયમિત કૉલ શરૂ કરી શકો છો. તેના માટે અમને કોલ શરૂ કરવાની પરવાનગીની જરૂર રહેશે.</string>
     <string name="accept">સ્વીકારો</string>
     <string name="not_now">હમણા નથી</string>
     <string name="marathi_text">મરાઠી</string>
@@ -17,12 +17,12 @@
     <string name="aasammi_text">આસામી</string>
 
     <string name="letsgetstarted">ચાલો, શરુ કરીએ</string>
-    <string name="txtenterMobilenumbe">મોબાઇલ નંબર દાખલ કરો</string>
+    <string name="txtenterMobilenumbe">તમારો મોબાઇલ નંબર લખો</string>
     <string name="txtValidmobilenumber">માન્ય મોબાઇલ નંબર દાખલ કરો</string>
-    <string name="txtlogin">પ્રવેશ કરો</string>
+    <string name="txtlogin">લોગીન તરફ આગળ વધો</string>
     <string name="txtmobileNumber">મોબાઇલ નંબર</string>
     <string name="verificationcode">ચકાસણી કોડ દાખલ કરો</string>
-    <string name="wehavesendverificaiton_code">અમે ચાલુ કરી છે 4 અંકનો ચકાસણી કોડ</string>
+    <string name="wehavesendverificaiton_code">અમે તમારા મોબાઇલ નંબર %s પર એક ઓટીપી મોકલ્યો છે,\nકૃપા કરીને માન્યતા માટે તેને પ્રદાન કરો</string>
     <string name="verify">ચકાસો</string>
     <string name="donthave_receive_resend">શું કોઈ કોડ પ્રાપ્ત થયો નથી? ફરીથી મોકલો</string>
     <string name="enterOtp">ઓટીપી દાખલ કરો</string>
@@ -48,7 +48,7 @@
     <string name="call_received_by">દ્વારા કૉલ પ્રાપ્ત થયો</string>
     <string name="appbar_title">સિનિયર સિટીઝન માહિતી</string>
     <string name="register_a_new_citizen">નવા નાગરિકની નોંધણી કરો</string>
-    <string name="emergency_call">ઇમર્જન્સી કૉલ</string>
+    <string name="emergency_call">કટોકટીનો કૉલ</string>
     <string name="report_a_problem">સમસ્યાનો અહેવાલ આપો</string>
     <string name="feedback">પ્રતિસાદ</string>
     <string name="drawerOpen">ડ્રોઅર ખુલ્લું</string>
@@ -80,32 +80,32 @@
     <string name="resolved">ઉકેલી</string>
     <string name="pending">બાકી</string>
 
-    <string name="pending_calls">બાકી કૉલ</string>
+    <string name="pending_calls">બાકી કોલ્સ</string>
     <string name="grievances">ફરિયાદો</string>
     <string name="see_all">બધા જુઓ</string>
 
     <string name="menu_calls">કોલ્સ</string>
     <string name="menu_home">મુખ્યપૃષ્ઠ</string>
-    <string name="pending_calls_count">બાકી કૉલ(%s)</string>
+    <string name="pending_calls_count">બાકી કોલ્સ(%s)</string>
     <string name="grievances_count">ફરિયાદો(%s)</string>
-    <string name="issues_count">Issues(%s)</string>
+    <string name="issues_count">સમસ્યાઓ(%s)</string>
     <string name="follow_up_count">પાછા કૉલ કરો(%s)</string>
     <string name="follow_up">પાછા કૉલ કરો</string>
-    <string name="attended_calls_count">પ્રસ્તુત કૉલ(%s)</string>
-    <string name="attended_calls">પ્રસ્તુત કૉલ</string>
+    <string name="attended_calls_count">પૂર્ણ કોલ્સ(%s)</string>
+    <string name="attended_calls">પૂર્ણ કોલ્સ</string>
     <string name="menu_notification">સૂચના</string>
     <string name="menu_profile">પ્રોફાઇલ</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
-    <string name="select_a_category">શ્રેણી ની પસંદગી કરો</string>
+    <string name="select_a_category">વર્ગની પસંદગી કરો</string>
     <string name="description">વર્ણન</string>
     <string name="priority">પ્રાથમિકતા</string>
     <string name="other_important_information">અન્ય મહત્વપૂર્ણ માહિતી</string>
     <string name="edit_fragment">Edit fragment</string>
-    <string name="select_a_call_status">ક callલ સ્થિતિ પસંદ કરો</string>
+    <string name="select_a_call_status">કૉલની સ્થિતિ પસંદ કરો</string>
     <string name="quarantine_hospitalization_status">સંસર્ગનિષેધ / હોસ્પિટલમાં દાખલ થવાની સ્થિતિ</string>
     <string name="select_status">સ્થિતિ પસંદ કરો</string>
-    <string name="category">કેટેગરી</string>
+    <string name="category">વર્ગ</string>
     <string name="medical_details">તબીબી વિગતો</string>
     <string name="grievance_information">ફરિયાદની માહિતી</string>
     <string name="other_problems">અન્ય સમસ્યાઓ</string>
@@ -118,47 +118,43 @@
     <string name="parkinson">ધ્રુજારી ની બીમારી</string>
     <string name="cataracts">મોતિયા</string>
     <string name="no_response">કોઈ જવાબ નથી</string>
-    <string name="no_response_single_line">કોઈ જવાબ નથી</string>
-    <string name="phone_not_picked">ફોન લેવામાં આવ્યો નથી</string>
+    <string name="phone_not_picked">ફોન ઉપાડ્યો નથી</string>
     <string name="phone_not_reachable">ફોન પહોંચી શકાય તેમ નથી</string>
-    <string name="call_disconnected">ક Callલ ડિસ્કનેક્ટ થયો</string>
+    <string name="call_disconnected">કૉલ ડિસ્કનેક્ટ થયો</string>
     <string name="home_quarantine">હા, ઘરેલુ સંસર્ગનિષેધ</string>
     <string name="government_quarantine">હા, સરકારી સંસર્ગનિષેધ</string>
     <string name="hospitalized">હા, હોસ્પિટલમાં દાખલ</string>
     <string name="not_quarantined">સંસર્ગનિષેધ અથવા હોસ્પિટલમાં દાખલ નથી</string>
     <string name="lack_of_food">ખોરાકનો અભાવ</string>
     <string name="lack_of_medicine">દવાનો અભાવ</string>
-    <string name="lack_of_banking_service">બેંકિંગ સેવાઓનો વપરાશ અભાવ</string>
+    <string name="lack_of_banking_service">બેંકિંગ સેવાઓનો અભાવ</string>
     <string name="lack_of_utilities">ઉપયોગિતાઓના સપ્લાયનો અભાવ (પાણી, વીજળી)</string>
     <string name="lack_of_hygine">સ્વચ્છતા અને સ્વચ્છતાનો અભાવ</string>
     <string name="lack_of_safety">સલામતીનો અભાવ</string>
-    <string name="lack_of_access_emergency">કટોકટી સેવાઓ (એમ્બ્યુલન્સ, હેલ્પલાઇન નંબર, વગેરે) ની accessક્સેસનો અભાવ.</string>
+    <string name="lack_of_access_emergency">કટોકટીની સેવાઓ(એમ્બ્યુલન્સ, હેલ્પલાઇન નંબર, વગેરે) નો અભાવ.</string>
     <string name="phone_and_service">ફોન અને ઇન્ટરનેટ સેવાઓ</string>
-    <string name="other_problems_reported">અન્ય સમસ્યાઓ અહેવાલ</string>
+    <string name="other_problems_reported">અન્ય સમસ્યાઓનો અહેવાલ</string>
     <string name="other">અન્ય</string>
     <string name="high">ઉચ્ચ</string>
     <string name="low">નીચા</string>
 
-    <string name="not_picked">ઉઠાવી\nનથી</string>
-    <string name="not_picked_single_line">ઉઠાવી નથી</string>
-    <string name="not_reachable">પહોંચી શકાય\nતેવું નથી</string>
+    <string name="not_picked_single_line">ઉપાડ્યો નથી</string>
     <string name="not_reachable_single_line">પહોંચી શકાય તેવું નથી</string>
     <string name="dis_connected">ડિસ્કનેક્ટ થયેલ</string>
     <string name="connected">કનેક્ટેડ</string>
     <string name="talked_with">કોની સાથે વાત કરી</string>
     <string name="medical_history">તબીબી ઇતિહાસ</string>
     <string name="medical_problems">તબીબી સમસ્યાઓ</string>
-    <string name="whom_did_you_talk_with">કોની સાથે વાત કરી</string>
     <string name="medical_history_sr_citizen">વરિષ્ઠ નાગરિકનો તબીબી ઇતિહાસ</string>
     <string name="behavior_change_practice">શું વરિષ્ઠ નાગરિકે તેમની સાથે વહેંચેલી વર્તણૂક પરિવર્તનની પદ્ધતિઓ હાથ ધરી છે ?</string>
-    <string name="info_you_talked_about">તમે કઈ સંબંધિત માહિતી વિશે વાત કરી હતી</string>
+    <string name="info_you_talked_about">તમે કઈ સંબંધિત માહિતી વાત કરી હતી</string>
     <string name="prevention">નિવારણ</string>
     <string name="access">પહોંચ</string>
     <string name="detection">તપાસ</string>
     <string name="status">સ્થિતિ</string>
     <string name="covid_19_symptoms">કોરોના લક્ષણો</string>
     <string name="non_covid_symptoms">બિન-કોરોના તબીબી સમસ્યાઓ</string>
-    <string name="select_category">કેટેગરી પસંદ કરો</string>
+    <string name="select_category">વર્ગ પસંદ કરો</string>
     <string name="gender">લિંગ-વિશિષ્ટ</string>
     <string name="report_lack_of_essential_services">આવશ્યક સેવાઓનો અભાવ જાણ કરો</string>
     <string name="sr_citizen_report_lack_of_essintial_services">શું વરિષ્ઠ નાગરિક આવશ્યક સેવાઓની અભાવની જાણ કરે છે ?</string>
@@ -220,10 +216,10 @@
     <string name="validate_other_medical_details">અન્ય તબીબી વિગતો પ્રદાન કરો જેમ કે COVID-19 લક્ષણો, વગેરે</string>
     <string name="validate_covid_symptoms">સિનિયર સિટિઝનમાં COVID-19 લક્ષણો પ્રદાન કરો</string>
     <string name="validate_quarantine_status">વરિષ્ઠ નાગરિકની સંસર્ગનિષેધની સ્થિતિ પ્રદાન કરો</string>
-    <string name="validate_complaint_category">ફરિયાદ વર્ગ પ્રદાન કરો</string>
+    <string name="validate_complaint_category">ફરિયાદનો વર્ગ પ્રદાન કરો</string>
     <string name="validate_emergency_required">કોઈપણ <b>કટોકટી અને/અથવા વૃદ્ધિની</b> વિગતો પ્રદાન કરો ?</string>
     <string name="check_internet">કૃપા કરીને ઇન્ટરનેટ કનેક્શન તપાસો</string>
-    <string name="sr_citizen_registered_successfully">વરિષ્ઠ નાગરિક સફળતાપૂર્વક નોંધાયેલું છે.</string>
+    <string name="sr_citizen_registered_successfully">વરિષ્ઠ નાગરિકની નોંધણી સફળતાપૂર્વક પૂર્ણ થઈ છે.</string>
 
     <string name="not_available">માહિતી ઉપલબ્ધ નથી</string>
 
@@ -253,7 +249,7 @@
     <string-array name="district1">
         <item>અરરિયા</item>
         <item>બેગુસરાય</item>
-        <item>સીતામhiી</item>
+        <item>સીતામારી</item>
         <item>કતિહાર</item>
         <item>શેઠપુરા</item>
     </string-array>
@@ -330,11 +326,11 @@
         <item>@string/number_busy</item>
         <item>@string/number_not_existing</item>
     </string-array>
-    <string name="call_dropped">ક Callલ પડ્યો</string>
+    <string name="call_dropped">કોલ છોડી દીધી</string>
     <string name="wrong_number">ખોટો નંબર</string>
     <string name="call_later">પછીથી ફોન કરો</string>
     <string name="number_busy">નંબર વ્યસ્ત</string>
-    <string name="number_not_existing">સંખ્યા અસ્તિત્વમાં નથી</string>
+    <string name="number_not_existing">નંબર અસ્તિત્વમાં નથી</string>
     <string-array name="talked_with">
         <item>@string/sr_citizen</item>
         <item>@string/family_member_of_sr_citizen</item>
@@ -363,7 +359,7 @@
     <string name="neutral">તટસ્થ</string>
     <string name="sad">ઉદાસી</string>
 
-    <string name="changelanguage">લungંગૌજ બદલો</string>
+    <string name="changelanguage">એપ્લિકેશનની ભાષા બદલો</string>
     <string name="logout">લૉગ આઉટ</string>
     <string name="contctNumber">સંપર્ક નંબર</string>
     <string name="email">ઇમેઇલ</string>
@@ -393,14 +389,14 @@
     <string name="invalidOTP">અમાન્ય OTP</string>
     <string name="limitecros">તમે મહત્તમ પ્રયત્નો પર પહોંચી ગયા છો</string>
     <string name="getnewOTP">નવું ઓટીપી મેળવો</string>
-    <string name="chnagenumber"> નંબર બદલો ? </string>
+    <string name="chnagenumber"> મોબાઇલ નંબર બદલો ? </string>
 
     <string name="pending_count">બાકી(%s)</string>
-    <string name="menu_issues">મુદ્દાઓ</string>
+    <string name="menu_issues">સમસ્યાઓ</string>
     <string name="type_remarks">ટીપ્પણી લખો …</string>
     <string name="remarks">ટીકાઓ</string>
     <string name="progress_updates">પ્રગતિ અપડેટ્સ:</string>
-    <string name="update_issue_progress">અપડેટ ઇશ્યૂ પ્રગતિ</string>
+    <string name="update_issue_progress">અપડેટ સમસ્યા પ્રગતિ</string>
     <string name="completed_count">- પૂર્ણ:</string>
     <string name="need_follow_up_count">- અનુસરવાની જરૂર છે:</string>
     <string name="pending_g_count">- બાકી:</string>
@@ -413,15 +409,15 @@
     <string name="status_warning">કૃપા કરીને સ્થિતિ પસંદ કરો</string>
     <string name="provide_remarks">કૃપા કરીને ટીપ્પણી આપો</string>
     <string name="in_progress">પ્રગતિમાં</string>
-    <string name="issue_id">ઇશ્યુ આઈ.ડી.</string>
+    <string name="issue_id">સમસ્યા આઈ.ડી.</string>
     <string name="created_date">બનાવવાની તારીખ</string>
     <string name="last_update_on">પર છેલ્લું અપડેટ</string>
     <string name="resolved_count">ઉકેલી(%s)</string>
     <string name="inprogress_count">પ્રગતિમાં(%s)</string>
     <string name="escalation">એસ્કેલેશન:</string>
-    <string name="type_reason">પ્રકાર કારણ…</string>
+    <string name="type_reason">કારણનો પ્રકાર…</string>
     <string name="update_the_progress_happen">અપગ્રેડ પ્રગતિ થાય છે</string>
-    <string name="update_call_status">ક Callલની સ્થિતિને અપડેટ કરો</string>
+    <string name="update_call_status">કોલની સ્થિતિને અપડેટ કરો</string>
     <string name="complaint_on">ફરિયાદ છે</string>
 
     <string name="otpsendsuccesfully">otp સફળતાપૂર્વક મોકલાઈ ગયું</string>
@@ -444,7 +440,7 @@
     <string name="reinforce_knowledge_for_prevention_of_covid_19">કોવિડ-19 ની  નિવારણ માટે જ્ Reાનને મજબુત બનાવવું</string>
     <string name="invalid_calls_count">અમાન્ય કોલ્સ(%s)</string>
 
-    <string name="password_text">એકવાર તમે પાસવર્ડ પ્રદાન કરો, પછી તમે એપ્લિકેશનનો ઉપયોગ કરવા માટે તૈયાર છો.</string>
+    <string name="password_text">એકવાર તમે પાસવર્ડ પ્રદાન કરશો, પછી તમે એપ્લિકેશનનો ઉપયોગ કરવા માટે તૈયાર છો.</string>
     <string name="enter_password">પાસવર્ડ આપો</string>
     <string name="validate_password">કૃપા કરી માન્ય પાસવર્ડ દાખલ કરો</string>
     <string name="verification">ચકાસણી</string>
@@ -486,4 +482,5 @@
     <string name="wait_for_emergency_data">અમે ઇમરજન્સી સંપર્ક માહિતીને અપડેટ કરી રહ્યા છીએ</string>
     <string name="phoneCallpermission_text">એપ્લિકેશન પાસે સુવિધા ઇમરજન્સી સંપર્ક છે જેના માટે અમને કોલ પરવાનગીઆધારની જરૂર પડશે</string>
 
+    <string name="validate_movbile_number">માન્ય મોબાઇલ નંબર પ્રદાન કરો અને તપાસો કે મોબાઇલ નંબર અમારી સાથે નોંધાયેલ છે</string>
 </resources>
