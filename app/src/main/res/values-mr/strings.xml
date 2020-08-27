@@ -230,61 +230,61 @@
 
     <string name="logout_error_message">आपण ऑफलाइन असताना संचयित केलेला अद्याप काही ज्येष्ठ नागरिक डेटा शिल्लक आहे. आपण आत्ताच लॉगआउट करू शकणार नाही, कृपया डेटा संकालनानंतर प्रयत्न करा</string>
 
-    <string-array name="states_array">
-        <item>आसाम</item>
-        <item>बिहार</item>
-        <item>मध्य प्रदेश</item>
-        <item>उत्तर प्रदेश</item>
-        <item>राजस्थान</item>
-        <item>महाराष्ट्र</item>
-        <item>गुजरात</item>
-        <item>झारखंड</item>
-    </string-array>
-    <string-array name="district0">
-        <item>बक्सा</item>
-        <item>बरपेटा</item>
-        <item>डारंग</item>
-        <item>धुबरी</item>
-        <item>गोलपारा</item>
-        <item>हैलाकांडी</item>
-    </string-array>
-    <string-array name="district1">
-        <item>अररिया</item>
-        <item>बेगूसराय</item>
-        <item>सीतामढी</item>
-        <item>कटिहार</item>
-        <item>शेखपुरा</item>
-    </string-array>
-    <string-array name="district2">
-        <item>बारवानी</item>
-        <item>दमोह</item>
-        <item>खंडवा</item>
-        <item>सिंगरौली</item>
-        <item>विदिशा</item>
-    </string-array>
-    <string-array name="district3">
-        <item>बलरामपूर</item>
-        <item>बेहराइच</item>
-        <item>चित्रकूट</item>
-        <item>श्रावस्ती</item>
-        <item>सोनभद्र</item>
-    </string-array>
-    <string-array name="district4">
-        <item>बरन</item>
-        <item>जैसलमेर</item>
-    </string-array>
-    <string-array name="district5">
-        <item>अमरावती</item>
-        <item>गडचिरोली</item>
-        <item>नंदुरबार</item>
-    </string-array>
-    <string-array name="district6">
-        <item>नर्मदा</item>
-    </string-array>
-    <string-array name="district7">
-        <item>पाकुर</item>
-        <item>साहिबगंज</item>
-    </string-array>
+<!--    <string-array name="states_array">-->
+<!--        <item>आसाम</item>-->
+<!--        <item>बिहार</item>-->
+<!--        <item>मध्य प्रदेश</item>-->
+<!--        <item>उत्तर प्रदेश</item>-->
+<!--        <item>राजस्थान</item>-->
+<!--        <item>महाराष्ट्र</item>-->
+<!--        <item>गुजरात</item>-->
+<!--        <item>झारखंड</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district0">-->
+<!--        <item>बक्सा</item>-->
+<!--        <item>बरपेटा</item>-->
+<!--        <item>डारंग</item>-->
+<!--        <item>धुबरी</item>-->
+<!--        <item>गोलपारा</item>-->
+<!--        <item>हैलाकांडी</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district1">-->
+<!--        <item>अररिया</item>-->
+<!--        <item>बेगूसराय</item>-->
+<!--        <item>सीतामढी</item>-->
+<!--        <item>कटिहार</item>-->
+<!--        <item>शेखपुरा</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district2">-->
+<!--        <item>बारवानी</item>-->
+<!--        <item>दमोह</item>-->
+<!--        <item>खंडवा</item>-->
+<!--        <item>सिंगरौली</item>-->
+<!--        <item>विदिशा</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district3">-->
+<!--        <item>बलरामपूर</item>-->
+<!--        <item>बेहराइच</item>-->
+<!--        <item>चित्रकूट</item>-->
+<!--        <item>श्रावस्ती</item>-->
+<!--        <item>सोनभद्र</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district4">-->
+<!--        <item>बरन</item>-->
+<!--        <item>जैसलमेर</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district5">-->
+<!--        <item>अमरावती</item>-->
+<!--        <item>गडचिरोली</item>-->
+<!--        <item>नंदुरबार</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district6">-->
+<!--        <item>नर्मदा</item>-->
+<!--    </string-array>-->
+<!--    <string-array name="district7">-->
+<!--        <item>पाकुर</item>-->
+<!--        <item>साहिबगंज</item>-->
+<!--    </string-array>-->
     <string-array name="districts_array">
         <item>बरपेटा</item>
         <item>बास्का</item>

@@ -330,6 +330,11 @@ class AppDataManager private constructor(
 
     override fun getAddress(): String = preferences.getAddress()
     override fun setAddress(address: String) = preferences.setAddress(address)
+    override fun getDistrict(): String = preferences.getDistrict()
+    override fun setDistrict(district: String) = preferences.setDistrict(district)
+
+    override fun getState(): String = preferences.getState()
+    override fun setState(state: String) = preferences.setState(state)
 
     override fun setLastSelectedId(callId: String) = preferences.setLastSelectedId(callId)
     override fun getLastSelectedId(): String = preferences.getLastSelectedId()

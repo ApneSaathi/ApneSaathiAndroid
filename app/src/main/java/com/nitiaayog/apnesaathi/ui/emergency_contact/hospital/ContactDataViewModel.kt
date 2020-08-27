@@ -15,8 +15,6 @@ import kotlinx.coroutines.launch
 
 class ContactDataViewModel private constructor(val dataManager: DataManager) : BaseViewModel() {
 
-    private val districtList: LiveData<MutableList<DistrictDetails>> = dataManager.getDistrictList()
-
     companion object {
 
         @Synchronized
@@ -25,21 +23,25 @@ class ContactDataViewModel private constructor(val dataManager: DataManager) : B
         }
     }
 
-    fun getDistrictList(): LiveData<MutableList<DistrictDetails>> = districtList
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
-    fun callEmergencyDataApi(mContext: Context, districtID: String) {
+    fun callEmergencyDataApi(mContext: Context, districtName: String) {
 
         if (checkNetworkAvailability(mContext, ApiProvider.ApiEmergencyContact)) {
             val params = JsonObject()
-            params.addProperty(ApiConstants.districtIdForEmergency, districtID)
+            params.addProperty(ApiConstants.DistrictName, districtName)
+
             dataManager.getEmergencyContact(params).doOnSubscribe {
-                loaderObservable.value = NetworkRequestState.LoadingData(ApiProvider.ApiEmergencyContact)
+                loaderObservable.value =
+                    NetworkRequestState.LoadingData(ApiProvider.ApiEmergencyContact)
             }.subscribe({
                 try {
-                    if (it.statusCode== "0") {
+                    if (it.statusCode == "0") {
                         viewModelScope.launch {
                             loaderObservable.value =
-                                NetworkRequestState.SuccessResponse(ApiProvider.ApiEmergencyContact, it)
+                                NetworkRequestState.SuccessResponse(
+                                    ApiProvider.ApiEmergencyContact,
+                                    it
+                                )
 
                         }
 

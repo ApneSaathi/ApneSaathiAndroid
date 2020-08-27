@@ -2,7 +2,6 @@ package com.nitiaayog.apnesaathi.ui.emergency_contact.hospital
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,11 +9,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
@@ -24,28 +22,48 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
+import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.emergencycontact.EmergencyContactResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactRealData
 import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactListAdapter
+import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactRealData
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
-import com.nitiaayog.apnesaathi.utility.ROLE_MASTER_ADMIN
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.hospital_list_activity.*
-import kotlinx.android.synthetic.main.include_toolbar.toolBar
+import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
 
 
 class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     val PERMISSION_CODE: Int = 200
-    lateinit var mContext: Context
-    lateinit var contact_listadapter: ContactListAdapter
-    var districtNames = mutableListOf<String>()
+    private val contactListAdapter: ContactListAdapter by lazy {
+        ContactListAdapter(this).apply {
+            this.setOnItemClickListener(object : ContactListAdapter.ItemClickListener {
+                override fun itemClick(data: ContactRealData) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (PermissionChecker.checkSelfPermission(
+                                this@ContactDataActivity,
+                                Manifest.permission.CALL_PHONE
+                            ) == PermissionChecker.PERMISSION_DENIED
+                        ) {
+                            val permission =
+                                arrayOf(Manifest.permission.CALL_PHONE)
+                            requestPermissions(permission, PERMISSION_CODE)
+                        } else {
+                            initiateCall(data)
+                        }
+                    } else {
+                        initiateCall(data)
+                    }
+                }
+            })
+        }
+    }
     lateinit var contactList: ArrayList<ContactRealData>
     override fun provideViewModel(): ContactDataViewModel {
         return ContactDataViewModel.getInstance(dataManager)
@@ -58,68 +76,91 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         toolBar.setNavigationOnClickListener {
             finish()
         }
-        bindview()
+        bindView()
+        initClicks()
 
+    }
+
+    private fun initClicks() {
+        actDistrict.throttleClick().subscribe {
+            actDistrict.showDropDown()
+            updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_up)
+        }.autoDispose(disposables)
+
+        actState.throttleClick().subscribe {
+            actState.showDropDown()
+            updateDropDownIndicator(actState, R.drawable.ic_arrow_up)
+        }.autoDispose(disposables)
     }
 
     private val progressDialog: ProgressDialog.Builder by lazy {
-        ProgressDialog.Builder(this!!).setMessage(R.string.wait_for_emergency_data)
+        ProgressDialog.Builder(this).setMessage(R.string.wait_for_emergency_data)
     }
 
-    private fun bindview() {
-        mContext = this
+    private fun bindView() {
         contactList = ArrayList()
         observeStates()
-        if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
-            relDistrictLayout.visibility = VISIBLE
-            viewModel.getDistrictList().removeObservers(this)
-            viewModel.getDistrictList().observe(this, Observer {
-
-                for (districtItem in it) {
-                    districtItem.districtName?.let { it1 -> districtNames.add(it1) }
-                }
-                val adapter = ArrayAdapter(this, R.layout.spinner_item, districtNames)
-                actDistrict.adapter = adapter
-            })
-
-
-            actDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    try {
-                        Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
-                            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                                viewModel.callEmergencyDataApi(
-                                    mContext,
-                                    "2"
-                                )
-                            }.autoDispose(disposables)
-                    } catch (e: Exception) {
-                        println("TAG -- MyData --> ${e.message}")
-                    }
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-            }
-
-            // static state list
-        } else {
-            relDistrictLayout.visibility = GONE
+        val stateList = resources.getStringArray(R.array.states_array)
+        val stateAdapter = ArrayAdapter(this, R.layout.item_layout_dropdown_menu, stateList)
+        actState.threshold = 0
+        actState.setAdapter(stateAdapter)
+        actState.setOnKeyListener(null)
+        actState.setOnDismissListener {
+            updateDropDownIndicator(actState, R.drawable.ic_arrow_down)
         }
-
-
-        val rvList = findViewById(R.id.rvList) as RecyclerView
-        rvList.layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
-
-
+        actState.setOnItemClickListener { _, _, position, _ ->
+            actDistrict.setText("")
+            actDistrict.hint = getString(R.string.district)
+            setDistrictAdapter(position)
+        }
+        rvList.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        rvList.adapter = contactListAdapter
     }
+
+    //Method for setting the district adapter
+    private fun setDistrictAdapter(position: Int) {
+        var districtsList = arrayOf<String>()
+        when (position) {
+            0 -> districtsList = resources.getStringArray(R.array.district0)
+            1 -> districtsList = resources.getStringArray(R.array.district1)
+            2 -> districtsList = resources.getStringArray(R.array.district2)
+            3 -> districtsList = resources.getStringArray(R.array.district3)
+            4 -> districtsList = resources.getStringArray(R.array.district4)
+            5 -> districtsList = resources.getStringArray(R.array.district5)
+            6 -> districtsList = resources.getStringArray(R.array.district6)
+            7 -> districtsList = resources.getStringArray(R.array.district7)
+        }
+        val adapter = ArrayAdapter(this, R.layout.item_layout_dropdown_menu, districtsList)
+        actDistrict.threshold = 0
+        actDistrict.setAdapter(adapter)
+        actDistrict.setOnKeyListener(null)
+        actDistrict.setOnDismissListener {
+            updateDropDownIndicator(actDistrict, R.drawable.ic_arrow_down)
+        }
+        actDistrict.setOnItemClickListener { _, _, pos, _ ->
+            contactList.clear()
+            contactListAdapter.notifyDataSetChanged()
+            getEmergencyContactList(districtsList[pos])
+        }
+    }
+
+    //Method for getting the emergency contact list
+    private fun getEmergencyContactList(districtName: String) {
+        try {
+            Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    viewModel.callEmergencyDataApi(
+                        this,
+                        districtName
+                    )
+                }.autoDispose(disposables)
+        } catch (e: Exception) {
+            println("TAG -- MyData --> ${e.message}")
+        }
+    }
+
+    private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =
+        autoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
 
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(this)
@@ -127,7 +168,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
             when (it) {
                 is NetworkRequestState.NetworkNotAvailable -> {
                     BaseUtility.showAlertMessage(
-                        mContext!!,
+                        this,
                         R.string.alert,
                         R.string.check_internet
                     )
@@ -139,8 +180,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                     progressDialog.dismiss()
 
                     BaseUtility.showAlertMessage(
-                        this, getString(R.string.error),
-                        getString(R.string.cannt_connect_to_server_try_later), getString(R.string.okay)
+                        this,
+                        getString(R.string.error),
+                        getString(R.string.cannt_connect_to_server_try_later),
+                        getString(R.string.okay)
                     )
                 }
                 is NetworkRequestState.SuccessResponse<*> -> {
@@ -195,49 +238,16 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
 
                     } else {
                         rvList.visibility = VISIBLE
-                        setadapter(contactList)
+                        contactListAdapter.setData(contactList)
+                        contactListAdapter.setNewTitle(intent.getStringExtra("title"))
+                        contactListAdapter.notifyDataSetChanged()
                     }
-
 
                 }
             }
         })
     }
 
-    private fun setadapter(contactList: ArrayList<ContactRealData>) {
-        contact_listadapter =
-            ContactListAdapter(
-                mContext,
-                contactList,
-                intent.getStringExtra("title"),
-                object :
-                    ContactListAdapter.ItemClickListener {
-                    override fun itemClick(data: ContactRealData) {
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (PermissionChecker.checkSelfPermission(
-                                    this@ContactDataActivity!!,
-                                    Manifest.permission.CALL_PHONE
-                                ) == PackageManager.PERMISSION_DENIED
-                            ) {
-                                val permission =
-                                    arrayOf(Manifest.permission.CALL_PHONE)
-                                requestPermissions(permission, PERMISSION_CODE)
-                            } else {
-                                initiateCall(data)
-                            }
-                        } else {
-                            initiateCall(data)
-                        }
-
-
-                    }
-
-
-                }
-            )
-        rvList.adapter = contact_listadapter
-    }
 
     private fun initiateCall(data: ContactRealData) {
         val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + data.contactnumber))
@@ -267,7 +277,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                     dialog.dismiss()
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                         data =
-                            Uri.fromParts("package", this@ContactDataActivity!!.packageName, null)
+                            Uri.fromParts("package", this@ContactDataActivity.packageName, null)
                     }
                     startActivityForResult(intent, BaseFragment.CONST_PERMISSION_FROM_SETTINGS)
                 }
@@ -275,9 +285,9 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
             }.create()
         dialog.show()
         dialog.getButton(DialogInterface.BUTTON_POSITIVE)
-            .setTextColor(ContextCompat.getColor(this!!, R.color.color_orange))
+            .setTextColor(ContextCompat.getColor(this, R.color.color_orange))
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
-            .setTextColor(ContextCompat.getColor(this!!, R.color.color_orange))
+            .setTextColor(ContextCompat.getColor(this, R.color.color_orange))
     }
 
     override fun provideLayoutResource(): Int = R.layout.hospital_list_activity
