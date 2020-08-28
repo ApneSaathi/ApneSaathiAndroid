@@ -410,7 +410,7 @@
     <string name="update_call_status">कॉल स्टेटस अपडेट करें</string>
     <string name="in_progress">काम जारी हैं</string>
     <string name="issue_id">इश्यू आई.डी.</string>
-    <string name="created_date">रचना तिथि</string>
+    <string name="created_date">दर्ज की गई तिथि</string>
     <string name="last_update_on">नवीनीकरण तिथि</string>
     <string name="resolved_count">हल(%s)</string>
     <string name="inprogress_count">चालू(%s)</string>
