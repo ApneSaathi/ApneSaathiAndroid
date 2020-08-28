@@ -28,6 +28,8 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.startSyncingData(this)
+
         initViewPager()
         initBottomNavigationView()
         if (viewPager.adapter!!.itemCount == 2) manageBottomNavigationViewForRoles()
