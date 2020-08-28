@@ -24,6 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
+/**
+ * This Class is the most important class for syncing of SR. Citizen Feedback Form when internet
+ * is not available and stored in room DB.
+ *
+ * Whenever network will available Android system will automatically trigger this class and
+ * start data syncing and fetch the data.
+ * */
 class SyncDataService : JobService() {
 
     companion object {
