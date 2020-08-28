@@ -212,7 +212,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleHospital) -> {
-                                    contactList.add(ContactRealData("item.hospitalName!!", item.hospital!!))
+                                    contactList.add(ContactRealData(item.hospitalName!!, item.hospital!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleApneSathiConsulatant) -> {
@@ -251,7 +251,6 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                     } else {
                         rvList.visibility = VISIBLE
                         contactListAdapter.setData(contactList)
-                        contactListAdapter.setNewTitle(intent.getStringExtra("title"))
                         contactListAdapter.notifyDataSetChanged()
                     }
 

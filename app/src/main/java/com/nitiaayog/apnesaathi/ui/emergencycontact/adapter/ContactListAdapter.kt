@@ -26,7 +26,6 @@ class ContactListAdapter(private val context: Context) :
     }
 
     private var data: List<ContactRealData> = mutableListOf()
-    var titlenew = ""
 
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         var TxtName: TextView = itemView.TxtName
@@ -66,7 +65,5 @@ class ContactListAdapter(private val context: Context) :
         data = contactList
     }
 
-    fun setNewTitle(title: String?) {
-        titlenew = title ?: ""
-    }
+
 }
