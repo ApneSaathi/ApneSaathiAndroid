@@ -22,6 +22,7 @@
     <string name="txtlogin">લોગીન તરફ આગળ વધો</string>
     <string name="txtmobileNumber">મોબાઇલ નંબર</string>
     <string name="verificationcode">ચકાસણી કોડ દાખલ કરો</string>
+
     <string name="wehavesendverificaiton_code">અમે તમારા મોબાઇલ નંબર %s પર એક ઓટીપી મોકલ્યો છે,\nકૃપા કરીને માન્યતા માટે તેને પ્રદાન કરો</string>
     <string name="verify">ચકાસો</string>
     <string name="donthave_receive_resend">શું કોઈ કોડ પ્રાપ્ત થયો નથી? ફરીથી મોકલો</string>
@@ -92,7 +93,6 @@
     <string name="follow_up">પાછા કૉલ કરો</string>
     <string name="attended_calls_count">પૂર્ણ કોલ્સ(%s)</string>
     <string name="attended_calls">પૂર્ણ કોલ્સ</string>
-    <string name="menu_notification">સૂચના</string>
     <string name="menu_profile">પ્રોફાઇલ</string>
 
     <string name="details_fragment">seniorCitizen detail fragment</string>
@@ -496,6 +496,11 @@
     <string name="hospitalcontact">હોસ્પિટલોનો સંપર્ક</string>
     <string name="police_contact">પોલીસ સ્ટેશનના સંપર્કો</string>
     <string name="apnesatthiConsulatant">અપને સાથી કોન્સલેન્ટ્સ</string>
-    <string name="customecontact">Custom Contact\'s</string>
+    <string name="menu_volunteers">સ્વયંસેવકો</string>
+    <string name="no_issues_available">કોઈ સમસ્યાઓ ઉપલબ્ધ નથી</string>
+    <string name="raised_by_me">મે દ્વારા ઉઠાવવામાં આવ્યું</string>
+    <string name="yet_to_be_called">હજુ બોલાવવાનું બાકી છે</string>
+    <string name="emergency">કટોકટી</string>
+    <string name="regular">નિયમિત</string>
 
 </resources>

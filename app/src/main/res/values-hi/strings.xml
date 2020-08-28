@@ -89,7 +89,6 @@
     <string name="follow_up">दोबारा कॉल करें</string>
     <string name="attended_calls_count">समाप्त कॉल(%s)</string>
     <string name="attended_calls">समाप्त कॉल</string>
-    <string name="menu_notification">अधिसूचना</string>
     <string name="menu_profile">प्रोफ़ाइल</string>
     <string name="issues_count">शिकायत(%s)</string>
 
@@ -497,5 +496,13 @@
     <string name="hospitalcontact">अस्पतालों से संपर्क करें</string>
     <string name="police_contact">पुलिस स्टेशन के संपर्क</string>
     <string name="apnesatthiConsulatant">एपने साठी कांसुलेंट्स</string>
+    <string name="menu_volunteers">स्वयंसेवकों</string>
+    <string name="details_fragment">वरिष्ठ नागरिक विस्तार </string>
+    <string name="no_issues_available">कोई समस्या उपलब्ध नहीं है</string>
+    <string name="raised_by_me">मेरे द्वारा उठाया</string>
+    <string name="yet_to_be_called">अभी तक बुलाया जाना है</string>
+    <string name="emergency">आपातकालीन</string>
+    <string name="regular">नियमित</string>
+
 
 </resources>
