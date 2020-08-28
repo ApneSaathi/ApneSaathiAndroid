@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact
+package com.nitiaayog.apnesaathi.ui.emergencycontact
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
-import com.nitiaayog.apnesaathi.ui.emergency_contact.contact_data.ContactDataActivity
+import com.nitiaayog.apnesaathi.ui.emergencycontact.contact_data.ContactDataActivity
 import kotlinx.android.synthetic.main.activity_emergency__contact_.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 

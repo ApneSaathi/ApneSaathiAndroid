@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact.contact_data
+package com.nitiaayog.apnesaathi.ui.emergencycontact.contact_data
 
 import android.Manifest
 import android.app.AlertDialog
@@ -29,8 +29,8 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.emergencycontact.
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactListAdapter
-import com.nitiaayog.apnesaathi.ui.emergency_contact.adapter.ContactRealData
+import com.nitiaayog.apnesaathi.ui.emergencycontact.adapter.ContactListAdapter
+import com.nitiaayog.apnesaathi.ui.emergencycontact.adapter.ContactRealData
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
@@ -69,6 +69,7 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     override fun provideViewModel(): ContactDataViewModel {
         return ContactDataViewModel.getInstance(dataManager)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         toolBar.setNavigationIcon(R.drawable.ic_back)
@@ -180,8 +181,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                 is NetworkRequestState.ErrorResponse -> {
                     progressDialog.dismiss()
                     BaseUtility.showAlertMessage(
-                        this, getString(R.string.error),
-                        getString(R.string.cannt_connect_to_server_try_later), getString(R.string.okay)
+                        this,
+                        getString(R.string.error),
+                        getString(R.string.cannt_connect_to_server_try_later),
+                        getString(R.string.okay)
                     )
                 }
                 is NetworkRequestState.LoadingData -> {
@@ -205,34 +208,33 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
                             when {
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titlePoliceStation) -> {
-                                    contactList.add(ContactRealData("", item.police!!))
+                                    contactList.add(ContactRealData(item.policeRegion!!, item.police!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleHospital) -> {
-                                    contactList.add(ContactRealData("", item.hospital!!))
+                                    contactList.add(ContactRealData("item.hospitalName!!", item.hospital!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleApneSathiConsulatant) -> {
                                     contactList.add(
                                         ContactRealData(
                                             item.consultantName!!,
-                                            item.hospital!!
+                                            item.apnisathiContact!!
                                         )
                                     )
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titleCustomContact) -> {
-                                    contactList.add(ContactRealData("", item.customeContact!!))
+                                    contactList.add(ContactRealData(item.contactName!!, item.customeContact!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.title108Ambulance) -> {
-                                    contactList.add(ContactRealData("", item.ambulance!!))
+                                    contactList.add(ContactRealData(item.hospitalName!!, item.ambulance!!))
                                 }
                                 intent.getStringExtra("title")
                                     .equals(ApiConstants.titlecovidcontrolroom) -> {
-                                    contactList.add(ContactRealData("", item.covidCtrlRoom!!))
+                                    contactList.add(ContactRealData(item.ctrlRoomRegion!!, item.covidCtrlRoom!!))
                                 }
-
                             }
                         }
                     } else {

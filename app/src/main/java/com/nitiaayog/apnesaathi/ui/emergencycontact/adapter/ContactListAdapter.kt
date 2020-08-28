@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact.adapter
+package com.nitiaayog.apnesaathi.ui.emergencycontact.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nitiaayog.apnesaathi.R
-import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import kotlinx.android.synthetic.main.contact_data_adapter.view.*
 import java.util.*
 
@@ -30,20 +29,19 @@ class ContactListAdapter(private val context: Context) :
     var titlenew = ""
 
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-        var title: TextView = itemView.TxtTitle
+        var TxtName: TextView = itemView.TxtName
         var TxtNumber: TextView = itemView.TxtNumber
         var ic_callImage: ImageView = itemView.ic_callImage
 
-        fun bindContact_Data(data: ContactRealData) {
+        fun bindContactData(data: ContactRealData) {
 
-            if (titlenew == ApiConstants.titleApneSathiConsulatant) {
-                title.visibility = VISIBLE
-                title.text = data.title
-
+            if (data.Name.isNotEmpty()) {
+                TxtName.visibility = VISIBLE
+                TxtName.text = "Name : " + data.Name
             } else {
-                title.visibility = GONE
+                TxtName.visibility = GONE
             }
-            TxtNumber.text = data.contactnumber
+            TxtNumber.text = "Number : " + data.contactnumber
 
             ic_callImage.setOnClickListener { itemClickListener.itemClick(data) }
 
@@ -61,7 +59,7 @@ class ContactListAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindContact_Data(data[position])
+        holder.bindContactData(data[position])
     }
 
     fun setData(contactList: ArrayList<ContactRealData>) {
