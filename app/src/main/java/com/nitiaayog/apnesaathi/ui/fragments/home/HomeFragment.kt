@@ -22,7 +22,7 @@ import com.nitiaayog.apnesaathi.model.GrievanceData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.emergency_contact.MainEmergency_Contact_Activity
+import com.nitiaayog.apnesaathi.ui.emergencycontact.MainEmergency_Contact_Activity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility

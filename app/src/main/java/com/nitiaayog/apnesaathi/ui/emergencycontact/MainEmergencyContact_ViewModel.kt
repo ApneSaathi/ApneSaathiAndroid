@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact
+package com.nitiaayog.apnesaathi.ui.emergencycontact
 
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel

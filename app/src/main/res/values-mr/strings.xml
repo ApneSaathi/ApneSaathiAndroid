@@ -96,7 +96,7 @@
     <string name="menu_profile">प्रोफाइल</string>
     <string name="issues_count">मुद्दे(%s)</string>
 
-    <string name="details_fragment">seniorCitizen detail fragment</string>
+    <string name="details_fragment">ज्येष्ठ नागरिक तपशील </string>
     <string name="select_a_category">एक श्रेणी निवडा</string>
     <string name="description">वर्णन</string>
     <string name="priority">प्राधान्य</string>
@@ -479,7 +479,7 @@
     <string name="update_ratings_successful">आपण <b>%s</b> रेटिंग यशस्वीरित्या अद्यतनित केले आहे</string>
 
     <string name="logout_message">आपली खात्री आहे की आपण लॉगआउट करू इच्छिता ?</string>
-    <string name="wait_for_emergency_data">आम्ही आपत्कालीन संपर्क डेटा अद्ययावत करत आहोत</string>
+    <string name="wait_for_emergency_data">कृपया थांबा आम्ही आपत्कालीन संपर्क लोड करत आहोत</string>
     <string name="phoneCallpermission_text">अॅपमध्ये वैशिष्ट्यपूर्ण आपत्कालीन संपर्क आहे ज्यासाठी आपल्याला कॉल परवानगीचा आधार आवश्यक आहे</string>
 
     <string name="validate_movbile_number">वैध मोबाइल नंबर द्या आणि मोबाइल नंबर आमच्याकडे नोंदणीकृत असल्याचे तपासा</string>
@@ -497,5 +497,11 @@
     <string name="hospitalcontact">रुग्णालयांचा संपर्क</string>
     <string name="police_contact">पोलिस स्टेशनचे संपर्क</string>
     <string name="apnesatthiConsulatant">अपने साथी सल्लागार</string>
+    <string name="menu_volunteers">स्वयंसेवक</string>
+    <string name="no_issues_available">समस्या उपलब्ध नाही</string>
+    <string name="raised_by_me">मी वाढवले</string>
+    <string name="yet_to_be_called">तरीही म्हणावे लागेल</string>
+    <string name="emergency">आणीबाणी</string>
+    <string name="regular">नियमित</string>
 
 </resources>

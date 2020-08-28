@@ -1,4 +1,4 @@
-package com.nitiaayog.apnesaathi.ui.emergency_contact.hospital
+package com.nitiaayog.apnesaathi.ui.emergencycontact.contact_data
 
 import android.content.Context
 import androidx.lifecycle.LiveData
