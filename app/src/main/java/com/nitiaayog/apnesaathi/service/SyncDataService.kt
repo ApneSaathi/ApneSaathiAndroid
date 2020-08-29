@@ -12,11 +12,10 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.AppDataManager
 import com.nitiaayog.apnesaathi.datamanager.DataManager
-import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
-import com.nitiaayog.apnesaathi.model.SyncSrCitizenGrievance
+import com.nitiaayog.apnesaathi.model.*
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.utility.NetworkProvider
+import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +33,7 @@ class SyncDataService : JobService() {
 
     companion object {
 
-        private const val TAG: String = "TAG -- JobService -->"
+        private const val TAG: String = "TAG -- JobService -- syncData --> "
         const val JOB_ID: Int = 1959
 
         fun enqueueWork(context: Context) {
@@ -58,10 +57,10 @@ class SyncDataService : JobService() {
         val dateTime: String = "${calendar.get(Calendar.HOUR_OF_DAY)} :" +
                 " ${calendar.get(Calendar.MINUTE)} ${calendar.get(Calendar.AM_PM)}"
         if (NetworkProvider.isConnected(applicationContext)) {
-            println("\n\n$TAG syncData --> onStartJob -- Internet Available - $dateTime")
+            println("\n\n$TAG onStartJob -- Internet Available - $dateTime")
             CoroutineScope(Dispatchers.IO).launch {
                 val processData = dataManager.getGrievancesToSync()
-                println("\n$TAG syncData --> onStartJob -- ${processData?.size} data will be synced")
+                println("\n$TAG onStartJob -- ${processData?.size} data will be synced")
                 processData?.run {
                     if (processData.isEmpty()) jobFinished(params, true)
                     else {
@@ -74,13 +73,13 @@ class SyncDataService : JobService() {
                     }
                 }
             }
-        } else println("\n$TAG syncData --> onStartJob -- No Internet - $dateTime")
+        } else println("\n$TAG onStartJob -- No Internet - $dateTime")
 
         return true
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
-        println("\n$TAG syncData --> onStopJob -- Job Completed")
+        println("\n$TAG onStopJob -- Job Completed")
         disposeAll(params)
         return true
     }
@@ -103,6 +102,8 @@ class SyncDataService : JobService() {
         params.addProperty(ApiConstants.SrCitizenTalkedWith, grievance.talkedWith)
         params.addProperty(ApiConstants.SrCitizenName, grievance.srCitizenName)
         params.addProperty(ApiConstants.SrCitizenGender, grievance.gender)
+
+        params.addProperty(ApiConstants.ImpRemarkInfo, grievance.impRemarkInfo)
         params.addProperty(ApiConstants.Role, dataManager.getRole())
 
         if (grievance.callStatusSubCode != "10") return params
@@ -117,13 +118,24 @@ class SyncDataService : JobService() {
         arraySubParams.addProperty(
             ApiConstants.CancerOrMajorSurgery, grievance.cancerOrMajorSurgery
         )
-        arraySubParams.addProperty(ApiConstants.OtherAilments, "N")
+        arraySubParams.addProperty(ApiConstants.OtherAilments, grievance.otherAilments)
 
         arraySubParams.addProperty(ApiConstants.RemarkOnMedicalHistory, "")
 
         arraySubParams.addProperty(ApiConstants.InfoTalkAbout, grievance.relatedInfoTalkedAbout)
+
+        arraySubParams.addProperty(
+            ApiConstants.IsSrCitizenAwareOfCovid19, grievance.hasSrCitizenAwareOfCovid19
+        )
+        arraySubParams.addProperty(
+            ApiConstants.IsSymptomsPreventionDiscussed, grievance.hasSymptomsPreventionDiscussed
+        )
+
         arraySubParams.addProperty(
             ApiConstants.NoticedBehaviouralChange, grievance.behavioralChangesNoticed
+        )
+        arraySubParams.addProperty(
+            ApiConstants.WhichPracticeNotFollowed, grievance.whichPracticesNotFollowed
         )
 
         arraySubParams.addProperty(ApiConstants.HasCovidSymptoms, grievance.hasCovidSymptoms)
@@ -154,12 +166,14 @@ class SyncDataService : JobService() {
         arraySubParams.addProperty(
             ApiConstants.PhoneInternetIssue, grievance.phoneAndInternetIssue!!.toInt()
         )
-
+        arraySubParams.addProperty(
+            ApiConstants.Description, grievance.description
+        )
         arraySubParams.addProperty(
             ApiConstants.IsEmergencyServicesRequired, grievance.emergencyServiceRequired
         )
         arraySubParams.addProperty(
-            ApiConstants.Description, grievance.description
+            ApiConstants.LackOfEssentialServices, grievance.lackOfEssentialServices
         )
 
         val jsonArray = JsonArray()
@@ -181,16 +195,35 @@ class SyncDataService : JobService() {
         return grievances
     }
 
-    private fun startSyncing(processData: List<SyncSrCitizenGrievance>) =
+    private fun manageCallsData(data: CallDetails) {
+        dataManager.clearPreviousData()
+        dataManager.insertCallData(data.callsList)
+
+        val grievances: List<SrCitizenGrievance> = prepareGrievances(data.callsList)
+        dataManager.insertGrievances(grievances)
+    }
+
+    private fun manageAdminData(data: AdminCallDetails) {
+        dataManager.clearDistricts()
+        dataManager.clearPreviousData()
+
+        dataManager.insertCallData(data.adminCallsList)
+        dataManager.insertDistrictData(data.adminDistrictList)
+
+        val grievances: List<SrCitizenGrievance> = prepareGrievances(data.adminCallsList)
+        dataManager.insertGrievances(grievances)
+    }
+
+    private suspend fun startSyncing(processData: List<SyncSrCitizenGrievance>) =
         processData.forEach { syncData(it) }
 
-    private fun syncData(grievance: SyncSrCitizenGrievance) {
+    private suspend fun syncData(grievance: SyncSrCitizenGrievance) {
         val params = preparePostParams(grievance)
         val disposable = dataManager.saveSrCitizenFeedback(params).doOnSubscribe {
             println("$TAG syncData -- params --> $params")
         }.subscribe({
             if (it.status == "0") {
-                println("$TAG syncData --> Successful -- ${grievance.callId} -- ${grievance.id}")
+                println("$TAG Successful -- ${grievance.callId} -- ${grievance.id}")
                 CoroutineScope(Dispatchers.IO).launch {
                     // (it.grievanceId != "-1") grievance is not added if added then
                     // that id will returned
@@ -212,43 +245,44 @@ class SyncDataService : JobService() {
                     }
                     println("$TAG syncData -- sync --> success")
                 }
-            } else println("$TAG syncData --> Failed -- ${grievance.callId} -- ${grievance.id}")
+            } else println("$TAG Failed -- ${grievance.callId} -- ${grievance.id}")
         }, {
-            println("$TAG syncData --> Failed -- ${grievance.callId} -- ${grievance.id}")
-            println("$TAG syncData --> Failed --> Exception")
-            println("$TAG syncData --> Failed --> ${it?.message}")
+            println("$TAG Failed -- ${grievance.callId} -- ${grievance.id}")
+            println("$TAG Failed --> Exception")
+            println("$TAG Failed --> ${it?.message}")
         })
         disposables.add(disposable)
     }
 
-    private fun getFetchData() {
+    private suspend fun getFetchData() {
         val params = JsonObject()
-        params.addProperty(ApiConstants.VolunteerId, dataManager.getUserId())
+        params.addProperty(ApiConstants.Id, dataManager.getUserId().toInt())
+        params.addProperty(ApiConstants.FilterBy, dataManager.getRole())
         dataManager.getCallDetails(params).doOnSubscribe {
-            println("\n\n$TAG syncData --> getFetchData -- Start fetching data")
+            println("\n\n$TAG getFetchData -- Start fetching data")
         }.subscribe({
             try {
                 if (it.status == "0") {
-                    println("\n\n$TAG syncData --> getFetchData -- Fetch Successful")
+                    println("\n\n$TAG getFetchData -- Fetch Successful")
                     CoroutineScope(Dispatchers.IO).launch {
                         io {
-                            val data = it.getData()
-                            dataManager.clearPreviousData()
-                            dataManager.insertCallData(data.callsList)
-
-                            val grievances: List<SrCitizenGrievance> =
-                                prepareGrievances(data.callsList)
-                            dataManager.insertGrievances(grievances)
-                            println("$TAG syncData --> getFetchData -- Fetched data successfully")
+                            if (dataManager.getRole() == ROLE_VOLUNTEER) {
+                                val data = it.getData()
+                                manageCallsData(data)
+                            } else {
+                                val data = it.getAdminData()
+                                manageAdminData(data)
+                            }
+                            println("$TAG getFetchData -- Fetched data successfully")
                         }
                     }
                 }
             } catch (e: Exception) {
-                println("$TAG syncData --> getFetchData -- ${e.message}")
+                println("$TAG getFetchData -- ${e.message}")
             }
         }, {
-            println("$TAG syncData --> getFetchData -- Error -- data fetching")
-            println("$TAG syncData --> getFetchData -- Error -- ${it?.message}")
+            println("$TAG getFetchData -- Error -- data fetching")
+            println("$TAG getFetchData -- Error -- ${it?.message}")
         }).autoDispose(disposables)
     }
 }
