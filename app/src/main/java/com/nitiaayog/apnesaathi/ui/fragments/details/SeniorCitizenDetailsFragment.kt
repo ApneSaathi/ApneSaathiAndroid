@@ -124,16 +124,16 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     private fun bindGrievanceData(srCitizenGrievance: SrCitizenGrievance) {
         var medicalHistory = ""
         if (srCitizenGrievance.hasDiabetic == "1") {
-            medicalHistory = getString(R.string.diabetes).plus(", ")
+            medicalHistory += getString(R.string.diabetes).plus(", ")
         }
         if (srCitizenGrievance.hasBloodPressure == "1") {
-            medicalHistory = getString(R.string.blood_pressure).plus(", ")
+            medicalHistory += getString(R.string.blood_pressure).plus(", ")
         }
         if (srCitizenGrievance.hasLungAilment == "1") {
-            medicalHistory = getString(R.string.lung_ailment).plus(", ")
+            medicalHistory += getString(R.string.lung_ailment).plus(", ")
         }
         if (srCitizenGrievance.cancerOrMajorSurgery == "1") {
-            medicalHistory = getString(R.string.cancer_major_surgery).plus(", ")
+            medicalHistory += getString(R.string.cancer_major_surgery)
         }
         if (medicalHistory.isEmpty()) {
             txt_medical_history.text = getString(R.string.no_problems)
