@@ -26,6 +26,12 @@ import kotlinx.android.synthetic.main.list_item_grievance_status.*
 import kotlinx.android.synthetic.main.updated_progress_layout.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
+/**
+ *  Fragment for showing the detailed view of grievances!
+ * [grievanceData] is the real data which is fetched form the API and it's used to bind the values into view.
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [GrievanceDetailsViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ */
 class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
     BaseFragment<GrievanceDetailsViewModel>() {
 
@@ -42,7 +48,10 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
         bindData()
         getDataStream()
     }
-
+    /**
+     * Method for fetching the data stream.
+     * This method also handles all the network issues.
+     */
     private fun getDataStream() {
         viewModel.getDataStream().removeObservers(viewLifecycleOwner)
         viewModel.getDataStream().observe(viewLifecycleOwner, Observer {
@@ -71,7 +80,9 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
             }
         })
     }
-
+    /**
+     * Method for binding the data using the data that was fetched from the API
+     */
     private fun bindData() {
         tv_grievance_type.text = grievanceData.grievanceType
         val priorityText = grievanceData.priority
@@ -145,7 +156,10 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
             showBottomSheetDialogFragment()
         }
     }
-
+    /**
+     * Method for showing the popup in which we are showing the UI for updating the grievances
+     * Also handles the update status click and based on the status selected update the server with corresponding status.
+     */
     private fun showBottomSheetDialogFragment() {
         val view = layoutInflater.inflate(R.layout.updated_progress_layout, null)
         val dialog = BottomSheetDialog(activity!!)
@@ -188,7 +202,10 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
 
         dialog.show()
     }
-
+    /**
+     * Method for updating the grievance status which was selected bt the user.
+     * This will make a call to the server
+     */
     private fun updateStatus(desc: String) {
         viewModel.updateGrievance(
             context!!,
@@ -199,7 +216,10 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
         )
     }
 
-
+    /**
+     * Method for getting the formatted date
+     * [date] is a date which is required to be converted in the required format
+     */
     private fun getFormattedDate(date: String?): String {
         if (date.isNullOrEmpty()) return ""
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
@@ -220,7 +240,10 @@ class GrievanceDetailFragment(private val grievanceData: GrievanceData) :
     override fun onCallPermissionDenied() {
         Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
     }
-
+    /**
+     * Method for setting the listener for reload API
+     * [ReloadApiRequiredListener] is listener for checking if reload is required
+     */
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }

@@ -11,11 +11,20 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * View model for handling all the actions related with senior citizen details page
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class SeniorCitizenDetailsViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
     private val dateList: MutableList<DateItem> = ArrayList()
     private val dataList = MutableLiveData<List<DateItem>>()
-    private lateinit var grievanceList:LiveData<MutableList<SrCitizenGrievance>>
+    private lateinit var grievanceList: LiveData<MutableList<SrCitizenGrievance>>
+
+    /**
+     * Method for extracting the date from senior citizen data
+     * [data] is the data from which dates are extracted
+     */
     fun prepareData(data: MutableList<SrCitizenGrievance>?) {
         dateList.clear()
         if (data != null) {
@@ -31,6 +40,10 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         }
     }
 
+    /**
+     * Method for getting the formatted month
+     * [date] is a date which is required to be converted in the required format
+     */
     private fun getMonthFromDate(date: String?): String {
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val output = DateTimeFormatter.ofPattern("MMM")
@@ -38,35 +51,38 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
         return output.format(fa)
     }
 
+    /**
+     * Method for getting the formatted day
+     * [date] is a date which is required to be converted in the required format
+     */
     private fun getDayFromDate(date: String?): String {
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val output = DateTimeFormatter.ofPattern("dd")
         val fa = input.parse(date)
         return output.format(fa)
     }
-    fun getGrievanceList():LiveData<MutableList<SrCitizenGrievance>> = grievanceList
+
+    /**
+     * Method for observing the network state
+     */
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
-    //    fun getSeniorCitizenDetails(context: Context) {
-//        if (checkNetworkAvailability(context)) {
-//            val params = JsonObject()
-//            params.addProperty("callid", 11)
-//            dataManager.getSeniorCitizenDetails(params).doOnSubscribe {
-//                loaderObservable.value = NetworkRequestState.LoadingData
-//            }.doOnSuccess { loaderObservable.value = NetworkRequestState.SuccessResponse(it) }
-//                .doOnError {
-//                    loaderObservable.value =
-//                        NetworkRequestState.ErrorResponse(ApiConstants.STATUS_EXCEPTION, it)
-//                }.subscribe().autoDispose(disposables)
-//        }
-//    }
+    /**
+     * Method for getting senior citizen data from the database
+     */
     fun getUniqueGrievanceList(id: Int): LiveData<MutableList<SrCitizenGrievance>> =
         dataManager.getAllUniqueGrievances(id)
 
+    /**
+     * Method for getting the date details
+     */
     fun getDataList(): MutableLiveData<List<DateItem>> {
         return dataList
     }
 
+    /**
+     * Method for setting the current date
+     */
     fun setCurrentDate() {
         dateList.clear()
         val date = Calendar.getInstance().time
