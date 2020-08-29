@@ -14,7 +14,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
-import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -61,13 +60,13 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         return grievances
     }
 
-    private fun manageCallsData(data: CallDetails) {
+    /*private fun manageCallsData(data: CallDetails) {
         dataManager.clearPreviousData()
         dataManager.insertCallData(data.callsList)
 
         val grievances: List<SrCitizenGrievance> = prepareGrievances(data.callsList)
         dataManager.insertGrievances(grievances)
-    }
+    }*/
 
     private fun manageAdminData(data: AdminCallDetails) {
 
@@ -113,13 +112,13 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
                     if (it.status == "0") {
                         viewModelScope.launch {
                             io {
-                                if (dataManager.getRole() == ROLE_VOLUNTEER) {
+                                /*if (dataManager.getRole() == ROLE_VOLUNTEER) {
                                     val data = it.getData()
                                     manageCallsData(data)
-                                } else {
-                                    val data = it.getAdminData()
-                                    manageAdminData(data)
-                                }
+                                } else {*/
+                                val data = it.getAdminData()
+                                manageAdminData(data)
+                                //}
                             }
                             updateNetworkState(
                                 NetworkRequestState.SuccessResponse(

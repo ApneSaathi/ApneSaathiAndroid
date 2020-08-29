@@ -273,13 +273,6 @@ class SyncDataService : JobService() {
                                 val data = it.getAdminData()
                                 manageAdminData(data)
                             }
-                            /*val data = it.getData()
-                            dataManager.clearPreviousData()
-                            dataManager.insertCallData(data.callsList)
-
-                            val grievances: List<SrCitizenGrievance> =
-                                prepareGrievances(data.callsList)
-                            dataManager.insertGrievances(grievances)*/
                             println("$TAG getFetchData -- Fetched data successfully")
                         }
                     }
