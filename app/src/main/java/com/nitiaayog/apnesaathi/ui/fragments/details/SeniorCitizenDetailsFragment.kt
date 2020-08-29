@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.SeniorCitizenDateAdapter
@@ -27,13 +26,19 @@ import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.android.synthetic.main.fragment_senior_citizen_details.*
 import org.threeten.bp.format.DateTimeFormatter
 
+/**
+ *  Fragment for showing the detailed view of senior citizen details. Which includes date wise filtering and a function to call them!.
+ * [DateItem] is used for filtering the grievances based on date.
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [SeniorCitizenDetailsViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ */
 class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>(),
     OnItemClickListener<DateItem> {
 
     private var isFromHomeFragment: Boolean = false
     private var adapter: SeniorCitizenDateAdapter = SeniorCitizenDateAdapter()
     var callData: CallData? = null
-    var grievancesList: MutableList<SrCitizenGrievance> = mutableListOf()
+    private var grievancesList: MutableList<SrCitizenGrievance> = mutableListOf()
     override fun provideViewModel(): SeniorCitizenDetailsViewModel =
         getViewModel {
             SeniorCitizenDetailsViewModel.getInstance(dataManager)
@@ -53,13 +58,16 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         initClicks()
     }
 
+    /**
+     * Method for fetching the grievance data from the database
+     */
     private fun getGrievanceData() {
         if (isFromHomeFragment || dataManager.getRole() == ROLE_VOLUNTEER) {
             callData?.callId?.let {
                 viewModel.getUniqueGrievanceList(it).removeObservers(viewLifecycleOwner)
             }
             callData?.callId?.let { it ->
-                viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, Observer {
+                viewModel.getUniqueGrievanceList(it).observe(viewLifecycleOwner, {
                     grievancesList = it
                     bindData()
                 })
@@ -70,6 +78,9 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
     }
 
+    /**
+     * Method for binding the data that was fetched from the database
+     */
     private fun bindData() {
         if (callData?.gender == "M") {
             img_user_icon.background =
@@ -92,7 +103,7 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
             txt_status.text = "--"
             txt_address.text = spanAddress
         }
-        viewModel.getDataList().observe(viewLifecycleOwner, Observer {
+        viewModel.getDataList().observe(viewLifecycleOwner, {
             adapter.setData(it)
             adapter.setOnItemClickListener(this)
             rcl_call_dates.layoutManager?.scrollToPosition(adapter.selectedPos)
@@ -113,14 +124,26 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     }
 
+    /**
+     * Method for making the view visible
+     * [view] is the view to be made visible
+     */
     private fun makeViewVisible(view: View) {
         view.visibility = View.VISIBLE
     }
 
+    /**
+     * Method for making the view invisible
+     * [view] is the view to be made invisible
+     */
     private fun makeViewInvisible(view: View) {
         view.visibility = View.GONE
     }
 
+    /**
+     * Method for binding the grievance data into the view
+     * [srCitizenGrievance] is data that was selected by the user by clicking the date
+     */
     private fun bindGrievanceData(srCitizenGrievance: SrCitizenGrievance) {
         var medicalHistory = ""
         if (srCitizenGrievance.hasDiabetic == "1") {
@@ -308,6 +331,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
 
     }
 
+    /**
+     * Method for getting the call status code
+     * [status] is the string variable for which we require the status codde
+     */
     private fun getCallStatusFromCode(status: String?): String {
         var callStatus = ""
         when (status) {
@@ -345,6 +372,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         return callStatus
     }
 
+    /**
+     * Method for getting the formatted date
+     * [date] is a date which is required to be converted in the required format
+     */
     private fun getFormattedDate(date: String): String {
         val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val output = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
@@ -352,6 +383,9 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         return output.format(fa)
     }
 
+    /**
+     * Method for making the grievance container invisible. This is required when there are no grievance to show.
+     */
     private fun makeGrievanceContainerInvisible() {
         if (isFromHomeFragment || dataManager.getRole() == ROLE_VOLUNTEER)
             txt_edit.visibility = View.VISIBLE
@@ -368,12 +402,18 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
     }
 
+    /**
+     * Method for making the grievance container visible. This is required when there are grievances to show.
+     */
     private fun makeGrievanceContainerVisible() {
         cl_uneditable_container.visibility = View.VISIBLE
         ll_status_container.visibility = View.GONE
         txt_edit.visibility = View.GONE
     }
 
+    /**
+     * Method for initializing the clicks in this page
+     */
     private fun initClicks() {
         txt_more_details.setOnClickListener {
             if (cg_more_details_group.isVisible) {
@@ -418,6 +458,9 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         }
     }
 
+    /**
+     * Method for initialing the recycler view
+     */
     private fun initRecyclerView() {
         val layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -443,6 +486,11 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
     override fun onCallPermissionDenied() =
         Toast.makeText(context, R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
+    /**
+     * Method for setting the selected senior citizen data
+     * [callData] is the actual senior citizen data
+     * [isFromHomeFragment] is a boolean for checking if the navigation happened from home fragment
+     */
     fun setSelectedUser(
         callData: CallData, isFromHomeFragment: Boolean = false
     ) {
@@ -450,6 +498,10 @@ class SeniorCitizenDetailsFragment : BaseFragment<SeniorCitizenDetailsViewModel>
         this.isFromHomeFragment = isFromHomeFragment
     }
 
+    /**
+     * Method for reloading the page
+     * [callData] is the data to be reloaded.
+     */
     fun reloadFragment(callData: CallData) {
         this.callData = callData
         getGrievanceData()
