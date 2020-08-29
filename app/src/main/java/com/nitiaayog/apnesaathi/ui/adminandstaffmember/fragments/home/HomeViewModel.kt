@@ -69,7 +69,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     }*/
 
     private fun manageAdminData(data: AdminCallDetails) {
-
         dataManager.clearDistricts()
         dataManager.clearPreviousData()
 
