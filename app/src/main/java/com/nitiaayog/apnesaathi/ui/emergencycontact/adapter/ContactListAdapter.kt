@@ -36,11 +36,11 @@ class ContactListAdapter(private val context: Context) :
 
             if (data.Name.isNotEmpty()) {
                 TxtName.visibility = VISIBLE
-                TxtName.text = "Name : " + data.Name
+                TxtName.text = context.getString(R.string.name) +" : " + data.Name
             } else {
                 TxtName.visibility = GONE
             }
-            TxtNumber.text = "Number : " + data.contactnumber
+            TxtNumber.text = context.getString(R.string.contact_number) +" : "+ data.contactnumber
 
             ic_callImage.setOnClickListener { itemClickListener.itemClick(data) }
 
