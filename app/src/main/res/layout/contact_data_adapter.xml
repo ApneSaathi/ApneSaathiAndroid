@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/TxtTitle"
+            android:id="@+id/TxtName"
             style="@style/TextAppearance.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,12 +25,13 @@
             android:layout_toLeftOf="@+id/ic_callImage"
             android:gravity="start"
             android:textSize="@dimen/text_13"
-            android:text="Pune Police Station" />
+            android:text="@string/police_contact" />
 
         <TextView
-            android:textSize="@dimen/text_12"
+            android:textSize="@dimen/text_13"
             android:layout_marginTop="@dimen/dimen_5"
-            android:layout_below="@+id/TxtTitle"
+            style="@style/TextAppearance.Title"
+            android:layout_below="@+id/TxtName"
             android:id="@+id/TxtNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
             android:layout_marginRight="@dimen/dimen_10"
             android:layout_toLeftOf="@+id/ic_callImage"
             android:gravity="start"
-            android:text="Pune Police Station" />
+            android:text="@string/nearpolicestation" />
 
         <ImageView
             android:layout_centerInParent="true"

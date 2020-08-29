@@ -70,8 +70,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 is NetworkRequestState.NetworkNotAvailable -> {
                     BaseUtility.showAlertMessage(
                         mContext!!,
-                        R.string.alert,
-                        R.string.check_internet
+                        R.string.alert, R.string.check_internet
                     )
                 }
                 is NetworkRequestState.LoadingData -> {

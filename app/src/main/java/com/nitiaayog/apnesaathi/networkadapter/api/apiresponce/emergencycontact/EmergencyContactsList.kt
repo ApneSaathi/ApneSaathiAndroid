@@ -40,4 +40,19 @@ class EmergencyContactsList {
     @Expose
     var customeContact: String? = null
 
+    @SerializedName("hospitalName")
+    @Expose
+    var hospitalName: String? = null
+
+    @SerializedName("policeRegion")
+    @Expose
+    var policeRegion: String? = null
+
+    @SerializedName("ctrlRoomRegion")
+    @Expose
+    var ctrlRoomRegion: String? = null
+
+    @SerializedName("contactName")
+    @Expose
+    var contactName: String? = null
 }

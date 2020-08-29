@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +21,7 @@ import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.emergency_contact.MainEmergency_Contact_Activity
+import com.nitiaayog.apnesaathi.ui.emergencycontact.MainEmergency_Contact_Activity
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.ui.fragments.home.BaseCallsTypeFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility

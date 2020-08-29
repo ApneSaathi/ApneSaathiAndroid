@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.emergency_contact.MainEmergency_Contact_Activity">
+    tools:context=".ui.emergencycontact.MainEmergency_Contact_Activity">
     <include layout="@layout/include_appbar_layout_with_toolbar" />
 
  <ScrollView

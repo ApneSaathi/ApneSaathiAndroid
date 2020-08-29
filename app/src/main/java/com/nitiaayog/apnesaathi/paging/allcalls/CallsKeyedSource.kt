@@ -20,6 +20,10 @@ class CallsKeyedSource(private val context: Context, private val viewModel: AllC
 
     private val dataManager: DataManager by lazy { viewModel.getDataManager() }
 
+    /**
+     * When first we will load data this method will be called i.e. only first time when object
+     * will be created
+     * */
     override fun loadInitial(
         params: LoadInitialParams<Int>, callback: LoadInitialCallback<CallData>
     ) {
@@ -31,6 +35,10 @@ class CallsKeyedSource(private val context: Context, private val viewModel: AllC
         }
     }
 
+    /**
+     * Except first time for loading more data on scroll to bottom this method will be called and
+     * if key will be null then it will stop load more
+     * */
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<CallData>) {
         println("$TAG loadAfter called")
         println("$TAG loadInitial --> Key = ${params.key}, RequestedSize = ${params.requestedLoadSize}")
@@ -44,6 +52,9 @@ class CallsKeyedSource(private val context: Context, private val viewModel: AllC
         }
     }
 
+    /**
+     * This method will provide item it that we will use as Key.
+     * */
     override fun getKey(item: CallData): Int {
         lastItemKey = item.callId!!
         println("$TAG last_key : $lastItemKey")
