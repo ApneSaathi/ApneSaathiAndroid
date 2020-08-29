@@ -523,15 +523,13 @@
     <string name="regular">Regular</string>
     <string name="wait_for_emergency_data">Please wait we are loading emergency contacts</string>
     <string name="phoneCallpermission_text">App has feature emergency contact For that we will require CALL permission basis..</string>
-
-
     <string name="validate_movbile_number">Provide valid mobile number and confirm mobile number is registered with us</string>
     <string name="emergency_contact_not_available">Emergency Contacts doesn\'t exist for this district</string>
     <string name="Hospital">Hospital</string>
     <string name="nearhospitals">Near By Government Hospital</string>
     <string name="police">Police</string>
     <string name="nearpolicestation">Near by police station</string>
-      <string name="apnesathiconsaltant">Apne Sathi Consaultant</string>
+    <string name="apnesathiconsaltant">Apne Sathi Consaultant</string>
     <string name="customcontact">Custom Contact</string>
     <string name="issue_details">Issue details</string>
     <string name="hospitalcontact">Hospital\'s Contact</string>
