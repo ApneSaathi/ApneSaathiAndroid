@@ -10,8 +10,14 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 import kotlinx.coroutines.launch
 
+
+/**
+ * [OtpActivityModel] for calling the login API
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class OtpActivityModel private constructor(dataManager: DataManager) : BaseViewModel() {
 
     val dataManager: DataManager = dataManager
@@ -26,12 +32,23 @@ class OtpActivityModel private constructor(dataManager: DataManager) : BaseViewM
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
+    /**
+     * Method getting the emergency contact from API.
+     * [userId] this is successfully logged userID and store in shared preference
+     * [phoneNumber] this is successfully logged phoneNumber and store in shared preference
+     * [role] this is successfully logged user role and store in shared preference
+     */
     fun setData(userId:String, phoneNumber:String, role: String) {
         dataManager.setUserId(userId)
         dataManager.setRole(role)
         dataManager.setPhoneNumber(phoneNumber)
     }
 
+    /**
+     * Method getting the emergency contact from API.
+     * [mContext] is the current activity context
+     * [phone] is the phone number for user using the login.
+     */
     fun callLogin(mContext: Context, phone: String) {
         if (checkNetworkAvailability(mContext, ApiProvider.ApiLoginUser)) {
             val params = JsonObject()

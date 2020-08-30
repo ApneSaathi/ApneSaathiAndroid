@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.updated_progress_layout.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
 /**
- *  Fragment for showing the detailed view of grievances!
+ * Fragment for showing the detailed view of grievances!
  * [grievanceData] is the real data which is fetched form the API and it's used to bind the values into view.
  * [BaseFragment] is the base fragment with functions that are common in all the fragments
  * [GrievanceDetailsViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database

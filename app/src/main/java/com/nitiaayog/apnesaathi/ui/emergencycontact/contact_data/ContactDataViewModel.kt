@@ -10,6 +10,10 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
+/**
+ * [ContactDataViewModel] for calling the emergency contact API
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class ContactDataViewModel private constructor(val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
@@ -21,6 +25,12 @@ class ContactDataViewModel private constructor(val dataManager: DataManager) : B
     }
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
+
+    /**
+     * Method getting the emergency contact from API.
+     * [mContext] is the current activity context
+     * [districtName] is the selected district name from drop-dawn.
+     */
     fun callEmergencyDataApi(mContext: Context, districtName: String) {
 
         if (checkNetworkAvailability(mContext, ApiProvider.ApiEmergencyContact)) {

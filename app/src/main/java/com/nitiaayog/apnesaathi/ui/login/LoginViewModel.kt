@@ -10,8 +10,14 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import com.nitiaayog.apnesaathi.ui.emergencycontact.contact_data.ContactDataViewModel
 import kotlinx.coroutines.launch
 
+
+/**
+ * [LoginViewModel] for calling the login API
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class LoginViewModel private constructor(dataManager: DataManager) : BaseViewModel() {
 
     val dataManager: DataManager = dataManager
@@ -26,6 +32,11 @@ class LoginViewModel private constructor(dataManager: DataManager) : BaseViewMod
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
+    /**
+     * Method getting the emergency contact from API.
+     * [mContext] is the current activity context
+     * [phone] is the phone number for user using the login.
+     */
     fun callLogin(mContext: Context, phone: String) {
 
         if (checkNetworkAvailability(mContext, ApiProvider.ApiLoginUser)) {

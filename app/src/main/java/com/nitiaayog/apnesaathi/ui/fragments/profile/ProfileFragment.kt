@@ -37,6 +37,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
+import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailsViewModel
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -54,6 +55,12 @@ import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 
+/**
+ * Fragment for showing the detailed view of user profile!
+  * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [ProfileFragmentViewModel] is the view model for performing fetching user profile details data from API
+ * [ProfileFragment] will handel the show user profile details and edit user profile details.
+ */
 class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     private val TAKE_GALLARY_PHOTO_REQUEST_CODE: Int = 1101
@@ -77,12 +84,19 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         bindview(view)
         return view
     }
-
+    /**
+     * Method for validating the email address.
+     */
     fun String.isEmailValid(): Boolean {
         return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
             .matches()
     }
-
+    /**
+     * Method for binding the data
+     * [view] get all UI component.
+     * view.TxtMainSave onClick user will update the user data to server
+     * view.TxtMainCancel onClick to visible the show user details Layout and hide user editable layout
+     */
     private fun bindview(view: View) {
         view.EditImageView.isClickable = false
         view.EditImageView.setOnClickListener {
@@ -164,11 +178,18 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }.autoDispose(disposables)
 
     }
-
+    /**
+     * Method for hiding the edit option in toolbar.
+     * [linearProfileDetails] RootLayout of show user profile details.
+     */
     private fun callMenuBarHide(linearProfileDetails: Boolean) {
         menuBar!!.findItem(R.id.editprofile).isVisible = linearProfileDetails
     }
 
+
+    /**
+     * Method for handling the runtime permission result.
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -185,6 +206,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }
     }
 
+
+    /**
+     * Method for showing the pop-up after runtime permission deny
+     */
     private fun ProfileshowPermissionTextPopup(@StringRes message: Int) {
         val dialog = AlertDialog.Builder(activity, R.style.Theme_AlertDialog)
             .setTitle(R.string.permission_detail).apply {
@@ -205,6 +230,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
             .setTextColor(ContextCompat.getColor(context!!, R.color.color_orange))
     }
 
+
+    /**
+     * Method for prepare the camera open of system
+     */
     @SuppressLint("WrongConstant")
     fun capturePhoto() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -224,7 +253,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }
     }
 
-
+    /**
+     * Method for open a system camera for taking a photo.
+     */
     private fun openCamera() {
         try {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -235,12 +266,19 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }
     }
 
+    /**
+     * Method for open a system gallery for taking a photo.
+     */
     fun fromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, TAKE_GALLARY_PHOTO_REQUEST_CODE)
     }
 
+    /**
+     * This method is hiding now, not required this functionality.
+     * Method for getting a result of capture image from camera and image from gallery.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             if (resultCode == Activity.RESULT_OK && requestCode == TAKE_GALLARY_PHOTO_REQUEST_CODE) {
@@ -257,12 +295,20 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }
     }
 
+    /**
+     * This method is hiding now, not required this functionality.
+     * Method for creating a Bitmap from string.
+     */
     private fun createABitmap(base64String: String) {
         val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
         EditImageView.setImageBitmap(decodedImage)
     }
 
+    /**
+     * This method is hiding now, not required this functionality.
+     * Method for creating a 64Image from Bitmap.
+     */
     private fun imageto64String(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
@@ -272,6 +318,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     }
 
 
+    /**
+     * This method is hiding now, not required this functionality.
+     * Method for get profile image from camera and gallery.
+     */
     private fun showGetImageDialog() {
         dialog = Dialog(context!!)
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -328,6 +378,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
 
     }
 
+    /**
+     * Method for request to the API of volunteer profile details
+     */
     private fun callvolunteerData() {
         try {
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
@@ -339,6 +392,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }
     }
 
+
+    /**
+     * Method for updating the UI from shared preferences data
+     */
     private fun updateEditField() {
         EditFirstName.setText(dataManager.getFirstName().toString())
         EditLastName.setText(dataManager.getLastName())
@@ -365,17 +422,22 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         setHasOptionsMenu(true)
     }
 
-    override
-    fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+    /**
+     * Method for onCreateOptionsMenu
+     */
+    override  fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menuBar = menu
         inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
 
     }
 
-
-    override
-    fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /**
+     * Method for for click on onCreateOptionsMenu
+     * after clicking on editprofile option menu will hide the user profile details layout and visible to the user details edit layout,
+     */
+    override  fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.editprofile -> {
                 LinearProfileDetails.isVisible = false
@@ -405,17 +467,28 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     override fun onCallPermissionDenied() {
     }
 
+    /**
+     * Method for prepare user logout
+     * clear the all shared preferences data
+     */
     private fun prepareToLogout() {
         viewModel.clearData()
         proceedToLogout()
     }
-
+    /**
+     * Method for user is logout properly
+     * And call login Activity
+     */
     private fun proceedToLogout() {
         val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)
         requireActivity().finishAffinity()
     }
 
+    /**
+     * Method for fetching the data from API.
+     * This method also handles all the network issues.
+     */
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(viewLifecycleOwner)
         viewModel.getDataObserver().observe(viewLifecycleOwner, Observer {
@@ -483,8 +556,14 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         })
     }
 
-    private fun getdataFromApi(it: NetworkRequestState.SuccessResponse<*>) {
-        val volunteerDataResponse = it.data
+    /**
+     * Method for get data from volunteer profile details API
+     * [apiresponse] is the data of volunteer profile details
+     * save data in shared preference
+     * also set default image for female user or male user
+     */
+    private fun getdataFromApi(apiresponse: NetworkRequestState.SuccessResponse<*>) {
+        val volunteerDataResponse = apiresponse.data
 
         if (volunteerDataResponse is VolunteerDataResponse) {
             if (dataManager.getRole() == ROLE_VOLUNTEER) {

@@ -6,7 +6,10 @@ import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getTargetIntent
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard.DashboardActivity
+import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
+import com.nitiaayog.apnesaathi.ui.emergencycontact.contact_data.ContactDataActivity
+import com.nitiaayog.apnesaathi.ui.emergencycontact.contact_data.ContactDataViewModel
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
 import com.nitiaayog.apnesaathi.utility.ROLE_DISTRICT_ADMIN
@@ -18,6 +21,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
+
+/**
+ * [SplashActivity] starting activity of Application
+ */
 class SplashActivity : AppCompatActivity() {
 
     private var disposable: Disposable? = null
@@ -37,7 +44,9 @@ class SplashActivity : AppCompatActivity() {
         }
         super.onDestroy()
     }
-
+    /**
+     * Method for navigating to next activity on condition bases.
+     */
     private fun navigateToNextActivity() {
         val dataManager = ApneSaathiApplication.getDataClient()
         val targetIntent = getTargetIntent(
