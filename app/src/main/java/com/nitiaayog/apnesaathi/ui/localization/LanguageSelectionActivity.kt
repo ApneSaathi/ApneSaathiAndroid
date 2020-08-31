@@ -15,12 +15,11 @@ import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import kotlinx.android.synthetic.main.activity_launguage_selection.*
 
 /**
- * [LanguageSelectionActivity] Activity for select multiple language 
+ * [LanguageSelectionActivity] Activity for select multiple language
  * [BaseActivity] is the base activity with functions that are common in all the Activity
  */
 class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
     lateinit var context: Context
-
 
     /**
      *  Method for handing the click actions.
