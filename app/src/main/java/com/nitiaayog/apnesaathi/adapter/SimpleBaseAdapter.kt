@@ -10,6 +10,11 @@ import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import kotlinx.android.synthetic.main.list_item_multi_auto_complete_recyclerview.view.*
 
+/**
+ *  Adapter for showing the details in the feed back form!
+ * [RecyclerView.Adapter] is the default adapter from android library
+ * [SimpleBaseAdapter.SimpleViewHolder] is the view holder for holding the views that are available in this page
+ */
 class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolder>() {
 
     private val dataList: MutableList<String> = mutableListOf()
@@ -26,15 +31,26 @@ class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolde
     override fun onBindViewHolder(holder: SimpleViewHolder, position: Int) =
         holder.bindData(dataList[position])
 
+    /**
+     * Method for setting the item click listener.
+     * [OnItemClickListener] is the call back event for listening to the item clicks
+     */
     fun setOnItemClickListener(onIteClickListener: OnItemClickListener<String>) {
         this.onIteClickListener = onIteClickListener
     }
 
+    /**
+     * Method for resetting the adapter values
+     */
     fun resetAdapter() {
         dataList.clear()
         notifyDataSetChanged()
     }
 
+    /**
+     * Method for adding a new item
+     * [name] is the new item to be added
+     */
     fun addItem(name: String) {
         val selectedItems = dataList.filter { it == name }
         if (selectedItems.isEmpty()) {
@@ -43,6 +59,10 @@ class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolde
         }
     }
 
+    /**
+     * Method for removing an item
+     * [name] is the item to be removed
+     */
     fun removeItem(name: String) {
         val selectedItems = dataList.filter { it == name }
         if (selectedItems.isNotEmpty()) {
@@ -52,11 +72,20 @@ class SimpleBaseAdapter : RecyclerView.Adapter<SimpleBaseAdapter.SimpleViewHolde
         }
     }
 
+    /**
+     * View Holder for holding the views associated with this page.
+     * [itemView] is the parent item view which holds the individual views
+     * [RecyclerView.ViewHolder] is the default android class
+     */
     inner class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val tvItemName: TextView = itemView.tvItemName
         private val ivClose: ImageView = itemView.ivClose
 
+        /**
+         * Method for binding the data
+         * [name] is the data which will be providing the values for binding the fields
+         */
         fun bindData(name: String) {
             tvItemName.text = name
             tvItemName.setOnClickListener {

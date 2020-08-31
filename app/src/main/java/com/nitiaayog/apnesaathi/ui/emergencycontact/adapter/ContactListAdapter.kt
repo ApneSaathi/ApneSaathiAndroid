@@ -13,14 +13,24 @@ import com.nitiaayog.apnesaathi.R
 import kotlinx.android.synthetic.main.contact_data_adapter.view.*
 import java.util.*
 
+/**
+ * [ContactListAdapter] for set the emergency contact data to adapter.
+ * [context] is the current activity context
+ */
 class ContactListAdapter(private val context: Context) :
     RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     private lateinit var itemClickListener: ItemClickListener
 
+    /**
+     * [ItemClickListener] to help for data pass to adapter to activity
+     */
     interface ItemClickListener {
         fun itemClick(data: ContactRealData)
     }
 
+    /**
+     * [ItemClickListener] get selected item data from recyclerview and pass to the parent activity .
+     */
     fun setOnItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListener = itemClickListener
     }
@@ -32,7 +42,11 @@ class ContactListAdapter(private val context: Context) :
         var TxtNumber: TextView = itemView.TxtNumber
         var ic_callImage: ImageView = itemView.ic_callImage
 
-        fun bindContactData(data: ContactRealData) {
+        /**
+         * Method for display the data at the specified position.
+         * [data] data get from server.
+         */
+          fun bindContactData(data: ContactRealData) {
 
             if (data.Name.isNotEmpty()) {
                 TxtName.visibility = VISIBLE
@@ -61,6 +75,10 @@ class ContactListAdapter(private val context: Context) :
         holder.bindContactData(data[position])
     }
 
+    /**
+     * method for update the data list.
+     * [contactList] get data from api
+     */
     fun setData(contactList: ArrayList<ContactRealData>) {
         data = contactList
     }
