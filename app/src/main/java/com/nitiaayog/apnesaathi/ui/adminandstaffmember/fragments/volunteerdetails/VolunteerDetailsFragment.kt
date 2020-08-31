@@ -28,7 +28,6 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
     companion object {
         fun getInstance(volunteer: Volunteer): Fragment {
             return VolunteerDetailsFragment().apply {
-                //setTargetFragment(fragment, VolunteersFragment.VolunteerDetailsCode)
                 arguments = Bundle().apply {
                     putInt(ID, volunteer.id!!)
                     putString(ApiConstants.FirstName, volunteer.firstName!!)
