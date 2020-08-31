@@ -4,9 +4,19 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import com.nitiaayog.apnesaathi.ui.base.BaseActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 
+/**
+ * [NetworkProvider] for handling the network connectivity
+ */
 object NetworkProvider {
 
+    /**
+     * Method for check the network is connected or not
+     * [context] is the current activity context.
+     */
     fun isConnected(context: Context): Boolean {
         var result = false
         val cManager =

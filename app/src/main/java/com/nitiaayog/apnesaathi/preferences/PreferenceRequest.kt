@@ -1,5 +1,10 @@
 package com.nitiaayog.apnesaathi.preferences
 
+
+
+/**
+ * [PreferenceRequest] interface for request to store data in shared preferences
+ */
 interface PreferenceRequest {
 
     fun isLogin(): Boolean

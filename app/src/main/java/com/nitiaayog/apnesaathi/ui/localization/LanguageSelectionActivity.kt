@@ -10,11 +10,24 @@ import com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard.DashboardActivi
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import kotlinx.android.synthetic.main.activity_launguage_selection.*
 
+/**
+ * [LanguageSelectionActivity] Activity for multiple login
+ * [BaseActivity] is the base activity with functions that are common in all the Activity
+ */
 class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
     lateinit var context: Context
+
+
+    /**
+     *  Method for handing the click actions.
+     *  [dataManager] for get data from shred preferences
+     *  get the selected language data from shared preference and checked particular checkbox
+     *  radiogroup.setOnCheckedChangeListener to select new language and store in shared preference using dataManager Object
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = applicationContext
@@ -36,6 +49,9 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
                 }
             }
         }
+
+
+
 
         radiogroup.setOnCheckedChangeListener { radioGroup, i ->
             when (radiogroup.checkedRadioButtonId) {

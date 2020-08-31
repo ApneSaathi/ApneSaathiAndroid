@@ -8,11 +8,18 @@ import android.util.Patterns
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import com.nitiaayog.apnesaathi.R
+import com.nitiaayog.apnesaathi.ui.base.BaseActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 import org.threeten.bp.format.DateTimeFormatter
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * [BaseUtility] is the base class with functions that are common in all the Activity or fragment
+ * [LoginViewModel] is the view model for performing fetching data from API.
+ */
 object BaseUtility {
 
     private val TAG: String = "TAG -- ${BaseUtility::class.java.simpleName} -->"
@@ -23,6 +30,10 @@ object BaseUtility {
     private const val ALLOWED_NUMBERS = "0123456789"
     private const val ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm"
 
+
+    /**
+     * Method for validating the email-id field
+     */
     fun validateEmailFormat(emailId: String) = Patterns.EMAIL_ADDRESS.matcher(emailId).matches()
 
     fun validatePhoneNumber(phoneNumber: String) = Patterns.PHONE.matcher(phoneNumber).matches()
@@ -32,6 +43,10 @@ object BaseUtility {
             this.data = Uri.parse(url)
         })
 
+    /**
+     * Method for provide a date formate
+     * [date] date string
+     */
     fun getFormattedDate(date: String): String {
         if (date.isEmpty()) return ""
         val input = DateTimeFormatter.ofPattern(FORMAT_SERVER_DATE_TIME)
@@ -40,6 +55,11 @@ object BaseUtility {
         return output.format(fa)
     }
 
+    /**
+     * Method for provide a date format
+     * [date] date string
+     * [inputFormat] date format
+     */
     fun dateTimeFormatConversion(date: String, inputFormat: String): Date {
         try {
             val inputFormatter: DateFormat = SimpleDateFormat(inputFormat, Locale.ENGLISH)
@@ -73,6 +93,9 @@ object BaseUtility {
         return ""
     }
 
+    /**
+     * Method for provide randomNumber
+     */
     fun getRandomNumber(numberLength: Int): String {
         val random = Random()
         val sb = StringBuilder(numberLength)
@@ -102,6 +125,12 @@ object BaseUtility {
         }
     }*/
 
+    /**
+     * Method for showing the alertDialog
+     * [context] is the activity context
+     * [title] is the alertDialog title
+     * [message] is the alertDialog message
+     */
     fun showAlertMessage(
         context: Context, @StringRes title: Int, @StringRes message: Int,
         @StringRes positiveTitle: Int = R.string.okay
@@ -109,6 +138,12 @@ object BaseUtility {
         .setMessage(message).setPositiveButton(positiveTitle) { dialog, _ -> dialog.dismiss() }
         .show()
 
+    /**
+     * Method for showing the alertDialog with cancelable false
+     * [context] is the activity context
+     * [title] is the alertDialog title
+     * [message] is the alertDialog message
+     */
     fun showAlertMessage(
         context: Context, @StringRes title: Int, @StringRes message: Int,
         @StringRes positiveTitle: Int = R.string.okay,
@@ -129,6 +164,12 @@ object BaseUtility {
     ) = AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog).setTitle(title)
         .setMessage(message).setPositiveButton(positiveTitle, onPositiveBtnClick).show()
 
+    /**
+     * Method for showing the alertDialog with positive or negative button
+     * [context] is the activity context
+     * [title] is the alertDialog title
+     * [message] is the alertDialog message
+     */
     fun showAlertMessage(
         context: Context, @StringRes title: Int, @StringRes message: Int,
         @StringRes positiveTitle: Int = R.string.yes, @StringRes negativeTitle: Int = R.string.no
@@ -138,6 +179,13 @@ object BaseUtility {
         .setNegativeButton(negativeTitle) { dialog, _ -> dialog.dismiss() }
         .show()
 
+
+    /**
+     * Method for showing the alertDialog with positive or negative button with cancelable false
+     * [context] is the activity context
+     * [title] is the alertDialog title
+     * [message] is the alertDialog message
+     */
     fun showAlertMessage(
         context: Context, @StringRes title: Int, @StringRes message: Int,
         @StringRes positiveTitle: Int = R.string.yes, @StringRes negativeTitle: Int = R.string.no,
