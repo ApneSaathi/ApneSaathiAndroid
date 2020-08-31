@@ -26,6 +26,12 @@ private val diffCallback: DiffUtil.ItemCallback<Volunteer> =
 
 private val config = AsyncDifferConfig.Builder<Volunteer>(diffCallback).build()
 
+/**
+ *  Adapter for showing the details of volunteers
+ * [RecyclerView.Adapter] is the default adapter from android library
+ * [VolunteersAdapter.VolunteerHolder] is the view holder for holding the views that are available in this page
+ * [View.OnClickListener] is the default class from android library for handling the item clicks
+ */
 class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.VolunteerHolder>(config) {
 
     companion object {
@@ -46,10 +52,19 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
         holder.bindData(getItem(position))
     }
 
+    /**
+     * Method for setting the item click listener.
+     * [OnItemClickListener] is the call back event for listening to the item clicks
+     */
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<Volunteer>) {
         this.itemClickListener = itemClickListener
     }
 
+    /**
+     * View Holder for holding the views associated with this page.
+     * [itemView] is the parent item view which holds the individual views
+     * [RecyclerView.ViewHolder] is the default android class
+     */
     inner class VolunteerHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
@@ -87,12 +102,19 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
             }
         }
 
+        /**
+         * Method for clearing the text fields
+         */
         private fun clear() {
             tvName.text = ""
             tvAddress.text = ""
             tvDate.text = ""
         }
 
+        /**
+         * Method for binding the data
+         * [volunteer] is the data which will be providing the values for binding the fields
+         */
         fun bindData(volunteer: Volunteer?) {
             if (volunteer == null) clear() else {
                 tvName.text = volunteer.firstName!!.plus(" ").plus(volunteer.lastName)
