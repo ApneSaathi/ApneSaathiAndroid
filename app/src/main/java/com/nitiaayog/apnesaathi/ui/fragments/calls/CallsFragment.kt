@@ -5,6 +5,7 @@ import android.view.View
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
+import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
@@ -17,6 +18,11 @@ import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_calls.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
+/**
+ * Fragment for showing the call status
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [HomeViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ */
 class CallsFragment : BaseFragment<HomeViewModel>() {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener

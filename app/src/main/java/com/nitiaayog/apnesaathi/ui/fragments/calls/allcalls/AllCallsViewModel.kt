@@ -1,7 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.fragments.calls.allcalls
 
 import android.content.Context
-import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -10,7 +9,6 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.google.gson.JsonObject
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
-import com.nitiaayog.apnesaathi.base.io
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.CallData
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
@@ -21,6 +19,10 @@ import com.nitiaayog.apnesaathi.paging.allcalls.CallsDataSourceFactory
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * View model for handling all the actions related with all calls fragment page
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class AllCallsViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {

@@ -20,6 +20,10 @@ import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
+/**
+ * View model for handling all the actions related home page
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
@@ -97,6 +101,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         dataManager.setLastSelectedId(callId)
     }
 
+    /**
+     * Method for fetching the call details from the API
+     */
     fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
@@ -134,6 +141,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         }
     }
 
+    /**
+     * Method for fetching the grievance list from the API
+     */
     fun getGrievanceTrackingList(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()

@@ -10,6 +10,10 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
+/**
+ * View model for handling all the actions related with senior citizen registration page
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
@@ -63,6 +67,9 @@ class RegisterSeniorCitizenViewModel(private val dataManager: DataManager) : Bas
         this.address = address
     }
 
+    /**
+     * Method for registering a new citizen. This method will make an API call to the server
+     */
     fun registerNewSeniorCitizen(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiRegisterSeniorCitizen)) {
             val params = JsonObject()

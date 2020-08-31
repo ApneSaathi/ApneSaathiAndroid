@@ -11,6 +11,10 @@ import com.nitiaayog.apnesaathi.ApneSaathiApplication
 import com.nitiaayog.apnesaathi.R
 import kotlinx.android.synthetic.main.progress_dialog_layout.*
 
+/**
+ * Class for showing progress dialogues throughout the app.
+ * [Dialog] is the default class from android library.
+ */
 class ProgressDialog private constructor(context: Context) : Dialog(context) {
 
     interface DialogEventListener {

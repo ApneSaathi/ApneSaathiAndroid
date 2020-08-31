@@ -35,6 +35,12 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * Fragment for showing the all the details in home page
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [HomeViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ * [OnItemClickListener] is the listener for listening to the click events
+ */
 class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData> {
 
     private lateinit var reloadApiRequiredListener: ReloadApiRequiredListener
@@ -116,6 +122,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
     override fun onCallPermissionDenied() =
         Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
 
+    /**
+     * Method for initializing the recycler view
+     */
     private fun initRecyclerView() {
         val rvPendingList = (rvPendingList as RecyclerView)
         rvPendingList.apply {
@@ -145,7 +154,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         grievancesAdapter.setOnItemClickListener(this)
     }
 
-
+    /**
+     * Method for managing the pending calls text values
+     */
     private fun managePendingCalls(dataList: MutableList<CallData>) {
         val size: Int = dataList.size
         tvPendingCalls.text = getString(R.string.pending_calls_count, size.toString())
@@ -166,6 +177,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         } else View.GONE
     }
 
+    /**
+     * Method for updating the call summary in home page
+     */
     private fun manageProgressBarData() {
         val pendingCalls = viewModel.getPendingCalls().value?.size ?: 0
         val followUpCalls = viewModel.getFollowupCalls().value?.size ?: 0
@@ -183,6 +197,10 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         tv_pending.text = getString(R.string.pending_g_count).plus(pendingCalls)
     }
 
+    /**
+     * Method for managing the grievance values
+     * [dataList] is the data which will be used for binding the values
+     */
     private fun manageGrievances(dataList: MutableList<GrievanceData>) {
         val size = dataList.size
         tvGrievances.text = getString(R.string.issues_count, size.toString())
@@ -198,11 +216,17 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         } else View.GONE
     }
 
+    /**
+     * Method for managing the progress bar visibility
+     */
     private fun manageProgressBar(visibility: Int) {
         progressBarCalls?.visibility = visibility
         progressBarGrievances?.visibility = visibility
     }
 
+    /**
+     * Method for observing the data stream from the database
+     */
     private fun getObservableDataStream() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner) {
@@ -260,6 +284,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Grievanc
         }
     }
 
+    /**
+     * Method for reloading the API's
+     */
     fun reloadApi() {
         try {
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)

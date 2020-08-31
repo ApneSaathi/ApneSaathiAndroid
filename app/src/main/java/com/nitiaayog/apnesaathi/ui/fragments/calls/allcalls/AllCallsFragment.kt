@@ -22,6 +22,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.include_recyclerview.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * Fragment for showing all the call status's
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [AllCallsViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ */
 class AllCallsFragment : BaseFragment<AllCallsViewModel>(), OnItemClickListener<CallData> {
 
     companion object {

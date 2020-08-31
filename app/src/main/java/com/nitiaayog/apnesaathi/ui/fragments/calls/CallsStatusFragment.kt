@@ -23,6 +23,12 @@ import com.nitiaayog.apnesaathi.ui.fragments.home.HomeViewModel
 import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
 import kotlinx.android.synthetic.main.fragment_calls_status.*
 
+/**
+ * Fragment for showing the call status
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [OnItemClickListener] is the listener for detecting item clicks
+ * [HomeViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ */
 class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<CallData> {
 
     private var lastCallPosition: Int = -1
@@ -154,6 +160,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         )
     }
 
+    /**
+     * Method for initialising the recycler view
+     */
     private fun initRecyclerView() {
         val rvPendingList = (rvPendingList as RecyclerView)
         rvPendingList.isNestedScrollingEnabled = false
@@ -192,6 +201,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         rvAttendedList.adapter = completedAdapter
     }
 
+    /**
+     * Method for managing the text of different call status's
+     */
     private fun manageCalls(dataList: MutableList<CallData>, @StringRes callsCountString: Int) =
         when (callsCountString) {
             R.string.pending_calls_count ->
@@ -206,6 +218,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
             }
         }
 
+    /**
+     * Method for managing views of different call status's
+     */
     private fun manageViews(
         @StringRes callsCount: Int, textView: TextView, button: Button, size: Int
     ) {
@@ -232,6 +247,9 @@ class CallsStatusFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<C
         } else View.GONE
     }
 
+    /**
+     * Method for getting and observing the data stream
+     */
     private fun getObservableStreams() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner, Observer {
