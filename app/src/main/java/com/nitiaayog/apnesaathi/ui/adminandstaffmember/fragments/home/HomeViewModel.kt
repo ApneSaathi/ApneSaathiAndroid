@@ -8,7 +8,6 @@ import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.model.AdminCallDetails
 import com.nitiaayog.apnesaathi.model.CallData
-import com.nitiaayog.apnesaathi.model.CallDetails
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
@@ -69,7 +68,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
     }*/
 
     private fun manageAdminData(data: AdminCallDetails) {
-
         dataManager.clearDistricts()
         dataManager.clearPreviousData()
 

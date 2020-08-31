@@ -38,8 +38,6 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
         private val TAG: String = "TAG -- ${VolunteersAdapter::class.java.simpleName} -->"
     }
 
-    //private val volunteers: MutableList<Volunteer> = mutableListOf()
-
     private lateinit var itemClickListener: OnItemClickListener<Volunteer>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VolunteerHolder {
@@ -53,11 +51,30 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
     }
 
     /**
+     * Method will find the Item from list if it exists the return it else will return null
+     * */
+    private fun getItemFromId(id: Int): Volunteer? {
+        return if (currentList != null) {
+            val data: List<Volunteer> = currentList!!.filter { it.id == id }
+            if (data.isNotEmpty()) data[0]
+            else null
+        } else null
+    }
+
+    /**
      * Method for setting the item click listener.
      * [OnItemClickListener] is the call back event for listening to the item clicks
      */
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<Volunteer>) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun updateVolunteer(id: Int, ratings: String) {
+        getItemFromId(id)?.let {
+            val position: Int = currentList!!.indexOf(it)
+            it.ratings = ratings
+            if (position >= 0) notifyItemChanged(position)
+        }
     }
 
     /**

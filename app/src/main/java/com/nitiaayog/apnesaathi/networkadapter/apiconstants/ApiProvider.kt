@@ -16,5 +16,5 @@ object ApiProvider {
     const val ApiUpdateGrievanceDetails = BuildConfig.ApiHost + BuildConfig.UpdateGrievanceDetails
     const val ApiUpdateProfile = BuildConfig.ApiHost + BuildConfig.UpdateProfile
     const val ApiRateVolunteer = BuildConfig.ApiHost + BuildConfig.RateVolunteer
-    const val ApiEmergencyContact = BuildConfig.ApiHost + BuildConfig.getEmergencyContactDetails
+    const val ApiEmergencyContact = BuildConfig.ApiHost + BuildConfig.GetEmergencyContactDetails
 }

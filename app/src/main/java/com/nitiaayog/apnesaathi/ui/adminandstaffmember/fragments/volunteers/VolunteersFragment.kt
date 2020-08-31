@@ -1,8 +1,10 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteers
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,9 +16,11 @@ import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
+import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails.VolunteerDetailsFragment
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
+import com.nitiaayog.apnesaathi.utility.ID
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,9 +32,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+/**
+ * This fragment will be visible to only Master Admin and Staff Members because this fragment will
+ * only display the list of volunteers assigned to them
+ * */
 class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
 
     companion object {
+        const val VolunteerDetailsCode: Int = 1959
         private val TAG: String = "TAG -- ${VolunteersFragment::class.java.simpleName} -->"
     }
 
@@ -54,6 +63,20 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
             .autoDispose(disposables)
 
         initViews()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if ((requestCode == VolunteerDetailsCode) && (resultCode == VolunteerDetailsCode) &&
+            (data != null)
+        ) {
+            val id: Int = data.getIntExtra(ID, 0)
+            val ratings: String? = data.getStringExtra(ApiConstants.Ratings)
+            if ((id > 0) && (ratings != null)) {
+                viewModel.updateVolunteerRating(ratings, id)
+                volunteersAdapter.updateVolunteer(id, ratings)
+            }
+        }
     }
 
     override fun provideViewModel(): VolunteersViewModel {
@@ -108,42 +131,12 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         }*/
     }
 
-    /*private fun initSearch() {
-        ivBack.throttleClick().subscribe { llSearch.visibility = View.GONE }
-            .autoDispose(disposables)
-
-        ivClose.throttleClick().subscribe {
-            *//*llSearch.visibility = if (llSearch.visibility == View.VISIBLE) {
-                etSearch.tag = "0" // Stop Searching
-                View.GONE
-            } else {
-                etSearch.tag = "1" // Start Searching
-                View.VISIBLE
-            }*//*
-            etSearch.tag = "0" // Stop Searching
-            llSearch.visibility = View.GONE
-            etSearch.text.clear()
-        }.autoDispose(disposables)
-    }*/
-
     private fun navigateToDetails(volunteer: Volunteer) {
-        /*val fragment = VolunteerDetailsFragment()
-        fragment.arguments = Bundle().apply {
-            putInt(ID, volunteer.id!!)
-            putString(ApiConstants.FirstName, volunteer.firstName!!)
-            putString(ApiConstants.LastName, volunteer.lastName!!)
-            putString(ApiConstants.PhoneNumber, volunteer.phoneNumber!!)
-            putString(ApiConstants.Gender, volunteer.gender!!)
-            putString(ApiConstants.AssessmentScore, volunteer.assessmentScore!!)
-            putString(
-                ApiConstants.Address, volunteer.address!!.plus(",").plus(volunteer.block).plus(",")
-                    .plus(volunteer.district).plus(",").plus(volunteer.state)
-            )
-            putString(ApiConstants.JoiningDate, volunteer.joiningDate!!)
-        }*/
+        val fragment: Fragment = VolunteerDetailsFragment.getInstance(volunteer)
+        fragment.setTargetFragment(this, VolunteerDetailsCode)
         addFragment(
-            R.id.fragmentAdminStaffVolunteerContainer,
-            VolunteerDetailsFragment.getInstance(volunteer), getString(R.string.volunteer_details)
+            R.id.fragmentAdminStaffVolunteerContainer, fragment,
+            getString(R.string.volunteer_details)
         )
     }
 

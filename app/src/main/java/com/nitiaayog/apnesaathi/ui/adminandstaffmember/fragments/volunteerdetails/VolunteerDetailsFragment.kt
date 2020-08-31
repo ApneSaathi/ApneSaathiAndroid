@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about.AboutVolunteerFragment
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.reviewrating.FragmentRatingReviews
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteers.VolunteersFragment
 import com.nitiaayog.apnesaathi.ui.fragments.details.SeniorCitizenDetailsFragment
 import com.nitiaayog.apnesaathi.utility.ID
 import com.nitiaayog.apnesaathi.utility.SR_CITIZEN_DETAIL_FRAGMENT
@@ -26,6 +28,7 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
     companion object {
         fun getInstance(volunteer: Volunteer): Fragment {
             return VolunteerDetailsFragment().apply {
+                //setTargetFragment(fragment, VolunteersFragment.VolunteerDetailsCode)
                 arguments = Bundle().apply {
                     putInt(ID, volunteer.id!!)
                     putString(ApiConstants.FirstName, volunteer.firstName!!)
@@ -39,10 +42,13 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
                             .plus(volunteer.state)
                     )
                     putString(ApiConstants.JoiningDate, volunteer.joiningDate!!)
+                    putString(ApiConstants.Ratings, volunteer.ratings!!)
                 }
             }
         }
     }
+
+    private lateinit var aboutFragment: AboutVolunteerFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -67,6 +73,17 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
                 1 -> tab.text = getString(R.string.reviews)
             }
         }.attach()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if ((requestCode == VolunteersFragment.VolunteerDetailsCode) && (resultCode == VolunteersFragment.VolunteerDetailsCode) &&
+            (data != null)
+        ) {
+            targetFragment?.onActivityResult(requestCode, resultCode, data)
+            if (::aboutFragment.isInitialized)
+                aboutFragment.updateRatings(data.getStringExtra(ApiConstants.Ratings)!!)
+        }
     }
 
     override fun onMoreButtonClick(callData: CallData) {
@@ -94,21 +111,24 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
                     data.getString(ApiConstants.AssessmentScore, "") else ""
                 joiningDate = if (data.containsKey(ApiConstants.JoiningDate))
                     data.getString(ApiConstants.JoiningDate, "") else ""
+                ratings = if (data.containsKey(ApiConstants.Ratings))
+                    data.getString(ApiConstants.Ratings, "") else ""
             }
         } else Volunteer()
     }
 
     private fun setUpViewPager() {
-        val adapter = FragmentViewPagerAdapter(requireActivity())
         val volunteer = getData()
-        val aboutFragment = AboutVolunteerFragment.getInstance(volunteer)
+        val adapter = FragmentViewPagerAdapter(requireActivity())
+
+        aboutFragment = AboutVolunteerFragment.getInstance(volunteer)
         aboutFragment.setOnMoreItemClickListener(this)
         adapter.addFragment(aboutFragment, getString(R.string.about))
-        adapter.addFragment(
-            FragmentRatingReviews.getInstance(
-                volunteer.id!!, volunteer.firstName!!, volunteer.lastName!!
-            ), getString(R.string.reviews)
-        )
+
+        val ratingsFragment = FragmentRatingReviews.getInstance(volunteer)
+        ratingsFragment.setTargetFragment(this, VolunteersFragment.VolunteerDetailsCode)
+        adapter.addFragment(ratingsFragment, getString(R.string.reviews))
+
         viewPager.adapter = adapter
     }
 }

@@ -1,5 +1,6 @@
 package com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.reviewrating
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -9,9 +10,11 @@ import com.nitiaayog.apnesaathi.base.ProgressDialog
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose
 import com.nitiaayog.apnesaathi.base.extensions.rx.throttleClick
+import com.nitiaayog.apnesaathi.model.Volunteer
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestState
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails.VolunteerDetailsViewModel
+import com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteers.VolunteersFragment
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.ID
@@ -27,13 +30,14 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
 
     companion object {
         private val TAG: String by lazy { "TAG -- ${FragmentRatingReviews::class.java.simpleName} -->" }
-        fun getInstance(volunteerId: Int, volunteerFirstName: String, volunteerLastName: String):
-                Fragment {
+        fun getInstance(volunteer: Volunteer): Fragment {
             return FragmentRatingReviews().apply {
+                //setTargetFragment(fragment, VolunteersFragment.VolunteerDetailsCode)
                 arguments = Bundle().apply {
-                    putInt(ID, volunteerId)
-                    putString(ApiConstants.FirstName, volunteerFirstName)
-                    putString(ApiConstants.LastName, volunteerLastName)
+                    putInt(ID, volunteer.id!!)
+                    putString(ApiConstants.FirstName, volunteer.firstName)
+                    putString(ApiConstants.LastName, volunteer.lastName)
+                    putString(ApiConstants.Ratings, volunteer.ratings)
                 }
             }
         }
@@ -62,6 +66,14 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
 
             firstName.plus(" ").plus(lastName)
         } else ""
+    }
+
+    private val ratings: String by lazy {
+        if (arguments != null) {
+            if (arguments!!.containsKey(ApiConstants.Ratings))
+                arguments!!.getString(ApiConstants.Ratings, "0.0")
+            else "0.0"
+        } else "0.0"
     }
 
     private val progressDialog: ProgressDialog.Builder by lazy {
@@ -94,11 +106,16 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
 
     }
 
+    /**
+     * Load initial values of volunteer ratings
+     **/
     private fun initViews() {
         tvRatingText.text = getString(R.string.rate_quality_of_service, volunteerName)
 
         rating.setOnRatingBarChangeListener { _, rating, _ -> updateRatings(rating) }
-        rating.rating = 2.5f
+        rating.rating = ratings.toFloat()
+
+        tvRatingCount.text = ratings
 
         btnRateVolunteer.text = getString(R.string.rate_volunteer, volunteerName)
         btnRateVolunteer.throttleClick().subscribe {
@@ -108,6 +125,9 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
         }.autoDispose(disposables)
     }
 
+    /**
+     * When star slider's values are updated we will show the ratings and status of it
+     **/
     private fun updateRatings(rating: Float) {
         //println("$TAG $rating")
         if (rating >= 4.0) tvRating.setText(R.string.excellent)
@@ -115,6 +135,8 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
         else if ((rating >= 2.0) && (rating <= 2.9)) tvRating.setText(R.string.good)
         else if ((rating >= 1.4) && (rating <= 1.9)) tvRating.setText(R.string.bad)
         else if (rating < 1.4) tvRating.setText(R.string.poor)
+
+        tvRatingCount.text = rating.toString()
     }
 
     private fun observeNetworkStream() {
@@ -122,6 +144,26 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
         viewModel.getNetworkStream().observe(viewLifecycleOwner) { manageNetworkState(it) }
     }
 
+    private fun updatePreviousFragment() {
+        try {
+            targetFragment?.let {
+                val intent: Intent = Intent().apply {
+                    putExtra(ID, volunteerId)
+                    putExtra(ApiConstants.Ratings, rating.rating.toString())
+                }
+                it.onActivityResult(
+                    VolunteersFragment.VolunteerDetailsCode,
+                    VolunteersFragment.VolunteerDetailsCode, intent
+                )
+            }
+        } catch (e: Exception) {
+            println("$TAG ${e.message}")
+        }
+    }
+
+    /**
+     * When network status is updating we can update Ui accordingly via this live data callbacks
+     **/
     private fun manageNetworkState(state: NetworkRequestState) {
         when (state) {
             is NetworkRequestState.NetworkNotAvailable ->
@@ -142,6 +184,7 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
                 )
             }
             is NetworkRequestState.SuccessResponse<*> -> {
+                updatePreviousFragment()
                 progressDialog.dismiss()
                 btnRateVolunteer.visibility = View.GONE
                 BaseUtility.showAlertMessage(

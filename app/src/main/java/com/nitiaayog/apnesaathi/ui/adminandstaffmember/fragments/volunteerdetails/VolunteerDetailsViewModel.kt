@@ -63,6 +63,9 @@ class VolunteerDetailsViewModel(
         addCallsTo(invalidCalls, invldCalls)
     }
 
+    /**
+     * Get assigned Sr. Citizens and call progress details as per the selected date
+     **/
     @WorkerThread
     private suspend fun getAssignedSrCitizens(date: String) {// date in format "yyyy-MM-dd"
         val params = JsonObject()
@@ -106,6 +109,9 @@ class VolunteerDetailsViewModel(
         }).autoDispose(disposables)
     }
 
+    /**
+     * Update the Ratings for the particular volunteer
+     **/
     @WorkerThread
     private fun rateVolunteer(rating: Float, volunteerName: String) {
         val params = JsonObject()

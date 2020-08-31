@@ -104,11 +104,15 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         Snackbar.make(constraintLayout, R.string.not_handle_action, Snackbar.LENGTH_LONG).show()
     }
 
+    /**
+     * Initialise the data
+     **/
     private fun setVolunteerData() {
         tvVolunteerName.text = volunteer!!.firstName.plus(" ").plus(volunteer!!.lastName)
         tvVolunteerPhoneNumber.text = volunteer!!.phoneNumber
         setAddress()
         setJoinDate()
+        setRatings(volunteer!!.ratings!!)
         civGender.setImageResource(
             if (volunteer!!.gender!!.toLowerCase(Locale.ENGLISH) == "m") R.drawable.ic_volunteer_male
             else R.drawable.ic_volunteer_female
@@ -122,6 +126,14 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
             .plus(volunteer!!.state)
         tvVolunteerAddress.text = getBoldItalicText(
             dataString, 0, address.length, 0, address.length
+        )
+    }
+
+    private fun setRatings(ratings: String) {
+        val myRatings = getString(R.string.ratings).plus(" : ")
+        val mRatings = myRatings.plus(ratings)
+        tvRatings.text = getBoldItalicText(
+            mRatings, 0, myRatings.length, 0, myRatings.length
         )
     }
 
@@ -143,6 +155,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         return spanText
     }
 
+    /**
+     * Initialise Senior Citizen List
+     **/
     private fun setupRecyclerView() {
         rvList.isNestedScrollingEnabled = false
         rvList.addItemDecoration(
@@ -178,6 +193,13 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         }
     }
 
+    /**
+     * Show date picker so that volunteer's last 2 months data can be visible to Master
+     * Admin/Staff Member datewise
+     *
+     * Minimum Date : 2 months back
+     * Maximum Date : Current Date
+     **/
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
         calendar.time = date
@@ -197,6 +219,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         picker.show()
     }
 
+    /**
+     * Update the progress of calls(Pending/Followup/Completed/Invalid calls)
+     * */
     private fun manageProgressBarData() {
         val pendingCalls = viewModel.getPendingCalls().size
         val followUpCalls = viewModel.getFollowupCalls().size
@@ -278,5 +303,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
     fun setOnMoreItemClickListener(moreButtonClickListener: MoreButtonClickedListener) {
         this.moreButtonClickListener = moreButtonClickListener
+    }
+
+    fun updateRatings(ratings: String) {
+        setRatings(ratings)
     }
 }

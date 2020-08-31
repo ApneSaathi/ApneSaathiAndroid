@@ -153,7 +153,7 @@
     <string name="gender">लिंग-विशेष</string>
     <string name="report_lack_of_essential_services">आवश्यक सेवाओं की कमी की रिपोर्ट करें</string>
     <string name="sr_citizen_report_lack_of_essintial_services">क्या वरिष्ठ नागरिक आवश्यक सेवाओंकी कमी की रिपोर्ट करता है ?</string>
-    <string name="need_emergency_escalation">क्या इमरजेंसी और एस्केलेशन की जरूरत है ?</string>
+    <string name="need_emergency_escalation">क्या आपातकालीन प्रक्रिया में तेजी की जरूरत है ?</string>
     <string name="any_sr_citizen_in_home">क्या आपके घर में कोई वरिष्ठ नागरिक है ?</string>
     <string name="new_sr_citizen_personal_details">नए वरिष्ठ नागरिक डिटेल्स</string>
     <string name="contact_number">संपर्क संख्या</string>
@@ -362,7 +362,7 @@
     <string name="lack_of_essential_services">आवश्यक सेवाओं का अभाव</string>
     <string name="issue_raised">मुद्दा उठाया</string>
     <string name="raised_on">बढ़ोतरी:</string>
-    <string name="emergency_escalation">आपातकालीन बढ़ाव</string>
+    <string name="emergency_escalation">आपातकालीन प्रक्रिया में तेजी</string>
 
     <string name="changelanguage">भाषा बदलो</string>
     <string name="logout">लॉग आउट</string>
@@ -414,7 +414,7 @@
     <string name="last_update_on">नवीनीकरण तिथि</string>
     <string name="resolved_count">हल(%s)</string>
     <string name="inprogress_count">चालू(%s)</string>
-    <string name="escalation">वृद्धि:</string>
+    <string name="escalation">प्रक्रिया में तेजी:</string>
     <string name="type_reason">प्रकार कारण…</string>
     <string name="update_the_progress_happen">प्रगति को अद्यतन करें</string>
 
@@ -504,5 +504,6 @@
     <string name="emergency">आपातकालीन</string>
     <string name="regular">नियमित</string>
 
+    <string name="ratings">रेटिंग</string>
 
 </resources>
