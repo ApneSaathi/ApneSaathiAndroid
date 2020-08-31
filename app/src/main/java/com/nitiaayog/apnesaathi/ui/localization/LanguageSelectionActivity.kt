@@ -15,7 +15,7 @@ import com.nitiaayog.apnesaathi.utility.LanguageUtils
 import kotlinx.android.synthetic.main.activity_launguage_selection.*
 
 /**
- * [LanguageSelectionActivity] Activity for select multiple language
+ * [LanguageSelectionActivity] Activity for choose language in complete app
  * [BaseActivity] is the base activity with functions that are common in all the Activity
  */
 class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
@@ -23,7 +23,6 @@ class LanguageSelectionActivity : BaseActivity<LanguageSelectionModel>() {
 
     /**
      *  Method for handing the click actions.
-     *  [dataManager] for get data from shred preferences
      *  get the selected language data from shared preference and checked particular checkbox
      *  radiogroup.setOnCheckedChangeListener to select new language and store in shared preference using dataManager Object
      */
