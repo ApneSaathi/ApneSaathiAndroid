@@ -37,7 +37,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
-import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailsViewModel
 import com.nitiaayog.apnesaathi.ui.localization.LanguageSelectionActivity
 import com.nitiaayog.apnesaathi.ui.login.LoginActivity
 import com.nitiaayog.apnesaathi.utility.BaseUtility
@@ -57,7 +56,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Fragment for showing the detailed view of user profile!
-  * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
  * [ProfileFragmentViewModel] is the view model for performing fetching user profile details data from API
  * [ProfileFragment] will handel the show user profile details and edit user profile details.
  */
@@ -84,6 +83,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         bindview(view)
         return view
     }
+
     /**
      * Method for validating the email address.
      */
@@ -91,6 +91,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
             .matches()
     }
+
     /**
      * Method for binding the data
      * [view] get all UI component.
@@ -178,6 +179,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         }.autoDispose(disposables)
 
     }
+
     /**
      * Method for hiding the edit option in toolbar.
      * [linearProfileDetails] RootLayout of show user profile details.
@@ -426,7 +428,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
     /**
      * Method for onCreateOptionsMenu
      */
-    override  fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menuBar = menu
         inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -437,7 +439,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
      * Method for for click on onCreateOptionsMenu
      * after clicking on editprofile option menu will hide the user profile details layout and visible to the user details edit layout,
      */
-    override  fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {
             R.id.editprofile -> {
                 LinearProfileDetails.isVisible = false
@@ -475,6 +477,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentViewModel>() {
         viewModel.clearData()
         proceedToLogout()
     }
+
     /**
      * Method for user is logout properly
      * And call login Activity

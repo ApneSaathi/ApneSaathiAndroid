@@ -22,6 +22,11 @@ import com.nitiaayog.apnesaathi.utility.BaseUtility
 import kotlinx.android.synthetic.main.include_register_new_sr_citizen.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
+/**
+ * Fragment for registering a new citizen
+ * [BaseFragment] is the base fragment with functions that are common in all the fragments
+ * [RegisterSeniorCitizenViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ */
 class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewModel>() {
 
     private var selectedGender: String = ""
@@ -104,6 +109,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
     }
 
+    /**
+     * Method for setting the adapter for showing the districts
+     */
     private fun setDistrictAdapter() {
         var districtsList = resources.getStringArray(R.array.districts_array)
         if (selectedStatePos != -1) {
@@ -132,6 +140,9 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }
     }
 
+    /**
+     * Method for handling the clicks
+     */
     private fun initClicks() {
 
         etContactNumber.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
@@ -199,9 +210,15 @@ class RegisterNewSeniorCitizenFragment : BaseFragment<RegisterSeniorCitizenViewM
         }.autoDispose(disposables)
     }
 
+    /**
+     * Method for changing the arrow in autocomplete text view
+     */
     private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =
         autoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
 
+    /**
+     * Method for validating the entered fields
+     */
     private fun validateFields(): Boolean {
         if (etName.text.isEmpty()) {
             tvNameError.visibility = View.VISIBLE
