@@ -26,12 +26,19 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.ui.adminandstaffmember.password.PasswordActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 import com.nitiaayog.apnesaathi.utility.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login_otpverify.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * [OtpActivity] Activity for validation the Login User OTP
+ * [BaseActivity] is the base activity with functions that are common in all the Activity
+ * [OtpActivityModel] is the view model for performing fetching data from API.
+ */
 class OtpActivity : BaseActivity<OtpActivityModel>() {
 
     /**
@@ -172,13 +179,11 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         TxtChangeNumber.throttleClick().subscribe { onBackPressed() }.autoDispose(disposables)
 
         callTimer()
-        /*if (phoneNumber.isNotEmpty()) {//!intent.getStringExtra("PhoneNo").isNullOrEmpty()
-            TxtMobileNumber.text = phoneNumber //intent.getStringExtra("PhoneNo")
-        } else {
-            TxtMobileNumber.text = "1234"
-        }*/
     }
 
+    /**
+     *  Method for set time OTP.
+     */
     private fun callTimer() {
         val timer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -194,9 +199,12 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         timer.start()
     }
 
+    /**
+     *  Method for handel the OTP Edit Text Next or Back Functionality
+     */
     private fun setOtpEditTextHandler() {
 
-        for (i in 0..3) { //Its designed for 6 digit OTP
+        for (i in 0..3) {
             otpEt.get(i)!!.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence,
@@ -242,6 +250,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         }
     }
 
+    /**
+     *  Method for Navigating the next activity.
+     */
     private fun callnextActivity() {
         val targetNavigation = when (role) {
             ROLE_STAFF_MEMBER, ROLE_DISTRICT_ADMIN, ROLE_MASTER_ADMIN -> {
@@ -278,6 +289,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
 
     override fun provideLayoutResource(): Int = R.layout.activity_login_otpverify
 
+    /**
+     *  Method for hiding the keypad.
+     */
     fun AppCompatActivity.hideKeyboard() {
         val view = this.currentFocus
         if (view != null) {
@@ -287,6 +301,9 @@ class OtpActivity : BaseActivity<OtpActivityModel>() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
+    /**
+     *  Method for fetching the login API Response.
+     */
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(this)
         viewModel.getDataObserver().observe(this, Observer {

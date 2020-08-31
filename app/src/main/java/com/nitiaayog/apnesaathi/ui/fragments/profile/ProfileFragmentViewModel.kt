@@ -13,6 +13,11 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.utility.ROLE_VOLUNTEER
 import kotlinx.coroutines.launch
 
+
+/**
+ * [ProfileFragmentViewModel] View model for handling all the API Response
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class ProfileFragmentViewModel private constructor(private val dataManager: DataManager) :
     BaseViewModel() {
 
@@ -24,16 +29,27 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
         }
     }
 
+    /**
+     * Method for fetching the user rating counter.
+     */
     suspend fun getCountOfDataRemainingToSync(): Int {
         return dataManager.getCount()
     }
 
+    /**
+     * Method for clear the shared preference data.
+     */
     fun clearData() {
         dataManager.clearData()
     }
 
     fun getDataObserver(): LiveData<NetworkRequestState> = loaderObservable
 
+    /**
+     * Method for fetch the profile details from server.
+     * [context] is the current activity context
+     * [volunteerId] is the id of the logged in user.
+     */
     fun getvolunteerData(mContext: Context, volunteerId: String) {
         if (checkNetworkAvailability(mContext, ApiProvider.ApiGetVolunteerData)) {
             val params = JsonObject()
@@ -71,6 +87,17 @@ class ProfileFragmentViewModel private constructor(private val dataManager: Data
 
 
     }
+
+
+    /**
+     * Method updating profile details to server.
+     * [context] is the current activity context
+     * [volunteerId] is the id of the logged in user.
+     * [firstname] is the first name of user
+     * [lastname] is the last name of user
+     * [address] is the address of user
+     * [email] is the email of user
+     */
 
     fun getUpdatedvolunteerData(
         mContext: Context,
