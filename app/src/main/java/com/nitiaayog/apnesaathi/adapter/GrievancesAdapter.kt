@@ -19,6 +19,11 @@ import com.nitiaayog.apnesaathi.model.GrievanceData
 import kotlinx.android.synthetic.main.list_item_grievances.view.*
 import java.util.*
 
+/**
+ *  Adapter for showing the grievance details and also provide an option for updating the grievance status!
+ * [RecyclerView.Adapter] is the default adapter from android library
+ * [GrievancesAdapter.GrievancesHolder] is the view holder for holding the views that are available in this page
+ */
 class GrievancesAdapter(private val context: Context) :
     RecyclerView.Adapter<GrievancesAdapter.GrievancesHolder>() {
 
@@ -30,6 +35,10 @@ class GrievancesAdapter(private val context: Context) :
 
     private lateinit var itemClickListener: OnItemClickListener<GrievanceData>
 
+    /**
+     * Method for setting the item click listener.
+     * [OnItemClickListener] is the call back event for listening to the item clicks
+     */
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
@@ -54,6 +63,10 @@ class GrievancesAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: GrievancesHolder, position: Int) =
         holder.bindData(dataList[position])
 
+    /**
+     * Method for setting the data.
+     * [dataList] is the list of data that's fetched from the api.
+     */
     fun setData(dataList: MutableList<GrievanceData>) {
         this.dataList.apply {
             this.clear()
@@ -61,7 +74,11 @@ class GrievancesAdapter(private val context: Context) :
         }
         notifyDataSetChanged()
     }
-
+    /**
+     * View Holder for holding the views associated with this page.
+     * [itemView] is the parent item view which holds the individual views
+     * [RecyclerView.ViewHolder] is the default android class
+     */
     inner class GrievancesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val civGender: CircleImageView = itemView.civGender
@@ -73,7 +90,10 @@ class GrievancesAdapter(private val context: Context) :
 
             }
         }
-
+        /**
+         * Method for binding the data
+         * [grievance] is the data which will be providing the values for binding the fields
+         */
         fun bindData(grievance: GrievanceData) {
             val complaint = " ".plus(context.getString(R.string.complaint_on)).plus(" ")
             val was = context.getString(R.string.was)

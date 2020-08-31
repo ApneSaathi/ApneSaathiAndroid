@@ -27,6 +27,11 @@ private val diffCallback: DiffUtil.ItemCallback<CallData> =
 
 private val config = AsyncDifferConfig.Builder<CallData>(diffCallback).build()
 
+/**
+ *  Adapter for showing calls including all the status!
+ * [PagedListAdapter] is the default adapter from android library. Used for pagination
+ * [AllCallsAdapter.CallHolder] is the view holder for holding the views that are available in this page
+ */
 class AllCallsAdapter : PagedListAdapter<CallData, AllCallsAdapter.CallHolder>(config) {
 
     companion object {
@@ -44,10 +49,19 @@ class AllCallsAdapter : PagedListAdapter<CallData, AllCallsAdapter.CallHolder>(c
     override fun onBindViewHolder(holder: CallHolder, position: Int) =
         holder.bindData(getItem(position))
 
+    /**
+     * Method for setting the item click listener.
+     * [OnItemClickListener] is the call back event for listening to the item clicks
+     */
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<CallData>) {
         this.itemClickListener = itemClickListener
     }
 
+    /**
+     * View Holder for holding the views associated with this page.
+     * [itemView] is the parent item view which holds the individual views
+     * [RecyclerView.ViewHolder] is the default android class
+     */
     inner class CallHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
@@ -81,12 +95,19 @@ class AllCallsAdapter : PagedListAdapter<CallData, AllCallsAdapter.CallHolder>(c
             }
         }
 
+        /**
+         * Method for clearing the text fields
+         */
         private fun clear() {
             tvName.text = ""
             tvAddress.text = ""
             tvDate.text = ""
         }
 
+        /**
+         * Method for binding the data
+         * [callData] is the data which will be providing the values for binding the fields
+         */
         fun bindData(callData: CallData?) {
             if (callData == null) clear() else {
                 tvName.text = callData.srCitizenName ?: ""
