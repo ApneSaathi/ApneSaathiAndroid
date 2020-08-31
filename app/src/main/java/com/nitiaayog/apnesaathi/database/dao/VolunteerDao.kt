@@ -32,6 +32,9 @@ interface VolunteerDao {
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}=:id")
     fun getVolunteer(id: Int): Volunteer?
 
+    @Query("UPDATE ${Tables.TABLE_VOLUNTEERS} SET ${Columns.Ratings}=:ratings WHERE ${Columns.Id}=:id")
+    fun updateRating(ratings: String, id: Int):Int
+
     @Query("DELETE FROM ${Tables.TABLE_VOLUNTEERS}")
     fun deleteAll()
 }

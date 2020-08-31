@@ -13,6 +13,7 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.NetworkRequestStat
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiConstants
 import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel() {
@@ -42,6 +43,10 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         super.onCleared()
     }
 
+    /**
+     * Every time when before inserting new volunteers list we should delete the previous list
+     * so that if there is any addition/deletion in list of volunteers, can be visible to Ui
+     * */
     private suspend fun insertVolunteers(volunteers: MutableList<Volunteer>) {
         try {
             dataManager.deleteVolunteers()
@@ -51,6 +56,9 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         }
     }
 
+    /**
+     * Fetch the data of Volunteers currently assigned to Master Admin/Staff Members
+     * */
     private suspend fun getVolunteers() {
         val params = JsonObject()
         params.addProperty(ApiConstants.AdminId, dataManager.getUserId().toInt())
@@ -98,5 +106,16 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
 
     fun getVolunteersStream(): LiveData<PagedList<Volunteer>> {
         return volunteers
+    }
+
+    fun updateVolunteerRating(ratings: String, id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = dataManager.updateVolunteerRatings(ratings, id)
+                println("$TAG $result")
+            } catch (e: Exception) {
+                println("$TAG ${e.message}")
+            }
+        }
     }
 }

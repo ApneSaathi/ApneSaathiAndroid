@@ -46,8 +46,24 @@ class VolunteersAdapter : PagedListAdapter<Volunteer, VolunteersAdapter.Voluntee
         holder.bindData(getItem(position))
     }
 
+    private fun getItemFromId(id: Int): Volunteer? {
+        return if (currentList != null) {
+            val data: List<Volunteer> = currentList!!.filter { it.id == id }
+            if (data.isNotEmpty()) data[0]
+            else null
+        } else null
+    }
+
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<Volunteer>) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun updateVolunteer(id: Int, ratings: String) {
+        getItemFromId(id)?.let {
+            val position: Int = currentList!!.indexOf(it)
+            it.ratings = ratings
+            notifyItemChanged(position)
+        }
     }
 
     inner class VolunteerHolder(itemView: View) : RecyclerView.ViewHolder(itemView),

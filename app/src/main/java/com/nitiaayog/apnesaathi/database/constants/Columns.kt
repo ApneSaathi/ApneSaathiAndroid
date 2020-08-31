@@ -10,6 +10,7 @@ object Columns {
     const val ContactNumber: String = "contact_number"
     const val Age: String = "age"
     const val Gender: String = "gender"
+    const val Ratings: String = "rating"
     const val Address: String = "address"
     const val State: String = "state"
     const val District: String = "district"

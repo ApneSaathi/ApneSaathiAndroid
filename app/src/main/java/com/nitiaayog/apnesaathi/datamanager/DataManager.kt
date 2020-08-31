@@ -57,6 +57,7 @@ interface DataManager : ApiRequest, PreferenceRequest {
     fun getVolunteers(afterId: Int, count: Int): List<Volunteer>
     suspend fun getVolunteer(id: Int): Volunteer?
     fun fetchVolunteers(): List<Volunteer>
+    suspend fun updateVolunteerRatings(ratings: String, id: Int):Int
     fun deleteVolunteers()
     fun getVolunteersList(): DataSource.Factory<Int, Volunteer>
     fun clearData()

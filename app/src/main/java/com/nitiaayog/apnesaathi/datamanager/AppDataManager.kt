@@ -270,6 +270,10 @@ class AppDataManager private constructor(
         return volunteerDao.fetchVolunteers()
     }
 
+    override suspend fun updateVolunteerRatings(ratings: String, id: Int):Int {
+        return volunteerDao.updateRating(ratings, id)
+    }
+
     override fun deleteVolunteers() {
         return volunteerDao.deleteAll()
     }

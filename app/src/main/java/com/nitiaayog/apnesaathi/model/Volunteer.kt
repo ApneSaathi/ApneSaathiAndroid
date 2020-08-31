@@ -61,6 +61,14 @@ open class Volunteer {
             field = value ?: ""
         }
 
+    @ColumnInfo(name = Columns.Ratings, defaultValue = "0.0")
+    @SerializedName(ApiConstants.Ratings)
+    var ratings: String? = "0.0"
+        get() = field ?: "0.0"
+        set(@NonNull value) {
+            field = value ?: "0.0"
+        }
+
     @ColumnInfo(name = Columns.Address, defaultValue = "")
     @SerializedName(ApiConstants.Address)
     var address: String? = ""
