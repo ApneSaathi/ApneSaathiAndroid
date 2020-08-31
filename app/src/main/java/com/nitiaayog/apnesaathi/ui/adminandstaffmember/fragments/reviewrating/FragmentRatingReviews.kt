@@ -32,7 +32,6 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
         private val TAG: String by lazy { "TAG -- ${FragmentRatingReviews::class.java.simpleName} -->" }
         fun getInstance(volunteer: Volunteer): Fragment {
             return FragmentRatingReviews().apply {
-                //setTargetFragment(fragment, VolunteersFragment.VolunteerDetailsCode)
                 arguments = Bundle().apply {
                     putInt(ID, volunteer.id!!)
                     putString(ApiConstants.FirstName, volunteer.firstName)
