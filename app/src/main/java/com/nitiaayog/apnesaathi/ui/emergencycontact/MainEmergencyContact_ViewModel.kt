@@ -4,6 +4,9 @@ import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
 
+/**
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class MainEmergencyContact_ViewModel private constructor(dataManager: DataManager) : BaseViewModel() {
 
     val dataManager: DataManager = dataManager
