@@ -3,6 +3,7 @@ package com.nitiaayog.apnesaathi.ui.emergencycontact
 import com.nitiaayog.apnesaathi.datamanager.DataManager
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 
+
 class MainEmergencyContact_ViewModel private constructor(dataManager: DataManager) : BaseViewModel() {
 
     val dataManager: DataManager = dataManager

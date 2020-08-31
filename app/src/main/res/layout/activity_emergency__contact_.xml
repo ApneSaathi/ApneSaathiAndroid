@@ -9,16 +9,15 @@
     <include layout="@layout/include_appbar_layout_with_toolbar" />
 
  <ScrollView
-     android:fillViewport="true"
+     android:layout_margin="@dimen/dimen_10"
      android:layout_width="match_parent"
+     android:scrollbars="none"
      android:layout_height="match_parent">
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_below="@+id/ambulance"
-         android:layout_margin="@dimen/dimen_10"
          android:orientation="vertical">
-
 
          <LinearLayout
              android:layout_width="match_parent"
@@ -148,7 +147,7 @@
                          android:layout_height="@dimen/view_size_50"
                          android:layout_centerHorizontal="true"
                          android:layout_marginTop="@dimen/dimen_5"
-                         android:src="@drawable/ic_abulance108" />
+                         android:src="@drawable/ic_ambulance108" />
 
                      <TextView
 
@@ -208,6 +207,7 @@
          </LinearLayout>
 
          <LinearLayout
+
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal"

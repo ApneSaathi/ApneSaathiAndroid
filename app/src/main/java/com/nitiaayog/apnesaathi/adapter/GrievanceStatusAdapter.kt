@@ -16,6 +16,11 @@ import com.nitiaayog.apnesaathi.model.GrievanceData
 import kotlinx.android.synthetic.main.list_item_grievance_status.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
+/**
+ *  Fragment for showing the grievance status in fragment!
+ * [RecyclerView.Adapter] is the default adapter from android library
+ * [GrievanceStatusAdapter.GrievanceViewHolder] is the view holder for holding the views that are available in this page
+ */
 class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.GrievanceViewHolder>() {
 
     private val dataList: MutableList<GrievanceData> = mutableListOf()
@@ -28,12 +33,18 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
         return GrievanceViewHolder(customView, parent.context)
     }
 
-    //Method for setting item click call back
+    /**
+     * Method for setting the item click listener.
+     * [OnItemClickListener] is the call back event for listening to the item clicks
+     */
     fun setOnItemClickListener(itemClickListener: OnItemClickListener<GrievanceData>) {
         this.itemClickListener = itemClickListener
     }
 
-    //Method for setting call button click call back.
+    /**
+     *   Method for setting call button click call back.
+     *   [CallButtonClickListener] is used for listening to the call button click
+     */
     fun setOnCallButtonClickListener(callButtonClickListener: CallButtonClickListener) {
         this.callButtonClickListener = callButtonClickListener
     }
@@ -44,12 +55,21 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
         holder.bindData(dataList[position])
     }
 
-    //Method for setting the data
+    /**
+     * Method for setting the data
+     * [data] is the real data that was fetched from the API
+     */
     fun setData(data: MutableList<GrievanceData>) {
         dataList.clear()
         dataList.addAll(data)
     }
 
+    /**
+     * View Holder for holding the views associated with this page.
+     * [itemView] is the parent item view which holds the individual views
+     * [context] is the current activity context
+     * [RecyclerView.ViewHolder] is the default android class
+     */
     inner class GrievanceViewHolder(itemView: View, private val context: Context) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
@@ -85,7 +105,10 @@ class GrievanceStatusAdapter : RecyclerView.Adapter<GrievanceStatusAdapter.Griev
             itemView.img_call_button.setOnClickListener(this)
         }
 
-        //Method for getting the formatted date
+        /**
+         * Method for getting the formatted date
+         * [date] is a date which is required to be converted in the required format
+         */
         private fun getFormattedDate(date: String?): String {
             if (date.isNullOrEmpty()) return ""
             val input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")

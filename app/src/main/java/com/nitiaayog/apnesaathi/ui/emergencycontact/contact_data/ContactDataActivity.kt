@@ -31,6 +31,7 @@ import com.nitiaayog.apnesaathi.ui.base.BaseActivity
 import com.nitiaayog.apnesaathi.ui.base.BaseFragment
 import com.nitiaayog.apnesaathi.ui.emergencycontact.adapter.ContactListAdapter
 import com.nitiaayog.apnesaathi.ui.emergencycontact.adapter.ContactRealData
+import com.nitiaayog.apnesaathi.ui.fragments.grievances.GrievanceDetailsViewModel
 import com.nitiaayog.apnesaathi.utility.BaseUtility
 import com.nitiaayog.apnesaathi.utility.LOAD_ELEMENTS_WITH_DELAY
 import io.reactivex.Observable
@@ -39,9 +40,17 @@ import kotlinx.android.synthetic.main.contact_data_activity.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.concurrent.TimeUnit
 
-
+/**
+ * [ContactDataActivity] for dividing the emergency contact page
+ * [BaseActivity] is the base activity with functions that are common in all the Activity
+ * [ContactDataViewModel] is the view model for performing fetching data from API
+ */
 class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     val PERMISSION_CODE: Int = 200
+
+    /**
+     * method for set contact data to contact adapter
+     */
     private val contactListAdapter: ContactListAdapter by lazy {
         ContactListAdapter(this).apply {
             this.setOnItemClickListener(object : ContactListAdapter.ItemClickListener {
@@ -81,7 +90,9 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         initClicks()
 
     }
-
+    /**
+     * method for handling click events
+     */
     private fun initClicks() {
         actDistrict.throttleClick().subscribe {
             if (actState.text.toString().isEmpty()) {
@@ -102,6 +113,9 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         ProgressDialog.Builder(this).setMessage(R.string.wait_for_emergency_data)
     }
 
+    /**
+     * Method for binding UI Components
+     */
     private fun bindView() {
         contactList = ArrayList()
         observeStates()
@@ -122,7 +136,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         rvList.adapter = contactListAdapter
     }
 
-    //Method for setting the district adapter
+    /**
+     * Method for setting the district adapter
+     * [position] is the selected district drop-dawn item position.
+     */
     private fun setDistrictAdapter(position: Int) {
         var districtsList = arrayOf<String>()
         when (position) {
@@ -149,7 +166,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         }
     }
 
-    //Method for getting the emergency contact list
+    /**
+     *  Method for getting the emergency contact list
+     * [districtName] it is required for fetching contact from API
+     */
     private fun getEmergencyContactList(districtName: String) {
         try {
             Observable.timer(LOAD_ELEMENTS_WITH_DELAY, TimeUnit.MILLISECONDS)
@@ -167,6 +187,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
     private fun updateDropDownIndicator(autoCompleteTextView: AutoCompleteTextView, icon: Int) =
         autoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
 
+
+    /**
+     *  Method for handing the emergency contact APi Response.
+     */
     private fun observeStates() {
         viewModel.getDataObserver().removeObservers(this)
         viewModel.getDataObserver().observe(this, Observer {
@@ -259,7 +283,10 @@ class ContactDataActivity : BaseActivity<ContactDataViewModel>() {
         })
     }
 
-
+    /**
+     *  Method for calling to particular contact.
+     *  [data] get from selected contact.
+     */
     private fun initiateCall(data: ContactRealData) {
         val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + data.contactnumber))
         startActivity(intent)

@@ -11,6 +11,10 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import java.util.*
 
+/**
+ * View model for handling all the actions related with grievances fragment
+ * [dataManager] is used to store all the data that is required in the app.
+ */
 class GrievanceDetailsViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
@@ -20,7 +24,14 @@ class GrievanceDetailsViewModel(private val dataManager: DataManager) : BaseView
             GrievanceDetailsViewModel(dataManager)
         }
     }
-
+    /**
+     * Method updating the grievance status.
+     * [context] is the current activity context
+     * [trackingId] is the id of the selected grievance that we need to send to the server.
+     * [status] is the grievance status selected by the user
+     * [description] is the description given by the user on updating the grievance
+     * [grievanceType] is the priority type of grievance
+     */
     internal fun updateGrievance(
         context: Context,
         trackingId: Int,
@@ -68,5 +79,8 @@ class GrievanceDetailsViewModel(private val dataManager: DataManager) : BaseView
         }
     }
 
+    /**
+     * Method for fetching the data stream
+     */
     fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
 }

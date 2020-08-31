@@ -31,6 +31,15 @@ import kotlinx.android.synthetic.main.fragment_grievances.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.lang.String.format
 
+/**
+ *  Parent fragment for showing pending, resolved and in progress grievances!
+ * This class helps adding required fragments using the viewpager
+ * [PageTitleChangeListener] is used for listening to the title change
+ * [BaseFragment] is the base fragment with functions that are common
+ * [HomeViewModel] is the view model for performing fetching data from API, caching it in data base and fetching the data back from database
+ * [OnItemClickListener] is used for listening to the item click
+ * [GrievanceStatusAdapter.CallButtonClickListener] is used for listening to the call button click
+ */
 class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<GrievanceData>,
     PageTitleChangeListener, GrievanceStatusAdapter.CallButtonClickListener {
 
@@ -64,7 +73,11 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         }.attach()
     }
 
-    //Method for fetching the data stream
+    /**
+     * Method for fetching the data stream.
+     * Also responsible for adding the districts to the menu when logged in as Master district admin.
+     * Also handles the network errors
+     */
     private fun getDataStream() {
         if (dataManager.getRole() == ROLE_MASTER_ADMIN) {
             viewModel.getDistrictList().removeObservers(viewLifecycleOwner)
@@ -133,12 +146,17 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
         })
     }
 
-    //Method for setting if api reload is required
+    /**
+     * Method for setting the listener for reload API
+     * [ReloadApiRequiredListener] is listener for checking if reload is required
+     */
     fun setReloadApiListener(reloadApiRequiredListener: ReloadApiRequiredListener) {
         this.reloadApiRequiredListener = reloadApiRequiredListener
     }
 
-    //Method for setting up the viewpager
+    /**
+     * Method for setting the view pager
+     */
     private fun setUpViewPager() {
         val adapter = FragmentViewPagerAdapter(activity!!)
         val pendingFragment = PendingGrievanceFragment()
@@ -193,7 +211,9 @@ class GrievancesFragment : BaseFragment<HomeViewModel>(), OnItemClickListener<Gr
             format(title, size.toString())
     }
 
-    //Method for reloading the API
+    /**
+     * Method for reloading the grievance tracking API
+     */
     fun reloadApi() {
         viewModel.getGrievanceTrackingList(this.context!!)
     }
