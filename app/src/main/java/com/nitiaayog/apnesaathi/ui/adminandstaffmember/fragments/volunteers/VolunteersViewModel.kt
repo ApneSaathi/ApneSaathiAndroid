@@ -112,7 +112,6 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = dataManager.updateVolunteerRatings(ratings, id)
-                println("$TAG $result")
             } catch (e: Exception) {
                 println("$TAG ${e.message}")
             }
