@@ -26,6 +26,10 @@ abstract class ApneSathiDatabase : RoomDatabase() {
     abstract fun provideVolunteerDao(): VolunteerDao
     abstract fun provideDistrictDao(): DistrictDataDao
 
+    /**
+     * This method will only be called when user will log out and we need to remove all the
+     * data from the database
+     * */
     @Transaction
     fun clearDatabase() = clearAllTables()
 
