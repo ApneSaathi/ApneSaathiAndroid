@@ -18,6 +18,11 @@ import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
+/**
+ * This page will only be visible when Master/District Admin and Staff Member logs in.
+ * If Volunteer logs in then
+ * @see com.nitiaayog.apnesaathi.ui.dashboard.DashBoardActivity page will visible
+ * */
 class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredListener {
 
     private val homeFragment = HomeFragment()
@@ -77,6 +82,9 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         setupViewPager(offscreenPageLimit, adapter)
     }
 
+    /**
+     * Prepare setup for ViewPager
+     **/
     private fun setupViewPager(offscreenPageLimit: Int, adapter: FragmentStateAdapter) {
         viewPager.isUserInputEnabled = false
         viewPager.adapter = adapter
@@ -91,6 +99,9 @@ class DashboardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredL
         })
     }
 
+    /**
+     * Instantiate Bottom Navigation Item click
+     * */
     private fun initBottomNavigationView() {
         bottomNavigationView.itemIconTintList = null
         bottomNavigationView.setOnNavigationItemSelectedListener {
