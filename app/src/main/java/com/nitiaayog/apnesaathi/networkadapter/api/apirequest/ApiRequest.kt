@@ -13,8 +13,12 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.profileupdate.Pro
 import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.VolunteerDataResponse
 import io.reactivex.Single
 
-interface ApiRequest {
 
+/**
+ * [ApiRequest] important interface
+ * In this interface we have create a services functions.
+ */
+interface ApiRequest {
     // Get Login User Data
     fun loginUser(phoneNumber: JsonObject): Single<LoginResponse>
 

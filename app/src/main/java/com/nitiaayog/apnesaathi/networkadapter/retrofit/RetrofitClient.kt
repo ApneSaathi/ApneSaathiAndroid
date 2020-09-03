@@ -4,6 +4,9 @@ import android.app.Application
 import com.google.gson.GsonBuilder
 import com.nitiaayog.apnesaathi.BuildConfig
 import com.nitiaayog.apnesaathi.networkadapter.api.apirequest.ApiInterface
+import com.nitiaayog.apnesaathi.ui.base.BaseActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginActivity
+import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,6 +15,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+
+/**
+ * [RetrofitClient] important class
+ * In this class implement of retrofit  for call the data from server.
+*/
 object RetrofitClient {
 
     private val TAG: String = RetrofitClient::class.java.simpleName
