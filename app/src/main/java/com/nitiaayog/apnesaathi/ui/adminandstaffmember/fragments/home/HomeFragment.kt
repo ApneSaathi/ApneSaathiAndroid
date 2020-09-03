@@ -77,7 +77,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     }
 
     override fun provideViewModel(): HomeViewModel {
-        return HomeViewModel.getInstance(requireContext(), dataManager)
+        return HomeViewModel.getInstance(dataManager)
     }
 
     override fun provideLayoutResource(): Int {

@@ -29,7 +29,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         private var instance: HomeViewModel? = null
 
         @Synchronized
-        fun getInstance(context: Context, dataManager: DataManager): HomeViewModel {
+        fun getInstance(dataManager: DataManager): HomeViewModel {
             return instance ?: synchronized(this) {
                 HomeViewModel(dataManager).also { instance = it }
             }
