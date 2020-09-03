@@ -2,6 +2,11 @@ package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
 import com.nitiaayog.apnesaathi.BuildConfig
 
+
+/**
+ * [ApiConstants] important class
+ * In this class we have stored complete service (API) path
+ */
 object ApiProvider {
     const val ApiLoginUser: String = BuildConfig.ApiHost + BuildConfig.GetLoginUser
     const val ApiVerifyPassword: String = BuildConfig.ApiHost + BuildConfig.VerifyPassword

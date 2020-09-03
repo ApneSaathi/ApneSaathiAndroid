@@ -1,5 +1,12 @@
 package com.nitiaayog.apnesaathi.networkadapter.apiconstants
 
+import com.nitiaayog.apnesaathi.networkadapter.retrofit.RetrofitClient
+
+
+/**
+ * [ApiConstants] important class
+ * In this class we have stored required parameter to the service (API)
+ */
 object ApiConstants {
 
     const val StatusCode: String = "statusCode"
