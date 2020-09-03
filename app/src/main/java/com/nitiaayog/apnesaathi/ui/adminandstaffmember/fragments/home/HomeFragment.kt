@@ -35,6 +35,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+/**
+ * This page will be loaded only when Master Admin or Staff Member will log in.
+ * UI of this page would be same as
+ * @see com.nitiaayog.apnesaathi.ui.fragments.calls.CallsFragment page
+ * */
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
     private var lastSelectedItemPosition: Int = 0
@@ -90,6 +95,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         Toast.makeText(requireContext(), R.string.not_handle_action, Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Setup for the list of Follow up Calls
+     * */
     private fun setupPendingCalls() {
         val rvPendingList = (rvPendingList as RecyclerView)
         rvPendingList.isNestedScrollingEnabled = false
@@ -101,6 +109,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         rvPendingList.adapter = pendingAdapter
     }
 
+    /**
+     * Adapter setup for the list of Pending Calls
+     * */
     private fun setupPendingCallsAdapter(): CallsAdapter {
         return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
@@ -121,6 +132,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
+    /**
+     * Setup for the list of Follow up Calls
+     * */
     private fun setupFollowupCalls() {
         val rvFollowupList = (rvFollowupList as RecyclerView)
         rvFollowupList.isNestedScrollingEnabled = false
@@ -132,6 +146,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         rvFollowupList.adapter = followupAdapter
     }
 
+    /**
+     * Adapter setup for the list of Follow up Calls
+     * */
     private fun setupFollowupCallsAdapter(): CallsAdapter {
         return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
@@ -153,6 +170,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
+    /**
+     * Setup for the list of Completed Calls
+     * */
     private fun setupCompletedCalls() {
         val rvAttendedList = (rvAttendedList as RecyclerView)
         rvAttendedList.isNestedScrollingEnabled = false
@@ -164,6 +184,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         rvAttendedList.adapter = completedAdapter
     }
 
+    /**
+     * Adapter setup for the list of Completed Calls
+     * */
     private fun setupCompletedCallsAdapter(): CallsAdapter {
         return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
@@ -185,6 +208,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
+    /**
+     * Setup for the list of Invalid Calls
+     * */
     private fun setupInvalidCalls() {
         val rvInvalidCallsList = (rvInvalidCallList as RecyclerView)
         rvInvalidCallsList.isNestedScrollingEnabled = false
@@ -196,6 +222,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         rvInvalidCallsList.adapter = invalidAdapter
     }
 
+    /**
+     * Adapter setup for the list of Invalid Calls
+     * */
     private fun setupInvalidCallsAdapter(): CallsAdapter {
         return CallsAdapter(true).apply {
             this.setOnItemClickListener(object : OnItemClickListener<CallData> {
@@ -217,6 +246,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         }
     }
 
+    /**
+     * Manage calls views as per the size of list
+     * */
     private fun manageCalls(itemCount: Int, @StringRes callsCountString: Int) {
         when (callsCountString) {
             R.string.pending_calls_count ->
@@ -302,6 +334,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         viewModel.getNetworkStream().observe(viewLifecycleOwner, { handleNetwork(it) })
     }
 
+    /**
+     * If calls status changes then update the list and title
+     * */
     private fun observePendingCalls() {
         viewModel.getPendingCalls().removeObservers(viewLifecycleOwner)
         viewModel.getPendingCalls().observe(viewLifecycleOwner, {
@@ -339,6 +374,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         })
     }
 
+    /**
+     * Observe change in data to for the UI changes
+     * */
     private fun getObservableStreams() {
         lifecycleScope.launch {
             observeNetwork()
@@ -350,6 +388,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             }
         }
     }
+
     override
     fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when (item.itemId) {

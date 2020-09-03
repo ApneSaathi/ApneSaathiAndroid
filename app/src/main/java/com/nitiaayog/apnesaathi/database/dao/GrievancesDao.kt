@@ -6,9 +6,15 @@ import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.model.SrCitizenGrievance
 
+/**
+ *
+ * */
 @Dao
 interface GrievancesDao {
 
+    /**
+     *
+     * */
     @Transaction
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES}")
     fun getGrievances(): LiveData<MutableList<SrCitizenGrievance>>
@@ -28,20 +34,27 @@ interface GrievancesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(grievances: SrCitizenGrievance): Long
 
+    /**
+     * Delete Previous Issue data
+     * */
     @Query("DELETE FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.DeleteIDAfterSync} =1")
     fun deletePreviousData()
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun updateJustId() {
-
-    }
-
+    /**
+     * Make a check whether issue exist or not
+     * */
     @Query("SELECT * FROM ${Tables.TABLE_GRIEVANCES} WHERE ${Columns.Id}=:id AND ${Columns.CallId}=:callId")
     fun isDataExist(id: Int, callId: Int): SrCitizenGrievance?
 
+    /**
+     * Delete Issue if not required
+     * */
     @Delete
     fun deleteGrievance(grievances: SrCitizenGrievance)
 
+    /**
+     * Update an issue details
+     * */
     @Query(
         "UPDATE ${Tables.TABLE_GRIEVANCES} SET ${Columns.IsDiabetic}=:hasDiabetic,${Columns.IsBloodPressure}=:hasBloodPressure,${Columns.IsLungAilment}=:hasLungAilment,${Columns.IsCancerOrMajorSurgery}=:cancerOrMajorSurgery,${Columns.OtherAilments}=:otherAilments,${Columns.RemarkOnMedicalHistory}=:remarksMedicalHistory,${Columns.InfoTalkAbout}=:relatedInfoTalkedAbout,${Columns.NoticedBehaviouralChanges}=:behavioralChangesNoticed,${Columns.HasCovidSymptoms}=:hasCovidSymptoms,${Columns.HasCough}=:hasCough,${Columns.HasFever}=:hasFever,${Columns.HasShortnessOfBreath}=:hasShortnessOfBreath,${Columns.HasSoreThroat}=:hasSoreThroat,${Columns.QuarantineStatus}=:quarantineStatus,${Columns.LackOfEssentialServices}=:lackOfEssentialServices,${Columns.FoodShortage}=:foodShortage,${Columns.MedicineShortage}=:medicineShortage,${Columns.AccessToBankingIssue}=:accessToBankingIssue,${Columns.UtilitySupplyIssue}=:utilitySupplyIssue,${Columns.HygieneIssue}=:hygieneIssue,${Columns.SafetyIssue}=:safetyIssue,${Columns.EmergencyServiceIssue}=:emergencyServiceIssue,${Columns.PhoneAndInternetIssue}=:phoneAndInternetIssue,${Columns.IsEmergencyServiceRequired}=:emergencyServiceRequired,${Columns.RemarksImportantInfo}=:impRemarkInfo WHERE ${Columns.Id}=:id AND ${Columns.CallId}=:callId"
     )
@@ -56,6 +69,9 @@ interface GrievancesDao {
         phoneAndInternetIssue: String, emergencyServiceRequired: String, impRemarkInfo: String
     )
 
+    /**
+     * If data of issue is already available in database then just update else insert it
+     * */
     @Transaction
     fun insertOrUpdate(grievances: List<SrCitizenGrievance>) = grievances.forEach {
         if (insert(it) == -1L)

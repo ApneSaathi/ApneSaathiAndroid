@@ -16,7 +16,6 @@ import com.nitiaayog.apnesaathi.model.Volunteer
 @Dao
 interface VolunteerDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(volunteers: List<Volunteer>)
 

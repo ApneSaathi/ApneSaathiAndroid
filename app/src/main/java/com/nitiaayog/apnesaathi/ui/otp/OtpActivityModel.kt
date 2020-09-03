@@ -13,7 +13,6 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
 import kotlinx.coroutines.launch
 
-
 /**
  * [OtpActivityModel] for calling the login API
  * [dataManager] is used to store all the data that is required in the app.
