@@ -14,7 +14,6 @@ import com.nitiaayog.apnesaathi.networkadapter.api.apiresponce.volunteerdata.Vol
 import io.reactivex.Single
 
 interface ApiRequest {
-
     // Get Login User Data
     fun loginUser(phoneNumber: JsonObject): Single<LoginResponse>
 
