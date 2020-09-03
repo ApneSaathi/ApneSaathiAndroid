@@ -65,6 +65,10 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         initViews()
     }
 
+    /**
+     * Here we will receive callback with non nullable data from onActivityResult of
+     * @see VolunteerDetailsFragment  and if data is proper then we will update in local database
+     * */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if ((requestCode == VolunteerDetailsCode) && (resultCode == VolunteerDetailsCode) &&
@@ -87,6 +91,9 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         return R.layout.fragment_admin_staff_volunteers
     }
 
+    /**
+     * Fetch volunteer and initiate call
+     * */
     override fun onCallPermissionGranted() {
         lifecycleScope.launch(Dispatchers.IO) {
             val volunteer: Volunteer? = viewModel.getVolunteer(lastSelectedItemId)
@@ -131,6 +138,10 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         }*/
     }
 
+    /**
+     * Navigation to Volunteer Details page
+     * @see VolunteerDetailsFragment
+     * */
     private fun navigateToDetails(volunteer: Volunteer) {
         val fragment: Fragment = VolunteerDetailsFragment.getInstance(volunteer)
         fragment.setTargetFragment(this, VolunteerDetailsCode)
@@ -140,6 +151,9 @@ class VolunteersFragment : BaseFragment<VolunteersViewModel>() {
         )
     }
 
+    /**
+     * Adapter setup for list of Volunteers
+     * */
     private fun setupVolunteersAdapter(): VolunteersAdapter {
         return VolunteersAdapter().apply {
             setOnItemClickListener(object : OnItemClickListener<Volunteer> {

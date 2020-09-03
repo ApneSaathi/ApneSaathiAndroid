@@ -34,6 +34,13 @@ import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * This page is the child page of Volunteer Details page
+ * @see (com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteerdetails.VolunteerDetailsFragment)
+ * Here we will load Sr. Citizens Assigned to the Volunteers also user can select date from
+ * Date Picker to see the progress of volunteer on a particular date.
+ * Minimum date can be selected before 2 months and Maximum date can be current date.
+ **/
 class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
 
     companion object {
@@ -119,6 +126,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         )
     }
 
+    /**
+     * Show Address in proper format
+     * */
     private fun setAddress() {
         val address = getString(R.string.address).plus(" : ")
         val dataString = address.plus(volunteer!!.address).plus(", ")
@@ -129,6 +139,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         )
     }
 
+    /**
+     * Show average ratings of the Volunteer
+     * */
     private fun setRatings(ratings: String) {
         val myRatings = getString(R.string.ratings).plus(" : ")
         val mRatings = myRatings.plus(ratings)
@@ -137,6 +150,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         )
     }
 
+    /**
+     * Show Joining date of Volunteer
+     * */
     private fun setJoinDate() {
         val joiningDate = getString(R.string.joining_date).plus(" : ")
         val dataString = joiningDate.plus(volunteer!!.joiningDate)
@@ -145,6 +161,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         )
     }
 
+    /**
+     * Helps to create Formatted Texts
+     * */
     private fun getBoldItalicText(
         dataText: String, boldStartIndex: Int, boldEndIndex: Int, italicStartIndex: Int,
         italicEndIndex: Int
@@ -170,6 +189,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         rvList.setPadding(padding, 0, padding, 0)
     }
 
+    /**
+     * Adapter setup for showing list of Senior Citizen
+     * */
     private fun setAdapter(): CallsAdapter {
         return CallsAdapter(false)
             .apply {
@@ -250,6 +272,9 @@ class AboutVolunteerFragment : BaseFragment<VolunteerDetailsViewModel>() {
         }
     }
 
+    /**
+     * Make an API call to get assigned sr. citizens list to volunteer on particular date
+     * */
     private fun getSeniorCitizens() {
         val mDate = BaseUtility.format(date, DATE_FORMAT)
         //println("$TAG $mDate")

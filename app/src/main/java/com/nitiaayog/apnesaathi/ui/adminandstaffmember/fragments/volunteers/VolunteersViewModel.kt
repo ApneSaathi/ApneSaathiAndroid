@@ -16,6 +16,9 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Class holds the data of Volunteers assigned to Master Admin and Staff Member
+ * */
 class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
@@ -96,6 +99,9 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         }
     }
 
+    /**
+     * Will return Volunteer object from the id.
+     * */
     suspend fun getVolunteer(id: Int): Volunteer? {
         return dataManager.getVolunteer(id)
     }
@@ -108,10 +114,13 @@ class VolunteersViewModel(private val dataManager: DataManager) : BaseViewModel(
         return volunteers
     }
 
+    /**
+     * Update volunteer ratings
+     * */
     fun updateVolunteerRating(ratings: String, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = dataManager.updateVolunteerRatings(ratings, id)
+                dataManager.updateVolunteerRatings(ratings, id)
             } catch (e: Exception) {
                 println("$TAG ${e.message}")
             }

@@ -16,6 +16,12 @@ import com.nitiaayog.apnesaathi.utility.REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
+/**
+ * This page will only be visible when Volunteer logs in. If other person except Volunteer role
+ * logs in
+ * @see com.nitiaayog.apnesaathi.ui.adminandstaffmember.dashboard.DashboardActivity
+ * page will visible
+ * */
 class DashBoardActivity : BaseActivity<DashBoardViewModel>(), ReloadApiRequiredListener {
 
     private val homeFragment = HomeFragment()

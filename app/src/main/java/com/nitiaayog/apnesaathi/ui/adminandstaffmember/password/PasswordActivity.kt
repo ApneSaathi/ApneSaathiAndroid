@@ -24,6 +24,9 @@ import java.util.concurrent.TimeUnit
 
 class PasswordActivity : BaseActivity<PasswordViewModel>() {
 
+    /**
+     * Progress dialog to show while making password verification with server
+     * */
     private val progressDialog: ProgressDialog.Builder by lazy {
         ProgressDialog.Builder(this).setTitle(R.string.verification)
             .setMessage(R.string.check_details)

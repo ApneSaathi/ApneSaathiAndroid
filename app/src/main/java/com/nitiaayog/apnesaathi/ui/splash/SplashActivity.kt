@@ -21,7 +21,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
-
 /**
  * [SplashActivity] starting activity of Application
  */

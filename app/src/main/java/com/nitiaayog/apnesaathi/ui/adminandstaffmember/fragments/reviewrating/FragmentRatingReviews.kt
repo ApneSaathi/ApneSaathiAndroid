@@ -26,6 +26,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+/**
+ * To rate volunteer by their Seniors this page will be useful
+ * */
 class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
 
     companion object {
@@ -143,6 +146,11 @@ class FragmentRatingReviews : BaseFragment<VolunteerDetailsViewModel>() {
         viewModel.getNetworkStream().observe(viewLifecycleOwner) { manageNetworkState(it) }
     }
 
+    /**
+     * Through this method we will call onActivityResult of
+     * @see com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.volunteers.VolunteersFragment
+     * to store updated data in database and in adapters
+     * */
     private fun updatePreviousFragment() {
         try {
             targetFragment?.let {
