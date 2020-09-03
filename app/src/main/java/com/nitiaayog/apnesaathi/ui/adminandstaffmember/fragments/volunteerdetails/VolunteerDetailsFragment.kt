@@ -26,6 +26,9 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
 
     companion object {
+        /**
+         * Create Fragment Object and pass required date to it
+         * */
         fun getInstance(volunteer: Volunteer): Fragment {
             return VolunteerDetailsFragment().apply {
                 arguments = Bundle().apply {
@@ -74,6 +77,11 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
         }.attach()
     }
 
+    /**
+     * If there is any kind of update volunteer details then using targetFragment this method will
+     * be called from
+     * @see FragmentRatingReviews
+     * */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if ((requestCode == VolunteersFragment.VolunteerDetailsCode) && (resultCode == VolunteersFragment.VolunteerDetailsCode) &&
@@ -85,12 +93,19 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
         }
     }
 
+    /**
+     * When user clicks on "i" button, navigate them to
+     * @see SeniorCitizenDetailsFragment fragment
+     * */
     override fun onMoreButtonClick(callData: CallData) {
         val fragment = SeniorCitizenDetailsFragment()
         fragment.setSelectedUser(callData)
         addFragment(R.id.fragmentCallContainer, fragment, SR_CITIZEN_DETAIL_FRAGMENT)
     }
 
+    /**
+     * Fetch data provided from the parent/previous fragment
+     * */
     private fun getData(): Volunteer {
         val data = arguments
         return if (data != null) {
@@ -116,6 +131,9 @@ class VolunteerDetailsFragment : Fragment(), MoreButtonClickedListener {
         } else Volunteer()
     }
 
+    /**
+     * Initialize and set up ViewPager
+     * */
     private fun setUpViewPager() {
         val volunteer = getData()
         val adapter = FragmentViewPagerAdapter(requireActivity())

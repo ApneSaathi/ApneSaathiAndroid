@@ -16,6 +16,9 @@ import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
+/**
+ * This class will provide the data of Sr Citizens for the calling
+ * */
 class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
 
     companion object {
@@ -26,7 +29,7 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         private var instance: HomeViewModel? = null
 
         @Synchronized
-        fun getInstance(context: Context, dataManager: DataManager): HomeViewModel {
+        fun getInstance(dataManager: DataManager): HomeViewModel {
             return instance ?: synchronized(this) {
                 HomeViewModel(dataManager).also { instance = it }
             }
@@ -59,14 +62,6 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         return grievances
     }
 
-    /*private fun manageCallsData(data: CallDetails) {
-        dataManager.clearPreviousData()
-        dataManager.insertCallData(data.callsList)
-
-        val grievances: List<SrCitizenGrievance> = prepareGrievances(data.callsList)
-        dataManager.insertGrievances(grievances)
-    }*/
-
     private fun manageAdminData(data: AdminCallDetails) {
         dataManager.clearDistricts()
         dataManager.clearPreviousData()
@@ -98,6 +93,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         return invalidCalls
     }
 
+    /**
+     * Get Sr. Citizens list to start calling them
+     * */
     suspend fun getCallDetails(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiLoadDashboard)) {
             val params = JsonObject()
@@ -136,6 +134,9 @@ class HomeViewModel(private val dataManager: DataManager) : BaseViewModel() {
         }
     }
 
+    /**
+     * Get list of Issues raised by the Sr Citizens
+     * */
     suspend fun getGrievanceTrackingList(context: Context) {
         if (checkNetworkAvailability(context, ApiProvider.ApiGrievanceTracking)) {
             val params = JsonObject()

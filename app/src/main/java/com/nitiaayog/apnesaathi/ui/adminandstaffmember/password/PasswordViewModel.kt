@@ -29,6 +29,9 @@ class PasswordViewModel(
 
     fun getNetworkStateObservable(): LiveData<NetworkRequestState> = loaderObservable
 
+    /**
+     * Validate Password with Server
+     * */
     @WorkerThread
     fun validatePassword(context: Context, password: String) {
         if (checkNetworkAvailability(context, ApiProvider.ApiVerifyPassword)) {

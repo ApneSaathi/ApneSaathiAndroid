@@ -1,10 +1,5 @@
 package com.nitiaayog.apnesaathi.preferences
 
-import com.nitiaayog.apnesaathi.ui.base.BaseActivity
-import com.nitiaayog.apnesaathi.ui.login.LoginActivity
-import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
-
-
 /**
  * [PreferenceConstants] for use to store values in shared preference.
  */

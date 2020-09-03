@@ -14,6 +14,12 @@ import com.nitiaayog.apnesaathi.networkadapter.apiconstants.ApiProvider
 import com.nitiaayog.apnesaathi.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * This ViewModel class is used in
+ * @see com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about.AboutVolunteerFragment and
+ * @see com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.reviewrating.FragmentRatingReviews
+ * to get the details of Volunteer and to rate the volunteer
+ * */
 class VolunteerDetailsViewModel(
     private val dataManager: DataManager, private val volunteerId: Int
 ) : BaseViewModel() {
@@ -40,6 +46,10 @@ class VolunteerDetailsViewModel(
         }
     }
 
+    /**
+     * Differentiate various types of calls to show them in a chart.Go through the Ui of
+     * @see com.nitiaayog.apnesaathi.ui.adminandstaffmember.fragments.about.AboutVolunteerFragment
+     * */
     private fun differentiateCalls() {
         val pndngCalls: List<CallData> = allCalls.filter {
             ((it.callStatusCode == "1") || (it.callStatusCode == "null") || (it.callStatusCode == ""))

@@ -6,10 +6,6 @@ import android.content.SharedPreferences
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.base.extensions.getString
 import com.nitiaayog.apnesaathi.base.extensions.putString
-import com.nitiaayog.apnesaathi.ui.base.BaseActivity
-import com.nitiaayog.apnesaathi.ui.login.LoginActivity
-import com.nitiaayog.apnesaathi.ui.login.LoginViewModel
-
 
 /**
  * [PreferenceManager] class for storing data in shared preferences
@@ -42,7 +38,6 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun isLogin(): Boolean =
         ((getUserId() != "") && (getPhoneNumber() != "") && (getRole() != ""))
 
-
     /**
      * Methods for storing and getting userId in shared preference
      */
@@ -50,12 +45,12 @@ open class PreferenceManager private constructor(application: Application) : Pre
     override fun setUserId(userId: String) =
         preferences.putString(PreferenceConstants.UserId, userId)
 
-
     /**
      * Methods for storing and getting user gender in shared preference
      */
     override fun setGender(gender: String) =
         preferences.putString(PreferenceConstants.Gender, gender)
+
     override fun getGender(): String = preferences.getString(PreferenceConstants.Gender)!!
 
     /**
@@ -63,6 +58,7 @@ open class PreferenceManager private constructor(application: Application) : Pre
      */
     override fun setSelectedDistrictId(id: String) =
         preferences.putString(PreferenceConstants.DistrictId, id)
+
     override fun getSelectedDistrictId(): String =
         preferences.getString(PreferenceConstants.DistrictId)!!
 
@@ -71,6 +67,7 @@ open class PreferenceManager private constructor(application: Application) : Pre
      */
     override fun setSrCitizenGender(gender: String) =
         preferences.putString(PreferenceConstants.SrCitizenGender, gender)
+
     override fun getSrCitizenGender(): String =
         preferences.getString(PreferenceConstants.SrCitizenGender)!!
 
@@ -87,6 +84,7 @@ open class PreferenceManager private constructor(application: Application) : Pre
      */
     override fun getProfileImage(): String =
         preferences.getString(PreferenceConstants.ProfileImage)!!
+
     override fun setProfileImage(profileImage: String) =
         preferences.putString(PreferenceConstants.ProfileImage, profileImage)
 
@@ -102,9 +100,9 @@ open class PreferenceManager private constructor(application: Application) : Pre
      */
     override fun getSelectedLanguage(): String =
         preferences.getString(PreferenceConstants.SelectedLanguage)!!
+
     override fun setSelectedLanguage(language: String) =
         preferences.putString(PreferenceConstants.SelectedLanguage, language)
-
 
     /**
      * Methods for storing and getting FirstName of user in shared preference

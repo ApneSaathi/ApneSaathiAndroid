@@ -10,6 +10,9 @@ import com.nitiaayog.apnesaathi.database.constants.Columns
 import com.nitiaayog.apnesaathi.database.constants.Tables
 import com.nitiaayog.apnesaathi.model.Volunteer
 
+/**
+ * This dao class is used when Master Admin/Staff Member will log in.
+ * */
 @Dao
 interface VolunteerDao {
 
@@ -19,7 +22,9 @@ interface VolunteerDao {
     @Query("SELECT ${Columns.FirstName},${Columns.LastName},${Columns.Gender},${Columns.ContactNumber},${Columns.Block},${Columns.District},${Columns.State} FROM ${Tables.TABLE_VOLUNTEERS}")
     fun getVolunteers(): LiveData<MutableList<Volunteer>>
 
-    /*This Query will return (count) data after id afterId*/
+    /**
+     * This Query will return (count) data after id afterId
+     * */
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}>:afterId ORDER BY ${Columns.Id} ASC LIMIT :count")
     fun getVolunteers(afterId: Int, count: Int = 5): MutableList<Volunteer>
 
@@ -32,6 +37,9 @@ interface VolunteerDao {
     @Query("SELECT * FROM ${Tables.TABLE_VOLUNTEERS} WHERE ${Columns.Id}=:id")
     fun getVolunteer(id: Int): Volunteer?
 
+    /**
+     * Update volunteer ratings
+     * */
     @Query("UPDATE ${Tables.TABLE_VOLUNTEERS} SET ${Columns.Ratings}=:ratings WHERE ${Columns.Id}=:id")
     fun updateRating(ratings: String, id: Int):Int
 

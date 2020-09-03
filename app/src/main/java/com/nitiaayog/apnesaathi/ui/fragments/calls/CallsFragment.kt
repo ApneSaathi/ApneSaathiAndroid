@@ -5,7 +5,6 @@ import android.view.View
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nitiaayog.apnesaathi.R
 import com.nitiaayog.apnesaathi.adapter.FragmentViewPagerAdapter
-import com.nitiaayog.apnesaathi.base.calbacks.OnItemClickListener
 import com.nitiaayog.apnesaathi.base.extensions.addFragment
 import com.nitiaayog.apnesaathi.base.extensions.getViewModel
 import com.nitiaayog.apnesaathi.base.extensions.rx.autoDispose

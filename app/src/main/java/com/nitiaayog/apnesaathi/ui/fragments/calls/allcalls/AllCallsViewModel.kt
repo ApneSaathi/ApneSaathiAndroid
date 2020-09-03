@@ -83,6 +83,9 @@ class AllCallsViewModel(private val dataManager: DataManager) : BaseViewModel() 
     fun getDataStream(): LiveData<NetworkRequestState> = loaderObservable
     fun getCallsStream(): LiveData<PagedList<CallData>> = callsData
 
+    /**
+     * Get all assigned Sr. Citizen list to make calls
+     * */
     @WorkerThread
     suspend fun getCallDetails(
         context: Context, callback: ItemKeyedDataSource.LoadCallback<CallData>? = null
