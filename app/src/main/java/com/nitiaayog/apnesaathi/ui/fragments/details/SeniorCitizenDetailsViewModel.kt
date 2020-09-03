@@ -19,7 +19,6 @@ class SeniorCitizenDetailsViewModel private constructor(private val dataManager:
     BaseViewModel() {
     private val dateList: MutableList<DateItem> = ArrayList()
     private val dataList = MutableLiveData<List<DateItem>>()
-    private lateinit var grievanceList: LiveData<MutableList<SrCitizenGrievance>>
 
     /**
      * Method for extracting the date from senior citizen data
